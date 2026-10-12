@@ -72,6 +72,8 @@ namespace TrashCats.Presentation.UI
             _ => id.Value,
         };
 
+        public static string UpgradeShort(UpgradeId id) => id.Value == "upg_dumpster" ? "Бак" : UpgradeName(id);
+
         public static string IdleBubble(IdleReason reason) => reason switch
         {
             IdleReason.Tired => "Устал",

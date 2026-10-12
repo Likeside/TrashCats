@@ -27,7 +27,7 @@ namespace TrashCats.Presentation.Map
 
             Ui.Panel(root, "Back", Palette.Background).rectTransform.Fill();
             if (background != null)
-                Ui.Cover(root, "MapArt", background, new Color(0.55f, 0.55f, 0.6f));
+                Ui.Cover(root, "MapArt", background, new Color(0.75f, 0.75f, 0.8f));
             var title = Ui.Label(root, "Район", 52, TextAnchor.MiddleCenter, Palette.Paper);
             title.rectTransform.Place(new Vector2(0, 1), Vector2.one, new Vector2(0, -110), Vector2.zero);
 
@@ -35,7 +35,7 @@ namespace TrashCats.Presentation.Map
             var territories = session.Config.Territories;
             var steps = territories.Count + 1;
 
-            var home = Ui.Panel(area, "Node_Home", Palette.PanelDark);
+            var home = Ui.Panel(area, "Node_Home", new Color(Palette.PanelDark.r, Palette.PanelDark.g, Palette.PanelDark.b, 0.8f));
             home.rectTransform.Place(new Vector2(0.15f, 0), new Vector2(0.85f, 1f / steps), new Vector2(0, 10), new Vector2(0, -10));
             Ui.Label(home.transform, "Мусорка ресторана\nнаше убежище", 34, TextAnchor.MiddleCenter, Palette.Paper).rectTransform.Fill(10);
 
@@ -71,7 +71,7 @@ namespace TrashCats.Presentation.Map
                 switch (state.Status)
                 {
                     case TerritoryStatus.Locked:
-                        button.Image.color = Palette.Disabled;
+                        button.Image.color = new Color(Palette.Disabled.r, Palette.Disabled.g, Palette.Disabled.b, 0.7f);
                         button.Interactable = false;
                         status.text = "Закрыто";
                         break;
@@ -81,7 +81,7 @@ namespace TrashCats.Presentation.Map
                         status.text = "Можно напасть! Награда: " + Reward(territory, true);
                         break;
                     default:
-                        button.Image.color = Palette.Hex("#7FB069");
+                        button.Image.color = new Color(0.5f, 0.69f, 0.41f, 0.85f);
                         button.Interactable = true;
                         status.text = $"Захвачено · {Texts.Bonus(territory)} · повтор: {Reward(territory, false)}";
                         break;

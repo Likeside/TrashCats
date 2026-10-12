@@ -97,7 +97,7 @@ namespace TrashCats.Presentation.Hideout
                 var (label, upgrade) = StationInfo(activity);
                 var prop = upgrade != null ? _art?.GetSprite("prop_" + upgrade.Value) : null;
                 var size = activity.Kind == ActivityKind.Scavenge ? new Vector2(150, 360) : prop != null ? new Vector2(260, 230) : new Vector2(240, 150);
-                var box = Ui.Panel(_root, "Station_" + activity.Id, activity.Kind == ActivityKind.Scavenge ? Palette.PanelDark : Palette.Station);
+                var box = Ui.Panel(_root, "Station_" + activity.Id, activity.Kind == ActivityKind.Scavenge ? new Color(0.1f, 0.1f, 0.12f, 0.35f) : Palette.Station);
                 box.rectTransform.At(StationAnchor(activity), size);
                 Text text;
                 if (prop != null)
@@ -142,7 +142,7 @@ namespace TrashCats.Presentation.Hideout
         private void RefreshUpgrade(UpgradeId id)
         {
             if (_upgradeLabels.TryGetValue(id, out var text))
-                text.text = $"{Texts.UpgradeName(id)} · ур. {_session.World.GetUpgradeLevel(id)}{(CanAfford(id) ? " (+)" : "")}";
+                text.text = $"{Texts.UpgradeShort(id)} · ур. {_session.World.GetUpgradeLevel(id)}{(CanAfford(id) ? " (+)" : "")}";
         }
 
         private bool CanAfford(UpgradeId id)
