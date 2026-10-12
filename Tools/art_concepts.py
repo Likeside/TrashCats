@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
-"""Generates art-direction round 1 concepts (Docs/ArtDirection/ART_DIRECTION_BRIEF.md §4-5).
+"""Generates art-direction concepts (Docs/ArtDirection/ART_DIRECTION_BRIEF.md §4-5).
 
-Reads OPENAI_API_KEY from the environment. Writes PNGs and prompts.md into Docs/ArtDirection/Concepts/round1.
-Usage: Tools/art_round1.py [--dry-run] [--only scene_style ...]
+Reads OPENAI_API_KEY from the environment. Writes PNGs and prompts.md into Docs/ArtDirection/Concepts/round<N>.
+Usage: Tools/art_concepts.py --round 1|2 [--styles S1 S4 ...] [--dry-run]
 """
 import base64, concurrent.futures, json, os, sys, time, urllib.error, urllib.request
 
 MODEL = "gpt-image-2"
 QUALITY = "high"
-OUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "Docs", "ArtDirection", "Concepts", "round1")
+CONCEPTS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "Docs", "ArtDirection", "Concepts")
 
 COMMON = (
     "Mobile game concept art. Humorous, warm, family-friendly tone. "
@@ -31,7 +31,7 @@ STYLES = {
     "S5": "Hand-painted casual mobile game style, soft painterly brush textures, warm cozy palette, gentle lighting, characters with clean readable shapes over painted backgrounds.",
 }
 
-SCENES = {
+ROUND1 = {
     "lineup": ("1536x1024",
         "Character lineup sheet of three stray cats standing side by side on a plain light neutral background, "
         "full body, three-quarter view, same ground line, showing relative size: left RYZHY, center PONCHIK, right SHNYR. "
@@ -46,10 +46,42 @@ SCENES = {
         "each with two small progress bars; two large tabs at the very bottom. The game scene occupies the middle 55% of the screen."),
 }
 
+ROUND2 = {
+    "combat": ("1024x1536",
+        "Mobile auto-battle screen, portrait orientation. Arena: a dark brick alley with a puddle and a street lamp. "
+        "Left: RYZHY lunging with an open-mouth bite attack; right: a big muscular rat in a torn hoodie recoiling. "
+        + CATS + " Floating damage number above the rat, a short skill banner above Ryzhy. "
+        "Under each fighter: a health bar and a smaller energy bar, small buff icons. "
+        "Top: two rows of small round portraits showing each side's fighter queue (cats vs rivals). "
+        "Bottom: speed toggle button and skip button."),
+    "training": ("1536x1024",
+        "Three-panel illustration of cats training with junk equipment, same scale in each panel: "
+        "1) RYZHY punching a tin can hanging on a string, can dented and swinging; "
+        "2) SHNYR pouncing at a wind-up toy mouse, mid-air; "
+        "3) PONCHIK running inside a wheel made from an old tire, sweating, tongue out. "
+        + CATS + " Simple matching backgrounds, emphasis on readable poses suitable for looping animation."),
+    "map": ("1024x1536",
+        "Mobile game territory map, portrait, vertical path from bottom to top through a small city block at night: "
+        "bottom - restaurant dumpster (home base); then backyard with laundry lines; fish shop back door; dark alley; "
+        "city park with a bench; top - the restaurant rooftop with a neon sign and a big grey tomcat in a captain's hat "
+        "silhouetted against the moon. Each location is a round node connected by a dashed path; lower nodes look conquered "
+        "(cat paw flag), the next one glows, upper ones are dimmed and locked."),
+    "uikit": ("1024x1536",
+        "Mobile game UI style sheet on a neutral background: primary and secondary buttons (normal / pressed / disabled), "
+        "a bottom sheet panel, a popup card with a portrait frame, horizontal progress bars (energy yellow, satiety orange, "
+        "health red, grit blue), resource icons (food: fish skeleton; junk: bent bolt and bottle cap), stat icons "
+        "(strength paw, agility tail, toughness shield), a small toast notification, tab bar with two tabs. "
+        "Materials and shapes inspired by street junk: cardboard, tape, bottle caps, tin."),
+}
+
+ROUNDS = {1: ROUND1, 2: ROUND2}
+SCENES = {**ROUND1, **ROUND2}
+
+
 def prompt_for(scene, style):
     return f"{STYLES[style]}\n\n{SCENES[scene][1]}\n\n{COMMON}"
 
-def generate(scene, style, key):
+def generate(scene, style, key, out_dir):
     size = SCENES[scene][0]
     body = json.dumps({"model": MODEL, "prompt": prompt_for(scene, style), "size": size, "quality": QUALITY, "n": 1}).encode()
     req = urllib.request.Request("https://api.openai.com/v1/images/generations", data=body,
@@ -64,25 +96,35 @@ def generate(scene, style, key):
             if e.code in (429, 500, 502, 503) and attempt < 2:
                 time.sleep(10 * (attempt + 1)); continue
             raise RuntimeError(f"{scene}_{style}: HTTP {e.code}: {msg}")
-    path = os.path.join(OUT_DIR, f"{scene}_{style}.png")
+    path = os.path.join(out_dir, f"{scene}_{style}.png")
     with open(path, "wb") as f:
         f.write(base64.b64decode(data["data"][0]["b64_json"]))
     return path, data.get("usage")
 
 def main():
-    dry = "--dry-run" in sys.argv
-    only = sys.argv[sys.argv.index("--only") + 1:] if "--only" in sys.argv else None
-    jobs = [(sc, st) for sc in SCENES for st in STYLES if not only or f"{sc}_{st}" in only]
-    os.makedirs(OUT_DIR, exist_ok=True)
-    with open(os.path.join(OUT_DIR, "prompts.md"), "w") as f:
-        f.write(f"# Round 1 prompts\n\nModel: `{MODEL}`, quality: `{QUALITY}`, n=1.\n\n")
-        for sc, st in [(sc, st) for sc in SCENES for st in STYLES]:
+    args = sys.argv[1:]
+    dry = "--dry-run" in args
+    rnd = int(args[args.index("--round") + 1]) if "--round" in args else 1
+    styles = []
+    if "--styles" in args:
+        for a in args[args.index("--styles") + 1:]:
+            if a.startswith("--"):
+                break
+            styles.append(a)
+    styles = styles or list(STYLES)
+    scenes = ROUNDS[rnd]
+    jobs = [(sc, st) for sc in scenes for st in styles]
+    out_dir = os.path.join(CONCEPTS_DIR, f"round{rnd}")
+    os.makedirs(out_dir, exist_ok=True)
+    with open(os.path.join(out_dir, "prompts.md"), "w") as f:
+        f.write(f"# Round {rnd} prompts\n\nModel: `{MODEL}`, quality: `{QUALITY}`, n=1.\n\n")
+        for sc, st in jobs:
             f.write(f"## {sc}_{st} ({SCENES[sc][0]})\n\n```\n{prompt_for(sc, st)}\n```\n\n")
     if dry:
         print("\n".join(f"{sc}_{st}" for sc, st in jobs)); return
     key = os.environ["OPENAI_API_KEY"]
     with concurrent.futures.ThreadPoolExecutor(max_workers=5) as ex:
-        futures = {ex.submit(generate, sc, st, key): (sc, st) for sc, st in jobs}
+        futures = {ex.submit(generate, sc, st, key, out_dir): (sc, st) for sc, st in jobs}
         for fut in concurrent.futures.as_completed(futures):
             try:
                 path, usage = fut.result()
