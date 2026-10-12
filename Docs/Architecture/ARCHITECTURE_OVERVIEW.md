@@ -21,6 +21,18 @@
 
 **Состояние репозитория на момент планирования:** Unity 6000.0.74f1, URP, 2D feature set, Input System, Test Framework. Не установлены: UniTask, DOTween, Newtonsoft JSON. Проект не под git.
 
+**Зафиксированные версии пакетов (M0-02):**
+
+| Пакет | Версия | Источник |
+|---|---|---|
+| UniTask (`com.cysharp.unitask`) | 2.5.10 | OpenUPM (scoped registry в `Packages/manifest.json`) |
+| Newtonsoft JSON (`com.unity.nuget.newtonsoft-json`) | 3.2.1 | Реестр Unity |
+| DOTween (free) | 1.3.030 | Официальный архив `dotween.demigiant.com`, распакован в `Assets/Plugins/Demigiant/DOTween` |
+
+- Модули DOTween собраны в отдельную сборку `DOTween.Modules` (asmdef добавлен вручную, как это делает DOTween Utility Panel), чтобы на них могли ссылаться наши asmdef.
+- Символы компиляции: `DOTWEEN` (добавляет DOTween), `UNITASK_DOTWEEN_SUPPORT` (включает `UniTask.DOTween` — `await` для твинов).
+- Обновлять пакеты только отдельной веткой с повторным прогоном тестов.
+
 ## 2. Слои и направление зависимостей
 
 ```mermaid
