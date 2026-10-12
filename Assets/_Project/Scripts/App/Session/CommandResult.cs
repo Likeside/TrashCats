@@ -24,6 +24,12 @@ namespace TrashCats.App
         UnknownUpgrade,
         MaxLevel,
         NotEnoughJunk,
+        UnknownTerritory,
+        TerritoryLocked,
+        InvalidTeam,
+        CatTooTired,
+        BattlePending,
+        NoPendingBattle,
     }
 
     public readonly struct CommandResult
@@ -69,6 +75,16 @@ namespace TrashCats.App
             SkillEquipError.SkillLocked => CommandError.SkillLocked,
             SkillEquipError.NotEquippable => CommandError.NotEquippable,
             _ => CommandError.AlreadyEquipped,
+        };
+
+        public static CommandError From(BattleError error) => error switch
+        {
+            BattleError.None => CommandError.None,
+            BattleError.UnknownTerritory => CommandError.UnknownTerritory,
+            BattleError.TerritoryLocked => CommandError.TerritoryLocked,
+            BattleError.InvalidTeam => CommandError.InvalidTeam,
+            BattleError.CatTooTired => CommandError.CatTooTired,
+            _ => CommandError.BattlePending,
         };
 
         public static CommandError From(UpgradeError error) => error switch

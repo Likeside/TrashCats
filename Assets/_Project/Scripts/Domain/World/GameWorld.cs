@@ -12,6 +12,9 @@ namespace TrashCats.Domain
         int Food { get; }
         int Junk { get; }
         int GetUpgradeLevel(UpgradeId id);
+        TerritoryProgress Territories { get; }
+        PendingBattle PendingBattle { get; }
+        bool FinalReached { get; }
         bool TryGetCat(CatId id, out IReadOnlyCat cat);
     }
 
@@ -29,12 +32,16 @@ namespace TrashCats.Domain
         public IReadOnlyList<Cat> Cats => _cats;
         public Wallet Wallet { get; }
         public UpgradeLevels Upgrades { get; }
+        public TerritoryProgress Territories { get; }
+        public PendingBattle PendingBattle { get; internal set; }
+        public bool FinalReached { get; internal set; }
 
         IReadOnlyList<IReadOnlyCat> IReadOnlyGameWorld.Cats => _cats;
         public int Food => Wallet.Food;
         public int Junk => Wallet.Junk;
 
-        public GameWorld(GameConfig config, long gameTimeMs, int saveSeed, IEnumerable<Cat> cats, Wallet wallet, UpgradeLevels upgrades)
+        public GameWorld(GameConfig config, long gameTimeMs, int saveSeed, IEnumerable<Cat> cats, Wallet wallet, UpgradeLevels upgrades,
+            TerritoryProgress territories = null, PendingBattle pendingBattle = null, bool finalReached = false)
         {
             Config = config ?? throw new ArgumentNullException(nameof(config));
             if (gameTimeMs < 0) throw new ArgumentOutOfRangeException(nameof(gameTimeMs));
@@ -43,7 +50,12 @@ namespace TrashCats.Domain
             _cats = new List<Cat>(cats ?? throw new ArgumentNullException(nameof(cats)));
             Wallet = wallet ?? throw new ArgumentNullException(nameof(wallet));
             Upgrades = upgrades ?? throw new ArgumentNullException(nameof(upgrades));
+            Territories = territories ?? new TerritoryProgress(config);
+            PendingBattle = pendingBattle;
+            FinalReached = finalReached;
         }
+
+        internal void AddCat(Cat cat) => _cats.Add(cat);
 
         /// <summary>New game: starting resources and starting cats from the config, time 0.</summary>
         public static GameWorld CreateNew(GameConfig config, int saveSeed)
@@ -90,6 +102,7 @@ namespace TrashCats.Domain
         {
             var modifiers = new ModifierSet();
             Upgrades.Contribute(Config, modifiers);
+            Territories.Contribute(Config, modifiers);
             return modifiers;
         }
     }

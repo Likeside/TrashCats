@@ -44,6 +44,11 @@ namespace TrashCats.Domain
                     errors.Add($"{pair.Key}: {pair.Value} cats on a station with capacity {capacity}.");
             }
 
+            var inBattle = new HashSet<CatId>(world.PendingBattle?.Order ?? new CatId[0]);
+            foreach (var cat in world.Cats)
+                if ((cat.Activity.Status == ActivityStatus.InBattle) != inBattle.Contains(cat.Id))
+                    errors.Add($"{cat.Id}: InBattle state does not match the pending battle.");
+
             foreach (var upgrade in config.Upgrades)
             {
                 var level = world.Upgrades.GetLevel(upgrade.Id);

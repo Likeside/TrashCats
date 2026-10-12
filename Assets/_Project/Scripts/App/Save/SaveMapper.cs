@@ -49,7 +49,49 @@ namespace TrashCats.App
                     .Where(u => world.GetUpgradeLevel(u.Id) > 0)
                     .ToDictionary(u => u.Id.Value, u => world.GetUpgradeLevel(u.Id)),
                 Settings = settings ?? new SettingsSave(),
+                Territories = world.Territories.All.ToDictionary(p => p.Key.Value,
+                    p => new TerritorySave { Status = p.Value.Status.ToString(), Attempts = p.Value.Attempts }),
+                PendingBattle = ToSave(world.PendingBattle),
+                FinalReached = world.FinalReached,
             };
+        }
+
+        private static PendingBattleSave ToSave(PendingBattle battle)
+        {
+            if (battle == null) return null;
+            FighterSave F(FighterSnapshot f) => new FighterSave
+            {
+                Id = f.Id, Strength = f.Strength, Agility = f.Agility, Toughness = f.Toughness,
+                Skills = f.Skills.Select(k => k.Value).ToArray(), HpMultiplierPermille = f.HpMultiplierPermille, ViewKey = f.ViewKey,
+            };
+            return new PendingBattleSave
+            {
+                Territory = battle.Territory.Value,
+                Order = battle.Order.Select(c => c.Value).ToArray(),
+                Seed = battle.Seed,
+                Players = battle.Setup.PlayerQueue.Select(F).ToList(),
+                Enemies = battle.Setup.EnemyQueue.Select(F).ToList(),
+            };
+        }
+
+        private static PendingBattle FromSave(PendingBattleSave save, GameConfig config, List<string> warnings)
+        {
+            if (save == null) return null;
+            try
+            {
+                var territory = new TerritoryId(save.Territory);
+                if (!config.TryGetTerritory(territory, out _)) throw new SaveCorruptedException($"unknown territory {save.Territory}");
+                FighterSnapshot F(FighterSave f, Side side) => new FighterSnapshot(f.Id, side, f.Strength, f.Agility, f.Toughness,
+                    (f.Skills ?? new string[0]).Select(k => new SkillId(k)).Where(k => config.TryGetSkill(k, out _)), f.HpMultiplierPermille, f.ViewKey);
+                var setup = new BattleSetup(save.Players.Select(f => F(f, Side.Player)), save.Enemies.Select(f => F(f, Side.Enemy)));
+                var order = save.Order.Select(c => new CatId(c)).ToArray();
+                return new PendingBattle(territory, order, save.Seed, setup, BattleSimulator.Simulate(setup, save.Seed, config));
+            }
+            catch (Exception e)
+            {
+                warnings.Add($"Pending battle dropped: {e.Message}");
+                return null;
+            }
         }
 
         /// <summary>Builds a world from a save. Throws <see cref="SaveCorruptedException"/> if it cannot be repaired.</summary>
@@ -88,9 +130,37 @@ namespace TrashCats.App
                 upgrades.Add(new KeyValuePair<UpgradeId, int>(definition.Id, Clamp(pair.Value, 0, definition.MaxLevel, $"upgrade {pair.Key}", warnings)));
             }
 
+            var territories = new List<KeyValuePair<TerritoryId, TerritoryState>>();
+            foreach (var pair in data.Territories ?? new Dictionary<string, TerritorySave>())
+            {
+                if (string.IsNullOrEmpty(pair.Key) || !config.TryGetTerritory(new TerritoryId(pair.Key), out var definition))
+                {
+                    warnings.Add($"Unknown territory '{pair.Key}' dropped.");
+                    continue;
+                }
+
+                Enum.TryParse(pair.Value?.Status, out TerritoryStatus status);
+                territories.Add(new KeyValuePair<TerritoryId, TerritoryState>(definition.Id, new TerritoryState(status, pair.Value?.Attempts ?? 0)));
+            }
+
+            var pending = FromSave(data.PendingBattle, config, warnings);
+            var inBattle = new HashSet<CatId>(pending?.Order ?? new CatId[0]);
+            if (pending != null && pending.Order.Any(id => cats.All(c => c.Id != id)))
+            {
+                warnings.Add("Pending battle references a cat that is not in the gang; dropped.");
+                pending = null;
+                inBattle.Clear();
+            }
+
+            foreach (var cat in cats)
+            {
+                if (inBattle.Contains(cat.Id))
+                    ForceInBattle(cat);
+            }
+
             var world = new GameWorld(config, gameTime, data.SaveSeed, cats,
                 new Wallet(Clamp(data.Food, 0, int.MaxValue, "Food", warnings), Clamp(data.Junk, 0, int.MaxValue, "Junk", warnings)),
-                new UpgradeLevels(upgrades));
+                new UpgradeLevels(upgrades), new TerritoryProgress(config, territories), pending, data.FinalReached);
 
             RepairStations(world, warnings);
             var violations = WorldInvariants.Check(world);
@@ -166,6 +236,9 @@ namespace TrashCats.App
 
         private static ActivityState FromSave(ActivitySave save, GameConfig config, long gameTime, CatId id, List<string> warnings)
         {
+            if (save != null && save.State == nameof(ActivityStatus.InBattle))
+                return ActivityState.Idle(IdleReason.None); // re-attached to the pending battle below, if it still exists
+
             if (save == null || save.State == nameof(ActivityStatus.Idle))
             {
                 Enum.TryParse(save?.IdleReason, out IdleReason reason);
@@ -182,9 +255,17 @@ namespace TrashCats.App
                 return ActivityState.Working(definition.Id, save.CycleStartMs, save.CycleDurationMs, save.HungryOverride);
             }
 
-            // InBattle without a pending battle (battles arrive in M4) or a broken cycle: the cat simply stands idle.
+            // A broken cycle (unknown activity, impossible times): the cat simply stands idle.
             warnings.Add($"{id}: activity state '{save.State}/{save.ActivityId}' reset to idle.");
             return ActivityState.Idle(IdleReason.None);
+        }
+
+        private static void ForceInBattle(Cat cat)
+        {
+            // A cat restored for a pending battle: its saved activity was reset to idle, the battle owns it now.
+            var events = new List<DomainEvent>();
+            ActivitySystem.Stop(cat, IdleReason.None, events);
+            BattleRestore.MarkInBattle(cat);
         }
 
         private static void RepairStations(GameWorld world, List<string> warnings)

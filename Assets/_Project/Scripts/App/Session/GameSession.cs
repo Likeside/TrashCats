@@ -77,7 +77,22 @@ namespace TrashCats.App
         public int PreviewOutput(CatId catId, ActivityId activityId) =>
             ActivitySystem.PreviewOutput(_world, _world.GetCat(catId), Config.GetActivity(activityId));
 
+        public CommandError CanStartBattle(TerritoryId territory, IReadOnlyList<CatId> order) =>
+            CommandErrors.From(Battles.CanStart(_world, territory, order));
+
         // --- Commands --------------------------------------------------------------------------------
+
+        /// <summary>Simulates the battle immediately; the result is fixed and saved before it is shown.</summary>
+        public CommandResult StartBattle(TerritoryId territory, IReadOnlyList<CatId> order) => Execute(
+            () => CommandErrors.From(Battles.CanStart(_world, territory, order)),
+            events => Battles.Start(_world, territory, order, events),
+            SaveUrgency.Immediate);
+
+        /// <summary>Applies the pending battle (rewards, costs, capture, recruitment).</summary>
+        public CommandResult CompleteBattle() => Execute(
+            () => _world.PendingBattle == null ? CommandError.NoPendingBattle : CommandError.None,
+            events => Battles.Complete(_world, events),
+            SaveUrgency.Immediate);
 
         public CommandResult AssignActivity(CatId catId, ActivityId activityId) => Execute(catId,
             cat => CommandErrors.From(ActivitySystem.CanStart(_world, cat, activityId)),

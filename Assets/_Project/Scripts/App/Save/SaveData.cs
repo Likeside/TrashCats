@@ -17,6 +17,9 @@ namespace TrashCats.App
         public int Junk;
         public List<CatSave> Cats = new List<CatSave>();
         public Dictionary<string, int> Upgrades = new Dictionary<string, int>();
+        public Dictionary<string, TerritorySave> Territories = new Dictionary<string, TerritorySave>();
+        public PendingBattleSave PendingBattle;
+        public bool FinalReached;
         public SettingsSave Settings = new SettingsSave();
     }
 
@@ -46,5 +49,35 @@ namespace TrashCats.App
         public int BattleSpeed = 1;
         public float SfxVolume = 1f;
         public float MusicVolume = 0.7f;
+    }
+}
+
+namespace TrashCats.App
+{
+    public sealed class TerritorySave
+    {
+        public string Status = "Locked";
+        public int Attempts;
+    }
+
+    /// <summary>The battle is stored as its inputs; the deterministic simulator recreates the same result on load.</summary>
+    public sealed class PendingBattleSave
+    {
+        public string Territory;
+        public string[] Order;
+        public int Seed;
+        public List<FighterSave> Players = new List<FighterSave>();
+        public List<FighterSave> Enemies = new List<FighterSave>();
+    }
+
+    public sealed class FighterSave
+    {
+        public string Id;
+        public int Strength;
+        public int Agility;
+        public int Toughness;
+        public string[] Skills;
+        public int HpMultiplierPermille = 1000;
+        public string ViewKey;
     }
 }

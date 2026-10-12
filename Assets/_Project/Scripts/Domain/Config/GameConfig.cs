@@ -71,6 +71,8 @@ namespace TrashCats.Domain
         public int HungryDurationMultiplier { get; init; } = 2;
         public int SatietyPerFood { get; init; } = 10;
         public int MinEnergyForBattle { get; init; } = 20;
+        public int BattleWinEnergyCost { get; init; } = 30;
+        public int BattleSatietyCost { get; init; } = 10;
     }
 
     public sealed class TimeConfig
