@@ -141,9 +141,10 @@ namespace TrashCats.Domain
             if (definition.Kind == ActivityKind.Sleep)
                 return cat.Energy >= config.Needs.Max ? ActivityError.EnergyFull : ActivityError.None;
 
-            if (CatRules.IsTired(cat, config)) return ActivityError.Tired;
+            // "MAX" is more useful to the player than "tired" when both apply.
             if (definition.Kind == ActivityKind.Train && cat.GetLevel(definition.TrainedAttribute) >= config.Progression.MaxLevel)
                 return ActivityError.AttributeMaxed;
+            if (CatRules.IsTired(cat, config)) return ActivityError.Tired;
             if (definition.Capacity > 0 && CountOthersOn(world, cat, definition.Id) >= definition.Capacity)
                 return ActivityError.StationBusy;
             return ActivityError.None;

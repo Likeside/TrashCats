@@ -22,7 +22,7 @@ MonoBehaviour:
   offlineSummaryMinMs: 60000
   maxLevel: 10
   xpBase: 10
-  xpPerLevel: 7
+  xpPerLevel: 12
   aptitudeBonusPct: 50
   battleXpWin: 8
   battleXpLoss: 3
@@ -30,6 +30,28 @@ MonoBehaviour:
   startJunk: 0
   startCats:
   - cat_ryzhy
+  combat:
+    tickMs: 100
+    hpBase: 40
+    hpPerToughness: 12
+    gritBase: 20
+    gritPerToughness: 5
+    gritRegenPerAction: 3
+    damageBase: 4
+    damagePerStrength: 2
+    intervalBaseTicks: 16
+    intervalAgilityDivisor: 2
+    intervalMinTicks: 10
+    hitBasePermille: 750
+    hitPerAgilityDiffPermille: 40
+    hitMinPermille: 350
+    hitMaxPermille: 950
+    varianceMinPermille: 850
+    varianceMaxPermille: 1150
+    suddenDeathAfterTicks: 450
+    suddenDeathPermille: 2000
+    fighterEntryPauseTicks: 10
+    safetyMaxTicks: 10000
   cats:
   - id: cat_ryzhy
     nameKey: cat.ryzhy
@@ -82,7 +104,7 @@ MonoBehaviour:
     kind: 2
     durationMs: 30000
     energyCost: 15
-    satietyCost: 10
+    satietyCost: 14
     baseOutput: 10
     trainedAttribute: 0
     capacity: 1
@@ -91,7 +113,7 @@ MonoBehaviour:
     kind: 2
     durationMs: 30000
     energyCost: 15
-    satietyCost: 10
+    satietyCost: 14
     baseOutput: 10
     trainedAttribute: 1
     capacity: 1
@@ -100,7 +122,7 @@ MonoBehaviour:
     kind: 2
     durationMs: 30000
     energyCost: 15
-    satietyCost: 10
+    satietyCost: 14
     baseOutput: 10
     trainedAttribute: 2
     capacity: 1
@@ -116,7 +138,7 @@ MonoBehaviour:
   upgrades:
   - id: upg_boxes
     nameKey: upg.boxes
-    costs: 0f00000028000000
+    costs: 140000003c000000
     effect: 0
     valuesPerLevel: 000000000a00000014000000
     foodPerLevel: 
@@ -124,7 +146,7 @@ MonoBehaviour:
     attribute: 0
   - id: upg_dumpster
     nameKey: upg.dumpster
-    costs: 0f00000028000000
+    costs: 140000003c000000
     effect: 1
     valuesPerLevel: 
     foodPerLevel: 000000000100000002000000
@@ -132,25 +154,25 @@ MonoBehaviour:
     attribute: 0
   - id: upg_can
     nameKey: upg.can
-    costs: 0f00000028000000
+    costs: 140000003c000000
     effect: 2
-    valuesPerLevel: 000000001900000032000000
+    valuesPerLevel: 000000001400000028000000
     foodPerLevel: 
     junkPerLevel: 
     attribute: 0
   - id: upg_mouse
     nameKey: upg.mouse
-    costs: 0f00000028000000
+    costs: 140000003c000000
     effect: 2
-    valuesPerLevel: 000000001900000032000000
+    valuesPerLevel: 000000001400000028000000
     foodPerLevel: 
     junkPerLevel: 
     attribute: 1
   - id: upg_wheel
     nameKey: upg.wheel
-    costs: 0f00000028000000
+    costs: 140000003c000000
     effect: 2
-    valuesPerLevel: 000000001900000032000000
+    valuesPerLevel: 000000001400000028000000
     foodPerLevel: 
     junkPerLevel: 
     attribute: 2
@@ -160,28 +182,229 @@ MonoBehaviour:
     isInnate: 1
     unlockAttribute: 0
     unlockLevel: 0
+    gritCost: 0
+    cooldownActions: 0
+    effect: 0
+    damagePermille: 1000
+    hitModifierPermille: 0
+    hits: 1
+    effectPermille: 0
+    effectCount: 0
   - id: skill_bite
     nameKey: skill.bite
     isInnate: 0
     unlockAttribute: 0
     unlockLevel: 4
+    gritCost: 12
+    cooldownActions: 3
+    effect: 0
+    damagePermille: 2000
+    hitModifierPermille: -100
+    hits: 1
+    effectPermille: 0
+    effectCount: 0
   - id: skill_double_paw
     nameKey: skill.double_paw
     isInnate: 0
     unlockAttribute: 1
     unlockLevel: 4
+    gritCost: 10
+    cooldownActions: 2
+    effect: 0
+    damagePermille: 700
+    hitModifierPermille: 0
+    hits: 2
+    effectPermille: 0
+    effectCount: 0
   - id: skill_thick_fur
     nameKey: skill.thick_fur
     isInnate: 0
     unlockAttribute: 2
     unlockLevel: 4
+    gritCost: 10
+    cooldownActions: 5
+    effect: 1
+    damagePermille: 1000
+    hitModifierPermille: 0
+    hits: 1
+    effectPermille: 600
+    effectCount: 3
   - id: skill_dodge
     nameKey: skill.dodge
     isInnate: 0
     unlockAttribute: 1
     unlockLevel: 7
+    gritCost: 8
+    cooldownActions: 4
+    effect: 2
+    damagePermille: 1000
+    hitModifierPermille: 0
+    hits: 1
+    effectPermille: 0
+    effectCount: 1
   - id: skill_dirty_trick
     nameKey: skill.dirty_trick
     isInnate: 0
     unlockAttribute: 0
     unlockLevel: 7
+    gritCost: 12
+    cooldownActions: 6
+    effect: 3
+    damagePermille: 1000
+    hitModifierPermille: 0
+    hits: 1
+    effectPermille: 200
+    effectCount: 3
+  enemies:
+  - id: enemy_rat
+    nameKey: enemy.rat
+    strength: 2
+    agility: 3
+    toughness: 1
+    skills: []
+    hpMultiplierPermille: 1000
+    viewKey: rat
+  - id: enemy_gull
+    nameKey: enemy.gull
+    strength: 3
+    agility: 5
+    toughness: 2
+    skills:
+    - skill_double_paw
+    hpMultiplierPermille: 1000
+    viewKey: gull
+  - id: enemy_shopcat
+    nameKey: enemy.shopcat
+    strength: 5
+    agility: 3
+    toughness: 4
+    skills:
+    - skill_bite
+    hpMultiplierPermille: 1000
+    viewKey: shopcat
+  - id: enemy_crow
+    nameKey: enemy.crow
+    strength: 4
+    agility: 6
+    toughness: 3
+    skills:
+    - skill_double_paw
+    - skill_dodge
+    hpMultiplierPermille: 1000
+    viewKey: crow
+  - id: enemy_bigrat
+    nameKey: enemy.bigrat
+    strength: 5
+    agility: 4
+    toughness: 4
+    skills:
+    - skill_bite
+    - skill_dirty_trick
+    hpMultiplierPermille: 1000
+    viewKey: bigrat
+  - id: enemy_crow_boss
+    nameKey: enemy.crow_boss
+    strength: 5
+    agility: 7
+    toughness: 3
+    skills:
+    - skill_double_paw
+    - skill_dodge
+    hpMultiplierPermille: 1000
+    viewKey: crow_boss
+  - id: enemy_raccoon
+    nameKey: enemy.raccoon
+    strength: 7
+    agility: 5
+    toughness: 5
+    skills:
+    - skill_bite
+    - skill_dirty_trick
+    hpMultiplierPermille: 1000
+    viewKey: raccoon
+  - id: enemy_pug
+    nameKey: enemy.pug
+    strength: 5
+    agility: 3
+    toughness: 9
+    skills:
+    - skill_thick_fur
+    - skill_bite
+    hpMultiplierPermille: 1000
+    viewKey: pug
+  - id: enemy_admiral
+    nameKey: enemy.admiral
+    strength: 9
+    agility: 7
+    toughness: 10
+    skills:
+    - skill_bite
+    - skill_thick_fur
+    - skill_dirty_trick
+    hpMultiplierPermille: 1700
+    viewKey: admiral
+  territories:
+  - id: ter_backyard
+    nameKey: ter.backyard
+    enemyQueue:
+    - enemy_rat
+    firstRewardFood: 10
+    firstRewardJunk: 10
+    repeatRewardPct: 30
+    bonus: 1
+    bonusValue: 5
+    recruitCat: cat_shnyr
+    isFinal: 0
+    viewKey: backyard
+  - id: ter_fishshop
+    nameKey: ter.fishshop
+    enemyQueue:
+    - enemy_gull
+    - enemy_shopcat
+    firstRewardFood: 15
+    firstRewardJunk: 15
+    repeatRewardPct: 30
+    bonus: 2
+    bonusValue: 25
+    recruitCat: 
+    isFinal: 0
+    viewKey: fishshop
+  - id: ter_alley
+    nameKey: ter.alley
+    enemyQueue:
+    - enemy_crow
+    - enemy_bigrat
+    firstRewardFood: 15
+    firstRewardJunk: 25
+    repeatRewardPct: 30
+    bonus: 3
+    bonusValue: 25
+    recruitCat: cat_ponchik
+    isFinal: 0
+    viewKey: alley
+  - id: ter_park
+    nameKey: ter.park
+    enemyQueue:
+    - enemy_crow_boss
+    - enemy_raccoon
+    - enemy_pug
+    firstRewardFood: 20
+    firstRewardJunk: 30
+    repeatRewardPct: 30
+    bonus: 4
+    bonusValue: 10
+    recruitCat: 
+    isFinal: 0
+    viewKey: park
+  - id: ter_rooftop
+    nameKey: ter.rooftop
+    enemyQueue:
+    - enemy_admiral
+    firstRewardFood: 40
+    firstRewardJunk: 40
+    repeatRewardPct: 30
+    bonus: 0
+    bonusValue: 0
+    recruitCat: 
+    isFinal: 1
+    viewKey: rooftop

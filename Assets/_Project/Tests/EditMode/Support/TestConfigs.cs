@@ -27,6 +27,22 @@ namespace TrashCats.Tests
         public static readonly SkillId ThickFur = new SkillId("skill_thick_fur");
         public static readonly SkillId Dodge = new SkillId("skill_dodge");
         public static readonly SkillId DirtyTrick = new SkillId("skill_dirty_trick");
+
+        public static readonly EnemyId Rat = new EnemyId("enemy_rat");
+        public static readonly EnemyId Gull = new EnemyId("enemy_gull");
+        public static readonly EnemyId ShopCat = new EnemyId("enemy_shopcat");
+        public static readonly EnemyId Crow = new EnemyId("enemy_crow");
+        public static readonly EnemyId BigRat = new EnemyId("enemy_bigrat");
+        public static readonly EnemyId CrowBoss = new EnemyId("enemy_crow_boss");
+        public static readonly EnemyId Raccoon = new EnemyId("enemy_raccoon");
+        public static readonly EnemyId Pug = new EnemyId("enemy_pug");
+        public static readonly EnemyId Admiral = new EnemyId("enemy_admiral");
+
+        public static readonly TerritoryId Backyard = new TerritoryId("ter_backyard");
+        public static readonly TerritoryId FishShop = new TerritoryId("ter_fishshop");
+        public static readonly TerritoryId Alley = new TerritoryId("ter_alley");
+        public static readonly TerritoryId Park = new TerritoryId("ter_park");
+        public static readonly TerritoryId Rooftop = new TerritoryId("ter_rooftop");
     }
 
     /// <summary>
@@ -38,7 +54,7 @@ namespace TrashCats.Tests
         {
             Needs = new NeedsConfig(),
             Time = new TimeConfig(),
-            Progression = new ProgressionConfig(),
+            Progression = new ProgressionConfig { XpPerLevel = 12 },
             Start = new StartConfig { Food = 10, Junk = 0, Cats = new[] { TestIds.Ryzhy } },
             Cats = new[]
             {
@@ -86,44 +102,109 @@ namespace TrashCats.Tests
             {
                 new UpgradeDefinition
                 {
-                    Id = TestIds.Boxes, NameKey = "upg.boxes", Costs = new[] { 15, 40 },
+                    Id = TestIds.Boxes, NameKey = "upg.boxes", Costs = new[] { 20, 60 },
                     Effect = new SleepEnergyBonusEffect { BonusPerLevel = new[] { 0, 10, 20 } },
                 },
                 new UpgradeDefinition
                 {
-                    Id = TestIds.Dumpster, NameKey = "upg.dumpster", Costs = new[] { 15, 40 },
+                    Id = TestIds.Dumpster, NameKey = "upg.dumpster", Costs = new[] { 20, 60 },
                     Effect = new ResourceOutputBonusEffect { FoodPerLevel = new[] { 0, 1, 2 }, JunkPerLevel = new[] { 0, 1, 2 } },
                 },
                 Station(TestIds.Can, "upg.can", AttributeType.Strength),
                 Station(TestIds.Mouse, "upg.mouse", AttributeType.Agility),
                 Station(TestIds.Wheel, "upg.wheel", AttributeType.Toughness),
             },
+            Combat = new CombatConfig(),
             Skills = new[]
             {
-                new SkillDefinition { Id = TestIds.Scratch, NameKey = "skill.scratch", IsInnate = true },
-                Skill(TestIds.Bite, "skill.bite", AttributeType.Strength, 4),
-                Skill(TestIds.DoublePaw, "skill.double_paw", AttributeType.Agility, 4),
-                Skill(TestIds.ThickFur, "skill.thick_fur", AttributeType.Toughness, 4),
-                Skill(TestIds.Dodge, "skill.dodge", AttributeType.Agility, 7),
-                Skill(TestIds.DirtyTrick, "skill.dirty_trick", AttributeType.Strength, 7),
+                new SkillDefinition { Id = TestIds.Scratch, NameKey = "skill.scratch", IsInnate = true, Effect = SkillEffectKind.Damage, DamagePermille = 1000 },
+                new SkillDefinition
+                {
+                    Id = TestIds.Bite, NameKey = "skill.bite", UnlockAttribute = AttributeType.Strength, UnlockLevel = 4,
+                    GritCost = 12, CooldownActions = 3, Effect = SkillEffectKind.Damage, DamagePermille = 2000, HitModifierPermille = -100,
+                },
+                new SkillDefinition
+                {
+                    Id = TestIds.DoublePaw, NameKey = "skill.double_paw", UnlockAttribute = AttributeType.Agility, UnlockLevel = 4,
+                    GritCost = 10, CooldownActions = 2, Effect = SkillEffectKind.Damage, DamagePermille = 700, Hits = 2,
+                },
+                new SkillDefinition
+                {
+                    Id = TestIds.ThickFur, NameKey = "skill.thick_fur", UnlockAttribute = AttributeType.Toughness, UnlockLevel = 4,
+                    GritCost = 10, CooldownActions = 5, Effect = SkillEffectKind.DamageReduction, EffectPermille = 600, EffectCount = 3,
+                },
+                new SkillDefinition
+                {
+                    Id = TestIds.Dodge, NameKey = "skill.dodge", UnlockAttribute = AttributeType.Agility, UnlockLevel = 7,
+                    GritCost = 8, CooldownActions = 4, Effect = SkillEffectKind.GuaranteedEvade, EffectCount = 1,
+                },
+                new SkillDefinition
+                {
+                    Id = TestIds.DirtyTrick, NameKey = "skill.dirty_trick", UnlockAttribute = AttributeType.Strength, UnlockLevel = 7,
+                    GritCost = 12, CooldownActions = 6, Effect = SkillEffectKind.AccuracyDebuff, EffectPermille = 200, EffectCount = 3,
+                },
+            },
+            Enemies = new[]
+            {
+                Enemy(TestIds.Rat, "enemy.rat", 2, 3, 1),
+                Enemy(TestIds.Gull, "enemy.gull", 3, 5, 2, TestIds.DoublePaw),
+                Enemy(TestIds.ShopCat, "enemy.shopcat", 5, 3, 4, TestIds.Bite),
+                Enemy(TestIds.Crow, "enemy.crow", 4, 6, 3, TestIds.DoublePaw, TestIds.Dodge),
+                Enemy(TestIds.BigRat, "enemy.bigrat", 5, 4, 4, TestIds.Bite, TestIds.DirtyTrick),
+                Enemy(TestIds.CrowBoss, "enemy.crow_boss", 5, 7, 3, TestIds.DoublePaw, TestIds.Dodge),
+                Enemy(TestIds.Raccoon, "enemy.raccoon", 7, 5, 5, TestIds.Bite, TestIds.DirtyTrick),
+                Enemy(TestIds.Pug, "enemy.pug", 5, 3, 9, TestIds.ThickFur, TestIds.Bite),
+                new EnemyDefinition
+                {
+                    Id = TestIds.Admiral, NameKey = "enemy.admiral", Strength = 9, Agility = 7, Toughness = 10,
+                    Skills = new[] { TestIds.Bite, TestIds.ThickFur, TestIds.DirtyTrick }, HpMultiplierPermille = 1700, ViewKey = "admiral",
+                },
+            },
+            Territories = new[]
+            {
+                new TerritoryDefinition
+                {
+                    Id = TestIds.Backyard, NameKey = "ter.backyard", EnemyQueue = new[] { TestIds.Rat }, FirstRewardFood = 10, FirstRewardJunk = 10,
+                    Bonus = TerritoryBonusKind.SleepEnergyFlat, BonusValue = 5, RecruitCat = TestIds.Shnyr, ViewKey = "backyard",
+                },
+                new TerritoryDefinition
+                {
+                    Id = TestIds.FishShop, NameKey = "ter.fishshop", EnemyQueue = new[] { TestIds.Gull, TestIds.ShopCat }, FirstRewardFood = 15, FirstRewardJunk = 15,
+                    Bonus = TerritoryBonusKind.FoodOutputPct, BonusValue = 25, ViewKey = "fishshop",
+                },
+                new TerritoryDefinition
+                {
+                    Id = TestIds.Alley, NameKey = "ter.alley", EnemyQueue = new[] { TestIds.Crow, TestIds.BigRat }, FirstRewardFood = 15, FirstRewardJunk = 25,
+                    Bonus = TerritoryBonusKind.JunkOutputPct, BonusValue = 25, RecruitCat = TestIds.Ponchik, ViewKey = "alley",
+                },
+                new TerritoryDefinition
+                {
+                    Id = TestIds.Park, NameKey = "ter.park", EnemyQueue = new[] { TestIds.CrowBoss, TestIds.Raccoon, TestIds.Pug }, FirstRewardFood = 20, FirstRewardJunk = 30,
+                    Bonus = TerritoryBonusKind.TrainingXpPct, BonusValue = 10, ViewKey = "park",
+                },
+                new TerritoryDefinition
+                {
+                    Id = TestIds.Rooftop, NameKey = "ter.rooftop", EnemyQueue = new[] { TestIds.Admiral }, FirstRewardFood = 40, FirstRewardJunk = 40,
+                    IsFinal = true, ViewKey = "rooftop",
+                },
             },
         };
 
         private static ActivityDefinition Training(ActivityId id, string nameKey, AttributeType attribute) => new ActivityDefinition
         {
             Id = id, NameKey = nameKey, Kind = ActivityKind.Train, TrainedAttribute = attribute,
-            DurationMs = 30_000, EnergyCost = 15, SatietyCost = 10, BaseOutput = 10, Capacity = 1,
+            DurationMs = 30_000, EnergyCost = 15, SatietyCost = 14, BaseOutput = 10, Capacity = 1,
         };
 
         private static UpgradeDefinition Station(UpgradeId id, string nameKey, AttributeType attribute) => new UpgradeDefinition
         {
-            Id = id, NameKey = nameKey, Costs = new[] { 15, 40 },
-            Effect = new TrainingXpBonusEffect { Attribute = attribute, PctPerLevel = new[] { 0, 25, 50 } },
+            Id = id, NameKey = nameKey, Costs = new[] { 20, 60 },
+            Effect = new TrainingXpBonusEffect { Attribute = attribute, PctPerLevel = new[] { 0, 20, 40 } },
         };
 
-        private static SkillDefinition Skill(SkillId id, string nameKey, AttributeType attribute, int level) => new SkillDefinition
+        private static EnemyDefinition Enemy(EnemyId id, string nameKey, int str, int agi, int tou, params SkillId[] skills) => new EnemyDefinition
         {
-            Id = id, NameKey = nameKey, UnlockAttribute = attribute, UnlockLevel = level,
+            Id = id, NameKey = nameKey, Strength = str, Agility = agi, Toughness = tou, Skills = skills, ViewKey = id.Value.Replace("enemy_", ""),
         };
     }
 }

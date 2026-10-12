@@ -27,7 +27,7 @@ namespace TrashCats.Infrastructure
         [Header("Progression")]
         public int maxLevel = 10;
         public int xpBase = 10;
-        public int xpPerLevel = 7;
+        public int xpPerLevel = 12;
         public int aptitudeBonusPct = 50;
         public int battleXpWin = 8;
         public int battleXpLoss = 3;
@@ -37,11 +37,16 @@ namespace TrashCats.Infrastructure
         public int startJunk;
         public List<string> startCats = new List<string>();
 
+        [Header("Combat (Docs/GDD/COMBAT_DESIGN.md)")]
+        public CombatEntry combat = new CombatEntry();
+
         [Header("Content")]
         public List<CatEntry> cats = new List<CatEntry>();
         public List<ActivityEntry> activities = new List<ActivityEntry>();
         public List<UpgradeEntry> upgrades = new List<UpgradeEntry>();
         public List<SkillEntry> skills = new List<SkillEntry>();
+        public List<EnemyEntry> enemies = new List<EnemyEntry>();
+        public List<TerritoryEntry> territories = new List<TerritoryEntry>();
 
         [Serializable]
         public sealed class CatEntry
@@ -99,6 +104,69 @@ namespace TrashCats.Infrastructure
             public bool isInnate;
             public AttributeType unlockAttribute;
             public int unlockLevel;
+            public int gritCost;
+            public int cooldownActions;
+            public SkillEffectKind effect;
+            public int damagePermille = 1000;
+            public int hitModifierPermille;
+            public int hits = 1;
+            public int effectPermille;
+            public int effectCount;
+        }
+
+        [Serializable]
+        public sealed class CombatEntry
+        {
+            public int tickMs = 100;
+            public int hpBase = 40;
+            public int hpPerToughness = 12;
+            public int gritBase = 20;
+            public int gritPerToughness = 5;
+            public int gritRegenPerAction = 3;
+            public int damageBase = 4;
+            public int damagePerStrength = 2;
+            public int intervalBaseTicks = 16;
+            public int intervalAgilityDivisor = 2;
+            public int intervalMinTicks = 10;
+            public int hitBasePermille = 750;
+            public int hitPerAgilityDiffPermille = 40;
+            public int hitMinPermille = 350;
+            public int hitMaxPermille = 950;
+            public int varianceMinPermille = 850;
+            public int varianceMaxPermille = 1150;
+            public int suddenDeathAfterTicks = 450;
+            public int suddenDeathPermille = 2000;
+            public int fighterEntryPauseTicks = 10;
+            public int safetyMaxTicks = 10000;
+        }
+
+        [Serializable]
+        public sealed class EnemyEntry
+        {
+            public string id;
+            public string nameKey;
+            public int strength = 1;
+            public int agility = 1;
+            public int toughness = 1;
+            public List<string> skills = new List<string>();
+            public int hpMultiplierPermille = 1000;
+            public string viewKey;
+        }
+
+        [Serializable]
+        public sealed class TerritoryEntry
+        {
+            public string id;
+            public string nameKey;
+            public List<string> enemyQueue = new List<string>();
+            public int firstRewardFood;
+            public int firstRewardJunk;
+            public int repeatRewardPct = 30;
+            public TerritoryBonusKind bonus;
+            public int bonusValue;
+            [Tooltip("Empty = nobody joins")] public string recruitCat;
+            public bool isFinal;
+            public string viewKey;
         }
     }
 }

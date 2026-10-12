@@ -23,7 +23,13 @@ namespace TrashCats.Tests
             foreach (var x in c.Upgrades)
                 sb.AppendLine($"upgrade {x.Id} {x.NameKey} [{string.Join(",", x.Costs)}] {Effect(x.Effect)}");
             foreach (var x in c.Skills)
-                sb.AppendLine($"skill {x.Id} {x.NameKey} {x.IsInnate} {x.UnlockAttribute} {x.UnlockLevel}");
+                sb.AppendLine($"skill {x.Id} {x.NameKey} {x.IsInnate} {x.UnlockAttribute} {x.UnlockLevel} grit {x.GritCost} cd {x.CooldownActions} {x.Effect} dmg {x.DamagePermille} hit {x.HitModifierPermille} x{x.Hits} eff {x.EffectPermille}/{x.EffectCount}");
+            var k = c.Combat;
+            sb.AppendLine($"combat {k.TickMs} {k.HpBase} {k.HpPerToughness} {k.GritBase} {k.GritPerToughness} {k.GritRegenPerAction} {k.DamageBase} {k.DamagePerStrength} {k.IntervalBaseTicks} {k.IntervalAgilityDivisor} {k.IntervalMinTicks} {k.HitBasePermille} {k.HitPerAgilityDiffPermille} {k.HitMinPermille} {k.HitMaxPermille} {k.VarianceMinPermille} {k.VarianceMaxPermille} {k.SuddenDeathAfterTicks} {k.SuddenDeathPermille} {k.FighterEntryPauseTicks} {k.SafetyMaxTicks}");
+            foreach (var x in c.Enemies)
+                sb.AppendLine($"enemy {x.Id} {x.NameKey} {x.Strength}/{x.Agility}/{x.Toughness} [{string.Join(",", x.Skills)}] hp {x.HpMultiplierPermille} {x.ViewKey}");
+            foreach (var x in c.Territories)
+                sb.AppendLine($"territory {x.Id} {x.NameKey} [{string.Join(",", x.EnemyQueue)}] {x.FirstRewardFood}/{x.FirstRewardJunk} {x.RepeatRewardPct}% {x.Bonus}={x.BonusValue} recruit {x.RecruitCat?.Value ?? "-"} final {x.IsFinal} {x.ViewKey}");
             return sb.ToString();
         }
 

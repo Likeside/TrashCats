@@ -153,7 +153,7 @@ namespace TrashCats.Tests
         }
 
         [TestCase(AttributeType.Strength, 0, 15)]   // aptitude +50%
-        [TestCase(AttributeType.Strength, 2, 20)]   // aptitude +50%, Can lvl 2 +50%
+        [TestCase(AttributeType.Strength, 2, 19)]   // aptitude +50%, Can lvl 2 +40%
         [TestCase(AttributeType.Agility, 0, 10)]
         public void Training_GrantsXpWithAptitudeAndStationBonus(AttributeType attribute, int stationLevel, int expectedXp)
         {
@@ -166,14 +166,14 @@ namespace TrashCats.Tests
             Simulation.AdvanceTo(world, 30_000, _events);
 
             Assert.That(_events.Single<ActivityCycleCompleted>().Output, Is.EqualTo(expectedXp));
-            Assert.That((cat.Energy, cat.Satiety), Is.EqualTo((85, 90)));
+            Assert.That((cat.Energy, cat.Satiety), Is.EqualTo((85, 86)));
         }
 
         [Test]
         public void UpgradeBoughtMidCycle_AppliesToCurrentCycle()
         {
             var cat = TestCats.Make(TestIds.Ryzhy, aptitude: AttributeType.Agility);
-            var world = TestWorlds.Make(_config, junk: 15, cats: cat);
+            var world = TestWorlds.Make(_config, junk: 20, cats: cat);
             ActivitySystem.Start(world, cat, TestIds.TrainStr, _events);
             Simulation.AdvanceTo(world, 10_000, _events);
 
@@ -237,7 +237,7 @@ namespace TrashCats.Tests
             var world = TestWorlds.Make(_config, upgrades: new[] { TestWorlds.Level(TestIds.Can, 2) }, cats: cat);
             ActivitySystem.Start(world, cat, TestIds.TrainStr, _events);
 
-            Simulation.AdvanceTo(world, 30_000 * 4, _events);
+            Simulation.AdvanceTo(world, 30_000 * 6, _events); // 106 XP needed, 19 per cycle
 
             Assert.That(cat.GetLevel(AttributeType.Strength), Is.EqualTo(10));
             Assert.That(cat.Activity.IdleReason, Is.EqualTo(IdleReason.AttributeMax));

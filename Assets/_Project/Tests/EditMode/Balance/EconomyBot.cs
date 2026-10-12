@@ -174,9 +174,12 @@ namespace TrashCats.Tests
             if (!AnyoneDoing(ActivityKind.Rummage) && _world.Junk < NextUpgradeCost() && cat.Id == JunkCollector())
                 return Id(ActivityKind.Rummage);
 
+            // Specialise in the aptitude, but catch up an attribute that falls 3+ levels behind (a sensible player).
+            var weakest = AttributeTypes.All.OrderBy(cat.GetLevel).First();
+            var focus = cat.GetLevel(cat.Aptitude) - cat.GetLevel(weakest) >= 3 ? weakest : cat.Aptitude;
             var training = _config.Activities.Where(a => a.Kind == ActivityKind.Train)
                 .Where(a => ActivitySystem.CanStart(_world, cat, a.Id) == ActivityError.None)
-                .OrderByDescending(a => a.TrainedAttribute == cat.Aptitude)
+                .OrderByDescending(a => a.TrainedAttribute == focus)
                 .ThenBy(a => cat.GetLevel(a.TrainedAttribute))
                 .FirstOrDefault();
             if (training != null)

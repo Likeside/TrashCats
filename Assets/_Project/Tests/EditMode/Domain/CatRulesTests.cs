@@ -47,11 +47,11 @@ namespace TrashCats.Tests
         {
             var cat = TestCats.Make(TestIds.Ryzhy, str: 1);
 
-            // 10 (1->2) + 17 (2->3) + 24 (3->4) = 51; 5 remain.
-            CatRules.AddXp(cat, AttributeType.Strength, 56, _config, _events);
+            // 10 (1->2) + 22 (2->3) + 34 (3->4) = 66; 4 remain.
+            CatRules.AddXp(cat, AttributeType.Strength, 70, _config, _events);
 
             Assert.That(cat.GetLevel(AttributeType.Strength), Is.EqualTo(4));
-            Assert.That(cat.GetXp(AttributeType.Strength), Is.EqualTo(5));
+            Assert.That(cat.GetXp(AttributeType.Strength), Is.EqualTo(4));
             Assert.That(_events.OfType<AttributeLevelUp>().Select(e => e.NewLevel), Is.EqualTo(new[] { 2, 3, 4 }));
         }
 
@@ -82,7 +82,7 @@ namespace TrashCats.Tests
         {
             var cat = TestCats.Make(TestIds.Ryzhy, str: 3);
 
-            CatRules.AddXp(cat, AttributeType.Strength, 24, _config, _events);
+            CatRules.AddXp(cat, AttributeType.Strength, 34, _config, _events);
 
             Assert.That(_events.OfType<SkillUnlocked>().Single().SkillId, Is.EqualTo(TestIds.Bite));
             Assert.That(cat.GetSkillInSlot(0), Is.EqualTo(TestIds.Bite));
@@ -98,7 +98,7 @@ namespace TrashCats.Tests
             CatRules.Equip(cat, 2, TestIds.ThickFur, _config, _events);
             _events.Clear();
 
-            CatRules.AddXp(cat, AttributeType.Strength, 45, _config, _events);
+            CatRules.AddXp(cat, AttributeType.Strength, 70, _config, _events);
 
             Assert.That(_events.OfType<SkillUnlocked>().Single().SkillId, Is.EqualTo(TestIds.DirtyTrick));
             Assert.That(_events.OfType<SkillEquipped>(), Is.Empty);

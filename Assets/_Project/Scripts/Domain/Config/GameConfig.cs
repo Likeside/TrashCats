@@ -13,26 +13,35 @@ namespace TrashCats.Domain
         public TimeConfig Time { get; init; } = new TimeConfig();
         public ProgressionConfig Progression { get; init; } = new ProgressionConfig();
         public StartConfig Start { get; init; } = new StartConfig();
+        public CombatConfig Combat { get; init; } = new CombatConfig();
 
         public IReadOnlyList<CatDefinition> Cats { get; init; } = Array.Empty<CatDefinition>();
         public IReadOnlyList<ActivityDefinition> Activities { get; init; } = Array.Empty<ActivityDefinition>();
         public IReadOnlyList<UpgradeDefinition> Upgrades { get; init; } = Array.Empty<UpgradeDefinition>();
         public IReadOnlyList<SkillDefinition> Skills { get; init; } = Array.Empty<SkillDefinition>();
+        public IReadOnlyList<EnemyDefinition> Enemies { get; init; } = Array.Empty<EnemyDefinition>();
+        public IReadOnlyList<TerritoryDefinition> Territories { get; init; } = Array.Empty<TerritoryDefinition>();
 
         private Dictionary<CatId, CatDefinition> _cats;
         private Dictionary<ActivityId, ActivityDefinition> _activities;
         private Dictionary<UpgradeId, UpgradeDefinition> _upgrades;
         private Dictionary<SkillId, SkillDefinition> _skills;
+        private Dictionary<EnemyId, EnemyDefinition> _enemies;
+        private Dictionary<TerritoryId, TerritoryDefinition> _territories;
 
         public CatDefinition GetCat(CatId id) => Get(ref _cats, Cats, d => d.Id, id);
         public ActivityDefinition GetActivity(ActivityId id) => Get(ref _activities, Activities, d => d.Id, id);
         public UpgradeDefinition GetUpgrade(UpgradeId id) => Get(ref _upgrades, Upgrades, d => d.Id, id);
         public SkillDefinition GetSkill(SkillId id) => Get(ref _skills, Skills, d => d.Id, id);
+        public EnemyDefinition GetEnemy(EnemyId id) => Get(ref _enemies, Enemies, d => d.Id, id);
+        public TerritoryDefinition GetTerritory(TerritoryId id) => Get(ref _territories, Territories, d => d.Id, id);
 
         public bool TryGetCat(CatId id, out CatDefinition def) => TryGet(ref _cats, Cats, d => d.Id, id, out def);
         public bool TryGetActivity(ActivityId id, out ActivityDefinition def) => TryGet(ref _activities, Activities, d => d.Id, id, out def);
         public bool TryGetUpgrade(UpgradeId id, out UpgradeDefinition def) => TryGet(ref _upgrades, Upgrades, d => d.Id, id, out def);
         public bool TryGetSkill(SkillId id, out SkillDefinition def) => TryGet(ref _skills, Skills, d => d.Id, id, out def);
+        public bool TryGetEnemy(EnemyId id, out EnemyDefinition def) => TryGet(ref _enemies, Enemies, d => d.Id, id, out def);
+        public bool TryGetTerritory(TerritoryId id, out TerritoryDefinition def) => TryGet(ref _territories, Territories, d => d.Id, id, out def);
 
         private static T Get<TId, T>(ref Dictionary<TId, T> cache, IReadOnlyList<T> list, Func<T, TId> key, TId id)
         {
@@ -74,7 +83,7 @@ namespace TrashCats.Domain
     {
         public int MaxLevel { get; init; } = 10;
         public int XpBase { get; init; } = 10;
-        public int XpPerLevel { get; init; } = 7;
+        public int XpPerLevel { get; init; } = 12;
         public int AptitudeBonusPct { get; init; } = 50;
         public int BattleXpWin { get; init; } = 8;
         public int BattleXpLoss { get; init; } = 3;

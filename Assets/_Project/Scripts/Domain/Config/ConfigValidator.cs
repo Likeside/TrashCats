@@ -14,6 +14,8 @@ namespace TrashCats.Domain
             ValidateActivities(config, errors);
             ValidateUpgrades(config, errors);
             ValidateSkills(config, errors);
+            ValidateEnemies(config, errors);
+            ValidateTerritories(config, errors);
             return errors;
         }
 
@@ -96,6 +98,35 @@ namespace TrashCats.Domain
                     continue;
                 if (skill.UnlockLevel < 1 || skill.UnlockLevel > config.Progression.MaxLevel)
                     errors.Add($"Skill '{skill.Id}': UnlockLevel must be within 1..{config.Progression.MaxLevel}.");
+            }
+        }
+
+        private static void ValidateEnemies(GameConfig config, List<string> errors)
+        {
+            CheckUniqueIds(config.Enemies.Select(e => e.Id.Value), "Enemy", errors);
+            foreach (var enemy in config.Enemies)
+            {
+                if (enemy.Strength < 1 || enemy.Agility < 1 || enemy.Toughness < 1) errors.Add($"Enemy '{enemy.Id}': attributes must be >= 1.");
+                if (enemy.HpMultiplierPermille <= 0) errors.Add($"Enemy '{enemy.Id}': HpMultiplierPermille must be positive.");
+                foreach (var skill in enemy.Skills)
+                    if (!config.TryGetSkill(skill, out _)) errors.Add($"Enemy '{enemy.Id}' references unknown skill '{skill}'.");
+            }
+
+            if (config.Enemies.Count > 0 && !config.Skills.Any(s => s.IsInnate && s.Effect == SkillEffectKind.Damage))
+                errors.Add("An innate damage skill (Scratch) is required for combat.");
+        }
+
+        private static void ValidateTerritories(GameConfig config, List<string> errors)
+        {
+            CheckUniqueIds(config.Territories.Select(t => t.Id.Value), "Territory", errors);
+            foreach (var territory in config.Territories)
+            {
+                if (territory.EnemyQueue.Count == 0) errors.Add($"Territory '{territory.Id}': enemy queue is empty.");
+                foreach (var enemy in territory.EnemyQueue)
+                    if (!config.TryGetEnemy(enemy, out _)) errors.Add($"Territory '{territory.Id}' references unknown enemy '{enemy}'.");
+                if (territory.RecruitCat is CatId cat && !config.TryGetCat(cat, out _))
+                    errors.Add($"Territory '{territory.Id}' recruits unknown cat '{cat}'.");
+                if (territory.FirstRewardFood < 0 || territory.FirstRewardJunk < 0) errors.Add($"Territory '{territory.Id}': rewards must not be negative.");
             }
         }
 

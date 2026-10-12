@@ -86,11 +86,11 @@ namespace TrashCats.Tests
         [Test]
         public void XpToNext_FollowsGddCurve()
         {
-            var progression = new ProgressionConfig();
-            var expected = new[] { 10, 17, 24, 31, 38, 45, 52, 59, 66 };
+            var progression = TestConfigs.Default().Progression;
+            var expected = new[] { 10, 22, 34, 46, 58, 70, 82, 94, 106 };
 
             Assert.That(Enumerable.Range(1, 9).Select(progression.XpToNext), Is.EqualTo(expected));
-            Assert.That(expected.Sum(), Is.EqualTo(342));
+            Assert.That(expected.Sum(), Is.EqualTo(522));
         }
 
         private static void AssertHasError(GameConfig config, string fragment)
