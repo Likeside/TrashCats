@@ -18,6 +18,11 @@ namespace TrashCats.Presentation.Dev
         [SerializeField] private FlipbookClip[] clips = Array.Empty<FlipbookClip>();
         [SerializeField] private string[] buttonLabels = Array.Empty<string>();
 
+        [Header("Separate tail layer (shown only with the clip at tailClipIndex)")]
+        [SerializeField] private SpriteFlipbook tail;
+        [SerializeField] private FlipbookClip tailClip;
+        [SerializeField] private int tailClipIndex;
+
         private UnityEngine.UI.Text _status;
 
         private void Start()
@@ -53,7 +58,16 @@ namespace TrashCats.Presentation.Dev
                 _status.text = $"{character.Current.name} · кадр {character.FrameIndex + 1}/{character.Current.frames.Length} · {character.Current.fps} fps";
         }
 
-        private void Play(FlipbookClip clip) => character.Play(clip);
+        private void Play(FlipbookClip clip)
+        {
+            character.Play(clip);
+            var withTail = tail != null && Array.IndexOf(clips, clip) == tailClipIndex;
+            if (tail == null)
+                return;
+            tail.gameObject.SetActive(withTail);
+            if (withTail)
+                tail.Play(tailClip);
+        }
 
         private IEnumerator CaptureAll(string dir)
         {
@@ -64,16 +78,21 @@ namespace TrashCats.Presentation.Dev
                 Play(clip);
                 enabled = false;
                 character.enabled = false;
-                for (var f = 0; f < clip.frames.Length; f++)
+                var tailFrames = tail != null && tail.gameObject.activeSelf ? tailClip.frames.Length : 0;
+                if (tail != null) tail.enabled = false;
+                for (var f = 0; f < Mathf.Max(clip.frames.Length, tailFrames); f++)
                 {
-                    character.GetComponent<SpriteRenderer>().sprite = clip.frames[f];
-                    _status.text = $"{clip.name} · кадр {f + 1}/{clip.frames.Length}";
+                    character.GetComponent<SpriteRenderer>().sprite = clip.frames[Mathf.Min(f, clip.frames.Length - 1)];
+                    if (tailFrames > 0)
+                        tail.GetComponent<SpriteRenderer>().sprite = tailClip.frames[f % tailFrames];
+                    _status.text = $"{clip.name} · кадр {f + 1}";
                     yield return new WaitForEndOfFrame();
                     ScreenCapture.CaptureScreenshot(Path.Combine(dir, $"{clip.name}_{f:00}.png"));
                     yield return null;
                 }
 
                 character.enabled = true;
+                if (tail != null) tail.enabled = true;
                 enabled = true;
             }
 

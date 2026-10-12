@@ -31,6 +31,13 @@ LAYOUT = (
 )
 
 SHEETS = {
+    "tail8": (8, "Draw ONLY the tail from the reference - no cat body, just the detached tail exactly as drawn in the "
+                 "reference: same thickness, orange fur with dark stripes, cream tip, bold black ink outline, same size. "
+                 "The thick cut end of the tail is at the lower right of every cell and stays at exactly the same position "
+                 "and angle in all 8 frames. Animation: a lazy idle tail sway - the tail stays curved upward like in the "
+                 "reference and only bends gradually: the middle bends a little more to the left over frames 1-4 and "
+                 "returns over frames 5-8, the cream tip flicks slightly. Small smooth changes between consecutive frames, "
+                 "frame 8 leads back to frame 1."),
     "idle8calm": (8, "Keep the exact pose, proportions and size of the reference in EVERY frame: the same boxer guard "
                      "standing on hind legs, the same position. Animation: calm 8-frame breathing loop. "
                      "The feet, legs, head and fists stay in exactly the same place in all frames - do not crouch, do not "

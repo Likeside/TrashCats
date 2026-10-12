@@ -11,11 +11,19 @@ namespace TrashCats.Presentation.Animation
         [Min(1)] public float fps = 10f;
         public bool loop = true;
 
+        [Tooltip("Loop forward then backward (0..n-1..1) - for frames ordered by pose, e.g. a tail sway.")]
+        public bool pingPong;
+
         [Tooltip("Procedural breathing: relative vertical stretch (0 = off). Scales around the sprite pivot (the planted foot).")]
         [Range(0f, 0.05f)] public float breathe;
         [Min(0.1f)] public float breathePeriod = 2.4f;
 
-        public float Duration => frames.Length / fps;
+        /// <summary>Frames in one loop: n, or 2n-2 when ping-ponging.</summary>
+        public int SequenceLength => pingPong && frames.Length > 1 ? frames.Length * 2 - 2 : frames.Length;
+
+        public float Duration => SequenceLength / fps;
+
+        public int FrameAt(int step) => step < frames.Length ? step : frames.Length * 2 - 2 - step;
     }
 
     /// <summary>
@@ -69,21 +77,22 @@ namespace TrashCats.Presentation.Animation
                 return;
 
             _time += Time.deltaTime;
-            var index = (int)(_time * _clip.fps);
-            if (index >= _clip.frames.Length)
+            var step = (int)(_time * _clip.fps);
+            if (step >= _clip.SequenceLength)
             {
                 if (_clip.loop)
                 {
                     _time %= _clip.Duration;
-                    index = (int)(_time * _clip.fps) % _clip.frames.Length;
+                    step = (int)(_time * _clip.fps) % _clip.SequenceLength;
                 }
                 else
                 {
-                    index = _clip.frames.Length - 1;
+                    step = _clip.SequenceLength - 1;
                     _finished = true;
                 }
             }
 
+            var index = _clip.FrameAt(step);
             if (index != FrameIndex)
                 SetFrame(index);
             if (_finished)

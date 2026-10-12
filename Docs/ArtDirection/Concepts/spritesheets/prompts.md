@@ -68,3 +68,13 @@ Keep the exact pose, proportions and size of the reference in EVERY frame: the s
 Comic book style matching the reference exactly: bold black ink outlines, flat orange fur with darker stripes, cream chest and muzzle, torn left ear, scar across the nose, yellow eyes. Same character, same proportions, same colors and line weight in every frame. No clothes.
 ```
 
+## ryzhy_tail8 (edit of ref_ryzhy_tail.png, background=opaque)
+
+```
+Game sprite sheet: exactly 8 animation frames arranged in a grid of 2 rows x 4 columns, reading order left to right, then the second row left to right. Equal cells with generous empty space between frames so they never touch, the character centered in each cell at the same scale, feet on the same baseline within a row, full body visible, side view facing right. Solid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no text, no frame numbers, no borders between cells.
+
+Draw ONLY the tail from the reference - no cat body, just the detached tail exactly as drawn in the reference: same thickness, orange fur with dark stripes, cream tip, bold black ink outline, same size. The thick cut end of the tail is at the lower right of every cell and stays at exactly the same position and angle in all 8 frames. Animation: a lazy idle tail sway - the tail stays curved upward like in the reference and only bends gradually: the middle bends a little more to the left over frames 1-4 and returns over frames 5-8, the cream tip flicks slightly. Small smooth changes between consecutive frames, frame 8 leads back to frame 1.
+
+Comic book style matching the reference exactly: bold black ink outlines, flat orange fur with darker stripes, cream chest and muzzle, torn left ear, scar across the nose, yellow eyes. Same character, same proportions, same colors and line weight in every frame. No clothes.
+```
+

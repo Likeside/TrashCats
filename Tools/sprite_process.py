@@ -7,7 +7,8 @@
 
 Usage: Tools/sprite_process.py <sheet.png> <out_dir> [--frames N] [--rows R] [--cell-height H] [--anchor backfoot|center]
 
-Anchors: "backfoot" (default) keeps the planted back foot (leftmost foot touching the ground; characters face right) at the
+Anchors: "base-br" puts the bottom-right extreme point (e.g. the cut base of a detached tail) at the sprite pivot.
+"backfoot" (default) keeps the planted back foot (leftmost foot touching the ground; characters face right) at the
 same x in every frame, so idle loops do not slide when the tail swings. "center" centres the bounding box (for jumps).
 Writes <name>_<i>.png frames and <name>_strip.png (frames side by side on a checkerboard) for review.
 """
@@ -123,6 +124,13 @@ def back_foot_x(alpha):
     return (left[0] + left[1]) / 2
 
 
+def bottom_right_point(alpha):
+    """(x, y) of the opaque pixel furthest to the bottom right (max x + y), in the crop's coordinates."""
+    ys, xs = np.nonzero(alpha > 64)
+    i = np.argmax(xs + ys)
+    return float(xs[i]), float(ys[i])
+
+
 def main():
     src, out_dir = sys.argv[1], sys.argv[2]
     expected = int(sys.argv[sys.argv.index("--frames") + 1]) if "--frames" in sys.argv else None
@@ -161,23 +169,36 @@ def main():
         crops = scaled
         print(f"{name}: scaled by {factor:.3f}")
 
-    for crop, _ in crops:
-        anchors.append(back_foot_x(crop[..., 3]) if anchor_mode == "backfoot" else crop.shape[1] / 2)
-
-    # symmetric cell around the anchor so the sprite pivot (bottom centre) is the anchor
-    half = max(max(a, c.shape[1] - a) for (c, _), a in zip(crops, anchors)) + pad
-    width = int(np.ceil(half * 2))
-    height = max(c.shape[0] + lift for c, lift in crops) + pad * 2
     os.makedirs(out_dir, exist_ok=True)
     cells = []
-    for i, ((crop, lift), anchor) in enumerate(zip(crops, anchors)):
-        cell = Image.new("RGBA", (width, height), (0, 0, 0, 0))
-        image = Image.fromarray(crop, "RGBA")
-        cell.paste(image, (int(round(width / 2 - anchor)), height - pad - lift - image.height))
-        if cell_h:
-            cell = cell.resize((round(width * cell_h / height), cell_h), Image.LANCZOS)
-        cell.save(os.path.join(out_dir, f"{name}_{i}.png"))
-        cells.append(cell)
+    if anchor_mode == "base-br":
+        # pivot (cell bottom centre) = base point; cell symmetric in x around it, base on the bottom padding line
+        points = [bottom_right_point(c[..., 3]) for c, _ in crops]
+        half = max(max(px, c.shape[1] - px) for (c, _), (px, _) in zip(crops, points)) + pad
+        width = int(np.ceil(half * 2))
+        height = int(np.ceil(max(py for _, py in points))) + pad * 2
+        for i, ((crop, _), (px, py)) in enumerate(zip(crops, points)):
+            cell = Image.new("RGBA", (width, height), (0, 0, 0, 0))
+            image = Image.fromarray(crop, "RGBA")
+            cell.alpha_composite(image, (int(round(width / 2 - px)), int(round(height - pad - py))))
+            cell.save(os.path.join(out_dir, f"{name}_{i}.png"))
+            cells.append(cell)
+    else:
+        for crop, _ in crops:
+            anchors.append(back_foot_x(crop[..., 3]) if anchor_mode == "backfoot" else crop.shape[1] / 2)
+
+        # symmetric cell around the anchor so the sprite pivot (bottom centre) is the anchor
+        half = max(max(a, c.shape[1] - a) for (c, _), a in zip(crops, anchors)) + pad
+        width = int(np.ceil(half * 2))
+        height = max(c.shape[0] + lift for c, lift in crops) + pad * 2
+        for i, ((crop, lift), anchor) in enumerate(zip(crops, anchors)):
+            cell = Image.new("RGBA", (width, height), (0, 0, 0, 0))
+            image = Image.fromarray(crop, "RGBA")
+            cell.paste(image, (int(round(width / 2 - anchor)), height - pad - lift - image.height))
+            if cell_h:
+                cell = cell.resize((round(width * cell_h / height), cell_h), Image.LANCZOS)
+            cell.save(os.path.join(out_dir, f"{name}_{i}.png"))
+            cells.append(cell)
 
     # review strip on a checkerboard so edges and fringes are visible
     cw, ch = cells[0].size

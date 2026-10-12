@@ -40,6 +40,17 @@ namespace TrashCats.Editor
             cat.AddComponent<SpriteRenderer>();
             var flipbook = cat.AddComponent<SpriteFlipbook>();
 
+            // tail layer: pivot = cut base of the tail, attached where it was cut from the body (Tools/split_tail.py)
+            var tail = new GameObject("Tail");
+            tail.transform.SetParent(cat.transform, false);
+            tail.transform.localPosition = new Vector3(0.12f, 1.49f, 0f);
+            var tailRenderer = tail.AddComponent<SpriteRenderer>();
+            tailRenderer.sortingOrder = -1;
+            var tailFlipbook = tail.AddComponent<SpriteFlipbook>();
+            var tailSo = new SerializedObject(tailFlipbook);
+            tailSo.FindProperty("target").objectReferenceValue = tailRenderer;
+            tailSo.ApplyModifiedPropertiesWithoutUndo();
+
             var root = new GameObject("AnimationTestScene").AddComponent<AnimationTestScene>();
             var so = new SerializedObject(root);
             so.FindProperty("character").objectReferenceValue = flipbook;
@@ -49,6 +60,10 @@ namespace TrashCats.Editor
             clips.GetArrayElementAtIndex(0).FindPropertyRelative("breathe").floatValue = 0.012f;
             clips.GetArrayElementAtIndex(0).FindPropertyRelative("breathePeriod").floatValue = 2.4f;
             FillClip(clips.GetArrayElementAtIndex(1), "punch", "Punch", 12f, true);
+            so.FindProperty("tail").objectReferenceValue = tailFlipbook;
+            FillClip(so.FindProperty("tailClip"), "tail", "Tail", 7f, true);
+            so.FindProperty("tailClip").FindPropertyRelative("pingPong").boolValue = true; // frames are ordered by curl
+            so.FindProperty("tailClipIndex").intValue = 0;
             var labels = so.FindProperty("buttonLabels");
             labels.arraySize = 2;
             labels.GetArrayElementAtIndex(0).stringValue = "Стойка";

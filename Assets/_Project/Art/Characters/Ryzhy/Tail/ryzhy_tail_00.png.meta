@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 9e85d8c74fdbadf43a15b74013a0ed0b
+guid: 3ba7d65e739cad8bfba183e32a4e7e99
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -945477283661795615
-    second: ryzhy_idle_01_0
+      213: 5711883972609020007
+    second: ryzhy_tail_00_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ryzhy_idle_01_0
+      name: ryzhy_tail_00_0
       rect:
         serializedVersion: 2
-        x: 32
-        y: 16
-        width: 282
-        height: 373
+        x: 16
+        y: 14
+        width: 85
+        height: 138
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1ee232c7b6df0e2f0800000000000000
-      internalID: -945477283661795615
+      spriteID: 7609b91d530b44f40800000000000000
+      internalID: 5711883972609020007
       vertices: []
       indices: 
       edges: []
