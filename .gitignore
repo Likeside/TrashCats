@@ -47,3 +47,7 @@ TestResults*.xml
 # OS
 .DS_Store
 Thumbs.db
+
+# Unity test runner / crash leftovers
+/[Aa]ssets/InitTestScene*.unity*
+mono_crash.*

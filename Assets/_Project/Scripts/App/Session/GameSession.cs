@@ -59,6 +59,26 @@ namespace TrashCats.App
                 _save.MarkDirty(SaveUrgency.Deferred);
         }
 
+        // --- Read-only queries for UI (no time catch-up, no state change) -------------------------------
+
+        public CommandError CanAssign(CatId catId, ActivityId activityId) =>
+            _world.TryGetCat(catId, out var cat) ? CommandErrors.From(ActivitySystem.CanStart(_world, cat, activityId)) : CommandError.UnknownCat;
+
+        public CommandError CanFeed(CatId catId) =>
+            _world.TryGetCat(catId, out var cat) ? CommandErrors.From(Feeding.CanFeed(cat, _world.Wallet, Config)) : CommandError.UnknownCat;
+
+        /// <summary>Food that feeding would spend right now (limited by the stockpile).</summary>
+        public int FoodToFeed(CatId catId) =>
+            _world.TryGetCat(catId, out var cat) ? Math.Min(Feeding.FoodToFill(cat, Config), _world.Wallet.Food) : 0;
+
+        public long PreviewDuration(CatId catId, ActivityId activityId) =>
+            ActivitySystem.CycleDuration(_world, _world.GetCat(catId), Config.GetActivity(activityId));
+
+        public int PreviewOutput(CatId catId, ActivityId activityId) =>
+            ActivitySystem.PreviewOutput(_world, _world.GetCat(catId), Config.GetActivity(activityId));
+
+        // --- Commands --------------------------------------------------------------------------------
+
         public CommandResult AssignActivity(CatId catId, ActivityId activityId) => Execute(catId,
             cat => CommandErrors.From(ActivitySystem.CanStart(_world, cat, activityId)),
             (cat, events) => ActivitySystem.Start(_world, cat, activityId, events),

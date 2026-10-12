@@ -91,6 +91,10 @@ namespace TrashCats.Domain
                 Stop(cat, reason, events);
         }
 
+        /// <summary>What one cycle would yield right now (Food, Junk, XP or Energy), for UI previews.</summary>
+        public static int PreviewOutput(GameWorld world, IReadOnlyCat cat, ActivityDefinition definition) =>
+            ExpectedOutput(world, cat, definition, world.CollectModifiers());
+
         internal static int ExpectedOutput(GameWorld world, IReadOnlyCat cat, ActivityDefinition definition, ModifierSet modifiers)
         {
             switch (definition.Kind)

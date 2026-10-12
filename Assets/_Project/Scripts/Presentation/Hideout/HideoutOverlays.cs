@@ -1,0 +1,157 @@
+using System;
+using System.Linq;
+using System.Text;
+using DG.Tweening;
+using TrashCats.App;
+using TrashCats.Presentation.UI;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace TrashCats.Presentation.Hideout
+{
+    /// <summary>Top bar with the gang's resources and (in development builds) the debug button.</summary>
+    public sealed class HudView
+    {
+        private readonly GameSession _session;
+        private readonly Text _resources;
+
+        public HudView(GameSession session, RectTransform root, Action onDebug)
+        {
+            _session = session;
+            Ui.Panel(root, "HudBack", Palette.PanelDark).rectTransform.Fill();
+            _resources = Ui.Label(root, "", 40, TextAnchor.MiddleLeft, Palette.Paper);
+            _resources.rectTransform.Fill(30);
+
+            if (onDebug != null)
+            {
+                var debug = Ui.Button(root, "Debug", "DBG", Palette.Disabled, onDebug, 28);
+                debug.Rect.Place(new Vector2(1, 0), new Vector2(1, 1), new Vector2(-150, 15), new Vector2(-20, -15));
+            }
+
+            Refresh();
+        }
+
+        public void Refresh() => _resources.text = $"Еда: {_session.World.Food}      Хлам: {_session.World.Junk}";
+    }
+
+    /// <summary>Short message line for rejected commands.</summary>
+    public sealed class ToastView
+    {
+        private readonly Text _text;
+
+        public ToastView(RectTransform parent)
+        {
+            _text = Ui.Label(parent, "", 34, TextAnchor.MiddleCenter, Palette.Paper);
+            _text.rectTransform.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(40, -90), new Vector2(-40, -20));
+            _text.gameObject.AddComponent<Outline>().effectColor = Palette.Ink;
+            _text.color = new Color(1, 1, 1, 0);
+        }
+
+        public void Show(string message)
+        {
+            _text.DOKill();
+            _text.text = message;
+            _text.color = Palette.Paper;
+            _text.DOFade(0f, 0.6f).SetDelay(1.6f).SetLink(_text.gameObject);
+        }
+    }
+
+    /// <summary>"Пока тебя не было" modal built from an <see cref="OfflineSummary"/>.</summary>
+    public sealed class OfflineSummaryModal
+    {
+        private readonly OverlayStack _overlays;
+        private readonly GameObject _root;
+        private readonly Text _body;
+
+        public OfflineSummaryModal(RectTransform parent, OverlayStack overlays)
+        {
+            _overlays = overlays;
+            var dim = Ui.Panel(parent, "OfflineSummary", Palette.Dim, raycast: true);
+            dim.rectTransform.Fill();
+            _root = dim.gameObject;
+
+            var panel = Ui.Panel(dim.transform, "Card", Palette.Panel, raycast: true);
+            panel.rectTransform.At(new Vector2(0.5f, 0.5f), new Vector2(900, 900));
+
+            var title = Ui.Label(panel.transform, "Пока тебя не было", 46, TextAnchor.UpperCenter, Palette.Ink);
+            title.rectTransform.Fill(40);
+            _body = Ui.Label(panel.transform, "", 32, TextAnchor.UpperLeft, Palette.Ink);
+            _body.rectTransform.Place(Vector2.zero, Vector2.one, new Vector2(50, 160), new Vector2(-50, -120));
+
+            var ok = Ui.Button(panel.transform, "Ok", "Отлично", Palette.Primary, () => _overlays.Close(_root));
+            ok.Rect.Place(new Vector2(0.25f, 0), new Vector2(0.75f, 0), new Vector2(0, 40), new Vector2(0, 140));
+
+            _root.SetActive(false);
+        }
+
+        public void Show(OfflineSummary summary)
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine($"Прошло: {Texts.Duration(summary.RealElapsedMs)}" + (summary.WasCapped ? $" (засчитано {Texts.Duration(summary.SimulatedMs)})" : ""));
+            if (summary.FoodGained > 0) sb.AppendLine($"Еда: +{summary.FoodGained}");
+            if (summary.JunkGained > 0) sb.AppendLine($"Хлам: +{summary.JunkGained}");
+            foreach (var group in summary.LevelUps.GroupBy(e => (e.CatId, e.Attribute)))
+                sb.AppendLine($"{Texts.CatName(group.Key.CatId)}: {Texts.Attribute(group.Key.Attribute)} {group.Max(e => e.NewLevel)}");
+            foreach (var unlocked in summary.SkillsUnlocked)
+                sb.AppendLine($"{Texts.CatName(unlocked.CatId)}: новое умение {unlocked.SkillId}");
+            foreach (var stopped in summary.Stopped)
+            {
+                var reason = Texts.IdleBubble(stopped.Reason);
+                if (reason.Length > 0)
+                    sb.AppendLine($"{Texts.CatName(stopped.CatId)}: {reason.ToLowerInvariant()}");
+            }
+
+            _body.text = sb.ToString();
+            _overlays.Push(_root);
+        }
+    }
+
+    /// <summary>Development-only cheats: time scale, resources, skipping time and resetting progress.</summary>
+    public sealed class DebugPanel
+    {
+        private readonly OverlayStack _overlays;
+        private readonly GameObject _root;
+        private readonly Text _scale;
+        private readonly GameSession _session;
+
+        public DebugPanel(RectTransform parent, OverlayStack overlays, GameSession session, DebugCommands debug, Action resetProgress)
+        {
+            _overlays = overlays;
+            _session = session;
+            var dim = Ui.Panel(parent, "DebugPanel", Palette.Dim, raycast: true);
+            dim.rectTransform.Fill();
+            _root = dim.gameObject;
+
+            var panel = Ui.Panel(dim.transform, "Card", Palette.PanelDark, raycast: true);
+            panel.rectTransform.At(new Vector2(0.5f, 0.5f), new Vector2(900, 1100));
+            _scale = Ui.Label(panel.transform, "", 40, TextAnchor.UpperCenter, Palette.Paper);
+            _scale.rectTransform.Fill(30);
+
+            void Add(int row, int col, string label, Action action)
+            {
+                var b = Ui.Button(panel.transform, label, label, Palette.Secondary, () => { action(); Refresh(); }, 32);
+                b.Rect.Place(new Vector2(col * 0.5f, 1), new Vector2((col + 1) * 0.5f, 1),
+                    new Vector2(30, -120 - (row + 1) * 140), new Vector2(-30, -120 - row * 140 - 20));
+            }
+
+            Add(0, 0, "Время ×1", () => session.DebugTimeScale = 1);
+            Add(0, 1, "Время ×5", () => session.DebugTimeScale = 5);
+            Add(1, 0, "Время ×20", () => session.DebugTimeScale = 20);
+            Add(1, 1, "+10 мин", () => debug.SkipGameTime(10 * 60_000));
+            Add(2, 0, "+100 еды", () => debug.AddResources(100, 0));
+            Add(2, 1, "+100 хлама", () => debug.AddResources(0, 100));
+            Add(3, 0, "Сбросить прогресс", resetProgress);
+            Add(3, 1, "Закрыть", () => _overlays.Close(_root));
+
+            _root.SetActive(false);
+        }
+
+        public void Open()
+        {
+            Refresh();
+            _overlays.Push(_root);
+        }
+
+        private void Refresh() => _scale.text = $"Отладка · скорость ×{_session.DebugTimeScale}";
+    }
+}
