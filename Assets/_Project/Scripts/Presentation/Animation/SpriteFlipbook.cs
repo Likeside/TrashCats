@@ -14,6 +14,9 @@ namespace TrashCats.Presentation.Animation
         [Tooltip("Loop forward then backward (0..n-1..1) - for frames ordered by pose, e.g. a tail sway.")]
         public bool pingPong;
 
+        [Tooltip("Optional per-frame attachment point (local units from the sprite pivot), e.g. where the tail joins the body.")]
+        public Vector2[] attachPoints = Array.Empty<Vector2>();
+
         [Tooltip("Procedural breathing: relative vertical stretch (0 = off). Scales around the sprite pivot (the planted foot).")]
         [Range(0f, 0.05f)] public float breathe;
         [Min(0.1f)] public float breathePeriod = 2.4f;
@@ -24,6 +27,13 @@ namespace TrashCats.Presentation.Animation
         public float Duration => SequenceLength / fps;
 
         public int FrameAt(int step) => step < frames.Length ? step : frames.Length * 2 - 2 - step;
+
+        public bool TryGetAttachPoint(int frame, out Vector2 point)
+        {
+            var has = attachPoints != null && attachPoints.Length > 0;
+            point = has ? attachPoints[Mathf.Clamp(frame, 0, attachPoints.Length - 1)] : default;
+            return has;
+        }
     }
 
     /// <summary>
@@ -97,6 +107,14 @@ namespace TrashCats.Presentation.Animation
                 SetFrame(index);
             if (_finished)
                 Finished?.Invoke(_clip);
+        }
+
+        /// <summary>Shows one frame of a clip and stops advancing (inspection, screenshots).</summary>
+        public void ShowFrame(FlipbookClip clip, int index)
+        {
+            _clip = clip;
+            _finished = true;
+            SetFrame(Mathf.Clamp(index, 0, clip.frames.Length - 1));
         }
 
         private void Breathe(float deltaTime)

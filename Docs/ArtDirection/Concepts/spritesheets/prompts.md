@@ -78,3 +78,13 @@ Draw ONLY the tail from the reference - no cat body, just the detached tail exac
 Comic book style matching the reference exactly: bold black ink outlines, flat orange fur with darker stripes, cream chest and muzzle, torn left ear, scar across the nose, yellow eyes. Same character, same proportions, same colors and line weight in every frame. No clothes.
 ```
 
+## ryzhy_tail8swish (edit of ref_ryzhy_tail.png, background=opaque)
+
+```
+Game sprite sheet: exactly 8 animation frames arranged in a grid of 2 rows x 4 columns, reading order left to right, then the second row left to right. Equal cells with generous empty space between frames so they never touch, the character centered in each cell at the same scale, feet on the same baseline within a row, full body visible, side view facing right. Solid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no text, no frame numbers, no borders between cells.
+
+Draw ONLY the tail from the reference - no cat body, just the detached tail exactly as drawn in the reference: same thickness, orange fur with dark stripes, cream tip, bold black ink outline, same size. The thick cut end of the tail is at the lower right of every cell and stays at exactly the same position and angle in all 8 frames. Animation: an expressive, lively tail swish with BIG amplitude, frames progressing steadily in one direction: frame 1 is the reference pose (tail raised high, curled into a hook); frames 2-7 the tail swings further and further down and back, uncurling into a wavy S-shape; frame 8 the tail is low and stretched almost horizontally to the left with the tip flicked up. Even steps between consecutive frames, no frame repeats the previous one.
+
+Comic book style matching the reference exactly: bold black ink outlines, flat orange fur with darker stripes, cream chest and muzzle, torn left ear, scar across the nose, yellow eyes. Same character, same proportions, same colors and line weight in every frame. No clothes.
+```
+

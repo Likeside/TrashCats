@@ -13,6 +13,42 @@ import numpy as np
 from PIL import Image, ImageDraw
 
 
+def components(mask):
+    """Yields boolean masks of 4-connected components."""
+    seen = np.zeros_like(mask)
+    h, w = mask.shape
+    for y0, x0 in zip(*np.nonzero(mask)):
+        if seen[y0, x0]:
+            continue
+        comp = np.zeros_like(mask)
+        queue = deque([(y0, x0)])
+        seen[y0, x0] = comp[y0, x0] = True
+        while queue:
+            y, x = queue.popleft()
+            for ny, nx in ((y + 1, x), (y - 1, x), (y, x + 1), (y, x - 1)):
+                if 0 <= ny < h and 0 <= nx < w and mask[ny, nx] and not seen[ny, nx]:
+                    seen[ny, nx] = comp[ny, nx] = True
+                    queue.append((ny, nx))
+        yield comp
+
+
+def leftover_specks(body, tail, max_size=400, reach=3):
+    """Small body fragments left touching the removed tail (e.g. a tail tip that overlapped a paw, edge fringe).
+    Only fragments within `reach` px of the tail are removed; separate details (speed lines, sparks) are kept."""
+    near_tail = tail.copy()
+    for _ in range(reach):
+        grown = near_tail.copy()
+        grown[1:] |= near_tail[:-1]; grown[:-1] |= near_tail[1:]
+        grown[:, 1:] |= near_tail[:, :-1]; grown[:, :-1] |= near_tail[:, 1:]
+        near_tail = grown
+    remove = np.zeros_like(body)
+    comps = sorted(components(body), key=lambda c: -c.sum())
+    for comp in comps[1:]:
+        if comp.sum() <= max_size and (comp & near_tail).any():
+            remove |= comp
+    return remove
+
+
 def main():
     args = sys.argv[1:]
     src, out = args[0], args[1]
@@ -38,9 +74,9 @@ def main():
                 tail[ny, nx] = True
                 queue.append((ny, nx))
 
-    # barrier pixels adjacent to the tail belong to the tail side's outline only if left of the cut; keep them on the body
     body = rgba.copy()
     body[..., 3] = np.where(tail, 0, body[..., 3])
+    body[..., 3] = np.where(leftover_specks(body[..., 3] > 0, tail), 0, body[..., 3])
     tail_img = rgba.copy()
     tail_img[..., 3] = np.where(tail, tail_img[..., 3], 0)
 

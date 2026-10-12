@@ -31,6 +31,14 @@ LAYOUT = (
 )
 
 SHEETS = {
+    "tail8swish": (8, "Draw ONLY the tail from the reference - no cat body, just the detached tail exactly as drawn in the "
+                      "reference: same thickness, orange fur with dark stripes, cream tip, bold black ink outline, same size. "
+                      "The thick cut end of the tail is at the lower right of every cell and stays at exactly the same position "
+                      "and angle in all 8 frames. Animation: an expressive, lively tail swish with BIG amplitude, frames "
+                      "progressing steadily in one direction: frame 1 is the reference pose (tail raised high, curled into a hook); "
+                      "frames 2-7 the tail swings further and further down and back, uncurling into a wavy S-shape; frame 8 "
+                      "the tail is low and stretched almost horizontally to the left with the tip flicked up. "
+                      "Even steps between consecutive frames, no frame repeats the previous one."),
     "tail8": (8, "Draw ONLY the tail from the reference - no cat body, just the detached tail exactly as drawn in the "
                  "reference: same thickness, orange fur with dark stripes, cream tip, bold black ink outline, same size. "
                  "The thick cut end of the tail is at the lower right of every cell and stays at exactly the same position "

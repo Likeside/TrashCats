@@ -18,10 +18,9 @@ namespace TrashCats.Presentation.Dev
         [SerializeField] private FlipbookClip[] clips = Array.Empty<FlipbookClip>();
         [SerializeField] private string[] buttonLabels = Array.Empty<string>();
 
-        [Header("Separate tail layer (shown only with the clip at tailClipIndex)")]
+        [Header("Separately animated tail, glued to the body's per-frame attach point")]
         [SerializeField] private SpriteFlipbook tail;
         [SerializeField] private FlipbookClip tailClip;
-        [SerializeField] private int tailClipIndex;
 
         private UnityEngine.UI.Text _status;
 
@@ -44,6 +43,8 @@ namespace TrashCats.Presentation.Dev
                 button.Rect.Place(new Vector2(i * width, 0), new Vector2((i + 1) * width, 0), new Vector2(30, 60), new Vector2(-30, 220));
             }
 
+            if (tail != null)
+                tail.Play(tailClip);
             if (clips.Length > 0)
                 Play(clips[0]);
 
@@ -58,51 +59,42 @@ namespace TrashCats.Presentation.Dev
                 _status.text = $"{character.Current.name} · кадр {character.FrameIndex + 1}/{character.Current.frames.Length} · {character.Current.fps} fps";
         }
 
-        private void Play(FlipbookClip clip)
-        {
-            character.Play(clip);
-            var withTail = tail != null && Array.IndexOf(clips, clip) == tailClipIndex;
-            if (tail == null)
-                return;
-            tail.gameObject.SetActive(withTail);
-            if (withTail)
-                tail.Play(tailClip);
-        }
+        private void Play(FlipbookClip clip) => character.Play(clip);
 
         private IEnumerator CaptureAll(string dir)
         {
             Directory.CreateDirectory(dir);
             yield return new WaitForSeconds(0.5f);
+            enabled = false;
+
+            // every body frame, with the tail frame that would be shown alongside it
             foreach (var clip in clips)
             {
-                Play(clip);
-                enabled = false;
-                character.enabled = false;
-                var tailFrames = tail != null && tail.gameObject.activeSelf ? tailClip.frames.Length : 0;
-                if (tail != null) tail.enabled = false;
-                for (var f = 0; f < Mathf.Max(clip.frames.Length, tailFrames); f++)
+                for (var f = 0; f < clip.frames.Length; f++)
                 {
-                    character.GetComponent<SpriteRenderer>().sprite = clip.frames[Mathf.Min(f, clip.frames.Length - 1)];
-                    if (tailFrames > 0)
-                        tail.GetComponent<SpriteRenderer>().sprite = tailClip.frames[f % tailFrames];
-                    _status.text = $"{clip.name} · кадр {f + 1}";
+                    character.ShowFrame(clip, f);
+                    if (tail != null)
+                        tail.ShowFrame(tailClip, f % tailClip.frames.Length);
+                    _status.text = $"{clip.name} · кадр {f + 1}/{clip.frames.Length}";
                     yield return new WaitForEndOfFrame();
                     ScreenCapture.CaptureScreenshot(Path.Combine(dir, $"{clip.name}_{f:00}.png"));
                     yield return null;
                 }
-
-                character.enabled = true;
-                if (tail != null) tail.enabled = true;
-                enabled = true;
             }
 
-            // live recording of the first clip (with procedural effects) for smoothness review
-            Play(clips[0]);
-            for (var t = 0; t < 24; t++)
+            // live recordings of each clip with the independent tail and procedural effects
+            enabled = true;
+            if (tail != null)
+                tail.Play(tailClip);
+            foreach (var clip in clips)
             {
-                yield return new WaitForEndOfFrame();
-                ScreenCapture.CaptureScreenshot(Path.Combine(dir, $"{clips[0].name}_live_{t:00}.png"));
-                yield return new WaitForSeconds(0.1f);
+                Play(clip);
+                for (var t = 0; t < 24; t++)
+                {
+                    yield return new WaitForEndOfFrame();
+                    ScreenCapture.CaptureScreenshot(Path.Combine(dir, $"{clip.name}_live_{t:00}.png"));
+                    yield return new WaitForSeconds(0.1f);
+                }
             }
 
             yield return new WaitForSeconds(0.5f);

@@ -50,6 +50,10 @@ namespace TrashCats.Editor
             var tailSo = new SerializedObject(tailFlipbook);
             tailSo.FindProperty("target").objectReferenceValue = tailRenderer;
             tailSo.ApplyModifiedPropertiesWithoutUndo();
+            var attachment = tail.AddComponent<FlipbookAttachment>();
+            var attachmentSo = new SerializedObject(attachment);
+            attachmentSo.FindProperty("body").objectReferenceValue = flipbook;
+            attachmentSo.ApplyModifiedPropertiesWithoutUndo();
 
             var root = new GameObject("AnimationTestScene").AddComponent<AnimationTestScene>();
             var so = new SerializedObject(root);
@@ -60,10 +64,11 @@ namespace TrashCats.Editor
             clips.GetArrayElementAtIndex(0).FindPropertyRelative("breathe").floatValue = 0.012f;
             clips.GetArrayElementAtIndex(0).FindPropertyRelative("breathePeriod").floatValue = 2.4f;
             FillClip(clips.GetArrayElementAtIndex(1), "punch", "Punch", 12f, true);
+            var attach = AttachPoints.Load($"{FramesRoot}/attach_points.json");
+            SetAttachPoints(clips.GetArrayElementAtIndex(0), attach.idle);
+            SetAttachPoints(clips.GetArrayElementAtIndex(1), attach.punch);
             so.FindProperty("tail").objectReferenceValue = tailFlipbook;
-            FillClip(so.FindProperty("tailClip"), "tail", "Tail", 7f, true);
-            so.FindProperty("tailClip").FindPropertyRelative("pingPong").boolValue = true; // frames are ordered by curl
-            so.FindProperty("tailClipIndex").intValue = 0;
+            FillClip(so.FindProperty("tailClip"), "tail", "Tail", 9f, true); // full swish cycle, loops on its own
             var labels = so.FindProperty("buttonLabels");
             labels.arraySize = 2;
             labels.GetArrayElementAtIndex(0).stringValue = "Стойка";
@@ -76,6 +81,46 @@ namespace TrashCats.Editor
 
             EditorSceneManager.SaveScene(scene, ScenePath);
             Debug.Log("[AnimationTest] scene saved: " + ScenePath);
+        }
+
+        private static void SetAttachPoints(SerializedProperty clip, Vector2[] points)
+        {
+            var array = clip.FindPropertyRelative("attachPoints");
+            array.arraySize = points.Length;
+            for (var i = 0; i < points.Length; i++)
+                array.GetArrayElementAtIndex(i).vector2Value = points[i];
+        }
+
+        /// <summary>attach_points.json: {"idle": [[x, y]], "punch": [[x, y], ...]} in local units from the body pivot.</summary>
+        private sealed class AttachPoints
+        {
+            public Vector2[] idle;
+            public Vector2[] punch;
+
+            public static AttachPoints Load(string path)
+            {
+                var json = System.IO.File.ReadAllText(path);
+                return new AttachPoints { idle = Parse(json, "idle"), punch = Parse(json, "punch") };
+            }
+
+            private static Vector2[] Parse(string json, string key)
+            {
+                var start = json.IndexOf('"' + key + '"');
+                var open = json.IndexOf('[', start);
+                var depth = 0;
+                var end = open;
+                for (; end < json.Length; end++)
+                {
+                    if (json[end] == '[') depth++;
+                    else if (json[end] == ']' && --depth == 0) break;
+                }
+
+                var numbers = System.Text.RegularExpressions.Regex.Matches(json.Substring(open, end - open), @"-?\d+(\.\d+)?")
+                    .Cast<System.Text.RegularExpressions.Match>()
+                    .Select(m => float.Parse(m.Value, System.Globalization.CultureInfo.InvariantCulture))
+                    .ToArray();
+                return Enumerable.Range(0, numbers.Length / 2).Select(i => new Vector2(numbers[i * 2], numbers[i * 2 + 1])).ToArray();
+            }
         }
 
         private static void FillClip(SerializedProperty clip, string name, string folder, float fps, bool loop)
