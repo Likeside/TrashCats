@@ -9,7 +9,7 @@ namespace TrashCats.Tests
     public sealed class ArchitectureTests
     {
         private static readonly Assembly DomainAsm = typeof(GameWorld).Assembly;
-        private static readonly Assembly AppAsm = typeof(AppAssembly).Assembly;
+        private static readonly Assembly AppAsm = typeof(GameSession).Assembly;
 
         [Test]
         public void Domain_DoesNotReferenceUnity()
