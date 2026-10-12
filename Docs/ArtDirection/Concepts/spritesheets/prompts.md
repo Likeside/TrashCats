@@ -38,3 +38,23 @@ Keep the exact stance, proportions and size of the reference: standing on hind l
 Comic book style matching the reference exactly: bold black ink outlines, flat orange fur with darker stripes, cream chest and muzzle, torn left ear, scar across the nose, yellow eyes. Same character, same proportions, same colors and line weight in every frame. No clothes.
 ```
 
+## ryzhy_idle8 (edit of ref_ryzhy_idle.png, background=opaque)
+
+```
+Game sprite sheet: exactly 8 animation frames arranged in a grid of 2 rows x 4 columns, reading order left to right, then the second row left to right. Equal cells with generous empty space between frames so they never touch, the character centered in each cell at the same scale, feet on the same baseline within a row, full body visible, side view facing right. Solid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no text, no frame numbers, no borders between cells.
+
+Keep the exact stance, proportions and size of the reference: standing on hind legs like a boxer. Animation: 8-frame idle fighting stance loop with clearly visible motion: the body bobs down and up (frames 1-4 lowering, 5-8 rising), fists bounce, the tail swings from left to right and back, the ears twitch in frame 3, the cat blinks in frame 6. Frame 8 leads smoothly back into frame 1.
+
+Comic book style matching the reference exactly: bold black ink outlines, flat orange fur with darker stripes, cream chest and muzzle, torn left ear, scar across the nose, yellow eyes. Same character, same proportions, same colors and line weight in every frame. No clothes.
+```
+
+## ryzhy_punch8 (edit of ref_ryzhy_idle.png, background=opaque)
+
+```
+Game sprite sheet: exactly 8 animation frames arranged in a grid of 2 rows x 4 columns, reading order left to right, then the second row left to right. Equal cells with generous empty space between frames so they never touch, the character centered in each cell at the same scale, feet on the same baseline within a row, full body visible, side view facing right. Solid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no text, no frame numbers, no borders between cells.
+
+Keep the exact stance, proportions and size of the reference: standing on hind legs like a boxer. Animation: 8-frame straight punch with the front paw: 1) guard, 2) shift weight back, 3) wind-up with the paw pulled back, 4) explosive lunge forward, 5) full extension with a comic impact burst at the paw, 6) paw still extended, burst fading, 7) pulling back, 8) back to guard like frame 1.
+
+Comic book style matching the reference exactly: bold black ink outlines, flat orange fur with darker stripes, cream chest and muzzle, torn left ear, scar across the nose, yellow eyes. Same character, same proportions, same colors and line weight in every frame. No clothes.
+```
+

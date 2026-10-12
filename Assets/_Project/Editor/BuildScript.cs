@@ -28,10 +28,18 @@ namespace TrashCats.Editor
             Build(BuildTarget.Android, Path.Combine("Builds", "Android", "TrashCats-dev.apk"), BuildOptions.Development);
         }
 
-        private static void Build(BuildTarget target, string path, BuildOptions options)
+        [MenuItem("TrashCats/Build/Linux Animation Test")]
+        public static void BuildLinuxAnimationTest()
+        {
+            AnimationTestSceneBuilder.Build();
+            Build(BuildTarget.StandaloneLinux64, Path.Combine("Builds", "LinuxAnimationTest", "TrashCatsAnimTest.x86_64"),
+                BuildOptions.None, new[] { AnimationTestSceneBuilder.ScenePath });
+        }
+
+        private static void Build(BuildTarget target, string path, BuildOptions options, string[] scenes = null)
         {
             Directory.CreateDirectory(Path.GetDirectoryName(path) ?? ".");
-            var scenes = EditorBuildSettings.scenes.Where(s => s.enabled).Select(s => s.path).ToArray();
+            scenes ??= EditorBuildSettings.scenes.Where(s => s.enabled).Select(s => s.path).ToArray();
             var report = BuildPipeline.BuildPlayer(new BuildPlayerOptions
             {
                 scenes = scenes,

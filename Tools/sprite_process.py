@@ -5,7 +5,7 @@
 - Finds frames as connected blobs (ignores small specks), left to right.
 - Places every frame into equal cells, centred horizontally; vertical offsets from the sheet's ground line are kept.
 
-Usage: Tools/sprite_process.py <sheet.png> <out_dir> [--frames N] [--cell-height H]
+Usage: Tools/sprite_process.py <sheet.png> <out_dir> [--frames N] [--rows R] [--cell-height H]
 Writes <name>_<i>.png frames and <name>_strip.png (frames side by side on a checkerboard) for review.
 """
 import os, sys
@@ -52,7 +52,7 @@ def label_blobs(mask):
     return blobs, labels
 
 
-def find_frames(alpha, expected=None, scale=4):
+def find_frames(alpha, expected=None, scale=4, rows=1):
     """
     Frames are the large blobs; small detached bits (sparks, whisker tips) join the nearest frame.
     Returns (bounding slices, full-resolution ownership mask) per frame, so overlapping boxes do not mix frames.
@@ -60,13 +60,26 @@ def find_frames(alpha, expected=None, scale=4):
     small = alpha[::scale, ::scale] > 32
     blobs, labels = label_blobs(small)
     total = small.sum()
-    big = sorted([i for i, b in enumerate(blobs) if b[4] > total * 0.03], key=lambda i: blobs[i][2])
+    row_height = small.shape[0] / rows
+
+    def order(i):
+        y0, y1, x0, x1, _ = blobs[i]
+        return int(((y0 + y1) / 2) // row_height), x0
+
+    big = sorted([i for i, b in enumerate(blobs) if b[4] > total * 0.015], key=order)
     owner = {i + 1: n for n, i in enumerate(big)}
     for i, b in enumerate(blobs):
         if i in big:
             continue
-        cx = (b[2] + b[3]) / 2
-        owner[i + 1] = min(range(len(big)), key=lambda n: abs((blobs[big[n]][2] + blobs[big[n]][3]) / 2 - cx))
+        cx, cy = (b[2] + b[3]) / 2, (b[0] + b[1]) / 2
+
+        def gap(n):  # distance from the fragment centre to frame n's box (0 inside)
+            y0, y1, x0, x1, _ = blobs[big[n]]
+            return max(x0 - cx, 0, cx - x1) + max(y0 - cy, 0, cy - y1)
+
+        nearest = min(range(len(big)), key=gap)
+        if gap(nearest) <= 12:  # ~48 px at scale 4: sparks and whisker tips next to a frame; farther specks are dropped
+            owner[i + 1] = nearest
 
     frame_map = np.zeros(labels.shape, dtype=np.int32) - 1
     for label, n in owner.items():
@@ -83,7 +96,7 @@ def find_frames(alpha, expected=None, scale=4):
     for n in range(len(big)):
         own = full == n
         ys, xs = np.nonzero(own & (alpha > 0))
-        frames.append(((slice(ys.min(), ys.max() + 1), slice(xs.min(), xs.max() + 1)), own))
+        frames.append(((slice(ys.min(), ys.max() + 1), slice(xs.min(), xs.max() + 1)), own, order(big[n])[0]))
     return frames
 
 
@@ -91,26 +104,29 @@ def main():
     src, out_dir = sys.argv[1], sys.argv[2]
     expected = int(sys.argv[sys.argv.index("--frames") + 1]) if "--frames" in sys.argv else None
     cell_h = int(sys.argv[sys.argv.index("--cell-height") + 1]) if "--cell-height" in sys.argv else None
+    rows = int(sys.argv[sys.argv.index("--rows") + 1]) if "--rows" in sys.argv else 1
     name = os.path.splitext(os.path.basename(src))[0]
     rgb = np.array(Image.open(src).convert("RGB"))
     color, alpha = key_green(rgb)
     rgba = np.dstack([color, alpha])
-    frames = find_frames(alpha, expected)
+    frames = find_frames(alpha, expected, rows=rows)
     if expected and len(frames) != expected:
         print(f"WARNING {name}: found {len(frames)} frames, expected {expected}")
 
     pad = 16
-    ground = max(ys.stop for (ys, _), _ in frames)       # lowest point of the sheet = ground line
-    width = max(xs.stop - xs.start for (_, xs), _ in frames) + pad * 2
-    height = max(ground - ys.start for (ys, _), _ in frames) + pad * 2
+    ground = {}                                         # lowest point of each row = its ground line
+    for (ys, _), _, row in frames:
+        ground[row] = max(ground.get(row, 0), ys.stop)
+    width = max(xs.stop - xs.start for (_, xs), _, _ in frames) + pad * 2
+    height = max(ground[row] - ys.start for (ys, _), _, row in frames) + pad * 2
     os.makedirs(out_dir, exist_ok=True)
     cells = []
-    for i, ((ys, xs), own) in enumerate(frames):
+    for i, ((ys, xs), own, row) in enumerate(frames):
         pixels = rgba.copy()
         pixels[..., 3] = np.where(own, pixels[..., 3], 0)
         crop = Image.fromarray(pixels[ys, xs], "RGBA")
         cell = Image.new("RGBA", (width, height), (0, 0, 0, 0))
-        lift = ground - ys.stop                            # keeps jumps in the air
+        lift = ground[row] - ys.stop                       # keeps jumps in the air
         cell.paste(crop, ((width - crop.width) // 2, height - pad - lift - crop.height))
         if cell_h:
             cell = cell.resize((round(width * cell_h / height), cell_h), Image.LANCZOS)

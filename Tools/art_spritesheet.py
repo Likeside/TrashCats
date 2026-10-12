@@ -15,6 +15,15 @@ STYLE = (
     "colors and line weight in every frame. No clothes."
 )
 
+LAYOUT_GRID = (
+    "Game sprite sheet: exactly {n} animation frames arranged in a grid of 2 rows x 4 columns, reading order left to right, "
+    "then the second row left to right. Equal cells with generous empty space between frames so they never touch, "
+    "the character centered in each cell at the same scale, feet on the same baseline within a row, full body visible, "
+    "side view facing right. "
+    "Solid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no text, "
+    "no frame numbers, no borders between cells."
+)
+
 LAYOUT = (
     "Game sprite sheet: exactly {n} frames in ONE horizontal row, equal-width cells, the character centered in each cell "
     "at the same scale, feet on the same baseline, full body visible, side view facing right. "
@@ -22,6 +31,14 @@ LAYOUT = (
 )
 
 SHEETS = {
+    "idle8": (8, "Keep the exact stance, proportions and size of the reference: standing on hind legs like a boxer. "
+                 "Animation: 8-frame idle fighting stance loop with clearly visible motion: the body bobs down and up "
+                 "(frames 1-4 lowering, 5-8 rising), fists bounce, the tail swings from left to right and back, "
+                 "the ears twitch in frame 3, the cat blinks in frame 6. Frame 8 leads smoothly back into frame 1."),
+    "punch8": (8, "Keep the exact stance, proportions and size of the reference: standing on hind legs like a boxer. "
+                  "Animation: 8-frame straight punch with the front paw: 1) guard, 2) shift weight back, 3) wind-up with "
+                  "the paw pulled back, 4) explosive lunge forward, 5) full extension with a comic impact burst at the paw, "
+                  "6) paw still extended, burst fading, 7) pulling back, 8) back to guard like frame 1."),
     "idle": (4, "Animation: idle fighting stance, breathing loop - chest rises and falls, tail sways, ears twitch slightly."),
     "punch": (4, "Keep the exact stance, proportions and size of the reference: standing on hind legs like a boxer. "
                  "Animation: punching a hanging tin can with a front paw - 1) wind-up pulling the paw back, "
@@ -33,7 +50,8 @@ SHEETS = {
 
 def generate(ref, out_dir, name, key, background):
     frames, action = SHEETS[name]
-    prompt = f"{LAYOUT.format(n=frames)}\n\n{action}\n\n{STYLE}"
+    layout = LAYOUT_GRID if frames > 4 else LAYOUT
+    prompt = f"{layout.format(n=frames)}\n\n{action}\n\n{STYLE}"
     out = os.path.join(out_dir, f"ryzhy_{name}{SUFFIX}.png")
     with tempfile.NamedTemporaryFile(suffix=".json", delete=False) as tmp:
         resp_path = tmp.name

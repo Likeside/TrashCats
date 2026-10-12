@@ -1,8 +1,12 @@
 {
     "name": "TrashCats.Editor",
     "rootNamespace": "TrashCats.Editor",
-    "references": [],
-    "includePlatforms": ["Editor"],
+    "references": [
+        "TrashCats.Presentation"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
