@@ -1,0 +1,23 @@
+{
+    "name": "TrashCats.Presentation",
+    "rootNamespace": "TrashCats.Presentation",
+    "references": [
+        "TrashCats.Domain",
+        "TrashCats.App",
+        "TrashCats.Infrastructure",
+        "UniTask",
+        "UniTask.DOTween",
+        "DOTween.Modules",
+        "UnityEngine.UI",
+        "Unity.TextMeshPro"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

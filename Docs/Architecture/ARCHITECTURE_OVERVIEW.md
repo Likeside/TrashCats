@@ -42,7 +42,7 @@ flowchart TB
       I[TrashCats.Infrastructure<br/>Часы, файловое хранилище, загрузка SO-конфигов,<br/>жизненный цикл приложения]
     end
     subgraph Pure["Чистый C#, noEngineReferences = true"]
-      A[TrashCats.Application<br/>Команды, игровая сессия, тик, офлайн,<br/>сохранение-оркестрация, шина событий, уведомления, туториал]
+      A[TrashCats.App<br/>Команды, игровая сессия, тик, офлайн,<br/>сохранение-оркестрация, шина событий, уведомления, туториал]
       D[TrashCats.Domain<br/>Коты, потребности, занятия, экономика, улучшения,<br/>территории, симуляция боя, ИИ, ГСЧ]
     end
     P --> A
@@ -52,6 +52,8 @@ flowchart TB
     I --> D
     A --> D
 ```
+
+> **Имя сборки слоя Application — `TrashCats.App`** (namespace `TrashCats.App`). Пространство имён `TrashCats.Application` перекрыло бы `UnityEngine.Application` во всём коде внутри `namespace TrashCats.*`: вызов `Application.persistentDataPath` перестал бы компилироваться. Слой по-прежнему называется Application.
 
 **Правила:**
 1. `Domain` не ссылается ни на что (кроме BCL). `noEngineReferences: true` — компилятор не даст использовать `UnityEngine`.
@@ -110,7 +112,7 @@ Assets/
   _Project/
     Scripts/
       Domain/            TrashCats.Domain.asmdef
-      Application/       TrashCats.Application.asmdef
+      App/               TrashCats.App.asmdef   (слой Application)
       Infrastructure/    TrashCats.Infrastructure.asmdef
       Presentation/      TrashCats.Presentation.asmdef
     Tests/

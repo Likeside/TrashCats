@@ -140,7 +140,7 @@ flowchart LR
 
 ## 2. Application
 
-### 2.1. GameSession + команды (`Application/Session`)
+### 2.1. GameSession + команды (`App/Session`)
 - **Ответственность:** единая точка изменения мира; выполнение команд по схеме «догнать → проверить → применить → опубликовать».
 - **Данные:** ссылка на `GameWorld`, `GameConfig`, `IClock`, `EventBus`, `SaveScheduler`, `TimeScale` (отладка).
 - **Операции (фасад для Presentation):**
@@ -159,12 +159,12 @@ flowchart LR
 - **Возврат:** `CommandResult { Ok | Fail(ErrorCode) }`. Presentation показывает локализованную причину по `ErrorCode`.
 - **Тесты:** каждая команда с фейковыми часами: успех, каждая причина отказа, отсутствие изменений при отказе, корректные события.
 
-### 2.2. Time / Tick (`Application/Time`)
+### 2.2. Time / Tick (`App/Time`)
 - **Ответственность:** перевод реального времени в игровое.
 - **Операции:** `Tick(utcNow)`: `Δ = clamp(utcNow − lastUtc, 0, OfflineCapMs) × TimeScale`; `world.AdvanceTo(world.GameTimeMs + Δ)`; `lastUtc = utcNow`. Если `Δ_real ≥ 60 с` — сформировать `OfflineSummary` из событий догона и положить в очередь уведомлений.
 - **Тесты:** перевод часов назад (Δ=0); большой Δ обрезается; сводка собирается только при большом Δ.
 
-### 2.3. BattleService (`Application/Battle`)
+### 2.3. BattleService (`App/Battle`)
 - **Ответственность:** подготовка снимков, seed, фиксация результата, применение последствий.
 - **Операции:**
   - `Start(territoryId, cats)`: отменить занятия выбранных котов → `InBattle`; `attempt = Territories.RegisterAttempt`; `seed = Combine(SaveSeed, territory, attempt)`; `result = Simulate(...)`; `world.PendingBattle = {territory, cats, result}`; **немедленное сохранение**.
@@ -172,28 +172,28 @@ flowchart LR
   - `GetBattleView()` — данные для экрана боя (снимки + лог).
 - **Тесты:** результат зафиксирован до показа; перезапуск с `PendingBattle` → тот же результат; последствия только для вышедших на ринг.
 
-### 2.4. EventBus (`Application/Events`)
+### 2.4. EventBus (`App/Events`)
 - **Ответственность:** доставка доменных событий подписчикам Presentation.
 - **Операции:** `Subscribe<T>(Action<T>) → IDisposable`, `Publish<T>(T)`, `PublishAll(IEnumerable<DomainEvent>)`.
 - **Правила:** синхронная доставка в главном потоке; публикация из обработчика события ставится в очередь и доставляется после текущей (нет рекурсии); исключение в подписчике логируется и не ломает остальных.
 - **Тесты:** порядок доставки; отписка; реентрантность.
 
-### 2.5. NotificationQueue (`Application/Notifications`)
+### 2.5. NotificationQueue (`App/Notifications`)
 - **Ответственность:** превращает события в очередь уведомлений-данных (модалки FIFO, тосты), учитывая приоритеты: уровень → умение → кот → территория.
 - **Данные:** `Queue<Notification>` (не сохраняется, кроме сводки офлайна — она пересоздаётся).
 - **Операции:** `Enqueue`, `TryDequeueModal`, `DrainToasts`, `SuspendModals()/ResumeModals()` (во время боя).
 - **Тесты:** приоритеты и FIFO; подавление во время боя.
 
-### 2.6. TutorialService (`Application/Tutorial`)
+### 2.6. TutorialService (`App/Tutorial`)
 - **Ответственность:** данные шагов онбординга и контекстных подсказок; реакция на события («первый Хлам») → шаг активен; хранение пройденных шагов в мире.
 - **Операции:** `CurrentStep`, `OnEvent(e)`, `Complete(stepId)`, `Skip()`.
 - **Тесты:** последовательность ведущей цепочки; одноразовость подсказок; пропуск.
 
-### 2.7. SaveService (`Application/Save`)
+### 2.7. SaveService (`App/Save`)
 - **Ответственность:** когда и что сохранять; маппинг `GameWorld ↔ SaveData`; миграции. Запись на диск — через `ISaveStorage`.
 - Подробно — [SAVE_SYSTEM.md](SAVE_SYSTEM.md).
 
-### 2.8. Debug (`Application/Debug`, только Development)
+### 2.8. Debug (`App/Debug`, только Development)
 - `TimeScale` (×1…×20), «+100 Еды/Хлама», «выиграть бой», «сбросить сохранение», «перемотать на N минут». Используется в плейтестах баланса.
 
 ---

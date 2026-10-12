@@ -1,0 +1,16 @@
+{
+    "name": "TrashCats.App",
+    "rootNamespace": "TrashCats.App",
+    "references": [
+        "TrashCats.Domain"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": true
+}
