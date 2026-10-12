@@ -1,0 +1,10 @@
+<!-- Keeps types that are only reached through reflection from being stripped by IL2CPP. -->
+<linker>
+  <!-- Save DTOs are created and filled by Newtonsoft.Json via reflection. -->
+  <assembly fullname="TrashCats.App">
+    <type fullname="TrashCats.App.SaveData" preserve="all" />
+    <type fullname="TrashCats.App.CatSave" preserve="all" />
+    <type fullname="TrashCats.App.ActivitySave" preserve="all" />
+    <type fullname="TrashCats.App.SettingsSave" preserve="all" />
+  </assembly>
+</linker>
