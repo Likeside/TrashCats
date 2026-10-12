@@ -35,7 +35,7 @@ namespace TrashCats.Editor
             ground.transform.position = new Vector3(0, -6.5f, 1);
 
             var cat = new GameObject("Ryzhy");
-            cat.transform.position = new Vector3(0, -3.6f, 0);
+            cat.transform.position = new Vector3(-1.4f, -3.6f, 0); // pivot is the planted back foot
             cat.transform.localScale = Vector3.one * 2f;
             cat.AddComponent<SpriteRenderer>();
             var flipbook = cat.AddComponent<SpriteFlipbook>();

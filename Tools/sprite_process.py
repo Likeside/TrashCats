@@ -3,9 +3,12 @@
 
 - Keys out the green background (with soft edges) and removes green spill from the outline.
 - Finds frames as connected blobs (ignores small specks), left to right.
-- Places every frame into equal cells, centred horizontally; vertical offsets from the sheet's ground line are kept.
+- Places every frame into equal cells around a shared anchor x; vertical offsets from the row's ground line are kept.
 
-Usage: Tools/sprite_process.py <sheet.png> <out_dir> [--frames N] [--rows R] [--cell-height H]
+Usage: Tools/sprite_process.py <sheet.png> <out_dir> [--frames N] [--rows R] [--cell-height H] [--anchor backfoot|center]
+
+Anchors: "backfoot" (default) keeps the planted back foot (leftmost foot touching the ground; characters face right) at the
+same x in every frame, so idle loops do not slide when the tail swings. "center" centres the bounding box (for jumps).
 Writes <name>_<i>.png frames and <name>_strip.png (frames side by side on a checkerboard) for review.
 """
 import os, sys
@@ -100,11 +103,32 @@ def find_frames(alpha, expected=None, scale=4, rows=1):
     return frames
 
 
+def back_foot_x(alpha):
+    """x of the leftmost foot that touches the ground (bottom rows of the figure), in the crop's coordinates."""
+    mask = alpha > 64
+    ys, xs = np.nonzero(mask)
+    bottom, top = ys.max(), ys.min()
+    band_top = bottom - max(4, int((bottom - top) * 0.07))
+    band = mask[band_top: bottom + 1]
+    cols = np.flatnonzero(band.any(axis=0))
+    runs, start = [], cols[0]
+    for prev, col in zip(cols, cols[1:]):
+        if col != prev + 1:
+            runs.append((start, prev))
+            start = col
+    runs.append((start, cols[-1]))
+    # a foot reaches the ground; a dangling tail tip in the band does not
+    grounded = [r for r in runs if r[1] - r[0] >= 6 and np.nonzero(band[:, r[0]: r[1] + 1].any(axis=1))[0].max() >= band.shape[0] - 4]
+    left = (grounded or runs)[0]
+    return (left[0] + left[1]) / 2
+
+
 def main():
     src, out_dir = sys.argv[1], sys.argv[2]
     expected = int(sys.argv[sys.argv.index("--frames") + 1]) if "--frames" in sys.argv else None
     cell_h = int(sys.argv[sys.argv.index("--cell-height") + 1]) if "--cell-height" in sys.argv else None
     rows = int(sys.argv[sys.argv.index("--rows") + 1]) if "--rows" in sys.argv else 1
+    anchor_mode = sys.argv[sys.argv.index("--anchor") + 1] if "--anchor" in sys.argv else "backfoot"
     name = os.path.splitext(os.path.basename(src))[0]
     rgb = np.array(Image.open(src).convert("RGB"))
     color, alpha = key_green(rgb)
@@ -117,17 +141,25 @@ def main():
     ground = {}                                         # lowest point of each row = its ground line
     for (ys, _), _, row in frames:
         ground[row] = max(ground.get(row, 0), ys.stop)
-    width = max(xs.stop - xs.start for (_, xs), _, _ in frames) + pad * 2
-    height = max(ground[row] - ys.start for (ys, _), _, row in frames) + pad * 2
-    os.makedirs(out_dir, exist_ok=True)
-    cells = []
-    for i, ((ys, xs), own, row) in enumerate(frames):
+
+    crops, anchors = [], []
+    for (ys, xs), own, row in frames:
         pixels = rgba.copy()
         pixels[..., 3] = np.where(own, pixels[..., 3], 0)
-        crop = Image.fromarray(pixels[ys, xs], "RGBA")
+        crop = pixels[ys, xs]
+        crops.append((crop, ground[row] - ys.stop))      # lift keeps jumps in the air
+        anchors.append(back_foot_x(crop[..., 3]) if anchor_mode == "backfoot" else crop.shape[1] / 2)
+
+    # symmetric cell around the anchor so the sprite pivot (bottom centre) is the anchor
+    half = max(max(a, c.shape[1] - a) for (c, _), a in zip(crops, anchors)) + pad
+    width = int(np.ceil(half * 2))
+    height = max(c.shape[0] + lift for c, lift in crops) + pad * 2
+    os.makedirs(out_dir, exist_ok=True)
+    cells = []
+    for i, ((crop, lift), anchor) in enumerate(zip(crops, anchors)):
         cell = Image.new("RGBA", (width, height), (0, 0, 0, 0))
-        lift = ground[row] - ys.stop                       # keeps jumps in the air
-        cell.paste(crop, ((width - crop.width) // 2, height - pad - lift - crop.height))
+        image = Image.fromarray(crop, "RGBA")
+        cell.paste(image, (int(round(width / 2 - anchor)), height - pad - lift - image.height))
         if cell_h:
             cell = cell.resize((round(width * cell_h / height), cell_h), Image.LANCZOS)
         cell.save(os.path.join(out_dir, f"{name}_{i}.png"))
