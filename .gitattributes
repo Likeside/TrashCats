@@ -1,0 +1,21 @@
+* text=auto
+*.cs text eol=lf diff=csharp
+*.md text eol=lf
+*.unity text eol=lf
+*.prefab text eol=lf
+*.asset text eol=lf
+*.meta text eol=lf
+*.mat text eol=lf
+*.asmdef text eol=lf
+*.json text eol=lf
+*.png binary
+*.jpg binary
+*.psd binary
+*.wav binary
+*.mp3 binary
+*.ogg binary
+*.ttf binary
+*.otf binary
+*.dll binary
+*.zip binary
+*.scenetemplate binary
