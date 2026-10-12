@@ -1,0 +1,186 @@
+[
+ {
+  "name": "guard_shnyr",
+  "refs": [
+   "Docs/ArtDirection/Generated/refs/ref_shnyr_concept.png"
+  ],
+  "size": "1024x1536",
+  "prompt": "ONE character only, full body, side view facing RIGHT, centered, feet on the ground near the bottom, filling most of the image height.\nPose: confident fighting stance standing on its hind legs like a boxer, front paws raised as fists.\nCharacter: the SAME grey striped tabby cat as in the reference (lanky, oversized ears, very long thin tail, narrow shifty yellow eyes)\nComic book style exactly like the reference: bold black ink outlines, flat colors with simple shading and light hatching, exaggerated expressive faces, humorous street-cat tone. No clothes unless stated.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no text, no frame numbers, no borders."
+ },
+ {
+  "name": "guard_ponchik",
+  "refs": [
+   "Docs/ArtDirection/Generated/refs/ref_ponchik_concept.png"
+  ],
+  "size": "1024x1536",
+  "prompt": "ONE character only, full body, side view facing RIGHT, centered, feet on the ground near the bottom, filling most of the image height.\nPose: confident fighting stance standing on its hind legs like a boxer, front paws raised as fists.\nCharacter: the SAME huge round black-and-white tuxedo cat as in the reference (tiny head on a big round body, sleepy half-closed yellow eyes, white belly)\nComic book style exactly like the reference: bold black ink outlines, flat colors with simple shading and light hatching, exaggerated expressive faces, humorous street-cat tone. No clothes unless stated.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no text, no frame numbers, no borders."
+ },
+ {
+  "name": "guard_rat",
+  "refs": [
+   "Docs/ArtDirection/Generated/refs/style_lineup.png"
+  ],
+  "size": "1024x1536",
+  "prompt": "Draw a NEW character (do NOT draw the cats from the reference, only copy its art style).\nONE character only, full body, side view facing RIGHT, centered, feet on the ground near the bottom, filling most of the image height.\nPose: confident fighting stance standing on its hind legs like a boxer, front paws raised as fists.\nCharacter: a scruffy street rat brawler, grey-brown fur, long pink tail, buck teeth, mean grin\nComic book style exactly like the reference: bold black ink outlines, flat colors with simple shading and light hatching, exaggerated expressive faces, humorous street-cat tone. No clothes unless stated.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no text, no frame numbers, no borders."
+ },
+ {
+  "name": "guard_gull",
+  "refs": [
+   "Docs/ArtDirection/Generated/refs/style_lineup.png"
+  ],
+  "size": "1024x1536",
+  "prompt": "Draw a NEW character (do NOT draw the cats from the reference, only copy its art style).\nONE character only, full body, side view facing RIGHT, centered, feet on the ground near the bottom, filling most of the image height.\nPose: confident fighting stance standing on its hind legs like a boxer, front paws raised as fists.\nCharacter: a fat greedy seagull, white and grey feathers, yellow beak, standing on webbed feet, wings raised like fists\nComic book style exactly like the reference: bold black ink outlines, flat colors with simple shading and light hatching, exaggerated expressive faces, humorous street-cat tone. No clothes unless stated.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no text, no frame numbers, no borders."
+ },
+ {
+  "name": "guard_shopcat",
+  "refs": [
+   "Docs/ArtDirection/Generated/refs/style_lineup.png"
+  ],
+  "size": "1024x1536",
+  "prompt": "Draw a NEW character (do NOT draw the cats from the reference, only copy its art style).\nONE character only, full body, side view facing RIGHT, centered, feet on the ground near the bottom, filling most of the image height.\nPose: confident fighting stance standing on its hind legs like a boxer, front paws raised as fists.\nCharacter: a plump cream-and-white fishmonger cat named Syomga, smug face, fish-shop smell lines, no clothes\nComic book style exactly like the reference: bold black ink outlines, flat colors with simple shading and light hatching, exaggerated expressive faces, humorous street-cat tone. No clothes unless stated.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no text, no frame numbers, no borders."
+ },
+ {
+  "name": "guard_crow",
+  "refs": [
+   "Docs/ArtDirection/Generated/refs/style_lineup.png"
+  ],
+  "size": "1024x1536",
+  "prompt": "Draw a NEW character (do NOT draw the cats from the reference, only copy its art style).\nONE character only, full body, side view facing RIGHT, centered, feet on the ground near the bottom, filling most of the image height.\nPose: confident fighting stance standing on its hind legs like a boxer, front paws raised as fists.\nCharacter: a sly black crow, glossy blue-black feathers, sharp beak, wings raised like fists\nComic book style exactly like the reference: bold black ink outlines, flat colors with simple shading and light hatching, exaggerated expressive faces, humorous street-cat tone. No clothes unless stated.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no text, no frame numbers, no borders."
+ },
+ {
+  "name": "guard_raccoon",
+  "refs": [
+   "Docs/ArtDirection/Generated/refs/style_lineup.png"
+  ],
+  "size": "1024x1536",
+  "prompt": "Draw a NEW character (do NOT draw the cats from the reference, only copy its art style).\nONE character only, full body, side view facing RIGHT, centered, feet on the ground near the bottom, filling most of the image height.\nPose: confident fighting stance standing on its hind legs like a boxer, front paws raised as fists.\nCharacter: a muscular raccoon bandit with a black eye mask and striped tail, cunning grin\nComic book style exactly like the reference: bold black ink outlines, flat colors with simple shading and light hatching, exaggerated expressive faces, humorous street-cat tone. No clothes unless stated.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no text, no frame numbers, no borders."
+ },
+ {
+  "name": "guard_pug",
+  "refs": [
+   "Docs/ArtDirection/Generated/refs/style_lineup.png"
+  ],
+  "size": "1024x1536",
+  "prompt": "Draw a NEW character (do NOT draw the cats from the reference, only copy its art style).\nONE character only, full body, side view facing RIGHT, centered, feet on the ground near the bottom, filling most of the image height.\nPose: confident fighting stance standing on its hind legs like a boxer, front paws raised as fists.\nCharacter: a stocky tough pug dog with a wrinkled face, underbite and spiked collar\nComic book style exactly like the reference: bold black ink outlines, flat colors with simple shading and light hatching, exaggerated expressive faces, humorous street-cat tone. No clothes unless stated.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no text, no frame numbers, no borders."
+ },
+ {
+  "name": "guard_admiral",
+  "refs": [
+   "Docs/ArtDirection/Generated/refs/style_lineup.png"
+  ],
+  "size": "1024x1536",
+  "prompt": "Draw a NEW character (do NOT draw the cats from the reference, only copy its art style).\nONE character only, full body, side view facing RIGHT, centered, feet on the ground near the bottom, filling most of the image height.\nPose: confident fighting stance standing on its hind legs like a boxer, front paws raised as fists.\nCharacter: a HUGE scarred grey tomcat boss wearing a navy captain's cap (the only clothing), one torn ear, menacing smirk\nComic book style exactly like the reference: bold black ink outlines, flat colors with simple shading and light hatching, exaggerated expressive faces, humorous street-cat tone. No clothes unless stated.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no text, no frame numbers, no borders."
+ },
+ {
+  "name": "hideout_ryzhy",
+  "refs": [
+   "Docs/ArtDirection/Generated/refs/ref_ryzhy_guard.png"
+  ],
+  "size": "1536x1024",
+  "prompt": "Character pose sheet: exactly 4 poses in ONE row, equal spacing, same scale, the same character in every pose, side view facing right, on FOUR legs like a real cat: 1) sitting upright, 2) sleeping curled up in a ball, 3) eating from a tin can, 4) walking.\nCharacter: the SAME ginger tomcat as in the reference (torn ear, scar on the nose, stripes)\nComic book style exactly like the reference: bold black ink outlines, flat colors with simple shading and light hatching, exaggerated expressive faces, humorous street-cat tone. No clothes unless stated.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no text, no frame numbers, no borders."
+ },
+ {
+  "name": "hideout_shnyr",
+  "refs": [
+   "Docs/ArtDirection/Generated/refs/ref_shnyr_concept.png"
+  ],
+  "size": "1536x1024",
+  "prompt": "Character pose sheet: exactly 4 poses in ONE row, equal spacing, same scale, the same character in every pose, side view facing right, on FOUR legs like a real cat: 1) sitting upright, 2) sleeping curled up in a ball, 3) eating from a tin can, 4) walking.\nCharacter: the SAME grey striped tabby cat as in the reference (lanky, oversized ears, very long thin tail, narrow shifty yellow eyes)\nComic book style exactly like the reference: bold black ink outlines, flat colors with simple shading and light hatching, exaggerated expressive faces, humorous street-cat tone. No clothes unless stated.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no text, no frame numbers, no borders."
+ },
+ {
+  "name": "hideout_ponchik",
+  "refs": [
+   "Docs/ArtDirection/Generated/refs/ref_ponchik_concept.png"
+  ],
+  "size": "1536x1024",
+  "prompt": "Character pose sheet: exactly 4 poses in ONE row, equal spacing, same scale, the same character in every pose, side view facing right, on FOUR legs like a real cat: 1) sitting upright, 2) sleeping curled up in a ball, 3) eating from a tin can, 4) walking.\nCharacter: the SAME huge round black-and-white tuxedo cat as in the reference (tiny head on a big round body, sleepy half-closed yellow eyes, white belly)\nComic book style exactly like the reference: bold black ink outlines, flat colors with simple shading and light hatching, exaggerated expressive faces, humorous street-cat tone. No clothes unless stated.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no text, no frame numbers, no borders."
+ },
+ {
+  "name": "ryzhy_bite_hit",
+  "refs": [
+   "Docs/ArtDirection/Generated/refs/ref_ryzhy_guard.png"
+  ],
+  "size": "1536x1024",
+  "prompt": "Game sprite sheet: 8 animation frames in a grid of 2 rows x 4 columns with generous empty space between frames. Row 1 is one animation (4 frames, left to right), row 2 is another animation (4 frames, left to right). The same character at the same scale in every frame, feet on the same baseline within a row, side view facing RIGHT, full body visible.\nKeep the exact character, proportions and size of the reference: the ginger boxer tomcat standing on hind legs.\nRow 1 - heavy BITE attack: 1) crouch with open jaws, 2) lunge forward, 3) bite with jaws snapping shut and a small comic impact star, 4) recover back to guard.\nRow 2 - getting HIT: 1) guard, 2) head snapped back with a pained face, 3) staggering backwards, 4) back to guard shaking the head.\nComic book style exactly like the reference: bold black ink outlines, flat colors with simple shading and light hatching, exaggerated expressive faces, humorous street-cat tone. No clothes unless stated.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no text, no frame numbers, no borders."
+ },
+ {
+  "name": "ryzhy_ko_win",
+  "refs": [
+   "Docs/ArtDirection/Generated/refs/ref_ryzhy_guard.png"
+  ],
+  "size": "1536x1024",
+  "prompt": "Game sprite sheet: 8 animation frames in a grid of 2 rows x 4 columns with generous empty space between frames. Row 1 is one animation (4 frames, left to right), row 2 is another animation (4 frames, left to right). The same character at the same scale in every frame, feet on the same baseline within a row, side view facing RIGHT, full body visible.\nKeep the exact character, proportions and size of the reference: the ginger boxer tomcat standing on hind legs.\nRow 1 - KNOCKED OUT: 1) dazed with swirly eyes, 2) wobbling backwards, 3) falling, 4) lying flat on the back with stars over the head.\nRow 2 - VICTORY: 1) fists up, 2) jumping cheer, 3) flexing, 4) proud grin with arms crossed.\nComic book style exactly like the reference: bold black ink outlines, flat colors with simple shading and light hatching, exaggerated expressive faces, humorous street-cat tone. No clothes unless stated.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no text, no frame numbers, no borders."
+ },
+ {
+  "name": "props",
+  "refs": [
+   "Docs/ArtDirection/Generated/refs/style_hideout.png"
+  ],
+  "size": "1536x1024",
+  "prompt": "Game props sheet in the comic style of the reference: exactly 5 separate objects in one row, well spaced, each fully visible: 1) a dented tin can hanging on a string from a short pipe (punching bag), 2) a wind-up toy mouse with a key, 3) an exercise wheel made from an old tire on a wooden stand, 4) a rusty green dumpster with junk around it, 5) a stack of cardboard boxes with an old blanket (cat bed). Side view, no characters, no text.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no text, no frame numbers, no borders."
+ },
+ {
+  "name": "bg_hideout",
+  "refs": [
+   "Docs/ArtDirection/Generated/refs/style_hideout.png"
+  ],
+  "size": "1024x1536",
+  "prompt": "Game background in the comic style of the reference, portrait orientation, NO characters, NO animals, NO text, NO UI. Side view stage for a 2D game: flat ground in the lower third, details only along the edges and top, a calm empty area in the middle. Scene: the back alley behind a small restaurant at dusk, brick walls, a warm lit back door with a lamp, pipes and wires, puddles; leave the ground empty (props are placed separately)."
+ },
+ {
+  "name": "bg_backyard",
+  "refs": [
+   "Docs/ArtDirection/Generated/refs/style_hideout.png"
+  ],
+  "size": "1024x1536",
+  "prompt": "Game background in the comic style of the reference, portrait orientation, NO characters, NO animals, NO text, NO UI. Side view stage for a 2D game: flat ground in the lower third, details only along the edges and top, a calm empty area in the middle. Scene: a backyard with a wooden fence, laundry lines with clothes, crates and a garden hose, early evening."
+ },
+ {
+  "name": "bg_fishshop",
+  "refs": [
+   "Docs/ArtDirection/Generated/refs/style_hideout.png"
+  ],
+  "size": "1024x1536",
+  "prompt": "Game background in the comic style of the reference, portrait orientation, NO characters, NO animals, NO text, NO UI. Side view stage for a 2D game: flat ground in the lower third, details only along the edges and top, a calm empty area in the middle. Scene: the back door of a fish shop: ice boxes with fish, a fishy smell sign, wet tiles, seagulls on the roof edge in the distance (tiny), evening."
+ },
+ {
+  "name": "bg_alley",
+  "refs": [
+   "Docs/ArtDirection/Generated/refs/style_hideout.png"
+  ],
+  "size": "1024x1536",
+  "prompt": "Game background in the comic style of the reference, portrait orientation, NO characters, NO animals, NO text, NO UI. Side view stage for a 2D game: flat ground in the lower third, details only along the edges and top, a calm empty area in the middle. Scene: a dark narrow alley with brick walls, a single street lamp, puddles, graffiti and trash bags, night."
+ },
+ {
+  "name": "bg_park",
+  "refs": [
+   "Docs/ArtDirection/Generated/refs/style_hideout.png"
+  ],
+  "size": "1024x1536",
+  "prompt": "Game background in the comic style of the reference, portrait orientation, NO characters, NO animals, NO text, NO UI. Side view stage for a 2D game: flat ground in the lower third, details only along the edges and top, a calm empty area in the middle. Scene: a city park at night: a bench, bushes, a trash bin and a lamp post on a path, trees in the background."
+ },
+ {
+  "name": "bg_rooftop",
+  "refs": [
+   "Docs/ArtDirection/Generated/refs/style_hideout.png"
+  ],
+  "size": "1024x1536",
+  "prompt": "Game background in the comic style of the reference, portrait orientation, NO characters, NO animals, NO text, NO UI. Side view stage for a 2D game: flat ground in the lower third, details only along the edges and top, a calm empty area in the middle. Scene: the roof of the restaurant at night: ventilation pipes, a big glowing neon sign 'MEOW' (no other text), the city skyline and the moon behind."
+ },
+ {
+  "name": "bg_map",
+  "refs": [
+   "Docs/ArtDirection/Generated/refs/style_hideout.png"
+  ],
+  "size": "1024x1536",
+  "prompt": "Game background in the comic style of the reference, portrait orientation, NO characters, NO animals, NO text, NO UI. Side view stage for a 2D game: flat ground in the lower third, details only along the edges and top, a calm empty area in the middle. Scene: a top-down-ish stylised neighbourhood map at night with a winding path going from a dumpster at the bottom, through a backyard, a fish shop, a dark alley, a park, up to a restaurant rooftop at the top; no text, no characters."
+ },
+ {
+  "name": "icons",
+  "refs": [
+   "Docs/ArtDirection/Generated/refs/style_hideout.png"
+  ],
+  "size": "1536x1024",
+  "prompt": "Game UI icon sheet in the comic style of the reference: exactly 6 separate square icons in one row, well spaced, thick outlines, readable at small size: 1) food: a fish skeleton, 2) junk: a bent bolt with a bottle cap, 3) energy: a lightning bolt, 4) satiety: a full food bowl, 5) strength: a cat paw fist, 6) map: a folded treasure map. No text.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no text, no frame numbers, no borders."
+ }
+]

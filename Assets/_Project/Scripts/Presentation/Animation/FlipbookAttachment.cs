@@ -10,13 +10,20 @@ namespace TrashCats.Presentation.Animation
     {
         [SerializeField] private SpriteFlipbook body;
 
+        private SpriteRenderer _renderer;
+
         public void Bind(SpriteFlipbook bodyFlipbook) => body = bodyFlipbook;
 
         private void LateUpdate()
         {
             if (body == null) return;
             var clip = body.Current;
-            if (clip != null && clip.TryGetAttachPoint(body.FrameIndex, out var point))
+            var point = Vector2.zero;
+            var attached = clip != null && clip.TryGetAttachPoint(body.FrameIndex, out point);
+            // body clips without attach points have the part drawn in (e.g. a tail): hide the separate part
+            if (_renderer == null) _renderer = GetComponent<SpriteRenderer>();
+            if (_renderer != null) _renderer.enabled = attached;
+            if (attached)
                 transform.localPosition = new Vector3(point.x, point.y, transform.localPosition.z);
         }
     }

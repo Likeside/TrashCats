@@ -76,11 +76,21 @@ def generate(ref, out_dir, name, key, background):
     out = os.path.join(out_dir, f"ryzhy_{name}{SUFFIX}.png")
     with tempfile.NamedTemporaryFile(suffix=".json", delete=False) as tmp:
         resp_path = tmp.name
+    # the key goes through a private header file, never through the command line or error messages
+    with tempfile.NamedTemporaryFile("w", suffix=".hdr", delete=False) as hdr:
+        hdr.write(f"Authorization: Bearer {key}\n")
+        header_file = hdr.name
+    os.chmod(header_file, 0o600)
     cmd = ["curl", "-sS", "https://api.openai.com/v1/images/edits",
-           "-H", f"Authorization: Bearer {key}",
+           "-H", f"@{header_file}",
            "-F", f"model={MODEL}", "-F", f"image[]=@{ref}", "-F", f"prompt={prompt}",
            "-F", "size=1536x1024", "-F", "quality=high", "-F", f"background={background}", "-o", resp_path]
-    subprocess.run(cmd, check=True)
+    try:
+        code = subprocess.run(cmd, capture_output=True).returncode
+    finally:
+        os.remove(header_file)
+    if code != 0:
+        raise RuntimeError(f"{name}: curl failed with exit code {code}")
     data = json.load(open(resp_path))
     os.remove(resp_path)
     if "error" in data:

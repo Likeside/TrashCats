@@ -18,7 +18,7 @@ namespace TrashCats.Presentation.Map
 
         public GameObject Root { get; }
 
-        public MapScreen(GameSession session, RectTransform parent, Action<TerritoryId> onOpen)
+        public MapScreen(GameSession session, RectTransform parent, Action<TerritoryId> onOpen, Sprite background = null)
         {
             _session = session;
             _onOpen = onOpen;
@@ -26,6 +26,8 @@ namespace TrashCats.Presentation.Map
             Root = root.gameObject;
 
             Ui.Panel(root, "Back", Palette.Background).rectTransform.Fill();
+            if (background != null)
+                Ui.Cover(root, "MapArt", background, new Color(0.55f, 0.55f, 0.6f));
             var title = Ui.Label(root, "Район", 52, TextAnchor.MiddleCenter, Palette.Paper);
             title.rectTransform.Place(new Vector2(0, 1), Vector2.one, new Vector2(0, -110), Vector2.zero);
 

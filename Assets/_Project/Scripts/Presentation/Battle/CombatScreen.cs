@@ -95,6 +95,7 @@ namespace TrashCats.Presentation.Battle
                 return;
 
             _arena.gameObject.SetActive(true);
+            _characters.SetArena(_session.Config.GetTerritory(_battle.Territory).ViewKey);
             _log = _battle.Result.Log;
             _next = 0;
             _time = 0f;

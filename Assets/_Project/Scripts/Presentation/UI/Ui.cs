@@ -109,6 +109,29 @@ namespace TrashCats.Presentation.UI
             return new UiButton(button, image, text);
         }
 
+        /// <summary>Picture filling the parent like CSS "cover" (keeps aspect, crops the overflow).</summary>
+        public static Image Cover(Transform parent, string name, Sprite sprite, Color tint)
+        {
+            var mask = Rect(parent, name).Fill();
+            mask.gameObject.AddComponent<RectMask2D>();
+            var image = Panel(mask, "Picture", tint);
+            image.sprite = sprite;
+            var fitter = image.gameObject.AddComponent<AspectRatioFitter>();
+            fitter.aspectMode = AspectRatioFitter.AspectMode.EnvelopeParent;
+            fitter.aspectRatio = sprite.rect.width / sprite.rect.height;
+            return image;
+        }
+
+        /// <summary>Picture fitted inside a rect keeping its aspect.</summary>
+        public static Image Picture(Transform parent, string name, Sprite sprite)
+        {
+            var image = Panel(parent, name, Color.white);
+            image.sprite = sprite;
+            image.preserveAspect = true;
+            image.rectTransform.Fill();
+            return image;
+        }
+
         public static UiBar Bar(Transform parent, string name, Color fill)
         {
             var back = Panel(parent, name, Palette.BarBack);

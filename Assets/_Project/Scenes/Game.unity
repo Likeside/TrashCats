@@ -231,6 +231,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de21658a19c574bb791b499bce1fb0a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterArt: {fileID: 11400000, guid: efdd354ea489ac7c89b0bdfcc8bb432a, type: 2}
+  arenaBackground: {fileID: 0}
 --- !u!4 &1658623799
 Transform:
   m_ObjectHideFlags: 0

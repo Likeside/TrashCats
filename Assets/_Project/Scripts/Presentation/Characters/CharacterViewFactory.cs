@@ -24,27 +24,45 @@ namespace TrashCats.Presentation.Characters
 
         public Sprite Portrait(string viewKey) => Find(viewKey)?.portrait;
 
+        public Sprite GetSprite(string key) => _registry != null ? _registry.GetSprite(key) : null;
+
+        private SpriteRenderer _arenaRenderer;
+        private GameObject _arenaFallback;
+
+        /// <summary>Shows the arena picture for a territory, or the graybox floor when there is none.</summary>
+        public void SetArena(string territoryViewKey)
+        {
+            var sprite = GetSprite("arena_" + territoryViewKey) ?? _arenaBackground;
+            _arenaRenderer.sprite = sprite;
+            _arenaRenderer.color = Color.white;
+            _arenaRenderer.enabled = sprite != null;
+            _arenaFallback.SetActive(sprite == null);
+            if (sprite == null) return;
+            var size = sprite.bounds.size;
+            var scale = Mathf.Max(12f / size.x, 19.4f / size.y);
+            _arenaRenderer.transform.localScale = Vector3.one * scale;
+            // pictures have their pivot at the bottom centre: align the bottom of the picture with the bottom of the screen
+            _arenaRenderer.transform.localPosition = new Vector3(0, -9.7f - sprite.bounds.min.y * scale, 0);
+        }
+
         public void BuildArenaBackground(Transform arena)
         {
+            var art = new GameObject("ArenaArt").AddComponent<SpriteRenderer>();
+            art.transform.SetParent(arena, false);
+            art.sortingOrder = -101;
+            _arenaRenderer = art;
+            _arenaFallback = new GameObject("Fallback");
+            _arenaFallback.transform.SetParent(arena, false);
             var back = new GameObject("Background").AddComponent<SpriteRenderer>();
-            back.transform.SetParent(arena, false);
+            back.transform.SetParent(_arenaFallback.transform, false);
             back.sortingOrder = -100;
-            if (_arenaBackground != null)
-            {
-                back.sprite = _arenaBackground;
-                var size = _arenaBackground.bounds.size;
-                var scale = Mathf.Max(11f / size.x, 19.2f / size.y);
-                back.transform.localScale = Vector3.one * scale;
-                back.transform.localPosition = new Vector3(0, -_arenaBackground.bounds.center.y * scale, 0);
-            }
-            else
             {
                 back.sprite = _square;
                 back.color = Palette.Hex("#2B2A2E");
                 back.transform.localScale = new Vector3(12f, 20f, 1f);
                 back.transform.localPosition = new Vector3(0, -10f, 0);
                 var ground = new GameObject("Ground").AddComponent<SpriteRenderer>();
-                ground.transform.SetParent(arena, false);
+                ground.transform.SetParent(_arenaFallback.transform, false);
                 ground.sprite = _square;
                 ground.color = Palette.Hex("#13171E");
                 ground.sortingOrder = -99;
@@ -71,6 +89,7 @@ namespace TrashCats.Presentation.Characters
             if (hasArt)
             {
                 renderer.sprite = art.idle.frames[0];
+                renderer.color = art.tint;
                 if (art.tail?.frames != null && art.tail.frames.Length > 0)
                 {
                     var tail = new GameObject("Tail");

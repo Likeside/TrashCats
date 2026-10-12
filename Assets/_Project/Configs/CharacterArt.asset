@@ -1,0 +1,1030 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31df824586ca0b9228e0b37298b65226, type: 3}
+  m_Name: CharacterArt
+  m_EditorClassIdentifier: 
+  characters:
+  - viewKey: admiral
+    battleScale: 1.55
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    idle:
+      name: idle
+      frames:
+      - {fileID: 21300000, guid: 81f7ffca8dc5f28f984fbadd9ec0e027, type: 3}
+      - {fileID: 21300000, guid: f0abe5520ebe517a7ba4e9529e365f72, type: 3}
+      - {fileID: 21300000, guid: adb2ba7f42499effc90b7f820047194a, type: 3}
+      - {fileID: 21300000, guid: 3be6aca0a739139b095a5dc2e35ebc30, type: 3}
+      fps: 6
+      loop: 1
+      pingPong: 0
+      attachPoints: []
+      breathe: 0.008
+      breathePeriod: 2.4
+    attack:
+      name: attack
+      frames:
+      - {fileID: 21300000, guid: e59279b10e458ffdda42b257215a8726, type: 3}
+      - {fileID: 21300000, guid: adda700ce6eb54dd7a5e561fc6e92965, type: 3}
+      - {fileID: 21300000, guid: 910860ba9dde04b5b8570d5832af3774, type: 3}
+      - {fileID: 21300000, guid: c9cbae8dd7ca8948889e6e28559bc9a5, type: 3}
+      fps: 12
+      loop: 0
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    heavyAttack:
+      name: attack
+      frames:
+      - {fileID: 21300000, guid: e59279b10e458ffdda42b257215a8726, type: 3}
+      - {fileID: 21300000, guid: adda700ce6eb54dd7a5e561fc6e92965, type: 3}
+      - {fileID: 21300000, guid: 910860ba9dde04b5b8570d5832af3774, type: 3}
+      - {fileID: 21300000, guid: c9cbae8dd7ca8948889e6e28559bc9a5, type: 3}
+      fps: 12
+      loop: 0
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    hit:
+      name: hit
+      frames:
+      - {fileID: 21300000, guid: 60fc064b331f1580e83edb9e6e6c45df, type: 3}
+      - {fileID: 21300000, guid: 5be3eff401681a8c99da60ec9c12e359, type: 3}
+      - {fileID: 21300000, guid: d4eab8b2a2c3edfedaa2b4414817f107, type: 3}
+      - {fileID: 21300000, guid: c004096089311b811ac42e558048afed, type: 3}
+      fps: 12
+      loop: 0
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    knockOut:
+      name: ko
+      frames:
+      - {fileID: 21300000, guid: f709c058e1ff0387096a9b2d7c97273d, type: 3}
+      - {fileID: 21300000, guid: eb48c123ce54b2dcfb3fdb2dea411429, type: 3}
+      - {fileID: 21300000, guid: c2b4ea440726d33d3a5562eed68c8547, type: 3}
+      - {fileID: 21300000, guid: 1ea1992402edf8a7f911ed6a94eb7741, type: 3}
+      fps: 8
+      loop: 0
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    tail:
+      name: 
+      frames: []
+      fps: 10
+      loop: 1
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    portrait: {fileID: 21300000, guid: 81f7ffca8dc5f28f984fbadd9ec0e027, type: 3}
+    hideoutPoses: []
+  - viewKey: crow
+    battleScale: 1.05
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    idle:
+      name: idle
+      frames:
+      - {fileID: 21300000, guid: 6740e8e33ba0196b9975ed22044353ed, type: 3}
+      - {fileID: 21300000, guid: 44636d09f727c2eacbe9a9e7b923a790, type: 3}
+      - {fileID: 21300000, guid: 6e14f3824117d45efb87c8f4f757ab79, type: 3}
+      - {fileID: 21300000, guid: f162855417a331bcca8e477e0786123a, type: 3}
+      fps: 6
+      loop: 1
+      pingPong: 0
+      attachPoints: []
+      breathe: 0.008
+      breathePeriod: 2.4
+    attack:
+      name: attack
+      frames:
+      - {fileID: 21300000, guid: 26029b9ba2c9d41a78b1f909448d70bf, type: 3}
+      - {fileID: 21300000, guid: 67d4dcb89ec3ca64892518e243a618be, type: 3}
+      - {fileID: 21300000, guid: fcc26ca0a021aad25b69d9908bd8da9e, type: 3}
+      - {fileID: 21300000, guid: 6146632d816017fadb30aba4f178fffc, type: 3}
+      fps: 12
+      loop: 0
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    heavyAttack:
+      name: attack
+      frames:
+      - {fileID: 21300000, guid: 26029b9ba2c9d41a78b1f909448d70bf, type: 3}
+      - {fileID: 21300000, guid: 67d4dcb89ec3ca64892518e243a618be, type: 3}
+      - {fileID: 21300000, guid: fcc26ca0a021aad25b69d9908bd8da9e, type: 3}
+      - {fileID: 21300000, guid: 6146632d816017fadb30aba4f178fffc, type: 3}
+      fps: 12
+      loop: 0
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    hit:
+      name: hit
+      frames:
+      - {fileID: 21300000, guid: 63802acc92822c334b4c40cb1a77075a, type: 3}
+      - {fileID: 21300000, guid: 1883f4971e4deeb5c8a9551c8b03eb7e, type: 3}
+      - {fileID: 21300000, guid: ef79537e52e115ac99a7bb7a665a691b, type: 3}
+      - {fileID: 21300000, guid: dce575af497d5b8b9af14a4ce8f2d10c, type: 3}
+      fps: 12
+      loop: 0
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    knockOut:
+      name: ko
+      frames:
+      - {fileID: 21300000, guid: 69b6034db3d000c569e403924ccc750a, type: 3}
+      - {fileID: 21300000, guid: 38f6c67f08dc95ba38662b00d3bbd9e1, type: 3}
+      - {fileID: 21300000, guid: a1fd91a8416394fe087d85c756fcfef8, type: 3}
+      - {fileID: 21300000, guid: d803a4bc666451d63987b47d8f11e262, type: 3}
+      fps: 8
+      loop: 0
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    tail:
+      name: 
+      frames: []
+      fps: 10
+      loop: 1
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    portrait: {fileID: 21300000, guid: 6740e8e33ba0196b9975ed22044353ed, type: 3}
+    hideoutPoses: []
+  - viewKey: gull
+    battleScale: 1.05
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    idle:
+      name: idle
+      frames:
+      - {fileID: 21300000, guid: 6f0b32131e6195413b3214ddc54d9863, type: 3}
+      - {fileID: 21300000, guid: b76710a14c58336ca8e7fb215b36cea6, type: 3}
+      - {fileID: 21300000, guid: d327f4b7535c80120b4aaa8cbd78251c, type: 3}
+      - {fileID: 21300000, guid: 65bdc81cf3f8ac6a2b038db3d8401ee6, type: 3}
+      fps: 6
+      loop: 1
+      pingPong: 0
+      attachPoints: []
+      breathe: 0.008
+      breathePeriod: 2.4
+    attack:
+      name: attack
+      frames:
+      - {fileID: 21300000, guid: 01b0e6b54369caac68d4fc4223be4293, type: 3}
+      - {fileID: 21300000, guid: d81593218c87a8cb2a7b172e56da21cf, type: 3}
+      - {fileID: 21300000, guid: 35e3f742c2e4cdbc29a3974adf2d96dc, type: 3}
+      - {fileID: 21300000, guid: 5a0e93010a16db93fa16d7457efa007d, type: 3}
+      fps: 12
+      loop: 0
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    heavyAttack:
+      name: attack
+      frames:
+      - {fileID: 21300000, guid: 01b0e6b54369caac68d4fc4223be4293, type: 3}
+      - {fileID: 21300000, guid: d81593218c87a8cb2a7b172e56da21cf, type: 3}
+      - {fileID: 21300000, guid: 35e3f742c2e4cdbc29a3974adf2d96dc, type: 3}
+      - {fileID: 21300000, guid: 5a0e93010a16db93fa16d7457efa007d, type: 3}
+      fps: 12
+      loop: 0
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    hit:
+      name: hit
+      frames:
+      - {fileID: 21300000, guid: f08e915a239d3c370b8e5816f8c75fec, type: 3}
+      - {fileID: 21300000, guid: ecca6c4ad2bf1a9c18c49278f694d52e, type: 3}
+      - {fileID: 21300000, guid: 6392c6375ecc2d5ba97d6587e4ff8407, type: 3}
+      - {fileID: 21300000, guid: 8ed4f7266a019e14681f9cf8ebddc48b, type: 3}
+      fps: 12
+      loop: 0
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    knockOut:
+      name: ko
+      frames:
+      - {fileID: 21300000, guid: 3b758afe99a850b52a9391a1c26e3502, type: 3}
+      - {fileID: 21300000, guid: a583bed8c3a3dcafea8dac92d7937169, type: 3}
+      - {fileID: 21300000, guid: d0aeae246b42561dc9b971ea2b384e18, type: 3}
+      - {fileID: 21300000, guid: 10bab449aad63fc6392d82e77f7347bd, type: 3}
+      fps: 8
+      loop: 0
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    tail:
+      name: 
+      frames: []
+      fps: 10
+      loop: 1
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    portrait: {fileID: 21300000, guid: 6f0b32131e6195413b3214ddc54d9863, type: 3}
+    hideoutPoses: []
+  - viewKey: ponchik
+    battleScale: 1.3
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    idle:
+      name: idle
+      frames:
+      - {fileID: 21300000, guid: 841882744e8e5fee3976c7c99cbeb71b, type: 3}
+      - {fileID: 21300000, guid: f6e1a52b80279a3f193d69c89e44dd2e, type: 3}
+      - {fileID: 21300000, guid: bb79610838c87983b9ed3a20a68215a0, type: 3}
+      - {fileID: 21300000, guid: 4ddcece3a1da9bab099e0f6ac5791652, type: 3}
+      fps: 6
+      loop: 1
+      pingPong: 0
+      attachPoints: []
+      breathe: 0.008
+      breathePeriod: 2.4
+    attack:
+      name: attack
+      frames:
+      - {fileID: 21300000, guid: 23d78e0f3797737989fa9a4d13b968fb, type: 3}
+      - {fileID: 21300000, guid: e10643c0a0c74e021a4cea9b63f9a723, type: 3}
+      - {fileID: 21300000, guid: 7fd31ed9d6606ee9c9656a15170f3c7b, type: 3}
+      - {fileID: 21300000, guid: bfd69532392d22d8d91655eee144db64, type: 3}
+      fps: 12
+      loop: 0
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    heavyAttack:
+      name: heavy
+      frames:
+      - {fileID: 21300000, guid: 3362ecc6e87e0f825bba4cfdfe2d9dd0, type: 3}
+      - {fileID: 21300000, guid: 9d29b3017cbc85fba904d3548bca0b68, type: 3}
+      - {fileID: 21300000, guid: deb41da4387bea33cbe1e3c9f64b8ef9, type: 3}
+      - {fileID: 21300000, guid: c5a06af548cb2f918be8155717700cfa, type: 3}
+      fps: 12
+      loop: 0
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    hit:
+      name: hit
+      frames:
+      - {fileID: 21300000, guid: cdd2eed4bfa49082586bc4252ac2d6f4, type: 3}
+      - {fileID: 21300000, guid: e5861d37d4aade11ba8c42621f8fa000, type: 3}
+      - {fileID: 21300000, guid: 633f168f5b192a48a9073c4830dd953d, type: 3}
+      - {fileID: 21300000, guid: d1c76542b1e69e4bcbb953b2c9ae9963, type: 3}
+      fps: 12
+      loop: 0
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    knockOut:
+      name: ko
+      frames:
+      - {fileID: 21300000, guid: 96dec15325f3aa0559ffbfaf601cebce, type: 3}
+      - {fileID: 21300000, guid: d5e0b1e3366fa4f3887ae6a1233e2c00, type: 3}
+      - {fileID: 21300000, guid: 19c6d46e5d76cde81a3c1e1ec177d26f, type: 3}
+      - {fileID: 21300000, guid: ca4a98b77c686061da5b319f408ab146, type: 3}
+      fps: 8
+      loop: 0
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    tail:
+      name: 
+      frames: []
+      fps: 10
+      loop: 1
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    portrait: {fileID: 21300000, guid: 841882744e8e5fee3976c7c99cbeb71b, type: 3}
+    hideoutPoses:
+    - {fileID: 21300000, guid: d545c6202ca9c1248afb8b0214a565e4, type: 3}
+    - {fileID: 21300000, guid: a6128fe2df4649888bdc63d6d461e419, type: 3}
+    - {fileID: 21300000, guid: f76825e74c6bac55888e84e827b755f6, type: 3}
+    - {fileID: 21300000, guid: 9996ed5807392a584a7276c41fb4d288, type: 3}
+  - viewKey: pug
+    battleScale: 1.15
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    idle:
+      name: idle
+      frames:
+      - {fileID: 21300000, guid: 3940a3e5ce3c6dbd4b2bcbddfbf39d09, type: 3}
+      - {fileID: 21300000, guid: bafa94e1d26cde376b1fefb41bb13821, type: 3}
+      - {fileID: 21300000, guid: dbad4e14200a52c51b99ae0ee484ebae, type: 3}
+      - {fileID: 21300000, guid: 69658ed8992dcbcfeadf9284d103dc05, type: 3}
+      fps: 6
+      loop: 1
+      pingPong: 0
+      attachPoints: []
+      breathe: 0.008
+      breathePeriod: 2.4
+    attack:
+      name: attack
+      frames:
+      - {fileID: 21300000, guid: 47c1be8f0f8605c47954b12724041d4a, type: 3}
+      - {fileID: 21300000, guid: 010e974078f11abc998ca336c6747cd4, type: 3}
+      - {fileID: 21300000, guid: 4a755768acd3be54eaf4420f12a8fa78, type: 3}
+      - {fileID: 21300000, guid: 7052b4ba9c85257b2be2fd56a6e5ade9, type: 3}
+      fps: 12
+      loop: 0
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    heavyAttack:
+      name: attack
+      frames:
+      - {fileID: 21300000, guid: 47c1be8f0f8605c47954b12724041d4a, type: 3}
+      - {fileID: 21300000, guid: 010e974078f11abc998ca336c6747cd4, type: 3}
+      - {fileID: 21300000, guid: 4a755768acd3be54eaf4420f12a8fa78, type: 3}
+      - {fileID: 21300000, guid: 7052b4ba9c85257b2be2fd56a6e5ade9, type: 3}
+      fps: 12
+      loop: 0
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    hit:
+      name: hit
+      frames:
+      - {fileID: 21300000, guid: 0223c4ca0386df0368d4fb0b03623155, type: 3}
+      - {fileID: 21300000, guid: 083c308985484634f802ff90625a115c, type: 3}
+      - {fileID: 21300000, guid: 7c168834aab69a428acc2a4dfcb72dc9, type: 3}
+      - {fileID: 21300000, guid: bc7b45c90db6fc3fd8c38c138353bce3, type: 3}
+      fps: 12
+      loop: 0
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    knockOut:
+      name: ko
+      frames:
+      - {fileID: 21300000, guid: de11be0ddae2f603c9d19fdfa8a6aada, type: 3}
+      - {fileID: 21300000, guid: ba2664528ea351c6b8fd5395d901537a, type: 3}
+      - {fileID: 21300000, guid: aed6071b653c77474978d43885ed3fc8, type: 3}
+      - {fileID: 21300000, guid: 11deedebfe4e974739ab1eb9926b2f98, type: 3}
+      fps: 8
+      loop: 0
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    tail:
+      name: 
+      frames: []
+      fps: 10
+      loop: 1
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    portrait: {fileID: 21300000, guid: 3940a3e5ce3c6dbd4b2bcbddfbf39d09, type: 3}
+    hideoutPoses: []
+  - viewKey: raccoon
+    battleScale: 1.25
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    idle:
+      name: idle
+      frames:
+      - {fileID: 21300000, guid: bbdec176a17c18feba1dcd63b4a5f867, type: 3}
+      - {fileID: 21300000, guid: 4101e76f6d0a627109c71a7cd6b30fbc, type: 3}
+      - {fileID: 21300000, guid: 7bc680dc0d54a0fed93e183235f90e96, type: 3}
+      - {fileID: 21300000, guid: c0b2307e9f6da9a5cbf4f267d2c585b1, type: 3}
+      fps: 6
+      loop: 1
+      pingPong: 0
+      attachPoints: []
+      breathe: 0.008
+      breathePeriod: 2.4
+    attack:
+      name: attack
+      frames:
+      - {fileID: 21300000, guid: d4eaf9176ab680e8da3a27d8a5310ab7, type: 3}
+      - {fileID: 21300000, guid: 5a731c7f0a7295a3d808a2221dd7b695, type: 3}
+      - {fileID: 21300000, guid: 64519e7ac324e74569a8222263ef5a02, type: 3}
+      - {fileID: 21300000, guid: 14c990fce3840c96aaf068f52ee1dd05, type: 3}
+      fps: 12
+      loop: 0
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    heavyAttack:
+      name: attack
+      frames:
+      - {fileID: 21300000, guid: d4eaf9176ab680e8da3a27d8a5310ab7, type: 3}
+      - {fileID: 21300000, guid: 5a731c7f0a7295a3d808a2221dd7b695, type: 3}
+      - {fileID: 21300000, guid: 64519e7ac324e74569a8222263ef5a02, type: 3}
+      - {fileID: 21300000, guid: 14c990fce3840c96aaf068f52ee1dd05, type: 3}
+      fps: 12
+      loop: 0
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    hit:
+      name: hit
+      frames:
+      - {fileID: 21300000, guid: b392bc716ba90955b8f5a0de6297bdc7, type: 3}
+      - {fileID: 21300000, guid: 775071239ac6383e5958ecc5325db7bf, type: 3}
+      - {fileID: 21300000, guid: 68b4dc1723783d980bb5b11ad305ce48, type: 3}
+      - {fileID: 21300000, guid: d5aa66f9494499a8caa4621fd418da71, type: 3}
+      fps: 12
+      loop: 0
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    knockOut:
+      name: ko
+      frames:
+      - {fileID: 21300000, guid: 214c8e3be942c39308a3cc8405e0c84e, type: 3}
+      - {fileID: 21300000, guid: 78e81b11bf04179cfad7640e9711c346, type: 3}
+      - {fileID: 21300000, guid: fce6469f08f915ab0a6292965e54a1de, type: 3}
+      - {fileID: 21300000, guid: f9c52d73a7869410594537123b8097e1, type: 3}
+      fps: 8
+      loop: 0
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    tail:
+      name: 
+      frames: []
+      fps: 10
+      loop: 1
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    portrait: {fileID: 21300000, guid: bbdec176a17c18feba1dcd63b4a5f867, type: 3}
+    hideoutPoses: []
+  - viewKey: rat
+    battleScale: 1
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    idle:
+      name: idle
+      frames:
+      - {fileID: 21300000, guid: c99568140b6328fe696ef485d5e4ca7e, type: 3}
+      - {fileID: 21300000, guid: d81a59499123c5a6290120d49816958c, type: 3}
+      - {fileID: 21300000, guid: 6c829f1fa100eba7f9b0767235371342, type: 3}
+      - {fileID: 21300000, guid: b00d6bc175db2869ba362a987e236a62, type: 3}
+      fps: 6
+      loop: 1
+      pingPong: 0
+      attachPoints: []
+      breathe: 0.008
+      breathePeriod: 2.4
+    attack:
+      name: attack
+      frames:
+      - {fileID: 21300000, guid: 3f4d43a1452539d93ba00fcc3e9193dd, type: 3}
+      - {fileID: 21300000, guid: bfdd6116f7220166c9919fa212bea1f3, type: 3}
+      - {fileID: 21300000, guid: c301438ef94d0df0089170de264aca50, type: 3}
+      - {fileID: 21300000, guid: b11e15d4200bca4ce8e76b11e6749517, type: 3}
+      fps: 12
+      loop: 0
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    heavyAttack:
+      name: attack
+      frames:
+      - {fileID: 21300000, guid: 3f4d43a1452539d93ba00fcc3e9193dd, type: 3}
+      - {fileID: 21300000, guid: bfdd6116f7220166c9919fa212bea1f3, type: 3}
+      - {fileID: 21300000, guid: c301438ef94d0df0089170de264aca50, type: 3}
+      - {fileID: 21300000, guid: b11e15d4200bca4ce8e76b11e6749517, type: 3}
+      fps: 12
+      loop: 0
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    hit:
+      name: hit
+      frames:
+      - {fileID: 21300000, guid: 0272d59adebb0e6c89abb6903724257b, type: 3}
+      - {fileID: 21300000, guid: e971677fe45ea843db225606815b1054, type: 3}
+      - {fileID: 21300000, guid: 1c09c820b45af4165931678267ac7906, type: 3}
+      - {fileID: 21300000, guid: d345bf6045cc28a1aaa94f288f43eec5, type: 3}
+      fps: 12
+      loop: 0
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    knockOut:
+      name: ko
+      frames:
+      - {fileID: 21300000, guid: e7933fad99c810a5994cb4c52b15b4c7, type: 3}
+      - {fileID: 21300000, guid: c8fa03f37b983096283ea6b6c99ea8d4, type: 3}
+      - {fileID: 21300000, guid: e636c77f70207428eb79d0eba6f41d4a, type: 3}
+      - {fileID: 21300000, guid: d8f22a0b4a45f4a04b68928d4c82da6f, type: 3}
+      fps: 8
+      loop: 0
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    tail:
+      name: 
+      frames: []
+      fps: 10
+      loop: 1
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    portrait: {fileID: 21300000, guid: c99568140b6328fe696ef485d5e4ca7e, type: 3}
+    hideoutPoses: []
+  - viewKey: ryzhy
+    battleScale: 1.25
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    idle:
+      name: idle
+      frames:
+      - {fileID: 21300000, guid: 8060dcf920e949793a71353d7d2f78b8, type: 3}
+      fps: 6
+      loop: 1
+      pingPong: 0
+      attachPoints:
+      - {x: 0.12, y: 1.49}
+      breathe: 0.012
+      breathePeriod: 2.4
+    attack:
+      name: punch
+      frames:
+      - {fileID: 21300000, guid: 57ff0936a6e69d018b5d0d9495aad68c, type: 3}
+      - {fileID: 21300000, guid: 67f82ec2ebe1397f1ae67283e143dbd9, type: 3}
+      - {fileID: 21300000, guid: 0e18c15a31d151ac6943049c4e4f92db, type: 3}
+      - {fileID: 21300000, guid: 0217b7cf93614ee97b16cc65e9130b4a, type: 3}
+      - {fileID: 21300000, guid: 956a56382dd3e8d3d842c780d98d56d2, type: 3}
+      - {fileID: 21300000, guid: 604ec938a0930bfcdb633062013a1a52, type: 3}
+      - {fileID: 21300000, guid: 67fc9714a36df4f00b9b0c03b5521581, type: 3}
+      - {fileID: 21300000, guid: 85b5cd79f91b356ec9f9d63d7d307824, type: 3}
+      fps: 12
+      loop: 0
+      pingPong: 0
+      attachPoints:
+      - {x: 0.125, y: 1.47}
+      - {x: 0.195, y: 1.44}
+      - {x: 0.305, y: 1.43}
+      - {x: 0.455, y: 1.38}
+      - {x: 0.445, y: 1.38}
+      - {x: 0.455, y: 1.4}
+      - {x: 0.175, y: 1.41}
+      - {x: 0.115, y: 1.43}
+      breathe: 0
+      breathePeriod: 2.4
+    heavyAttack:
+      name: heavy
+      frames:
+      - {fileID: 21300000, guid: 40e2adeed971b28878fb47b371d8ac0b, type: 3}
+      - {fileID: 21300000, guid: 40f3f5f8d86481f5ea44801cdabce452, type: 3}
+      - {fileID: 21300000, guid: f177f935fcf7e2ec09f708d4e26c0ce1, type: 3}
+      - {fileID: 21300000, guid: 66d6f46b76ca22b0cae2015465169fd5, type: 3}
+      fps: 12
+      loop: 0
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    hit:
+      name: hit
+      frames:
+      - {fileID: 21300000, guid: 252880901015b991293d53f4f9999b79, type: 3}
+      - {fileID: 21300000, guid: 8238eeadd22de391b993478fb623a53a, type: 3}
+      - {fileID: 21300000, guid: be2130d0cd60342eea342abbb97f919c, type: 3}
+      - {fileID: 21300000, guid: 910389cd0b8b7162fa2330f8bf9a0a98, type: 3}
+      fps: 12
+      loop: 0
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    knockOut:
+      name: ko
+      frames:
+      - {fileID: 21300000, guid: a2eb55ba24672d1cfb64d2b3f925c415, type: 3}
+      - {fileID: 21300000, guid: 2721ee75bae1cd5019eb3945676c8776, type: 3}
+      - {fileID: 21300000, guid: 965322040825ee5aa95124c625528adc, type: 3}
+      - {fileID: 21300000, guid: 3f8c07c9fa3fddb4b83dd4735c2e34bb, type: 3}
+      fps: 8
+      loop: 0
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    tail:
+      name: tail
+      frames:
+      - {fileID: 21300000, guid: 3ba7d65e739cad8bfba183e32a4e7e99, type: 3}
+      - {fileID: 21300000, guid: fcda1d7137d4c297b8f4d378af969512, type: 3}
+      - {fileID: 21300000, guid: bc70c7bb2028020aa96ca0dc8b076f72, type: 3}
+      - {fileID: 21300000, guid: 2d96fec7fd4cb78dc91f8d34fea3f37d, type: 3}
+      - {fileID: 21300000, guid: 3287990d3d302c6d68c5212596cf4dc7, type: 3}
+      - {fileID: 21300000, guid: 0bbc7976a008d81a19e0bb16b31875ab, type: 3}
+      - {fileID: 21300000, guid: a8714436836440eafa81077132d18211, type: 3}
+      - {fileID: 21300000, guid: bc0a39257291a2edda7d8094a2a18981, type: 3}
+      fps: 5
+      loop: 1
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    portrait: {fileID: 21300000, guid: 8060dcf920e949793a71353d7d2f78b8, type: 3}
+    hideoutPoses:
+    - {fileID: 21300000, guid: 2d5d31ccfbeed0c3e9feea13a2f29838, type: 3}
+    - {fileID: 21300000, guid: cc7c661d943bd4281886fd4cf8ff5ee0, type: 3}
+    - {fileID: 21300000, guid: 8310a59e1a032660c8dc0c93c7458f81, type: 3}
+    - {fileID: 21300000, guid: a95c291213e12663c9f17f90ae1f673d, type: 3}
+  - viewKey: shnyr
+    battleScale: 1.25
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    idle:
+      name: idle
+      frames:
+      - {fileID: 21300000, guid: fe290c758d927ac02bdb25f4aba52bce, type: 3}
+      - {fileID: 21300000, guid: 92af6bfbeedea6a8cbe6f005d09861e2, type: 3}
+      - {fileID: 21300000, guid: 459597628e5c1abfeaa24f0dcdf803a4, type: 3}
+      - {fileID: 21300000, guid: 73ccf66a793d413518620c22a63004ce, type: 3}
+      fps: 6
+      loop: 1
+      pingPong: 0
+      attachPoints: []
+      breathe: 0.008
+      breathePeriod: 2.4
+    attack:
+      name: attack
+      frames:
+      - {fileID: 21300000, guid: 483f64f4176416b4f95c0b206243a922, type: 3}
+      - {fileID: 21300000, guid: 229383a5adeab2b1d9c033f99d02bfc6, type: 3}
+      - {fileID: 21300000, guid: d45f197fb18ca81b3996ed6b93a66930, type: 3}
+      - {fileID: 21300000, guid: b9cc5db7ae918fc979b6d29d9e51a596, type: 3}
+      fps: 12
+      loop: 0
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    heavyAttack:
+      name: heavy
+      frames:
+      - {fileID: 21300000, guid: 2e2d142af5ca9fce3b21fdd3f0f7e703, type: 3}
+      - {fileID: 21300000, guid: 02d640c9ba1bebdb5a067387beee27bb, type: 3}
+      - {fileID: 21300000, guid: 8c9f0a40e132bdc48a2582f8090f103a, type: 3}
+      - {fileID: 21300000, guid: 1833c60a1473a353c9a9e48f53077645, type: 3}
+      fps: 12
+      loop: 0
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    hit:
+      name: hit
+      frames:
+      - {fileID: 21300000, guid: 393b569b500b76d2aa3a3ad2f86f205e, type: 3}
+      - {fileID: 21300000, guid: 7983f61772948916d8a04115e283053a, type: 3}
+      - {fileID: 21300000, guid: 35703fbab72b18804859439f443578bd, type: 3}
+      - {fileID: 21300000, guid: 8fe1d78e6eb7a6deabf4ba0b8d737515, type: 3}
+      fps: 12
+      loop: 0
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    knockOut:
+      name: ko
+      frames:
+      - {fileID: 21300000, guid: f398fb98e3487c4109b01e410a477804, type: 3}
+      - {fileID: 21300000, guid: efbf405341f6acd16bc5d610f8a043a7, type: 3}
+      - {fileID: 21300000, guid: c35ddf868f5a10622a3c4ed43e8de579, type: 3}
+      - {fileID: 21300000, guid: 10bac811da2e98a3d8fcb115d8c93e03, type: 3}
+      fps: 8
+      loop: 0
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    tail:
+      name: 
+      frames: []
+      fps: 10
+      loop: 1
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    portrait: {fileID: 21300000, guid: fe290c758d927ac02bdb25f4aba52bce, type: 3}
+    hideoutPoses:
+    - {fileID: 21300000, guid: 1e4b152b8d2d4635ba43a0995b121c57, type: 3}
+    - {fileID: 21300000, guid: 055680a4bdc8f8f3da848e7fc23185b8, type: 3}
+    - {fileID: 21300000, guid: 2f5c372833869d1c58ff3c47203494f3, type: 3}
+    - {fileID: 21300000, guid: c4d49032ee12b992f8ecdc247c4c9e73, type: 3}
+  - viewKey: shopcat
+    battleScale: 1.25
+    tint: {r: 1, g: 1, b: 1, a: 1}
+    idle:
+      name: idle
+      frames:
+      - {fileID: 21300000, guid: 61e1ff5026dce1f8bac14138845ef6c7, type: 3}
+      - {fileID: 21300000, guid: d7b4d9181f3f198fc8f554bd944a308d, type: 3}
+      - {fileID: 21300000, guid: 79adea3b869b7d4c1852d95371ee970f, type: 3}
+      - {fileID: 21300000, guid: de8e6c534cb03ac4cba9ac09427dcffa, type: 3}
+      fps: 6
+      loop: 1
+      pingPong: 0
+      attachPoints: []
+      breathe: 0.008
+      breathePeriod: 2.4
+    attack:
+      name: attack
+      frames:
+      - {fileID: 21300000, guid: b46fc746677b18518a84d37afc10b917, type: 3}
+      - {fileID: 21300000, guid: 91f66d2f23c44faec8121c7a289ddfe0, type: 3}
+      - {fileID: 21300000, guid: 3e1d21f4fe19fc70b9f1ea9a5e2ff794, type: 3}
+      - {fileID: 21300000, guid: 0efab3091e4100bed9c9b8233b8a5d48, type: 3}
+      fps: 12
+      loop: 0
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    heavyAttack:
+      name: attack
+      frames:
+      - {fileID: 21300000, guid: b46fc746677b18518a84d37afc10b917, type: 3}
+      - {fileID: 21300000, guid: 91f66d2f23c44faec8121c7a289ddfe0, type: 3}
+      - {fileID: 21300000, guid: 3e1d21f4fe19fc70b9f1ea9a5e2ff794, type: 3}
+      - {fileID: 21300000, guid: 0efab3091e4100bed9c9b8233b8a5d48, type: 3}
+      fps: 12
+      loop: 0
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    hit:
+      name: hit
+      frames:
+      - {fileID: 21300000, guid: aed664e43788efbe3a05cd837224bef0, type: 3}
+      - {fileID: 21300000, guid: d075fb27934fd1d61bee897bf187732e, type: 3}
+      - {fileID: 21300000, guid: b6c58ba6931d688eeb74b18926325b1c, type: 3}
+      - {fileID: 21300000, guid: b346649633f7797b88af1f5f769773d9, type: 3}
+      fps: 12
+      loop: 0
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    knockOut:
+      name: ko
+      frames:
+      - {fileID: 21300000, guid: df6d6372d53beae6eaf75280bdd35224, type: 3}
+      - {fileID: 21300000, guid: c5a8533dc3ffa18ce9737ebec1407408, type: 3}
+      - {fileID: 21300000, guid: 2291f5ffaeaf3a0e7ac7c223ad9f3fa8, type: 3}
+      - {fileID: 21300000, guid: fa7726d8348b9e27dbd377320ad2f563, type: 3}
+      fps: 8
+      loop: 0
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    tail:
+      name: 
+      frames: []
+      fps: 10
+      loop: 1
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    portrait: {fileID: 21300000, guid: 61e1ff5026dce1f8bac14138845ef6c7, type: 3}
+    hideoutPoses: []
+  - viewKey: crow_boss
+    battleScale: 1.2
+    tint: {r: 0.8, g: 0.8, b: 1, a: 1}
+    idle:
+      name: idle
+      frames:
+      - {fileID: 21300000, guid: 6740e8e33ba0196b9975ed22044353ed, type: 3}
+      - {fileID: 21300000, guid: 44636d09f727c2eacbe9a9e7b923a790, type: 3}
+      - {fileID: 21300000, guid: 6e14f3824117d45efb87c8f4f757ab79, type: 3}
+      - {fileID: 21300000, guid: f162855417a331bcca8e477e0786123a, type: 3}
+      fps: 6
+      loop: 1
+      pingPong: 0
+      attachPoints: []
+      breathe: 0.008
+      breathePeriod: 2.4
+    attack:
+      name: attack
+      frames:
+      - {fileID: 21300000, guid: 26029b9ba2c9d41a78b1f909448d70bf, type: 3}
+      - {fileID: 21300000, guid: 67d4dcb89ec3ca64892518e243a618be, type: 3}
+      - {fileID: 21300000, guid: fcc26ca0a021aad25b69d9908bd8da9e, type: 3}
+      - {fileID: 21300000, guid: 6146632d816017fadb30aba4f178fffc, type: 3}
+      fps: 12
+      loop: 0
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    heavyAttack:
+      name: attack
+      frames:
+      - {fileID: 21300000, guid: 26029b9ba2c9d41a78b1f909448d70bf, type: 3}
+      - {fileID: 21300000, guid: 67d4dcb89ec3ca64892518e243a618be, type: 3}
+      - {fileID: 21300000, guid: fcc26ca0a021aad25b69d9908bd8da9e, type: 3}
+      - {fileID: 21300000, guid: 6146632d816017fadb30aba4f178fffc, type: 3}
+      fps: 12
+      loop: 0
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    hit:
+      name: hit
+      frames:
+      - {fileID: 21300000, guid: 63802acc92822c334b4c40cb1a77075a, type: 3}
+      - {fileID: 21300000, guid: 1883f4971e4deeb5c8a9551c8b03eb7e, type: 3}
+      - {fileID: 21300000, guid: ef79537e52e115ac99a7bb7a665a691b, type: 3}
+      - {fileID: 21300000, guid: dce575af497d5b8b9af14a4ce8f2d10c, type: 3}
+      fps: 12
+      loop: 0
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    knockOut:
+      name: ko
+      frames:
+      - {fileID: 21300000, guid: 69b6034db3d000c569e403924ccc750a, type: 3}
+      - {fileID: 21300000, guid: 38f6c67f08dc95ba38662b00d3bbd9e1, type: 3}
+      - {fileID: 21300000, guid: a1fd91a8416394fe087d85c756fcfef8, type: 3}
+      - {fileID: 21300000, guid: d803a4bc666451d63987b47d8f11e262, type: 3}
+      fps: 8
+      loop: 0
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    tail:
+      name: 
+      frames: []
+      fps: 10
+      loop: 1
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    portrait: {fileID: 21300000, guid: 6740e8e33ba0196b9975ed22044353ed, type: 3}
+    hideoutPoses: []
+  - viewKey: bigrat
+    battleScale: 1.3
+    tint: {r: 1, g: 0.78, b: 0.72, a: 1}
+    idle:
+      name: idle
+      frames:
+      - {fileID: 21300000, guid: c99568140b6328fe696ef485d5e4ca7e, type: 3}
+      - {fileID: 21300000, guid: d81a59499123c5a6290120d49816958c, type: 3}
+      - {fileID: 21300000, guid: 6c829f1fa100eba7f9b0767235371342, type: 3}
+      - {fileID: 21300000, guid: b00d6bc175db2869ba362a987e236a62, type: 3}
+      fps: 6
+      loop: 1
+      pingPong: 0
+      attachPoints: []
+      breathe: 0.008
+      breathePeriod: 2.4
+    attack:
+      name: attack
+      frames:
+      - {fileID: 21300000, guid: 3f4d43a1452539d93ba00fcc3e9193dd, type: 3}
+      - {fileID: 21300000, guid: bfdd6116f7220166c9919fa212bea1f3, type: 3}
+      - {fileID: 21300000, guid: c301438ef94d0df0089170de264aca50, type: 3}
+      - {fileID: 21300000, guid: b11e15d4200bca4ce8e76b11e6749517, type: 3}
+      fps: 12
+      loop: 0
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    heavyAttack:
+      name: attack
+      frames:
+      - {fileID: 21300000, guid: 3f4d43a1452539d93ba00fcc3e9193dd, type: 3}
+      - {fileID: 21300000, guid: bfdd6116f7220166c9919fa212bea1f3, type: 3}
+      - {fileID: 21300000, guid: c301438ef94d0df0089170de264aca50, type: 3}
+      - {fileID: 21300000, guid: b11e15d4200bca4ce8e76b11e6749517, type: 3}
+      fps: 12
+      loop: 0
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    hit:
+      name: hit
+      frames:
+      - {fileID: 21300000, guid: 0272d59adebb0e6c89abb6903724257b, type: 3}
+      - {fileID: 21300000, guid: e971677fe45ea843db225606815b1054, type: 3}
+      - {fileID: 21300000, guid: 1c09c820b45af4165931678267ac7906, type: 3}
+      - {fileID: 21300000, guid: d345bf6045cc28a1aaa94f288f43eec5, type: 3}
+      fps: 12
+      loop: 0
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    knockOut:
+      name: ko
+      frames:
+      - {fileID: 21300000, guid: e7933fad99c810a5994cb4c52b15b4c7, type: 3}
+      - {fileID: 21300000, guid: c8fa03f37b983096283ea6b6c99ea8d4, type: 3}
+      - {fileID: 21300000, guid: e636c77f70207428eb79d0eba6f41d4a, type: 3}
+      - {fileID: 21300000, guid: d8f22a0b4a45f4a04b68928d4c82da6f, type: 3}
+      fps: 8
+      loop: 0
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    tail:
+      name: 
+      frames: []
+      fps: 10
+      loop: 1
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    portrait: {fileID: 21300000, guid: c99568140b6328fe696ef485d5e4ca7e, type: 3}
+    hideoutPoses: []
+  sprites:
+  - key: arena_alley
+    sprite: {fileID: 21300000, guid: 8395c6d93845b895cbc9815234920ae7, type: 3}
+  - key: arena_backyard
+    sprite: {fileID: 21300000, guid: 63a1af186c966d28c98fac3675f2f5c1, type: 3}
+  - key: arena_fishshop
+    sprite: {fileID: 21300000, guid: 04da52d4b756c8c7eaa70b84871c07da, type: 3}
+  - key: arena_park
+    sprite: {fileID: 21300000, guid: b363f5dc65537e2dea049491ef939123, type: 3}
+  - key: arena_rooftop
+    sprite: {fileID: 21300000, guid: 86f33c60367f56de1969a7eb9ae97554, type: 3}
+  - key: bg_hideout
+    sprite: {fileID: 21300000, guid: 411d07a56dbec68949e2ec2f2b4459b0, type: 3}
+  - key: bg_map
+    sprite: {fileID: 21300000, guid: 5acc1b7dedfbc782b8e854ba5cff45a0, type: 3}
+  - key: icon_energy
+    sprite: {fileID: 21300000, guid: ecec9d35429069e9baff2291dd18524b, type: 3}
+  - key: icon_food
+    sprite: {fileID: 21300000, guid: 9268719260576e706bf0539042c46819, type: 3}
+  - key: icon_junk
+    sprite: {fileID: 21300000, guid: 3f6b534063dbf4036bc46a19a45d2e23, type: 3}
+  - key: icon_map
+    sprite: {fileID: 21300000, guid: bcf79cb9987c226d786e64570e52a215, type: 3}
+  - key: icon_satiety
+    sprite: {fileID: 21300000, guid: 92f3dc1861eb3114daa13230cca36230, type: 3}
+  - key: icon_strength
+    sprite: {fileID: 21300000, guid: 6f97afbe19985c736bd0e2c2562acee1, type: 3}
+  - key: prop_upg_boxes
+    sprite: {fileID: 21300000, guid: 78d51e62bc1d37d3eae2a616c675eea1, type: 3}
+  - key: prop_upg_can
+    sprite: {fileID: 21300000, guid: 3dc3fc6384e41959a8d1eb5a6eb638dc, type: 3}
+  - key: prop_upg_dumpster
+    sprite: {fileID: 21300000, guid: 12ff5e28b32091d9f9a0a18c164901e1, type: 3}
+  - key: prop_upg_mouse
+    sprite: {fileID: 21300000, guid: 57c71a3b0e8bcf6e29a18aefa3a21846, type: 3}
+  - key: prop_upg_wheel
+    sprite: {fileID: 21300000, guid: b00bb7cdcd8234fdca1c5816c57e83c0, type: 3}

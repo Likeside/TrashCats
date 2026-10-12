@@ -5,7 +5,8 @@
 - Finds frames as connected blobs (ignores small specks), left to right.
 - Places every frame into equal cells around a shared anchor x; vertical offsets from the row's ground line are kept.
 
-Usage: Tools/sprite_process.py <sheet.png> <out_dir> [--frames N] [--rows R] [--cell-height H] [--anchor backfoot|center]
+Usage: Tools/sprite_process.py <sheet.png> <out_dir> [--frames N] [--rows R] [--cell-height H] [--anchor backfoot|center|base-br]
+       [--match-height H [--match-frame K]]
 
 Anchors: "base-br" puts the bottom-right extreme point (e.g. the cut base of a detached tail) at the sprite pivot.
 "backfoot" (default) keeps the planted back foot (leftmost foot touching the ground; characters face right) at the
@@ -138,6 +139,7 @@ def main():
     rows = int(sys.argv[sys.argv.index("--rows") + 1]) if "--rows" in sys.argv else 1
     anchor_mode = sys.argv[sys.argv.index("--anchor") + 1] if "--anchor" in sys.argv else "backfoot"
     match_height = int(sys.argv[sys.argv.index("--match-height") + 1]) if "--match-height" in sys.argv else None
+    match_frame = int(sys.argv[sys.argv.index("--match-frame") + 1]) if "--match-frame" in sys.argv else 0
     name = os.path.splitext(os.path.basename(src))[0]
     rgb = np.array(Image.open(src).convert("RGB"))
     color, alpha = key_green(rgb)
@@ -159,8 +161,8 @@ def main():
         crops.append((crop, ground[row] - ys.stop))      # lift keeps jumps in the air
 
     if match_height:
-        # uniform scale so the first frame's figure is match_height px tall (keeps clips of one character consistent)
-        factor = match_height / crops[0][0].shape[0]
+        # uniform scale so the reference frame's figure is match_height px tall (keeps clips of one character consistent)
+        factor = match_height / crops[match_frame][0].shape[0]
         scaled = []
         for crop, lift in crops:
             image = Image.fromarray(crop, "RGBA")

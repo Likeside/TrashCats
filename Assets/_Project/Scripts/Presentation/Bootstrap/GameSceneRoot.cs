@@ -99,8 +99,8 @@ namespace TrashCats.Presentation.Bootstrap
             _messages = new MessageQueue(overlayRoot, _overlays);
 
             // screens
-            _hideout = new HideoutScreen(_services, screens, overlayRoot, _overlays, _details, _upgrades, debugPanel, ShowResult);
-            _map = new MapScreen(session, screens, OpenPrep);
+            _hideout = new HideoutScreen(_services, screens, overlayRoot, _overlays, _details, _upgrades, debugPanel, ShowResult, factory);
+            _map = new MapScreen(session, screens, OpenPrep, factory.GetSprite("bg_map"));
             _prep = new BattlePrepScreen(session, screens, () => _router.Show(ScreenId.Map), _ => StartCombat(), _details.Open);
             _combat = new CombatScreen(session, screens, transform, factory, results);
             _combat.SetSpeed(_services.Settings.BattleSpeed);

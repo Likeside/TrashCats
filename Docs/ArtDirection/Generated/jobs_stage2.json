@@ -1,0 +1,162 @@
+[
+ {
+  "name": "shnyr_idle_attack",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw/guard_shnyr.png"
+  ],
+  "size": "1536x1024",
+  "prompt": "Game sprite sheet: 8 animation frames in a grid of 2 rows x 4 columns with generous empty space between frames so they never touch. Row 1 is one animation (4 frames, left to right), row 2 is another animation (4 frames, left to right). The SAME character as in the reference with the exact same proportions, colours and size in every frame, feet on the same baseline within a row, side view facing RIGHT, full body visible.\nRow 1 - IDLE: calm fighting stance exactly like the reference pose, nearly identical frames with only slight breathing; feet stay planted.\nRow 2 - ATTACK: a quick double swipe with both front paws (two fast scratches): 1) wind-up, 2) strike, 3) full extension with a small comic impact burst, 4) back to stance.\nComic book style exactly like the reference: bold black ink outlines, flat colors with simple shading and light hatching, exaggerated expressive faces.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no text, no frame numbers, no borders."
+ },
+ {
+  "name": "shnyr_heavy_hit",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw/guard_shnyr.png"
+  ],
+  "size": "1536x1024",
+  "prompt": "Game sprite sheet: 8 animation frames in a grid of 2 rows x 4 columns with generous empty space between frames so they never touch. Row 1 is one animation (4 frames, left to right), row 2 is another animation (4 frames, left to right). The SAME character as in the reference with the exact same proportions, colours and size in every frame, feet on the same baseline within a row, side view facing RIGHT, full body visible.\nRow 1 - HEAVY ATTACK: a sneaky lunging BITE with jaws wide open: 1) anticipation, 2) launch, 3) impact with a comic impact burst, 4) recover.\nRow 2 - HIT reaction: 1) stance, 2) head snapped back with a pained face, 3) staggering backwards, 4) back to stance.\nComic book style exactly like the reference: bold black ink outlines, flat colors with simple shading and light hatching, exaggerated expressive faces.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no text, no frame numbers, no borders."
+ },
+ {
+  "name": "shnyr_ko_win",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw/guard_shnyr.png"
+  ],
+  "size": "1536x1024",
+  "prompt": "Game sprite sheet: 8 animation frames in a grid of 2 rows x 4 columns with generous empty space between frames so they never touch. Row 1 is one animation (4 frames, left to right), row 2 is another animation (4 frames, left to right). The SAME character as in the reference with the exact same proportions, colours and size in every frame, feet on the same baseline within a row, side view facing RIGHT, full body visible.\nRow 1 - KNOCKED OUT: 1) dazed with swirly eyes, 2) wobbling, 3) falling backwards, 4) lying flat on the ground with stars over the head.\nRow 2 - VICTORY: 1) fists up, 2) jumping cheer, 3) flexing, 4) proud grin.\nComic book style exactly like the reference: bold black ink outlines, flat colors with simple shading and light hatching, exaggerated expressive faces.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no text, no frame numbers, no borders."
+ },
+ {
+  "name": "ponchik_idle_attack",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw/guard_ponchik.png"
+  ],
+  "size": "1536x1024",
+  "prompt": "Game sprite sheet: 8 animation frames in a grid of 2 rows x 4 columns with generous empty space between frames so they never touch. Row 1 is one animation (4 frames, left to right), row 2 is another animation (4 frames, left to right). The SAME character as in the reference with the exact same proportions, colours and size in every frame, feet on the same baseline within a row, side view facing RIGHT, full body visible.\nRow 1 - IDLE: calm fighting stance exactly like the reference pose, nearly identical frames with only slight breathing; feet stay planted.\nRow 2 - ATTACK: a slow heavy belly bump forward: 1) wind-up, 2) strike, 3) full extension with a small comic impact burst, 4) back to stance.\nComic book style exactly like the reference: bold black ink outlines, flat colors with simple shading and light hatching, exaggerated expressive faces.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no text, no frame numbers, no borders."
+ },
+ {
+  "name": "ponchik_heavy_hit",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw/guard_ponchik.png"
+  ],
+  "size": "1536x1024",
+  "prompt": "Game sprite sheet: 8 animation frames in a grid of 2 rows x 4 columns with generous empty space between frames so they never touch. Row 1 is one animation (4 frames, left to right), row 2 is another animation (4 frames, left to right). The SAME character as in the reference with the exact same proportions, colours and size in every frame, feet on the same baseline within a row, side view facing RIGHT, full body visible.\nRow 1 - HEAVY ATTACK: a full body SLAM: jumping and landing with the whole round body: 1) anticipation, 2) launch, 3) impact with a comic impact burst, 4) recover.\nRow 2 - HIT reaction: 1) stance, 2) head snapped back with a pained face, 3) staggering backwards, 4) back to stance.\nComic book style exactly like the reference: bold black ink outlines, flat colors with simple shading and light hatching, exaggerated expressive faces.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no text, no frame numbers, no borders."
+ },
+ {
+  "name": "ponchik_ko_win",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw/guard_ponchik.png"
+  ],
+  "size": "1536x1024",
+  "prompt": "Game sprite sheet: 8 animation frames in a grid of 2 rows x 4 columns with generous empty space between frames so they never touch. Row 1 is one animation (4 frames, left to right), row 2 is another animation (4 frames, left to right). The SAME character as in the reference with the exact same proportions, colours and size in every frame, feet on the same baseline within a row, side view facing RIGHT, full body visible.\nRow 1 - KNOCKED OUT: 1) dazed with swirly eyes, 2) wobbling, 3) falling backwards, 4) lying flat on the ground with stars over the head.\nRow 2 - VICTORY: 1) fists up, 2) jumping cheer, 3) flexing, 4) proud grin.\nComic book style exactly like the reference: bold black ink outlines, flat colors with simple shading and light hatching, exaggerated expressive faces.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no text, no frame numbers, no borders."
+ },
+ {
+  "name": "rat_idle_attack",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw/guard_rat.png"
+  ],
+  "size": "1536x1024",
+  "prompt": "Game sprite sheet: 8 animation frames in a grid of 2 rows x 4 columns with generous empty space between frames so they never touch. Row 1 is one animation (4 frames, left to right), row 2 is another animation (4 frames, left to right). The SAME character as in the reference with the exact same proportions, colours and size in every frame, feet on the same baseline within a row, side view facing RIGHT, full body visible.\nRow 1 - IDLE: calm fighting stance exactly like the reference pose, nearly identical frames with only slight breathing; feet stay planted.\nRow 2 - ATTACK: a quick claw scratch: 1) wind-up, 2) strike, 3) full extension with a small comic impact burst, 4) back to stance.\nComic book style exactly like the reference: bold black ink outlines, flat colors with simple shading and light hatching, exaggerated expressive faces.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no text, no frame numbers, no borders."
+ },
+ {
+  "name": "rat_hit_ko",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw/guard_rat.png"
+  ],
+  "size": "1536x1024",
+  "prompt": "Game sprite sheet: 8 animation frames in a grid of 2 rows x 4 columns with generous empty space between frames so they never touch. Row 1 is one animation (4 frames, left to right), row 2 is another animation (4 frames, left to right). The SAME character as in the reference with the exact same proportions, colours and size in every frame, feet on the same baseline within a row, side view facing RIGHT, full body visible.\nRow 1 - HIT reaction: 1) stance, 2) head snapped back with a pained face, 3) staggering backwards, 4) back to stance.\nRow 2 - KNOCKED OUT: 1) dazed with swirly eyes, 2) wobbling, 3) falling backwards, 4) lying flat on the ground with stars over the head.\nComic book style exactly like the reference: bold black ink outlines, flat colors with simple shading and light hatching, exaggerated expressive faces.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no text, no frame numbers, no borders."
+ },
+ {
+  "name": "gull_idle_attack",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw/guard_gull.png"
+  ],
+  "size": "1536x1024",
+  "prompt": "Game sprite sheet: 8 animation frames in a grid of 2 rows x 4 columns with generous empty space between frames so they never touch. Row 1 is one animation (4 frames, left to right), row 2 is another animation (4 frames, left to right). The SAME character as in the reference with the exact same proportions, colours and size in every frame, feet on the same baseline within a row, side view facing RIGHT, full body visible.\nRow 1 - IDLE: calm fighting stance exactly like the reference pose, nearly identical frames with only slight breathing; feet stay planted.\nRow 2 - ATTACK: two fast pecks with the beak: 1) wind-up, 2) strike, 3) full extension with a small comic impact burst, 4) back to stance.\nComic book style exactly like the reference: bold black ink outlines, flat colors with simple shading and light hatching, exaggerated expressive faces.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no text, no frame numbers, no borders."
+ },
+ {
+  "name": "gull_hit_ko",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw/guard_gull.png"
+  ],
+  "size": "1536x1024",
+  "prompt": "Game sprite sheet: 8 animation frames in a grid of 2 rows x 4 columns with generous empty space between frames so they never touch. Row 1 is one animation (4 frames, left to right), row 2 is another animation (4 frames, left to right). The SAME character as in the reference with the exact same proportions, colours and size in every frame, feet on the same baseline within a row, side view facing RIGHT, full body visible.\nRow 1 - HIT reaction: 1) stance, 2) head snapped back with a pained face, 3) staggering backwards, 4) back to stance.\nRow 2 - KNOCKED OUT: 1) dazed with swirly eyes, 2) wobbling, 3) falling backwards, 4) lying flat on the ground with stars over the head.\nComic book style exactly like the reference: bold black ink outlines, flat colors with simple shading and light hatching, exaggerated expressive faces.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no text, no frame numbers, no borders."
+ },
+ {
+  "name": "crow_idle_attack",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw/guard_crow.png"
+  ],
+  "size": "1536x1024",
+  "prompt": "Game sprite sheet: 8 animation frames in a grid of 2 rows x 4 columns with generous empty space between frames so they never touch. Row 1 is one animation (4 frames, left to right), row 2 is another animation (4 frames, left to right). The SAME character as in the reference with the exact same proportions, colours and size in every frame, feet on the same baseline within a row, side view facing RIGHT, full body visible.\nRow 1 - IDLE: calm fighting stance exactly like the reference pose, nearly identical frames with only slight breathing; feet stay planted.\nRow 2 - ATTACK: two fast pecks with the beak: 1) wind-up, 2) strike, 3) full extension with a small comic impact burst, 4) back to stance.\nComic book style exactly like the reference: bold black ink outlines, flat colors with simple shading and light hatching, exaggerated expressive faces.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no text, no frame numbers, no borders."
+ },
+ {
+  "name": "crow_hit_ko",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw/guard_crow.png"
+  ],
+  "size": "1536x1024",
+  "prompt": "Game sprite sheet: 8 animation frames in a grid of 2 rows x 4 columns with generous empty space between frames so they never touch. Row 1 is one animation (4 frames, left to right), row 2 is another animation (4 frames, left to right). The SAME character as in the reference with the exact same proportions, colours and size in every frame, feet on the same baseline within a row, side view facing RIGHT, full body visible.\nRow 1 - HIT reaction: 1) stance, 2) head snapped back with a pained face, 3) staggering backwards, 4) back to stance.\nRow 2 - KNOCKED OUT: 1) dazed with swirly eyes, 2) wobbling, 3) falling backwards, 4) lying flat on the ground with stars over the head.\nComic book style exactly like the reference: bold black ink outlines, flat colors with simple shading and light hatching, exaggerated expressive faces.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no text, no frame numbers, no borders."
+ },
+ {
+  "name": "raccoon_idle_attack",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw/guard_raccoon.png"
+  ],
+  "size": "1536x1024",
+  "prompt": "Game sprite sheet: 8 animation frames in a grid of 2 rows x 4 columns with generous empty space between frames so they never touch. Row 1 is one animation (4 frames, left to right), row 2 is another animation (4 frames, left to right). The SAME character as in the reference with the exact same proportions, colours and size in every frame, feet on the same baseline within a row, side view facing RIGHT, full body visible.\nRow 1 - IDLE: calm fighting stance exactly like the reference pose, nearly identical frames with only slight breathing; feet stay planted.\nRow 2 - ATTACK: a strong straight punch: 1) wind-up, 2) strike, 3) full extension with a small comic impact burst, 4) back to stance.\nComic book style exactly like the reference: bold black ink outlines, flat colors with simple shading and light hatching, exaggerated expressive faces.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no text, no frame numbers, no borders."
+ },
+ {
+  "name": "raccoon_hit_ko",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw/guard_raccoon.png"
+  ],
+  "size": "1536x1024",
+  "prompt": "Game sprite sheet: 8 animation frames in a grid of 2 rows x 4 columns with generous empty space between frames so they never touch. Row 1 is one animation (4 frames, left to right), row 2 is another animation (4 frames, left to right). The SAME character as in the reference with the exact same proportions, colours and size in every frame, feet on the same baseline within a row, side view facing RIGHT, full body visible.\nRow 1 - HIT reaction: 1) stance, 2) head snapped back with a pained face, 3) staggering backwards, 4) back to stance.\nRow 2 - KNOCKED OUT: 1) dazed with swirly eyes, 2) wobbling, 3) falling backwards, 4) lying flat on the ground with stars over the head.\nComic book style exactly like the reference: bold black ink outlines, flat colors with simple shading and light hatching, exaggerated expressive faces.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no text, no frame numbers, no borders."
+ },
+ {
+  "name": "pug_idle_attack",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw/guard_pug.png"
+  ],
+  "size": "1536x1024",
+  "prompt": "Game sprite sheet: 8 animation frames in a grid of 2 rows x 4 columns with generous empty space between frames so they never touch. Row 1 is one animation (4 frames, left to right), row 2 is another animation (4 frames, left to right). The SAME character as in the reference with the exact same proportions, colours and size in every frame, feet on the same baseline within a row, side view facing RIGHT, full body visible.\nRow 1 - IDLE: calm fighting stance exactly like the reference pose, nearly identical frames with only slight breathing; feet stay planted.\nRow 2 - ATTACK: a snapping bite: 1) wind-up, 2) strike, 3) full extension with a small comic impact burst, 4) back to stance.\nComic book style exactly like the reference: bold black ink outlines, flat colors with simple shading and light hatching, exaggerated expressive faces.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no text, no frame numbers, no borders."
+ },
+ {
+  "name": "pug_hit_ko",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw/guard_pug.png"
+  ],
+  "size": "1536x1024",
+  "prompt": "Game sprite sheet: 8 animation frames in a grid of 2 rows x 4 columns with generous empty space between frames so they never touch. Row 1 is one animation (4 frames, left to right), row 2 is another animation (4 frames, left to right). The SAME character as in the reference with the exact same proportions, colours and size in every frame, feet on the same baseline within a row, side view facing RIGHT, full body visible.\nRow 1 - HIT reaction: 1) stance, 2) head snapped back with a pained face, 3) staggering backwards, 4) back to stance.\nRow 2 - KNOCKED OUT: 1) dazed with swirly eyes, 2) wobbling, 3) falling backwards, 4) lying flat on the ground with stars over the head.\nComic book style exactly like the reference: bold black ink outlines, flat colors with simple shading and light hatching, exaggerated expressive faces.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no text, no frame numbers, no borders."
+ },
+ {
+  "name": "shopcat_idle_attack",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw/guard_shopcat.png"
+  ],
+  "size": "1536x1024",
+  "prompt": "Game sprite sheet: 8 animation frames in a grid of 2 rows x 4 columns with generous empty space between frames so they never touch. Row 1 is one animation (4 frames, left to right), row 2 is another animation (4 frames, left to right). The SAME character as in the reference with the exact same proportions, colours and size in every frame, feet on the same baseline within a row, side view facing RIGHT, full body visible.\nRow 1 - IDLE: calm fighting stance exactly like the reference pose, nearly identical frames with only slight breathing; feet stay planted.\nRow 2 - ATTACK: a paw swipe slap: 1) wind-up, 2) strike, 3) full extension with a small comic impact burst, 4) back to stance.\nComic book style exactly like the reference: bold black ink outlines, flat colors with simple shading and light hatching, exaggerated expressive faces.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no text, no frame numbers, no borders."
+ },
+ {
+  "name": "shopcat_hit_ko",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw/guard_shopcat.png"
+  ],
+  "size": "1536x1024",
+  "prompt": "Game sprite sheet: 8 animation frames in a grid of 2 rows x 4 columns with generous empty space between frames so they never touch. Row 1 is one animation (4 frames, left to right), row 2 is another animation (4 frames, left to right). The SAME character as in the reference with the exact same proportions, colours and size in every frame, feet on the same baseline within a row, side view facing RIGHT, full body visible.\nRow 1 - HIT reaction: 1) stance, 2) head snapped back with a pained face, 3) staggering backwards, 4) back to stance.\nRow 2 - KNOCKED OUT: 1) dazed with swirly eyes, 2) wobbling, 3) falling backwards, 4) lying flat on the ground with stars over the head.\nComic book style exactly like the reference: bold black ink outlines, flat colors with simple shading and light hatching, exaggerated expressive faces.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no text, no frame numbers, no borders."
+ },
+ {
+  "name": "admiral_idle_attack",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw/guard_admiral.png"
+  ],
+  "size": "1536x1024",
+  "prompt": "Game sprite sheet: 8 animation frames in a grid of 2 rows x 4 columns with generous empty space between frames so they never touch. Row 1 is one animation (4 frames, left to right), row 2 is another animation (4 frames, left to right). The SAME character as in the reference with the exact same proportions, colours and size in every frame, feet on the same baseline within a row, side view facing RIGHT, full body visible.\nRow 1 - IDLE: calm fighting stance exactly like the reference pose, nearly identical frames with only slight breathing; feet stay planted.\nRow 2 - ATTACK: a huge heavy haymaker punch: 1) wind-up, 2) strike, 3) full extension with a small comic impact burst, 4) back to stance.\nComic book style exactly like the reference: bold black ink outlines, flat colors with simple shading and light hatching, exaggerated expressive faces.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no text, no frame numbers, no borders."
+ },
+ {
+  "name": "admiral_hit_ko",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw/guard_admiral.png"
+  ],
+  "size": "1536x1024",
+  "prompt": "Game sprite sheet: 8 animation frames in a grid of 2 rows x 4 columns with generous empty space between frames so they never touch. Row 1 is one animation (4 frames, left to right), row 2 is another animation (4 frames, left to right). The SAME character as in the reference with the exact same proportions, colours and size in every frame, feet on the same baseline within a row, side view facing RIGHT, full body visible.\nRow 1 - HIT reaction: 1) stance, 2) head snapped back with a pained face, 3) staggering backwards, 4) back to stance.\nRow 2 - KNOCKED OUT: 1) dazed with swirly eyes, 2) wobbling, 3) falling backwards, 4) lying flat on the ground with stars over the head.\nComic book style exactly like the reference: bold black ink outlines, flat colors with simple shading and light hatching, exaggerated expressive faces.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no text, no frame numbers, no borders."
+ }
+]

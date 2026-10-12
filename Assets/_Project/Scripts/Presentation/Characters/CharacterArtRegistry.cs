@@ -11,6 +11,17 @@ namespace TrashCats.Presentation.Characters
     {
         public List<CharacterArt> characters = new List<CharacterArt>();
 
+        [Tooltip("Environment and UI pictures by key: bg_hideout, bg_map, arena_<territory view key>, prop_<upgrade id>, icon_<name>")]
+        public List<NamedSprite> sprites = new List<NamedSprite>();
+
+        public Sprite GetSprite(string key)
+        {
+            foreach (var entry in sprites)
+                if (entry != null && entry.key == key)
+                    return entry.sprite;
+            return null;
+        }
+
         public CharacterArt Find(string viewKey)
         {
             foreach (var art in characters)
@@ -21,10 +32,18 @@ namespace TrashCats.Presentation.Characters
     }
 
     [Serializable]
+    public sealed class NamedSprite
+    {
+        public string key;
+        public Sprite sprite;
+    }
+
+    [Serializable]
     public sealed class CharacterArt
     {
         public string viewKey;
         [Tooltip("World scale of the battle sprites")] public float battleScale = 1f;
+        [Tooltip("Colour multiplier (variants such as the crow boss reuse another character's frames)")] public Color tint = Color.white;
         public FlipbookClip idle = new FlipbookClip();
         public FlipbookClip attack = new FlipbookClip();
         public FlipbookClip heavyAttack = new FlipbookClip();
@@ -32,7 +51,9 @@ namespace TrashCats.Presentation.Characters
         public FlipbookClip knockOut = new FlipbookClip();
         [Tooltip("Optional separately animated tail; attach points come from the body clips")] public FlipbookClip tail = new FlipbookClip();
         [Tooltip("Static picture for UI (hideout tokens, cards)")] public Sprite portrait;
-        [Tooltip("Hideout (four-legged) picture")] public Sprite hideout;
+        [Tooltip("Hideout (four-legged) pictures: sitting, sleeping, eating, walking")] public Sprite[] hideoutPoses = Array.Empty<Sprite>();
+
+        public Sprite HideoutPose(int index) => hideoutPoses != null && index < hideoutPoses.Length ? hideoutPoses[index] : null;
 
         public bool HasBattleArt => idle != null && idle.frames != null && idle.frames.Length > 0;
     }
