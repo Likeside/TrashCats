@@ -8,7 +8,7 @@ namespace TrashCats.Tests
 {
     public sealed class ArchitectureTests
     {
-        private static readonly Assembly DomainAsm = typeof(DomainAssembly).Assembly;
+        private static readonly Assembly DomainAsm = typeof(GameWorld).Assembly;
         private static readonly Assembly AppAsm = typeof(AppAssembly).Assembly;
 
         [Test]
