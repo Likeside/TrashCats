@@ -123,7 +123,7 @@ namespace TrashCats.Presentation.Hideout
             _root = dim.gameObject;
 
             var panel = Ui.Panel(dim.transform, "Card", Palette.PanelDark, raycast: true);
-            panel.rectTransform.At(new Vector2(0.5f, 0.5f), new Vector2(900, 1100));
+            panel.rectTransform.At(new Vector2(0.5f, 0.5f), new Vector2(900, 1260));
             _scale = Ui.Label(panel.transform, "", 40, TextAnchor.UpperCenter, Palette.Paper);
             _scale.rectTransform.Fill(30);
 
@@ -140,8 +140,10 @@ namespace TrashCats.Presentation.Hideout
             Add(1, 1, "+10 мин", () => debug.SkipGameTime(10 * 60_000));
             Add(2, 0, "+100 еды", () => debug.AddResources(100, 0));
             Add(2, 1, "+100 хлама", () => debug.AddResources(0, 100));
-            Add(3, 0, "Сбросить прогресс", resetProgress);
-            Add(3, 1, "Закрыть", () => _overlays.Close(_root));
+            Add(3, 0, "Открыть территории", debug.UnlockAllTerritories);
+            Add(3, 1, "Все коты + отдых", debug.RecruitAllAndRest);
+            Add(4, 0, "Сбросить прогресс", resetProgress);
+            Add(4, 1, "Закрыть", () => _overlays.Close(_root));
 
             _root.SetActive(false);
         }

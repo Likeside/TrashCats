@@ -35,6 +35,20 @@ namespace TrashCats.App
             Publish(events);
         }
 
+        public void UnlockAllTerritories()
+        {
+            DebugCheats.UnlockAllTerritories(_session.MutableWorld);
+            Publish(new List<DomainEvent> { new ResourcesChanged(_session.World.Food, _session.World.Junk, 0, 0) });
+        }
+
+        public void RecruitAllAndRest()
+        {
+            var events = new List<DomainEvent>();
+            DebugCheats.RecruitAll(_session.MutableWorld, events);
+            DebugCheats.RestAll(_session.MutableWorld, events);
+            Publish(events);
+        }
+
         private void Publish(List<DomainEvent> events)
         {
             _bus.PublishAll(events);

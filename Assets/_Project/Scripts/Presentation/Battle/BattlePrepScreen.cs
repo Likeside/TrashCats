@@ -60,11 +60,12 @@ namespace TrashCats.Presentation.Battle
         {
             _territory = territory;
             _order.Clear();
-            // sensible default: the strongest available cat first
-            var best = _session.World.Cats
+            // sensible default: every rested cat, strongest first (the player can reorder with taps)
+            _order.AddRange(_session.World.Cats
                 .Where(c => c.Energy >= _session.Config.Needs.MinEnergyForBattle)
-                .OrderByDescending(c => AttributeTypes.All.Sum(c.GetLevel)).FirstOrDefault();
-            if (best != null) _order.Add(best.Id);
+                .OrderByDescending(c => AttributeTypes.All.Sum(c.GetLevel))
+                .Take(Battles.MaxTeamSize)
+                .Select(c => c.Id));
             Refresh();
         }
 
@@ -83,7 +84,7 @@ namespace TrashCats.Presentation.Battle
                 var e = enemies[i];
                 var hp = CombatFormulas.MaxHp(config.Combat, e.Toughness, e.HpMultiplierPermille);
                 var skills = e.Skills.Count == 0 ? "только Царапина" : string.Join(", ", e.Skills.Select(Texts.SkillName));
-                Row(_enemyList, i, enemies.Count, Palette.Hex("#5A3A3A"),
+                Row(_enemyList, "PrepEnemy" + i, i, enemies.Count, Palette.Hex("#5A3A3A"),
                     $"{i + 1}. {Texts.EnemyName(e.Id.Value)}   {Texts.Stats(e.Strength, e.Agility, e.Toughness)} · HP {hp}\n<size=26>{skills}</size>", null);
             }
 
@@ -99,7 +100,7 @@ namespace TrashCats.Presentation.Battle
                             + $"\n<size=26>{(skills.Count == 0 ? "только Царапина" : string.Join(", ", skills))}{(tired ? " · устал" : "")}{(cat.Activity.IsWorking ? " · занят" : "")}</size>";
                 var color = position >= 0 ? Palette.Primary : tired ? Palette.Disabled : CatColors.For(cat.Id);
                 var id = cat.Id;
-                var row = Row(_catList, i, Math.Max(3, cats.Count), color, label, () => Toggle(id));
+                var row = Row(_catList, "PrepCat_" + cat.Id, i, Math.Max(3, cats.Count), color, label, () => Toggle(id));
                 row.Interactable = !tired || position >= 0;
                 row.Text.color = position >= 0 ? Palette.Ink : CatColors.TextOn(color);
 
@@ -111,6 +112,7 @@ namespace TrashCats.Presentation.Battle
             _fight.Interactable = error == CommandError.None;
             var busy = _order.Where(id => _session.World.TryGetCat(id, out var c) && c.Activity.IsWorking).Select(Texts.CatName).ToList();
             _warning.text = error != CommandError.None ? Texts.Error(error)
+                : _order.Count > 1 ? $"Порядок: {string.Join(" → ", _order.Select(Texts.CatName))}. Победитель дуэли остаётся на ринге."
                 : busy.Count > 0 ? $"{string.Join(", ", busy)} бросит текущее занятие (прогресс цикла пропадёт)"
                 : "Победитель дуэли остаётся на ринге с текущим здоровьем.";
         }
@@ -139,12 +141,12 @@ namespace TrashCats.Presentation.Battle
             list = Ui.Rect(box, "List").Place(Vector2.zero, Vector2.one, Vector2.zero, new Vector2(0, -50));
         }
 
-        private static UiButton Row(RectTransform list, int index, int count, Color color, string text, Action onClick)
+        private static UiButton Row(RectTransform list, string name, int index, int count, Color color, string text, Action onClick)
         {
             var slots = Math.Max(count, 3);
             var y1 = 1f - (float)index / slots;
             var y0 = 1f - (index + 1f) / slots;
-            var row = Ui.Button(list, "Row" + index, text, color, onClick, 32);
+            var row = Ui.Button(list, name, text, color, onClick, 32);
             row.Rect.Place(new Vector2(0, y0), new Vector2(1, y1), new Vector2(0, 6), new Vector2(0, -6));
             row.Text.alignment = TextAnchor.MiddleLeft;
             row.Text.supportRichText = true;

@@ -63,6 +63,14 @@ namespace TrashCats.Presentation.Bootstrap
             else
             {
                 _router.Show(ScreenId.Hideout);
+                var world = _services.Session.World;
+                if (world.GameTimeMs == 0 && world.Territories.All.Values.All(t => t.Attempts == 0))
+                    _messages.Enqueue("Банда помойных котов",
+                        "Ты — Рыжий, кот с мусорки за рестораном.\n\n"
+                        + "1. Нажми на кота и выбери занятие: еда, хлам, тренировка, сон.\n"
+                        + "2. Корми котов — голодные работают вдвое медленнее.\n"
+                        + "3. Тренируй Силу до 4 — откроется Укус.\n"
+                        + "4. На Карте нападай на соседей и собирай банду.");
             }
 
             bootstrap.StartTicking();

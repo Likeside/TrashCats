@@ -14,17 +14,61 @@ namespace TrashCats.Presentation.Dev
     public sealed class AutoplayCapture : MonoBehaviour
     {
         private string _dir;
+        private bool _battles;
 
         public static void AttachIfRequested(GameObject host)
         {
             var args = Environment.GetCommandLineArgs();
-            var index = Array.IndexOf(args, "-autoplayCapture");
-            if (index < 0 || index + 1 >= args.Length)
+            foreach (var (flag, battles) in new[] { ("-autoplayCapture", false), ("-autoplayBattles", true) })
+            {
+                var index = Array.IndexOf(args, flag);
+                if (index < 0 || index + 1 >= args.Length) continue;
+                var capture = host.AddComponent<AutoplayCapture>();
+                capture._dir = args[index + 1];
+                capture._battles = battles;
                 return;
-            host.AddComponent<AutoplayCapture>()._dir = args[index + 1];
+            }
         }
 
-        private IEnumerator Start()
+        private IEnumerator Start() => _battles ? Battles() : Tour();
+
+        /// <summary>Unlocks everything and fights at every territory with the whole gang, capturing each battle.</summary>
+        private IEnumerator Battles()
+        {
+            Directory.CreateDirectory(_dir);
+            yield return new WaitForSeconds(1f);
+            Dismiss();
+            var debug = GameBootstrap.Instance.Services.Debug;
+            debug.RecruitAllAndRest();
+            debug.UnlockAllTerritories();
+            yield return new WaitForSeconds(0.5f);
+            for (var i = 0; i < 3; i++) Dismiss();
+            yield return Shot("b00_hideout_gang");
+            foreach (var territory in new[] { "ter_backyard", "ter_fishshop", "ter_alley", "ter_park", "ter_rooftop" })
+            {
+                debug.RecruitAllAndRest();
+                Click("Tab_Map");
+                yield return null;
+                Click("Node_" + territory);
+                yield return null;
+                yield return Shot($"b_{territory}_prep");
+                Click("Prep_Fight");
+                yield return new WaitForSeconds(1.2f);
+                yield return Shot($"b_{territory}_1");
+                yield return new WaitForSeconds(2.5f);
+                yield return Shot($"b_{territory}_2");
+                Click("Combat_Skip");
+                yield return new WaitForSeconds(0.4f);
+                yield return Shot($"b_{territory}_result");
+                Click("Results_Continue");
+                yield return new WaitForSeconds(0.4f);
+                for (var i = 0; i < 4; i++) Dismiss();
+            }
+
+            Application.Quit();
+        }
+
+        private IEnumerator Tour()
         {
             Directory.CreateDirectory(_dir);
             yield return new WaitForSeconds(1f);
