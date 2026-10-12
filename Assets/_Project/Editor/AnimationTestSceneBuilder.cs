@@ -68,7 +68,7 @@ namespace TrashCats.Editor
             SetAttachPoints(clips.GetArrayElementAtIndex(0), attach.idle);
             SetAttachPoints(clips.GetArrayElementAtIndex(1), attach.punch);
             so.FindProperty("tail").objectReferenceValue = tailFlipbook;
-            FillClip(so.FindProperty("tailClip"), "tail", "Tail", 9f, true); // full swish cycle, loops on its own
+            FillClip(so.FindProperty("tailClip"), "tail", "Tail", 5f, true); // full swish cycle, loops on its own (slow, per user)
             var labels = so.FindProperty("buttonLabels");
             labels.arraySize = 2;
             labels.GetArrayElementAtIndex(0).stringValue = "Стойка";
