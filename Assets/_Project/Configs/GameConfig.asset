@@ -1,0 +1,187 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35fedba609295a415b87abf055af0629, type: 3}
+  m_Name: GameConfig
+  m_EditorClassIdentifier: 
+  needsMax: 100
+  tiredThreshold: 20
+  hungryThreshold: 20
+  hungryDurationMultiplier: 2
+  satietyPerFood: 10
+  minEnergyForBattle: 20
+  offlineCapMs: 3600000
+  offlineSummaryMinMs: 60000
+  maxLevel: 10
+  xpBase: 10
+  xpPerLevel: 7
+  aptitudeBonusPct: 50
+  battleXpWin: 8
+  battleXpLoss: 3
+  startFood: 10
+  startJunk: 0
+  startCats:
+  - cat_ryzhy
+  cats:
+  - id: cat_ryzhy
+    nameKey: cat.ryzhy
+    aptitude: 0
+    startStrength: 3
+    startAgility: 2
+    startToughness: 2
+    startEnergy: 100
+    startSatiety: 60
+    viewKey: ryzhy
+  - id: cat_shnyr
+    nameKey: cat.shnyr
+    aptitude: 1
+    startStrength: 3
+    startAgility: 5
+    startToughness: 3
+    startEnergy: 100
+    startSatiety: 50
+    viewKey: shnyr
+  - id: cat_ponchik
+    nameKey: cat.ponchik
+    aptitude: 2
+    startStrength: 5
+    startAgility: 4
+    startToughness: 7
+    startEnergy: 100
+    startSatiety: 50
+    viewKey: ponchik
+  activities:
+  - id: act_scavenge
+    nameKey: act.scavenge
+    kind: 0
+    durationMs: 20000
+    energyCost: 10
+    satietyCost: 4
+    baseOutput: 3
+    trainedAttribute: 0
+    capacity: 0
+  - id: act_rummage
+    nameKey: act.rummage
+    kind: 1
+    durationMs: 25000
+    energyCost: 10
+    satietyCost: 4
+    baseOutput: 3
+    trainedAttribute: 0
+    capacity: 0
+  - id: act_train_str
+    nameKey: act.train_str
+    kind: 2
+    durationMs: 30000
+    energyCost: 15
+    satietyCost: 10
+    baseOutput: 10
+    trainedAttribute: 0
+    capacity: 1
+  - id: act_train_agi
+    nameKey: act.train_agi
+    kind: 2
+    durationMs: 30000
+    energyCost: 15
+    satietyCost: 10
+    baseOutput: 10
+    trainedAttribute: 1
+    capacity: 1
+  - id: act_train_tou
+    nameKey: act.train_tou
+    kind: 2
+    durationMs: 30000
+    energyCost: 15
+    satietyCost: 10
+    baseOutput: 10
+    trainedAttribute: 2
+    capacity: 1
+  - id: act_sleep
+    nameKey: act.sleep
+    kind: 3
+    durationMs: 15000
+    energyCost: 0
+    satietyCost: 0
+    baseOutput: 25
+    trainedAttribute: 0
+    capacity: 0
+  upgrades:
+  - id: upg_boxes
+    nameKey: upg.boxes
+    costs: 0f00000028000000
+    effect: 0
+    valuesPerLevel: 000000000a00000014000000
+    foodPerLevel: 
+    junkPerLevel: 
+    attribute: 0
+  - id: upg_dumpster
+    nameKey: upg.dumpster
+    costs: 0f00000028000000
+    effect: 1
+    valuesPerLevel: 
+    foodPerLevel: 000000000100000002000000
+    junkPerLevel: 000000000100000002000000
+    attribute: 0
+  - id: upg_can
+    nameKey: upg.can
+    costs: 0f00000028000000
+    effect: 2
+    valuesPerLevel: 000000001900000032000000
+    foodPerLevel: 
+    junkPerLevel: 
+    attribute: 0
+  - id: upg_mouse
+    nameKey: upg.mouse
+    costs: 0f00000028000000
+    effect: 2
+    valuesPerLevel: 000000001900000032000000
+    foodPerLevel: 
+    junkPerLevel: 
+    attribute: 1
+  - id: upg_wheel
+    nameKey: upg.wheel
+    costs: 0f00000028000000
+    effect: 2
+    valuesPerLevel: 000000001900000032000000
+    foodPerLevel: 
+    junkPerLevel: 
+    attribute: 2
+  skills:
+  - id: skill_scratch
+    nameKey: skill.scratch
+    isInnate: 1
+    unlockAttribute: 0
+    unlockLevel: 0
+  - id: skill_bite
+    nameKey: skill.bite
+    isInnate: 0
+    unlockAttribute: 0
+    unlockLevel: 4
+  - id: skill_double_paw
+    nameKey: skill.double_paw
+    isInnate: 0
+    unlockAttribute: 1
+    unlockLevel: 4
+  - id: skill_thick_fur
+    nameKey: skill.thick_fur
+    isInnate: 0
+    unlockAttribute: 2
+    unlockLevel: 4
+  - id: skill_dodge
+    nameKey: skill.dodge
+    isInnate: 0
+    unlockAttribute: 1
+    unlockLevel: 7
+  - id: skill_dirty_trick
+    nameKey: skill.dirty_trick
+    isInnate: 0
+    unlockAttribute: 0
+    unlockLevel: 7
