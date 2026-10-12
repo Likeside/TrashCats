@@ -31,6 +31,12 @@ LAYOUT = (
 )
 
 SHEETS = {
+    "idle8calm": (8, "Keep the exact pose, proportions and size of the reference in EVERY frame: the same boxer guard "
+                     "standing on hind legs, the same position. Animation: calm 8-frame breathing loop. "
+                     "The feet, legs, head and fists stay in exactly the same place in all frames - do not crouch, do not "
+                     "lean, do not move the head. Only small changes: the chest and shoulders rise slightly (frames 1-4) "
+                     "and lower back (frames 5-8); the tail sways gently and smoothly in small steps from one side to the "
+                     "other and back; the cat blinks only in frame 6. Consecutive frames must look almost identical."),
     "idle8": (8, "Keep the exact stance, proportions and size of the reference: standing on hind legs like a boxer. "
                  "Animation: 8-frame idle fighting stance loop with clearly visible motion: the body bobs down and up "
                  "(frames 1-4 lowering, 5-8 rising), fists bounce, the tail swings from left to right and back, "

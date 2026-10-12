@@ -45,7 +45,9 @@ namespace TrashCats.Editor
             so.FindProperty("character").objectReferenceValue = flipbook;
             var clips = so.FindProperty("clips");
             clips.arraySize = 2;
-            FillClip(clips.GetArrayElementAtIndex(0), "idle", "Idle", 10f, true);
+            FillClip(clips.GetArrayElementAtIndex(0), "idle", "Idle", 8f, true);
+            clips.GetArrayElementAtIndex(0).FindPropertyRelative("breathe").floatValue = 0.012f;
+            clips.GetArrayElementAtIndex(0).FindPropertyRelative("breathePeriod").floatValue = 2.4f;
             FillClip(clips.GetArrayElementAtIndex(1), "punch", "Punch", 12f, true);
             var labels = so.FindProperty("buttonLabels");
             labels.arraySize = 2;

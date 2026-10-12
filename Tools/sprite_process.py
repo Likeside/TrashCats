@@ -129,6 +129,7 @@ def main():
     cell_h = int(sys.argv[sys.argv.index("--cell-height") + 1]) if "--cell-height" in sys.argv else None
     rows = int(sys.argv[sys.argv.index("--rows") + 1]) if "--rows" in sys.argv else 1
     anchor_mode = sys.argv[sys.argv.index("--anchor") + 1] if "--anchor" in sys.argv else "backfoot"
+    match_height = int(sys.argv[sys.argv.index("--match-height") + 1]) if "--match-height" in sys.argv else None
     name = os.path.splitext(os.path.basename(src))[0]
     rgb = np.array(Image.open(src).convert("RGB"))
     color, alpha = key_green(rgb)
@@ -148,6 +149,19 @@ def main():
         pixels[..., 3] = np.where(own, pixels[..., 3], 0)
         crop = pixels[ys, xs]
         crops.append((crop, ground[row] - ys.stop))      # lift keeps jumps in the air
+
+    if match_height:
+        # uniform scale so the first frame's figure is match_height px tall (keeps clips of one character consistent)
+        factor = match_height / crops[0][0].shape[0]
+        scaled = []
+        for crop, lift in crops:
+            image = Image.fromarray(crop, "RGBA")
+            size = (max(1, round(image.width * factor)), max(1, round(image.height * factor)))
+            scaled.append((np.array(image.resize(size, Image.LANCZOS)), round(lift * factor)))
+        crops = scaled
+        print(f"{name}: scaled by {factor:.3f}")
+
+    for crop, _ in crops:
         anchors.append(back_foot_x(crop[..., 3]) if anchor_mode == "backfoot" else crop.shape[1] / 2)
 
     # symmetric cell around the anchor so the sprite pivot (bottom centre) is the anchor

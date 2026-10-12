@@ -11,6 +11,10 @@ namespace TrashCats.Presentation.Animation
         [Min(1)] public float fps = 10f;
         public bool loop = true;
 
+        [Tooltip("Procedural breathing: relative vertical stretch (0 = off). Scales around the sprite pivot (the planted foot).")]
+        [Range(0f, 0.05f)] public float breathe;
+        [Min(0.1f)] public float breathePeriod = 2.4f;
+
         public float Duration => frames.Length / fps;
     }
 
@@ -25,7 +29,9 @@ namespace TrashCats.Presentation.Animation
 
         private FlipbookClip _clip;
         private float _time;
+        private float _breathTime;
         private bool _finished;
+        private Vector3 _baseScale;
 
         public event Action<FlipbookClip> Finished;
 
@@ -36,6 +42,7 @@ namespace TrashCats.Presentation.Animation
         {
             if (target == null)
                 target = GetComponent<SpriteRenderer>();
+            _baseScale = transform.localScale;
         }
 
         public void Play(FlipbookClip clip, bool restart = true)
@@ -48,12 +55,17 @@ namespace TrashCats.Presentation.Animation
             _clip = clip;
             _time = 0f;
             _finished = false;
+            transform.localScale = _baseScale;
             SetFrame(0);
         }
 
         private void Update()
         {
-            if (_clip == null || _finished)
+            if (_clip == null)
+                return;
+
+            Breathe(Time.deltaTime);
+            if (_finished)
                 return;
 
             _time += Time.deltaTime;
@@ -76,6 +88,17 @@ namespace TrashCats.Presentation.Animation
                 SetFrame(index);
             if (_finished)
                 Finished?.Invoke(_clip);
+        }
+
+        private void Breathe(float deltaTime)
+        {
+            if (_clip.breathe <= 0f)
+                return;
+
+            _breathTime += deltaTime;
+            var wave = Mathf.Sin(_breathTime * 2f * Mathf.PI / _clip.breathePeriod) * _clip.breathe;
+            // stretch up while slightly narrowing keeps the volume; the pivot (planted foot) stays in place
+            transform.localScale = new Vector3(_baseScale.x * (1f - wave * 0.5f), _baseScale.y * (1f + wave), _baseScale.z);
         }
 
         private void SetFrame(int index)

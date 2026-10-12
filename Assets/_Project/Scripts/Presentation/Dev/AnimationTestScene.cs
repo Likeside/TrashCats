@@ -77,6 +77,15 @@ namespace TrashCats.Presentation.Dev
                 enabled = true;
             }
 
+            // live recording of the first clip (with procedural effects) for smoothness review
+            Play(clips[0]);
+            for (var t = 0; t < 24; t++)
+            {
+                yield return new WaitForEndOfFrame();
+                ScreenCapture.CaptureScreenshot(Path.Combine(dir, $"{clips[0].name}_live_{t:00}.png"));
+                yield return new WaitForSeconds(0.1f);
+            }
+
             yield return new WaitForSeconds(0.5f);
             Application.Quit();
         }

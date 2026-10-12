@@ -58,3 +58,13 @@ Keep the exact stance, proportions and size of the reference: standing on hind l
 Comic book style matching the reference exactly: bold black ink outlines, flat orange fur with darker stripes, cream chest and muzzle, torn left ear, scar across the nose, yellow eyes. Same character, same proportions, same colors and line weight in every frame. No clothes.
 ```
 
+## ryzhy_idle8calm (edit of ref_ryzhy_guard.png, background=opaque)
+
+```
+Game sprite sheet: exactly 8 animation frames arranged in a grid of 2 rows x 4 columns, reading order left to right, then the second row left to right. Equal cells with generous empty space between frames so they never touch, the character centered in each cell at the same scale, feet on the same baseline within a row, full body visible, side view facing right. Solid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no text, no frame numbers, no borders between cells.
+
+Keep the exact pose, proportions and size of the reference in EVERY frame: the same boxer guard standing on hind legs, the same position. Animation: calm 8-frame breathing loop. The feet, legs, head and fists stay in exactly the same place in all frames - do not crouch, do not lean, do not move the head. Only small changes: the chest and shoulders rise slightly (frames 1-4) and lower back (frames 5-8); the tail sways gently and smoothly in small steps from one side to the other and back; the cat blinks only in frame 6. Consecutive frames must look almost identical.
+
+Comic book style matching the reference exactly: bold black ink outlines, flat orange fur with darker stripes, cream chest and muzzle, torn left ear, scar across the nose, yellow eyes. Same character, same proportions, same colors and line weight in every frame. No clothes.
+```
+
