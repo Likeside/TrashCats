@@ -39,6 +39,10 @@ namespace TrashCats.Presentation.Bootstrap
 
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            var args = System.Environment.GetCommandLineArgs();
+            var saveDirArg = System.Array.IndexOf(args, "-saveDir");
+            if (saveDirArg >= 0 && saveDirArg + 1 < args.Length)
+                SaveDirectoryOverride = args[saveDirArg + 1]; // isolated saves for automated runs
             Application.targetFrameRate = 60;
             Services = Compose();
         }

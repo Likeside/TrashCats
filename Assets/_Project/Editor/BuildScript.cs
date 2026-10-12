@@ -28,6 +28,12 @@ namespace TrashCats.Editor
             Build(BuildTarget.Android, Path.Combine("Builds", "Android", "TrashCats-dev.apk"), BuildOptions.Development);
         }
 
+        [MenuItem("TrashCats/Build/Linux Game")]
+        public static void BuildLinuxGame()
+        {
+            Build(BuildTarget.StandaloneLinux64, Path.Combine("Builds", "Linux", "TrashCats.x86_64"), BuildOptions.Development);
+        }
+
         [MenuItem("TrashCats/Build/Linux Animation Test")]
         public static void BuildLinuxAnimationTest()
         {

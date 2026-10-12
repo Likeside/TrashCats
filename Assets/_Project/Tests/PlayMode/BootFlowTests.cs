@@ -70,6 +70,29 @@ namespace TrashCats.Tests
             Assert.That(ryzhy.Activity.ActivityId, Is.EqualTo(new ActivityId("act_scavenge")));
         }
 
+        [UnityTest]
+        public IEnumerator BattleLoop_MapPrepFightSkipResults_AppliesBattle()
+        {
+            yield return BootGame();
+            var session = GameBootstrap.Instance.Services.Session;
+
+            Click("Tab_Map");
+            yield return null;
+            Click("Node_ter_backyard");
+            yield return null;
+            Click("Prep_Fight");
+            yield return null;
+            Assert.That(session.World.PendingBattle, Is.Not.Null);
+            Click("Combat_Skip");
+            for (var i = 0; i < 5; i++) yield return null;
+            Click("Results_Continue");
+            yield return null;
+
+            Assert.That(session.World.PendingBattle, Is.Null);
+            Assert.That(session.World.Territories.Get(new TerritoryId("ter_backyard")).Attempts, Is.EqualTo(1));
+            Assert.That(session.World.Cats[0].Activity.Status, Is.EqualTo(ActivityStatus.Idle));
+        }
+
         private static IEnumerator BootGame()
         {
             SceneManager.LoadScene(GameBootstrap.BootSceneName, LoadSceneMode.Single);

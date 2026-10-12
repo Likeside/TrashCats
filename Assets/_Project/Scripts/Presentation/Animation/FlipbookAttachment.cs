@@ -10,8 +10,11 @@ namespace TrashCats.Presentation.Animation
     {
         [SerializeField] private SpriteFlipbook body;
 
+        public void Bind(SpriteFlipbook bodyFlipbook) => body = bodyFlipbook;
+
         private void LateUpdate()
         {
+            if (body == null) return;
             var clip = body.Current;
             if (clip != null && clip.TryGetAttachPoint(body.FrameIndex, out var point))
                 transform.localPosition = new Vector3(point.x, point.y, transform.localPosition.z);

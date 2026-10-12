@@ -103,8 +103,69 @@ namespace TrashCats.Presentation.UI
             CommandError.NotEnoughJunk => "Не хватает хлама",
             CommandError.MaxLevel => "Максимум",
             CommandError.NotWorking => "Ничем не занят",
+            CommandError.TerritoryLocked => "Территория закрыта",
+            CommandError.InvalidSlot => "Все слоты заняты — сначала сними умение",
+            CommandError.SkillLocked => "Умение ещё не открыто",
+            CommandError.InvalidTeam => "Выбери от 1 до 3 котов",
+            CommandError.CatTooTired => "Кот слишком устал (нужно 20 энергии)",
+            CommandError.BattlePending => "Бой уже идёт",
             _ => error.ToString(),
         };
+
+        public static string TerritoryName(TerritoryId id) => id.Value switch
+        {
+            "ter_backyard" => "Задний двор",
+            "ter_fishshop" => "Рыбная лавка",
+            "ter_alley" => "Тёмный переулок",
+            "ter_park" => "Городской парк",
+            "ter_rooftop" => "Крыша ресторана",
+            _ => id.Value,
+        };
+
+        public static string EnemyName(string id) => id switch
+        {
+            "enemy_rat" => "Крыса Хвост",
+            "enemy_gull" => "Чайка",
+            "enemy_shopcat" => "Кот Сёмга",
+            "enemy_crow" => "Ворона",
+            "enemy_bigrat" => "Крыса-громила",
+            "enemy_crow_boss" => "Ворона-атаман",
+            "enemy_raccoon" => "Енот",
+            "enemy_pug" => "Мопс",
+            "enemy_admiral" => "Адмирал",
+            _ => CatName(new CatId(id)),
+        };
+
+        public static string SkillName(SkillId id) => id.Value switch
+        {
+            "skill_scratch" => "Царапина",
+            "skill_bite" => "Укус",
+            "skill_double_paw" => "Двойная лапа",
+            "skill_thick_fur" => "Густая шерсть",
+            "skill_dodge" => "Уворот",
+            "skill_dirty_trick" => "Грязный трюк",
+            _ => id.Value,
+        };
+
+        public static string SkillDescription(SkillDefinition s) => s.Effect switch
+        {
+            SkillEffectKind.Damage when s.Hits > 1 => $"{s.Hits} удара по {s.DamagePermille / 10}% урона",
+            SkillEffectKind.Damage => s.DamagePermille > 1000 ? $"Урон ×{s.DamagePermille / 1000f:0.#}, точность {s.HitModifierPermille / 10}%" : "Обычная атака",
+            SkillEffectKind.DamageReduction => $"{s.EffectCount} удара по вам: урон −{100 - s.EffectPermille / 10}%",
+            SkillEffectKind.GuaranteedEvade => "Следующая атака врага промахнётся",
+            _ => $"Враг теряет {s.EffectPermille / 10}% точности на {s.EffectCount} действия",
+        };
+
+        public static string Bonus(TerritoryDefinition t) => t.Bonus switch
+        {
+            TerritoryBonusKind.SleepEnergyFlat => $"Сон +{t.BonusValue} энергии",
+            TerritoryBonusKind.FoodOutputPct => $"Добыча еды +{t.BonusValue}%",
+            TerritoryBonusKind.JunkOutputPct => $"Поиск хлама +{t.BonusValue}%",
+            TerritoryBonusKind.TrainingXpPct => $"Тренировки +{t.BonusValue}% опыта",
+            _ => t.IsFinal ? "Главная банда района" : "",
+        };
+
+        public static string Stats(int s, int a, int t) => $"С{s} Л{a} К{t}";
 
         public static string Seconds(long ms) => $"{ms / 1000} с";
 

@@ -56,8 +56,14 @@ namespace TrashCats.Presentation.Animation
         public FlipbookClip Current => _clip;
         public int FrameIndex { get; private set; }
 
-        private void Awake()
+        private bool _initialized;
+
+        private void Awake() => Init();
+
+        private void Init()
         {
+            if (_initialized) return;
+            _initialized = true;
             if (target == null)
                 target = GetComponent<SpriteRenderer>();
             _baseScale = transform.localScale;
@@ -65,11 +71,12 @@ namespace TrashCats.Presentation.Animation
 
         public void Play(FlipbookClip clip, bool restart = true)
         {
-            if (clip == null || clip.frames.Length == 0)
+            if (clip == null || clip.frames == null || clip.frames.Length == 0)
                 return;
             if (!restart && clip == _clip)
                 return;
 
+            Init();
             _clip = clip;
             _time = 0f;
             _finished = false;
@@ -112,6 +119,7 @@ namespace TrashCats.Presentation.Animation
         /// <summary>Shows one frame of a clip and stops advancing (inspection, screenshots).</summary>
         public void ShowFrame(FlipbookClip clip, int index)
         {
+            Init();
             _clip = clip;
             _finished = true;
             SetFrame(Mathf.Clamp(index, 0, clip.frames.Length - 1));

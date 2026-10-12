@@ -1,0 +1,127 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using TrashCats.App;
+using TrashCats.Domain;
+using TrashCats.Presentation.UI;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace TrashCats.Presentation.Hideout
+{
+    /// <summary>Cat details (Docs/GDD/UI_UX.md §5): attributes with XP, combat stats, skill slots.</summary>
+    public sealed class CatDetailsSheet
+    {
+        private readonly GameSession _session;
+        private readonly OverlayStack _overlays;
+        private readonly Action<CommandResult> _onResult;
+        private readonly GameObject _root;
+        private readonly Text _header;
+        private readonly Text _attributes;
+        private readonly Text _slots;
+        private readonly RectTransform _skills;
+        private CatId? _catId;
+
+        public bool IsOpen => _catId != null;
+
+        public CatDetailsSheet(GameSession session, RectTransform parent, OverlayStack overlays, Action<CommandResult> onResult)
+        {
+            _session = session;
+            _overlays = overlays;
+            _onResult = onResult;
+
+            var dim = Ui.Panel(parent, "CatDetails", Palette.Dim, raycast: true);
+            dim.rectTransform.Fill();
+            dim.gameObject.AddComponent<Button>().onClick.AddListener(Close);
+            _root = dim.gameObject;
+            var panel = Ui.Panel(dim.transform, "Sheet", Palette.Panel, raycast: true);
+            panel.rectTransform.Place(Vector2.zero, new Vector2(1, 0.88f));
+
+            _header = Ui.Label(panel.transform, "", 48, TextAnchor.UpperLeft, Palette.Ink);
+            _header.rectTransform.Place(new Vector2(0, 1), Vector2.one, new Vector2(40, -90), new Vector2(-40, -24));
+            _attributes = Ui.Label(panel.transform, "", 32, TextAnchor.UpperLeft, Palette.Ink);
+            _attributes.rectTransform.Place(new Vector2(0, 1), Vector2.one, new Vector2(40, -330), new Vector2(-40, -100));
+            _attributes.supportRichText = true;
+            _slots = Ui.Label(panel.transform, "", 32, TextAnchor.UpperLeft, Palette.Ink);
+            _slots.rectTransform.Place(new Vector2(0, 1), Vector2.one, new Vector2(40, -420), new Vector2(-40, -340));
+            _skills = Ui.Rect(panel.transform, "Skills").Place(Vector2.zero, Vector2.one, new Vector2(30, 150), new Vector2(-30, -430));
+
+            var close = Ui.Button(panel.transform, "Details_Close", "Закрыть", Palette.Disabled, Close, 36);
+            close.Rect.Place(new Vector2(0.3f, 0), new Vector2(0.7f, 0), new Vector2(0, 30), new Vector2(0, 130));
+            _root.SetActive(false);
+        }
+
+        public void Open(CatId catId)
+        {
+            _catId = catId;
+            Refresh();
+            _overlays.Push(_root, () => _catId = null);
+        }
+
+        public void Close() => _overlays.Close(_root);
+
+        public void Refresh()
+        {
+            if (_catId == null || !_session.World.TryGetCat(_catId.Value, out var cat))
+                return;
+
+            var config = _session.Config;
+            var id = _catId.Value;
+            _header.text = $"{Texts.CatName(id)} · склонность: {Texts.Attribute(cat.Aptitude)}";
+            var lines = AttributeTypes.All.Select(a =>
+            {
+                var level = cat.GetLevel(a);
+                var xp = level >= config.Progression.MaxLevel ? "MAX" : $"{cat.GetXp(a)}/{config.Progression.XpToNext(level)}";
+                return $"{Texts.Attribute(a)} {level}  <size=26>({xp})</size>{(a == cat.Aptitude ? " ★" : "")}";
+            });
+            var c = config.Combat;
+            _attributes.text = string.Join("\n", lines)
+                               + $"\n<size=28>HP {CombatFormulas.MaxHp(c, cat.GetLevel(AttributeType.Toughness))} · Задор {CombatFormulas.MaxGrit(c, cat.GetLevel(AttributeType.Toughness))} · урон {CombatFormulas.BaseDamage(c, cat.GetLevel(AttributeType.Strength))}</size>";
+            var equipped = Enumerable.Range(0, Cat.SkillSlotCount).Select(cat.GetSkillInSlot).ToList();
+            _slots.text = "Слоты: " + string.Join(" | ", equipped.Select(s => s == null ? "пусто" : Texts.SkillName(s.Value))) + "  (+ Царапина всегда)";
+
+            for (var i = _skills.childCount - 1; i >= 0; i--)
+                UnityEngine.Object.Destroy(_skills.GetChild(i).gameObject);
+            var skills = config.Skills.Where(s => !s.IsInnate).ToList();
+            for (var i = 0; i < skills.Count; i++)
+            {
+                var skill = skills[i];
+                var unlocked = CatRules.IsSkillUnlocked(cat, skill);
+                var slot = equipped.IndexOf(skill.Id);
+                var state = !unlocked ? $"нужно {Texts.Attribute(skill.UnlockAttribute)} {skill.UnlockLevel}" : slot >= 0 ? $"в слоте {slot + 1} — нажми, чтобы снять" : "нажми, чтобы взять";
+                var color = !unlocked ? Palette.Disabled : slot >= 0 ? Palette.Primary : Palette.Secondary;
+                var skillId = skill.Id;
+                var row = Ui.Button(_skills, "Skill_" + skill.Id, $"{Texts.SkillName(skill.Id)} — {state}\n<size=24>{Texts.SkillDescription(skill)} · Задор {skill.GritCost}</size>",
+                    color, () => Toggle(skillId), 30);
+                row.Text.supportRichText = true;
+                row.Text.alignment = TextAnchor.MiddleLeft;
+                row.Rect.Place(new Vector2(0, 1f - (i + 1f) / skills.Count), new Vector2(1, 1f - (float)i / skills.Count), new Vector2(0, 5), new Vector2(0, -5));
+                row.Interactable = unlocked;
+            }
+        }
+
+        private void Toggle(SkillId skill)
+        {
+            if (_catId == null || !_session.World.TryGetCat(_catId.Value, out var cat))
+                return;
+            var slots = Enumerable.Range(0, Cat.SkillSlotCount).Select(cat.GetSkillInSlot).ToList();
+            var current = slots.IndexOf(skill);
+            CommandResult result;
+            if (current >= 0)
+                result = _session.EquipSkill(_catId.Value, current, null);
+            else
+            {
+                var free = slots.IndexOf(null);
+                result = free >= 0 ? _session.EquipSkill(_catId.Value, free, skill) : CommandResult.Fail(CommandError.AlreadyEquipped);
+                if (free < 0)
+                {
+                    _onResult(CommandResult.Fail(CommandError.InvalidSlot));
+                    return;
+                }
+            }
+
+            _onResult(result);
+            Refresh();
+        }
+    }
+}

@@ -21,15 +21,17 @@ namespace TrashCats.Presentation.Hideout
         private readonly GameSession _session;
         private readonly RectTransform _root;
         private readonly Action<CatId> _onCatTapped;
+        private readonly Action<UpgradeId> _onStationTapped;
         private readonly Dictionary<CatId, CatToken> _tokens = new Dictionary<CatId, CatToken>();
         private readonly Dictionary<UpgradeId, Text> _upgradeLabels = new Dictionary<UpgradeId, Text>();
         private readonly List<IDisposable> _subscriptions = new List<IDisposable>();
 
-        public HideoutSceneView(GameSession session, EventBus bus, RectTransform root, Action<CatId> onCatTapped)
+        public HideoutSceneView(GameSession session, EventBus bus, RectTransform root, Action<CatId> onCatTapped, Action<UpgradeId> onStationTapped)
         {
             _session = session;
             _root = root;
             _onCatTapped = onCatTapped;
+            _onStationTapped = onStationTapped;
 
             Ui.Panel(root, "Floor", Palette.Scene).rectTransform.Fill();
             BuildStations();
@@ -41,6 +43,20 @@ namespace TrashCats.Presentation.Hideout
             _subscriptions.Add(bus.Subscribe<ActivityStopped>(_ => LayoutTokens(true)));
             _subscriptions.Add(bus.Subscribe<ActivityCycleCompleted>(OnCycleCompleted));
             _subscriptions.Add(bus.Subscribe<UpgradePurchased>(e => RefreshUpgrade(e.UpgradeId)));
+        }
+
+        /// <summary>Adds tokens for newly recruited cats.</summary>
+        public void SyncCats()
+        {
+            var added = false;
+            foreach (var cat in _session.World.Cats)
+            {
+                if (_tokens.ContainsKey(cat.Id)) continue;
+                AddToken(cat);
+                added = true;
+            }
+
+            if (added) LayoutTokens(animate: false);
         }
 
         public void Tick()
@@ -81,6 +97,10 @@ namespace TrashCats.Presentation.Hideout
                 {
                     _upgradeLabels[upgrade.Value] = text;
                     RefreshUpgrade(upgrade.Value);
+                    var id = upgrade.Value;
+                    box.raycastTarget = true;
+                    box.gameObject.AddComponent<Button>().onClick.AddListener(() => _onStationTapped(id));
+                    box.name = "Station_" + id;
                 }
             }
         }
@@ -102,7 +122,20 @@ namespace TrashCats.Presentation.Hideout
         private void RefreshUpgrade(UpgradeId id)
         {
             if (_upgradeLabels.TryGetValue(id, out var text))
-                text.text = $"{Texts.UpgradeName(id)}\nур. {_session.World.GetUpgradeLevel(id)}";
+                text.text = $"{Texts.UpgradeName(id)}\nур. {_session.World.GetUpgradeLevel(id)}{(CanAfford(id) ? " (+)" : "")}";
+        }
+
+        private bool CanAfford(UpgradeId id)
+        {
+            var definition = _session.Config.GetUpgrade(id);
+            var level = _session.World.GetUpgradeLevel(id);
+            return level < definition.MaxLevel && _session.World.Junk >= definition.Costs[level];
+        }
+
+        public void RefreshUpgrades()
+        {
+            foreach (var id in _upgradeLabels.Keys)
+                RefreshUpgrade(id);
         }
 
         private static Vector2 StationAnchor(ActivityDefinition activity) => activity.Kind switch

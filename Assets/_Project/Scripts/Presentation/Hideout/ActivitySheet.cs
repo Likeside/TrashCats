@@ -28,7 +28,7 @@ namespace TrashCats.Presentation.Hideout
 
         public bool IsOpen => _catId != null;
 
-        public ActivitySheet(GameSession session, RectTransform parent, OverlayStack overlays, Action<CommandResult> onResult)
+        public ActivitySheet(GameSession session, RectTransform parent, OverlayStack overlays, Action<CommandResult> onResult, Action<CatId> onDetails)
         {
             _session = session;
             _overlays = overlays;
@@ -46,6 +46,11 @@ namespace TrashCats.Presentation.Hideout
             _title.rectTransform.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(40, -90), new Vector2(-40, -20));
             _needs = Ui.Label(panel.transform, "", 30, TextAnchor.MiddleLeft, Palette.Ink);
             _needs.rectTransform.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(40, -140), new Vector2(-40, -90));
+            var details = Ui.Button(panel.transform, "Sheet_Details", "Умения и статы", Palette.Paper, () =>
+            {
+                if (_catId is CatId id) onDetails(id);
+            }, 28);
+            details.Rect.Place(new Vector2(1, 1), new Vector2(1, 1), new Vector2(-330, -95), new Vector2(-30, -25));
 
             var activities = OrderedActivities(session.Config);
             for (var i = 0; i < activities.Count; i++)
