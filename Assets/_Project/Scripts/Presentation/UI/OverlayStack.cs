@@ -13,6 +13,9 @@ namespace TrashCats.Presentation.UI
 
         public bool IsEmpty => _stack.Count == 0;
 
+        /// <summary>A sheet or modal was opened (sound).</summary>
+        public event Action<GameObject> Pushed;
+
         /// <summary>The topmost open sheet or modal, or null.</summary>
         public GameObject Top => _stack.Count == 0 ? null : _stack[_stack.Count - 1].Root;
 
@@ -21,6 +24,7 @@ namespace TrashCats.Presentation.UI
             root.SetActive(true);
             root.transform.SetAsLastSibling();
             _stack.Add((root, onClosed));
+            Pushed?.Invoke(root);
         }
 
         public void Close(GameObject root)

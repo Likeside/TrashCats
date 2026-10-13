@@ -38,6 +38,13 @@ namespace TrashCats.Presentation.UI
         public Sprite tape;
         public Sprite pointer;
 
+        [Header("Effects")]
+        public Sprite fxStar;
+        public Sprite fxDust;
+        public Sprite fxScratch;
+        public Sprite fxSparkle;
+        [Tooltip("Red halftone vignette for \"Ярость!\"")] public Sprite rageVignette;
+
         [Header("Round pictures (map vignettes, fighter queue)")]
         [Tooltip("White disc used as a mask")] public Sprite circle;
         public Sprite ring;

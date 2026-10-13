@@ -71,6 +71,11 @@ namespace TrashCats.Editor
             skin.tape = Sprite("tape");
             skin.pointer = Sprite("pointer");
             skin.circle = Sprite("circle_mask");
+            skin.fxStar = Sprite("fx_star");
+            skin.fxDust = Sprite("fx_dust");
+            skin.fxScratch = Sprite("fx_scratch");
+            skin.fxSparkle = Sprite("fx_sparkle");
+            skin.rageVignette = Sprite("rage_vignette");
             skin.ring = Sprite("map_ring");
             skin.ringGold = Sprite("map_ring_gold");
             skin.icons = Directory.GetFiles(UiRoot, "icon_*.png").OrderBy(f => f)

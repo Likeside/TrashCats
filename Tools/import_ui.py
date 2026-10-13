@@ -32,6 +32,7 @@ SHEETS = {
     "ui_a_buttons": ["button_a_yellow", "button_a_blue", "button_a_grey"],
     "ui_a_parts": ["hud_a"],
     "ui_a_sheet": ["panel_a"],
+    "fx_combat": ["fx_star", "fx_dust", "fx_scratch", "fx_sparkle"],
     "ui_map_parts": ["map_ring", None, None, None],
     "ui_a_icons": ["icon_food", "icon_junk", "icon_hp", "icon_paw", "icon_home", "icon_map", "icon_energy", "icon_satiety"],
 }
@@ -43,7 +44,10 @@ CONCEPT = "Docs/ArtDirection/Concepts/round1/blind/hideout_A.png"
 PORTRAITS = {"Ryzhy": (44, 1080, 323, 1250), "shnyr": (380, 1080, 641, 1238), "ponchik": (699, 1080, 983, 1238)}
 
 # how far apart parts of one item may be (px); small where items sit close together
-MERGE = {"ui_icons_a": 18, "ui_icons_b": 18, "ui_bars": 0}
+MERGE = {"ui_icons_a": 18, "ui_icons_b": 18, "ui_bars": 0, "fx_combat": 14}
+
+# items cut by a fixed box (left, top, right, bottom) because they consist of scattered parts
+MANUAL = {"fx_sparkle": ("fx_combat", (1230, 330, 1490, 650))}
 
 # 9-slice borders (left, bottom, right, top) in source pixels; items not listed are drawn whole
 SLICES = {
@@ -132,6 +136,20 @@ def drawn():
     d.ellipse((48, 48, size - 49, size - 49), fill=(0, 0, 0, 0))
     ring.save(f"{OUT}/map_ring_gold.png")
 
+    # "Ярость!" vignette: red halftone dots growing towards the edges (Art Bible §8), transparent in the middle
+    w, h = 540, 960
+    vignette = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    d = ImageDraw.Draw(vignette)
+    step = 18
+    for y in range(0, h + step, step):
+        for x in range((y // step % 2) * step // 2, w + step, step):
+            dx, dy = (x - w / 2) / (w / 2), (y - h / 2) / (h / 2)
+            t = max(0.0, (dx * dx + dy * dy) ** 0.5 - 0.55) / 0.6
+            r = min(step * 0.62, step * 0.75 * t)
+            if r > 0.8:
+                d.ellipse((x - r, y - r, x + r, y + r), fill=(205, 40, 30, 235))
+    vignette.save(f"{OUT}/rage_vignette.png")
+
 
 def enemy_portraits():
     """Head-and-shoulders square cut from each enemy's first stance frame (characters face right, head on top)."""
@@ -175,6 +193,10 @@ def main():
             pad.paste(img, (4, 4))
             pad.save(f"{OUT}/{name}.png")
             print(f"   {name}: {pad.width}x{pad.height}")
+            if name in MANUAL:
+                left, top, right, bottom = MANUAL[name][1]
+                img = Image.fromarray(np.dstack([clean, alpha]), "RGBA").crop((left, top, right, bottom))
+                img.save(f"{OUT}/{name}.png")
             if name == "button_yellow":
                 neutral(pad).save(f"{OUT}/button_white.png")
             if name == "button_a_yellow":

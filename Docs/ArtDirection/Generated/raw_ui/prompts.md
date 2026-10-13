@@ -89,3 +89,10 @@ Game UI parts copied EXACTLY from the style of the round location frames on the 
 Flat front view, no text, no letters. Solid flat pure green (#00FF00) chroma-key background everywhere (also inside the rings), no shadows on it, no scenery. Do not use green in the items.
 ```
 
+## fx_combat (1536x1024, refs: ui_fx.png, combat_S4.png)
+
+```
+Comic game VFX sprites in exactly the style of the references: thick black ink outlines, flat bold colours, halftone dots, NO soft glow, NO realistic particles. Exactly 4 separate items in one row, generous space between them: 1) a comic impact star: a jagged white-and-yellow starburst with an orange rim (the flash where a punch lands), 2) a flat comic dust cloud puff, light grey-beige with an ink outline, 3) three parallel diagonal claw scratch slashes, white with red edges, 4) a small cluster of four yellow sparkle stars.
+Flat front view, no text, no letters. Solid flat pure green (#00FF00) chroma-key background everywhere, no shadows on it, no scenery. Do not use green in the items.
+```
+
