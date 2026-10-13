@@ -88,9 +88,36 @@ namespace TrashCats.Editor
 
             EditorUtility.SetDirty(registry);
             AssetDatabase.SaveAssets();
+            WriteManifest(registry);
             AssignToGameScene(registry);
             Debug.Log($"[ArtBuilder] {registry.characters.Count} characters, {registry.sprites.Count} sprites: "
                       + string.Join(", ", registry.characters.Select(c => $"{c.viewKey}({Count(c)})")));
+        }
+
+        /// <summary>
+        /// TestResults/clips.json: how every clip actually plays (frame files, fps, loop, ping-pong, drawn key frames),
+        /// read by Tools/anim_qa.py to check the animations the way the game shows them.
+        /// </summary>
+        private static void WriteManifest(CharacterArtRegistry registry)
+        {
+            var sb = new System.Text.StringBuilder("[\n");
+            var first = true;
+            foreach (var art in registry.characters)
+            {
+                if (art.tint != Color.white) continue; // variants reuse another character's frames
+                foreach (var (role, clip) in new[] { ("idle", art.idle), ("attack", art.attack), ("heavy", art.heavyAttack), ("hit", art.hit), ("ko", art.knockOut),
+                             ("tail", art.tail), ("hideoutIdle", art.hideoutIdle), ("run", art.run), ("canPunch", art.canPunch), ("rope", art.rope), ("dig", art.dig) })
+                {
+                    if (clip?.frames == null || clip.frames.Length == 0) continue;
+                    if (role == "heavy" && clip == art.attack) continue;
+                    var files = string.Join(",", clip.frames.Select(f => $"\"{AssetDatabase.GetAssetPath(f)}\""));
+                    sb.Append(first ? "" : ",\n").Append($"{{\"character\":\"{art.viewKey}\",\"role\":\"{role}\",\"fps\":{clip.fps.ToString(CultureInfo.InvariantCulture)},\"loop\":{(clip.loop ? "true" : "false")},\"pingPong\":{(clip.pingPong ? "true" : "false")},\"keys\":[{string.Join(",", clip.keys ?? new int[0])}],\"frames\":[{files}]}}");
+                    first = false;
+                }
+            }
+
+            Directory.CreateDirectory("TestResults");
+            File.WriteAllText("TestResults/clips.json", sb.Append("\n]\n").ToString());
         }
 
         private static string Count(CharacterArt c) =>
