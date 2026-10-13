@@ -1,0 +1,11 @@
+[
+ {
+  "name": "ryzhy_bench_v2",
+  "size": "1536x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_bench/ryzhy_bench_v1.png",
+   "Docs/ArtDirection/Generated/raw_v4/ryzhy_idle8.png"
+  ],
+  "prompt": "Game sprite sheet: 8 animation frames of ONE continuous looping animation in a grid of 2 rows x 4 columns, read left to right, top row first, generous empty space between frames, never mirror a frame. The same orange tabby tomcat Ryzhy and the same home-made barbell (broom handle with taped tin cans) as in the first reference, same comic style. BENCH PRESS lying on its back on an invisible bench (do NOT draw the bench). Change the pose: the KNEES ARE BENT and both hind feet stand FLAT ON THE GROUND below, as if the feet rest on the floor on either side of a bench. The whole body is seen at a slight diagonal angle: the feet and knees are a bit to the LEFT of the head (the body axis tilts from the lower-left feet up to the head at the upper-right), the feet closer to the viewer. Loop: 1) bar on the chest, 2) starts pushing, 3) halfway up, straining face, 4) arms fully extended, 5) holds it, proud grin, 6) lowering, 7) halfway down, 8) bar back on the chest. The body, legs and feet stay exactly on the same spot in every frame, only the arms and the bar move; the bar stays parallel to the shoulders. IMPORTANT: solid flat pure chroma-key GREEN (#00FF00) background everywhere, no bench, no floor line, no shadow, no text."
+ }
+]

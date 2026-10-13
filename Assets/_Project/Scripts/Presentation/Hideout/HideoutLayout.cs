@@ -7,7 +7,8 @@ namespace TrashCats.Presentation.Hideout
     /// Where things stand in the hideout, in the 0..1 space of the background picture bg_hideout (x to the right, y up;
     /// 1024x1536, Docs/ArtDirection/Generated/raw_v7/bg_hideout.png): the back wall's base at y ≈ 0.425 with the door at
     /// x 0.36..0.62 and the street gap at the right edge; the yard below. Props are rects; cats stand on foot
-    /// points with the clip they play and the side they face; cats in or on a prop draw over it.
+    /// points with the clip they play and the side they face; cats on a prop draw over it. The can hangs right of the
+    /// door, the dumpster stands at the back by the right wall, the bench mat lies in the front left corner.
     /// </summary>
     public static class HideoutLayout
     {
@@ -27,10 +28,9 @@ namespace TrashCats.Presentation.Hideout
             Sit,
             Sleep,
             Walk,
-            Run,
+            Bench,
             Punch,
             Rope,
-            Dig,
         }
 
         /// <summary>How a cat appears at a spot.</summary>
@@ -39,7 +39,7 @@ namespace TrashCats.Presentation.Hideout
             public Vector2 Foot { get; }
             public CatClip Clip { get; }
             public bool FaceLeft { get; }
-            /// <summary>Drawn over the station prop it stands on / runs in (sleep on the boxes, run in the wheel).</summary>
+            /// <summary>Drawn over the station prop it lies on (sleep on the boxes, bench press on the mat).</summary>
             public bool OverProp { get; }
             public float Scale { get; }
             public bool Hidden { get; }
@@ -58,8 +58,11 @@ namespace TrashCats.Presentation.Hideout
             }
         }
 
-        /// <summary>The wheel, standing on the yard by the left wall.</summary>
-        public static readonly (Vector2 Min, Vector2 Max) Wheel = (new Vector2(0.53f, 0.34f), new Vector2(1.06f, 0.735f));
+        /// <summary>The bench press mat with brick stands, in the front left corner; the rect keeps the mat sprite's aspect (448/639).</summary>
+        public static readonly (Vector2 Min, Vector2 Max) Bench = (new Vector2(0.02f, 0.075f), new Vector2(0.44f, 0.075f + 0.42f * 448f / 639f * PictureAspect));
+
+        /// <summary>The dumpster at the back by the right wall; a cat rummaging in it is not shown, only its badge above.</summary>
+        public static readonly (Vector2 Min, Vector2 Max) Dumpster = (new Vector2(0.78f, 0.4f), new Vector2(1.04f, 0.564f));
 
         /// <summary>The box bed, sized for Ponchik (the biggest sleeper); the middle of its blanket is at 74% of its height.</summary>
         public static readonly (Vector2 Min, Vector2 Max) Bed = (new Vector2(0.55f, -0.02f), new Vector2(1.07f, 0.286f));
@@ -68,14 +71,14 @@ namespace TrashCats.Presentation.Hideout
         public static (Vector2 Min, Vector2 Max) Station(ActivityDefinition activity) => activity.Kind switch
         {
             ActivityKind.Scavenge => (new Vector2(0.806f, 0.722f), new Vector2(0.95f, 0.83f)), // the street gap on the right
-            ActivityKind.Rummage => (new Vector2(-0.17f, 0.0f), new Vector2(0.26f, 0.265f)),    // big dumpster, its edge in front
+            ActivityKind.Rummage => Dumpster,
             ActivityKind.Sleep => Bed,
             _ => activity.TrainedAttribute switch
             {
-                // can on a bracket on the wall, its body at the fist height of the punching cat
-                AttributeType.Strength => (new Vector2(0.122f, 0.491f), new Vector2(0.257f, 0.654f)),
+                // can on a bracket on the wall right of the door, its body at the fist height of the punching cat
+                AttributeType.Strength => (new Vector2(0.655f, 0.491f), new Vector2(0.79f, 0.654f)),
                 AttributeType.Agility => (new Vector2(0.35f, 0.497f), new Vector2(0.415f, 0.65f)),  // skipping rope on a nail by the door
-                _ => Wheel,
+                _ => Bench,
             },
         };
 
@@ -87,33 +90,31 @@ namespace TrashCats.Presentation.Hideout
             return activity.Kind switch
             {
                 ActivityKind.Scavenge => new CatSpot(new Vector2(0.887f, 0.722f), CatClip.Walk, hidden: true),
-                // head first in the dumpster: the cut line of the clip hides under the bin's front rim; Ponchik's clip
-                // is drawn the other way round, so it is mirrored
-                ActivityKind.Rummage => viewKey == "ponchik"
-                    ? new CatSpot(new Vector2(0.11f + 0.05f * index, 0.178f), CatClip.Dig, faceLeft: true)
-                    : new CatSpot(new Vector2(0.135f + 0.05f * index, 0.178f), CatClip.Dig),
+                ActivityKind.Rummage => new CatSpot(new Vector2((Dumpster.Min.x + Dumpster.Max.x) * 0.5f, Dumpster.Max.y), CatClip.Walk, hidden: true),
                 // lying on the blanket at full size (no depth shrink), drawn over the bed
                 ActivityKind.Sleep => new CatSpot(bedTop + shift * 0.5f, CatClip.Sleep, overProp: true, scale: 0.85f / DepthScale(bedTop.y)),
                 _ => activity.TrainedAttribute switch
                 {
-                    // right of the can at arm's length, hitting to the left
-                    AttributeType.Strength => new CatSpot(new Vector2(0.43f, 0.371f) + shift, CatClip.Punch, faceLeft: true),
-                    AttributeType.Agility => new CatSpot(new Vector2(0.4f, 0.03f) + shift, CatClip.Rope),
-                    _ => new CatSpot(Vector2.zero, CatClip.Run, faceLeft: true, overProp: true),
+                    // left of the can at arm's length, hitting to the right
+                    AttributeType.Strength => new CatSpot(new Vector2(0.48f, 0.371f) + new Vector2(-shift.x, shift.y), CatClip.Punch),
+                    AttributeType.Agility => new CatSpot(new Vector2(0.49f, 0.03f) + shift, CatClip.Rope),
+                    // mirrored with the mat: the brick stands at the right end
+                    _ => new CatSpot(Vector2.zero, CatClip.Bench, faceLeft: true, overProp: true),
                 },
             };
         }
 
         /// <summary>
-        /// A cat running in the wheel, relative to the wheel's rect: foot point (0..1 of the rect) and the cat box height
-        /// as a share of the rect height. Solved against the sprites (the drum's inner floor of wheel frame 0 and the
-        /// union of the cat's run frames): every pixel stays inside the drum, the feet on its floor.
+        /// A cat pressing on the mat, relative to the mat's rect: bottom centre of the frame box (0..1 of the rect) and
+        /// the box height as a share of the rect height. Taken from the approved previews
+        /// (Tools/compose_bench_preview.py: mat x0.729, Ryzhy and Ponchik x1.35 at -90,-195, Shnyr x1.15 at -67,-136),
+        /// mirrored left to right with the mat (x = 1 - preview x).
         /// </summary>
-        public static (Vector2 Foot, float Height)? RunFit(string viewKey) => viewKey switch
+        public static (Vector2 Foot, float Height)? BenchFit(string viewKey) => viewKey switch
         {
-            "ryzhy" => (new Vector2(0.51f, 0.199f), 0.568f),
-            "shnyr" => (new Vector2(0.537f, 0.191f), 0.618f),
-            "ponchik" => (new Vector2(0.559f, 0.191f), 0.565f),
+            "ryzhy" => (new Vector2(0.555f, 0.092f), 1.506f),
+            "shnyr" => (new Vector2(0.556f, 0.107f), 1.31f),
+            "ponchik" => (new Vector2(0.571f, 0.104f), 1.494f),
             _ => null,
         };
 

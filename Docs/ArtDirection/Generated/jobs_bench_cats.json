@@ -1,0 +1,20 @@
+[
+ {
+  "name": "shnyr_bench",
+  "size": "1536x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_bench/ryzhy_bench_v2.png",
+   "Docs/ArtDirection/Generated/raw_v4/shnyr_idle8.png"
+  ],
+  "prompt": "Game sprite sheet: 8 animation frames of ONE continuous looping animation in a grid of 2 rows x 4 columns, read left to right, top row first, generous empty space between frames, never mirror a frame. Redraw EXACTLY the animation of the FIRST reference (same pose, same diagonal angle, same bent knees with feet down, same home-made barbell of a broom handle with taped tin cans, same 8 phases of the bench press), but the character is the thin grey striped cat Shnyr with huge ears and a very long curly tail from the SECOND reference (its face, body shape, colours). The body, legs and feet stay exactly on the same spot in every frame, only the arms and the bar move. Same comic ink style. IMPORTANT: solid flat pure chroma-key GREEN (#00FF00) background everywhere, no bench, no floor, no shadow, no text."
+ },
+ {
+  "name": "ponchik_bench",
+  "size": "1536x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_bench/ryzhy_bench_v2.png",
+   "Docs/ArtDirection/Generated/raw_v6/ponchik_idle_front.png"
+  ],
+  "prompt": "Game sprite sheet: 8 animation frames of ONE continuous looping animation in a grid of 2 rows x 4 columns, read left to right, top row first, generous empty space between frames, never mirror a frame. Redraw EXACTLY the animation of the FIRST reference (same pose, same diagonal angle, same bent knees with feet down, same home-made barbell of a broom handle with taped tin cans, same 8 phases of the bench press), but the character is the very fat black-and-white cat Ponchik from the SECOND reference (its face, body shape, colours). The body, legs and feet stay exactly on the same spot in every frame, only the arms and the bar move. Same comic ink style. IMPORTANT: solid flat pure chroma-key GREEN (#00FF00) background everywhere, no bench, no floor, no shadow, no text."
+ }
+]

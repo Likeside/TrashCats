@@ -1,0 +1,11 @@
+[
+ {
+  "name": "bench_mat",
+  "size": "1536x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_bench/ryzhy_bench_v2.png",
+   "Docs/ArtDirection/Generated/raw_v4/bg_hideout.png"
+  ],
+  "prompt": "Comic art style of the references (bold black ink outlines, flat colours, a bit of hatching). Exactly 2 separate objects side by side with lots of space between them, both seen from the SAME angle as the lying cat in the first reference (the long axis goes diagonally: the foot end at the lower LEFT, the head end at the upper RIGHT, seen from slightly above): LEFT: an old worn mattress / thick folded blanket lying flat on the ground, long enough for a cat to lie on, with a pillow made of a rolled rag at the head end (upper right), and at the head end two improvised barbell stands made of stacked bricks with a notch on top, one on each side of the pillow, EMPTY (no bar on them). RIGHT: the same mattress with the same brick stands, but with the home-made barbell from the first reference (broom handle with taped tin cans) resting on the stands. No characters. Solid flat pure chroma-key GREEN (#00FF00) background everywhere, no floor, no shadow on the background, no text."
+ }
+]

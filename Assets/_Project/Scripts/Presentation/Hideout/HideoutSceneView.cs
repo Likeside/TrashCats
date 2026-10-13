@@ -35,10 +35,12 @@ namespace TrashCats.Presentation.Hideout
         private readonly Dictionary<UpgradeId, TMP_Text> _upgradeLabels = new Dictionary<UpgradeId, TMP_Text>();
         private readonly Dictionary<UpgradeId, RectTransform> _stations = new Dictionary<UpgradeId, RectTransform>();
         private readonly Dictionary<ActivityKind, float> _propBase = new Dictionary<ActivityKind, float>();
-        private RectTransform _wheelArcs;
         private RectTransform _can;
         private GameObject _ropeProp;
         private Vector2 _streetGap;
+        private RectTransform _dumpster;
+        private int _rummaging;
+        private float _junkTimer;
         private readonly List<IDisposable> _subscriptions = new List<IDisposable>();
 
         public HideoutSceneView(GameSession session, EventBus bus, RectTransform root, Action<CatId> onCatTapped, Action<UpgradeId> onStationTapped,
@@ -114,6 +116,13 @@ namespace TrashCats.Presentation.Hideout
                 if (back.activeSelf != (reason.Length > 0))
                     back.SetActive(reason.Length > 0);
             }
+
+            // junk tumbles out of the dumpster while someone rummages in it
+            if (_rummaging > 0 && _dumpster != null && (_junkTimer -= Time.deltaTime) <= 0f)
+            {
+                _junkTimer = UnityEngine.Random.Range(0.25f, 0.5f);
+                SpillJunk();
+            }
         }
 
         public void Dispose()
@@ -130,31 +139,26 @@ namespace TrashCats.Presentation.Hideout
             foreach (var activity in config.Activities)
             {
                 var (label, upgrade) = StationInfo(activity);
-                var prop = upgrade != null ? _art?.GetSprite("prop_" + upgrade.Value) : null;
+                var bench = activity.Kind == ActivityKind.Train && activity.TrainedAttribute == AttributeType.Toughness;
+                // the bench mat replaced the wheel, its upgrade keeps the wheel's id
+                var prop = bench ? _art?.GetSprite("prop_bench") : upgrade != null ? _art?.GetSprite("prop_" + upgrade.Value) : null;
                 var (min, max) = HideoutLayout.Station(activity);
                 var scavenge = activity.Kind == ActivityKind.Scavenge;
                 var box = Ui.Panel(_frame, "Station_" + activity.Id, scavenge || prop != null ? new Color(0, 0, 0, 0) : Palette.Station);
                 box.rectTransform.Place(min, max);
-                var wheel = activity.Kind == ActivityKind.Train && activity.TrainedAttribute == AttributeType.Toughness ? _art?.Find("wheel") : null;
-                if (wheel != null && wheel.HasBattleArt)
-                {
-                    // one still frame of the wheel; while a cat runs, comic speed arcs circle along the rim (the drawn
-                    // spin frames do not loop seamlessly)
-                    var picture = Ui.Picture(box.transform, "Prop", wheel.idle.frames[0]);
-                    var arcs = _art?.GetSprite("fx_wheel_arcs");
-                    if (arcs != null)
-                        _wheelArcs = WheelArcs(picture.rectTransform, wheel.idle.frames[0], arcs);
-                }
-                else if (prop != null)
+                if (prop != null)
                 {
                     var picture = Ui.Picture(box.transform, "Prop", prop);
+                    if (bench)
+                        picture.rectTransform.localScale = new Vector3(-1f, 1f, 1f); // brick stands at the right end
                     if (activity.Kind == ActivityKind.Train && activity.TrainedAttribute == AttributeType.Strength)
                     {
                         // the can swings from the top of its rope when punched
                         picture.rectTransform.pivot = new Vector2(0.5f, 1f);
                         picture.rectTransform.Fill();
                         _can = picture.rectTransform;
-                        // a wrought-iron bracket sticks out of the wall; its hook holds the top of the can's rope
+                        // a wrought-iron bracket sticks out of the wall; its hook holds the top of the can's rope. The
+                        // sprite is drawn with the wall on the left: mirrored, the bracket hangs on the wall right of the hook
                         var bracketSprite = _art?.GetSprite("prop_bracket");
                         if (bracketSprite != null)
                         {
@@ -163,17 +167,20 @@ namespace TrashCats.Presentation.Hideout
                             var height = width * HideoutLayout.PictureAspect * bracketSprite.rect.height / bracketSprite.rect.width;
                             var bracket = Ui.Panel(_frame, "Bracket", Color.white);
                             bracket.sprite = bracketSprite;
-                            bracket.rectTransform.Place(new Vector2(hook.x - 0.892f * width, hook.y), new Vector2(hook.x + 0.108f * width, hook.y + height));
+                            bracket.rectTransform.Place(new Vector2(hook.x - 0.108f * width, hook.y), new Vector2(hook.x + 0.892f * width, hook.y + height));
+                            bracket.rectTransform.localScale = new Vector3(-1f, 1f, 1f);
                             _depthItems.Add((bracket.transform, min.y + 0.0001f));
                         }
                     }
                 }
+                if (activity.Kind == ActivityKind.Rummage)
+                    _dumpster = box.rectTransform;
                 if (activity.Kind == ActivityKind.Train && activity.TrainedAttribute == AttributeType.Agility)
                     _ropeProp = box.transform.Find("Prop")?.gameObject;
                 if (scavenge)
                     _streetGap = new Vector2((min.x + max.x) * 0.5f, min.y);
                 _depthItems.Add((box.transform, min.y));
-                if (activity.Kind == ActivityKind.Sleep || (activity.Kind == ActivityKind.Train && activity.TrainedAttribute == AttributeType.Toughness))
+                if (activity.Kind == ActivityKind.Sleep || bench)
                     _propBase[activity.Kind == ActivityKind.Sleep ? ActivityKind.Sleep : ActivityKind.Train] = min.y;
 
                 var text = Plate(box.rectTransform, label, scavenge);
@@ -335,9 +342,9 @@ namespace TrashCats.Presentation.Hideout
             var config = _session.Config;
             var groups = new Dictionary<string, int>();
             var idle = 0;
-            var wheelBusy = false;
             var ropeBusy = false;
             var away = 0;
+            var rummaging = 0;
             for (var i = 0; i < world.Cats.Count; i++)
             {
                 var cat = world.Cats[i];
@@ -353,28 +360,35 @@ namespace TrashCats.Presentation.Hideout
                     groups.TryGetValue(activity.Id.Value, out var index);
                     groups[activity.Id.Value] = index + 1;
                     spot = HideoutLayout.Spot(activity, index, token.Art?.viewKey);
-                    // one cat fits in the wheel / on the bed; others wait beside it
+                    // one cat fits on the mat / on the bed; others wait beside it (behind the mat)
+                    var (bMin, bMax) = HideoutLayout.Bench;
                     if (spot.OverProp && index > 0)
-                        spot = new HideoutLayout.CatSpot(spot.Foot + new Vector2(-0.12f * index, -0.12f), HideoutLayout.CatClip.Sit);
-                    wheelBusy |= spot.Clip == HideoutLayout.CatClip.Run;
+                        spot = spot.Clip == HideoutLayout.CatClip.Bench
+                            ? new HideoutLayout.CatSpot(new Vector2((bMin.x + bMax.x) * 0.5f + 0.12f * (index - 1), bMax.y + 0.01f), HideoutLayout.CatClip.Sit)
+                            : new HideoutLayout.CatSpot(spot.Foot + new Vector2(-0.12f * index, -0.12f), HideoutLayout.CatClip.Sit);
                     ropeBusy |= spot.Clip == HideoutLayout.CatClip.Rope;
-                    if (spot.Clip == HideoutLayout.CatClip.Run && token.Art != null && HideoutLayout.RunFit(token.Art.viewKey) is var (runFoot, runHeight))
+                    if (spot.Clip == HideoutLayout.CatClip.Bench && token.Art != null && HideoutLayout.BenchFit(token.Art.viewKey) is var (benchFoot, benchHeight))
                     {
-                        // placed and sized inside the wheel's rect, so the cat always fits the drum
-                        var (wMin, wMax) = HideoutLayout.Wheel;
-                        var size = wMax - wMin;
-                        spot = new HideoutLayout.CatSpot(wMin + Vector2.Scale(runFoot, size), spot.Clip, spot.FaceLeft, spot.OverProp, height: runHeight * size.y);
+                        // placed and sized against the mat's rect, as in the approved previews
+                        var size = bMax - bMin;
+                        spot = new HideoutLayout.CatSpot(bMin + Vector2.Scale(benchFoot, size), spot.Clip, spot.FaceLeft, spot.OverProp, height: benchHeight * size.y);
                     }
                 }
                 else
                     spot = HideoutLayout.Idle(token.Art?.viewKey, idle++);
 
-                // out on the street: a portrait with the cycle bar at the street gap instead of the cat
+                // out on the street or in the dumpster: a portrait with the cycle bar instead of the cat, right over the
+                // dumpster or above it under the street gap (it fits under the HUD); more cats go to the left
                 token.Away.Root.gameObject.SetActive(spot.Hidden);
                 if (spot.Hidden)
                 {
-                    var top = _streetGap.y - 0.02f - 0.15f * away++;
-                    token.Away.Root.Place(new Vector2(_streetGap.x - 0.08f, top - 0.14f), new Vector2(_streetGap.x + 0.06f, top));
+                    const float badge = 0.12f;
+                    var rummage = kind == ActivityKind.Rummage;
+                    var at = rummage
+                        ? new Vector2(spot.Foot.x - 0.09f - 0.13f * rummaging++, spot.Foot.y + 0.002f)
+                        : new Vector2(_streetGap.x - 0.06f - 0.13f * away++, spot.Foot.y + 0.002f - 0.035f);
+                    token.Away.Root.Place(at, at + new Vector2(badge, badge));
+                    token.Away.Caption.text = Loc.T(rummage ? "hideout.rummaging" : "hideout.away");
                 }
 
                 var moved = token.Placed && (spot.Foot != token.Spot.Foot || spot.Clip != token.Spot.Clip);
@@ -390,13 +404,7 @@ namespace TrashCats.Presentation.Hideout
             }
 
             _ropeProp?.SetActive(!ropeBusy);
-            if (_wheelArcs != null && _wheelArcs.gameObject.activeSelf != wheelBusy)
-            {
-                _wheelArcs.gameObject.SetActive(wheelBusy);
-                _wheelArcs.DOKill();
-                if (wheelBusy)
-                    _wheelArcs.DOLocalRotate(new Vector3(0, 0, 360f), 1.6f, RotateMode.FastBeyond360).SetEase(Ease.Linear).SetLoops(-1).SetLink(_wheelArcs.gameObject);
-            }
+            _rummaging = rummaging;
 
             SortByDepth();
         }
@@ -425,6 +433,9 @@ namespace TrashCats.Presentation.Hideout
             var w = h * size.x / size.y / HideoutLayout.PictureAspect;
             token.Root.Place(new Vector2(spot.Foot.x - w * 0.5f, spot.Foot.y), new Vector2(spot.Foot.x + w * 0.5f, spot.Foot.y + h));
             token.Image.rectTransform.localScale = new Vector3(spot.FaceLeft != sourceFacesLeft ? -1f : 1f, 1f, 1f);
+            // the bench frames leave room above the lying cat for the raised bar: the cycle bar goes over the barbell
+            var barY = spot.Clip == HideoutLayout.CatClip.Bench ? 0.8f : 1f;
+            token.Progress.Rect.Place(new Vector2(0.5f, barY), new Vector2(0.5f, barY), new Vector2(-75, 4), new Vector2(75, 24));
             token.Image.color = token.BaseColor;
 
             // a sleeping cat breathes: a slow ping-pong squash from the feet
@@ -436,7 +447,7 @@ namespace TrashCats.Presentation.Hideout
                 body.DOScaleY(1.045f, 1.6f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo).SetLink(body.gameObject);
         }
 
-        /// <summary>Clip for a hideout pose and whether its frames face left (run frames are drawn facing left).</summary>
+        /// <summary>Clip for a hideout pose and whether its frames face left.</summary>
         private static (FlipbookClip Clip, bool FacesLeft) ClipFor(CatToken token, HideoutLayout.CatClip clip)
         {
             var art = token.Art;
@@ -445,12 +456,11 @@ namespace TrashCats.Presentation.Hideout
             FlipbookClip Pose(int index) => art.HideoutPose(index) is Sprite sprite ? new FlipbookClip { frames = new[] { sprite } } : null;
             return clip switch
             {
-                HideoutLayout.CatClip.Run when art.run?.frames.Length > 0 => (art.run, true),
+                HideoutLayout.CatClip.Bench when art.bench?.frames.Length > 0 => (art.bench, false),
                 HideoutLayout.CatClip.Punch when art.canPunch?.frames.Length > 0 => (art.canPunch, false),
                 HideoutLayout.CatClip.Rope when art.rope?.frames.Length > 0 => (art.rope, false),
-                HideoutLayout.CatClip.Dig when art.dig?.frames.Length > 0 => (art.dig, false),
                 HideoutLayout.CatClip.Sleep => (Pose(1) ?? Pose(0), false),
-                HideoutLayout.CatClip.Walk or HideoutLayout.CatClip.Run => (Pose(3) ?? Pose(0), false),
+                HideoutLayout.CatClip.Walk or HideoutLayout.CatClip.Bench => (Pose(3) ?? Pose(0), false),
                 HideoutLayout.CatClip.Punch => (Pose(3) ?? Pose(0), false),
                 _ when art.hideoutIdle?.frames.Length > 0 => (art.hideoutIdle, false),
                 _ => (Pose(0), false),
@@ -500,21 +510,20 @@ namespace TrashCats.Presentation.Hideout
         /// <summary>Punch frames (jab and hook fully extended) knock the can.</summary>
         private void OnCatFrame(CatToken token, int frame)
         {
-            if (token.Spot.Clip == HideoutLayout.CatClip.Dig && (frame == 1 || frame == 5))
-                ThrowJunk(token.Root);
             // the jab and the hook are the originally drawn frames 2 and 5
             var punch = token.Art?.canPunch;
             if (_can == null || token.Spot.Clip != HideoutLayout.CatClip.Punch || punch == null || (frame != punch.KeyFrame(2) && frame != punch.KeyFrame(5)))
                 return;
             _can.DOComplete();
-            _can.DOPunchRotation(new Vector3(0, 0, frame == punch.KeyFrame(5) ? -16f : -10f), 0.55f, 4, 0.6f).SetLink(_can.gameObject);
+            // hit from the left: the can swings to the right
+            _can.DOPunchRotation(new Vector3(0, 0, frame == punch.KeyFrame(5) ? 16f : 10f), 0.55f, 4, 0.6f).SetLink(_can.gameObject);
             var star = Ui.Skin?.fxStar;
             if (star == null)
                 return;
             var flash = Ui.Panel(_can, "Hit", Color.white);
             flash.sprite = star;
             flash.preserveAspect = true;
-            flash.rectTransform.anchorMin = flash.rectTransform.anchorMax = new Vector2(0.75f, 0.2f); // hit from the right
+            flash.rectTransform.anchorMin = flash.rectTransform.anchorMax = new Vector2(0.25f, 0.2f); // hit from the left
             flash.rectTransform.sizeDelta = new Vector2(110, 110);
             flash.rectTransform.localScale = Vector3.one * 0.5f;
             DOTween.Sequence()
@@ -524,8 +533,11 @@ namespace TrashCats.Presentation.Hideout
                 .SetLink(flash.gameObject);
         }
 
-        /// <summary>"Ушёл за едой": round portrait, caption and cycle bar shown at the street gap while the cat is away.</summary>
-        private (RectTransform Root, UiBar Bar) AwayBadge(CatId id, Sprite portrait)
+        /// <summary>
+        /// "Ушёл за едой" / "роется в мусоре": round portrait, caption and cycle bar shown at the street gap or over the
+        /// dumpster while the cat is out of sight.
+        /// </summary>
+        private (RectTransform Root, UiBar Bar, TMP_Text Caption) AwayBadge(CatId id, Sprite portrait)
         {
             var root = Ui.Rect(_frame, "Away_" + id);
             var picture = new RoundPicture(root, "Portrait", CatColors.Backdrop(id), 0.8f);
@@ -540,31 +552,11 @@ namespace TrashCats.Presentation.Hideout
             var button = Ui.Panel(root, "Tap", new Color(0, 0, 0, 0), raycast: true);
             button.rectTransform.Fill();
             button.gameObject.AddComponent<Button>().onClick.AddListener(() => _onCatTapped(id));
-            return (root, bar);
+            return (root, bar, caption);
         }
 
-        /// <summary>
-        /// Speed arcs on the wheel's rim: a square that rotates inside a parent squashed to the rim's ellipse
-        /// (measured on the wheel sprite: drum opening x 0.19..0.66, y 0.25..0.84 from the bottom).
-        /// </summary>
-        private static RectTransform WheelArcs(RectTransform picture, Sprite wheel, Sprite arcs)
-        {
-            var ellipse = Ui.Rect(picture, "SpinEllipse");
-            ellipse.anchorMin = ellipse.anchorMax = new Vector2(0.425f, 0.545f);
-            var w = wheel.rect.width * 0.47f * 1.18f;
-            var h = wheel.rect.height * 0.59f * 1.12f;
-            // sizes are in sprite pixels: the picture is fitted with preserveAspect, so scale with its rect
-            var fit = ellipse.gameObject.AddComponent<SpinFit>();
-            fit.Init(picture, wheel, w, h);
-            var image = Ui.Panel(ellipse, "Arcs", Color.white);
-            image.sprite = arcs;
-            image.rectTransform.Fill();
-            image.gameObject.SetActive(false);
-            return image.rectTransform;
-        }
-
-        /// <summary>A bit of junk (bolt, cap, can) flies out of the dumpster in an arc while a cat digs in it.</summary>
-        private void ThrowJunk(RectTransform cat)
+        /// <summary>A bit of junk (bolt, cap, can) pops up out of the dumpster and tumbles down over its front.</summary>
+        private void SpillJunk()
         {
             var sprite = Ui.Skin?.Icon("junk");
             if (sprite == null)
@@ -572,17 +564,18 @@ namespace TrashCats.Presentation.Hideout
             var junk = Ui.Panel(_frame, "Junk", Color.white);
             junk.sprite = sprite;
             junk.preserveAspect = true;
+            junk.transform.SetSiblingIndex(_dumpster.GetSiblingIndex() + 1);
             var rt = junk.rectTransform;
-            var from = new Vector2((cat.anchorMin.x + cat.anchorMax.x) * 0.5f, cat.anchorMin.y + 0.02f);
+            var from = new Vector2(Mathf.Lerp(_dumpster.anchorMin.x, _dumpster.anchorMax.x, UnityEngine.Random.Range(0.25f, 0.7f)), _dumpster.anchorMax.y - 0.03f);
             rt.anchorMin = rt.anchorMax = from;
-            rt.sizeDelta = new Vector2(70, 70);
-            var dx = UnityEngine.Random.Range(60f, 160f);
-            var duration = 0.7f;
+            rt.sizeDelta = Vector2.one * UnityEngine.Random.Range(40f, 60f);
+            var dx = UnityEngine.Random.Range(-90f, 50f);
+            var duration = UnityEngine.Random.Range(0.6f, 0.8f);
             DOTween.Sequence()
                 .Append(rt.DOAnchorPosX(dx, duration).SetEase(Ease.Linear))
                 .Join(rt.DOAnchorPosY(140f, duration * 0.45f).SetEase(Ease.OutQuad))
-                .Insert(duration * 0.45f, rt.DOAnchorPosY(-40f, duration * 0.55f).SetEase(Ease.InQuad))
-                .Join(rt.DORotate(new Vector3(0, 0, -360f), duration, RotateMode.FastBeyond360))
+                .Insert(duration * 0.45f, rt.DOAnchorPosY(-90f, duration * 0.55f).SetEase(Ease.InQuad))
+                .Join(rt.DORotate(new Vector3(0, 0, dx < 0 ? 360f : -360f), duration, RotateMode.FastBeyond360))
                 .Append(junk.DOFade(0f, 0.2f))
                 .OnComplete(() => UnityEngine.Object.Destroy(junk.gameObject))
                 .SetLink(junk.gameObject);
@@ -621,7 +614,7 @@ namespace TrashCats.Presentation.Hideout
             public CharacterArt Art;
             public Image Image;
             public UiFlipbook Flipbook;
-            public (RectTransform Root, UiBar Bar) Away;
+            public (RectTransform Root, UiBar Bar, TMP_Text Caption) Away;
             public Color BaseColor;
             public HideoutLayout.CatSpot Spot;
             public float Depth;

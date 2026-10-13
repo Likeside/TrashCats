@@ -1,0 +1,20 @@
+[
+ {
+  "name": "ryzhy_f07_smirk",
+  "size": "1536x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/refs/thrust/ryzhy_f07.png",
+   "Docs/ArtDirection/Generated/refs/thrust/ryzhy_f00.png"
+  ],
+  "prompt": "Edit the FIRST image: keep EVERYTHING exactly the same (the cat, its pose, the barbell in front of the face, arms, body, legs, size, position, colours, style, green background) and change ONLY the face expression where it is visible: the expression of the cat in the SECOND image \u2014 a smug half-lidded smirk with the MOUTH CLOSED, no teeth visible. The barbell stays in front of the face. Nothing else changes."
+ },
+ {
+  "name": "ryzhy_f08_smirk",
+  "size": "1536x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/refs/thrust/ryzhy_f08.png",
+   "Docs/ArtDirection/Generated/refs/thrust/ryzhy_f00.png"
+  ],
+  "prompt": "Edit the FIRST image: keep EVERYTHING exactly the same (the cat, its pose, the barbell in front of the face, arms, body, legs, size, position, colours, style, green background) and change ONLY the face expression where it is visible: the expression of the cat in the SECOND image \u2014 a smug half-lidded smirk with the MOUTH CLOSED, no teeth visible. The barbell stays in front of the face. Nothing else changes."
+ }
+]
