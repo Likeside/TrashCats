@@ -1,10 +1,22 @@
 fileFormatVersion: 2
-guid: 06f3dd7604af3750fb8794ee67cc966f
+guid: a095f65187009af30879f2bd6c621b0f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1354666940511489137
-    second: ponchik_hideidle_15_0
+      213: -4113500723597405052
+    second: fx_wheel_arcs_0
+  - first:
+      213: -6276360519779880176
+    second: fx_wheel_arcs_1
+  - first:
+      213: 4426943173107162186
+    second: fx_wheel_arcs_2
+  - first:
+      213: 5780231178801358564
+    second: fx_wheel_arcs_3
+  - first:
+      213: -4341199041007997792
+    second: fx_wheel_arcs_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +138,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ponchik_hideidle_15_0
+      name: fx_wheel_arcs_0
       rect:
         serializedVersion: 2
-        x: 33
-        y: 17
-        width: 317
-        height: 379
+        x: 134
+        y: 450
+        width: 173
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +153,96 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 17c0722b76ebcc210800000000000000
-      internalID: 1354666940511489137
+      spriteID: 4841aaad2e8e9e6c0800000000000000
+      internalID: -4113500723597405052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fx_wheel_arcs_1
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 439
+        width: 96
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 013fb306c53e5e8a0800000000000000
+      internalID: -6276360519779880176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fx_wheel_arcs_2
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 46
+        width: 118
+        height: 141
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4c94e96c59af6d30800000000000000
+      internalID: 4426943173107162186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fx_wheel_arcs_3
+      rect:
+        serializedVersion: 2
+        x: 419
+        y: 138
+        width: 46
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e6a714d1a1873050800000000000000
+      internalID: 5780231178801358564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fx_wheel_arcs_4
+      rect:
+        serializedVersion: 2
+        x: 422
+        y: 94
+        width: 76
+        height: 163
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0aca37d0976f0c3c0800000000000000
+      internalID: -4341199041007997792
       vertices: []
       indices: 
       edges: []

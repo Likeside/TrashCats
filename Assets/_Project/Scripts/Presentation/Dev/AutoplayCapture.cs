@@ -153,6 +153,10 @@ namespace TrashCats.Presentation.Dev
             services.Debug.RecruitAllAndRest();
             yield return null;
             Dismiss(); Dismiss();
+            foreach (var cat in services.Session.World.Cats) services.Session.StopActivity(cat.Id);
+            yield return new WaitForSeconds(0.8f);
+            Dismiss(); Dismiss();
+            yield return Shot("03a_idle_three");
             services.Session.AssignActivity(new TrashCats.Domain.CatId("cat_shnyr"), new TrashCats.Domain.ActivityId("act_train_tou"));
             services.Session.AssignActivity(new TrashCats.Domain.CatId("cat_ponchik"), new TrashCats.Domain.ActivityId("act_sleep"));
             yield return new WaitForSeconds(0.8f);

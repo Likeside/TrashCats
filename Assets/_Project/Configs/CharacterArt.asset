@@ -26,7 +26,7 @@ MonoBehaviour:
       fps: 6
       loop: 1
       keys: 
-      pingPong: 0
+      pingPong: 1
       attachPoints: []
       breathe: 0.008
       breathePeriod: 2.4
@@ -185,7 +185,7 @@ MonoBehaviour:
       fps: 6
       loop: 1
       keys: 
-      pingPong: 0
+      pingPong: 1
       attachPoints: []
       breathe: 0.008
       breathePeriod: 2.4
@@ -344,7 +344,7 @@ MonoBehaviour:
       fps: 6
       loop: 1
       keys: 
-      pingPong: 0
+      pingPong: 1
       attachPoints: []
       breathe: 0.008
       breathePeriod: 2.4
@@ -503,7 +503,7 @@ MonoBehaviour:
       fps: 6
       loop: 1
       keys: 
-      pingPong: 0
+      pingPong: 1
       attachPoints: []
       breathe: 0.008
       breathePeriod: 2.4
@@ -593,11 +593,10 @@ MonoBehaviour:
       - {fileID: 21300000, guid: b97e31aac385ac9a593292bfcfbeee78, type: 3}
       - {fileID: 21300000, guid: 5abe4f2bf7e44094189f38bf6cc52cb0, type: 3}
       - {fileID: 21300000, guid: 8d73e7e1ed5f26572834fc1915912f88, type: 3}
-      - {fileID: 21300000, guid: 06f3dd7604af3750fb8794ee67cc966f, type: 3}
       fps: 12
       loop: 1
       keys: 
-      pingPong: 0
+      pingPong: 1
       attachPoints: []
       breathe: 0
       breathePeriod: 2.4
@@ -734,7 +733,7 @@ MonoBehaviour:
       fps: 6
       loop: 1
       keys: 
-      pingPong: 0
+      pingPong: 1
       attachPoints: []
       breathe: 0.008
       breathePeriod: 2.4
@@ -893,7 +892,7 @@ MonoBehaviour:
       fps: 6
       loop: 1
       keys: 
-      pingPong: 0
+      pingPong: 1
       attachPoints: []
       breathe: 0.008
       breathePeriod: 2.4
@@ -1052,7 +1051,7 @@ MonoBehaviour:
       fps: 6
       loop: 1
       keys: 
-      pingPong: 0
+      pingPong: 1
       attachPoints: []
       breathe: 0.008
       breathePeriod: 2.4
@@ -1315,11 +1314,10 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 9440f01f66f0d99d5898358cb9008017, type: 3}
       - {fileID: 21300000, guid: fbf6ca8f3f9ab79c8ba043d9d9dc90ca, type: 3}
       - {fileID: 21300000, guid: 43e93473e1d93632084393e1fb77ebcf, type: 3}
-      - {fileID: 21300000, guid: 224e727d5b81398e39eabdf389527d03, type: 3}
       fps: 12
       loop: 1
       keys: 
-      pingPong: 0
+      pingPong: 1
       attachPoints: []
       breathe: 0
       breathePeriod: 2.4
@@ -1464,7 +1462,7 @@ MonoBehaviour:
       fps: 6
       loop: 1
       keys: 
-      pingPong: 0
+      pingPong: 1
       attachPoints: []
       breathe: 0.008
       breathePeriod: 2.4
@@ -1552,11 +1550,10 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 7fc12feab84775d75af47dc96ab4852b, type: 3}
       - {fileID: 21300000, guid: ebce37c8792264a4d96eacc69559fbc1, type: 3}
       - {fileID: 21300000, guid: c6c9abf06955394779fa25f49fee7afa, type: 3}
-      - {fileID: 21300000, guid: d9e55247a6a84fa94b4a4004bea5440d, type: 3}
       fps: 12
       loop: 1
       keys: 
-      pingPong: 0
+      pingPong: 1
       attachPoints: []
       breathe: 0
       breathePeriod: 2.4
@@ -1693,7 +1690,7 @@ MonoBehaviour:
       fps: 6
       loop: 1
       keys: 
-      pingPong: 0
+      pingPong: 1
       attachPoints: []
       breathe: 0.008
       breathePeriod: 2.4
@@ -1983,7 +1980,7 @@ MonoBehaviour:
       fps: 6
       loop: 1
       keys: 
-      pingPong: 0
+      pingPong: 1
       attachPoints: []
       breathe: 0.008
       breathePeriod: 2.4
@@ -2142,7 +2139,7 @@ MonoBehaviour:
       fps: 6
       loop: 1
       keys: 
-      pingPong: 0
+      pingPong: 1
       attachPoints: []
       breathe: 0.008
       breathePeriod: 2.4
@@ -2303,6 +2300,8 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 411d07a56dbec68949e2ec2f2b4459b0, type: 3}
   - key: bg_map
     sprite: {fileID: 21300000, guid: 5acc1b7dedfbc782b8e854ba5cff45a0, type: 3}
+  - key: fx_wheel_arcs
+    sprite: {fileID: 21300000, guid: a095f65187009af30879f2bd6c621b0f, type: 3}
   - key: icon_energy
     sprite: {fileID: 21300000, guid: ecec9d35429069e9baff2291dd18524b, type: 3}
   - key: icon_food

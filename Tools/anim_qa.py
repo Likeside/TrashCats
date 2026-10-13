@@ -22,6 +22,8 @@ OUT_DIR = "TestResults/anim-qa"
 
 # clips that should stand on one spot (drift is a defect); strikes and hits move on purpose
 IN_PLACE = {"idle", "hideoutIdle", "run", "canPunch", "rope", "dig"}
+# clips the game does not animate (the wheel spins procedurally over its first frame)
+SKIP = {"wheel/idle"}
 LIMITS = {"size": 0.08, "drift": 0.04, "seam": 1.8, "spike": 3.0, "smear": 0.03}
 
 
@@ -146,7 +148,7 @@ def draw(clip, frames, path):
 def main():
     only = sys.argv[sys.argv.index("--only") + 1] if "--only" in sys.argv else ""
     images = "--no-images" not in sys.argv
-    clips = [c for c in json.load(open(MANIFEST)) if only in f"{c['character']}/{c['role']}"]
+    clips = [c for c in json.load(open(MANIFEST)) if only in f"{c['character']}/{c['role']}" and f"{c['character']}/{c['role']}" not in SKIP]
     os.makedirs(OUT_DIR, exist_ok=True)
     rows = []
     for clip in clips:
