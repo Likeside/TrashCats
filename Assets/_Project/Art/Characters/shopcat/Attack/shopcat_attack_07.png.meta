@@ -129,10 +129,10 @@ TextureImporter:
       name: shopcat_attack_07_0
       rect:
         serializedVersion: 2
-        x: 261
-        y: 15
-        width: 241
-        height: 363
+        x: 335
+        y: 73
+        width: 349
+        height: 316
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

@@ -129,10 +129,10 @@ TextureImporter:
       name: shnyr_attack_05_0
       rect:
         serializedVersion: 2
-        x: 210
-        y: 36
-        width: 241
-        height: 333
+        x: 313
+        y: 37
+        width: 291
+        height: 326
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

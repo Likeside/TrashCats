@@ -129,10 +129,10 @@ TextureImporter:
       name: shnyr_canpunch_06_0
       rect:
         serializedVersion: 2
-        x: 225
+        x: 247
         y: 15
-        width: 236
-        height: 372
+        width: 234
+        height: 379
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

@@ -40,6 +40,13 @@ namespace TrashCats.Presentation.Characters
             if (_art != null && _art.HasBattleArt) _body.Play(_art.idle);
         }
 
+        /// <summary>Seconds (at ×1) from the start of the attack to the frame where the blow lands (drawn frame 4).</summary>
+        public float StrikeDelay(SkillDefinition skill)
+        {
+            var clip = skill.IsHeavyAttack ? _art?.heavyAttack : _art?.attack;
+            return clip != null && clip.keys != null && clip.keys.Length > 3 ? clip.KeyTime(3) : 0.3f;
+        }
+
         public void PlayAttack(SkillDefinition skill, int speed)
         {
             var clip = skill.IsHeavyAttack ? _art?.heavyAttack : _art?.attack;

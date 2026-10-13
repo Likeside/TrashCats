@@ -486,10 +486,12 @@ namespace TrashCats.Presentation.Hideout
         {
             if (token.Spot.Clip == HideoutLayout.CatClip.Dig && (frame == 1 || frame == 5))
                 ThrowJunk(token.Root);
-            if (_can == null || token.Spot.Clip != HideoutLayout.CatClip.Punch || (frame != 2 && frame != 5))
+            // the jab and the hook are the originally drawn frames 2 and 5
+            var punch = token.Art?.canPunch;
+            if (_can == null || token.Spot.Clip != HideoutLayout.CatClip.Punch || punch == null || (frame != punch.KeyFrame(2) && frame != punch.KeyFrame(5)))
                 return;
             _can.DOComplete();
-            _can.DOPunchRotation(new Vector3(0, 0, frame == 5 ? -16f : -10f), 0.55f, 4, 0.6f).SetLink(_can.gameObject);
+            _can.DOPunchRotation(new Vector3(0, 0, frame == punch.KeyFrame(5) ? -16f : -10f), 0.55f, 4, 0.6f).SetLink(_can.gameObject);
             var star = Ui.Skin?.fxStar;
             if (star == null)
                 return;

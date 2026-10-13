@@ -146,9 +146,14 @@ namespace TrashCats.Editor
         private static FlipbookClip Clip(string dir, string folder, float fps, bool loop)
         {
             var frames = Sprites($"{dir}/{folder}");
-            // clips doubled by Tools/interpolate_frames.py (8 -> 16, 8 -> 15) play at double rate: same tempo, smoother
-            if (frames.Length >= 15) fps *= 2f;
-            return frames.Length == 0 ? null : new FlipbookClip { name = folder.ToLowerInvariant(), frames = frames, fps = fps, loop = loop };
+            // doubled clips play faster to keep the tempo: by keys.json (adaptive in-betweens) or 8 -> 15/16 frames
+            var keys = new int[0];
+            var keysPath = $"{dir}/{folder}/keys.json";
+            if (File.Exists(keysPath))
+                keys = Regex.Matches(File.ReadAllText(keysPath), @"\d+").Cast<Match>().Select(m => int.Parse(m.Value)).ToArray();
+            if (keys.Length > 0) fps *= (float)frames.Length / keys.Length;
+            else if (frames.Length >= 15) fps *= 2f;
+            return frames.Length == 0 ? null : new FlipbookClip { name = folder.ToLowerInvariant(), frames = frames, fps = fps, loop = loop, keys = keys };
         }
 
         private static Sprite[] Sprites(string folder)

@@ -25,6 +25,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 3be6aca0a739139b095a5dc2e35ebc30, type: 3}
       fps: 6
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0.008
@@ -40,8 +41,17 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 6b210bcf86db748639f30b47ac1c392a, type: 3}
       - {fileID: 21300000, guid: c825aced0c8133b8292ea8e7811eb224, type: 3}
       - {fileID: 21300000, guid: 3e589fec4e17f1dd7a688a4fb0a9699e, type: 3}
-      fps: 12
+      - {fileID: 21300000, guid: c9dd84155cee10857b7f799d296618ee, type: 3}
+      - {fileID: 21300000, guid: 3e2e239f6cc421eacbc3e58c3966e0d2, type: 3}
+      - {fileID: 21300000, guid: b2cb54349fcbd0f78b6dd86448a19e81, type: 3}
+      - {fileID: 21300000, guid: 65953267f19cbd46aafefcc4d81e2ac1, type: 3}
+      - {fileID: 21300000, guid: 6a2e7207c8e4e0ac89a5f89fde26a22f, type: 3}
+      - {fileID: 21300000, guid: cdc975db4dfd59504ac1f468a0b33d72, type: 3}
+      - {fileID: 21300000, guid: 052f3662732e3ad8b9163f3748f064dc, type: 3}
+      - {fileID: 21300000, guid: e059e84f2f36ea6658929be897d2e737, type: 3}
+      fps: 24
       loop: 0
+      keys: 00000000010000000200000005000000070000000a0000000c0000000f000000
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -57,8 +67,17 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 6b210bcf86db748639f30b47ac1c392a, type: 3}
       - {fileID: 21300000, guid: c825aced0c8133b8292ea8e7811eb224, type: 3}
       - {fileID: 21300000, guid: 3e589fec4e17f1dd7a688a4fb0a9699e, type: 3}
-      fps: 12
+      - {fileID: 21300000, guid: c9dd84155cee10857b7f799d296618ee, type: 3}
+      - {fileID: 21300000, guid: 3e2e239f6cc421eacbc3e58c3966e0d2, type: 3}
+      - {fileID: 21300000, guid: b2cb54349fcbd0f78b6dd86448a19e81, type: 3}
+      - {fileID: 21300000, guid: 65953267f19cbd46aafefcc4d81e2ac1, type: 3}
+      - {fileID: 21300000, guid: 6a2e7207c8e4e0ac89a5f89fde26a22f, type: 3}
+      - {fileID: 21300000, guid: cdc975db4dfd59504ac1f468a0b33d72, type: 3}
+      - {fileID: 21300000, guid: 052f3662732e3ad8b9163f3748f064dc, type: 3}
+      - {fileID: 21300000, guid: e059e84f2f36ea6658929be897d2e737, type: 3}
+      fps: 24
       loop: 0
+      keys: 00000000010000000200000005000000070000000a0000000c0000000f000000
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -72,6 +91,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: c004096089311b811ac42e558048afed, type: 3}
       fps: 12
       loop: 0
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -85,6 +105,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 1ea1992402edf8a7f911ed6a94eb7741, type: 3}
       fps: 8
       loop: 0
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -94,6 +115,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -103,6 +125,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -112,6 +135,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -121,6 +145,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -130,6 +155,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -139,6 +165,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -157,6 +184,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: f162855417a331bcca8e477e0786123a, type: 3}
       fps: 6
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0.008
@@ -172,8 +200,17 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 4e17f1ddd1ad200b2a68e3403f793c13, type: 3}
       - {fileID: 21300000, guid: e7055771fb2b101bbab38f1482049ac6, type: 3}
       - {fileID: 21300000, guid: 36b12e1daafdacd6b969d6dee1323ebc, type: 3}
-      fps: 12
+      - {fileID: 21300000, guid: 77766b712897d241bb30697ec9912a92, type: 3}
+      - {fileID: 21300000, guid: 00e4b8d8a57d512f8bf9fc5a46c189c9, type: 3}
+      - {fileID: 21300000, guid: 9bab4bb429b17471d947caec01a2b829, type: 3}
+      - {fileID: 21300000, guid: a8b240c731430b354aaa51efc14c5053, type: 3}
+      - {fileID: 21300000, guid: d41e00862f052cab48b87d9e64799e2f, type: 3}
+      - {fileID: 21300000, guid: fda0c8d9c5c91653f9cb9b069e4445ed, type: 3}
+      - {fileID: 21300000, guid: e077373204c89ca12829d37b04bf23bc, type: 3}
+      - {fileID: 21300000, guid: f2e21437b870cb52cbe284e7e823cf22, type: 3}
+      fps: 24
       loop: 0
+      keys: 00000000040000000500000006000000090000000a0000000b0000000f000000
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -189,8 +226,17 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 4e17f1ddd1ad200b2a68e3403f793c13, type: 3}
       - {fileID: 21300000, guid: e7055771fb2b101bbab38f1482049ac6, type: 3}
       - {fileID: 21300000, guid: 36b12e1daafdacd6b969d6dee1323ebc, type: 3}
-      fps: 12
+      - {fileID: 21300000, guid: 77766b712897d241bb30697ec9912a92, type: 3}
+      - {fileID: 21300000, guid: 00e4b8d8a57d512f8bf9fc5a46c189c9, type: 3}
+      - {fileID: 21300000, guid: 9bab4bb429b17471d947caec01a2b829, type: 3}
+      - {fileID: 21300000, guid: a8b240c731430b354aaa51efc14c5053, type: 3}
+      - {fileID: 21300000, guid: d41e00862f052cab48b87d9e64799e2f, type: 3}
+      - {fileID: 21300000, guid: fda0c8d9c5c91653f9cb9b069e4445ed, type: 3}
+      - {fileID: 21300000, guid: e077373204c89ca12829d37b04bf23bc, type: 3}
+      - {fileID: 21300000, guid: f2e21437b870cb52cbe284e7e823cf22, type: 3}
+      fps: 24
       loop: 0
+      keys: 00000000040000000500000006000000090000000a0000000b0000000f000000
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -204,6 +250,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: dce575af497d5b8b9af14a4ce8f2d10c, type: 3}
       fps: 12
       loop: 0
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -217,6 +264,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: d803a4bc666451d63987b47d8f11e262, type: 3}
       fps: 8
       loop: 0
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -226,6 +274,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -235,6 +284,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -244,6 +294,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -253,6 +304,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -262,6 +314,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -271,6 +324,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -289,6 +343,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 65bdc81cf3f8ac6a2b038db3d8401ee6, type: 3}
       fps: 6
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0.008
@@ -304,8 +359,17 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 9011fa0b1e24ffc3d9efd35f30a9bb7a, type: 3}
       - {fileID: 21300000, guid: 4a0f45f65ef5a79a1839fa3b57c6fb8c, type: 3}
       - {fileID: 21300000, guid: 61476a00096885b71a124a4b4cf2b478, type: 3}
-      fps: 12
+      - {fileID: 21300000, guid: 7e7718b8922605a8391eda3ba2495901, type: 3}
+      - {fileID: 21300000, guid: 097eb20969e936990975c154d5fa499f, type: 3}
+      - {fileID: 21300000, guid: 890cc4639ef7e53b58a1d5414d1bfe84, type: 3}
+      - {fileID: 21300000, guid: 150f7f81195661854a3d564ada7b1319, type: 3}
+      - {fileID: 21300000, guid: 2a8a3e63209723dd3bb6247592232db4, type: 3}
+      - {fileID: 21300000, guid: 9452f50692abbee24b350ba61b76920b, type: 3}
+      - {fileID: 21300000, guid: 09965c92374ac8a55a17942b27c96a94, type: 3}
+      - {fileID: 21300000, guid: f35fd2b451f6db47ebaf68d8072aeb0f, type: 3}
+      fps: 24
       loop: 0
+      keys: 0000000001000000020000000300000007000000080000000b0000000f000000
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -321,8 +385,17 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 9011fa0b1e24ffc3d9efd35f30a9bb7a, type: 3}
       - {fileID: 21300000, guid: 4a0f45f65ef5a79a1839fa3b57c6fb8c, type: 3}
       - {fileID: 21300000, guid: 61476a00096885b71a124a4b4cf2b478, type: 3}
-      fps: 12
+      - {fileID: 21300000, guid: 7e7718b8922605a8391eda3ba2495901, type: 3}
+      - {fileID: 21300000, guid: 097eb20969e936990975c154d5fa499f, type: 3}
+      - {fileID: 21300000, guid: 890cc4639ef7e53b58a1d5414d1bfe84, type: 3}
+      - {fileID: 21300000, guid: 150f7f81195661854a3d564ada7b1319, type: 3}
+      - {fileID: 21300000, guid: 2a8a3e63209723dd3bb6247592232db4, type: 3}
+      - {fileID: 21300000, guid: 9452f50692abbee24b350ba61b76920b, type: 3}
+      - {fileID: 21300000, guid: 09965c92374ac8a55a17942b27c96a94, type: 3}
+      - {fileID: 21300000, guid: f35fd2b451f6db47ebaf68d8072aeb0f, type: 3}
+      fps: 24
       loop: 0
+      keys: 0000000001000000020000000300000007000000080000000b0000000f000000
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -336,6 +409,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 8ed4f7266a019e14681f9cf8ebddc48b, type: 3}
       fps: 12
       loop: 0
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -349,6 +423,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 10bab449aad63fc6392d82e77f7347bd, type: 3}
       fps: 8
       loop: 0
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -358,6 +433,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -367,6 +443,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -376,6 +453,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -385,6 +463,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -394,6 +473,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -403,6 +483,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -421,6 +502,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 4ddcece3a1da9bab099e0f6ac5791652, type: 3}
       fps: 6
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0.008
@@ -436,8 +518,17 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 7b7baa30594af646993f8e26db6eb43e, type: 3}
       - {fileID: 21300000, guid: c62ea05b453b85cadb9e9098fe88bc53, type: 3}
       - {fileID: 21300000, guid: 8b51037d91edb9eb6ba8f187aa9faf11, type: 3}
-      fps: 12
+      - {fileID: 21300000, guid: b9e4c8d866b0471aa8bc848dbeb1b41a, type: 3}
+      - {fileID: 21300000, guid: fc16c5e495c727f46aefcf1d1b331982, type: 3}
+      - {fileID: 21300000, guid: 57d7e658539422959b1891f601b34bec, type: 3}
+      - {fileID: 21300000, guid: 66277c83aaff7e376aea250d7c3615fb, type: 3}
+      - {fileID: 21300000, guid: 902660cbc80c050feb16435b4436f418, type: 3}
+      - {fileID: 21300000, guid: e4f46de08bab4f8798b1dde659002749, type: 3}
+      - {fileID: 21300000, guid: a61826824afde95fd859f1373554d677, type: 3}
+      - {fileID: 21300000, guid: 503f83b4936685842852067c0a7aa3ad, type: 3}
+      fps: 24
       loop: 0
+      keys: 0000000001000000020000000300000006000000090000000c0000000f000000
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -451,6 +542,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: c5a06af548cb2f918be8155717700cfa, type: 3}
       fps: 12
       loop: 0
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -464,6 +556,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: d1c76542b1e69e4bcbb953b2c9ae9963, type: 3}
       fps: 12
       loop: 0
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -477,6 +570,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: ca4a98b77c686061da5b319f408ab146, type: 3}
       fps: 8
       loop: 0
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -502,6 +596,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 06f3dd7604af3750fb8794ee67cc966f, type: 3}
       fps: 12
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -527,6 +622,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: a058f14dfa702a372b63e3a550358bd1, type: 3}
       fps: 18
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -552,6 +648,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 7d9684aeeb394fd3b92e08cae536c7d9, type: 3}
       fps: 16
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -577,6 +674,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 076de383697fa97648fe3566113dd82f, type: 3}
       fps: 18
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -592,8 +690,17 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 4a077196e4655aff686f6fd1cf443658, type: 3}
       - {fileID: 21300000, guid: 4a69327582da1e284bd3d082de8d6d7b, type: 3}
       - {fileID: 21300000, guid: 50eeb0cf1449c037987eda231004db33, type: 3}
-      fps: 10
+      - {fileID: 21300000, guid: 5fbebb4f46831698fa644b175f7d833c, type: 3}
+      - {fileID: 21300000, guid: 42867f8e64fc5d86d89738bb7b6910eb, type: 3}
+      - {fileID: 21300000, guid: b1f74edee123d8b23bf646b86c4e2693, type: 3}
+      - {fileID: 21300000, guid: 65850b7fc799fe5b5856a5d1cb6f0333, type: 3}
+      - {fileID: 21300000, guid: 46a673647af3adf84911661429a8755f, type: 3}
+      - {fileID: 21300000, guid: 61abec80fab97b65c9ec82721b3d26e6, type: 3}
+      - {fileID: 21300000, guid: 16ac1031d414189ff8e2eb892799930e, type: 3}
+      - {fileID: 21300000, guid: 6d5167dfc18ae0e04853da76a82c37b4, type: 3}
+      fps: 20
       loop: 1
+      keys: 00000000020000000400000006000000080000000a0000000c0000000e000000
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -603,6 +710,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -625,6 +733,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 69658ed8992dcbcfeadf9284d103dc05, type: 3}
       fps: 6
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0.008
@@ -640,8 +749,17 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 16f03b945932f23969314a2cf2e09f3d, type: 3}
       - {fileID: 21300000, guid: 63bd0e204736938e683e5ea038c16711, type: 3}
       - {fileID: 21300000, guid: 0fc4b451eefaa4632b38693178715a2b, type: 3}
-      fps: 12
+      - {fileID: 21300000, guid: 38c1b05957518b579b1bba3c73983973, type: 3}
+      - {fileID: 21300000, guid: 24461bafcd5d71f4eb589a1dd0478da7, type: 3}
+      - {fileID: 21300000, guid: 06c9a3b0ee1127afbabff6767139eaed, type: 3}
+      - {fileID: 21300000, guid: e3dc8a104815f3b6baf479375ec5b09d, type: 3}
+      - {fileID: 21300000, guid: 7cbbd8e93ea6faf0aa69c86cae613e54, type: 3}
+      - {fileID: 21300000, guid: 21ec346bb425fc2ceb5b45068dbad5d3, type: 3}
+      - {fileID: 21300000, guid: f31c6c596c4832d299b3918e9ee4ac83, type: 3}
+      - {fileID: 21300000, guid: 6ffb6ab90fd129aa888307b898297a1e, type: 3}
+      fps: 24
       loop: 0
+      keys: 0000000002000000030000000600000007000000090000000c0000000f000000
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -657,8 +775,17 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 16f03b945932f23969314a2cf2e09f3d, type: 3}
       - {fileID: 21300000, guid: 63bd0e204736938e683e5ea038c16711, type: 3}
       - {fileID: 21300000, guid: 0fc4b451eefaa4632b38693178715a2b, type: 3}
-      fps: 12
+      - {fileID: 21300000, guid: 38c1b05957518b579b1bba3c73983973, type: 3}
+      - {fileID: 21300000, guid: 24461bafcd5d71f4eb589a1dd0478da7, type: 3}
+      - {fileID: 21300000, guid: 06c9a3b0ee1127afbabff6767139eaed, type: 3}
+      - {fileID: 21300000, guid: e3dc8a104815f3b6baf479375ec5b09d, type: 3}
+      - {fileID: 21300000, guid: 7cbbd8e93ea6faf0aa69c86cae613e54, type: 3}
+      - {fileID: 21300000, guid: 21ec346bb425fc2ceb5b45068dbad5d3, type: 3}
+      - {fileID: 21300000, guid: f31c6c596c4832d299b3918e9ee4ac83, type: 3}
+      - {fileID: 21300000, guid: 6ffb6ab90fd129aa888307b898297a1e, type: 3}
+      fps: 24
       loop: 0
+      keys: 0000000002000000030000000600000007000000090000000c0000000f000000
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -672,6 +799,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: bc7b45c90db6fc3fd8c38c138353bce3, type: 3}
       fps: 12
       loop: 0
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -685,6 +813,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 11deedebfe4e974739ab1eb9926b2f98, type: 3}
       fps: 8
       loop: 0
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -694,6 +823,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -703,6 +833,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -712,6 +843,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -721,6 +853,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -730,6 +863,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -739,6 +873,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -757,6 +892,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: c0b2307e9f6da9a5cbf4f267d2c585b1, type: 3}
       fps: 6
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0.008
@@ -772,8 +908,17 @@ MonoBehaviour:
       - {fileID: 21300000, guid: b5cea396e36f71778bdbe8a9bdd2b94f, type: 3}
       - {fileID: 21300000, guid: 72f5d7a4056f312879cfb9d6ac1f3404, type: 3}
       - {fileID: 21300000, guid: 28a1760e8a1dbddf083f01f498692801, type: 3}
-      fps: 12
+      - {fileID: 21300000, guid: 34f681b6ac2dd47ad8ca847babddc3d0, type: 3}
+      - {fileID: 21300000, guid: 929c6f5afd484ec6a876c3e9ab8a6057, type: 3}
+      - {fileID: 21300000, guid: 2b89aa664ca202e2dba1f53545b2c531, type: 3}
+      - {fileID: 21300000, guid: 58e41012b66385e0fad4b75afd4df875, type: 3}
+      - {fileID: 21300000, guid: dcdc1dc725745f3b6b27c9cc6de6c95e, type: 3}
+      - {fileID: 21300000, guid: d0861d71272770e0688b1212ae88dc72, type: 3}
+      - {fileID: 21300000, guid: e1d10cbb6fc716e84b20aa2a3144b69e, type: 3}
+      - {fileID: 21300000, guid: dcc98f258acdbf7d18dd0b528fe48469, type: 3}
+      fps: 24
       loop: 0
+      keys: 0000000001000000020000000300000006000000090000000c0000000f000000
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -789,8 +934,17 @@ MonoBehaviour:
       - {fileID: 21300000, guid: b5cea396e36f71778bdbe8a9bdd2b94f, type: 3}
       - {fileID: 21300000, guid: 72f5d7a4056f312879cfb9d6ac1f3404, type: 3}
       - {fileID: 21300000, guid: 28a1760e8a1dbddf083f01f498692801, type: 3}
-      fps: 12
+      - {fileID: 21300000, guid: 34f681b6ac2dd47ad8ca847babddc3d0, type: 3}
+      - {fileID: 21300000, guid: 929c6f5afd484ec6a876c3e9ab8a6057, type: 3}
+      - {fileID: 21300000, guid: 2b89aa664ca202e2dba1f53545b2c531, type: 3}
+      - {fileID: 21300000, guid: 58e41012b66385e0fad4b75afd4df875, type: 3}
+      - {fileID: 21300000, guid: dcdc1dc725745f3b6b27c9cc6de6c95e, type: 3}
+      - {fileID: 21300000, guid: d0861d71272770e0688b1212ae88dc72, type: 3}
+      - {fileID: 21300000, guid: e1d10cbb6fc716e84b20aa2a3144b69e, type: 3}
+      - {fileID: 21300000, guid: dcc98f258acdbf7d18dd0b528fe48469, type: 3}
+      fps: 24
       loop: 0
+      keys: 0000000001000000020000000300000006000000090000000c0000000f000000
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -804,6 +958,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: d5aa66f9494499a8caa4621fd418da71, type: 3}
       fps: 12
       loop: 0
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -817,6 +972,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: f9c52d73a7869410594537123b8097e1, type: 3}
       fps: 8
       loop: 0
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -826,6 +982,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -835,6 +992,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -844,6 +1002,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -853,6 +1012,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -862,6 +1022,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -871,6 +1032,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -889,6 +1051,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: b00d6bc175db2869ba362a987e236a62, type: 3}
       fps: 6
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0.008
@@ -904,8 +1067,17 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 0d95ee6a36317eaa7ba415d6534d7293, type: 3}
       - {fileID: 21300000, guid: 81a23ddeac04d3f78a9bed89a305f5f9, type: 3}
       - {fileID: 21300000, guid: 32a28abec8c160e7d9ffe731803a5c67, type: 3}
-      fps: 12
+      - {fileID: 21300000, guid: f5196bb791cf07bc193c55422f713324, type: 3}
+      - {fileID: 21300000, guid: 28a40cd871ffc11cea7eddb40a5eb819, type: 3}
+      - {fileID: 21300000, guid: 949309e1bc9925838b9e61c9f39be725, type: 3}
+      - {fileID: 21300000, guid: 8489bbdc5fcdb816590a9fa443f59ede, type: 3}
+      - {fileID: 21300000, guid: 913e18cf804e2d3cfad0ca4413aeb13e, type: 3}
+      - {fileID: 21300000, guid: 064417012c017d4428aa430671e824c5, type: 3}
+      - {fileID: 21300000, guid: bb39a86c8aad72a3491048ff5ca1ef7b, type: 3}
+      - {fileID: 21300000, guid: ac05b75275c3d8123951edefff011b9b, type: 3}
+      fps: 24
       loop: 0
+      keys: 00000000010000000200000005000000070000000a0000000c0000000f000000
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -921,8 +1093,17 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 0d95ee6a36317eaa7ba415d6534d7293, type: 3}
       - {fileID: 21300000, guid: 81a23ddeac04d3f78a9bed89a305f5f9, type: 3}
       - {fileID: 21300000, guid: 32a28abec8c160e7d9ffe731803a5c67, type: 3}
-      fps: 12
+      - {fileID: 21300000, guid: f5196bb791cf07bc193c55422f713324, type: 3}
+      - {fileID: 21300000, guid: 28a40cd871ffc11cea7eddb40a5eb819, type: 3}
+      - {fileID: 21300000, guid: 949309e1bc9925838b9e61c9f39be725, type: 3}
+      - {fileID: 21300000, guid: 8489bbdc5fcdb816590a9fa443f59ede, type: 3}
+      - {fileID: 21300000, guid: 913e18cf804e2d3cfad0ca4413aeb13e, type: 3}
+      - {fileID: 21300000, guid: 064417012c017d4428aa430671e824c5, type: 3}
+      - {fileID: 21300000, guid: bb39a86c8aad72a3491048ff5ca1ef7b, type: 3}
+      - {fileID: 21300000, guid: ac05b75275c3d8123951edefff011b9b, type: 3}
+      fps: 24
       loop: 0
+      keys: 00000000010000000200000005000000070000000a0000000c0000000f000000
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -936,6 +1117,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: d345bf6045cc28a1aaa94f288f43eec5, type: 3}
       fps: 12
       loop: 0
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -949,6 +1131,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: d8f22a0b4a45f4a04b68928d4c82da6f, type: 3}
       fps: 8
       loop: 0
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -958,6 +1141,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -967,6 +1151,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -976,6 +1161,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -985,6 +1171,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -994,6 +1181,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1003,6 +1191,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1018,6 +1207,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 8060dcf920e949793a71353d7d2f78b8, type: 3}
       fps: 6
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints:
       - {x: 0.12, y: 1.49}
@@ -1036,6 +1226,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 85b5cd79f91b356ec9f9d63d7d307824, type: 3}
       fps: 12
       loop: 0
+      keys: 
       pingPong: 0
       attachPoints:
       - {x: 0.125, y: 1.47}
@@ -1057,6 +1248,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 66d6f46b76ca22b0cae2015465169fd5, type: 3}
       fps: 12
       loop: 0
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1070,6 +1262,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 910389cd0b8b7162fa2330f8bf9a0a98, type: 3}
       fps: 12
       loop: 0
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1083,6 +1276,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 3f8c07c9fa3fddb4b83dd4735c2e34bb, type: 3}
       fps: 8
       loop: 0
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1108,6 +1302,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 224e727d5b81398e39eabdf389527d03, type: 3}
       fps: 12
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1133,6 +1328,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 2ba59cf1c380f353380f6bceb2e5904b, type: 3}
       fps: 18
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1158,6 +1354,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: b405d90c941c5e3cf869f170d9342e1f, type: 3}
       fps: 16
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1183,6 +1380,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 4183dc0ca9e05c1b5b585c33b0d54997, type: 3}
       fps: 18
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1198,8 +1396,17 @@ MonoBehaviour:
       - {fileID: 21300000, guid: d344766501471a81780cc4c34703e8c1, type: 3}
       - {fileID: 21300000, guid: 479d4a0748226b36d8892a93d9202c45, type: 3}
       - {fileID: 21300000, guid: 80e1bf201debb80ddb436cdf2b71459b, type: 3}
-      fps: 10
+      - {fileID: 21300000, guid: c5cb758e974d5a6429fa4311f07ad594, type: 3}
+      - {fileID: 21300000, guid: 4274dbc16de53d471a72f20c4358ee46, type: 3}
+      - {fileID: 21300000, guid: aea6c929183b75c75838ef5cb697925d, type: 3}
+      - {fileID: 21300000, guid: e129394a6b6f9956ba1b84458a8743ac, type: 3}
+      - {fileID: 21300000, guid: 2900f02f324798850b55b594b0593c02, type: 3}
+      - {fileID: 21300000, guid: 11a024aa61b5979bc9f6c1a29dccb461, type: 3}
+      - {fileID: 21300000, guid: 38e53eca2e1013fd793fe9619d8dbfe5, type: 3}
+      - {fileID: 21300000, guid: 3c28a58eb30b33fb18ce2de525acf6ed, type: 3}
+      fps: 20
       loop: 1
+      keys: 00000000020000000400000006000000080000000a0000000c0000000e000000
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1217,6 +1424,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: bc0a39257291a2edda7d8094a2a18981, type: 3}
       fps: 5
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1239,6 +1447,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 73ccf66a793d413518620c22a63004ce, type: 3}
       fps: 6
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0.008
@@ -1254,8 +1463,15 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 5c9d6d459f17e8ffaafc4e03f97dea63, type: 3}
       - {fileID: 21300000, guid: e783454d4ba99d85a91905e4025a20e0, type: 3}
       - {fileID: 21300000, guid: 65bf0eb74a2c87fe0944865287ec85e3, type: 3}
-      fps: 12
+      - {fileID: 21300000, guid: 888e053b54e0f6d079f0f40b10368864, type: 3}
+      - {fileID: 21300000, guid: 0f7d8a276c2e0c70e926f3fc3108aaac, type: 3}
+      - {fileID: 21300000, guid: 1e9d98ef422cf5ef3a4604ac0afc4745, type: 3}
+      - {fileID: 21300000, guid: e125284e842ecc4ee85e26d2d86299fd, type: 3}
+      - {fileID: 21300000, guid: 2cd8d792704f02aa89c3250915dc9e68, type: 3}
+      - {fileID: 21300000, guid: 3d35f334f77121ee99045afe93b9ee72, type: 3}
+      fps: 21
       loop: 0
+      keys: 000000000100000002000000030000000700000008000000090000000d000000
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1269,6 +1485,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 1833c60a1473a353c9a9e48f53077645, type: 3}
       fps: 12
       loop: 0
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1282,6 +1499,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 8fe1d78e6eb7a6deabf4ba0b8d737515, type: 3}
       fps: 12
       loop: 0
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1295,6 +1513,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 10bac811da2e98a3d8fcb115d8c93e03, type: 3}
       fps: 8
       loop: 0
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1320,6 +1539,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: d9e55247a6a84fa94b4a4004bea5440d, type: 3}
       fps: 12
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1345,6 +1565,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: c11492add87dcb7db88e919fb6032ea1, type: 3}
       fps: 18
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1370,6 +1591,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: f1618a869a411287dbe02cdaab40d248, type: 3}
       fps: 16
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1395,6 +1617,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: dbe1001deb3cc6825809c2c9ae5ed5a5, type: 3}
       fps: 18
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1410,8 +1633,17 @@ MonoBehaviour:
       - {fileID: 21300000, guid: a0eb9a25b19b9949fbb56dfc830521ad, type: 3}
       - {fileID: 21300000, guid: e9cf455ce44dc5c999b6e21e4d475f9a, type: 3}
       - {fileID: 21300000, guid: 87dd72bc6fe93a1b8bf5543205cd4112, type: 3}
-      fps: 10
+      - {fileID: 21300000, guid: 804b25f504aaa92bbbaea7baecbb882c, type: 3}
+      - {fileID: 21300000, guid: 365a0b80f96cf1f65b0da43195f4b949, type: 3}
+      - {fileID: 21300000, guid: 41b7d89148d67388f8fc9bdc6a0b6138, type: 3}
+      - {fileID: 21300000, guid: b0e2131f4e62952c79e4d91c2c54837f, type: 3}
+      - {fileID: 21300000, guid: 85c610f8a55146487b814afa49e478a9, type: 3}
+      - {fileID: 21300000, guid: 032906e136a9a0ab5be46e533b555b59, type: 3}
+      - {fileID: 21300000, guid: 724ae5f8d2ee96163919bf662384cd95, type: 3}
+      - {fileID: 21300000, guid: 2b0a9d3226a3fed05854227bb46140c0, type: 3}
+      fps: 20
       loop: 1
+      keys: 0000000003000000040000000500000006000000070000000a0000000d000000
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1421,6 +1653,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1443,6 +1676,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: de8e6c534cb03ac4cba9ac09427dcffa, type: 3}
       fps: 6
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0.008
@@ -1458,8 +1692,17 @@ MonoBehaviour:
       - {fileID: 21300000, guid: e80f065c3e383a614a029e4beb3b2620, type: 3}
       - {fileID: 21300000, guid: cf7d440cc88e2fac6bf11e73735a9002, type: 3}
       - {fileID: 21300000, guid: dfd6416cb3b4ffb9d9fe8d4ac66c599c, type: 3}
-      fps: 12
+      - {fileID: 21300000, guid: cc420fa4c10156b26957c248c8a67f0d, type: 3}
+      - {fileID: 21300000, guid: a12eaeb1b84fc081994bd6ff27205a49, type: 3}
+      - {fileID: 21300000, guid: ec8d318dbe7c4c7a6b26b95352041998, type: 3}
+      - {fileID: 21300000, guid: 17c220fc5e1587e4e820e10a0ceed83a, type: 3}
+      - {fileID: 21300000, guid: 46f323d7e5eb941fb88d311a789d42d6, type: 3}
+      - {fileID: 21300000, guid: 85201018867e60d3387bee208febd494, type: 3}
+      - {fileID: 21300000, guid: b4667d0ce94e0eacea207cdb091d9599, type: 3}
+      - {fileID: 21300000, guid: ec917c2ec15decf29b0799aaba1eb1df, type: 3}
+      fps: 24
       loop: 0
+      keys: 00000000020000000300000005000000070000000a0000000c0000000f000000
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1475,8 +1718,17 @@ MonoBehaviour:
       - {fileID: 21300000, guid: e80f065c3e383a614a029e4beb3b2620, type: 3}
       - {fileID: 21300000, guid: cf7d440cc88e2fac6bf11e73735a9002, type: 3}
       - {fileID: 21300000, guid: dfd6416cb3b4ffb9d9fe8d4ac66c599c, type: 3}
-      fps: 12
+      - {fileID: 21300000, guid: cc420fa4c10156b26957c248c8a67f0d, type: 3}
+      - {fileID: 21300000, guid: a12eaeb1b84fc081994bd6ff27205a49, type: 3}
+      - {fileID: 21300000, guid: ec8d318dbe7c4c7a6b26b95352041998, type: 3}
+      - {fileID: 21300000, guid: 17c220fc5e1587e4e820e10a0ceed83a, type: 3}
+      - {fileID: 21300000, guid: 46f323d7e5eb941fb88d311a789d42d6, type: 3}
+      - {fileID: 21300000, guid: 85201018867e60d3387bee208febd494, type: 3}
+      - {fileID: 21300000, guid: b4667d0ce94e0eacea207cdb091d9599, type: 3}
+      - {fileID: 21300000, guid: ec917c2ec15decf29b0799aaba1eb1df, type: 3}
+      fps: 24
       loop: 0
+      keys: 00000000020000000300000005000000070000000a0000000c0000000f000000
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1490,6 +1742,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: b346649633f7797b88af1f5f769773d9, type: 3}
       fps: 12
       loop: 0
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1503,6 +1756,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: fa7726d8348b9e27dbd377320ad2f563, type: 3}
       fps: 8
       loop: 0
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1512,6 +1766,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1521,6 +1776,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1530,6 +1786,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1539,6 +1796,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1548,6 +1806,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1557,6 +1816,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1587,6 +1847,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 95b81bf4363d621b7a7f6442189fb2f3, type: 3}
       fps: 24
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1596,6 +1857,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1605,6 +1867,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1614,6 +1877,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1623,6 +1887,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1632,6 +1897,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1641,6 +1907,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1650,6 +1917,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1659,6 +1927,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1668,6 +1937,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1677,6 +1947,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1695,6 +1966,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: f162855417a331bcca8e477e0786123a, type: 3}
       fps: 6
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0.008
@@ -1710,8 +1982,17 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 4e17f1ddd1ad200b2a68e3403f793c13, type: 3}
       - {fileID: 21300000, guid: e7055771fb2b101bbab38f1482049ac6, type: 3}
       - {fileID: 21300000, guid: 36b12e1daafdacd6b969d6dee1323ebc, type: 3}
-      fps: 12
+      - {fileID: 21300000, guid: 77766b712897d241bb30697ec9912a92, type: 3}
+      - {fileID: 21300000, guid: 00e4b8d8a57d512f8bf9fc5a46c189c9, type: 3}
+      - {fileID: 21300000, guid: 9bab4bb429b17471d947caec01a2b829, type: 3}
+      - {fileID: 21300000, guid: a8b240c731430b354aaa51efc14c5053, type: 3}
+      - {fileID: 21300000, guid: d41e00862f052cab48b87d9e64799e2f, type: 3}
+      - {fileID: 21300000, guid: fda0c8d9c5c91653f9cb9b069e4445ed, type: 3}
+      - {fileID: 21300000, guid: e077373204c89ca12829d37b04bf23bc, type: 3}
+      - {fileID: 21300000, guid: f2e21437b870cb52cbe284e7e823cf22, type: 3}
+      fps: 24
       loop: 0
+      keys: 00000000040000000500000006000000090000000a0000000b0000000f000000
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1727,8 +2008,17 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 4e17f1ddd1ad200b2a68e3403f793c13, type: 3}
       - {fileID: 21300000, guid: e7055771fb2b101bbab38f1482049ac6, type: 3}
       - {fileID: 21300000, guid: 36b12e1daafdacd6b969d6dee1323ebc, type: 3}
-      fps: 12
+      - {fileID: 21300000, guid: 77766b712897d241bb30697ec9912a92, type: 3}
+      - {fileID: 21300000, guid: 00e4b8d8a57d512f8bf9fc5a46c189c9, type: 3}
+      - {fileID: 21300000, guid: 9bab4bb429b17471d947caec01a2b829, type: 3}
+      - {fileID: 21300000, guid: a8b240c731430b354aaa51efc14c5053, type: 3}
+      - {fileID: 21300000, guid: d41e00862f052cab48b87d9e64799e2f, type: 3}
+      - {fileID: 21300000, guid: fda0c8d9c5c91653f9cb9b069e4445ed, type: 3}
+      - {fileID: 21300000, guid: e077373204c89ca12829d37b04bf23bc, type: 3}
+      - {fileID: 21300000, guid: f2e21437b870cb52cbe284e7e823cf22, type: 3}
+      fps: 24
       loop: 0
+      keys: 00000000040000000500000006000000090000000a0000000b0000000f000000
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1742,6 +2032,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: dce575af497d5b8b9af14a4ce8f2d10c, type: 3}
       fps: 12
       loop: 0
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1755,6 +2046,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: d803a4bc666451d63987b47d8f11e262, type: 3}
       fps: 8
       loop: 0
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1764,6 +2056,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1773,6 +2066,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1782,6 +2076,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1791,6 +2086,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1800,6 +2096,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1809,6 +2106,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1827,6 +2125,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: b00d6bc175db2869ba362a987e236a62, type: 3}
       fps: 6
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0.008
@@ -1842,8 +2141,17 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 0d95ee6a36317eaa7ba415d6534d7293, type: 3}
       - {fileID: 21300000, guid: 81a23ddeac04d3f78a9bed89a305f5f9, type: 3}
       - {fileID: 21300000, guid: 32a28abec8c160e7d9ffe731803a5c67, type: 3}
-      fps: 12
+      - {fileID: 21300000, guid: f5196bb791cf07bc193c55422f713324, type: 3}
+      - {fileID: 21300000, guid: 28a40cd871ffc11cea7eddb40a5eb819, type: 3}
+      - {fileID: 21300000, guid: 949309e1bc9925838b9e61c9f39be725, type: 3}
+      - {fileID: 21300000, guid: 8489bbdc5fcdb816590a9fa443f59ede, type: 3}
+      - {fileID: 21300000, guid: 913e18cf804e2d3cfad0ca4413aeb13e, type: 3}
+      - {fileID: 21300000, guid: 064417012c017d4428aa430671e824c5, type: 3}
+      - {fileID: 21300000, guid: bb39a86c8aad72a3491048ff5ca1ef7b, type: 3}
+      - {fileID: 21300000, guid: ac05b75275c3d8123951edefff011b9b, type: 3}
+      fps: 24
       loop: 0
+      keys: 00000000010000000200000005000000070000000a0000000c0000000f000000
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1859,8 +2167,17 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 0d95ee6a36317eaa7ba415d6534d7293, type: 3}
       - {fileID: 21300000, guid: 81a23ddeac04d3f78a9bed89a305f5f9, type: 3}
       - {fileID: 21300000, guid: 32a28abec8c160e7d9ffe731803a5c67, type: 3}
-      fps: 12
+      - {fileID: 21300000, guid: f5196bb791cf07bc193c55422f713324, type: 3}
+      - {fileID: 21300000, guid: 28a40cd871ffc11cea7eddb40a5eb819, type: 3}
+      - {fileID: 21300000, guid: 949309e1bc9925838b9e61c9f39be725, type: 3}
+      - {fileID: 21300000, guid: 8489bbdc5fcdb816590a9fa443f59ede, type: 3}
+      - {fileID: 21300000, guid: 913e18cf804e2d3cfad0ca4413aeb13e, type: 3}
+      - {fileID: 21300000, guid: 064417012c017d4428aa430671e824c5, type: 3}
+      - {fileID: 21300000, guid: bb39a86c8aad72a3491048ff5ca1ef7b, type: 3}
+      - {fileID: 21300000, guid: ac05b75275c3d8123951edefff011b9b, type: 3}
+      fps: 24
       loop: 0
+      keys: 00000000010000000200000005000000070000000a0000000c0000000f000000
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1874,6 +2191,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: d345bf6045cc28a1aaa94f288f43eec5, type: 3}
       fps: 12
       loop: 0
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1887,6 +2205,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: d8f22a0b4a45f4a04b68928d4c82da6f, type: 3}
       fps: 8
       loop: 0
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1896,6 +2215,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1905,6 +2225,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1914,6 +2235,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1923,6 +2245,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1932,6 +2255,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0
@@ -1941,6 +2265,7 @@ MonoBehaviour:
       frames: []
       fps: 10
       loop: 1
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0

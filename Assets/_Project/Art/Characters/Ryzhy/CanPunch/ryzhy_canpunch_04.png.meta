@@ -129,9 +129,9 @@ TextureImporter:
       name: ryzhy_canpunch_04_0
       rect:
         serializedVersion: 2
-        x: 257
+        x: 288
         y: 17
-        width: 267
+        width: 331
         height: 358
       alignment: 0
       pivot: {x: 0, y: 0}

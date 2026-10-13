@@ -129,10 +129,10 @@ TextureImporter:
       name: gull_attack_06_0
       rect:
         serializedVersion: 2
-        x: 296
-        y: 15
-        width: 254
-        height: 338
+        x: 360
+        y: 55
+        width: 357
+        height: 337
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

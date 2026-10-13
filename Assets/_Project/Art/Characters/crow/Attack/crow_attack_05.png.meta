@@ -129,10 +129,10 @@ TextureImporter:
       name: crow_attack_05_0
       rect:
         serializedVersion: 2
-        x: 357
-        y: 40
-        width: 263
-        height: 298
+        x: 407
+        y: 42
+        width: 339
+        height: 286
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

@@ -129,10 +129,10 @@ TextureImporter:
       name: raccoon_attack_01_0
       rect:
         serializedVersion: 2
-        x: 312
-        y: 44
-        width: 284
-        height: 335
+        x: 338
+        y: 48
+        width: 313
+        height: 365
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
