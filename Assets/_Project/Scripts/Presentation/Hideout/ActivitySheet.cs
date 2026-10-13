@@ -60,6 +60,13 @@ namespace TrashCats.Presentation.Hideout
                 var col = i % 2;
                 var row = i / 2;
                 var button = Ui.Button(panel.transform, "Activity_" + activity.Id, "", Palette.Secondary, () => Assign(activity.Id), 30);
+                // what the activity brings: food, junk, an attribute or energy
+                var outcome = Ui.Icon(button.Rect, Texts.OutcomeIcon(activity));
+                if (outcome != null)
+                {
+                    outcome.rectTransform.Place(new Vector2(0.03f, 0.12f), new Vector2(0.27f, 0.88f));
+                    button.Text.rectTransform.anchorMin = new Vector2(0.27f, button.Text.rectTransform.anchorMin.y);
+                }
                 button.Rect.Place(new Vector2(col * 0.5f, 1f), new Vector2((col + 1) * 0.5f, 1f),
                     new Vector2(30, -160 - (row + 1) * 180), new Vector2(-30, -160 - row * 180 - 20));
                 _buttons.Add((activity, button));

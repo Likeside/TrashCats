@@ -1,0 +1,103 @@
+[
+ {
+  "name": "bg_hideout",
+  "size": "1024x1536",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v3/bg_hideout.png"
+  ],
+  "prompt": "Redraw EXACTLY this picture (same alley, wall, door, lamp, pipes, framing and style), but REMOVE the metal drain grate from the ground completely: the cobblestone ground is continuous and empty there. No characters, no text."
+ },
+ {
+  "name": "wheel_spin",
+  "size": "1536x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/refs/concept_wheel.png",
+   "Docs/ArtDirection/Concepts/round1/blind/hideout_A.png",
+   "Docs/ArtDirection/Generated/raw_v4/ryzhy_run2.png"
+  ],
+  "prompt": "Comic art style of the references: bold black ink outlines, flat cel shading with one shadow step, subtle halftone dots, hand-inked hatching. Game sprite sheet: 8 frames of a big wooden exercise wheel spinning, in a grid of 2 rows x 4 columns, generous space between frames. The wheel is seen EXACTLY at the angle of the wheel in the first reference: almost face-on, the open front facing the viewer and turned slightly to the left so the inner drum surface is visible on the left, mounted on a wooden A-frame stand on its right side whose two feet stand flat on the ground at the bottom. The drum is COMPLETELY EMPTY inside (no spokes, no bars, no cat). Every frame shows exactly the same wheel, size and position; only the slats and marks on the rim move a little further around each frame (smooth loop).\nIMPORTANT: the background of the whole sheet MUST be solid flat pure chroma-key GREEN (#00FF00) everywhere (not blue, not cream, not white), no ground line under the feet, no gradient, no floor, no shadow on the background, no scenery, no text. Do not use green on the object."
+ },
+ {
+  "name": "prop_can",
+  "size": "1024x1024",
+  "refs": [
+   "Docs/ArtDirection/Concepts/round1/blind/hideout_A.png"
+  ],
+  "prompt": "Comic art style of the references: bold black ink outlines, flat cel shading with one shadow step, subtle halftone dots, hand-inked hatching. One single object, centred: a dented, slightly rusty tin can hanging vertically on a rope, the rope going straight up to the top edge of the picture. Seen at eye level from slightly ABOVE: the top rim of the can is visible as a thin ellipse, the BOTTOM of the can is NOT visible (only the curved bottom edge).\nSolid flat pure green (#00FF00) chroma-key background everywhere, no gradient, no floor, no shadow on the background, no scenery, no text. Do not use green on the object."
+ },
+ {
+  "name": "prop_dumpster",
+  "size": "1024x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/refs/concept_dumpster.png",
+   "Docs/ArtDirection/Concepts/round1/blind/hideout_A.png"
+  ],
+  "prompt": "Comic art style of the references: bold black ink outlines, flat cel shading with one shadow step, subtle halftone dots, hand-inked hatching. One single object: the big rusty dark green dumpster from the first reference at EXACTLY the same angle: seen from its right-front corner, the long front side going away to the left, the right side facing the viewer, the lid half open with planks and a trash bag sticking out, a fish-bone sticker on its side, a bottle and a banana peel at its base.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no gradient, no floor, no shadow on the background, no scenery, no text. Do not use green on the object."
+ },
+ {
+  "name": "prop_boxes",
+  "size": "1024x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/refs/concept_boxes.png",
+   "Docs/ArtDirection/Concepts/round1/blind/hideout_A.png"
+  ],
+  "prompt": "Comic art style of the references: bold black ink outlines, flat cel shading with one shadow step, subtle halftone dots, hand-inked hatching. One single object: a BIG stack of cardboard boxes like in the first reference (two layers, wide), with an old folded blanket and a cushion on the top forming a wide flat cat bed, a heart sticker on one box. Seen from the front-left like the reference. Nothing on the bed.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no gradient, no floor, no shadow on the background, no scenery, no text. Do not use green on the object."
+ },
+ {
+  "name": "ryzhy_idle8",
+  "size": "1536x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/refs/concept_ryzhy.png",
+   "Docs/ArtDirection/Generated/refs/ref_ryzhy_guard.png",
+   "Docs/ArtDirection/Generated/raw_v4/ryzhy_run2.png"
+  ],
+  "prompt": "Game sprite sheet: 8 animation frames of ONE continuous looping animation in a grid of 2 rows x 4 columns, read left to right, top row first, generous empty space between frames. The SAME character with exactly the same proportions, colours and size in every frame, feet on the same baseline in every frame, never mirror a frame. Character: the orange tabby tomcat Ryzhy (torn left ear, smug grin), exactly as in the references. A cocky, sassy IDLE: standing upright on the hind legs, chest out, arms crossed (or one paw on the hip), head tilted back with a smug half-lidded look, the tail swishing slowly; in the frames only the tail, the ears and a slight body sway move (subtle loop, frame 8 leads back to frame 1). Side 3/4 view facing RIGHT. Comic art style of the references: bold black ink outlines, flat cel shading with one shadow step, subtle halftone dots, hand-inked hatching. \nIMPORTANT: the background of the whole sheet MUST be solid flat pure chroma-key GREEN (#00FF00) everywhere (not blue, not cream, not white), no ground line under the feet, no gradient, no floor, no shadow on the background, no scenery, no text. Do not use green on the object."
+ },
+ {
+  "name": "ryzhy_run2",
+  "size": "1536x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/refs/concept_ryzhy.png",
+   "Docs/ArtDirection/Generated/refs/ref_ryzhy_guard.png"
+  ],
+  "prompt": "Game sprite sheet: 8 animation frames of ONE continuous looping animation in a grid of 2 rows x 4 columns, read left to right, top row first, generous empty space between frames. The SAME character with exactly the same proportions, colours and size in every frame, feet on the same baseline in every frame, never mirror a frame. Character: the orange tabby tomcat Ryzhy (torn left ear, smug grin), exactly as in the references. An anthropomorphic RUN cycle on the TWO HIND LEGS like a person jogging in a hamster wheel: upright body, arms pumping, legs alternating, a moderate steady pace (not sprinting), determined sweaty face. Runs on the spot. Side view, the head on the LEFT, facing LEFT, in all 8 frames. Comic art style of the references: bold black ink outlines, flat cel shading with one shadow step, subtle halftone dots, hand-inked hatching. \nSolid flat pure green (#00FF00) chroma-key background everywhere, no gradient, no floor, no shadow on the background, no scenery, no text. Do not use green on the object."
+ },
+ {
+  "name": "shnyr_idle8",
+  "size": "1536x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw/guard_shnyr.png",
+   "Docs/ArtDirection/Generated/refs/ref_shnyr_concept.png",
+   "Docs/ArtDirection/Generated/raw_v4/ryzhy_run2.png"
+  ],
+  "prompt": "Game sprite sheet: 8 animation frames of ONE continuous looping animation in a grid of 2 rows x 4 columns, read left to right, top row first, generous empty space between frames. The SAME character with exactly the same proportions, colours and size in every frame, feet on the same baseline in every frame, never mirror a frame. Character: the thin grey striped cat Shnyr with huge ears, exactly as in the references. A cocky, sassy IDLE: standing upright on the hind legs, chest out, arms crossed (or one paw on the hip), head tilted back with a smug half-lidded look, the tail swishing slowly; in the frames only the tail, the ears and a slight body sway move (subtle loop, frame 8 leads back to frame 1). Side 3/4 view facing RIGHT. Comic art style of the references: bold black ink outlines, flat cel shading with one shadow step, subtle halftone dots, hand-inked hatching. \nIMPORTANT: the background of the whole sheet MUST be solid flat pure chroma-key GREEN (#00FF00) everywhere (not blue, not cream, not white), no ground line under the feet, no gradient, no floor, no shadow on the background, no scenery, no text. Do not use green on the object."
+ },
+ {
+  "name": "shnyr_run2",
+  "size": "1536x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw/guard_shnyr.png",
+   "Docs/ArtDirection/Generated/refs/ref_shnyr_concept.png"
+  ],
+  "prompt": "Game sprite sheet: 8 animation frames of ONE continuous looping animation in a grid of 2 rows x 4 columns, read left to right, top row first, generous empty space between frames. The SAME character with exactly the same proportions, colours and size in every frame, feet on the same baseline in every frame, never mirror a frame. Character: the thin grey striped cat Shnyr with huge ears, exactly as in the references. An anthropomorphic RUN cycle on the TWO HIND LEGS like a person jogging in a hamster wheel: upright body, arms pumping, legs alternating, a moderate steady pace (not sprinting), determined sweaty face. Runs on the spot. Side view, the head on the LEFT, facing LEFT, in all 8 frames. Comic art style of the references: bold black ink outlines, flat cel shading with one shadow step, subtle halftone dots, hand-inked hatching. \nSolid flat pure green (#00FF00) chroma-key background everywhere, no gradient, no floor, no shadow on the background, no scenery, no text. Do not use green on the object."
+ },
+ {
+  "name": "ponchik_idle8",
+  "size": "1536x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw/guard_ponchik.png",
+   "Docs/ArtDirection/Generated/refs/ref_ponchik_concept.png",
+   "Docs/ArtDirection/Generated/raw_v4/ryzhy_run2.png"
+  ],
+  "prompt": "Game sprite sheet: 8 animation frames of ONE continuous looping animation in a grid of 2 rows x 4 columns, read left to right, top row first, generous empty space between frames. The SAME character with exactly the same proportions, colours and size in every frame, feet on the same baseline in every frame, never mirror a frame. Character: the very fat black-and-white cat Ponchik, exactly as in the references. A cocky, sassy IDLE: standing upright on the hind legs, chest out, arms crossed (or one paw on the hip), head tilted back with a smug half-lidded look, the tail swishing slowly; in the frames only the tail, the ears and a slight body sway move (subtle loop, frame 8 leads back to frame 1). Side 3/4 view facing RIGHT. Comic art style of the references: bold black ink outlines, flat cel shading with one shadow step, subtle halftone dots, hand-inked hatching. \nIMPORTANT: the background of the whole sheet MUST be solid flat pure chroma-key GREEN (#00FF00) everywhere (not blue, not cream, not white), no ground line under the feet, no gradient, no floor, no shadow on the background, no scenery, no text. Do not use green on the object."
+ },
+ {
+  "name": "ponchik_run2",
+  "size": "1536x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw/guard_ponchik.png",
+   "Docs/ArtDirection/Generated/refs/ref_ponchik_concept.png"
+  ],
+  "prompt": "Game sprite sheet: 8 animation frames of ONE continuous looping animation in a grid of 2 rows x 4 columns, read left to right, top row first, generous empty space between frames. The SAME character with exactly the same proportions, colours and size in every frame, feet on the same baseline in every frame, never mirror a frame. Character: the very fat black-and-white cat Ponchik, exactly as in the references. An anthropomorphic RUN cycle on the TWO HIND LEGS like a person jogging in a hamster wheel: upright body, arms pumping, legs alternating, a moderate steady pace (not sprinting), determined sweaty face. Runs on the spot. Side view, the head on the LEFT, facing LEFT, in all 8 frames. Comic art style of the references: bold black ink outlines, flat cel shading with one shadow step, subtle halftone dots, hand-inked hatching. \nSolid flat pure green (#00FF00) chroma-key background everywhere, no gradient, no floor, no shadow on the background, no scenery, no text. Do not use green on the object."
+ }
+]

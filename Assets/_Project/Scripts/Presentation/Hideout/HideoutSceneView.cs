@@ -147,6 +147,18 @@ namespace TrashCats.Presentation.Hideout
                         picture.rectTransform.pivot = new Vector2(0.5f, 1f);
                         picture.rectTransform.Fill();
                         _can = picture.rectTransform;
+                        // a wrought-iron bracket sticks out of the wall; its hook holds the top of the can's rope
+                        var bracketSprite = _art?.GetSprite("prop_bracket");
+                        if (bracketSprite != null)
+                        {
+                            var hook = new Vector2((min.x + max.x) * 0.5f, max.y - 0.006f);
+                            const float width = 0.17f;
+                            var height = width * HideoutLayout.PictureAspect * bracketSprite.rect.height / bracketSprite.rect.width;
+                            var bracket = Ui.Panel(_frame, "Bracket", Color.white);
+                            bracket.sprite = bracketSprite;
+                            bracket.rectTransform.Place(new Vector2(hook.x - 0.892f * width, hook.y), new Vector2(hook.x + 0.108f * width, hook.y + height));
+                            _depthItems.Add((bracket.transform, min.y + 0.0001f));
+                        }
                     }
                 }
                 _depthItems.Add((box.transform, min.y));
@@ -270,7 +282,7 @@ namespace TrashCats.Presentation.Hideout
 
             var progress = Ui.Bar(rt, "Progress", Palette.Progress);
             // under the name at the cat's feet: above the head it ran into the station captions
-            progress.Rect.Place(new Vector2(0.05f, 0f), new Vector2(0.95f, 0f), new Vector2(0, -56), new Vector2(0, -34));
+            progress.Rect.Place(new Vector2(0.5f, 0f), new Vector2(0.5f, 0f), new Vector2(-90, -56), new Vector2(90, -34));
             bubble.rectTransform.Place(Vector2.zero, Vector2.one, new Vector2(12, 26), new Vector2(-12, -10));
             if (Ui.Skin?.bubble == null) bubble.Outlined();
 
@@ -371,6 +383,7 @@ namespace TrashCats.Presentation.Hideout
                 HideoutLayout.CatClip.Sleep => (Pose(1) ?? Pose(0), false),
                 HideoutLayout.CatClip.Walk or HideoutLayout.CatClip.Run => (Pose(3) ?? Pose(0), false),
                 HideoutLayout.CatClip.Punch => (Pose(3) ?? Pose(0), false),
+                _ when art.hideoutIdle?.frames.Length > 0 => (art.hideoutIdle, false),
                 _ => (Pose(0), false),
             };
         }
@@ -459,7 +472,7 @@ namespace TrashCats.Presentation.Hideout
             var text = e.Kind == ActivityKind.Train
                 ? $"+{e.Output} {Texts.AttributeGenitive(e.TrainedAttribute).ToLowerInvariant()}"
                 : Texts.Output(_session.Config.GetActivity(e.ActivityId), e.Output);
-            FloatingText.Spawn(_root, token.Root, text);
+            FloatingText.Spawn(_root, token.Root, text, Texts.OutcomeIcon(_session.Config.GetActivity(e.ActivityId)));
         }
 
         private sealed class CatToken
@@ -512,9 +525,20 @@ namespace TrashCats.Presentation.Hideout
     /// <summary>Rising, fading text above a target (cycle results).</summary>
     public static class FloatingText
     {
-        public static void Spawn(RectTransform parent, RectTransform target, string text)
+        public static void Spawn(RectTransform parent, RectTransform target, string text, string icon = null)
         {
-            var label = Ui.Label(parent, text, 32, TextAnchor.MiddleCenter, Palette.Primary);
+            var label = Ui.Label(parent, text, 34, TextAnchor.MiddleCenter, Palette.Primary);
+            var sprite = icon != null ? Ui.Skin?.Icon(icon) : null;
+            if (sprite != null)
+            {
+                var picture = Ui.Panel(label.transform, "Icon", Color.white);
+                picture.sprite = sprite;
+                picture.preserveAspect = true;
+                picture.rectTransform.anchorMin = picture.rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
+                picture.rectTransform.sizeDelta = new Vector2(64, 64);
+                picture.rectTransform.anchoredPosition = new Vector2(-label.preferredWidth * 0.5f - 38f, 0);
+                picture.DOFade(0f, 1.1f).SetEase(Ease.InQuad).SetLink(picture.gameObject);
+            }
             var rt = label.rectTransform;
             rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 0.5f);
             rt.sizeDelta = new Vector2(320, 50);

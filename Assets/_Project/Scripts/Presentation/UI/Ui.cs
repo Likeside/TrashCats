@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -157,6 +158,35 @@ namespace TrashCats.Presentation.UI
             if (sprite != null)
                 image.pixelsPerUnitMultiplier = tin ? Skin.tinBorderScale : Skin.paperBorderScale * (style == CardStyle.Strip ? 1.6f : 1f);
             return image;
+        }
+
+        /// <summary>
+        /// Big event icon sitting on the top edge of a card (victory, new cat, skill...), so every outcome is
+        /// recognisable at a glance. Change it with <see cref="SetBadge"/>; hidden when the key has no art.
+        /// </summary>
+        public static Image Badge(Transform card, float size = 210f)
+        {
+            var image = Panel(card, "Badge", Color.white);
+            image.preserveAspect = true;
+            var rt = image.rectTransform;
+            rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 1f);
+            rt.sizeDelta = new Vector2(size, size);
+            rt.anchoredPosition = new Vector2(0, 10);
+            image.gameObject.SetActive(false);
+            return image;
+        }
+
+        public static void SetBadge(Image badge, string key)
+        {
+            var sprite = key != null ? Skin?.Icon(key) : null;
+            badge.sprite = sprite;
+            badge.gameObject.SetActive(sprite != null);
+            if (sprite != null)
+            {
+                badge.rectTransform.DOKill();
+                badge.rectTransform.localScale = Vector3.one * 0.6f;
+                badge.rectTransform.DOScale(1f, 0.35f).SetEase(Ease.OutBack).SetLink(badge.gameObject);
+            }
         }
 
         /// <summary>Icon from the skin, or null when there is no art for the key.</summary>

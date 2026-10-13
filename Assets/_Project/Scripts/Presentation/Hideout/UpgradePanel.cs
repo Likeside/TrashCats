@@ -30,8 +30,9 @@ namespace TrashCats.Presentation.Hideout
             _root = dim.gameObject;
             var card = Ui.Card(dim.transform, "Card", CardStyle.Paper, raycast: true);
             card.rectTransform.At(new Vector2(0.5f, 0.5f), new Vector2(880, 700));
+            Ui.SetBadge(Ui.Badge(card.transform, 190f), "tools");
             _text = Ui.Label(card.transform, "", 36, TextAnchor.UpperCenter, Palette.Ink);
-            _text.rectTransform.Place(Vector2.zero, Vector2.one, new Vector2(40, 180), new Vector2(-40, -40));
+            _text.rectTransform.Place(Vector2.zero, Vector2.one, new Vector2(40, 180), new Vector2(-40, -110));
             _buy = Ui.Button(card.transform, "Upgrade_Buy", "", Palette.Primary, Buy, 38);
             _buy.Rect.Place(new Vector2(0.15f, 0), new Vector2(0.85f, 0), new Vector2(0, 40), new Vector2(0, 150));
             _root.SetActive(false);

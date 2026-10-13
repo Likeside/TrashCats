@@ -5,6 +5,15 @@ TextureImporter:
   - first:
       213: 6321244211624739672
     second: wheel_idle_03_0
+  - first:
+      213: 3003380548019492392
+    second: wheel_idle_03_1
+  - first:
+      213: 9209893179565669076
+    second: wheel_idle_03_2
+  - first:
+      213: -611394716846602056
+    second: wheel_idle_03_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -129,10 +138,10 @@ TextureImporter:
       name: wheel_idle_03_0
       rect:
         serializedVersion: 2
-        x: 17
-        y: 15
-        width: 331
-        height: 412
+        x: 25
+        y: 281
+        width: 50
+        height: 87
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -143,6 +152,72 @@ TextureImporter:
       bones: []
       spriteID: 853036c7e1299b750800000000000000
       internalID: 6321244211624739672
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wheel_idle_03_1
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 15
+        width: 310
+        height: 364
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 826150222b62ea920800000000000000
+      internalID: 3003380548019492392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wheel_idle_03_2
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 327
+        width: 73
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4dafd4bfc0d10df70800000000000000
+      internalID: 9209893179565669076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wheel_idle_03_3
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 167
+        width: 13
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b8cecc8eb3e387f0800000000000000
+      internalID: -611394716846602056
       vertices: []
       indices: 
       edges: []

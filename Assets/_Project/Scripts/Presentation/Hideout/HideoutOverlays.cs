@@ -32,12 +32,12 @@ namespace TrashCats.Presentation.Hideout
             }
             else
             {
-                // the concept's top bar: a dark rounded pill floating over the scene, big icons breaking its edge
+                // the concept's top bar: a wide dark rounded bar; each resource is one centred block (icon + number on a plate)
                 var pill = Ui.Card(root, "HudPill", CardStyle.Tin);
-                pill.rectTransform.Place(new Vector2(0.03f, 0.08f), new Vector2(0.72f, 0.92f));
+                pill.rectTransform.Place(new Vector2(0.02f, 0.06f), new Vector2(0.75f, 0.94f));
                 pill.pixelsPerUnitMultiplier = 2.6f;
-                _resources = Group(pill.rectTransform, 0f, "food");
-                _junk = Group(pill.rectTransform, 0.5f, "junk");
+                _resources = Group(pill.rectTransform, 0.04f, "food");
+                _junk = Group(pill.rectTransform, 0.52f, "junk");
             }
 
             if (onSettings != null)
@@ -57,14 +57,19 @@ namespace TrashCats.Presentation.Hideout
             Refresh();
         }
 
-        /// <summary>Icon overlapping the pill on the left of its half, then the number.</summary>
+        /// <summary>One resource block inside the bar: the icon, then the number on a dark plate.</summary>
         private static TMP_Text Group(RectTransform pill, float x0, string icon)
         {
-            var picture = Ui.Icon(pill, icon);
-            picture.rectTransform.Place(new Vector2(x0, -0.25f), new Vector2(x0, 1.25f), new Vector2(-6, 0), new Vector2(120, 0));
-            var label = Ui.Label(pill, "", 52, TextAnchor.MiddleLeft, Palette.Paper, heading: true);
-            label.rectTransform.Place(new Vector2(x0, 0), new Vector2(x0 + 0.5f, 1), new Vector2(124, 0), new Vector2(-8, 0));
-            label.Outlined();
+            var block = Ui.Rect(pill, "Block_" + icon).Place(new Vector2(x0, 0.12f), new Vector2(x0 + 0.44f, 0.88f));
+            var plate = Ui.Panel(block, "Plate", new Color(0f, 0f, 0f, 0.45f));
+            plate.sprite = Ui.Skin?.barFrame;
+            plate.type = Image.Type.Sliced;
+            plate.pixelsPerUnitMultiplier = 3f;
+            plate.rectTransform.Place(new Vector2(0.3f, 0.08f), new Vector2(1f, 0.92f));
+            var picture = Ui.Icon(block, icon);
+            picture.rectTransform.Place(new Vector2(0f, 0f), new Vector2(0.36f, 1f));
+            var label = Ui.Label(plate.transform, "", 46, TextAnchor.MiddleCenter, Palette.Paper, heading: true);
+            label.rectTransform.Fill(4);
             return label;
         }
 
@@ -91,14 +96,30 @@ namespace TrashCats.Presentation.Hideout
             _text.rectTransform.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(40, -210), new Vector2(-40, -140));
             _text.Outlined();
             _text.color = new Color(1, 1, 1, 0);
+            _icon = Ui.Panel(_text.transform, "Icon", Color.white);
+            _icon.preserveAspect = true;
+            _icon.rectTransform.anchorMin = _icon.rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
+            _icon.rectTransform.sizeDelta = new Vector2(80, 80);
+            _icon.gameObject.SetActive(false);
         }
 
-        public void Show(string message)
+        private readonly Image _icon;
+
+        /// <param name="icon">Optional skin icon shown left of the text (attribute of a level-up...).</param>
+        public void Show(string message, string icon = null)
         {
             _text.DOKill();
+            _icon.DOKill();
             _text.text = message;
             _text.color = Palette.Paper;
             _text.DOFade(0f, 0.6f).SetDelay(1.6f).SetLink(_text.gameObject);
+            var sprite = icon != null ? Ui.Skin?.Icon(icon) : null;
+            _icon.gameObject.SetActive(sprite != null);
+            if (sprite == null) return;
+            _icon.sprite = sprite;
+            _icon.color = Color.white;
+            _icon.rectTransform.anchoredPosition = new Vector2(-_text.preferredWidth * 0.5f - 50f, 0);
+            _icon.DOFade(0f, 0.6f).SetDelay(1.6f).SetLink(_icon.gameObject);
         }
     }
 
@@ -119,8 +140,9 @@ namespace TrashCats.Presentation.Hideout
             var panel = Ui.Card(dim.transform, "Card", CardStyle.Paper, raycast: true);
             panel.rectTransform.At(new Vector2(0.5f, 0.5f), new Vector2(900, 900));
 
+            Ui.SetBadge(Ui.Badge(panel.transform, 190f), "clock");
             var title = Ui.Label(panel.transform, Loc.T("hideout_overlays.02"), 46, TextAnchor.UpperCenter, Palette.Ink);
-            title.rectTransform.Fill(40);
+            title.rectTransform.Place(Vector2.zero, Vector2.one, new Vector2(40, 40), new Vector2(-40, -100));
             _body = Ui.Label(panel.transform, "", 32, TextAnchor.UpperLeft, Palette.Ink);
             _body.rectTransform.Place(Vector2.zero, Vector2.one, new Vector2(50, 160), new Vector2(-50, -120));
 

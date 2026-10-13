@@ -68,7 +68,7 @@ namespace TrashCats.Editor
                 copy.idle = baseArt.idle; copy.attack = baseArt.attack; copy.heavyAttack = baseArt.heavyAttack;
                 copy.hit = baseArt.hit; copy.knockOut = baseArt.knockOut; copy.tail = baseArt.tail; copy.portrait = baseArt.portrait;
                 copy.hideoutPoses = baseArt.hideoutPoses;
-                copy.run = baseArt.run; copy.canPunch = baseArt.canPunch;
+                copy.run = baseArt.run; copy.canPunch = baseArt.canPunch; copy.hideoutIdle = baseArt.hideoutIdle;
                 copy.viewKey = key;
                 copy.tint = tint;
                 copy.battleScale = scale;
@@ -108,7 +108,8 @@ namespace TrashCats.Editor
                 hit = Clip(dir, "Hit", 12f, false),
                 knockOut = Clip(dir, "KO", 8f, false),
                 tail = Clip(dir, "Tail", 5f, true),
-                run = Clip(dir, "Run", 14f, true),
+                run = Clip(dir, "Run", 9f, true),
+                hideoutIdle = Clip(dir, "HideIdle", 6f, true),
                 canPunch = Clip(dir, "CanPunch", 10f, true),
                 hideoutPoses = Sprites(dir + "/Hideout"),
             };
@@ -118,6 +119,7 @@ namespace TrashCats.Editor
             art.knockOut ??= new FlipbookClip();
             art.tail ??= new FlipbookClip();
             art.run ??= new FlipbookClip();
+            art.hideoutIdle ??= new FlipbookClip();
             art.canPunch ??= new FlipbookClip();
             if (art.idle == null)
                 return null;

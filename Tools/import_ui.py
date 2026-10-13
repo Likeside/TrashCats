@@ -32,6 +32,7 @@ SHEETS = {
     "ui_a_buttons": ["button_a_yellow", "button_a_blue", "button_a_grey"],
     "ui_a_parts": ["hud_a"],
     "ui_a_sheet": ["panel_a"],
+    "ui_event_icons": ["icon_victory", "icon_defeat", "icon_newcat", "icon_skill", "icon_flag", "icon_levelup", "icon_final", "icon_tools"],
     "cat_busts": ["bust_ryzhy", "bust_shnyr", "bust_ponchik"],
     "fx_combat": ["fx_star", "fx_dust", "fx_scratch", "fx_sparkle"],
     "ui_map_parts": ["map_ring", None, None, None],
@@ -45,7 +46,7 @@ CONCEPT = "Docs/ArtDirection/Concepts/round1/blind/hideout_A.png"
 PORTRAITS = {"Ryzhy": (44, 1080, 323, 1250), "shnyr": (380, 1080, 641, 1238), "ponchik": (699, 1080, 983, 1238)}
 
 # how far apart parts of one item may be (px); small where items sit close together
-MERGE = {"cat_busts": 8, "ui_icons_a": 18, "ui_icons_b": 18, "ui_bars": 0, "fx_combat": 14}
+MERGE = {"ui_event_icons": 18, "cat_busts": 8, "ui_icons_a": 18, "ui_icons_b": 18, "ui_bars": 0, "fx_combat": 14}
 
 # items cut by a fixed box (left, top, right, bottom) because they consist of scattered parts
 MANUAL = {"fx_sparkle": ("fx_combat", (1230, 330, 1490, 650))}

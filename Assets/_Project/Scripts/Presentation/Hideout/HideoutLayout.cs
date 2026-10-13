@@ -17,7 +17,7 @@ namespace TrashCats.Presentation.Hideout
         public static readonly Vector2 Focus = new Vector2(0.5f, 0.2f);
 
         /// <summary>Picture height per sprite pixel at the front edge: a sitting cat (312 px) is 0.2 of the picture.</summary>
-        public const float HeightPerPixel = 0.2f / 312f;
+        public const float HeightPerPixel = 0.25f / 312f;
 
         public static float DepthScale(float y) => Mathf.Lerp(1f, 0.7f, Mathf.InverseLerp(0.08f, 0.45f, y));
 
@@ -56,13 +56,14 @@ namespace TrashCats.Presentation.Hideout
         public static (Vector2 Min, Vector2 Max) Station(ActivityDefinition activity) => activity.Kind switch
         {
             ActivityKind.Scavenge => (new Vector2(0.84f, 0.68f), new Vector2(1.0f, 0.8f)),     // the street gap on the right
-            ActivityKind.Rummage => (new Vector2(-0.2f, 0.0f), new Vector2(0.313f, 0.34f)),     // big dumpster, its edge in front
-            ActivityKind.Sleep => (new Vector2(0.68f, 0.03f), new Vector2(0.975f, 0.23f)),      // box bed, front right
+            ActivityKind.Rummage => (new Vector2(-0.17f, 0.0f), new Vector2(0.26f, 0.265f)),     // big dumpster, its edge in front
+            ActivityKind.Sleep => (new Vector2(0.64f, 0.02f), new Vector2(1.0f, 0.23f)),        // big box bed, front right
             _ => activity.TrainedAttribute switch
             {
-                AttributeType.Strength => (new Vector2(0.04f, 0.40f), new Vector2(0.266f, 0.82f)), // can on a rope from the pipe
-                AttributeType.Agility => (new Vector2(0.40f, 0.2f), new Vector2(0.517f, 0.27f)),   // toy mouse in the yard
-                _ => (new Vector2(0.55f, 0.27f), new Vector2(1.044f, 0.67f)),                     // wheel on the right
+                // can on a rope: its body (lower 60% of the sprite) at the punching cat's fist height (70% of the punch frame)
+                AttributeType.Strength => (new Vector2(0.08f, 0.423f), new Vector2(0.23f, 0.604f)),
+                AttributeType.Agility => (new Vector2(0.04f, 0.29f), new Vector2(0.13f, 0.34f)),   // toy mouse by the wall, behind the dumpster
+                _ => (new Vector2(0.5f, 0.3f), new Vector2(1.09f, 0.74f)),                        // big wheel on the right, standing on the ground
             },
         };
 
@@ -73,15 +74,16 @@ namespace TrashCats.Presentation.Hideout
             return activity.Kind switch
             {
                 ActivityKind.Scavenge => new CatSpot(new Vector2(0.93f, 0.68f), CatClip.Walk, hidden: true),
-                ActivityKind.Rummage => new CatSpot(new Vector2(0.38f, 0.12f) + shift, CatClip.Walk, faceLeft: true),
-                ActivityKind.Sleep => new CatSpot(new Vector2(0.83f, 0.205f) + shift * 0.5f, CatClip.Sleep, overProp: true),
+                ActivityKind.Rummage => new CatSpot(new Vector2(0.36f, 0.16f) + shift, CatClip.Walk, faceLeft: true),
+                ActivityKind.Sleep => new CatSpot(new Vector2(0.82f, 0.175f) + shift * 0.5f, CatClip.Sleep, overProp: true),
                 _ => activity.TrainedAttribute switch
                 {
                     // the punching cat stands right of the can and hits to the left
-                    AttributeType.Strength => new CatSpot(new Vector2(0.31f, 0.33f) + shift, CatClip.Punch, faceLeft: true),
-                    AttributeType.Agility => new CatSpot(new Vector2(0.62f, 0.2f) + shift, CatClip.Walk, faceLeft: true),
-                    // inside the wheel's drum (hole at x 0.29..0.65, bottom at 0.32 of the wheel sprite)
-                    _ => new CatSpot(new Vector2(0.785f, 0.39f), CatClip.Run, faceLeft: true, overProp: true, scale: 1.05f),
+                    // stands at arm's length: the fist tip (5% from the frame's edge) lands in the right quarter of the can
+                    AttributeType.Strength => new CatSpot(new Vector2(0.48f, 0.29f) + shift, CatClip.Punch, faceLeft: true),
+                    AttributeType.Agility => new CatSpot(new Vector2(0.24f, 0.31f) + shift, CatClip.Walk, faceLeft: true),
+                    // inside the wheel's drum (hole at x 0.19..0.66, bottom at 0.25 of the wheel sprite)
+                    _ => new CatSpot(new Vector2(0.75f, 0.415f), CatClip.Run, faceLeft: true, overProp: true),
                 },
             };
         }
@@ -89,10 +91,11 @@ namespace TrashCats.Presentation.Hideout
         /// <summary>Idle cats hang around in front of the door.</summary>
         public static CatSpot Idle(int index) => new CatSpot(index switch
         {
-            0 => new Vector2(0.47f, 0.36f),
-            1 => new Vector2(0.58f, 0.3f),
-            2 => new Vector2(0.34f, 0.26f),
-            _ => new Vector2(0.5f + 0.08f * (index - 3), 0.24f),
+            // the free middle ground in front, away from the can, the wheel and the bed
+            0 => new Vector2(0.46f, 0.05f),
+            1 => new Vector2(0.4f, 0.15f),
+            2 => new Vector2(0.55f, 0.13f),
+            _ => new Vector2(0.45f + 0.06f * (index - 3), 0.1f),
         }, CatClip.Sit);
     }
 }

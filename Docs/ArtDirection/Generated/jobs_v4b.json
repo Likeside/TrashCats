@@ -1,0 +1,19 @@
+[
+ {
+  "name": "prop_bracket",
+  "size": "1024x1024",
+  "refs": [
+   "Docs/ArtDirection/Concepts/round1/blind/hideout_A.png"
+  ],
+  "prompt": "Comic art style of the references: bold black ink outlines, flat cel shading, subtle halftone dots. One single object: a rusty wrought-iron wall bracket seen from the front at eye level: a small square mounting plate with two bolts on the LEFT (it is fixed to a wall), and a horizontal iron arm sticking out to the RIGHT from it, ending in a downward hook with a short knotted rope loop hanging from the hook. Nothing else.\nIMPORTANT: solid flat pure chroma-key GREEN (#00FF00) background everywhere, no shadow on it, no scenery, no text, no letters. Do not use green on the objects."
+ },
+ {
+  "name": "ui_event_icons",
+  "size": "1536x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_ui/ui_a_icons.png",
+   "Docs/ArtDirection/Concepts/round1/blind/hideout_A.png"
+  ],
+  "prompt": "Comic art style of the references: bold black ink outlines, flat cel shading, subtle halftone dots. Game UI icon sheet in EXACTLY the style of the first reference icons (thick outline, flat bold colours, readable at 96 px). Exactly 8 separate icons in 2 rows of 4, no tiles behind them: 1) VICTORY: a golden trophy cup with a cat paw print on it, 2) DEFEAT: a cat head with a bandage, a black eye and a plaster, 3) NEW CAT: an orange cat head with a big green-free white plus badge, 4) NEW SKILL: three red claw scratch marks with a yellow spark, 5) TERRITORY: a yellow flag with a black paw print on a pole, 6) LEVEL UP: a fat yellow arrow pointing up with a star, 7) FINAL: a golden crown with a fish-bone emblem, 8) UPGRADE: a hammer and a wrench crossed.\nIMPORTANT: solid flat pure chroma-key GREEN (#00FF00) background everywhere, no shadow on it, no scenery, no text, no letters. Do not use green on the objects."
+ }
+]
