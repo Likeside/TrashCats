@@ -2,7 +2,9 @@
     "name": "TrashCats.Editor",
     "rootNamespace": "TrashCats.Editor",
     "references": [
-        "TrashCats.Presentation"
+        "TrashCats.Presentation",
+        "Unity.TextMeshPro",
+        "UnityEngine.UI"
     ],
     "includePlatforms": [
         "Editor"

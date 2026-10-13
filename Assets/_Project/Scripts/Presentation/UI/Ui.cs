@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.UI;
@@ -6,17 +7,28 @@ using UnityEngine.UI;
 
 namespace TrashCats.Presentation.UI
 {
+    public enum CardStyle
+    {
+        /// <summary>Light cardboard sheet with paper inside (sheets, modals).</summary>
+        Paper,
+        /// <summary>Wide cardboard strip (toasts, rows).</summary>
+        Strip,
+        /// <summary>Dark painted tin (HUD, navigation).</summary>
+        Tin,
+    }
+
     /// <summary>
-    /// Code-built graybox UI primitives (uGUI). Real art and prefabs replace them in M6; screens only talk to the
-    /// small widget classes below, so the swap does not touch presenter logic.
+    /// Code-built UI primitives (uGUI + TextMeshPro). With a <see cref="UiSkin"/> they use the comic cardboard art,
+    /// without it they stay graybox; screens only talk to the small widget classes below.
     /// </summary>
     public static class Ui
     {
         public static readonly Vector2 ReferenceResolution = new Vector2(1080, 1920);
 
-        private static Font _font;
+        /// <summary>Text this large or larger uses the heading font.</summary>
+        private const int HeadingSize = 44;
 
-        public static Font Font => _font != null ? _font : _font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+        public static UiSkin Skin { get; set; }
 
         public static Canvas CreateCanvas(string name, int sortingOrder)
         {
@@ -79,20 +91,80 @@ namespace TrashCats.Presentation.UI
             return rt;
         }
 
-        public static Text Label(Transform parent, string text, int size, TextAnchor align, Color color)
+        public static TextMeshProUGUI Label(Transform parent, string text, int size, TextAnchor align, Color color, bool? heading = null)
         {
             var rt = Rect(parent, "Label");
-            var label = rt.gameObject.AddComponent<Text>();
-            label.font = Font;
+            var label = rt.gameObject.AddComponent<TextMeshProUGUI>();
+            var font = heading ?? size >= HeadingSize ? Skin?.headingFont : Skin?.bodyFont;
+            if (font != null)
+                label.font = font;
             label.text = text;
             label.fontSize = size;
-            label.alignment = align;
+            label.Align(align);
             label.color = color;
             label.raycastTarget = false;
-            label.horizontalOverflow = HorizontalWrapMode.Wrap;
-            label.verticalOverflow = VerticalWrapMode.Overflow;
+            label.richText = true;
+            label.textWrappingMode = TextWrappingModes.Normal;
+            label.overflowMode = TextOverflowModes.Overflow;
             rt.Fill();
             return label;
+        }
+
+        public static TMP_Text Align(this TMP_Text label, TextAnchor anchor)
+        {
+            label.alignment = anchor switch
+            {
+                TextAnchor.UpperLeft => TextAlignmentOptions.TopLeft,
+                TextAnchor.UpperCenter => TextAlignmentOptions.Top,
+                TextAnchor.UpperRight => TextAlignmentOptions.TopRight,
+                TextAnchor.MiddleLeft => TextAlignmentOptions.Left,
+                TextAnchor.MiddleRight => TextAlignmentOptions.Right,
+                TextAnchor.LowerLeft => TextAlignmentOptions.BottomLeft,
+                TextAnchor.LowerCenter => TextAlignmentOptions.Bottom,
+                TextAnchor.LowerRight => TextAlignmentOptions.BottomRight,
+                _ => TextAlignmentOptions.Center,
+            };
+            return label;
+        }
+
+        /// <summary>Ink outline for text drawn straight over pictures.</summary>
+        public static TMP_Text Outlined(this TMP_Text label)
+        {
+            var material = label.font == Skin?.headingFont ? Skin?.headingOutline : label.font == Skin?.bodyFont ? Skin?.bodyOutline : null;
+            if (material != null)
+                label.fontSharedMaterial = material;
+            else
+                label.outlineWidth = 0.2f;
+            return label;
+        }
+
+        /// <summary>Background card: 9-sliced cardboard art with a skin, a flat colour without.</summary>
+        public static Image Card(Transform parent, string name, CardStyle style, bool raycast = false)
+        {
+            var tin = style == CardStyle.Tin;
+            var sprite = tin ? Skin?.tin : Skin?.paper;
+            var image = Panel(parent, name, sprite != null ? Color.white : tin ? Palette.PanelDark : Palette.Panel, raycast);
+            Sliced(image, sprite);
+            if (sprite != null)
+                image.pixelsPerUnitMultiplier = tin ? Skin.tinBorderScale : Skin.paperBorderScale * (style == CardStyle.Strip ? 1.6f : 1f);
+            return image;
+        }
+
+        /// <summary>Icon from the skin, or null when there is no art for the key.</summary>
+        public static Image Icon(Transform parent, string key)
+        {
+            var sprite = Skin?.Icon(key);
+            return sprite == null ? null : Picture(parent, "Icon_" + key, sprite);
+        }
+
+        private static void Sliced(Image image, Sprite sprite, float fitHeight = 0f)
+        {
+            if (sprite == null)
+                return;
+            image.sprite = sprite;
+            image.type = sprite.border != Vector4.zero ? Image.Type.Sliced : Image.Type.Simple;
+            if (fitHeight > 0f)
+                image.gameObject.AddComponent<SliceFit>().heightShare = fitHeight;
         }
 
         public static UiButton Button(Transform parent, string name, string label, Color color, Action onClick, int fontSize = 36)
@@ -100,13 +172,19 @@ namespace TrashCats.Presentation.UI
             var image = Panel(parent, name, color, raycast: true);
             var button = image.gameObject.AddComponent<Button>();
             var colors = button.colors;
-            colors.disabledColor = new Color(1f, 1f, 1f, 0.35f);
+            colors.disabledColor = Skin != null ? new Color(0.78f, 0.78f, 0.78f, 0.85f) : new Color(1f, 1f, 1f, 0.35f);
+            colors.pressedColor = new Color(0.85f, 0.85f, 0.85f);
             button.colors = colors;
-            var text = Label(image.transform, label, fontSize, TextAnchor.MiddleCenter, Palette.Ink);
-            text.rectTransform.Fill(12);
+            var text = Label(image.transform, label, fontSize, TextAnchor.MiddleCenter, Palette.Ink, heading: true);
+            text.rectTransform.Fill(Skin?.button != null ? 22 : 12);
+            text.enableAutoSizing = true;
+            text.fontSizeMax = fontSize;
+            text.fontSizeMin = Mathf.Max(18, fontSize * 0.6f);
             if (onClick != null)
                 button.onClick.AddListener(() => onClick());
-            return new UiButton(button, image, text);
+            var result = new UiButton(button, image, text);
+            result.SetColor(color);
+            return result;
         }
 
         /// <summary>Picture filling the parent like CSS "cover" (keeps aspect, crops the overflow).</summary>
@@ -132,13 +210,51 @@ namespace TrashCats.Presentation.UI
             return image;
         }
 
-        public static UiBar Bar(Transform parent, string name, Color fill)
+        /// <param name="badge">Skin bar with a badge on the left (energy, satiety, hp, grit), else a plain frame.</param>
+        public static UiBar Bar(Transform parent, string name, Color fill, string badge = null)
         {
-            var back = Panel(parent, name, Palette.BarBack);
-            var fillImage = Panel(back.transform, "Fill", fill);
+            var frame = (badge != null ? Skin?.BadgeBar(badge) : null) ?? Skin?.barFrame;
+            var back = Panel(parent, name, frame != null ? Color.white : Palette.BarBack);
+            Sliced(back, frame, 1.15f);
+            // the fill lives inside the frame's dark channel: inset by the frame's borders, scaled like the image
+            var channel = Rect(back.transform, "Channel").Fill();
+            if (frame != null)
+                back.gameObject.AddComponent<ChannelFit>().Init(channel, frame);
+            var fillImage = Panel(channel, "Fill", fill);
             fillImage.rectTransform.Fill();
-            var label = Label(back.transform, "", 24, TextAnchor.MiddleCenter, Palette.Ink);
+            var label = Label(back.transform, "", 24, TextAnchor.MiddleCenter, frame != null ? Palette.Paper : Palette.Ink, heading: frame != null);
+            if (frame != null)
+                label.Outlined();
             return new UiBar(back.rectTransform, fillImage.rectTransform, label);
+        }
+    }
+
+    /// <summary>Keeps a bar's fill channel inside the frame's dark inner area when the frame's borders rescale.</summary>
+    public sealed class ChannelFit : MonoBehaviour
+    {
+        private RectTransform _channel;
+        private Image _image;
+        private Vector4 _inner;
+
+        public void Init(RectTransform channel, Sprite frame)
+        {
+            _channel = channel;
+            _image = GetComponent<Image>();
+            // the dark channel starts a little inside the 9-slice border on the badge side, at ~40% of the others
+            var b = frame.border;
+            _inner = new Vector4(b.x > b.z * 2f ? b.x * 0.97f : b.x * 0.55f, b.y * 0.55f, b.z * 0.55f, b.w * 0.55f);
+            Apply();
+        }
+
+        private void LateUpdate() => Apply();
+
+        private void Apply()
+        {
+            if (_channel == null)
+                return;
+            var m = Mathf.Max(0.01f, _image.pixelsPerUnitMultiplier);
+            _channel.offsetMin = new Vector2(_inner.x / m, _inner.y / m);
+            _channel.offsetMax = new Vector2(-_inner.z / m, -_inner.w / m);
         }
     }
 
@@ -146,10 +262,10 @@ namespace TrashCats.Presentation.UI
     {
         public Button Button { get; }
         public Image Image { get; }
-        public Text Text { get; }
+        public TMP_Text Text { get; }
         public RectTransform Rect => Image.rectTransform;
 
-        public UiButton(Button button, Image image, Text text)
+        public UiButton(Button button, Image image, TMP_Text text)
         {
             Button = button;
             Image = image;
@@ -161,6 +277,32 @@ namespace TrashCats.Presentation.UI
             get => Button.interactable;
             set => Button.interactable = value;
         }
+
+        /// <summary>Palette yellow and blue use their hand-coloured art, any other colour tints the neutral button.</summary>
+        public void SetColor(Color color)
+        {
+            var skin = Ui.Skin;
+            if (skin == null || skin.button == null)
+            {
+                Image.color = color;
+                return;
+            }
+
+            var sprite = Same(color, Palette.Primary) && skin.buttonPrimary != null ? skin.buttonPrimary
+                : Same(color, Palette.Secondary) && skin.buttonSecondary != null ? skin.buttonSecondary
+                : skin.button;
+            if (Image.sprite != sprite)
+            {
+                Image.sprite = sprite;
+                Image.type = Image.Type.Sliced;
+                if (Image.GetComponent<SliceFit>() == null)
+                    Image.gameObject.AddComponent<SliceFit>().heightShare = 1.05f;
+            }
+
+            Image.color = sprite == skin.button ? color : new Color(1f, 1f, 1f, color.a);
+        }
+
+        private static bool Same(Color a, Color b) => Mathf.Abs(a.r - b.r) + Mathf.Abs(a.g - b.g) + Mathf.Abs(a.b - b.b) < 0.02f;
     }
 
     public sealed class UiBar
@@ -168,9 +310,9 @@ namespace TrashCats.Presentation.UI
         private readonly RectTransform _fill;
 
         public RectTransform Rect { get; }
-        public Text Label { get; }
+        public TMP_Text Label { get; }
 
-        public UiBar(RectTransform rect, RectTransform fill, Text label)
+        public UiBar(RectTransform rect, RectTransform fill, TMP_Text label)
         {
             Rect = rect;
             _fill = fill;

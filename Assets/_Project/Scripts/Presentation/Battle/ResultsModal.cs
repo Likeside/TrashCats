@@ -4,6 +4,7 @@ using System.Text;
 using TrashCats.App;
 using TrashCats.Domain;
 using TrashCats.Presentation.UI;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,8 +16,8 @@ namespace TrashCats.Presentation.Battle
         private readonly GameSession _session;
         private readonly OverlayStack _overlays;
         private readonly GameObject _root;
-        private readonly Text _title;
-        private readonly Text _body;
+        private readonly TMP_Text _title;
+        private readonly TMP_Text _body;
         private Action<TerritoryId, bool> _onDone;
         private TerritoryId _territory;
 
@@ -28,10 +29,10 @@ namespace TrashCats.Presentation.Battle
             dim.rectTransform.Fill();
             _root = dim.gameObject;
 
-            var card = Ui.Panel(dim.transform, "Card", Palette.Panel, raycast: true);
+            var card = Ui.Card(dim.transform, "Card", CardStyle.Paper, raycast: true);
             card.rectTransform.At(new Vector2(0.5f, 0.5f), new Vector2(940, 1100));
             _title = Ui.Label(card.transform, "", 64, TextAnchor.UpperCenter, Palette.Ink);
-            _title.rectTransform.Fill(40);
+            _title.rectTransform.Fill(50);
             _body = Ui.Label(card.transform, "", 34, TextAnchor.UpperLeft, Palette.Ink);
             _body.rectTransform.Place(Vector2.zero, Vector2.one, new Vector2(60, 200), new Vector2(-60, -150));
 

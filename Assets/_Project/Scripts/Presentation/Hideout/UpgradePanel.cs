@@ -2,6 +2,7 @@ using System;
 using TrashCats.App;
 using TrashCats.Domain;
 using TrashCats.Presentation.UI;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,7 +15,7 @@ namespace TrashCats.Presentation.Hideout
         private readonly OverlayStack _overlays;
         private readonly Action<CommandResult> _onResult;
         private readonly GameObject _root;
-        private readonly Text _text;
+        private readonly TMP_Text _text;
         private readonly UiButton _buy;
         private UpgradeId? _upgrade;
 
@@ -27,7 +28,7 @@ namespace TrashCats.Presentation.Hideout
             dim.rectTransform.Fill();
             dim.gameObject.AddComponent<Button>().onClick.AddListener(() => _overlays.Close(_root));
             _root = dim.gameObject;
-            var card = Ui.Panel(dim.transform, "Card", Palette.Panel, raycast: true);
+            var card = Ui.Card(dim.transform, "Card", CardStyle.Paper, raycast: true);
             card.rectTransform.At(new Vector2(0.5f, 0.5f), new Vector2(880, 700));
             _text = Ui.Label(card.transform, "", 36, TextAnchor.UpperCenter, Palette.Ink);
             _text.rectTransform.Place(Vector2.zero, Vector2.one, new Vector2(40, 180), new Vector2(-40, -40));

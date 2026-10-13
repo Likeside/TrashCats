@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 namespace TrashCats.Presentation.UI
@@ -29,7 +30,7 @@ namespace TrashCats.Presentation.UI
         public ScreenRouter(RectTransform navRoot)
         {
             _nav = navRoot.gameObject;
-            Ui.Panel(navRoot, "NavBack", Palette.PanelDark).rectTransform.Fill();
+            Ui.Card(navRoot, "NavBack", CardStyle.Tin).rectTransform.Fill();
             _hideoutTab = Ui.Button(navRoot, "Tab_Hideout", "Убежище", Palette.Primary, () => Show(ScreenId.Hideout), 36);
             _hideoutTab.Rect.Place(Vector2.zero, new Vector2(0.5f, 1), new Vector2(20, 15), new Vector2(-10, -15));
             _mapTab = Ui.Button(navRoot, "Tab_Map", "Карта", Palette.Disabled, () => Show(ScreenId.Map), 36);
@@ -48,8 +49,8 @@ namespace TrashCats.Presentation.UI
                 pair.Value.Root.SetActive(pair.Key == id);
             var screen = _screens[id];
             _nav.SetActive(screen.WithNav);
-            _hideoutTab.Image.color = id == ScreenId.Hideout ? Palette.Primary : Palette.Disabled;
-            _mapTab.Image.color = id == ScreenId.Map ? Palette.Primary : Palette.Disabled;
+            _hideoutTab.SetColor(id == ScreenId.Hideout ? Palette.Primary : Palette.Disabled);
+            _mapTab.SetColor(id == ScreenId.Map ? Palette.Primary : Palette.Disabled);
             Current = id;
             screen.OnShow?.Invoke();
             Changed?.Invoke(id);

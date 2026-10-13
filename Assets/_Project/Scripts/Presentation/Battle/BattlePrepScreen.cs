@@ -5,6 +5,7 @@ using TrashCats.App;
 using TrashCats.Domain;
 using TrashCats.Presentation.Hideout;
 using TrashCats.Presentation.UI;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,8 +23,8 @@ namespace TrashCats.Presentation.Battle
         private readonly Action<CatId> _onCatDetails;
         private readonly RectTransform _enemyList;
         private readonly RectTransform _catList;
-        private readonly Text _title;
-        private readonly Text _warning;
+        private readonly TMP_Text _title;
+        private readonly TMP_Text _warning;
         private readonly UiButton _fight;
         private readonly List<CatId> _order = new List<CatId>();
         private TerritoryId _territory;
@@ -40,9 +41,12 @@ namespace TrashCats.Presentation.Battle
             var root = Ui.Rect(parent, "BattlePrepScreen").Fill();
             Root = root.gameObject;
             Ui.Panel(root, "Back", Palette.Background).rectTransform.Fill();
+            if (Ui.Skin != null)
+                Ui.Card(root, "Tin", CardStyle.Tin).rectTransform.Fill(6);
 
             _title = Ui.Label(root, "", 50, TextAnchor.MiddleCenter, Palette.Paper);
-            _title.rectTransform.Place(new Vector2(0, 1), Vector2.one, new Vector2(0, -110), Vector2.zero);
+            _title.rectTransform.Place(new Vector2(0, 1), Vector2.one, new Vector2(0, -130), new Vector2(0, -20));
+            _title.Outlined();
 
             Section(root, "Враги (по очереди)", 0.62f, 0.9f, out _enemyList);
             Section(root, "Твоя банда — нажми, чтобы выбрать порядок", 0.2f, 0.6f, out _catList);
@@ -135,7 +139,7 @@ namespace TrashCats.Presentation.Battle
 
         private static void Section(RectTransform root, string caption, float y0, float y1, out RectTransform list)
         {
-            var box = Ui.Rect(root, caption).Place(new Vector2(0, y0), new Vector2(1, y1), new Vector2(30, 0), new Vector2(-30, 0));
+            var box = Ui.Rect(root, caption).Place(new Vector2(0, y0), new Vector2(1, y1), new Vector2(60, 0), new Vector2(-60, 0));
             var label = Ui.Label(box, caption, 30, TextAnchor.UpperLeft, Palette.Disabled);
             label.rectTransform.Place(new Vector2(0, 1), Vector2.one, new Vector2(0, -44), Vector2.zero);
             list = Ui.Rect(box, "List").Place(Vector2.zero, Vector2.one, Vector2.zero, new Vector2(0, -50));
@@ -148,8 +152,7 @@ namespace TrashCats.Presentation.Battle
             var y0 = 1f - (index + 1f) / slots;
             var row = Ui.Button(list, name, text, color, onClick, 32);
             row.Rect.Place(new Vector2(0, y0), new Vector2(1, y1), new Vector2(0, 6), new Vector2(0, -6));
-            row.Text.alignment = TextAnchor.MiddleLeft;
-            row.Text.supportRichText = true;
+            row.Text.Align(TextAnchor.MiddleLeft);
             row.Text.rectTransform.Fill(20);
             row.Text.color = CatColors.TextOn(color);
             if (onClick == null) row.Button.transition = Selectable.Transition.None;

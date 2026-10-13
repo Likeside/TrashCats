@@ -3,6 +3,7 @@ using System.Collections;
 using System.IO;
 using TrashCats.Presentation.Animation;
 using TrashCats.Presentation.UI;
+using TMPro;
 using UnityEngine;
 
 namespace TrashCats.Presentation.Dev
@@ -22,7 +23,7 @@ namespace TrashCats.Presentation.Dev
         [SerializeField] private SpriteFlipbook tail;
         [SerializeField] private FlipbookClip tailClip;
 
-        private UnityEngine.UI.Text _status;
+        private TMP_Text _status;
 
         private void Start()
         {

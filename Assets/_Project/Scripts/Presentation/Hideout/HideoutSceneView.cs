@@ -6,6 +6,7 @@ using TrashCats.App;
 using TrashCats.Domain;
 using TrashCats.Presentation.Characters;
 using TrashCats.Presentation.UI;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,7 +26,7 @@ namespace TrashCats.Presentation.Hideout
         private readonly Action<UpgradeId> _onStationTapped;
         private readonly CharacterViewFactory _art;
         private readonly Dictionary<CatId, CatToken> _tokens = new Dictionary<CatId, CatToken>();
-        private readonly Dictionary<UpgradeId, Text> _upgradeLabels = new Dictionary<UpgradeId, Text>();
+        private readonly Dictionary<UpgradeId, TMP_Text> _upgradeLabels = new Dictionary<UpgradeId, TMP_Text>();
         private readonly List<IDisposable> _subscriptions = new List<IDisposable>();
 
         public HideoutSceneView(GameSession session, EventBus bus, RectTransform root, Action<CatId> onCatTapped, Action<UpgradeId> onStationTapped,
@@ -99,14 +100,14 @@ namespace TrashCats.Presentation.Hideout
                 var size = activity.Kind == ActivityKind.Scavenge ? new Vector2(150, 360) : prop != null ? new Vector2(260, 230) : new Vector2(240, 150);
                 var box = Ui.Panel(_root, "Station_" + activity.Id, activity.Kind == ActivityKind.Scavenge ? new Color(0.1f, 0.1f, 0.12f, 0.35f) : Palette.Station);
                 box.rectTransform.At(StationAnchor(activity), size);
-                Text text;
+                TMP_Text text;
                 if (prop != null)
                 {
                     box.color = new Color(0, 0, 0, 0);
                     Ui.Picture(box.transform, "Prop", prop).rectTransform.Place(Vector2.zero, Vector2.one, new Vector2(0, 40), Vector2.zero);
                     text = Ui.Label(box.transform, label, 26, TextAnchor.LowerCenter, Palette.Paper);
                     text.rectTransform.Fill(0);
-                    text.gameObject.AddComponent<UnityEngine.UI.Outline>().effectColor = Palette.Ink;
+                    text.Outlined();
                 }
                 else
                 {
@@ -193,7 +194,7 @@ namespace TrashCats.Presentation.Hideout
             if (hasArt)
             {
                 name.rectTransform.Place(new Vector2(0, 0), new Vector2(1, 0), new Vector2(0, -34), new Vector2(0, 0));
-                name.gameObject.AddComponent<UnityEngine.UI.Outline>().effectColor = Palette.Ink;
+                name.Outlined();
             }
 
             var bubble = Ui.Label(rt, "", 26, TextAnchor.LowerCenter, Palette.Primary);
@@ -269,13 +270,13 @@ namespace TrashCats.Presentation.Hideout
         private sealed class CatToken
         {
             public RectTransform Root { get; }
-            public Text Bubble { get; }
+            public TMP_Text Bubble { get; }
             public UiBar Progress { get; }
             public CharacterArt Art;
             public Image Image;
             public Color BaseColor;
 
-            public CatToken(RectTransform root, Text bubble, UiBar progress)
+            public CatToken(RectTransform root, TMP_Text bubble, UiBar progress)
             {
                 Root = root;
                 Bubble = bubble;
@@ -308,7 +309,7 @@ namespace TrashCats.Presentation.Hideout
             rt.anchorMin = rt.anchorMax = target.anchorMin;
             rt.sizeDelta = new Vector2(320, 50);
             rt.anchoredPosition = target.anchoredPosition + new Vector2(0, 90);
-            label.gameObject.AddComponent<Outline>().effectColor = Palette.Ink;
+            label.Outlined();
 
             DOTween.Sequence()
                 .Append(rt.DOAnchorPosY(rt.anchoredPosition.y + 90, 1.1f).SetEase(Ease.OutCubic))
