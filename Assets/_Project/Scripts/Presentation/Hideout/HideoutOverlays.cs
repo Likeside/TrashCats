@@ -4,6 +4,7 @@ using System.Text;
 using DG.Tweening;
 using TrashCats.App;
 using TrashCats.Presentation.UI;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,14 +14,30 @@ namespace TrashCats.Presentation.Hideout
     public sealed class HudView
     {
         private readonly GameSession _session;
-        private readonly Text _resources;
+        private readonly TMP_Text _resources;
+        private readonly TMP_Text _junk;
+        private readonly bool _withIcons;
 
         public HudView(GameSession session, RectTransform root, Action onDebug)
         {
             _session = session;
-            Ui.Panel(root, "HudBack", Palette.PanelDark).rectTransform.Fill();
+            Ui.Card(root, "HudBack", CardStyle.Tin).rectTransform.Fill();
             _resources = Ui.Label(root, "", 40, TextAnchor.MiddleLeft, Palette.Paper);
             _resources.rectTransform.Fill(30);
+            // with the skin: fish-bone and bolt icons in front of the numbers
+            var food = Ui.Icon(root, "food");
+            var junk = Ui.Icon(root, "junk");
+            if (food != null && junk != null)
+            {
+                _withIcons = true;
+                food.rectTransform.Place(new Vector2(0, 0), new Vector2(0, 1), new Vector2(28, 14), new Vector2(110, -14));
+                junk.rectTransform.Place(new Vector2(0, 0), new Vector2(0, 1), new Vector2(300, 14), new Vector2(370, -14));
+                _resources.rectTransform.Fill();
+                _resources.rectTransform.offsetMin = new Vector2(120, 0);
+                _junk = Ui.Label(root, "", 44, TextAnchor.MiddleLeft, Palette.Paper);
+                _junk.rectTransform.Place(Vector2.zero, Vector2.one, new Vector2(382, 0), Vector2.zero);
+                _resources.fontSize = 44;
+            }
 
             if (onDebug != null)
             {
@@ -31,19 +48,28 @@ namespace TrashCats.Presentation.Hideout
             Refresh();
         }
 
-        public void Refresh() => _resources.text = $"Еда: {_session.World.Food}      Хлам: {_session.World.Junk}";
+        public void Refresh()
+        {
+            if (_withIcons)
+            {
+                _resources.text = _session.World.Food.ToString();
+                _junk.text = _session.World.Junk.ToString();
+            }
+            else
+                _resources.text = $"Еда: {_session.World.Food}      Хлам: {_session.World.Junk}";
+        }
     }
 
     /// <summary>Short message line for rejected commands.</summary>
     public sealed class ToastView
     {
-        private readonly Text _text;
+        private readonly TMP_Text _text;
 
         public ToastView(RectTransform parent)
         {
             _text = Ui.Label(parent, "", 34, TextAnchor.MiddleCenter, Palette.Paper);
             _text.rectTransform.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(40, -90), new Vector2(-40, -20));
-            _text.gameObject.AddComponent<Outline>().effectColor = Palette.Ink;
+            _text.Outlined();
             _text.color = new Color(1, 1, 1, 0);
         }
 
@@ -61,7 +87,7 @@ namespace TrashCats.Presentation.Hideout
     {
         private readonly OverlayStack _overlays;
         private readonly GameObject _root;
-        private readonly Text _body;
+        private readonly TMP_Text _body;
 
         public OfflineSummaryModal(RectTransform parent, OverlayStack overlays)
         {
@@ -70,7 +96,7 @@ namespace TrashCats.Presentation.Hideout
             dim.rectTransform.Fill();
             _root = dim.gameObject;
 
-            var panel = Ui.Panel(dim.transform, "Card", Palette.Panel, raycast: true);
+            var panel = Ui.Card(dim.transform, "Card", CardStyle.Paper, raycast: true);
             panel.rectTransform.At(new Vector2(0.5f, 0.5f), new Vector2(900, 900));
 
             var title = Ui.Label(panel.transform, "Пока тебя не было", 46, TextAnchor.UpperCenter, Palette.Ink);
@@ -111,7 +137,7 @@ namespace TrashCats.Presentation.Hideout
     {
         private readonly OverlayStack _overlays;
         private readonly GameObject _root;
-        private readonly Text _scale;
+        private readonly TMP_Text _scale;
         private readonly GameSession _session;
 
         public DebugPanel(RectTransform parent, OverlayStack overlays, GameSession session, DebugCommands debug, Action resetProgress)
@@ -122,7 +148,7 @@ namespace TrashCats.Presentation.Hideout
             dim.rectTransform.Fill();
             _root = dim.gameObject;
 
-            var panel = Ui.Panel(dim.transform, "Card", Palette.PanelDark, raycast: true);
+            var panel = Ui.Card(dim.transform, "Card", CardStyle.Tin, raycast: true);
             panel.rectTransform.At(new Vector2(0.5f, 0.5f), new Vector2(900, 1260));
             _scale = Ui.Label(panel.transform, "", 40, TextAnchor.UpperCenter, Palette.Paper);
             _scale.rectTransform.Fill(30);

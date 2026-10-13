@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TrashCats.App;
 using TrashCats.Domain;
 using TrashCats.Presentation.UI;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,7 +25,7 @@ namespace TrashCats.Presentation.Hideout
             _onCardTapped = onCardTapped;
             _onResult = onResult;
 
-            Ui.Panel(root, "PanelBack", Palette.PanelDark).rectTransform.Fill();
+            Ui.Card(root, "PanelBack", CardStyle.Tin).rectTransform.Fill();
             for (var i = 0; i < Slots; i++)
             {
                 var slot = Ui.Rect(root, "Slot" + i);
@@ -57,8 +58,8 @@ namespace TrashCats.Presentation.Hideout
             private readonly GameObject _content;
             private readonly GameObject _locked;
             private readonly Image _header;
-            private readonly Text _name;
-            private readonly Text _status;
+            private readonly TMP_Text _name;
+            private readonly TMP_Text _status;
             private readonly UiBar _progress;
             private readonly UiBar _energy;
             private readonly UiBar _satiety;
@@ -69,37 +70,44 @@ namespace TrashCats.Presentation.Hideout
             {
                 _owner = owner;
 
-                var background = Ui.Panel(slot, "Card", Palette.Panel, raycast: true);
+                var background = Ui.Card(slot, "Card", CardStyle.Strip, raycast: true);
                 background.rectTransform.Fill();
                 background.gameObject.AddComponent<Button>().onClick.AddListener(() =>
                 {
                     if (_cat != null) _owner._onCardTapped(_cat.Id);
                 });
 
-                _content = Ui.Rect(background.transform, "Content").Fill().gameObject;
+                _content = Ui.Rect(background.transform, "Content").Fill(Ui.Skin != null ? 16 : 0).gameObject;
                 var content = _content.transform;
 
                 _header = Ui.Panel(content, "Header", Color.gray);
-                _header.rectTransform.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(0, -60), Vector2.zero);
+                if (Ui.Skin?.button != null)
+                {
+                    // the cat's name on a painted plate in the cat's colour
+                    _header.sprite = Ui.Skin.button;
+                    _header.type = Image.Type.Sliced;
+                    _header.gameObject.AddComponent<SliceFit>();
+                }
+                _header.rectTransform.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(0, -56), Vector2.zero);
                 _name = Ui.Label(_header.transform, "", 34, TextAnchor.MiddleCenter, Palette.Paper);
 
                 _status = Ui.Label(content, "", 26, TextAnchor.MiddleCenter, Palette.Ink);
-                _status.rectTransform.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(8, -120), new Vector2(-8, -62));
+                _status.rectTransform.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(8, -104), new Vector2(-8, -58));
 
                 _progress = Ui.Bar(content, "Progress", Palette.Progress);
-                _progress.Rect.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(16, -142), new Vector2(-16, -126));
+                _progress.Rect.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(16, -120), new Vector2(-16, -106));
 
-                _energy = Ui.Bar(content, "Energy", Palette.Energy);
-                _energy.Rect.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(16, -196), new Vector2(-16, -156));
+                _energy = Ui.Bar(content, "Energy", Palette.Energy, "energy");
+                _energy.Rect.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(6, -166), new Vector2(-6, -128));
 
-                _satiety = Ui.Bar(content, "Satiety", Palette.Satiety);
-                _satiety.Rect.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(16, -246), new Vector2(-16, -206));
+                _satiety = Ui.Bar(content, "Satiety", Palette.Satiety, "satiety");
+                _satiety.Rect.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(6, -212), new Vector2(-6, -174));
 
                 _feed = Ui.Button(content, "Feed", "Покормить", Palette.Primary, () =>
                 {
                     if (_cat != null) _owner._onResult(_owner._session.FeedCat(_cat.Id));
                 }, 28);
-                _feed.Rect.Place(new Vector2(0, 0), new Vector2(1, 0), new Vector2(16, 12), new Vector2(-16, 66));
+                _feed.Rect.Place(new Vector2(0, 0), new Vector2(1, 0), new Vector2(10, 4), new Vector2(-10, 58));
 
                 _locked = Ui.Label(background.transform, "Ещё не\nв банде", 32, TextAnchor.MiddleCenter, Palette.Disabled).gameObject;
             }
@@ -122,8 +130,8 @@ namespace TrashCats.Presentation.Hideout
                     : Texts.IdleStatus(cat.Activity.IdleReason);
 
                 var max = (float)session.Config.Needs.Max;
-                _energy.Set(cat.Energy / max, $"Энергия {cat.Energy}");
-                _satiety.Set(cat.Satiety / max, $"Сытость {cat.Satiety}");
+                _energy.Set(cat.Energy / max, Ui.Skin != null ? cat.Energy.ToString() : $"Энергия {cat.Energy}");
+                _satiety.Set(cat.Satiety / max, Ui.Skin != null ? cat.Satiety.ToString() : $"Сытость {cat.Satiety}");
 
                 var canFeed = session.CanFeed(cat.Id);
                 _feed.Interactable = canFeed == CommandError.None;

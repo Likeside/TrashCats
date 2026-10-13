@@ -7,6 +7,7 @@ using TrashCats.Domain;
 using TrashCats.Presentation.Characters;
 using TrashCats.Presentation.Hideout;
 using TrashCats.Presentation.UI;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,9 +25,11 @@ namespace TrashCats.Presentation.Battle
         private readonly CharacterViewFactory _characters;
         private readonly ResultsModal _results;
         private readonly Transform _arena;
-        private readonly Text _title;
-        private readonly Text _banner;
-        private readonly Text[] _queues = new Text[2];
+        private readonly TMP_Text _title;
+        private readonly TMP_Text _banner;
+        private readonly RectTransform _bannerRoot;
+        private readonly CanvasGroup _bannerGroup;
+        private readonly TMP_Text[] _queues = new TMP_Text[2];
         private readonly FighterHud[] _huds = new FighterHud[2];
         private readonly CharacterView[] _views = new CharacterView[2];
         private readonly UiButton _speed;
@@ -61,17 +64,28 @@ namespace TrashCats.Presentation.Battle
 
             _title = Ui.Label(root, "", 40, TextAnchor.MiddleCenter, Palette.Paper);
             _title.rectTransform.Place(new Vector2(0, 1), Vector2.one, new Vector2(0, -80), Vector2.zero);
+            _title.Outlined();
             for (var side = 0; side < 2; side++)
             {
                 _queues[side] = Ui.Label(root, "", 28, side == 0 ? TextAnchor.UpperLeft : TextAnchor.UpperRight, Palette.Paper);
                 _queues[side].rectTransform.Place(new Vector2(side * 0.5f, 1), new Vector2(side * 0.5f + 0.5f, 1), new Vector2(30, -200), new Vector2(-30, -90));
-                _queues[side].supportRichText = true;
+                _queues[side].Outlined();
                 _huds[side] = new FighterHud(root, side);
             }
 
-            _banner = Ui.Label(root, "", 60, TextAnchor.MiddleCenter, Palette.Primary);
-            _banner.rectTransform.Place(new Vector2(0, 0.72f), new Vector2(1, 0.8f));
-            _banner.gameObject.AddComponent<Outline>().effectColor = Palette.Ink;
+            // skill banner: a tilted yellow comic ribbon (Art Bible §6), or outlined yellow text without the skin
+            _bannerRoot = Ui.Rect(root, "Banner").Place(new Vector2(0.05f, 0.71f), new Vector2(0.95f, 0.81f));
+            _bannerGroup = _bannerRoot.gameObject.AddComponent<CanvasGroup>();
+            _bannerGroup.alpha = 0f;
+            _bannerGroup.blocksRaycasts = false;
+            var ribbon = Ui.Skin?.ribbon;
+            if (ribbon != null)
+                Ui.Picture(_bannerRoot, "Ribbon", ribbon).preserveAspect = false;
+            _banner = Ui.Label(_bannerRoot, "", 60, TextAnchor.MiddleCenter, ribbon != null ? Palette.Ink : Palette.Primary, heading: true);
+            if (ribbon != null)
+                _banner.rectTransform.localRotation = Quaternion.Euler(0, 0, 4f);
+            else
+                _banner.Outlined();
 
             _speed = Ui.Button(root, "Combat_Speed", "×1", Palette.Primary, ToggleSpeed, 44);
             _speed.Rect.Place(Vector2.zero, new Vector2(0.45f, 0.09f), new Vector2(30, 30), new Vector2(-15, 0));
@@ -101,6 +115,7 @@ namespace TrashCats.Presentation.Battle
             _time = 0f;
             _endDelay = -1f;
             _banner.text = "";
+            _bannerGroup.alpha = 0f;
             _title.text = Texts.TerritoryName(_battle.Territory);
             foreach (var view in _views) view?.Destroy();
             Array.Clear(_views, 0, 2);
@@ -238,18 +253,19 @@ namespace TrashCats.Presentation.Battle
                 var queue = side == 0 ? _battle.Setup.PlayerQueue : _battle.Setup.EnemyQueue;
                 var knocked = new HashSet<string>(log.OfType<FighterKnockedOut>().Where(k => (int)k.Side == side).Select(k => k.FighterId));
                 _queues[side].text = string.Join("\n", queue.Select(f =>
-                    knocked.Contains(f.Id) ? $"<color=#888888>✗ {NameOf(f.Id, f.Side)}</color>" : NameOf(f.Id, f.Side)));
+                    knocked.Contains(f.Id) ? $"<color=#888888>× {NameOf(f.Id, f.Side)}</color>" : NameOf(f.Id, f.Side)));
             }
         }
 
         private void ShowBanner(string text)
         {
-            _banner.DOKill();
+            _bannerGroup.DOKill();
+            _bannerRoot.DOKill();
             _banner.text = text;
-            _banner.color = Palette.Primary;
-            _banner.transform.localScale = Vector3.one * 1.3f;
-            _banner.transform.DOScale(1f, 0.2f);
-            _banner.DOFade(0f, 0.5f).SetDelay(0.7f / _speedFactor).SetLink(_banner.gameObject);
+            _bannerGroup.alpha = 1f;
+            _bannerRoot.localScale = Vector3.one * 1.3f;
+            _bannerRoot.DOScale(1f, 0.2f).SetLink(_bannerRoot.gameObject);
+            _bannerGroup.DOFade(0f, 0.5f).SetDelay(0.7f / _speedFactor).SetLink(_bannerRoot.gameObject);
         }
 
         private void FloatAt(Vector3 world, string text, Color color, int size)
@@ -257,7 +273,7 @@ namespace TrashCats.Presentation.Battle
             var camera = Camera.main;
             if (camera == null) return;
             var label = Ui.Label(_uiRoot, text, size, TextAnchor.MiddleCenter, color);
-            label.gameObject.AddComponent<Outline>().effectColor = Palette.Ink;
+            label.Outlined();
             var rt = label.rectTransform;
             var canvas = _uiRoot.GetComponentInParent<Canvas>();
             RectTransformUtility.ScreenPointToLocalPointInRectangle(_uiRoot, camera.WorldToScreenPoint(world),
@@ -277,10 +293,10 @@ namespace TrashCats.Presentation.Battle
         /// <summary>Name, HP and Grit bars and status line for one side.</summary>
         private sealed class FighterHud
         {
-            private readonly Text _name;
+            private readonly TMP_Text _name;
             private readonly UiBar _hp;
             private readonly UiBar _grit;
-            private readonly Text _status;
+            private readonly TMP_Text _status;
             private readonly Dictionary<CombatStatus, int> _statuses = new Dictionary<CombatStatus, int>();
             private int _maxHp = 1, _maxGrit = 1;
 
@@ -290,12 +306,14 @@ namespace TrashCats.Presentation.Battle
                 var box = Ui.Rect(root, side == 0 ? "PlayerHud" : "EnemyHud").Place(new Vector2(x0, 0.12f), new Vector2(x0 + 0.42f, 0.27f));
                 _name = Ui.Label(box, "", 34, TextAnchor.UpperCenter, Palette.Paper);
                 _name.rectTransform.Place(new Vector2(0, 1), Vector2.one, new Vector2(0, -50), Vector2.zero);
-                _hp = Ui.Bar(box, "Hp", Palette.Hex("#D9402B"));
-                _hp.Rect.Place(new Vector2(0, 1), Vector2.one, new Vector2(0, -100), new Vector2(0, -56));
-                _grit = Ui.Bar(box, "Grit", Palette.Hex("#3F7FBF"));
-                _grit.Rect.Place(new Vector2(0, 1), Vector2.one, new Vector2(0, -136), new Vector2(0, -106));
+                _name.Outlined();
+                _hp = Ui.Bar(box, "Hp", Palette.Hex("#D9402B"), "hp");
+                _hp.Rect.Place(new Vector2(0, 1), Vector2.one, new Vector2(0, -108), new Vector2(0, -56));
+                _grit = Ui.Bar(box, "Grit", Palette.Hex("#3F7FBF"), "grit");
+                _grit.Rect.Place(new Vector2(0, 1), Vector2.one, new Vector2(0, -156), new Vector2(0, -112));
                 _status = Ui.Label(box, "", 26, TextAnchor.UpperCenter, Palette.Primary);
-                _status.rectTransform.Place(new Vector2(0, 1), Vector2.one, new Vector2(0, -180), new Vector2(0, -140));
+                _status.Outlined();
+                _status.rectTransform.Place(new Vector2(0, 1), Vector2.one, new Vector2(0, -200), new Vector2(0, -160));
             }
 
             public void Reset()

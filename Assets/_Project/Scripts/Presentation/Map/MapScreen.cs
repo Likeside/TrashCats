@@ -4,6 +4,7 @@ using System.Linq;
 using TrashCats.App;
 using TrashCats.Domain;
 using TrashCats.Presentation.UI;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,7 +15,7 @@ namespace TrashCats.Presentation.Map
     {
         private readonly GameSession _session;
         private readonly Action<TerritoryId> _onOpen;
-        private readonly List<(TerritoryDefinition Territory, UiButton Button, Text Status)> _nodes = new List<(TerritoryDefinition, UiButton, Text)>();
+        private readonly List<(TerritoryDefinition Territory, UiButton Button, TMP_Text Status)> _nodes = new List<(TerritoryDefinition, UiButton, TMP_Text)>();
 
         public GameObject Root { get; }
 
@@ -30,12 +31,13 @@ namespace TrashCats.Presentation.Map
                 Ui.Cover(root, "MapArt", background, new Color(0.75f, 0.75f, 0.8f));
             var title = Ui.Label(root, "Район", 52, TextAnchor.MiddleCenter, Palette.Paper);
             title.rectTransform.Place(new Vector2(0, 1), Vector2.one, new Vector2(0, -110), Vector2.zero);
+            title.Outlined();
 
             var area = Ui.Rect(root, "Path").Place(Vector2.zero, Vector2.one, new Vector2(60, 150), new Vector2(-60, -120));
             var territories = session.Config.Territories;
             var steps = territories.Count + 1;
 
-            var home = Ui.Panel(area, "Node_Home", new Color(Palette.PanelDark.r, Palette.PanelDark.g, Palette.PanelDark.b, 0.8f));
+            var home = Ui.Card(area, "Node_Home", CardStyle.Tin);
             home.rectTransform.Place(new Vector2(0.15f, 0), new Vector2(0.85f, 1f / steps), new Vector2(0, 10), new Vector2(0, -10));
             Ui.Label(home.transform, "Мусорка ресторана\nнаше убежище", 34, TextAnchor.MiddleCenter, Palette.Paper).rectTransform.Fill(10);
 
@@ -50,9 +52,10 @@ namespace TrashCats.Presentation.Map
                 var id = territory.Id;
                 var button = Ui.Button(area, "Node_" + territory.Id, "", Palette.Secondary, () => _onOpen(id), 36);
                 button.Rect.Place(new Vector2(0.08f, y0), new Vector2(0.92f, y1), new Vector2(0, 14), new Vector2(0, -14));
-                button.Text.alignment = TextAnchor.UpperCenter;
+                button.Text.rectTransform.offsetMax = new Vector2(-60, -12);
                 var status = Ui.Label(button.Rect, "", 28, TextAnchor.LowerCenter, Palette.Ink);
                 status.rectTransform.Fill(14);
+                status.gameObject.SetActive(false);
                 _nodes.Add((territory, button, status));
             }
 
@@ -66,26 +69,27 @@ namespace TrashCats.Presentation.Map
             {
                 var state = world.Territories.Get(territory.Id);
                 var enemies = string.Join(", ", territory.EnemyQueue.Select(e => Texts.EnemyName(e.Value)));
-                button.Text.text = $"{Texts.TerritoryName(territory.Id)}\n<size=26>{enemies}</size>";
-                button.Text.supportRichText = true;
+                var name = Texts.TerritoryName(territory.Id);
                 switch (state.Status)
                 {
                     case TerritoryStatus.Locked:
-                        button.Image.color = new Color(Palette.Disabled.r, Palette.Disabled.g, Palette.Disabled.b, 0.7f);
+                        button.SetColor(new Color(Palette.Disabled.r, Palette.Disabled.g, Palette.Disabled.b, 0.92f));
                         button.Interactable = false;
                         status.text = "Закрыто";
                         break;
                     case TerritoryStatus.Available:
-                        button.Image.color = Palette.Primary;
+                        button.SetColor(Palette.Primary);
                         button.Interactable = true;
                         status.text = "Можно напасть! Награда: " + Reward(territory, true);
                         break;
                     default:
-                        button.Image.color = new Color(0.5f, 0.69f, 0.41f, 0.85f);
+                        button.SetColor(new Color(0.5f, 0.69f, 0.41f, 0.85f));
                         button.Interactable = true;
                         status.text = $"Захвачено · {Texts.Bonus(territory)} · повтор: {Reward(territory, false)}";
                         break;
                 }
+
+                button.Text.text = $"{name}\n<size=24>{enemies}</size>\n<size=24>{status.text}</size>";
             }
         }
 

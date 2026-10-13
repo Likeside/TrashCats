@@ -4,6 +4,7 @@ using System.Linq;
 using TrashCats.App;
 using TrashCats.Domain;
 using TrashCats.Presentation.UI;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,9 +17,9 @@ namespace TrashCats.Presentation.Hideout
         private readonly OverlayStack _overlays;
         private readonly Action<CommandResult> _onResult;
         private readonly GameObject _root;
-        private readonly Text _header;
-        private readonly Text _attributes;
-        private readonly Text _slots;
+        private readonly TMP_Text _header;
+        private readonly TMP_Text _attributes;
+        private readonly TMP_Text _slots;
         private readonly RectTransform _skills;
         private CatId? _catId;
 
@@ -34,16 +35,15 @@ namespace TrashCats.Presentation.Hideout
             dim.rectTransform.Fill();
             dim.gameObject.AddComponent<Button>().onClick.AddListener(Close);
             _root = dim.gameObject;
-            var panel = Ui.Panel(dim.transform, "Sheet", Palette.Panel, raycast: true);
+            var panel = Ui.Card(dim.transform, "Sheet", CardStyle.Paper, raycast: true);
             panel.rectTransform.Place(Vector2.zero, new Vector2(1, 0.88f));
 
             _header = Ui.Label(panel.transform, "", 48, TextAnchor.UpperLeft, Palette.Ink);
-            _header.rectTransform.Place(new Vector2(0, 1), Vector2.one, new Vector2(40, -90), new Vector2(-40, -24));
+            _header.rectTransform.Place(new Vector2(0, 1), Vector2.one, new Vector2(60, -116), new Vector2(-60, -50));
             _attributes = Ui.Label(panel.transform, "", 32, TextAnchor.UpperLeft, Palette.Ink);
-            _attributes.rectTransform.Place(new Vector2(0, 1), Vector2.one, new Vector2(40, -330), new Vector2(-40, -100));
-            _attributes.supportRichText = true;
+            _attributes.rectTransform.Place(new Vector2(0, 1), Vector2.one, new Vector2(60, -340), new Vector2(-60, -122));
             _slots = Ui.Label(panel.transform, "", 32, TextAnchor.UpperLeft, Palette.Ink);
-            _slots.rectTransform.Place(new Vector2(0, 1), Vector2.one, new Vector2(40, -420), new Vector2(-40, -340));
+            _slots.rectTransform.Place(new Vector2(0, 1), Vector2.one, new Vector2(60, -425), new Vector2(-60, -345));
             _skills = Ui.Rect(panel.transform, "Skills").Place(Vector2.zero, Vector2.one, new Vector2(30, 150), new Vector2(-30, -430));
 
             var close = Ui.Button(panel.transform, "Details_Close", "Закрыть", Palette.Disabled, Close, 36);
@@ -72,7 +72,7 @@ namespace TrashCats.Presentation.Hideout
             {
                 var level = cat.GetLevel(a);
                 var xp = level >= config.Progression.MaxLevel ? "MAX" : $"{cat.GetXp(a)}/{config.Progression.XpToNext(level)}";
-                return $"{Texts.Attribute(a)} {level}  <size=26>({xp})</size>{(a == cat.Aptitude ? " ★" : "")}";
+                return $"{Texts.Attribute(a)} {level}  <size=26>({xp})</size>{(a == cat.Aptitude ? " *" : "")}";
             });
             var c = config.Combat;
             _attributes.text = string.Join("\n", lines)
@@ -93,8 +93,7 @@ namespace TrashCats.Presentation.Hideout
                 var skillId = skill.Id;
                 var row = Ui.Button(_skills, "Skill_" + skill.Id, $"{Texts.SkillName(skill.Id)} — {state}\n<size=24>{Texts.SkillDescription(skill)} · Задор {skill.GritCost}</size>",
                     color, () => Toggle(skillId), 30);
-                row.Text.supportRichText = true;
-                row.Text.alignment = TextAnchor.MiddleLeft;
+                row.Text.Align(TextAnchor.MiddleLeft);
                 row.Rect.Place(new Vector2(0, 1f - (i + 1f) / skills.Count), new Vector2(1, 1f - (float)i / skills.Count), new Vector2(0, 5), new Vector2(0, -5));
                 row.Interactable = unlocked;
             }

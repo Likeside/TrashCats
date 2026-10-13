@@ -4,6 +4,7 @@ using System.Linq;
 using TrashCats.App;
 using TrashCats.Domain;
 using TrashCats.Presentation.UI;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,8 +20,8 @@ namespace TrashCats.Presentation.Hideout
         private readonly OverlayStack _overlays;
         private readonly Action<CommandResult> _onResult;
         private readonly GameObject _root;
-        private readonly Text _title;
-        private readonly Text _needs;
+        private readonly TMP_Text _title;
+        private readonly TMP_Text _needs;
         private readonly List<(ActivityDefinition Activity, UiButton Button)> _buttons = new List<(ActivityDefinition, UiButton)>();
         private readonly UiButton _feed;
         private readonly UiButton _stop;
@@ -39,18 +40,18 @@ namespace TrashCats.Presentation.Hideout
             dim.gameObject.AddComponent<Button>().onClick.AddListener(Close);
             _root = dim.gameObject;
 
-            var panel = Ui.Panel(dim.transform, "Sheet", Palette.Panel, raycast: true);
+            var panel = Ui.Card(dim.transform, "Sheet", CardStyle.Paper, raycast: true);
             panel.rectTransform.Place(Vector2.zero, new Vector2(1f, 0f), Vector2.zero, new Vector2(0, 980));
 
             _title = Ui.Label(panel.transform, "", 44, TextAnchor.MiddleLeft, Palette.Ink);
-            _title.rectTransform.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(40, -90), new Vector2(-40, -20));
+            _title.rectTransform.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(60, -105), new Vector2(-40, -45));
             _needs = Ui.Label(panel.transform, "", 30, TextAnchor.MiddleLeft, Palette.Ink);
-            _needs.rectTransform.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(40, -140), new Vector2(-40, -90));
+            _needs.rectTransform.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(60, -150), new Vector2(-40, -105));
             var details = Ui.Button(panel.transform, "Sheet_Details", "Умения и статы", Palette.Paper, () =>
             {
                 if (_catId is CatId id) onDetails(id);
             }, 28);
-            details.Rect.Place(new Vector2(1, 1), new Vector2(1, 1), new Vector2(-330, -95), new Vector2(-30, -25));
+            details.Rect.Place(new Vector2(1, 1), new Vector2(1, 1), new Vector2(-400, -100), new Vector2(-100, -30));
 
             var activities = OrderedActivities(session.Config);
             for (var i = 0; i < activities.Count; i++)
@@ -95,7 +96,7 @@ namespace TrashCats.Presentation.Hideout
                 var error = _session.CanAssign(id, activity.Id);
                 var current = cat.Activity.IsWorking && cat.Activity.ActivityId == activity.Id;
                 button.Interactable = error == CommandError.None;
-                button.Image.color = current ? Palette.Primary : Palette.Secondary;
+                button.SetColor(current ? Palette.Primary : Palette.Secondary);
 
                 string details;
                 if (error != CommandError.None)
@@ -111,7 +112,6 @@ namespace TrashCats.Presentation.Hideout
                 }
 
                 button.Text.text = $"{Texts.ActivityName(activity)}\n<size=26>{details}</size>";
-                button.Text.supportRichText = true;
             }
 
             var canFeed = _session.CanFeed(id);

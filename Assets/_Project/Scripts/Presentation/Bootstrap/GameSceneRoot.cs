@@ -22,6 +22,7 @@ namespace TrashCats.Presentation.Bootstrap
     {
         [SerializeField] private CharacterArtRegistry characterArt;
         [SerializeField] private Sprite arenaBackground;
+        [SerializeField] private UiSkin uiSkin;
 
         private GameServices _services;
         private ScreenRouter _router;
@@ -80,6 +81,7 @@ namespace TrashCats.Presentation.Bootstrap
         private void Build(GameBootstrap bootstrap)
         {
             var session = _services.Session;
+            Ui.Skin = uiSkin;
             Ui.EnsureEventSystem();
             var canvas = Ui.CreateCanvas("UI", 0);
             canvas.transform.SetParent(transform, false);
