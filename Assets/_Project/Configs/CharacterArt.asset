@@ -327,7 +327,7 @@ MonoBehaviour:
       attachPoints: []
       breathe: 0
       breathePeriod: 2.4
-    portrait: {fileID: 21300000, guid: 841882744e8e5fee3976c7c99cbeb71b, type: 3}
+    portrait: {fileID: 21300000, guid: bf043a600b1a4428bb5afef339dfee3e, type: 3}
     hideoutPoses:
     - {fileID: 21300000, guid: d545c6202ca9c1248afb8b0214a565e4, type: 3}
     - {fileID: 21300000, guid: a6128fe2df4649888bdc63d6d461e419, type: 3}
@@ -665,7 +665,7 @@ MonoBehaviour:
       attachPoints: []
       breathe: 0
       breathePeriod: 2.4
-    portrait: {fileID: 21300000, guid: 8060dcf920e949793a71353d7d2f78b8, type: 3}
+    portrait: {fileID: 21300000, guid: b746d57cc798f2a58bd6c30836dcbbd7, type: 3}
     hideoutPoses:
     - {fileID: 21300000, guid: 2d5d31ccfbeed0c3e9feea13a2f29838, type: 3}
     - {fileID: 21300000, guid: cc7c661d943bd4281886fd4cf8ff5ee0, type: 3}
@@ -748,7 +748,7 @@ MonoBehaviour:
       attachPoints: []
       breathe: 0
       breathePeriod: 2.4
-    portrait: {fileID: 21300000, guid: fe290c758d927ac02bdb25f4aba52bce, type: 3}
+    portrait: {fileID: 21300000, guid: 8019e1eaf29c3a189a7ef4a7853b2dab, type: 3}
     hideoutPoses:
     - {fileID: 21300000, guid: 1e4b152b8d2d4635ba43a0995b121c57, type: 3}
     - {fileID: 21300000, guid: 055680a4bdc8f8f3da848e7fc23185b8, type: 3}

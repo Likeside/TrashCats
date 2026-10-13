@@ -117,7 +117,8 @@ namespace TrashCats.Editor
             if (art.idle == null)
                 return null;
             art.idle.breathe = art.idle.frames.Length <= 2 ? 0.012f : 0.008f;
-            art.portrait = art.idle.frames.FirstOrDefault();
+            // card portrait cut from the concept (Tools/import_ui.py), else the first stance frame
+            art.portrait = Sprites(dir + "/Portrait").FirstOrDefault() ?? art.idle.frames.FirstOrDefault();
 
             var attach = dir + "/attach_points.json";
             if (File.Exists(attach))

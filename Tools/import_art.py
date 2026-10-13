@@ -9,7 +9,7 @@ import glob, os, shutil, subprocess, sys, tempfile
 import numpy as np
 from PIL import Image
 
-RAW = "Docs/ArtDirection/Generated/raw"
+RAW = os.environ.get("ART_RAW", "Docs/ArtDirection/Generated/raw")  # later rounds: ART_RAW=.../raw_v2
 CHARS = "Assets/_Project/Art/Characters"
 ENV = "Assets/_Project/Art/Environment"
 PY = sys.argv[1] if len(sys.argv) > 1 else sys.executable

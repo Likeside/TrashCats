@@ -210,16 +210,27 @@ namespace TrashCats.Presentation.UI
             return image;
         }
 
-        /// <param name="badge">Skin bar with a badge on the left (energy, satiety, hp, grit), else a plain frame.</param>
+        /// <param name="badge">Icon drawn just left of the bar (energy, satiety, hp, grit); leave room for it.</param>
         public static UiBar Bar(Transform parent, string name, Color fill, string badge = null)
         {
-            var frame = (badge != null ? Skin?.BadgeBar(badge) : null) ?? Skin?.barFrame;
+            var frame = Skin?.barFrame;
             var back = Panel(parent, name, frame != null ? Color.white : Palette.BarBack);
             Sliced(back, frame, 1.15f);
             // the fill lives inside the frame's dark channel: inset by the frame's borders, scaled like the image
             var channel = Rect(back.transform, "Channel").Fill();
             if (frame != null)
                 back.gameObject.AddComponent<ChannelFit>().Init(channel, frame);
+            var icon = badge != null ? Skin?.Icon(badge == "grit" ? "paw" : badge) : null;
+            if (icon != null)
+            {
+                var picture = Picture(back.transform, "Badge", icon);
+                picture.rectTransform.pivot = new Vector2(1f, 0.5f);
+                picture.rectTransform.Place(new Vector2(0, -0.2f), new Vector2(0, 1.2f));
+                var fitter = picture.gameObject.AddComponent<AspectRatioFitter>();
+                fitter.aspectMode = AspectRatioFitter.AspectMode.HeightControlsWidth;
+                fitter.aspectRatio = icon.rect.width / icon.rect.height;
+                picture.rectTransform.anchoredPosition = new Vector2(-4, 0);
+            }
             var fillImage = Panel(channel, "Fill", fill);
             fillImage.rectTransform.Fill();
             var label = Label(back.transform, "", 24, TextAnchor.MiddleCenter, frame != null ? Palette.Paper : Palette.Ink, heading: frame != null);

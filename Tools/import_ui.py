@@ -28,7 +28,16 @@ SHEETS = {
     "ui_icons_b": ["icon_home", "icon_map", "icon_sleep", "icon_upgrade", "icon_speed", "icon_skip", "icon_settings", "icon_crown"],
     "ui_fx": ["ribbon", "burst", "bubble", "tape", "pointer"],
     "ui_extra": ["panel_tin"],
+    # round 2: style of the chosen concept hideout_A (rounded, ink outline, no tape)
+    "ui_a_buttons": ["button_a_yellow", "button_a_blue", "button_a_grey"],
+    "ui_a_parts": ["hud_a"],
+    "ui_a_sheet": ["panel_a"],
+    "ui_a_icons": ["icon_food", "icon_junk", "icon_hp", "icon_paw", "icon_home", "icon_map", "icon_energy", "icon_satiety"],
 }
+
+# cat card portraits cut straight from the concept (left, top, right, bottom)
+CONCEPT = "Docs/ArtDirection/Concepts/round1/blind/hideout_A.png"
+PORTRAITS = {"Ryzhy": (44, 1080, 323, 1250), "shnyr": (380, 1080, 641, 1238), "ponchik": (699, 1080, 983, 1238)}
 
 # how far apart parts of one item may be (px); small where items sit close together
 MERGE = {"ui_icons_a": 18, "ui_icons_b": 18, "ui_bars": 0}
@@ -46,6 +55,12 @@ SLICES = {
     "bar_hp": (178, 52, 48, 52),
     "bar_grit": (178, 52, 48, 52),
     "tape": (34, 26, 34, 26),
+    "button_a_yellow": (50, 50, 50, 50),
+    "button_a_blue": (50, 50, 50, 50),
+    "button_a_grey": (50, 50, 50, 50),
+    "button_a_white": (50, 50, 50, 50),
+    "hud_a": (60, 60, 60, 60),
+    "panel_a": (90, 90, 90, 90),
 }
 
 
@@ -123,6 +138,13 @@ def main():
             print(f"   {name}: {pad.width}x{pad.height}")
             if name == "button_yellow":
                 neutral(pad).save(f"{OUT}/button_white.png")
+            if name == "button_a_yellow":
+                neutral(pad).save(f"{OUT}/button_a_white.png")
+    concept = Image.open(CONCEPT).convert("RGBA")
+    for key, box in PORTRAITS.items():
+        folder = f"Assets/_Project/Art/Characters/{key}/Portrait"
+        os.makedirs(folder, exist_ok=True)
+        concept.crop(box).save(f"{folder}/{key.lower()}_portrait.png")
     with open(f"{OUT}/slices.json", "w") as f:
         json.dump({k: list(v) for k, v in SLICES.items()}, f, indent=1)
 

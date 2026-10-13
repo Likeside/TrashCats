@@ -47,3 +47,38 @@ Game UI parts in exactly the comic style of the references (thick black ink outl
 Flat front view, no text, no letters, no numbers. Each item separate and fully visible with generous empty space between items. Solid flat pure green (#00FF00) chroma-key background everywhere like the first reference, no shadows on the background, no scenery.
 ```
 
+## ui_a_kit (1536x1024, refs: ui_from_hideout_A.png, hideout_A.png)
+
+```
+Match EXACTLY the UI style of the first reference (cropped from the second): clean rounded rectangles, thick dark navy-black outline, a soft light inner bevel on the top edge, subtle comic halftone dot texture, slightly worn hand-inked edges. NO duct tape, NO torn cardboard, NO stone. Exactly 6 separate BLANK UI parts arranged in 2 rows of 3: row 1: a wide orange-yellow (#F0A92A) button (about 3:1) like the home button in the reference but with NO icon; a wide blue (#3F8FC4) button of the same shape with NO icon; a wide grey-beige (#A99E8E) disabled button of the same shape. row 2: an empty cream paper card frame (portrait 3:4) with rounded corners like the cat cards in the reference, nothing inside; a long dark charcoal HUD bar (about 6:1) with rounded ends and a thin bronze inner border like the resource bar in the reference, empty; an empty status bar track (about 7:1): a rounded flat black channel with a dark outline like the bars on the cat cards.
+Flat front view, no text, no letters, no numbers. Each item separate and fully visible with generous empty space between items. Solid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery. Do not use green in the items.
+```
+
+## ui_a_icons (1536x1024, refs: ui_from_hideout_A.png, hideout_A.png)
+
+```
+Match EXACTLY the UI style of the first reference (cropped from the second): clean rounded rectangles, thick dark navy-black outline, a soft light inner bevel on the top edge, subtle comic halftone dot texture, slightly worn hand-inked edges. NO duct tape, NO torn cardboard, NO stone. Game UI icon sheet in exactly the style of the icons in the reference (thick outline, flat comic colours, readable at 64 px). Exactly 8 separate icons arranged in 2 rows of 4, no tiles behind them: 1) an open tin of cat food with a fish label (food), 2) a grey gear with a steel bolt (junk), 3) a red heart, 4) an orange-yellow cat paw print, 5) a dark navy house silhouette like on the yellow button, 6) a folded blue paper map with a dashed path and an X, 7) a yellow lightning bolt (energy), 8) an orange food bowl full of kibble (satiety).
+Flat front view, no text, no letters, no numbers. Each item separate and fully visible with generous empty space between items. Solid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery. Do not use green in the items.
+```
+
+## ui_a_sheet (1024x1536, refs: ui_from_hideout_A.png, hideout_A.png)
+
+```
+Match EXACTLY the UI style of the first reference (cropped from the second): clean rounded rectangles, thick dark navy-black outline, a soft light inner bevel on the top edge, subtle comic halftone dot texture, slightly worn hand-inked edges. NO duct tape, NO torn cardboard, NO stone. One single large EMPTY modal panel for a mobile game, filling most of the picture: a cream paper (#EAD9B5) panel with rounded corners, a thick dark navy-black outline, a thin darker beige inner border line a little inside the edge, subtle halftone texture, worn edges, completely empty inside.
+Flat front view, no text, no letters, no numbers. Each item separate and fully visible with generous empty space between items. Solid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery. Do not use green in the items.
+```
+
+## ui_a_parts (1536x1024, refs: ui_from_hideout_A.png)
+
+```
+Copy EXACTLY the style of the reference UI. Exactly 3 separate BLANK parts stacked vertically: 1) the dark charcoal resource bar from the top of the reference (about 6:1, rounded ends, thin bronze inner border), completely empty; 2) one empty status bar track from the cat cards (about 8:1): a rounded flat black channel with a dark outline, empty; 3) one empty cat card from the reference (portrait 3:4): cream paper with rounded corners and a thick dark outline, with nothing inside (no portrait, no bars).
+Flat front view, no text, no icons, no letters. Generous empty space between items. Solid flat pure green (#00FF00) chroma-key background everywhere like the reference's background, no shadows on it. Do not use green in the items.
+```
+
+## ui_a_buttons (1024x1536, refs: ui_from_hideout_A.png)
+
+```
+Copy EXACTLY the style of the two big buttons at the bottom of the reference (orange home button, blue map button): rounded rectangle, thick dark navy-black outline, flat saturated fill with fine halftone dots, a thin lighter highlight line along the top inside edge, a darker band along the bottom edge. NO tape, NO cream border. Exactly 3 separate BLANK buttons stacked vertically, each about 3:1: 1) orange-yellow (#F0A92A), 2) blue (#3F8FC4), 3) dull grey-beige (#A99E8E).
+Flat front view, no text, no icons, no letters. Generous empty space between items. Solid flat pure green (#00FF00) chroma-key background everywhere like the reference's background, no shadows on it. Do not use green in the items.
+```
+

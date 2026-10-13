@@ -35,6 +35,8 @@ namespace TrashCats.Presentation.UI
             _hideoutTab.Rect.Place(Vector2.zero, new Vector2(0.5f, 1), new Vector2(20, 15), new Vector2(-10, -15));
             _mapTab = Ui.Button(navRoot, "Tab_Map", "Карта", Palette.Disabled, () => Show(ScreenId.Map), 36);
             _mapTab.Rect.Place(new Vector2(0.5f, 0), Vector2.one, new Vector2(10, 15), new Vector2(-20, -15));
+            AddIcon(_hideoutTab, "home");
+            AddIcon(_mapTab, "map");
         }
 
         public void Register(ScreenId id, GameObject root, bool withNav, Action onShow = null)
@@ -54,6 +56,16 @@ namespace TrashCats.Presentation.UI
             Current = id;
             screen.OnShow?.Invoke();
             Changed?.Invoke(id);
+        }
+
+        /// <summary>Icon on the left of a tab, as on the concept's big home and map buttons.</summary>
+        private static void AddIcon(UiButton tab, string key)
+        {
+            var icon = Ui.Icon(tab.Rect, key);
+            if (icon == null)
+                return;
+            icon.rectTransform.Place(new Vector2(0.06f, 0.15f), new Vector2(0.3f, 0.85f));
+            tab.Text.rectTransform.anchorMin = new Vector2(0.3f, tab.Text.rectTransform.anchorMin.y);
         }
 
         /// <summary>Marks the Map tab when something new is waiting there.</summary>

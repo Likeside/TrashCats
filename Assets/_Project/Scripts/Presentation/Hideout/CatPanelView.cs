@@ -18,12 +18,15 @@ namespace TrashCats.Presentation.Hideout
         private readonly Action<CatId> _onCardTapped;
         private readonly Action<CommandResult> _onResult;
         private readonly Card[] _cards = new Card[Slots];
+        private readonly Characters.CharacterViewFactory _art;
 
-        public CatPanelView(GameSession session, RectTransform root, Action<CatId> onCardTapped, Action<CommandResult> onResult)
+        public CatPanelView(GameSession session, RectTransform root, Action<CatId> onCardTapped, Action<CommandResult> onResult,
+            Characters.CharacterViewFactory art = null)
         {
             _session = session;
             _onCardTapped = onCardTapped;
             _onResult = onResult;
+            _art = art;
 
             Ui.Card(root, "PanelBack", CardStyle.Tin).rectTransform.Fill();
             for (var i = 0; i < Slots; i++)
@@ -58,7 +61,10 @@ namespace TrashCats.Presentation.Hideout
             private readonly GameObject _content;
             private readonly GameObject _locked;
             private readonly Image _header;
+            private readonly Image _portrait;
+            private readonly AspectRatioFitter _portraitFit;
             private readonly TMP_Text _name;
+            private TMP_Text _portraitName;
             private readonly TMP_Text _status;
             private readonly UiBar _progress;
             private readonly UiBar _energy;
@@ -91,23 +97,36 @@ namespace TrashCats.Presentation.Hideout
                 _header.rectTransform.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(0, -56), Vector2.zero);
                 _name = Ui.Label(_header.transform, "", 34, TextAnchor.MiddleCenter, Palette.Paper);
 
+                // portrait on a coloured halftone backdrop, as in the concept; the name sits on its lower edge
+                var border = Ui.Panel(content, "PortraitBorder", Palette.Ink);
+                border.rectTransform.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(0, -170), Vector2.zero);
+                var window = Ui.Rect(border.transform, "Window").Fill(4);
+                window.gameObject.AddComponent<RectMask2D>();
+                _portrait = Ui.Panel(window, "Portrait", Color.white);
+                _portraitFit = _portrait.gameObject.AddComponent<AspectRatioFitter>();
+                _portraitFit.aspectMode = AspectRatioFitter.AspectMode.EnvelopeParent;
+                _portrait.rectTransform.pivot = new Vector2(0.5f, 0.8f); // crop the chest, keep the ears
+                _portraitName = Ui.Label(window, "", 34, TextAnchor.LowerCenter, Palette.Paper, heading: true);
+                _portraitName.rectTransform.Fill(4);
+                _portraitName.Outlined();
+
                 _status = Ui.Label(content, "", 26, TextAnchor.MiddleCenter, Palette.Ink);
-                _status.rectTransform.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(8, -104), new Vector2(-8, -58));
+                _status.rectTransform.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(4, -204), new Vector2(-4, -174));
 
                 _progress = Ui.Bar(content, "Progress", Palette.Progress);
-                _progress.Rect.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(16, -120), new Vector2(-16, -106));
+                _progress.Rect.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(50, -218), new Vector2(-10, -206));
 
                 _energy = Ui.Bar(content, "Energy", Palette.Energy, "energy");
-                _energy.Rect.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(6, -166), new Vector2(-6, -128));
+                _energy.Rect.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(50, -258), new Vector2(-6, -226));
 
                 _satiety = Ui.Bar(content, "Satiety", Palette.Satiety, "satiety");
-                _satiety.Rect.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(6, -212), new Vector2(-6, -174));
+                _satiety.Rect.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(50, -298), new Vector2(-6, -266));
 
                 _feed = Ui.Button(content, "Feed", "Покормить", Palette.Primary, () =>
                 {
                     if (_cat != null) _owner._onResult(_owner._session.FeedCat(_cat.Id));
                 }, 28);
-                _feed.Rect.Place(new Vector2(0, 0), new Vector2(1, 0), new Vector2(10, 4), new Vector2(-10, 58));
+                _feed.Rect.Place(new Vector2(0, 0), new Vector2(1, 0), new Vector2(4, 2), new Vector2(-4, 60));
 
                 _locked = Ui.Label(background.transform, "Ещё не\nв банде", 32, TextAnchor.MiddleCenter, Palette.Disabled).gameObject;
             }
@@ -123,6 +142,15 @@ namespace TrashCats.Presentation.Hideout
                 var session = _owner._session;
                 var color = CatColors.For(cat.Id);
                 _header.color = color;
+                var portrait = session.Config.GetCat(cat.Id).ViewKey is string key ? _owner._art?.Portrait(key) : null;
+                _portrait.transform.parent.parent.gameObject.SetActive(portrait != null);
+                _header.gameObject.SetActive(portrait == null);
+                if (portrait != null)
+                {
+                    _portrait.sprite = portrait;
+                    _portraitFit.aspectRatio = portrait.rect.width / portrait.rect.height;
+                    _portraitName.text = Texts.CatName(cat.Id);
+                }
                 _name.color = CatColors.TextOn(color);
                 _name.text = Texts.CatName(cat.Id);
                 _status.text = cat.Activity.IsWorking

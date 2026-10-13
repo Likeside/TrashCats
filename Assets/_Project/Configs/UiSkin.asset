@@ -16,23 +16,15 @@ MonoBehaviour:
   bodyFont: {fileID: 11400000, guid: fd62fa2846998f811af0dd3bb1b917c3, type: 2}
   headingOutline: {fileID: 2100000, guid: 3751006a33d8972a1b358794e49b151b, type: 2}
   bodyOutline: {fileID: 2100000, guid: eecab7faa0f0f26ee815e34abf7cd07c, type: 2}
-  button: {fileID: 21300000, guid: e830cecd0230a70b59a0b00b965d4606, type: 3}
-  buttonPrimary: {fileID: 21300000, guid: 89a582cde312b2cbc8fc8945b6791121, type: 3}
-  buttonSecondary: {fileID: 21300000, guid: 2def0a272d1747fc49ec30e1b0e2fc9a, type: 3}
-  paper: {fileID: 21300000, guid: d75b4235cc3985748bd5beb87685ca20, type: 3}
+  button: {fileID: 21300000, guid: a5ee207676de86a07ad947a4b751664a, type: 3}
+  buttonPrimary: {fileID: 21300000, guid: 39f4664dda388299a8caf5777d2a603e, type: 3}
+  buttonSecondary: {fileID: 21300000, guid: bd3ee10e644ab6f7da07a1a75044d755, type: 3}
+  paper: {fileID: 21300000, guid: 8a4e2f616c1f2975d94026862ea778bf, type: 3}
   paperBorderScale: 1.6
-  tin: {fileID: 21300000, guid: 21a855477a1b017f0a635c62ffd3ac64, type: 3}
+  tin: {fileID: 21300000, guid: 3f37af50a0da218deb173a257e175648, type: 3}
   tinBorderScale: 2
-  barFrame: {fileID: 21300000, guid: 174b406d45808c4ddbe418b59fe49daf, type: 3}
-  badgeBars:
-  - key: energy
-    sprite: {fileID: 21300000, guid: 5c7acdced800ac25aaac19106c2cfefd, type: 3}
-  - key: satiety
-    sprite: {fileID: 21300000, guid: 5ac694c69ea938b9f927de949a68888f, type: 3}
-  - key: hp
-    sprite: {fileID: 21300000, guid: abee51b930eddc9918f46c0e2293d185, type: 3}
-  - key: grit
-    sprite: {fileID: 21300000, guid: feacd890229e39d9b88a63cc27998acf, type: 3}
+  barFrame: {fileID: 21300000, guid: 3f37af50a0da218deb173a257e175648, type: 3}
+  badgeBars: []
   ribbon: {fileID: 21300000, guid: 3ec80d3d66d3b6efa8912860d9e5b3e7, type: 3}
   burst: {fileID: 21300000, guid: a00c3c60cb80c2dd8a045abf700ab7a6, type: 3}
   bubble: {fileID: 21300000, guid: 951f38fd29c60585d849b0a7ba8ea06c, type: 3}
@@ -45,16 +37,24 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: d346b0677f51cffbcb1fd66738473228, type: 3}
   - key: crown
     sprite: {fileID: 21300000, guid: 672c42fa8c92820f0a0c7d9e57639c07, type: 3}
+  - key: energy
+    sprite: {fileID: 21300000, guid: 37fe6d25ed261ef1d98c08653a165c9f, type: 3}
   - key: food
     sprite: {fileID: 21300000, guid: 86d7779f7ed60a84396752f1c9196662, type: 3}
   - key: home
     sprite: {fileID: 21300000, guid: 50438b46022ac3f2ab8d99b142041690, type: 3}
+  - key: hp
+    sprite: {fileID: 21300000, guid: f94ad8c1242ce6802b528f8577f92ea8, type: 3}
   - key: junk
     sprite: {fileID: 21300000, guid: 1154cdca80fdb366db782b3bf4191d0b, type: 3}
   - key: lock
     sprite: {fileID: 21300000, guid: 98ebb6ef3ddf01643831eb1629da9dd5, type: 3}
   - key: map
     sprite: {fileID: 21300000, guid: 65fc5eefc3b4adf3f816d6eadacf84e3, type: 3}
+  - key: paw
+    sprite: {fileID: 21300000, guid: 8eb7a3bff1ac8358fbab47c116783f28, type: 3}
+  - key: satiety
+    sprite: {fileID: 21300000, guid: ce94e3aa6860519e998fd0056b5bbde4, type: 3}
   - key: settings
     sprite: {fileID: 21300000, guid: d4b170eea1e296301a45fc6c1457b1fb, type: 3}
   - key: skip
