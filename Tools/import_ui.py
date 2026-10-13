@@ -110,6 +110,23 @@ def items(alpha, merge=18, min_pixels=3000):
     return ordered, labels
 
 
+def defringe(img, passes=6):
+    """Eats the light, unsaturated leftovers of a paper background along the cut edge, then softens the edge."""
+    a = np.array(img).astype(np.int16)
+    rgb, alpha = a[..., :3], a[..., 3]
+    light = (rgb.min(axis=2) > 175) & (rgb.max(axis=2) - rgb.min(axis=2) < 45)
+    for _ in range(passes):
+        clear = alpha < 40
+        edge = ndimage.binary_dilation(clear) & ~clear
+        eat = edge & light
+        if not eat.any():
+            break
+        alpha[eat] = 0
+    alpha = ndimage.grey_erosion(alpha, size=(2, 2))
+    a[..., 3] = alpha
+    return Image.fromarray(a.astype(np.uint8), "RGBA")
+
+
 def neutral(img):
     """Yellow button -> white-ish button that keeps outline, texture and shading; tinted at runtime."""
     a = np.array(img).astype(np.float32)
@@ -193,6 +210,8 @@ def main():
             img = img.crop(img.getchannel("A").point(lambda v: 255 if v > 16 else 0).getbbox())
             pad = Image.new("RGBA", (img.width + 8, img.height + 8), (0, 0, 0, 0))
             pad.paste(img, (4, 4))
+            if name.startswith("bust_"):
+                pad = defringe(pad)
             pad.save(f"{OUT}/{name}.png")
             print(f"   {name}: {pad.width}x{pad.height}")
             if name in MANUAL:
