@@ -232,6 +232,14 @@ namespace TrashCats.Presentation.Tutorial
             }
         }
 
+        public static string HintIcon(string id) => id switch
+        {
+            TutorialService.HintJunk => "junk",
+            TutorialService.HintRelay => "paw",
+            TutorialService.HintSlots => "skill",
+            _ => null,
+        };
+
         /// <summary>One-shot contextual hint: (title, body) for the message queue, or null.</summary>
         public static (string Title, string Body)? Hint(string id) => id switch
         {

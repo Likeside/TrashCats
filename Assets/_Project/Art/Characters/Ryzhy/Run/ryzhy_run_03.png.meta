@@ -129,10 +129,10 @@ TextureImporter:
       name: ryzhy_run_03_0
       rect:
         serializedVersion: 2
-        x: 17
-        y: 34
-        width: 336
-        height: 174
+        x: 20
+        y: 18
+        width: 293
+        height: 352
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

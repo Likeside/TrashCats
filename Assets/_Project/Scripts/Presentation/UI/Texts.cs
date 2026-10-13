@@ -176,5 +176,22 @@ namespace TrashCats.Presentation.UI
             var minutes = ms / 60_000;
             return minutes > 0 ? Loc.T("texts.85", minutes) : Loc.T("texts.84", ms / 1000);
         }
+
+        /// <summary>Skin icon of an attribute.</summary>
+        public static string AttributeIcon(AttributeType attribute) => attribute switch
+        {
+            AttributeType.Strength => "strength",
+            AttributeType.Agility => "agility",
+            _ => "toughness",
+        };
+
+        /// <summary>Skin icon of what an activity yields (food, junk, an attribute, energy).</summary>
+        public static string OutcomeIcon(ActivityDefinition activity) => activity.Kind switch
+        {
+            ActivityKind.Scavenge => "food",
+            ActivityKind.Rummage => "junk",
+            ActivityKind.Sleep => "energy",
+            _ => AttributeIcon(activity.TrainedAttribute),
+        };
     }
 }

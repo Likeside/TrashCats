@@ -47,8 +47,14 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: d346b0677f51cffbcb1fd66738473228, type: 3}
   - key: crown
     sprite: {fileID: 21300000, guid: 672c42fa8c92820f0a0c7d9e57639c07, type: 3}
+  - key: defeat
+    sprite: {fileID: 21300000, guid: 96354d4e26df0af0f81c95d1b24ef159, type: 3}
   - key: energy
     sprite: {fileID: 21300000, guid: 37fe6d25ed261ef1d98c08653a165c9f, type: 3}
+  - key: final
+    sprite: {fileID: 21300000, guid: af2a613d71e155bdb8de7d8064e63826, type: 3}
+  - key: flag
+    sprite: {fileID: 21300000, guid: e9114e403b212377ba01c30c437a4b9b, type: 3}
   - key: food
     sprite: {fileID: 21300000, guid: 86d7779f7ed60a84396752f1c9196662, type: 3}
   - key: home
@@ -57,16 +63,22 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: f94ad8c1242ce6802b528f8577f92ea8, type: 3}
   - key: junk
     sprite: {fileID: 21300000, guid: 1154cdca80fdb366db782b3bf4191d0b, type: 3}
+  - key: levelup
+    sprite: {fileID: 21300000, guid: d7938fd9bf708ba7f8df52a58bc74b64, type: 3}
   - key: lock
     sprite: {fileID: 21300000, guid: 98ebb6ef3ddf01643831eb1629da9dd5, type: 3}
   - key: map
     sprite: {fileID: 21300000, guid: 65fc5eefc3b4adf3f816d6eadacf84e3, type: 3}
+  - key: newcat
+    sprite: {fileID: 21300000, guid: 2c69bda1dbdc6e0aba79855d4406ce03, type: 3}
   - key: paw
     sprite: {fileID: 21300000, guid: 8eb7a3bff1ac8358fbab47c116783f28, type: 3}
   - key: satiety
     sprite: {fileID: 21300000, guid: ce94e3aa6860519e998fd0056b5bbde4, type: 3}
   - key: settings
     sprite: {fileID: 21300000, guid: d4b170eea1e296301a45fc6c1457b1fb, type: 3}
+  - key: skill
+    sprite: {fileID: 21300000, guid: d1d8746fd4d3a5062a91ca17359b1122, type: 3}
   - key: skip
     sprite: {fileID: 21300000, guid: c9cc0196a5623432f84159f910bc04bf, type: 3}
   - key: sleep
@@ -75,9 +87,13 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: c7e640c2b6dc572819e76c935b0a4815, type: 3}
   - key: strength
     sprite: {fileID: 21300000, guid: 7735cfe5653dec278ad12f87b4b970c0, type: 3}
+  - key: tools
+    sprite: {fileID: 21300000, guid: 967f4f8ef6f05f95aba6388485997f7e, type: 3}
   - key: toughness
     sprite: {fileID: 21300000, guid: 7561cd0b9773c84bd91697c5a54749c6, type: 3}
   - key: upgrade
     sprite: {fileID: 21300000, guid: 139baac32267849ef919cae74fc0551b, type: 3}
+  - key: victory
+    sprite: {fileID: 21300000, guid: 07577f8a6799889578af90a078f9f615, type: 3}
   - key: xp
     sprite: {fileID: 21300000, guid: ed84f58d19ccc0276a98438683a1f117, type: 3}

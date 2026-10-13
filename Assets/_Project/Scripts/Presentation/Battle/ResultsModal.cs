@@ -17,6 +17,8 @@ namespace TrashCats.Presentation.Battle
         private readonly OverlayStack _overlays;
         private readonly GameObject _root;
         private readonly TMP_Text _title;
+        private readonly Image _badge;
+        private readonly RectTransform _chips;
         private readonly TMP_Text _body;
         private Action<TerritoryId, bool> _onDone;
         private TerritoryId _territory;
@@ -32,9 +34,12 @@ namespace TrashCats.Presentation.Battle
             var card = Ui.Card(dim.transform, "Card", CardStyle.Paper, raycast: true);
             card.rectTransform.At(new Vector2(0.5f, 0.5f), new Vector2(940, 1100));
             _title = Ui.Label(card.transform, "", 64, TextAnchor.UpperCenter, Palette.Ink);
-            _title.rectTransform.Fill(50);
+            _title.rectTransform.Place(Vector2.zero, Vector2.one, new Vector2(50, 50), new Vector2(-50, -110));
+            _badge = Ui.Badge(card.transform, 240f);
             _body = Ui.Label(card.transform, "", 34, TextAnchor.UpperLeft, Palette.Ink);
-            _body.rectTransform.Place(Vector2.zero, Vector2.one, new Vector2(60, 200), new Vector2(-60, -150));
+            _body.rectTransform.Place(Vector2.zero, Vector2.one, new Vector2(60, 200), new Vector2(-60, -310));
+            // what the battle brought, as icons: food, junk, captured territory, new cat
+            _chips = Ui.Rect(card.transform, "Chips").Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(50, -300), new Vector2(-50, -170));
 
             var cont = Ui.Button(card.transform, "Results_Continue", Loc.T("results_modal.01"), Palette.Primary, () => Close(false), 40);
             cont.Rect.Place(new Vector2(0, 0), new Vector2(0.5f, 0), new Vector2(40, 40), new Vector2(-15, 160));
@@ -55,6 +60,24 @@ namespace TrashCats.Presentation.Battle
             var first = victory && world.Territories.Get(territory.Id).Status != TerritoryStatus.Captured;
 
             _title.text = victory ? Loc.T("results_modal.03") : Loc.T("results_modal.04");
+            Ui.SetBadge(_badge, victory ? "victory" : "defeat");
+            for (var i = _chips.childCount - 1; i >= 0; i--)
+                UnityEngine.Object.Destroy(_chips.GetChild(i).gameObject);
+            if (victory)
+            {
+                var (chipFood, chipJunk) = TerritoryProgress.Reward(territory, first);
+                var chips = new System.Collections.Generic.List<(string Icon, string Text)> { ("food", "+" + chipFood), ("junk", "+" + chipJunk) };
+                if (first) chips.Add(("flag", ""));
+                if (first && territory.RecruitCat is CatId newCat && !world.TryGetCat(newCat, out _)) chips.Add(("newcat", Texts.CatName(newCat)));
+                for (var i = 0; i < chips.Count; i++)
+                {
+                    var cell = Ui.Rect(_chips, "Chip").Place(new Vector2((float)i / chips.Count, 0), new Vector2((i + 1f) / chips.Count, 1));
+                    var icon = Ui.Icon(cell, chips[i].Icon);
+                    icon?.rectTransform.Place(new Vector2(0, 0), new Vector2(chips[i].Text.Length > 0 ? 0.45f : 1f, 1));
+                    var label = Ui.Label(cell, chips[i].Text, 40, TextAnchor.MiddleLeft, Palette.Paper, heading: true);
+                    label.rectTransform.Place(new Vector2(0.47f, 0), Vector2.one);
+                }
+            }
             var sb = new StringBuilder();
             sb.AppendLine(Texts.TerritoryName(territory.Id) + (first ? Loc.T("results_modal.05") : ""));
             sb.AppendLine();

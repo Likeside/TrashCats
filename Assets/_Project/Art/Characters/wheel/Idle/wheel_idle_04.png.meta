@@ -5,6 +5,15 @@ TextureImporter:
   - first:
       213: 2221895342560658885
     second: wheel_idle_04_0
+  - first:
+      213: -5262819223763564514
+    second: wheel_idle_04_1
+  - first:
+      213: -7099360657893504998
+    second: wheel_idle_04_2
+  - first:
+      213: -3412155914639458597
+    second: wheel_idle_04_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -129,10 +138,10 @@ TextureImporter:
       name: wheel_idle_04_0
       rect:
         serializedVersion: 2
-        x: 15
-        y: 15
-        width: 334
-        height: 411
+        x: 31
+        y: 312
+        width: 43
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -143,6 +152,72 @@ TextureImporter:
       bones: []
       spriteID: 5c54c6dba02c5de10800000000000000
       internalID: 2221895342560658885
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wheel_idle_04_1
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 15
+        width: 306
+        height: 369
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e18c972bcc5b6f6b0800000000000000
+      internalID: -5262819223763564514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wheel_idle_04_2
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 337
+        width: 71
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a18cfdd78110a7d90800000000000000
+      internalID: -7099360657893504998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wheel_idle_04_3
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 205
+        width: 15
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bdebaa5264695a0d0800000000000000
+      internalID: -3412155914639458597
       vertices: []
       indices: 
       edges: []

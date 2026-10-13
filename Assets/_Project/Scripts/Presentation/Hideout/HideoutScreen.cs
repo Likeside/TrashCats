@@ -62,7 +62,7 @@ namespace TrashCats.Presentation.Hideout
 
         public void RebuildCats() => _scene.SyncCats();
 
-        public void Toast(string message) => _toast.Show(message);
+        public void Toast(string message, string icon = null) => _toast.Show(message, icon);
 
         public void Dispose() => _scene.Dispose();
     }

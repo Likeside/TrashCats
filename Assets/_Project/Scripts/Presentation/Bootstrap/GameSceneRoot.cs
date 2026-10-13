@@ -81,7 +81,7 @@ namespace TrashCats.Presentation.Bootstrap
                 if (world.GameTimeMs < 60_000 && !world.Tutorial.Skipped && !world.Tutorial.Completed.Any()
                     && world.Territories.All.Values.All(t => t.Attempts == 0))
                     _messages.Enqueue(Loc.T("game_scene_root.01"),
-                        Loc.T("game_scene_root.02"));
+                        Loc.T("game_scene_root.02"), "home");
             }
 
             _tutorial.Evaluate();
@@ -158,7 +158,7 @@ namespace TrashCats.Presentation.Bootstrap
             _tutorial.HintRequested += id =>
             {
                 var hint = Tutorial.TutorialOverlay.Hint(id);
-                if (hint != null) _messages.Enqueue(hint.Value.Title, hint.Value.Body);
+                if (hint != null) _messages.Enqueue(hint.Value.Title, hint.Value.Body, Tutorial.TutorialOverlay.HintIcon(id));
             };
 
             // sound: clicks, opened sheets/modals, music per screen (CONTENT_SPEC §10)
@@ -204,24 +204,24 @@ namespace TrashCats.Presentation.Bootstrap
                 _hideout.RebuildCats();
                 _audio.Play("hid_meow");
                 var cat = config.GetCat(e.CatId);
-                _messages.Enqueue(Loc.T("game_scene_root.03"), Loc.T("game_scene_root.04", Texts.CatName(e.CatId), Texts.Attribute(cat.Aptitude)));
+                _messages.Enqueue(Loc.T("game_scene_root.03"), Loc.T("game_scene_root.04", Texts.CatName(e.CatId), Texts.Attribute(cat.Aptitude)), "newcat");
             }));
             _subscriptions.Add(bus.Subscribe<TerritoryCaptured>(e =>
             {
                 if (e.Unlocked is TerritoryId next)
-                    _messages.Enqueue(Loc.T("game_scene_root.05"), Loc.T("game_scene_root.06", Texts.TerritoryName(next)));
+                    _messages.Enqueue(Loc.T("game_scene_root.05"), Loc.T("game_scene_root.06", Texts.TerritoryName(next)), "flag");
             }));
             _subscriptions.Add(bus.Subscribe<SkillUnlocked>(e =>
             {
                 var skill = config.GetSkill(e.SkillId);
-                _messages.Enqueue(Loc.T("game_scene_root.07"), Loc.T("game_scene_root.08", Texts.CatName(e.CatId), Texts.SkillName(e.SkillId), Texts.SkillDescription(skill)));
+                _messages.Enqueue(Loc.T("game_scene_root.07"), Loc.T("game_scene_root.08", Texts.CatName(e.CatId), Texts.SkillName(e.SkillId), Texts.SkillDescription(skill)), "skill");
             }));
             _subscriptions.Add(bus.Subscribe<FinalReached>(_ =>
-                _messages.Enqueue(Loc.T("game_scene_root.09"), Loc.T("game_scene_root.10"))));
+                _messages.Enqueue(Loc.T("game_scene_root.09"), Loc.T("game_scene_root.10"), "final")));
             _subscriptions.Add(bus.Subscribe<AttributeLevelUp>(e =>
             {
                 if (_router.Current == ScreenId.Hideout)
-                    _hideout.Toast($"{Texts.CatName(e.CatId)}: {Texts.Attribute(e.Attribute)} {e.NewLevel}!");
+                    _hideout.Toast($"{Texts.CatName(e.CatId)}: {Texts.Attribute(e.Attribute)} {e.NewLevel}!", Texts.AttributeIcon(e.Attribute));
             }));
         }
 
