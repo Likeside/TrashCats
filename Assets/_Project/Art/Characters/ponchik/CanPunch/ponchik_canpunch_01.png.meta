@@ -129,10 +129,10 @@ TextureImporter:
       name: ponchik_canpunch_01_0
       rect:
         serializedVersion: 2
-        x: 263
-        y: 51
-        width: 235
-        height: 333
+        x: 288
+        y: 34
+        width: 254
+        height: 368
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

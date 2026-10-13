@@ -129,10 +129,10 @@ TextureImporter:
       name: ponchik_attack_07_0
       rect:
         serializedVersion: 2
-        x: 241
-        y: 15
-        width: 237
-        height: 345
+        x: 321
+        y: 68
+        width: 306
+        height: 358
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

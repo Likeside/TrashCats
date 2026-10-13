@@ -11,12 +11,6 @@ TextureImporter:
   - first:
       213: 5662660842738993350
     second: shopcat_attack_01_2
-  - first:
-      213: 2501612287771374525
-    second: shopcat_attack_01_3
-  - first:
-      213: 6667530711331346375
-    second: shopcat_attack_01_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -141,10 +135,10 @@ TextureImporter:
       name: shopcat_attack_01_0
       rect:
         serializedVersion: 2
-        x: 264
-        y: 48
-        width: 250
-        height: 316
+        x: 310
+        y: 31
+        width: 240
+        height: 340
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -163,10 +157,10 @@ TextureImporter:
       name: shopcat_attack_01_1
       rect:
         serializedVersion: 2
-        x: 265
-        y: 318
-        width: 45
-        height: 59
+        x: 344
+        y: 322
+        width: 34
+        height: 55
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -185,10 +179,10 @@ TextureImporter:
       name: shopcat_attack_01_2
       rect:
         serializedVersion: 2
-        x: 293
+        x: 373
         y: 347
-        width: 20
-        height: 31
+        width: 13
+        height: 35
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -199,50 +193,6 @@ TextureImporter:
       bones: []
       spriteID: 6c8c8fec800d59e40800000000000000
       internalID: 5662660842738993350
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: shopcat_attack_01_3
-      rect:
-        serializedVersion: 2
-        x: 251
-        y: 297
-        width: 55
-        height: 43
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: db37d522f1387b220800000000000000
-      internalID: 2501612287771374525
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: shopcat_attack_01_4
-      rect:
-        serializedVersion: 2
-        x: 253
-        y: 286
-        width: 33
-        height: 19
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 7c799e91bd3d78c50800000000000000
-      internalID: 6667530711331346375
       vertices: []
       indices: 
       edges: []

@@ -187,7 +187,8 @@ namespace TrashCats.Presentation.Battle
             switch (e)
             {
                 case FighterEntered _: return 0.55f;
-                case ActionPerformed _: return 0.3f; // until the strike frame of the attack clip
+                case ActionPerformed action: // until the frame of the attack clip where the blow lands
+                    return _views[(int)action.Side]?.StrikeDelay(_session.Config.GetSkill(action.SkillId)) ?? 0.3f;
                 case HitResolved _:
                     var nextIsHit = _next < _log.Count && _log[_next] is HitResolved;
                     return nextIsHit ? 0.28f : 0.6f;

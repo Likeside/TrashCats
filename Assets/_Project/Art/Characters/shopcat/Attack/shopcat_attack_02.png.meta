@@ -5,6 +5,18 @@ TextureImporter:
   - first:
       213: 610039538406955911
     second: shopcat_attack_02_0
+  - first:
+      213: -8913960092403859335
+    second: shopcat_attack_02_1
+  - first:
+      213: 3185330020596470669
+    second: shopcat_attack_02_2
+  - first:
+      213: 7327116434452079089
+    second: shopcat_attack_02_3
+  - first:
+      213: -2767329650271579339
+    second: shopcat_attack_02_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -129,10 +141,10 @@ TextureImporter:
       name: shopcat_attack_02_0
       rect:
         serializedVersion: 2
-        x: 295
-        y: 52
-        width: 311
-        height: 283
+        x: 311
+        y: 48
+        width: 250
+        height: 316
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -143,6 +155,94 @@ TextureImporter:
       bones: []
       spriteID: 78b90b16abb477800800000000000000
       internalID: 610039538406955911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shopcat_attack_02_1
+      rect:
+        serializedVersion: 2
+        x: 312
+        y: 318
+        width: 45
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 970824e26804b4480800000000000000
+      internalID: -8913960092403859335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shopcat_attack_02_2
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 347
+        width: 20
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d835a02f6c0943c20800000000000000
+      internalID: 3185330020596470669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shopcat_attack_02_3
+      rect:
+        serializedVersion: 2
+        x: 298
+        y: 297
+        width: 55
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f1617f83952fa560800000000000000
+      internalID: 7327116434452079089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shopcat_attack_02_4
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 286
+        width: 33
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 533182358587899d0800000000000000
+      internalID: -2767329650271579339
       vertices: []
       indices: 
       edges: []

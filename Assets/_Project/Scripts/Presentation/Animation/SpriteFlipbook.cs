@@ -11,6 +11,15 @@ namespace TrashCats.Presentation.Animation
         [Min(1)] public float fps = 10f;
         public bool loop = true;
 
+        [Tooltip("Index in frames of each originally drawn frame (clips doubled by Tools/interpolate_adaptive.py); empty = every frame is a key.")]
+        public int[] keys = Array.Empty<int>();
+
+        /// <summary>Frame index of the originally drawn frame <paramref name="key"/>.</summary>
+        public int KeyFrame(int key) => keys != null && key < keys.Length ? keys[key] : key;
+
+        /// <summary>Seconds from the clip start to the originally drawn frame <paramref name="key"/>.</summary>
+        public float KeyTime(int key) => KeyFrame(key) / fps;
+
         [Tooltip("Loop forward then backward (0..n-1..1) - for frames ordered by pose, e.g. a tail sway.")]
         public bool pingPong;
 
