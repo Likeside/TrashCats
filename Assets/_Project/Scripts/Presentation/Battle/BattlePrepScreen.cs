@@ -86,10 +86,10 @@ namespace TrashCats.Presentation.Battle
             for (var i = 0; i < enemies.Count; i++)
             {
                 var e = enemies[i];
-                var hp = CombatFormulas.MaxHp(config.Combat, e.Toughness, e.HpMultiplierPermille);
+                var hp = CombatFormulas.MaxHp(config.Combat, e.Endurance, e.HpMultiplierPermille);
                 var skills = e.Skills.Count == 0 ? Loc.T("battle_prep_screen.05") : string.Join(", ", e.Skills.Select(Texts.SkillName));
                 InfoRow(_enemyList, "PrepEnemy" + i, i, enemies.Count,
-                    $"{i + 1}. {Texts.EnemyName(e.Id.Value)}   {Texts.Stats(e.Strength, e.Agility, e.Toughness)} · HP {hp}\n<size=26>{skills}</size>");
+                    $"{i + 1}. {Texts.EnemyName(e.Id.Value)}   {Texts.Stats(e.Strength, e.Technique, e.Endurance)} · HP {hp}\n<size=26>{skills}</size>");
             }
 
             Clear(_catList);
@@ -100,7 +100,7 @@ namespace TrashCats.Presentation.Battle
                 var position = _order.IndexOf(cat.Id);
                 var tired = cat.Energy < config.Needs.MinEnergyForBattle;
                 var skills = Enumerable.Range(0, Cat.SkillSlotCount).Select(cat.GetSkillInSlot).Where(s => s != null).Select(s => Texts.SkillName(s.Value)).ToList();
-                var label = Loc.T("battle_prep_screen.06", (position >= 0 ? $"[{position + 1}] " : ""), Texts.CatName(cat.Id), Texts.Stats(cat.GetLevel(AttributeType.Strength), cat.GetLevel(AttributeType.Agility), cat.GetLevel(AttributeType.Toughness)), cat.Energy)
+                var label = Loc.T("battle_prep_screen.06", (position >= 0 ? $"[{position + 1}] " : ""), Texts.CatName(cat.Id), Texts.Stats(cat.GetLevel(AttributeType.Strength), cat.GetLevel(AttributeType.Technique), cat.GetLevel(AttributeType.Endurance)), cat.Energy)
                             + $"\n<size=26>{(skills.Count == 0 ? Loc.T("battle_prep_screen.05") : string.Join(", ", skills))}{(tired ? Loc.T("battle_prep_screen.07") : "")}{(cat.Activity.IsWorking ? Loc.T("battle_prep_screen.08") : "")}</size>";
                 var color = position >= 0 ? Palette.Primary : tired ? Palette.Disabled : Palette.Panel;
                 var id = cat.Id;

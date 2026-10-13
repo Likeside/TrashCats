@@ -7,18 +7,18 @@ namespace TrashCats.Domain
     /// <summary>Integer combat formulas (Docs/GDD/COMBAT_DESIGN.md §4).</summary>
     public static class CombatFormulas
     {
-        public static int MaxHp(CombatConfig c, int toughness, int multiplierPermille = 1000) =>
-            (int)((long)(c.HpBase + c.HpPerToughness * toughness) * multiplierPermille / 1000);
+        public static int MaxHp(CombatConfig c, int endurance, int multiplierPermille = 1000) =>
+            (int)((long)(c.HpBase + c.HpPerEndurance * endurance) * multiplierPermille / 1000);
 
-        public static int MaxGrit(CombatConfig c, int toughness) => c.GritBase + c.GritPerToughness * toughness;
+        public static int MaxGrit(CombatConfig c, int endurance) => c.GritBase + c.GritPerEndurance * endurance;
 
         public static int BaseDamage(CombatConfig c, int strength) => c.DamageBase + c.DamagePerStrength * strength;
 
-        public static int IntervalTicks(CombatConfig c, int agility) =>
-            Math.Max(c.IntervalMinTicks, c.IntervalBaseTicks - agility / c.IntervalAgilityDivisor);
+        public static int IntervalTicks(CombatConfig c, int technique) =>
+            Math.Max(c.IntervalMinTicks, c.IntervalBaseTicks - technique / c.IntervalTechniqueDivisor);
 
-        public static int HitChancePermille(CombatConfig c, int attackerAgility, int defenderAgility, int modifierPermille) =>
-            Math.Clamp(c.HitBasePermille + c.HitPerAgilityDiffPermille * (attackerAgility - defenderAgility) + modifierPermille,
+        public static int HitChancePermille(CombatConfig c, int attackerTechnique, int defenderTechnique, int modifierPermille) =>
+            Math.Clamp(c.HitBasePermille + c.HitPerTechniqueDiffPermille * (attackerTechnique - defenderTechnique) + modifierPermille,
                 c.HitMinPermille, c.HitMaxPermille);
 
         /// <summary>Damage of one landed hit; every factor in permille, rounded once at the end, at least 1.</summary>
@@ -138,7 +138,7 @@ namespace TrashCats.Domain
                 var eReady = _enemy.Timer <= 0;
                 if (pReady && eReady)
                 {
-                    var playerFirst = _player.Snapshot.Agility >= _enemy.Snapshot.Agility;
+                    var playerFirst = _player.Snapshot.Technique >= _enemy.Snapshot.Technique;
                     return playerFirst ? new[] { _player, _enemy } : new[] { _enemy, _player };
                 }
 
@@ -159,9 +159,9 @@ namespace TrashCats.Domain
                 {
                     Snapshot = s,
                     Side = side,
-                    MaxHp = CombatFormulas.MaxHp(_c, s.Toughness, s.HpMultiplierPermille),
-                    MaxGrit = CombatFormulas.MaxGrit(_c, s.Toughness),
-                    Interval = CombatFormulas.IntervalTicks(_c, s.Agility),
+                    MaxHp = CombatFormulas.MaxHp(_c, s.Endurance, s.HpMultiplierPermille),
+                    MaxGrit = CombatFormulas.MaxGrit(_c, s.Endurance),
+                    Interval = CombatFormulas.IntervalTicks(_c, s.Technique),
                     Skills = s.Skills.Select(_config.GetSkill).Where(k => !k.IsInnate).ToList(),
                     Innate = _innate,
                 };
@@ -238,7 +238,7 @@ namespace TrashCats.Domain
                 }
 
                 var blind = self.Blinded > 0 ? -_blindPenaltyPermille : 0;
-                var chance = CombatFormulas.HitChancePermille(_c, self.Snapshot.Agility, opponent.Snapshot.Agility, skill.HitModifierPermille + blind);
+                var chance = CombatFormulas.HitChancePermille(_c, self.Snapshot.Technique, opponent.Snapshot.Technique, skill.HitModifierPermille + blind);
                 var baseDamage = CombatFormulas.BaseDamage(_c, self.Snapshot.Strength);
                 for (var hit = 0; hit < skill.Hits && opponent.Hp > 0; hit++)
                 {

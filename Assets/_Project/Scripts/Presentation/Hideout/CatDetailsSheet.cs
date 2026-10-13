@@ -76,7 +76,7 @@ namespace TrashCats.Presentation.Hideout
             });
             var c = config.Combat;
             _attributes.text = string.Join("\n", lines)
-                               + Loc.T("cat_details_sheet.03", CombatFormulas.MaxHp(c, cat.GetLevel(AttributeType.Toughness)), CombatFormulas.MaxGrit(c, cat.GetLevel(AttributeType.Toughness)), CombatFormulas.BaseDamage(c, cat.GetLevel(AttributeType.Strength)));
+                               + Loc.T("cat_details_sheet.03", CombatFormulas.MaxHp(c, cat.GetLevel(AttributeType.Endurance)), CombatFormulas.MaxGrit(c, cat.GetLevel(AttributeType.Endurance)), CombatFormulas.BaseDamage(c, cat.GetLevel(AttributeType.Strength)));
             var equipped = Enumerable.Range(0, Cat.SkillSlotCount).Select(cat.GetSkillInSlot).ToList();
             _slots.text = Loc.T("cat_details_sheet.04") + string.Join(" | ", equipped.Select(s => s == null ? Loc.T("cat_details_sheet.05") : Texts.SkillName(s.Value))) + Loc.T("cat_details_sheet.06");
 

@@ -52,7 +52,7 @@ namespace TrashCats.Presentation.UI
         public Sprite ring;
         public Sprite ringGold;
 
-        [Tooltip("Icons by key: food, junk, energy, satiety, strength, agility, toughness, xp, lock, clock, home, map, sleep, upgrade, speed, skip, settings, crown")]
+        [Tooltip("Icons by key: food, junk, energy, satiety, strength, technique, endurance, xp, lock, clock, home, map, sleep, upgrade, speed, skip, settings, crown")]
         public List<NamedSprite> icons = new List<NamedSprite>();
 
         public Sprite Icon(string key) => Find(icons, key);

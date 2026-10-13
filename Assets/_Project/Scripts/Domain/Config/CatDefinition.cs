@@ -6,8 +6,8 @@ namespace TrashCats.Domain
         public string NameKey { get; init; }
         public AttributeType Aptitude { get; init; }
         public int StartStrength { get; init; } = 1;
-        public int StartAgility { get; init; } = 1;
-        public int StartToughness { get; init; } = 1;
+        public int StartTechnique { get; init; } = 1;
+        public int StartEndurance { get; init; } = 1;
         public int StartEnergy { get; init; } = 100;
         public int StartSatiety { get; init; } = 60;
 
@@ -17,8 +17,8 @@ namespace TrashCats.Domain
         public int GetStartLevel(AttributeType attribute) => attribute switch
         {
             AttributeType.Strength => StartStrength,
-            AttributeType.Agility => StartAgility,
-            _ => StartToughness,
+            AttributeType.Technique => StartTechnique,
+            _ => StartEndurance,
         };
     }
 }

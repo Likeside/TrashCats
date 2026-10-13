@@ -1,0 +1,6 @@
+## icons_strength_technique (1536x1024, refs: icon_toughness.png, icon_strength.png, bench_mat.png)
+
+```
+Two game UI icons side by side with lots of space between them, in EXACTLY the style of the first reference icon (thick black ink outline, flat bold colour with a subtle halftone dot texture, a light rim highlight, chunky readable silhouette, comic style, no text). LEFT icon = STRENGTH: a home-made barbell like the one in the third reference (a short wooden broom handle with a taped tin can on each end), horizontal, slightly tilted, in warm red-orange tones. RIGHT icon = TECHNIQUE: a cat's paw thrown in a straight punch hitting a dented tin can with a small comic impact star at the contact point and two short speed lines behind the paw, in purple-violet tones. Both icons the same size and visual weight as each other, each fills a square area. Solid flat pure chroma-key GREEN (#00FF00) background everywhere, no shadows on the background.
+```
+

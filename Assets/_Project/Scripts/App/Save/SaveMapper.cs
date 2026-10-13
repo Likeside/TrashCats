@@ -62,7 +62,7 @@ namespace TrashCats.App
             if (battle == null) return null;
             FighterSave F(FighterSnapshot f) => new FighterSave
             {
-                Id = f.Id, Strength = f.Strength, Agility = f.Agility, Toughness = f.Toughness,
+                Id = f.Id, Strength = f.Strength, Agility = f.Technique, Toughness = f.Endurance,
                 Skills = f.Skills.Select(k => k.Value).ToArray(), HpMultiplierPermille = f.HpMultiplierPermille, ViewKey = f.ViewKey,
             };
             return new PendingBattleSave

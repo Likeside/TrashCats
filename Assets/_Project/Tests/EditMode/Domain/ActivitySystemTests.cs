@@ -154,7 +154,7 @@ namespace TrashCats.Tests
 
         [TestCase(AttributeType.Strength, 0, 15)]   // aptitude +50%
         [TestCase(AttributeType.Strength, 2, 19)]   // aptitude +50%, Can lvl 2 +40%
-        [TestCase(AttributeType.Agility, 0, 10)]
+        [TestCase(AttributeType.Technique, 0, 10)]
         public void Training_GrantsXpWithAptitudeAndStationBonus(AttributeType attribute, int stationLevel, int expectedXp)
         {
             var cat = TestCats.Make(TestIds.Ryzhy, aptitude: AttributeType.Strength);
@@ -172,7 +172,7 @@ namespace TrashCats.Tests
         [Test]
         public void UpgradeBoughtMidCycle_AppliesToCurrentCycle()
         {
-            var cat = TestCats.Make(TestIds.Ryzhy, aptitude: AttributeType.Agility);
+            var cat = TestCats.Make(TestIds.Ryzhy, aptitude: AttributeType.Technique);
             var world = TestWorlds.Make(_config, junk: 20, cats: cat);
             ActivitySystem.Start(world, cat, TestIds.TrainStr, _events);
             Simulation.AdvanceTo(world, 10_000, _events);

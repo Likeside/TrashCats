@@ -30,7 +30,7 @@ namespace TrashCats.Editor
         private static readonly (string Key, string Folder)[] Cats = { ("ryzhy", "Ryzhy"), ("shnyr", "shnyr"), ("ponchik", "ponchik") };
 
         private static ActivityDefinition Train(AttributeType a) => new ActivityDefinition { Kind = ActivityKind.Train, TrainedAttribute = a };
-        private static readonly ActivityDefinition Punch = Train(AttributeType.Strength), Rope = Train(AttributeType.Agility), Bench = Train(AttributeType.Toughness);
+        private static readonly ActivityDefinition Punch = Train(AttributeType.Technique), Rope = Train(AttributeType.Endurance), Bench = Train(AttributeType.Strength);
         private static readonly ActivityDefinition Sleep = new ActivityDefinition { Kind = ActivityKind.Sleep };
 
         [MenuItem("TrashCats/Art/Build Hideout Layout Scene")]

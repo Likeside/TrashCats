@@ -105,9 +105,9 @@ Below each cat, a small solid black silhouette of the same pose.
 ```
 Mobile game main screen mockup, portrait. Scene: the back alley behind a small restaurant at dusk, warm light from the restaurant back door.
 Center-left: a big rusty dumpster with junk around it. Right: a stack of cardboard boxes where a cat sleeps.
-Upper-left: a tin can hanging on a string from a pipe — RYZHY punches it.
-Upper-center: a wind-up toy mouse — SHNYR chases it.
-Upper-right: an improvised exercise wheel made from an old tire — PONCHIK runs in it, looking exhausted.
+Upper-left: a tin can hanging on a string from a pipe — SHNYR punches it.
+Upper-center: a skipping rope — PONCHIK jumps it, looking exhausted.
+Upper-right: a home-made bench press on a mat with brick stands — RYZHY presses the barbell.
 UI overlay: thin top bar with a food icon and a scrap-metal icon with numbers; bottom area with three cat portrait cards, each with two small progress bars; two large tabs at the very bottom.
 The game scene occupies the middle 55% of the screen.
 ```
@@ -125,9 +125,9 @@ Bottom: speed toggle button and skip button.
 **D. Тренировки** (раунд 2; горизонтальный 3:2)
 ```
 Three-panel illustration of cats training with junk equipment, same scale in each panel:
-1) RYZHY punching a tin can hanging on a string, can dented and swinging;
-2) SHNYR pouncing at a wind-up toy mouse, mid-air;
-3) PONCHIK running inside a wheel made from an old tire, sweating, tongue out.
+1) RYZHY lying on a mat, pressing a home-made barbell resting on brick stands;
+2) SHNYR punching a tin can hanging on a string, can dented and swinging;
+3) PONCHIK jumping a skipping rope, sweating, tongue out.
 Simple matching backgrounds, emphasis on readable poses suitable for looping animation.
 ```
 
@@ -141,7 +141,7 @@ Each location is a round node connected by a dashed path; lower nodes look conqu
 **F. UI-кит** (раунд 2; портрет)
 ```
 Mobile game UI style sheet on a neutral background: primary and secondary buttons (normal / pressed / disabled), a bottom sheet panel, a popup card with a portrait frame, horizontal progress bars (energy yellow, satiety orange, health red, grit blue),
-resource icons (food: fish skeleton; junk: bent bolt and bottle cap), stat icons (strength paw, agility feather-like tail, toughness shield), a small toast notification, tab bar with two tabs.
+resource icons (food: fish skeleton; junk: bent bolt and bottle cap), stat icons (strength home-made barbell, technique paw punching a can, endurance heart with a paw), a small toast notification, tab bar with two tabs.
 Materials and shapes inspired by street junk: cardboard, tape, bottle caps, tin.
 ```
 

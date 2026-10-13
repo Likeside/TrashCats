@@ -81,6 +81,7 @@ namespace TrashCats.App
     {
         public string Id;
         public int Strength;
+        // stored under the old attribute names (Agility, Toughness) so that existing saves keep loading
         public int Agility;
         public int Toughness;
         public string[] Skills;

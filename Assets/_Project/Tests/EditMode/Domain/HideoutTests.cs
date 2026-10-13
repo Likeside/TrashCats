@@ -78,8 +78,8 @@ namespace TrashCats.Tests
             Assert.That(modifiers.SleepEnergyFlat, Is.EqualTo(10));
             Assert.That((modifiers.FoodOutputFlat, modifiers.JunkOutputFlat), Is.EqualTo((2, 2)));
             Assert.That(modifiers.GetTrainingXpPct(AttributeType.Strength), Is.EqualTo(40));
-            Assert.That(modifiers.GetTrainingXpPct(AttributeType.Agility), Is.EqualTo(0));
-            Assert.That(modifiers.GetTrainingXpPct(AttributeType.Toughness), Is.EqualTo(20));
+            Assert.That(modifiers.GetTrainingXpPct(AttributeType.Technique), Is.EqualTo(0));
+            Assert.That(modifiers.GetTrainingXpPct(AttributeType.Endurance), Is.EqualTo(20));
         }
 
         [Test]

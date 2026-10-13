@@ -5,17 +5,17 @@ namespace TrashCats.Domain
     {
         public int TickMs { get; init; } = 100;
         public int HpBase { get; init; } = 40;
-        public int HpPerToughness { get; init; } = 12;
+        public int HpPerEndurance { get; init; } = 12;
         public int GritBase { get; init; } = 20;
-        public int GritPerToughness { get; init; } = 5;
+        public int GritPerEndurance { get; init; } = 5;
         public int GritRegenPerAction { get; init; } = 3;
         public int DamageBase { get; init; } = 4;
         public int DamagePerStrength { get; init; } = 2;
         public int IntervalBaseTicks { get; init; } = 16;
-        public int IntervalAgilityDivisor { get; init; } = 2;
+        public int IntervalTechniqueDivisor { get; init; } = 2;
         public int IntervalMinTicks { get; init; } = 10;
         public int HitBasePermille { get; init; } = 750;
-        public int HitPerAgilityDiffPermille { get; init; } = 40;
+        public int HitPerTechniqueDiffPermille { get; init; } = 40;
         public int HitMinPermille { get; init; } = 350;
         public int HitMaxPermille { get; init; } = 950;
         public int VarianceMinPermille { get; init; } = 850;

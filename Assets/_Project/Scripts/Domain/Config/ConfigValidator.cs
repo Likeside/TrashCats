@@ -106,7 +106,7 @@ namespace TrashCats.Domain
             CheckUniqueIds(config.Enemies.Select(e => e.Id.Value), "Enemy", errors);
             foreach (var enemy in config.Enemies)
             {
-                if (enemy.Strength < 1 || enemy.Agility < 1 || enemy.Toughness < 1) errors.Add($"Enemy '{enemy.Id}': attributes must be >= 1.");
+                if (enemy.Strength < 1 || enemy.Technique < 1 || enemy.Endurance < 1) errors.Add($"Enemy '{enemy.Id}': attributes must be >= 1.");
                 if (enemy.HpMultiplierPermille <= 0) errors.Add($"Enemy '{enemy.Id}': HpMultiplierPermille must be positive.");
                 foreach (var skill in enemy.Skills)
                     if (!config.TryGetSkill(skill, out _)) errors.Add($"Enemy '{enemy.Id}' references unknown skill '{skill}'.");

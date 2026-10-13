@@ -24,7 +24,9 @@ SHEETS = {
     "ui_buttons": ["button_yellow", "button_blue", None, None, None, None],
     "ui_panels": ["panel_paper", None, None],
     "ui_bars": ["bar_frame", "bar_energy", "bar_satiety", "bar_hp", "bar_grit"],
-    "ui_icons_a": ["icon_food", "icon_junk", "icon_strength", "icon_agility", "icon_toughness", "icon_xp", "icon_lock", "icon_clock"],
+    # the attribute icons of this sheet were replaced (paw, tail, heart: ArtSource/UI/*_v1_*.png); strength and technique
+    # now come from Docs/ArtDirection/Generated/raw_icons_attr, endurance from the icon_endurance sheet
+    "ui_icons_a": ["icon_food", "icon_junk", None, None, None, "icon_xp", "icon_lock", "icon_clock"],
     "ui_icons_b": ["icon_home", "icon_map", "icon_sleep", "icon_upgrade", "icon_speed", "icon_skip", "icon_settings", "icon_crown"],
     "ui_fx": ["ribbon", "burst", "bubble", "tape", "pointer"],
     "ui_extra": ["panel_tin"],
@@ -32,7 +34,7 @@ SHEETS = {
     "ui_a_buttons": ["button_a_yellow", "button_a_blue", "button_a_grey"],
     "ui_a_parts": ["hud_a"],
     "ui_a_sheet": ["panel_a"],
-    "icon_endurance": ["icon_toughness"],
+    "icon_endurance": ["icon_endurance"],
     "ui_event_icons": ["icon_victory", "icon_defeat", "icon_newcat", "icon_skill", "icon_flag", "icon_levelup", "icon_final", "icon_tools"],
     "cat_busts": ["bust_ryzhy", "bust_shnyr", "bust_ponchik"],
     "fx_combat": ["fx_star", "fx_dust", "fx_scratch", "fx_sparkle"],
