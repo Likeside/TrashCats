@@ -123,28 +123,45 @@ namespace TrashCats.Presentation.Hideout
         }
     }
 
-    /// <summary>"Пока тебя не было" modal built from an <see cref="OfflineSummary"/>.</summary>
+    /// <summary>
+    /// "Пока тебя не было": what happened while the player was away, as icons — resources gained, who grew which
+    /// attribute, new skills, and which cats stopped and why (they wait for the player).
+    /// </summary>
     public sealed class OfflineSummaryModal
     {
-        private readonly OverlayStack _overlays;
-        private readonly GameObject _root;
-        private readonly TMP_Text _body;
+        private const float RowHeight = 96f;
+        private const int MaxRows = 3;
 
-        public OfflineSummaryModal(RectTransform parent, OverlayStack overlays)
+        private readonly OverlayStack _overlays;
+        private readonly Func<TrashCats.Domain.CatId, Sprite> _portrait;
+        private readonly GameObject _root;
+        private readonly TMP_Text _time;
+        private readonly RectTransform _content;
+
+        public OfflineSummaryModal(RectTransform parent, OverlayStack overlays, Func<TrashCats.Domain.CatId, Sprite> portrait = null)
         {
             _overlays = overlays;
+            _portrait = portrait;
             var dim = Ui.Panel(parent, "OfflineSummary", Palette.Dim, raycast: true);
             dim.rectTransform.Fill();
             _root = dim.gameObject;
 
             var panel = Ui.Card(dim.transform, "Card", CardStyle.Paper, raycast: true);
-            panel.rectTransform.At(new Vector2(0.5f, 0.5f), new Vector2(900, 900));
+            panel.rectTransform.At(new Vector2(0.5f, 0.5f), new Vector2(940, 1240));
 
             Ui.SetBadge(Ui.Badge(panel.transform, 190f), "clock");
             var title = Ui.Label(panel.transform, Loc.T("hideout_overlays.02"), 46, TextAnchor.UpperCenter, Palette.Ink);
-            title.rectTransform.Place(Vector2.zero, Vector2.one, new Vector2(40, 40), new Vector2(-40, -100));
-            _body = Ui.Label(panel.transform, "", 32, TextAnchor.UpperLeft, Palette.Ink);
-            _body.rectTransform.Place(Vector2.zero, Vector2.one, new Vector2(60, 160), new Vector2(-60, -190));
+            title.rectTransform.Place(new Vector2(0, 1), Vector2.one, new Vector2(40, -170), new Vector2(-40, -100));
+            _time = Ui.Label(panel.transform, "", 30, TextAnchor.UpperCenter, Palette.Ink);
+            _time.rectTransform.Place(new Vector2(0, 1), Vector2.one, new Vector2(40, -220), new Vector2(-40, -172));
+
+            _content = Ui.Rect(panel.transform, "Content").Place(Vector2.zero, Vector2.one, new Vector2(60, 170), new Vector2(-60, -235));
+            var column = _content.gameObject.AddComponent<VerticalLayoutGroup>();
+            column.spacing = 10;
+            column.childAlignment = TextAnchor.UpperCenter;
+            column.childControlWidth = column.childControlHeight = true;
+            column.childForceExpandWidth = true;
+            column.childForceExpandHeight = false;
 
             var ok = Ui.Button(panel.transform, "Ok", Loc.T("hideout_overlays.03"), Palette.Primary, () => _overlays.Close(_root));
             ok.Rect.Place(new Vector2(0.25f, 0), new Vector2(0.75f, 0), new Vector2(0, 40), new Vector2(0, 140));
@@ -154,23 +171,116 @@ namespace TrashCats.Presentation.Hideout
 
         public void Show(OfflineSummary summary)
         {
-            var sb = new StringBuilder();
-            sb.AppendLine(Loc.T("hideout_overlays.04", Texts.Duration(summary.RealElapsedMs)) + (summary.WasCapped ? Loc.T("hideout_overlays.05", Texts.Duration(summary.SimulatedMs)) : ""));
-            if (summary.FoodGained > 0) sb.AppendLine(Loc.T("hideout_overlays.06", summary.FoodGained));
-            if (summary.JunkGained > 0) sb.AppendLine(Loc.T("hideout_overlays.07", summary.JunkGained));
-            foreach (var group in summary.LevelUps.GroupBy(e => (e.CatId, e.Attribute)))
-                sb.AppendLine($"{Texts.CatName(group.Key.CatId)}: {Texts.Attribute(group.Key.Attribute)} {group.Max(e => e.NewLevel)}");
-            foreach (var unlocked in summary.SkillsUnlocked)
-                sb.AppendLine(Loc.T("hideout_overlays.08", Texts.CatName(unlocked.CatId), Texts.SkillName(unlocked.SkillId)));
-            foreach (var stopped in summary.Stopped)
+            _time.text = Loc.T("hideout_overlays.04", Texts.Duration(summary.RealElapsedMs))
+                         + (summary.WasCapped ? Loc.T("hideout_overlays.05", Texts.Duration(summary.SimulatedMs)) : "");
+            for (var i = _content.childCount - 1; i >= 0; i--)
+                UnityEngine.Object.Destroy(_content.GetChild(i).gameObject);
+
+            // resources
+            if (summary.FoodGained > 0 || summary.JunkGained > 0)
             {
-                var reason = Texts.IdleBubble(stopped.Reason);
-                if (reason.Length > 0)
-                    sb.AppendLine($"{Texts.CatName(stopped.CatId)}: {reason.ToLowerInvariant()}");
+                var row = Row(TextAnchor.MiddleCenter, 40);
+                if (summary.FoodGained > 0) Chip(row, "food", "+" + summary.FoodGained);
+                if (summary.JunkGained > 0) Chip(row, "junk", "+" + summary.JunkGained);
             }
 
-            _body.text = sb.ToString();
+            // grown attributes: portrait, attribute icon, new level (highest per cat and attribute)
+            var levels = summary.LevelUps.GroupBy(e => (e.CatId, e.Attribute)).Select(g => (g.Key.CatId, g.Key.Attribute, Level: g.Max(e => e.NewLevel))).ToList();
+            if (levels.Count > 0)
+            {
+                Header(Loc.T("offline.levels"));
+                foreach (var cat in levels.GroupBy(l => l.CatId).Take(MaxRows))
+                {
+                    var row = Row(TextAnchor.MiddleLeft, 18);
+                    Portrait(row, cat.Key);
+                    foreach (var level in cat)
+                        Chip(row, Texts.AttributeIcon(level.Attribute), level.Level.ToString(), 70f);
+                }
+            }
+
+            if (summary.SkillsUnlocked.Count > 0)
+            {
+                Header(Loc.T("offline.skills"));
+                foreach (var unlocked in summary.SkillsUnlocked.Take(MaxRows))
+                {
+                    var row = Row(TextAnchor.MiddleLeft, 18);
+                    Portrait(row, unlocked.CatId);
+                    Chip(row, "skill", Texts.SkillName(unlocked.SkillId), 70f);
+                }
+            }
+
+            // cats that stopped and wait for the player, with the reason
+            var waiting = summary.Stopped.Where(s => Texts.IdleBubble(s.Reason).Length > 0).GroupBy(s => s.CatId).Select(g => g.Last()).ToList();
+            if (waiting.Count > 0)
+            {
+                Header(Loc.T("offline.waiting"));
+                var row = Row(TextAnchor.MiddleLeft, 30);
+                foreach (var stopped in waiting.Take(MaxRows))
+                {
+                    Portrait(row, stopped.CatId);
+                    Bubble(row, Texts.IdleBubble(stopped.Reason));
+                }
+            }
+
+            if (_content.childCount == 0)
+                Header(Loc.T("offline.nothing"));
+
             _overlays.Push(_root);
+        }
+
+        private RectTransform Row(TextAnchor align, float spacing)
+        {
+            var row = Ui.Rect(_content, "Row");
+            row.gameObject.AddComponent<LayoutElement>().preferredHeight = RowHeight;
+            var layout = row.gameObject.AddComponent<HorizontalLayoutGroup>();
+            layout.childAlignment = align;
+            layout.spacing = spacing;
+            layout.childControlWidth = layout.childControlHeight = true;
+            layout.childForceExpandWidth = layout.childForceExpandHeight = false;
+            return row;
+        }
+
+        private void Header(string text)
+        {
+            var label = Ui.Label(_content, text, 32, TextAnchor.LowerLeft, Palette.Ink, heading: true);
+            label.gameObject.AddComponent<LayoutElement>().preferredHeight = 46;
+        }
+
+        private static void Fixed(Component c, float width, float height)
+        {
+            var element = c.gameObject.AddComponent<LayoutElement>();
+            element.preferredWidth = element.minWidth = width;
+            element.preferredHeight = height;
+        }
+
+        /// <summary>Icon followed by a short text (number, level, skill name).</summary>
+        private static void Chip(RectTransform row, string icon, string text, float size = 86f)
+        {
+            var picture = Ui.Icon(row, icon);
+            if (picture != null)
+                Fixed(picture, size * picture.sprite.rect.width / picture.sprite.rect.height, size);
+            var label = Ui.Label(row, text, 40, TextAnchor.MiddleLeft, Palette.Paper, heading: true);
+            label.textWrappingMode = TextWrappingModes.NoWrap;
+            label.gameObject.AddComponent<LayoutElement>().preferredHeight = RowHeight;
+        }
+
+        private void Portrait(RectTransform row, TrashCats.Domain.CatId cat)
+        {
+            var cell = Ui.Rect(row, "Portrait");
+            Fixed(cell, RowHeight, RowHeight);
+            var picture = new RoundPicture(cell, "Round", CatColors.Backdrop(cat), 0.8f);
+            picture.Root.Fill();
+            picture.SetPicture(_portrait?.Invoke(cat));
+        }
+
+        /// <summary>The idle reason in a comic speech bubble next to the cat.</summary>
+        private static void Bubble(RectTransform row, string text)
+        {
+            var back = Ui.Panel(row, "Bubble", Ui.Skin?.bubble != null ? Color.white : new Color(0, 0, 0, 0));
+            back.sprite = Ui.Skin?.bubble;
+            Fixed(back, 170, 86);
+            var label = Ui.Label(back.transform, text, 26, TextAnchor.MiddleCenter, Palette.Paper, heading: true);
+            label.rectTransform.Place(Vector2.zero, Vector2.one, new Vector2(12, 22), new Vector2(-12, -8));
         }
     }
 

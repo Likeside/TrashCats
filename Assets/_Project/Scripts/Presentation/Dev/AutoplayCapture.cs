@@ -127,6 +127,11 @@ namespace TrashCats.Presentation.Dev
             yield return Shot("03c_stations");
             yield return new WaitForSeconds(0.2f);
             yield return Shot("03d_stations_later");
+            services.Debug.SimulateAbsence(25 * 60_000L);
+            yield return new WaitForSeconds(0.6f);
+            yield return Shot("03e_offline");
+            Click("Ok", required: false);
+            for (var i = 0; i < 4; i++) Dismiss();
             Click("Station_upg_can");
             yield return Shot("04_upgrade_panel");
             Click("UpgradePanel");
