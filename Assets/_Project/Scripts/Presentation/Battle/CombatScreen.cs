@@ -78,12 +78,13 @@ namespace TrashCats.Presentation.Battle
             _bannerGroup = _bannerRoot.gameObject.AddComponent<CanvasGroup>();
             _bannerGroup.alpha = 0f;
             _bannerGroup.blocksRaycasts = false;
-            var ribbon = Ui.Skin?.ribbon;
+            // a jagged comic burst behind the skill name, like "WILD BITE!" in the combat concept
+            var ribbon = Ui.Skin?.burst;
             if (ribbon != null)
-                Ui.Picture(_bannerRoot, "Ribbon", ribbon).preserveAspect = false;
+                Ui.Picture(_bannerRoot, "Burst", ribbon).preserveAspect = false;
             _banner = Ui.Label(_bannerRoot, "", 60, TextAnchor.MiddleCenter, ribbon != null ? Palette.Ink : Palette.Primary, heading: true);
             if (ribbon != null)
-                _banner.rectTransform.localRotation = Quaternion.Euler(0, 0, 4f);
+                _bannerRoot.localRotation = Quaternion.Euler(0, 0, 5f);
             else
                 _banner.Outlined();
 
@@ -308,9 +309,9 @@ namespace TrashCats.Presentation.Battle
                 _name.rectTransform.Place(new Vector2(0, 1), Vector2.one, new Vector2(0, -50), Vector2.zero);
                 _name.Outlined();
                 _hp = Ui.Bar(box, "Hp", Palette.Hex("#D9402B"), "hp");
-                _hp.Rect.Place(new Vector2(0, 1), Vector2.one, new Vector2(0, -108), new Vector2(0, -56));
+                _hp.Rect.Place(new Vector2(0, 1), Vector2.one, new Vector2(46, -100), new Vector2(0, -62));
                 _grit = Ui.Bar(box, "Grit", Palette.Hex("#3F7FBF"), "grit");
-                _grit.Rect.Place(new Vector2(0, 1), Vector2.one, new Vector2(0, -156), new Vector2(0, -112));
+                _grit.Rect.Place(new Vector2(0, 1), Vector2.one, new Vector2(46, -144), new Vector2(0, -110));
                 _status = Ui.Label(box, "", 26, TextAnchor.UpperCenter, Palette.Primary);
                 _status.Outlined();
                 _status.rectTransform.Place(new Vector2(0, 1), Vector2.one, new Vector2(0, -200), new Vector2(0, -160));

@@ -57,14 +57,14 @@ namespace TrashCats.Editor
             skin.headingOutline = OutlineMaterial(skin.headingFont, "RussoOne Outline", 0.28f);
             skin.bodyOutline = OutlineMaterial(skin.bodyFont, "BalsamiqSans Outline", 0.22f);
 
-            skin.button = Sprite("button_white");
-            skin.buttonPrimary = Sprite("button_yellow");
-            skin.buttonSecondary = Sprite("button_blue");
-            skin.paper = Sprite("panel_paper");
-            skin.tin = Sprite("panel_tin");
-            skin.barFrame = Sprite("bar_frame");
-            skin.badgeBars = new[] { "energy", "satiety", "hp", "grit" }
-                .Select(k => new NamedSprite { key = k, sprite = Sprite("bar_" + k) }).Where(n => n.sprite != null).ToList();
+            skin.button = Sprite("button_a_white") ?? Sprite("button_white");
+            skin.buttonPrimary = Sprite("button_a_yellow") ?? Sprite("button_yellow");
+            skin.buttonSecondary = Sprite("button_a_blue") ?? Sprite("button_blue");
+            skin.paper = Sprite("panel_a") ?? Sprite("panel_paper");
+            skin.tin = Sprite("hud_a") ?? Sprite("panel_tin");
+            skin.barFrame = Sprite("hud_a") ?? Sprite("bar_frame");
+            // the concept's bars are plain tracks with an icon beside them (Ui.Bar), not badge bars
+            skin.badgeBars = new List<NamedSprite>();
             skin.ribbon = Sprite("ribbon");
             skin.burst = Sprite("burst");
             skin.bubble = Sprite("bubble");

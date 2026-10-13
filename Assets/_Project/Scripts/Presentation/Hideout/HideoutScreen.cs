@@ -15,7 +15,7 @@ namespace TrashCats.Presentation.Hideout
     {
         public const float HudHeight = 110f;
         public const float NavHeight = 130f;
-        private const float PanelHeight = 340f;
+        private const float PanelHeight = 430f;
 
         private readonly HudView _hud;
         private readonly HideoutSceneView _scene;
@@ -40,7 +40,7 @@ namespace TrashCats.Presentation.Hideout
             _sheet = new ActivitySheet(session, overlayRoot, overlays, showResult, details.Open);
             _hud = new HudView(session, hudRect, debugPanel != null ? debugPanel.Open : (Action)null);
             _scene = new HideoutSceneView(session, services.Bus, sceneRect, _sheet.Open, upgrades.Open, art);
-            _panel = new CatPanelView(session, panelRect, _sheet.Open, showResult);
+            _panel = new CatPanelView(session, panelRect, _sheet.Open, showResult, art);
             _toast = new ToastView(sceneRect);
         }
 
