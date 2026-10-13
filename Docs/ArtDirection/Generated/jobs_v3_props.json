@@ -1,0 +1,26 @@
+[
+ {
+  "name": "prop_wheel",
+  "size": "1024x1024",
+  "refs": [
+   "Docs/ArtDirection/Concepts/round1/blind/hideout_A.png"
+  ],
+  "prompt": "Comic art style of the reference: bold black ink outlines, flat cel shading, subtle halftone dots. One single object, centred: a big wooden hamster-style exercise wheel for cats, seen at a 3/4 angle from the front-left so you look INTO the drum, exactly like the wheel in the reference. The drum is wide, made of wooden slats, and it is attached to the stand only at ONE side by a short axle at the back. The inside of the drum and its front opening are COMPLETELY EMPTY: no spokes, no cross bars, no axle in front, nothing in the opening. A sturdy wooden A-frame stand behind the drum.\nThe background MUST be a solid flat pure chroma-key green (#00FF00) everywhere around the object, no gradient, no floor, no shadow, no scenery, no text. Do not use green on the object itself."
+ },
+ {
+  "name": "prop_can",
+  "size": "1024x1024",
+  "refs": [
+   "Docs/ArtDirection/Concepts/round1/blind/hideout_A.png"
+  ],
+  "prompt": "Comic art style of the reference: bold black ink outlines, flat cel shading, subtle halftone dots. One single object, centred: a dented, slightly rusty tin can hanging vertically on a rope, the rope going straight up to the top edge of the picture (no bracket, no pipe, no knot at the top). Front view.\nThe background MUST be a solid flat pure chroma-key green (#00FF00) everywhere around the object, no gradient, no floor, no shadow, no scenery, no text. Do not use green on the object itself."
+ },
+ {
+  "name": "prop_dumpster",
+  "size": "1024x1024",
+  "refs": [
+   "Docs/ArtDirection/Concepts/round1/blind/hideout_A.png"
+  ],
+  "prompt": "Comic art style of the reference: bold black ink outlines, flat cel shading, subtle halftone dots. One single object, centred: a big rusty dark green dumpster seen from the front at a slight 3/4 angle, lid half open with junk (planks, a bottle, a trash bag) sticking out, a banana peel and a tin can at its base.\nThe background MUST be a solid flat pure chroma-key green (#00FF00) everywhere around the object, no gradient, no floor, no shadow, no scenery, no text. Do not use green on the object itself."
+ }
+]

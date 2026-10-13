@@ -129,10 +129,10 @@ TextureImporter:
       name: rat_attack_01_0
       rect:
         serializedVersion: 2
-        x: 156
-        y: 15
-        width: 261
-        height: 370
+        x: 307
+        y: 18
+        width: 334
+        height: 344
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

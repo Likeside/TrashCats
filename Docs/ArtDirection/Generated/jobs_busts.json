@@ -1,0 +1,11 @@
+[
+ {
+  "name": "cat_busts",
+  "size": "1536x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/refs/ui_from_hideout_A.png",
+   "Docs/ArtDirection/Concepts/round1/blind/lineup_A.png"
+  ],
+  "prompt": "Exactly 3 separate head-and-shoulders busts of the three cats, copied EXACTLY from the portraits on the cat cards in the first reference (same faces, expressions, colours, comic ink style): 1) Ryzhy: orange tabby tomcat with a smug grin and a torn left ear; 2) Shnyr: thin grey striped cat with huge ears and narrow yellow eyes; 3) Ponchik: very fat black-and-white cat with half-closed sleepy eyes. Each bust cut at the chest with a straight horizontal bottom edge, the whole head and BOTH EARS fully visible with space above them, no frame, no card, no background colour behind them, no text.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows on it. Do not use green in the cats."
+ }
+]

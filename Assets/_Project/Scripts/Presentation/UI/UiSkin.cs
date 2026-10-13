@@ -17,6 +17,8 @@ namespace TrashCats.Presentation.UI
         [Tooltip("Body text (Balsamiq Sans)")] public TMP_FontAsset bodyFont;
         [Tooltip("Heading font material with an ink outline, for text drawn over pictures")] public Material headingOutline;
         [Tooltip("Body font material with an ink outline")] public Material bodyOutline;
+        [Tooltip("Thicker outlines for big text (40+)")] public Material headingOutlineBold;
+        public Material bodyOutlineBold;
 
         [Header("Buttons")]
         [Tooltip("Neutral button tinted by any colour")] public Sprite button;

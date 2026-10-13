@@ -84,6 +84,34 @@ def main():
         elif name in BACKGROUNDS:
             print(f"{name} -> {BACKGROUNDS[name]}")
             put(path, f"{ENV}/{BACKGROUNDS[name]}.png")
+        elif name == "wheel_spin" or name.endswith(("_run", "_canpunch", "_attack8")):
+            # round 3: one 8-frame clip per sheet (2x4)
+            if name == "wheel_spin":
+                key, clip, extra = "wheel", "Idle", ["--anchor", "center"]
+            else:
+                key, kind = name.rsplit("_", 1)
+                key = KEY_FOLDERS.get(key, key)
+                clip, extra = {
+                    "run": ("Run", ["--anchor", "center", "--match-height", "210"]),
+                    "canpunch": ("CanPunch", ["--match-height", str(GUARD_HEIGHT), "--match-frame", "0"]),
+                    "attack8": ("Attack", ["--match-height", str(GUARD_HEIGHT), "--match-frame", "0"]),
+                }[kind]
+            print(f"{name} -> {key}/{clip}")
+            out, base = process(path, 8, 2, extra)
+            folder = f"{CHARS}/{key}/{clip}"
+            for old in glob.glob(f"{folder}/*.png*"):
+                os.remove(old)
+            frames = sorted(glob.glob(f"{out}/{base}_[0-9].png"), key=lambda p: int(p.rsplit("_", 1)[1][:-4]))
+            for i, f in enumerate(frames):
+                put(f, f"{folder}/{key.lower()}_{clip.lower()}_{i:02d}.png")
+        elif name.startswith("prop_"):
+            # single prop on green (round 3): key out and trim
+            key = {"prop_wheel": "prop_upg_wheel", "prop_can": "prop_upg_can", "prop_dumpster": "prop_upg_dumpster"}.get(name, name)
+            print(f"{name} -> {key}")
+            out, base = process(path, 1, 1, ["--anchor", "center"])
+            f = sorted(glob.glob(f"{out}/{base}_[0-9].png"))[0]
+            trim(f)
+            put(f, f"{ENV}/{key}.png")
         elif name.startswith("guard_"):
             continue
         else:

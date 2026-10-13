@@ -1,0 +1,133 @@
+[
+ {
+  "name": "wheel_spin",
+  "size": "1536x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v3/prop_wheel.png"
+  ],
+  "prompt": "Game sprite sheet: 8 frames of the wooden exercise wheel from the reference spinning, in a grid of 2 rows x 4 columns, generous space between frames. Every frame shows EXACTLY the same wheel and stand, same size, same position and same 3/4 angle; only the drum rotates: the wooden slats inside the drum and the marks on the rim move a little further around in each frame, making a smooth looping rotation. The drum stays completely empty inside. Comic style exactly like the reference.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows, no scenery, no text, no frame numbers."
+ },
+ {
+  "name": "ryzhy_run",
+  "size": "1536x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw/hideout_ryzhy.png",
+   "Docs/ArtDirection/Generated/refs/ref_ryzhy_guard.png"
+  ],
+  "prompt": "Game sprite sheet: 8 animation frames of ONE continuous animation in a grid of 2 rows x 4 columns, read left to right, top row first, with generous empty space between frames so they never touch. The SAME character as in the reference with exactly the same proportions, colours and size in every frame, feet on the same baseline in every frame. Side view, the cat's HEAD IS ON THE LEFT and its tail on the right in ALL 8 frames (never mirror a frame). A looping RUN cycle on all four legs, like a cat running inside an exercise wheel: legs stretching and gathering, body bouncing slightly, tail flowing behind, determined face. The cat runs on the spot (does not move forward between frames). Comic book style exactly like the reference: bold black ink outlines, flat colors with simple shading and light hatching, expressive face.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no props, no text, no frame numbers, no borders."
+ },
+ {
+  "name": "ryzhy_canpunch",
+  "size": "1536x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/refs/ref_ryzhy_guard.png"
+  ],
+  "prompt": "Game sprite sheet: 8 animation frames of ONE continuous animation in a grid of 2 rows x 4 columns, read left to right, top row first, with generous empty space between frames so they never touch. The SAME character as in the reference with exactly the same proportions, colours and size in every frame, feet on the same baseline in every frame. Side view facing RIGHT, standing on the hind legs in the boxing stance of the reference. A training PUNCH combo at a punching bag that hangs just in front of it (do NOT draw the bag): 1) stance, 2) wind-up, 3) right jab fully extended, 4) recoil, 5) wind-up, 6) strong left hook fully extended, 7) recoil, 8) back to stance. Feet stay planted. Comic book style exactly like the reference: bold black ink outlines, flat colors with simple shading and light hatching, expressive face.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no props, no text, no frame numbers, no borders."
+ },
+ {
+  "name": "shnyr_run",
+  "size": "1536x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw/hideout_shnyr.png",
+   "Docs/ArtDirection/Generated/raw/guard_shnyr.png"
+  ],
+  "prompt": "Game sprite sheet: 8 animation frames of ONE continuous animation in a grid of 2 rows x 4 columns, read left to right, top row first, with generous empty space between frames so they never touch. The SAME character as in the reference with exactly the same proportions, colours and size in every frame, feet on the same baseline in every frame. Side view facing LEFT. A looping RUN cycle on all four legs, like a cat running inside an exercise wheel: legs stretching and gathering, body bouncing slightly, tail flowing behind, determined face. The cat runs on the spot (does not move forward between frames). Comic book style exactly like the reference: bold black ink outlines, flat colors with simple shading and light hatching, expressive face.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no props, no text, no frame numbers, no borders."
+ },
+ {
+  "name": "shnyr_canpunch",
+  "size": "1536x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw/guard_shnyr.png"
+  ],
+  "prompt": "Game sprite sheet: 8 animation frames of ONE continuous animation in a grid of 2 rows x 4 columns, read left to right, top row first, with generous empty space between frames so they never touch. The SAME character as in the reference with exactly the same proportions, colours and size in every frame, feet on the same baseline in every frame. Side view, the cat's FACE AND FISTS POINT TO THE RIGHT in ALL 8 frames (never mirror a frame), standing on the hind legs in the boxing stance of the reference. A training PUNCH combo at a punching bag that hangs just in front of it (do NOT draw the bag): 1) stance, 2) wind-up, 3) right jab fully extended, 4) recoil, 5) wind-up, 6) strong left hook fully extended, 7) recoil, 8) back to stance. Feet stay planted. Comic book style exactly like the reference: bold black ink outlines, flat colors with simple shading and light hatching, expressive face.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no props, no text, no frame numbers, no borders."
+ },
+ {
+  "name": "ponchik_run",
+  "size": "1536x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw/hideout_ponchik.png",
+   "Docs/ArtDirection/Generated/raw/guard_ponchik.png"
+  ],
+  "prompt": "Game sprite sheet: 8 animation frames of ONE continuous animation in a grid of 2 rows x 4 columns, read left to right, top row first, with generous empty space between frames so they never touch. The SAME character as in the reference with exactly the same proportions, colours and size in every frame, feet on the same baseline in every frame. Side view facing LEFT. A looping RUN cycle on all four legs, like a cat running inside an exercise wheel: legs stretching and gathering, body bouncing slightly, tail flowing behind, determined face. The cat runs on the spot (does not move forward between frames). Comic book style exactly like the reference: bold black ink outlines, flat colors with simple shading and light hatching, expressive face.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no props, no text, no frame numbers, no borders."
+ },
+ {
+  "name": "ponchik_canpunch",
+  "size": "1536x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw/guard_ponchik.png"
+  ],
+  "prompt": "Game sprite sheet: 8 animation frames of ONE continuous animation in a grid of 2 rows x 4 columns, read left to right, top row first, with generous empty space between frames so they never touch. The SAME character as in the reference with exactly the same proportions, colours and size in every frame, feet on the same baseline in every frame. Side view facing RIGHT, standing on the hind legs in the boxing stance of the reference. A training PUNCH combo at a punching bag that hangs just in front of it (do NOT draw the bag): 1) stance, 2) wind-up, 3) right jab fully extended, 4) recoil, 5) wind-up, 6) strong left hook fully extended, 7) recoil, 8) back to stance. Feet stay planted. Comic book style exactly like the reference: bold black ink outlines, flat colors with simple shading and light hatching, expressive face.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no props, no text, no frame numbers, no borders."
+ },
+ {
+  "name": "rat_attack8",
+  "size": "1536x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw/guard_rat.png"
+  ],
+  "prompt": "Game sprite sheet: 8 animation frames of ONE continuous animation in a grid of 2 rows x 4 columns, read left to right, top row first, with generous empty space between frames so they never touch. The SAME character as in the reference with exactly the same proportions, colours and size in every frame, feet on the same baseline in every frame. Side view facing RIGHT. One fighting ATTACK animation: 1) stance like the reference, 2) wind-up leaning back, 3) lunge forward, 4) strike fully extended with a small comic impact burst at the paw or beak, 5) follow-through, 6) pulling back, 7) recovering, 8) back to the stance. Feet stay on the baseline. Comic book style exactly like the reference: bold black ink outlines, flat colors with simple shading and light hatching, expressive face.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no props, no text, no frame numbers, no borders."
+ },
+ {
+  "name": "gull_attack8",
+  "size": "1536x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw/guard_gull.png"
+  ],
+  "prompt": "Game sprite sheet: 8 animation frames of ONE continuous animation in a grid of 2 rows x 4 columns, read left to right, top row first, with generous empty space between frames so they never touch. The SAME character as in the reference with exactly the same proportions, colours and size in every frame, feet on the same baseline in every frame. Side view facing RIGHT. One fighting ATTACK animation: 1) stance like the reference, 2) wind-up leaning back, 3) lunge forward, 4) strike fully extended with a small comic impact burst at the paw or beak, 5) follow-through, 6) pulling back, 7) recovering, 8) back to the stance. Feet stay on the baseline. Comic book style exactly like the reference: bold black ink outlines, flat colors with simple shading and light hatching, expressive face.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no props, no text, no frame numbers, no borders."
+ },
+ {
+  "name": "shopcat_attack8",
+  "size": "1536x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw/guard_shopcat.png"
+  ],
+  "prompt": "Game sprite sheet: 8 animation frames of ONE continuous animation in a grid of 2 rows x 4 columns, read left to right, top row first, with generous empty space between frames so they never touch. The SAME character as in the reference with exactly the same proportions, colours and size in every frame, feet on the same baseline in every frame. Side view facing RIGHT. One fighting ATTACK animation: 1) stance like the reference, 2) wind-up leaning back, 3) lunge forward, 4) strike fully extended with a small comic impact burst at the paw or beak, 5) follow-through, 6) pulling back, 7) recovering, 8) back to the stance. Feet stay on the baseline. Comic book style exactly like the reference: bold black ink outlines, flat colors with simple shading and light hatching, expressive face.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no props, no text, no frame numbers, no borders."
+ },
+ {
+  "name": "crow_attack8",
+  "size": "1536x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw/guard_crow.png"
+  ],
+  "prompt": "Game sprite sheet: 8 animation frames of ONE continuous animation in a grid of 2 rows x 4 columns, read left to right, top row first, with generous empty space between frames so they never touch. The SAME character as in the reference with exactly the same proportions, colours and size in every frame, feet on the same baseline in every frame. Side view facing RIGHT. One fighting ATTACK animation: 1) stance like the reference, 2) wind-up leaning back, 3) lunge forward, 4) strike fully extended with a small comic impact burst at the paw or beak, 5) follow-through, 6) pulling back, 7) recovering, 8) back to the stance. Feet stay on the baseline. Comic book style exactly like the reference: bold black ink outlines, flat colors with simple shading and light hatching, expressive face.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no props, no text, no frame numbers, no borders."
+ },
+ {
+  "name": "raccoon_attack8",
+  "size": "1536x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw/guard_raccoon.png"
+  ],
+  "prompt": "Game sprite sheet: 8 animation frames of ONE continuous animation in a grid of 2 rows x 4 columns, read left to right, top row first, with generous empty space between frames so they never touch. The SAME character as in the reference with exactly the same proportions, colours and size in every frame, feet on the same baseline in every frame. Side view facing RIGHT. One fighting ATTACK animation: 1) stance like the reference, 2) wind-up leaning back, 3) lunge forward, 4) strike fully extended with a small comic impact burst at the paw or beak, 5) follow-through, 6) pulling back, 7) recovering, 8) back to the stance. Feet stay on the baseline. Comic book style exactly like the reference: bold black ink outlines, flat colors with simple shading and light hatching, expressive face.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no props, no text, no frame numbers, no borders."
+ },
+ {
+  "name": "pug_attack8",
+  "size": "1536x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw/guard_pug.png"
+  ],
+  "prompt": "Game sprite sheet: 8 animation frames of ONE continuous animation in a grid of 2 rows x 4 columns, read left to right, top row first, with generous empty space between frames so they never touch. The SAME character as in the reference with exactly the same proportions, colours and size in every frame, feet on the same baseline in every frame. Side view facing RIGHT. One fighting ATTACK animation: 1) stance like the reference, 2) wind-up leaning back, 3) lunge forward, 4) strike fully extended with a small comic impact burst at the paw or beak, 5) follow-through, 6) pulling back, 7) recovering, 8) back to the stance. Feet stay on the baseline. Comic book style exactly like the reference: bold black ink outlines, flat colors with simple shading and light hatching, expressive face.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no props, no text, no frame numbers, no borders."
+ },
+ {
+  "name": "admiral_attack8",
+  "size": "1536x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw/guard_admiral.png"
+  ],
+  "prompt": "Game sprite sheet: 8 animation frames of ONE continuous animation in a grid of 2 rows x 4 columns, read left to right, top row first, with generous empty space between frames so they never touch. The SAME character as in the reference with exactly the same proportions, colours and size in every frame, feet on the same baseline in every frame. Side view facing RIGHT. One fighting ATTACK animation: 1) stance like the reference, 2) wind-up leaning back, 3) lunge forward, 4) strike fully extended with a small comic impact burst at the paw or beak, 5) follow-through, 6) pulling back, 7) recovering, 8) back to the stance. Feet stay on the baseline. Comic book style exactly like the reference: bold black ink outlines, flat colors with simple shading and light hatching, expressive face.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no props, no text, no frame numbers, no borders."
+ },
+ {
+  "name": "shnyr_attack8",
+  "size": "1536x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw/guard_shnyr.png"
+  ],
+  "prompt": "Game sprite sheet: 8 animation frames of ONE continuous animation in a grid of 2 rows x 4 columns, read left to right, top row first, with generous empty space between frames so they never touch. The SAME character as in the reference with exactly the same proportions, colours and size in every frame, feet on the same baseline in every frame. Side view facing RIGHT. One fighting ATTACK animation: 1) stance like the reference, 2) wind-up leaning back, 3) lunge forward, 4) strike fully extended with a small comic impact burst at the paw or beak, 5) follow-through, 6) pulling back, 7) recovering, 8) back to the stance. Feet stay on the baseline. Comic book style exactly like the reference: bold black ink outlines, flat colors with simple shading and light hatching, expressive face.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no props, no text, no frame numbers, no borders."
+ },
+ {
+  "name": "ponchik_attack8",
+  "size": "1536x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw/guard_ponchik.png"
+  ],
+  "prompt": "Game sprite sheet: 8 animation frames of ONE continuous animation in a grid of 2 rows x 4 columns, read left to right, top row first, with generous empty space between frames so they never touch. The SAME character as in the reference with exactly the same proportions, colours and size in every frame, feet on the same baseline in every frame. Side view facing RIGHT. One fighting ATTACK animation: 1) stance like the reference, 2) wind-up leaning back, 3) lunge forward, 4) strike fully extended with a small comic impact burst at the paw or beak, 5) follow-through, 6) pulling back, 7) recovering, 8) back to the stance. Feet stay on the baseline. Comic book style exactly like the reference: bold black ink outlines, flat colors with simple shading and light hatching, expressive face.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no props, no text, no frame numbers, no borders."
+ }
+]

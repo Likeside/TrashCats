@@ -96,3 +96,10 @@ Comic game VFX sprites in exactly the style of the references: thick black ink o
 Flat front view, no text, no letters. Solid flat pure green (#00FF00) chroma-key background everywhere, no shadows on it, no scenery. Do not use green in the items.
 ```
 
+## cat_busts (1536x1024, refs: ui_from_hideout_A.png, lineup_A.png)
+
+```
+Exactly 3 separate head-and-shoulders busts of the three cats, copied EXACTLY from the portraits on the cat cards in the first reference (same faces, expressions, colours, comic ink style): 1) Ryzhy: orange tabby tomcat with a smug grin and a torn left ear; 2) Shnyr: thin grey striped cat with huge ears and narrow yellow eyes; 3) Ponchik: very fat black-and-white cat with half-closed sleepy eyes. Each bust cut at the chest with a straight horizontal bottom edge, the whole head and BOTH EARS fully visible with space above them, no frame, no card, no background colour behind them, no text.
+Solid flat pure green (#00FF00) chroma-key background everywhere, no shadows on it. Do not use green in the cats.
+```
+

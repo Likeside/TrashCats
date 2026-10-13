@@ -19,7 +19,6 @@ namespace TrashCats.Presentation.Battle
     /// </summary>
     public sealed class CombatScreen
     {
-        private const float SecondsPerTick = 0.1f;
 
         private readonly GameSession _session;
         private readonly CharacterViewFactory _characters;
@@ -129,7 +128,7 @@ namespace TrashCats.Presentation.Battle
             _characters.SetArena(_session.Config.GetTerritory(_battle.Territory).ViewKey);
             _log = _battle.Result.Log;
             _next = 0;
-            _time = 0f;
+            _time = 0.4f;
             _endDelay = -1f;
             _banner.text = "";
             _bannerGroup.alpha = 0f;
@@ -171,10 +170,30 @@ namespace TrashCats.Presentation.Battle
                 return;
             }
 
-            _time += deltaTime * _speedFactor;
-            var tick = (int)(_time / SecondsPerTick);
-            while (_next < _log.Count && _log[_next].Tick <= tick)
-                Present(_log[_next++], animate: true);
+            // strictly one beat at a time: each event waits until the previous one has played out (swing, hit, reaction)
+            _time -= deltaTime * _speedFactor;
+            while (_time <= 0f && _next < _log.Count)
+            {
+                var e = _log[_next++];
+                Present(e, animate: true);
+                _time += HoldAfter(e);
+            }
+        }
+
+        /// <summary>Seconds (at ×1) the replay waits after showing an event.</summary>
+        private float HoldAfter(BattleEvent e)
+        {
+            switch (e)
+            {
+                case FighterEntered _: return 0.55f;
+                case ActionPerformed _: return 0.3f; // until the strike frame of the attack clip
+                case HitResolved _:
+                    var nextIsHit = _next < _log.Count && _log[_next] is HitResolved;
+                    return nextIsHit ? 0.28f : 0.6f;
+                case FighterKnockedOut _: return 0.9f;
+                case SuddenDeathStarted _: return 0.8f;
+                default: return 0f;
+            }
         }
 
         private void Skip()
@@ -432,7 +451,7 @@ namespace TrashCats.Presentation.Battle
             {
                 var x0 = side == 0 ? 0.04f : 0.54f;
                 var box = Ui.Rect(root, side == 0 ? "PlayerHud" : "EnemyHud").Place(new Vector2(x0, 0.12f), new Vector2(x0 + 0.42f, 0.27f));
-                _name = Ui.Label(box, "", 34, TextAnchor.UpperCenter, Palette.Paper);
+                _name = Ui.Label(box, "", 38, TextAnchor.UpperCenter, Palette.Paper, heading: true);
                 _name.rectTransform.Place(new Vector2(0, 1), Vector2.one, new Vector2(0, -50), Vector2.zero);
                 _name.Outlined();
                 _hp = Ui.Bar(box, "Hp", Palette.Hex("#D9402B"), "hp");

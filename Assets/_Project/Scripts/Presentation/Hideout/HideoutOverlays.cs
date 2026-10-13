@@ -21,40 +21,51 @@ namespace TrashCats.Presentation.Hideout
         public HudView(GameSession session, RectTransform root, Action onDebug, Action onSettings = null)
         {
             _session = session;
-            Ui.Card(root, "HudBack", CardStyle.Tin).rectTransform.Fill();
-            _resources = Ui.Label(root, "", 40, TextAnchor.MiddleLeft, Palette.Paper);
-            _resources.rectTransform.Fill(30);
-            // with the skin: fish-bone and bolt icons in front of the numbers
-            var food = Ui.Icon(root, "food");
-            var junk = Ui.Icon(root, "junk");
-            if (food != null && junk != null)
+            var food = Ui.Skin?.Icon("food");
+            var junk = Ui.Skin?.Icon("junk");
+            _withIcons = food != null && junk != null;
+            if (!_withIcons)
             {
-                _withIcons = true;
-                food.rectTransform.Place(new Vector2(0, 0), new Vector2(0, 1), new Vector2(28, 14), new Vector2(110, -14));
-                junk.rectTransform.Place(new Vector2(0, 0), new Vector2(0, 1), new Vector2(300, 14), new Vector2(370, -14));
-                _resources.rectTransform.Fill();
-                _resources.rectTransform.offsetMin = new Vector2(120, 0);
-                _junk = Ui.Label(root, "", 44, TextAnchor.MiddleLeft, Palette.Paper);
-                _junk.rectTransform.Place(Vector2.zero, Vector2.one, new Vector2(382, 0), Vector2.zero);
-                _resources.fontSize = 44;
+                Ui.Card(root, "HudBack", CardStyle.Tin).rectTransform.Fill();
+                _resources = Ui.Label(root, "", 40, TextAnchor.MiddleLeft, Palette.Paper);
+                _resources.rectTransform.Fill(30);
+            }
+            else
+            {
+                // the concept's top bar: a dark rounded pill floating over the scene, big icons breaking its edge
+                var pill = Ui.Card(root, "HudPill", CardStyle.Tin);
+                pill.rectTransform.Place(new Vector2(0.03f, 0.08f), new Vector2(0.72f, 0.92f));
+                pill.pixelsPerUnitMultiplier = 2.6f;
+                _resources = Group(pill.rectTransform, 0f, "food");
+                _junk = Group(pill.rectTransform, 0.5f, "junk");
             }
 
             if (onSettings != null)
             {
-                // gear on a small square button, left of the debug button
                 var settings = Ui.Button(root, "Hud_Settings", "", Palette.Secondary, onSettings);
-                settings.Rect.Place(new Vector2(1, 0), new Vector2(1, 1), new Vector2(-260, 12), new Vector2(-170, -12));
+                settings.Rect.Place(new Vector2(0.75f, 0.12f), new Vector2(0.86f, 0.88f));
                 var gear = Ui.Icon(settings.Rect, "settings");
-                gear?.rectTransform.Place(new Vector2(0.15f, 0.15f), new Vector2(0.85f, 0.85f));
+                gear?.rectTransform.Place(new Vector2(0.18f, 0.18f), new Vector2(0.82f, 0.82f));
             }
 
             if (onDebug != null)
             {
-                var debug = Ui.Button(root, "Debug", "DBG", Palette.Disabled, onDebug, 28);
-                debug.Rect.Place(new Vector2(1, 0), new Vector2(1, 1), new Vector2(-150, 15), new Vector2(-20, -15));
+                var debug = Ui.Button(root, "Debug", "DBG", Palette.Disabled, onDebug, 26);
+                debug.Rect.Place(new Vector2(0.87f, 0.12f), new Vector2(0.98f, 0.88f));
             }
 
             Refresh();
+        }
+
+        /// <summary>Icon overlapping the pill on the left of its half, then the number.</summary>
+        private static TMP_Text Group(RectTransform pill, float x0, string icon)
+        {
+            var picture = Ui.Icon(pill, icon);
+            picture.rectTransform.Place(new Vector2(x0, -0.25f), new Vector2(x0, 1.25f), new Vector2(-6, 0), new Vector2(120, 0));
+            var label = Ui.Label(pill, "", 52, TextAnchor.MiddleLeft, Palette.Paper, heading: true);
+            label.rectTransform.Place(new Vector2(x0, 0), new Vector2(x0 + 0.5f, 1), new Vector2(124, 0), new Vector2(-8, 0));
+            label.Outlined();
+            return label;
         }
 
         public void Refresh()
@@ -77,7 +88,7 @@ namespace TrashCats.Presentation.Hideout
         public ToastView(RectTransform parent)
         {
             _text = Ui.Label(parent, "", 34, TextAnchor.MiddleCenter, Palette.Paper);
-            _text.rectTransform.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(40, -90), new Vector2(-40, -20));
+            _text.rectTransform.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(40, -210), new Vector2(-40, -140));
             _text.Outlined();
             _text.color = new Color(1, 1, 1, 0);
         }

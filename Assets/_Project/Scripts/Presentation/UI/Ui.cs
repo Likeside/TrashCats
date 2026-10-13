@@ -104,12 +104,15 @@ namespace TrashCats.Presentation.UI
             label.text = text;
             label.fontSize = size;
             label.Align(align);
-            label.color = color;
+            // comic lettering: white text with an ink outline everywhere (dark text only without a skin)
+            label.color = Skin != null && color == Palette.Ink ? Palette.Paper : color;
             label.raycastTarget = false;
             label.richText = true;
             label.textWrappingMode = TextWrappingModes.Normal;
             label.overflowMode = TextOverflowModes.Overflow;
             rt.Fill();
+            if (Skin != null)
+                label.Outlined();
             return label;
         }
 
@@ -133,7 +136,10 @@ namespace TrashCats.Presentation.UI
         /// <summary>Ink outline for text drawn straight over pictures.</summary>
         public static TMP_Text Outlined(this TMP_Text label)
         {
-            var material = label.font == Skin?.headingFont ? Skin?.headingOutline : label.font == Skin?.bodyFont ? Skin?.bodyOutline : null;
+            var bold = label.fontSize >= 32f;
+            var material = label.font == Skin?.headingFont ? (bold ? Skin.headingOutlineBold : null) ?? Skin.headingOutline
+                : label.font == Skin?.bodyFont ? (bold ? Skin.bodyOutlineBold : null) ?? Skin.bodyOutline
+                : null;
             if (material != null)
                 label.fontSharedMaterial = material;
             else
@@ -345,7 +351,7 @@ namespace TrashCats.Presentation.UI
 
             Image.color = sprite == skin.button ? color : new Color(1f, 1f, 1f, color.a);
             // readable text on any fill: ink on light colours, paper on dark ones
-            Text.color = color.r * 0.299f + color.g * 0.587f + color.b * 0.114f > 0.5f ? Palette.Ink : Palette.Paper;
+            Text.color = Palette.Paper;
         }
 
         private static bool Same(Color a, Color b) => Mathf.Abs(a.r - b.r) + Mathf.Abs(a.g - b.g) + Mathf.Abs(a.b - b.b) < 0.02f;
