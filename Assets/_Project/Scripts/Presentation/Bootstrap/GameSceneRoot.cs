@@ -37,6 +37,7 @@ namespace TrashCats.Presentation.Bootstrap
         private MessageQueue _messages;
         private TutorialService _tutorial;
         private Audio.GameAudio _audio;
+        private ConfirmModal _confirm;
         private System.Action _onButtonClicked;
         private Tutorial.TutorialOverlay _tutorialOverlay;
 
@@ -109,6 +110,14 @@ namespace TrashCats.Presentation.Bootstrap
             // overlays (created in the overlay layer, shown above every screen and the nav)
             _details = new CatDetailsSheet(session, overlayRoot, _overlays, ShowResult);
             _upgrades = new UpgradePanel(session, overlayRoot, _overlays, ShowResult);
+            _audio = new Audio.GameAudio(audioLibrary, transform)
+            {
+                SfxVolume = _services.Settings.SfxVolume,
+                MusicVolume = _services.Settings.MusicVolume,
+            };
+            _confirm = new ConfirmModal(overlayRoot, _overlays);
+            var settings = new SettingsPanel(overlayRoot, _overlays, _services.Settings, _audio,
+                () => _services.SaveScheduler.MarkDirty(SaveUrgency.Deferred), _confirm, bootstrap.ResetProgress);
             var debugTools = Debug.isDebugBuild || Application.isEditor;
             var debugPanel = debugTools ? new DebugPanel(overlayRoot, _overlays, session, _services.Debug, bootstrap.ResetProgress) : null;
             var results = new ResultsModal(session, overlayRoot, _overlays);
@@ -116,7 +125,7 @@ namespace TrashCats.Presentation.Bootstrap
             _messages = new MessageQueue(overlayRoot, _overlays);
 
             // screens
-            _hideout = new HideoutScreen(_services, screens, overlayRoot, _overlays, _details, _upgrades, debugPanel, ShowResult, factory);
+            _hideout = new HideoutScreen(_services, screens, overlayRoot, _overlays, _details, _upgrades, debugPanel, ShowResult, factory, settings.Open);
             _map = new MapScreen(session, screens, OpenPrep, factory.GetSprite("bg_map"), factory.GetSprite);
             _prep = new BattlePrepScreen(session, screens, () => _router.Show(ScreenId.Map), _ => StartCombat(), _details.Open);
             _combat = new CombatScreen(session, screens, transform, factory, results);
@@ -134,7 +143,7 @@ namespace TrashCats.Presentation.Bootstrap
             _router.Register(ScreenId.Map, _map.Root, withNav: true, () => _map.Refresh());
             _router.Register(ScreenId.BattlePrep, _prep.Root, withNav: false);
             _router.Register(ScreenId.Combat, _combat.Root, withNav: false);
-            foreach (var overlay in new[] { "CatDetails", "UpgradePanel", "Results", "OfflineSummary", "Message", "DebugPanel", "ActivitySheet" })
+            foreach (var overlay in new[] { "CatDetails", "UpgradePanel", "Results", "OfflineSummary", "Message", "DebugPanel", "ActivitySheet", "SettingsPanel", "Confirm" })
             {
                 var t = overlayRoot.Find(overlay);
                 if (t != null) t.SetAsLastSibling();
@@ -150,11 +159,6 @@ namespace TrashCats.Presentation.Bootstrap
             };
 
             // sound: clicks, opened sheets/modals, music per screen (CONTENT_SPEC §10)
-            _audio = new Audio.GameAudio(audioLibrary, transform)
-            {
-                SfxVolume = _services.Settings.SfxVolume,
-                MusicVolume = _services.Settings.MusicVolume,
-            };
             _onButtonClicked = () => _audio.Play("ui_tap");
             Ui.ButtonClicked += _onButtonClicked;
             _overlays.Pushed += root => _audio.Play(root.name == "Message" ? "ui_popup" : "ui_open");
@@ -271,10 +275,13 @@ namespace TrashCats.Presentation.Bootstrap
             _hideout.Tick();
             _combat.Tick(Time.deltaTime);
             var keyboard = Keyboard.current;
+            // Android "Back" arrives as Escape: close the top sheet/modal, else step back a screen, else offer to quit
             if (keyboard != null && keyboard.escapeKey.wasPressedThisFrame && !_overlays.Back())
             {
                 if (_router.Current == ScreenId.BattlePrep) _router.Show(ScreenId.Map);
                 else if (_router.Current == ScreenId.Map) _router.Show(ScreenId.Hideout);
+                else if (_router.Current == ScreenId.Hideout)
+                    _confirm.Ask(Loc.T("quit.title"), Loc.T("quit.body"), Loc.T("quit.yes"), Application.Quit);
             }
         }
 

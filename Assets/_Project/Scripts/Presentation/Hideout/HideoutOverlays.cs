@@ -18,7 +18,7 @@ namespace TrashCats.Presentation.Hideout
         private readonly TMP_Text _junk;
         private readonly bool _withIcons;
 
-        public HudView(GameSession session, RectTransform root, Action onDebug)
+        public HudView(GameSession session, RectTransform root, Action onDebug, Action onSettings = null)
         {
             _session = session;
             Ui.Card(root, "HudBack", CardStyle.Tin).rectTransform.Fill();
@@ -37,6 +37,15 @@ namespace TrashCats.Presentation.Hideout
                 _junk = Ui.Label(root, "", 44, TextAnchor.MiddleLeft, Palette.Paper);
                 _junk.rectTransform.Place(Vector2.zero, Vector2.one, new Vector2(382, 0), Vector2.zero);
                 _resources.fontSize = 44;
+            }
+
+            if (onSettings != null)
+            {
+                // gear on a small square button, left of the debug button
+                var settings = Ui.Button(root, "Hud_Settings", "", Palette.Secondary, onSettings);
+                settings.Rect.Place(new Vector2(1, 0), new Vector2(1, 1), new Vector2(-260, 12), new Vector2(-170, -12));
+                var gear = Ui.Icon(settings.Rect, "settings");
+                gear?.rectTransform.Place(new Vector2(0.15f, 0.15f), new Vector2(0.85f, 0.85f));
             }
 
             if (onDebug != null)

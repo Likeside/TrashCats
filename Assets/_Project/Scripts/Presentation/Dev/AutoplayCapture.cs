@@ -132,6 +132,13 @@ namespace TrashCats.Presentation.Dev
             Click("Cat_cat_ryzhy");
             Click("Sheet_Details");
             yield return Shot("11_cat_details");
+            Click("Details_Close", required: false);
+            GameObject.Find("CatDetails")?.SetActive(false);
+            yield return new WaitForSeconds(0.3f);
+            Click("Hud_Settings");
+            yield return Shot("12_settings");
+            Click("Settings_Reset");
+            yield return Shot("13_reset_confirm");
             yield return new WaitForSeconds(0.3f);
             Application.Quit();
         }
