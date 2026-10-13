@@ -4,6 +4,7 @@
     "references": [
         "TrashCats.Presentation",
         "TrashCats.App",
+        "TrashCats.Domain",
         "Unity.TextMeshPro",
         "UnityEngine.UI"
     ],

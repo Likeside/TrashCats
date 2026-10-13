@@ -1,0 +1,16 @@
+﻿[
+  {"path":"HideoutLayout/Background","sprite":"Assets/_Project/Art/Environment/bg_hideout.png","active":true,"foot":[0.5,0],"min":[0,0],"max":[1,1],"height":1,"flip":false,"order":-10000},
+  {"path":"HideoutLayout/Props/Dumpster","sprite":"Assets/_Project/Art/Environment/prop_upg_dumpster.png","active":true,"foot":[0.91,0.425],"min":[0.79,0.425],"max":[1.03,0.527],"height":0.102,"flip":false,"order":-4250},
+  {"path":"HideoutLayout/Props/Can","sprite":"Assets/_Project/Art/Environment/prop_upg_can.png","active":true,"foot":[0.765,0.491],"min":[0.6975,0.491],"max":[0.8325,0.654],"height":0.163,"flip":false,"order":-4240},
+  {"path":"HideoutLayout/Props/Rope","sprite":"Assets/_Project/Art/Environment/prop_upg_mouse.png","active":true,"foot":[0.3825,0.5206],"min":[0.35,0.5206],"max":[0.415,0.6264],"height":0.1059,"flip":false,"order":-4970},
+  {"path":"HideoutLayout/Props/BenchMat","sprite":"Assets/_Project/Art/Environment/prop_bench.png","active":true,"foot":[0.22,0.19],"min":[0.01,0.19],"max":[0.43,0.3863],"height":0.1963,"flip":true,"order":-3100},
+  {"path":"HideoutLayout/Props/Bed","sprite":"Assets/_Project/Art/Environment/prop_upg_boxes.png","active":true,"foot":[0.81,-0.0198],"min":[0.55,-0.0198],"max":[1.07,0.2858],"height":0.3055,"flip":false,"order":200},
+  {"path":"HideoutLayout/Props/Bracket","sprite":"Assets/_Project/Art/Environment/prop_bracket.png","active":true,"foot":[0.718,0.648],"min":[0.658,0.648],"max":[0.778,0.7103],"height":0.0623,"flip":false,"order":-4241},
+  {"path":"HideoutLayout/Cats_Idle/ryzhy_Idle","sprite":"Assets/_Project/Art/Characters/Ryzhy/HideIdle/ryzhy_hideidle_00.png","active":true,"foot":[0.62,0.275],"min":[0.4565,0.275],"max":[0.7835,0.5511],"height":0.2761,"flip":false,"order":-2740},
+  {"path":"HideoutLayout/Cats_Idle/shnyr_Idle","sprite":"Assets/_Project/Art/Characters/shnyr/HideIdle/shnyr_hideidle_00.png","active":true,"foot":[0.355,0.275],"min":[0.1773,0.275],"max":[0.5327,0.5471],"height":0.2721,"flip":true,"order":-2740},
+  {"path":"HideoutLayout/Cats_Idle/ponchik_Idle","sprite":"Assets/_Project/Art/Characters/ponchik/HideIdle/ponchik_hideidle_00.png","active":true,"foot":[0.48,0.3],"min":[0.2946,0.3],"max":[0.6654,0.5876],"height":0.2876,"flip":false,"order":-2990},
+  {"path":"HideoutLayout/Cats_Stations/ryzhy_Punch","sprite":"Assets/_Project/Art/Characters/Ryzhy/CanPunch/ryzhy_canpunch_00.png","active":true,"foot":[0.525,0.371],"min":[0.203,0.371],"max":[0.847,0.64],"height":0.269,"flip":false,"order":-3700},
+  {"path":"HideoutLayout/Cats_Stations/ryzhy_Sleep","sprite":"Assets/_Project/Art/Characters/Ryzhy/Hideout/Ryzhy_hideout_01.png","active":true,"foot":[0.8932,0.2064],"min":[0.7711,0.2064],"max":[1.0153,0.3141],"height":0.1076,"flip":false,"order":220},
+  {"path":"HideoutLayout/Cats_Stations/shnyr_Rope","sprite":"Assets/_Project/Art/Characters/shnyr/Rope/shnyr_rope_00.png","active":true,"foot":[0.49,0.03],"min":[0.2995,0.03],"max":[0.6805,0.433],"height":0.403,"flip":false,"order":-290},
+  {"path":"HideoutLayout/Cats_Stations/ponchik_Bench","sprite":"Assets/_Project/Art/Characters/ponchik/Bench/bench_00.png","active":true,"foot":[0.2498,0.2104],"min":[-0.0116,0.2104],"max":[0.5112,0.5037],"height":0.2933,"flip":true,"order":-1880}
+]
