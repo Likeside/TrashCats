@@ -54,8 +54,10 @@ namespace TrashCats.Editor
                 EditorUtility.SetDirty(skin.headingFont);
             }
 
-            skin.headingOutline = OutlineMaterial(skin.headingFont, "RussoOne Outline", 0.28f);
-            skin.bodyOutline = OutlineMaterial(skin.bodyFont, "BalsamiqSans Outline", 0.22f);
+            skin.headingOutline = OutlineMaterial(skin.headingFont, "RussoOne Outline", 0.24f);
+            skin.bodyOutline = OutlineMaterial(skin.bodyFont, "BalsamiqSans Outline", 0.24f);
+            skin.headingOutlineBold = OutlineMaterial(skin.headingFont, "RussoOne Outline Bold", 0.32f);
+            skin.bodyOutlineBold = OutlineMaterial(skin.bodyFont, "BalsamiqSans Outline Bold", 0.32f);
 
             skin.button = Sprite("button_a_white") ?? Sprite("button_white");
             skin.buttonPrimary = Sprite("button_a_yellow") ?? Sprite("button_yellow");
@@ -119,7 +121,7 @@ namespace TrashCats.Editor
             if (font == null)
                 return null;
 
-            var asset = TMP_FontAsset.CreateFontAsset(font, 90, 9, GlyphRenderMode.SDFAA, 1024, 1024, AtlasPopulationMode.Dynamic, true);
+            var asset = TMP_FontAsset.CreateFontAsset(font, 90, 20, GlyphRenderMode.SDFAA, 2048, 2048, AtlasPopulationMode.Dynamic, true);
             asset.name = fileName + " SDF";
             asset.TryAddCharacters(Characters, out var missing);
             if (!string.IsNullOrEmpty(missing))
@@ -150,13 +152,13 @@ namespace TrashCats.Editor
             material.EnableKeyword(ShaderUtilities.Keyword_Outline);
             material.SetFloat(ShaderUtilities.ID_OutlineWidth, width);
             material.SetColor(ShaderUtilities.ID_OutlineColor, Ink);
-            material.SetFloat(ShaderUtilities.ID_FaceDilate, width * 0.6f);
+            material.SetFloat(ShaderUtilities.ID_FaceDilate, width * 0.9f);
             // comic drop shadow
             material.EnableKeyword(ShaderUtilities.Keyword_Underlay);
             material.SetColor(ShaderUtilities.ID_UnderlayColor, new Color(0f, 0f, 0f, 0.8f));
             material.SetFloat(ShaderUtilities.ID_UnderlayOffsetX, 0.6f);
             material.SetFloat(ShaderUtilities.ID_UnderlayOffsetY, -0.6f);
-            material.SetFloat(ShaderUtilities.ID_UnderlayDilate, width);
+            material.SetFloat(ShaderUtilities.ID_UnderlayDilate, width * 0.9f);
             EditorUtility.SetDirty(material);
             return material;
         }

@@ -129,9 +129,9 @@ TextureImporter:
       name: admiral_attack_00_0
       rect:
         serializedVersion: 2
-        x: 184
-        y: 18
-        width: 260
+        x: 295
+        y: 15
+        width: 263
         height: 371
       alignment: 0
       pivot: {x: 0, y: 0}

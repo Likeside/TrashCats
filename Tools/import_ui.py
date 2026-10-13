@@ -8,7 +8,7 @@ Also writes button_white.png (the yellow button turned neutral so it can be tint
 in pixels: left, bottom, right, top) for the Unity skin builder. Needs numpy, scipy, Pillow.
 Usage: Tools/import_ui.py
 """
-import json, os, sys
+import glob, json, os, shutil, sys
 import numpy as np
 from PIL import Image, ImageFilter
 from scipy import ndimage
@@ -32,6 +32,7 @@ SHEETS = {
     "ui_a_buttons": ["button_a_yellow", "button_a_blue", "button_a_grey"],
     "ui_a_parts": ["hud_a"],
     "ui_a_sheet": ["panel_a"],
+    "cat_busts": ["bust_ryzhy", "bust_shnyr", "bust_ponchik"],
     "fx_combat": ["fx_star", "fx_dust", "fx_scratch", "fx_sparkle"],
     "ui_map_parts": ["map_ring", None, None, None],
     "ui_a_icons": ["icon_food", "icon_junk", "icon_hp", "icon_paw", "icon_home", "icon_map", "icon_energy", "icon_satiety"],
@@ -44,7 +45,7 @@ CONCEPT = "Docs/ArtDirection/Concepts/round1/blind/hideout_A.png"
 PORTRAITS = {"Ryzhy": (44, 1080, 323, 1250), "shnyr": (380, 1080, 641, 1238), "ponchik": (699, 1080, 983, 1238)}
 
 # how far apart parts of one item may be (px); small where items sit close together
-MERGE = {"ui_icons_a": 18, "ui_icons_b": 18, "ui_bars": 0, "fx_combat": 14}
+MERGE = {"cat_busts": 8, "ui_icons_a": 18, "ui_icons_b": 18, "ui_bars": 0, "fx_combat": 14}
 
 # items cut by a fixed box (left, top, right, bottom) because they consist of scattered parts
 MANUAL = {"fx_sparkle": ("fx_combat", (1230, 330, 1490, 650))}
@@ -203,11 +204,15 @@ def main():
                 neutral(pad).save(f"{OUT}/button_a_white.png")
     drawn()
     enemy_portraits()
-    concept = Image.open(CONCEPT).convert("RGBA")
-    for key, box in PORTRAITS.items():
+    # card portraits: generated busts with transparent background (ears may stick out of the card)
+    for key in PORTRAITS:
+        bust = f"{OUT}/bust_{key.lower()}.png"
         folder = f"Assets/_Project/Art/Characters/{key}/Portrait"
-        os.makedirs(folder, exist_ok=True)
-        concept.crop(box).save(f"{folder}/{key.lower()}_portrait.png")
+        if os.path.exists(bust):
+            os.makedirs(folder, exist_ok=True)
+            for old in glob.glob(f"{folder}/*_portrait.png*"):
+                os.remove(old)
+            shutil.move(bust, f"{folder}/{key.lower()}_bust.png")
     with open(f"{OUT}/slices.json", "w") as f:
         json.dump({k: list(v) for k, v in SLICES.items()}, f, indent=1)
 

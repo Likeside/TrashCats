@@ -1,0 +1,20 @@
+[
+ {
+  "name": "bg_hideout",
+  "size": "1024x1536",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v2/bg_hideout.png",
+   "Docs/ArtDirection/Concepts/round1/blind/hideout_A.png"
+  ],
+  "prompt": "Use EXACTLY the comic art style of the references: bold black ink outlines, flat cel shading with one shadow step, subtle halftone dots, hand-inked hatching, warm lamp light against a dusky purple sky. NOT pixel art, NOT painterly, NOT 3D. NO characters, NO animals, NO text. The same back alley behind a restaurant as the first reference but framed CLOSER so objects placed on it look big: the brick back wall fills the upper half; the warmly lit wooden back door with a lamp stands in the centre-right of the wall (its threshold at about 45% from the bottom); a thick horizontal rusty water pipe runs along the wall on the LEFT half at about 62% height (a tin can will hang from it); a dark narrow gap to the street at the far right edge; the lower half is a wide, flat, EMPTY cobblestone ground in slight perspective with only a drain grate near the bottom; NO dumpster, NO can, NO wheel, NO boxes, NO trash on the ground."
+ },
+ {
+  "name": "props",
+  "size": "1536x1024",
+  "refs": [
+   "Docs/ArtDirection/Concepts/round1/blind/hideout_A.png",
+   "Docs/ArtDirection/Generated/raw_v2/props.png"
+  ],
+  "prompt": "Use EXACTLY the comic art style of the references: bold black ink outlines, flat cel shading with one shadow step, subtle halftone dots, hand-inked hatching, warm lamp light against a dusky purple sky. NOT pixel art, NOT painterly, NOT 3D. Game props sheet: exactly 4 separate objects in one row, well spaced, each fully visible: 1) a big rusty dark green dumpster in 3/4 front view with the lid propped open and junk sticking out, a little trash at its base, 2) a dented tin can hanging on a short rope; the top end of the rope is cut straight (no bracket, no pipe), 3) a wooden hamster exercise wheel standing on an A-frame wooden stand, seen at a 3/4 angle like in the first reference so a cat could run inside it; the wheel is a wide drum made of wooden slats and is COMPLETELY EMPTY inside: NO spokes, NO axle bars crossing the inside, 4) a stack of cardboard boxes with an old blanket on top (cat bed). No characters, no text.\nSolid flat pure green (#00FF00) chroma-key background everywhere, no shadows on the background, no scenery, no borders."
+ }
+]

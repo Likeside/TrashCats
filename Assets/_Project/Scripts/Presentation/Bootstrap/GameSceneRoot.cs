@@ -43,6 +43,9 @@ namespace TrashCats.Presentation.Bootstrap
 
         /// <summary>Widget the tutorial points at right now (dev autoplay).</summary>
         public string TutorialTargetName => _tutorialOverlay?.TargetName;
+
+        /// <summary>Dev autoplay: ends the guided tutorial so screenshots show the scene.</summary>
+        public void DevSkipTutorial() => _tutorial?.Skip();
         private OfflineSummaryModal _offline;
         private GameObject _background;
         private readonly List<System.IDisposable> _subscriptions = new List<System.IDisposable>();

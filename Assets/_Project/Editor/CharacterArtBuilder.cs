@@ -68,6 +68,7 @@ namespace TrashCats.Editor
                 copy.idle = baseArt.idle; copy.attack = baseArt.attack; copy.heavyAttack = baseArt.heavyAttack;
                 copy.hit = baseArt.hit; copy.knockOut = baseArt.knockOut; copy.tail = baseArt.tail; copy.portrait = baseArt.portrait;
                 copy.hideoutPoses = baseArt.hideoutPoses;
+                copy.run = baseArt.run; copy.canPunch = baseArt.canPunch;
                 copy.viewKey = key;
                 copy.tint = tint;
                 copy.battleScale = scale;
@@ -107,6 +108,8 @@ namespace TrashCats.Editor
                 hit = Clip(dir, "Hit", 12f, false),
                 knockOut = Clip(dir, "KO", 8f, false),
                 tail = Clip(dir, "Tail", 5f, true),
+                run = Clip(dir, "Run", 14f, true),
+                canPunch = Clip(dir, "CanPunch", 10f, true),
                 hideoutPoses = Sprites(dir + "/Hideout"),
             };
             art.attack ??= new FlipbookClip();
@@ -114,9 +117,12 @@ namespace TrashCats.Editor
             art.hit ??= new FlipbookClip();
             art.knockOut ??= new FlipbookClip();
             art.tail ??= new FlipbookClip();
+            art.run ??= new FlipbookClip();
+            art.canPunch ??= new FlipbookClip();
             if (art.idle == null)
                 return null;
-            art.idle.breathe = art.idle.frames.Length <= 2 ? 0.012f : 0.008f;
+            art.idle.breathe = key == "wheel" ? 0f : art.idle.frames.Length <= 2 ? 0.012f : 0.008f;
+            if (key == "wheel") art.idle.fps = 12f;
             // card portrait cut from the concept (Tools/import_ui.py), else the first stance frame
             art.portrait = Sprites(dir + "/Portrait").FirstOrDefault() ?? art.idle.frames.FirstOrDefault();
 

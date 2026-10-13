@@ -33,8 +33,9 @@ namespace TrashCats.Presentation.Hideout
             var root = Ui.Rect(parent, "HideoutScreen").Fill();
             Root = root.gameObject;
 
+            // the scene runs up under the floating top bar (concept)
+            var sceneRect = Ui.Rect(root, "Scene").Place(Vector2.zero, Vector2.one, new Vector2(0, NavHeight + PanelHeight), Vector2.zero);
             var hudRect = Ui.Rect(root, "Hud").Place(new Vector2(0, 1), Vector2.one, new Vector2(0, -HudHeight), Vector2.zero);
-            var sceneRect = Ui.Rect(root, "Scene").Place(Vector2.zero, Vector2.one, new Vector2(0, NavHeight + PanelHeight), new Vector2(0, -HudHeight));
             var panelRect = Ui.Rect(root, "CatPanel").Place(Vector2.zero, new Vector2(1, 0), new Vector2(0, NavHeight), new Vector2(0, NavHeight + PanelHeight));
 
             _sheet = new ActivitySheet(session, overlayRoot, overlays, showResult, details.Open);

@@ -62,7 +62,7 @@ namespace TrashCats.Presentation.Hideout
             private readonly GameObject _locked;
             private readonly Image _header;
             private readonly Image _portrait;
-            private readonly AspectRatioFitter _portraitFit;
+            private readonly Image _backdrop;
             private readonly TMP_Text _name;
             private TMP_Text _portraitName;
             private readonly TMP_Text _status;
@@ -101,12 +101,15 @@ namespace TrashCats.Presentation.Hideout
                 var border = Ui.Panel(content, "PortraitBorder", Palette.Ink);
                 border.rectTransform.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(0, -170), Vector2.zero);
                 var window = Ui.Rect(border.transform, "Window").Fill(4);
-                window.gameObject.AddComponent<RectMask2D>();
-                _portrait = Ui.Panel(window, "Portrait", Color.white);
-                _portraitFit = _portrait.gameObject.AddComponent<AspectRatioFitter>();
-                _portraitFit.aspectMode = AspectRatioFitter.AspectMode.EnvelopeParent;
-                _portrait.rectTransform.pivot = new Vector2(0.5f, 0.8f); // crop the chest, keep the ears
-                _portraitName = Ui.Label(window, "", 34, TextAnchor.LowerCenter, Palette.Paper, heading: true);
+                _backdrop = Ui.Panel(window, "Backdrop", Palette.PanelDark);
+                _backdrop.rectTransform.Fill();
+                // the bust is clipped at the bottom and sides only: the ears stick out over the card, like in the concept
+                var clip = Ui.Rect(border.transform, "BustClip").Place(Vector2.zero, Vector2.one, new Vector2(4, 4), new Vector2(-4, 110));
+                clip.gameObject.AddComponent<RectMask2D>();
+                _portrait = Ui.Panel(clip, "Portrait", Color.white);
+                _portrait.preserveAspect = true;
+                _portrait.rectTransform.Place(new Vector2(0.04f, 0f), new Vector2(0.96f, 1f), Vector2.zero, new Vector2(0, -40));
+                _portraitName = Ui.Label(border.transform, "", 34, TextAnchor.LowerCenter, Palette.Paper, heading: true);
                 _portraitName.rectTransform.Fill(4);
                 _portraitName.Outlined();
 
@@ -144,11 +147,11 @@ namespace TrashCats.Presentation.Hideout
                 _header.color = color;
                 var portrait = session.Config.GetCat(cat.Id).ViewKey is string key ? _owner._art?.Portrait(key) : null;
                 _portrait.transform.parent.parent.gameObject.SetActive(portrait != null);
+                _backdrop.color = CatColors.Backdrop(cat.Id);
                 _header.gameObject.SetActive(portrait == null);
                 if (portrait != null)
                 {
                     _portrait.sprite = portrait;
-                    _portraitFit.aspectRatio = portrait.rect.width / portrait.rect.height;
                     _portraitName.text = Texts.CatName(cat.Id);
                 }
                 _name.color = CatColors.TextOn(color);

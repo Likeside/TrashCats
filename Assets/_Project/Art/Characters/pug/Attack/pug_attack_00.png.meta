@@ -129,10 +129,10 @@ TextureImporter:
       name: pug_attack_00_0
       rect:
         serializedVersion: 2
-        x: 221
-        y: 22
-        width: 246
-        height: 369
+        x: 348
+        y: 15
+        width: 251
+        height: 371
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

@@ -16,6 +16,8 @@ MonoBehaviour:
   bodyFont: {fileID: 11400000, guid: fd62fa2846998f811af0dd3bb1b917c3, type: 2}
   headingOutline: {fileID: 2100000, guid: 3751006a33d8972a1b358794e49b151b, type: 2}
   bodyOutline: {fileID: 2100000, guid: eecab7faa0f0f26ee815e34abf7cd07c, type: 2}
+  headingOutlineBold: {fileID: 2100000, guid: cd96b826d774ab038816bbd2a1f4e8ec, type: 2}
+  bodyOutlineBold: {fileID: 2100000, guid: 61b4c9b04d6dd48c29e7c2c51c2c4704, type: 2}
   button: {fileID: 21300000, guid: a5ee207676de86a07ad947a4b751664a, type: 3}
   buttonPrimary: {fileID: 21300000, guid: 39f4664dda388299a8caf5777d2a603e, type: 3}
   buttonSecondary: {fileID: 21300000, guid: bd3ee10e644ab6f7da07a1a75044d755, type: 3}
