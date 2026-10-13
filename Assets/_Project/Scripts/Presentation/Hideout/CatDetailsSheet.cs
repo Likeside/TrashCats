@@ -96,7 +96,7 @@ namespace TrashCats.Presentation.Hideout
                 row.Text.Align(TextAnchor.MiddleLeft);
                 row.Rect.Place(new Vector2(0, 1f - (i + 1f) / skills.Count), new Vector2(1, 1f - (float)i / skills.Count), new Vector2(0, 5), new Vector2(0, -5));
                 row.Interactable = unlocked;
-                row.Text.rectTransform.Fill(22);
+                row.Text.rectTransform.Place(Vector2.zero, Vector2.one, new Vector2(40, 12), new Vector2(-40, -12));
                 if (!unlocked && Ui.Icon(row.Rect, "lock") is Image lockIcon)
                 {
                     lockIcon.rectTransform.Place(new Vector2(1, 0.2f), new Vector2(1, 0.8f), new Vector2(-80, 0), new Vector2(-24, 0));

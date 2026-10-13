@@ -144,7 +144,7 @@ namespace TrashCats.Presentation.Hideout
             var title = Ui.Label(panel.transform, Loc.T("hideout_overlays.02"), 46, TextAnchor.UpperCenter, Palette.Ink);
             title.rectTransform.Place(Vector2.zero, Vector2.one, new Vector2(40, 40), new Vector2(-40, -100));
             _body = Ui.Label(panel.transform, "", 32, TextAnchor.UpperLeft, Palette.Ink);
-            _body.rectTransform.Place(Vector2.zero, Vector2.one, new Vector2(50, 160), new Vector2(-50, -120));
+            _body.rectTransform.Place(Vector2.zero, Vector2.one, new Vector2(60, 160), new Vector2(-60, -190));
 
             var ok = Ui.Button(panel.transform, "Ok", Loc.T("hideout_overlays.03"), Palette.Primary, () => _overlays.Close(_root));
             ok.Rect.Place(new Vector2(0.25f, 0), new Vector2(0.75f, 0), new Vector2(0, 40), new Vector2(0, 140));

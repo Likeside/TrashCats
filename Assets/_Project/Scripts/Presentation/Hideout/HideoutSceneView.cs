@@ -165,12 +165,7 @@ namespace TrashCats.Presentation.Hideout
                 if (activity.Kind == ActivityKind.Sleep || (activity.Kind == ActivityKind.Train && activity.TrainedAttribute == AttributeType.Toughness))
                     _propBase[activity.Kind == ActivityKind.Sleep ? ActivityKind.Sleep : ActivityKind.Train] = min.y;
 
-                var text = Ui.Label(box.transform, label, 26, scavenge ? TextAnchor.MiddleCenter : TextAnchor.UpperCenter, Palette.Paper);
-                // the caption sits just under the prop's base (in the street passage for the exit)
-                text.rectTransform.Place(new Vector2(-0.3f, 0), new Vector2(1.3f, 0), new Vector2(0, -34), new Vector2(0, 0));
-                if (scavenge)
-                    text.rectTransform.Fill();
-                text.Outlined();
+                var text = Plate(box.rectTransform, label, scavenge);
                 if (upgrade != null)
                 {
                     _upgradeLabels[upgrade.Value] = text;
@@ -182,6 +177,34 @@ namespace TrashCats.Presentation.Hideout
                     box.name = "Station_" + id;
                 }
             }
+        }
+
+        /// <summary>
+        /// Station caption on a small dark plate that hugs the text, under the prop's base (in the middle of the street
+        /// gap for the exit), so it does not float in the air.
+        /// </summary>
+        private static TMP_Text Plate(RectTransform box, string caption, bool centred)
+        {
+            var plate = Ui.Panel(box, "Caption", Ui.Skin?.barFrame != null ? Color.white : new Color(0, 0, 0, 0.55f));
+            plate.sprite = Ui.Skin?.barFrame;
+            plate.type = Image.Type.Sliced;
+            plate.pixelsPerUnitMultiplier = 3.2f;
+            var rt = plate.rectTransform;
+            rt.anchorMin = rt.anchorMax = new Vector2(0.5f, centred ? 0.5f : 0f);
+            rt.pivot = new Vector2(0.5f, centred ? 0.5f : 1f);
+            rt.anchoredPosition = new Vector2(0, centred ? 0 : -4);
+            var text = Ui.Label(plate.transform, caption, 26, TextAnchor.MiddleCenter, Palette.Paper);
+            text.textWrappingMode = TextWrappingModes.NoWrap;
+            text.rectTransform.Fill();
+            FitPlate(text);
+            return text;
+        }
+
+        /// <summary>Sizes a caption plate to its text plus padding.</summary>
+        private static void FitPlate(TMP_Text text)
+        {
+            var size = text.GetPreferredValues(text.text);
+            ((RectTransform)text.transform.parent).sizeDelta = new Vector2(size.x + 40f, size.y + 14f);
         }
 
         private (string Label, UpgradeId? Upgrade) StationInfo(ActivityDefinition activity)
@@ -226,8 +249,10 @@ namespace TrashCats.Presentation.Hideout
 
         private void RefreshUpgrade(UpgradeId id)
         {
-            if (_upgradeLabels.TryGetValue(id, out var text))
-                text.text = Loc.T("hideout_scene_view.02", Texts.UpgradeShort(id), _session.World.GetUpgradeLevel(id), (CanAfford(id) ? " (+)" : ""));
+            if (!_upgradeLabels.TryGetValue(id, out var text))
+                return;
+            text.text = Loc.T("hideout_scene_view.02", Texts.UpgradeShort(id), _session.World.GetUpgradeLevel(id), (CanAfford(id) ? " (+)" : ""));
+            FitPlate(text);
         }
 
         private bool CanAfford(UpgradeId id)
@@ -282,7 +307,8 @@ namespace TrashCats.Presentation.Hideout
 
             var progress = Ui.Bar(rt, "Progress", Palette.Progress);
             // under the name at the cat's feet: above the head it ran into the station captions
-            progress.Rect.Place(new Vector2(0.5f, 0f), new Vector2(0.5f, 0f), new Vector2(-90, -56), new Vector2(90, -34));
+            // a narrow cycle bar right above the busy cat's head
+            progress.Rect.Place(new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(-75, 4), new Vector2(75, 24));
             bubble.rectTransform.Place(Vector2.zero, Vector2.one, new Vector2(12, 26), new Vector2(-12, -10));
             if (Ui.Skin?.bubble == null) bubble.Outlined();
 

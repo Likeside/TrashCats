@@ -82,8 +82,9 @@ namespace TrashCats.Presentation.Hideout
                     // stands at arm's length: the fist tip (5% from the frame's edge) lands in the right quarter of the can
                     AttributeType.Strength => new CatSpot(new Vector2(0.48f, 0.29f) + shift, CatClip.Punch, faceLeft: true),
                     AttributeType.Agility => new CatSpot(new Vector2(0.24f, 0.31f) + shift, CatClip.Walk, faceLeft: true),
-                    // inside the wheel's drum (hole at x 0.19..0.66, bottom at 0.25 of the wheel sprite)
-                    _ => new CatSpot(new Vector2(0.75f, 0.415f), CatClip.Run, faceLeft: true, overProp: true),
+                    // on the lowest middle point of the drum's inner floor (x 0.48, y 0.2 of the wheel sprite);
+                    // run frames keep ~8% empty space under the feet, hence a little lower
+                    _ => new CatSpot(new Vector2(0.783f, 0.372f), CatClip.Run, faceLeft: true, overProp: true),
                 },
             };
         }

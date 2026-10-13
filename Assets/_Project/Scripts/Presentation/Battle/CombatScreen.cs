@@ -28,6 +28,7 @@ namespace TrashCats.Presentation.Battle
         private readonly TMP_Text _banner;
         private readonly RectTransform _bannerRoot;
         private readonly CanvasGroup _rage;
+        private readonly bool[] _knocked = new bool[2];
         private readonly CanvasGroup _bannerGroup;
         private readonly RectTransform[] _queues = new RectTransform[2];
         private readonly List<(string Id, RoundPicture Picture)>[] _queuePictures = { new List<(string, RoundPicture)>(), new List<(string, RoundPicture)>() };
@@ -230,6 +231,7 @@ namespace TrashCats.Presentation.Battle
                     }
 
                     _views[side] = view;
+                    _knocked[side] = false;
                     if (animate && entered.Side == Side.Player) Sound("cmb_hiss", 0.6f);
                     _huds[side].Enter(NameOf(entered.FighterId, entered.Side), entered.Hp, entered.MaxHp, entered.Grit, entered.MaxGrit);
                     RefreshQueues();
@@ -288,6 +290,7 @@ namespace TrashCats.Presentation.Battle
                 case FighterKnockedOut ko:
                 {
                     var side = (int)ko.Side;
+                    _knocked[side] = true;
                     if (animate)
                     {
                         _views[side]?.PlayKnockOut(side == 0, _speedFactor);
@@ -303,8 +306,9 @@ namespace TrashCats.Presentation.Battle
                     Sound(ended.Outcome == BattleOutcome.Victory ? "cmb_win" : "cmb_lose");
                     _rage.DOKill();
                     _rage.DOFade(0f, 0.3f).SetLink(_rage.gameObject);
-                    foreach (var view in _views)
-                        view?.PlayIdle();
+                    // the winner relaxes; a knocked-out fighter stays down
+                    for (var side = 0; side < 2; side++)
+                        if (!_knocked[side]) _views[side]?.PlayIdle();
                     _endDelay = animate ? 1.2f : 0.01f;
                     break;
             }

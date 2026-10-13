@@ -107,6 +107,7 @@ namespace TrashCats.Presentation.Battle
                 var row = Row(_catList, "PrepCat_" + cat.Id, i, Math.Max(3, cats.Count), color, label, () => Toggle(id));
                 row.Interactable = !tired || position >= 0;
 
+                row.Text.rectTransform.offsetMax = new Vector2(-200, -12); // room for the "Умения" button
                 var details = Ui.Button(row.Rect, "Details_" + cat.Id, Loc.T("battle_prep_screen.09"), Palette.Paper, () => _onCatDetails(id), 26);
                 details.Rect.Place(new Vector2(1, 0.5f), new Vector2(1, 0.5f), new Vector2(-170, -35), new Vector2(-15, 35));
             }
@@ -152,7 +153,7 @@ namespace TrashCats.Presentation.Battle
             var row = Ui.Button(list, name, text, color, onClick, 32);
             row.Rect.Place(new Vector2(0, y0), new Vector2(1, y1), new Vector2(0, 6), new Vector2(0, -6));
             row.Text.Align(TextAnchor.MiddleLeft);
-            row.Text.rectTransform.Fill(20);
+            row.Text.rectTransform.Place(Vector2.zero, Vector2.one, new Vector2(40, 12), new Vector2(-40, -12));
             return row;
         }
 
