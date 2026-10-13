@@ -35,6 +35,30 @@ namespace TrashCats.Domain
             return BattleError.None;
         }
 
+        /// <summary>
+        /// Share of wins (0..1) of this team in this order against the territory's enemies over <paramref name="samples"/>
+        /// simulations with fixed seeds 1..N (the real fight has its own seed, so this is an estimate). Changes nothing.
+        /// </summary>
+        public static float EstimateWinChance(IReadOnlyGameWorld world, TerritoryId territory, IReadOnlyList<CatId> order, int samples = 100)
+        {
+            var config = world.Config;
+            if (order == null || order.Count == 0 || !config.TryGetTerritory(territory, out var definition))
+                return 0f;
+            var cats = new List<FighterSnapshot>();
+            foreach (var id in order)
+            {
+                if (!world.TryGetCat(id, out var cat)) return 0f;
+                cats.Add(FighterSnapshot.FromCat(cat, config));
+            }
+
+            var setup = new BattleSetup(cats, definition.EnemyQueue.Select(e => FighterSnapshot.FromEnemy(config.GetEnemy(e))));
+            var wins = 0;
+            for (var seed = 1; seed <= samples; seed++)
+                if (BattleSimulator.Simulate(setup, seed, config).Outcome == BattleOutcome.Victory)
+                    wins++;
+            return (float)wins / samples;
+        }
+
         /// <summary>Cancels the team's activities, simulates the battle and stores it as pending. The result is final.</summary>
         public static PendingBattle Start(GameWorld world, TerritoryId territory, IReadOnlyList<CatId> order, List<DomainEvent> events)
         {

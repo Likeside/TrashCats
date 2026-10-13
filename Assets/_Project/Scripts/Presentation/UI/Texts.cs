@@ -178,6 +178,9 @@ namespace TrashCats.Presentation.UI
         }
 
         /// <summary>Skin icon of an attribute.</summary>
+        /// <summary>Skin icon of a skill (Art/UI/icon_skill_*.png); the generic skill icon when there is none.</summary>
+        public static string SkillIcon(SkillId id) => Ui.Skin?.Icon(id.Value) != null ? id.Value : "skill";
+
         public static string AttributeIcon(AttributeType attribute) => attribute switch
         {
             AttributeType.Strength => "strength",

@@ -115,7 +115,7 @@ namespace TrashCats.Presentation.Bootstrap
 
             // overlays (created in the overlay layer, shown above every screen and the nav)
             _details = new CatDetailsSheet(session, overlayRoot, _overlays, ShowResult);
-            _upgrades = new UpgradePanel(session, overlayRoot, _overlays, ShowResult);
+            _upgrades = new UpgradePanel(session, overlayRoot, _overlays, ShowResult, id => factory.GetSprite(HideoutLayout.UpgradeSprite(id)));
             _audio = new Audio.GameAudio(audioLibrary, transform)
             {
                 SfxVolume = _services.Settings.SfxVolume,
