@@ -343,6 +343,8 @@ namespace TrashCats.Presentation.Hideout
                     if (spot.OverProp && index > 0)
                         spot = new HideoutLayout.CatSpot(spot.Foot + new Vector2(-0.12f * index, -0.12f), HideoutLayout.CatClip.Sit);
                     wheelBusy |= spot.Clip == HideoutLayout.CatClip.Run;
+                    if (spot.Clip == HideoutLayout.CatClip.Run && token.Art != null && HideoutLayout.RunFoot(token.Art.viewKey) is Vector2 runFoot)
+                        spot = new HideoutLayout.CatSpot(runFoot, spot.Clip, spot.FaceLeft, spot.OverProp, spot.Scale);
                 }
                 else
                     spot = HideoutLayout.Idle(idle++);
