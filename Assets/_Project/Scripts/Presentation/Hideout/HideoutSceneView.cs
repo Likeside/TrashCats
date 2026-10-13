@@ -149,6 +149,8 @@ namespace TrashCats.Presentation.Hideout
                 if (prop != null)
                 {
                     var picture = Ui.Picture(box.transform, "Prop", prop);
+                    if (bench)
+                        picture.rectTransform.localScale = new Vector3(-1f, 1f, 1f); // brick stands at the right end
                     if (activity.Kind == ActivityKind.Train && activity.TrainedAttribute == AttributeType.Strength)
                     {
                         // the can swings from the top of its rope when punched
@@ -375,14 +377,17 @@ namespace TrashCats.Presentation.Hideout
                 else
                     spot = HideoutLayout.Idle(token.Art?.viewKey, idle++);
 
-                // out on the street or in the dumpster: a portrait with the cycle bar instead of the cat, in the street gap
-                // (more cats to the left) or over the dumpster (more cats side by side)
+                // out on the street or in the dumpster: a portrait with the cycle bar instead of the cat, right over the
+                // dumpster or above it under the street gap (it fits under the HUD); more cats go to the left
                 token.Away.Root.gameObject.SetActive(spot.Hidden);
                 if (spot.Hidden)
                 {
+                    const float badge = 0.12f;
                     var rummage = kind == ActivityKind.Rummage;
-                    var at = rummage ? spot.Foot + new Vector2(0.15f * rummaging++ - 0.07f, 0.002f) : new Vector2(_streetGap.x - 0.07f - 0.15f * away++, _streetGap.y);
-                    token.Away.Root.Place(at, at + new Vector2(0.14f, 0.14f));
+                    var at = rummage
+                        ? new Vector2(spot.Foot.x - 0.09f - 0.13f * rummaging++, spot.Foot.y + 0.002f)
+                        : new Vector2(_streetGap.x - 0.06f - 0.13f * away++, spot.Foot.y + 0.002f - 0.035f);
+                    token.Away.Root.Place(at, at + new Vector2(badge, badge));
                     token.Away.Caption.text = Loc.T(rummage ? "hideout.rummaging" : "hideout.away");
                 }
 
@@ -428,6 +433,9 @@ namespace TrashCats.Presentation.Hideout
             var w = h * size.x / size.y / HideoutLayout.PictureAspect;
             token.Root.Place(new Vector2(spot.Foot.x - w * 0.5f, spot.Foot.y), new Vector2(spot.Foot.x + w * 0.5f, spot.Foot.y + h));
             token.Image.rectTransform.localScale = new Vector3(spot.FaceLeft != sourceFacesLeft ? -1f : 1f, 1f, 1f);
+            // the bench frames leave room above the lying cat for the raised bar: the cycle bar goes over the barbell
+            var barY = spot.Clip == HideoutLayout.CatClip.Bench ? 0.8f : 1f;
+            token.Progress.Rect.Place(new Vector2(0.5f, barY), new Vector2(0.5f, barY), new Vector2(-75, 4), new Vector2(75, 24));
             token.Image.color = token.BaseColor;
 
             // a sleeping cat breathes: a slow ping-pong squash from the feet

@@ -170,6 +170,18 @@ namespace TrashCats.Presentation.Dev
             yield return new WaitForSeconds(0.8f);
             for (var i = 0; i < 4; i++) Dismiss();
             yield return Shot("03s_sleep");
+            // each cat on the bench, then rested again for the dumpster and the street
+            foreach (var who in new[] { "cat_ryzhy", "cat_ponchik" })
+            {
+                foreach (var cat in services.Session.World.Cats) services.Session.StopActivity(cat.Id);
+                services.Debug.RecruitAllAndRest();
+                services.Session.AssignActivity(new TrashCats.Domain.CatId(who), new TrashCats.Domain.ActivityId("act_train_tou"));
+                yield return new WaitForSeconds(0.8f);
+                for (var i = 0; i < 4; i++) Dismiss();
+                yield return Shot("03b_bench_" + who);
+            }
+            foreach (var cat in services.Session.World.Cats) services.Session.StopActivity(cat.Id);
+            services.Debug.RecruitAllAndRest();
             services.Session.AssignActivity(new TrashCats.Domain.CatId("cat_ryzhy"), new TrashCats.Domain.ActivityId("act_train_agi"));
             services.Session.AssignActivity(new TrashCats.Domain.CatId("cat_shnyr"), new TrashCats.Domain.ActivityId("act_rummage"));
             services.Session.AssignActivity(new TrashCats.Domain.CatId("cat_ponchik"), new TrashCats.Domain.ActivityId("act_scavenge"));

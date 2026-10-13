@@ -98,7 +98,8 @@ namespace TrashCats.Presentation.Hideout
                     // left of the can at arm's length, hitting to the right
                     AttributeType.Strength => new CatSpot(new Vector2(0.48f, 0.371f) + new Vector2(-shift.x, shift.y), CatClip.Punch),
                     AttributeType.Agility => new CatSpot(new Vector2(0.49f, 0.03f) + shift, CatClip.Rope),
-                    _ => new CatSpot(Vector2.zero, CatClip.Bench, overProp: true),
+                    // mirrored with the mat: the brick stands at the right end
+                    _ => new CatSpot(Vector2.zero, CatClip.Bench, faceLeft: true, overProp: true),
                 },
             };
         }
@@ -106,13 +107,14 @@ namespace TrashCats.Presentation.Hideout
         /// <summary>
         /// A cat pressing on the mat, relative to the mat's rect: bottom centre of the frame box (0..1 of the rect) and
         /// the box height as a share of the rect height. Taken from the approved previews
-        /// (Tools/compose_bench_preview.py: mat x0.729, Ryzhy and Ponchik x1.35 at -90,-195, Shnyr x1.15 at -67,-136).
+        /// (Tools/compose_bench_preview.py: mat x0.729, Ryzhy and Ponchik x1.35 at -90,-195, Shnyr x1.15 at -67,-136),
+        /// mirrored left to right with the mat (x = 1 - preview x).
         /// </summary>
         public static (Vector2 Foot, float Height)? BenchFit(string viewKey) => viewKey switch
         {
-            "ryzhy" => (new Vector2(0.445f, 0.092f), 1.506f),
-            "shnyr" => (new Vector2(0.444f, 0.107f), 1.31f),
-            "ponchik" => (new Vector2(0.429f, 0.104f), 1.494f),
+            "ryzhy" => (new Vector2(0.555f, 0.092f), 1.506f),
+            "shnyr" => (new Vector2(0.556f, 0.107f), 1.31f),
+            "ponchik" => (new Vector2(0.571f, 0.104f), 1.494f),
             _ => null,
         };
 
