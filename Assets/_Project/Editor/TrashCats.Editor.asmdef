@@ -3,6 +3,7 @@
     "rootNamespace": "TrashCats.Editor",
     "references": [
         "TrashCats.Presentation",
+        "TrashCats.App",
         "Unity.TextMeshPro",
         "UnityEngine.UI"
     ],
