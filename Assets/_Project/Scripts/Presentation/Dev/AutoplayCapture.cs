@@ -157,6 +157,18 @@ namespace TrashCats.Presentation.Dev
             yield return new WaitForSeconds(0.8f);
             Dismiss(); Dismiss();
             yield return Shot("03a_idle_three");
+            // the cat details and the battle prep with the whole gang rested (win chance bar)
+            Click("Cat_cat_ryzhy");
+            Click("Sheet_Details");
+            yield return Shot("03h_cat_details");
+            Click("Details_Close", required: false);
+            GameObject.Find("ActivitySheet")?.SetActive(false);
+            Click("Tab_Map");
+            Click("Node_ter_backyard");
+            yield return Shot("03i_prep_rested");
+            Click("Prep_Back");
+            Click("Tab_Hideout", required: false);
+            yield return new WaitForSeconds(0.3f);
             services.Session.AssignActivity(new TrashCats.Domain.CatId("cat_shnyr"), new TrashCats.Domain.ActivityId("act_train_tou"));
             services.Session.AssignActivity(new TrashCats.Domain.CatId("cat_ponchik"), new TrashCats.Domain.ActivityId("act_sleep"));
             yield return new WaitForSeconds(0.8f);

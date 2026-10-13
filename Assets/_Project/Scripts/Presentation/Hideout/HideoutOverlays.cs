@@ -214,11 +214,15 @@ namespace TrashCats.Presentation.Hideout
             if (waiting.Count > 0)
             {
                 Header(Loc.T("offline.waiting"));
-                var row = Row(TextAnchor.MiddleLeft, 30);
-                foreach (var stopped in waiting.Take(MaxRows))
+                // two cats with their bubbles per row: three did not fit the card's width
+                RectTransform row = null;
+                var shown = waiting.Take(MaxRows * 2).ToList();
+                for (var i = 0; i < shown.Count; i++)
                 {
-                    Portrait(row, stopped.CatId);
-                    Bubble(row, Texts.IdleBubble(stopped.Reason));
+                    if (i % 2 == 0) row = Row(TextAnchor.MiddleLeft, 16);
+                    Portrait(row, shown[i].CatId);
+                    Bubble(row, Texts.IdleBubble(shown[i].Reason));
+                    if (i % 2 == 0 && i + 1 < shown.Count) Spacer(row, 24);
                 }
             }
 
@@ -272,6 +276,8 @@ namespace TrashCats.Presentation.Hideout
             picture.Root.Fill();
             picture.SetPicture(_portrait?.Invoke(cat));
         }
+
+        private static void Spacer(RectTransform row, float width) => Fixed(Ui.Rect(row, "Gap"), width, RowHeight);
 
         /// <summary>The idle reason in a comic speech bubble next to the cat.</summary>
         private static void Bubble(RectTransform row, string text)

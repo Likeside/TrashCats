@@ -126,6 +126,17 @@ namespace TrashCats.Presentation.Hideout
             },
         };
 
+        /// <summary>Sprite key of the object an upgrade improves (for the upgrade window).</summary>
+        public static string UpgradeSprite(UpgradeId id) => id.Value switch
+        {
+            "upg_boxes" => Bed.Sprite,
+            "upg_dumpster" => Dumpster.Sprite,
+            "upg_can" => Can.Sprite,
+            "upg_mouse" => RopeProp.Sprite,
+            "upg_wheel" => Bench.Sprite,
+            _ => null,
+        };
+
         /// <summary>Prop rect (min, max) for a station.</summary>
         public static (Vector2 Min, Vector2 Max) Station(ActivityDefinition activity) => (Prop(activity).Min, Prop(activity).Max);
 

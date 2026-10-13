@@ -41,14 +41,14 @@ MonoBehaviour:
   ring: {fileID: 21300000, guid: 214bbbf7c19b801e48a3b2f6014b0425, type: 3}
   ringGold: {fileID: 21300000, guid: e6189f0f4360d9459b9e452675133e53, type: 3}
   icons:
-  - key: technique
-    sprite: {fileID: 21300000, guid: b23f37c8a4114b96f9356cbf30922f56, type: 3}
   - key: clock
     sprite: {fileID: 21300000, guid: d346b0677f51cffbcb1fd66738473228, type: 3}
   - key: crown
     sprite: {fileID: 21300000, guid: 672c42fa8c92820f0a0c7d9e57639c07, type: 3}
   - key: defeat
     sprite: {fileID: 21300000, guid: 96354d4e26df0af0f81c95d1b24ef159, type: 3}
+  - key: endurance
+    sprite: {fileID: 21300000, guid: 7561cd0b9773c84bd91697c5a54749c6, type: 3}
   - key: energy
     sprite: {fileID: 21300000, guid: 37fe6d25ed261ef1d98c08653a165c9f, type: 3}
   - key: final
@@ -79,6 +79,18 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: d4b170eea1e296301a45fc6c1457b1fb, type: 3}
   - key: skill
     sprite: {fileID: 21300000, guid: d1d8746fd4d3a5062a91ca17359b1122, type: 3}
+  - key: skill_bite
+    sprite: {fileID: 21300000, guid: 3e7c1b2a0858167798cc9f175c6c35e7, type: 3}
+  - key: skill_dirty_trick
+    sprite: {fileID: 21300000, guid: 33891f2586a57c92d9645e69aafd0667, type: 3}
+  - key: skill_dodge
+    sprite: {fileID: 21300000, guid: 551ee88a63af98bb4b492e70d668f077, type: 3}
+  - key: skill_double_paw
+    sprite: {fileID: 21300000, guid: 0954458a6e248fc59ba3caf4f81eb944, type: 3}
+  - key: skill_scratch
+    sprite: {fileID: 21300000, guid: 94459ee4000c890d8935dcef7d241c56, type: 3}
+  - key: skill_thick_fur
+    sprite: {fileID: 21300000, guid: a391e816bcd400770a581c3e5f4b97c8, type: 3}
   - key: skip
     sprite: {fileID: 21300000, guid: c9cc0196a5623432f84159f910bc04bf, type: 3}
   - key: sleep
@@ -87,10 +99,10 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: c7e640c2b6dc572819e76c935b0a4815, type: 3}
   - key: strength
     sprite: {fileID: 21300000, guid: 7735cfe5653dec278ad12f87b4b970c0, type: 3}
+  - key: technique
+    sprite: {fileID: 21300000, guid: b23f37c8a4114b96f9356cbf30922f56, type: 3}
   - key: tools
     sprite: {fileID: 21300000, guid: 967f4f8ef6f05f95aba6388485997f7e, type: 3}
-  - key: endurance
-    sprite: {fileID: 21300000, guid: 7561cd0b9773c84bd91697c5a54749c6, type: 3}
   - key: upgrade
     sprite: {fileID: 21300000, guid: 139baac32267849ef919cae74fc0551b, type: 3}
   - key: victory

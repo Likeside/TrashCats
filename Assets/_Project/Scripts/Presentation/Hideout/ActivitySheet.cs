@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using TrashCats.App;
 using TrashCats.Domain;
 using TrashCats.Presentation.UI;
@@ -43,15 +44,28 @@ namespace TrashCats.Presentation.Hideout
             var panel = Ui.Card(dim.transform, "Sheet", CardStyle.Paper, raycast: true);
             panel.rectTransform.Place(Vector2.zero, new Vector2(1f, 0f), Vector2.zero, new Vector2(0, 980));
 
+            // name and needs on the left half, the details button on the right: nothing overlaps
             _title = Ui.Label(panel.transform, "", 44, TextAnchor.MiddleLeft, Palette.Ink);
-            _title.rectTransform.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(60, -105), new Vector2(-40, -45));
+            _title.rectTransform.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(60, -105), new Vector2(-520, -45));
             _needs = Ui.Label(panel.transform, "", 30, TextAnchor.MiddleLeft, Palette.Ink);
-            _needs.rectTransform.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(60, -150), new Vector2(-40, -105));
-            var details = Ui.Button(panel.transform, "Sheet_Details", Loc.T("activity_sheet.01"), Palette.Paper, () =>
+            _needs.rectTransform.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(60, -150), new Vector2(-520, -105));
+            _needs.enableAutoSizing = true;
+            _needs.fontSizeMin = 20;
+            _needs.fontSizeMax = 30;
+
+            // big yellow "skills and stats" button with an icon that gently pulses, so it is hard to miss
+            var details = Ui.Button(panel.transform, "Sheet_Details", Loc.T("activity_sheet.01"), Palette.Primary, () =>
             {
                 if (_catId is CatId id) onDetails(id);
-            }, 28);
-            details.Rect.Place(new Vector2(1, 1), new Vector2(1, 1), new Vector2(-400, -100), new Vector2(-100, -30));
+            }, 34);
+            details.Rect.Place(new Vector2(1, 1), new Vector2(1, 1), new Vector2(-500, -165), new Vector2(-40, -35));
+            if (Ui.Icon(details.Rect, "skill") is Image icon)
+            {
+                icon.rectTransform.Place(new Vector2(0, 0.12f), new Vector2(0, 0.88f), new Vector2(26, 0), new Vector2(126, 0));
+                details.Text.rectTransform.offsetMin = new Vector2(130, details.Text.rectTransform.offsetMin.y);
+            }
+            details.Text.Outlined();
+            details.Rect.DOScale(1.05f, 0.7f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo).SetLink(details.Rect.gameObject);
 
             var activities = OrderedActivities(session.Config);
             for (var i = 0; i < activities.Count; i++)

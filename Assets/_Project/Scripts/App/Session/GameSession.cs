@@ -80,6 +80,9 @@ namespace TrashCats.App
         public CommandError CanStartBattle(TerritoryId territory, IReadOnlyList<CatId> order) =>
             CommandErrors.From(Battles.CanStart(_world, territory, order));
 
+        /// <summary>Estimated chance (0..1) that this team in this order wins the territory's fight.</summary>
+        public float EstimateWinChance(TerritoryId territory, IReadOnlyList<CatId> order) => Battles.EstimateWinChance(_world, territory, order);
+
         // --- Commands --------------------------------------------------------------------------------
 
         /// <summary>Simulates the battle immediately; the result is fixed and saved before it is shown.</summary>
