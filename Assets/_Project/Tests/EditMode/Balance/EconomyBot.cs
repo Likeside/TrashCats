@@ -44,10 +44,10 @@ namespace TrashCats.Tests
         public int InvariantViolations { get; private set; }
         public long IdleCatMs { get; private set; }
 
-        public EconomyBot(GameConfig config)
+        public EconomyBot(GameConfig config, int seed = 1)
         {
             _config = config;
-            _world = GameWorld.CreateNew(config, 1);
+            _world = GameWorld.CreateNew(config, seed);
         }
 
         public static IReadOnlyList<ScriptedFight> ExpectedFights(GameConfig config) => new[]
@@ -83,6 +83,89 @@ namespace TrashCats.Tests
                     InvariantViolations++;
                 if (t % snapshotEveryMs == 0)
                     TakeSnapshot();
+            }
+        }
+
+        public sealed class FightRecord
+        {
+            public long AtMs;
+            public string Territory;
+            public bool Victory;
+            public int TeamPower;
+            public int EnemyPower;
+        }
+
+        public List<FightRecord> Fights { get; } = new List<FightRecord>();
+
+        /// <summary>Seconds a battle replay takes for the player (the world keeps running meanwhile).</summary>
+        public const long BattleReplayMs = 45_000;
+
+        /// <summary>
+        /// Full run with real battles (M5-09): plays like a sensible player and attacks the next territory when the
+        /// rested team is roughly as strong as the enemies (or after waiting a while since a loss). Stops at the final
+        /// victory or <paramref name="maxMs"/>. Returns the time of the final victory, or null.
+        /// </summary>
+        public long? RunWithBattles(long maxMs, double readiness = 0.9, long retryAfterLossMs = 240_000)
+        {
+            TakeSnapshot();
+            var lastLoss = long.MinValue / 2;
+            for (var t = 1000L; t <= maxMs; t += 1000)
+            {
+                Simulation.AdvanceTo(_world, t, _events);
+                Account();
+                Decide();
+                EquipSkills();
+                IdleCatMs += 1000 * _world.Cats.Count(c => !c.Activity.IsWorking);
+                if (WorldInvariants.Check(_world).Count > 0)
+                    InvariantViolations++;
+                if (t % 300_000 == 0)
+                    TakeSnapshot();
+
+                var target = _config.Territories.FirstOrDefault(x => _world.Territories.Get(x.Id).Status == TerritoryStatus.Available);
+                if (target == null)
+                    continue;
+                var team = _world.Cats.Where(c => c.Energy >= 50)
+                    .OrderByDescending(c => AttributeTypes.All.Sum(c.GetLevel)).Take(Battles.MaxTeamSize).ToList();
+                var teamPower = team.Sum(c => AttributeTypes.All.Sum(c.GetLevel));
+                var enemyPower = target.EnemyQueue.Select(_config.GetEnemy).Sum(e => (e.Strength + e.Agility + e.Toughness) * e.HpMultiplierPermille / 1000);
+                var ready = teamPower >= enemyPower * readiness || t - lastLoss >= retryAfterLossMs && Fights.Any(f => f.Territory == target.Id.Value);
+                if (!ready || team.Count < Math.Min(_world.Cats.Count, Battles.MaxTeamSize) || t - lastLoss < 60_000)
+                    continue;
+
+                var events = new List<DomainEvent>();
+                var battle = Battles.Start(_world, target.Id, team.Select(c => c.Id).ToList(), events);
+                var victory = battle.Result.Outcome == BattleOutcome.Victory;
+                Fights.Add(new FightRecord { AtMs = t, Territory = target.Id.Value, Victory = victory, TeamPower = teamPower, EnemyPower = enemyPower });
+                _log.Add($"{Format(t)} бой {target.Id}: {(victory ? "победа" : "поражение")} (сила {teamPower} против {enemyPower})");
+                t += BattleReplayMs;
+                Simulation.AdvanceTo(_world, t, _events);
+                Battles.Complete(_world, events);
+                Account();
+                if (!victory) lastLoss = t;
+                if (victory && target.IsFinal)
+                    return t;
+            }
+
+            return null;
+        }
+
+        /// <summary>Puts unlocked skills into free slots (damage skills first).</summary>
+        private void EquipSkills()
+        {
+            var events = new List<DomainEvent>();
+            foreach (var cat in _world.Cats)
+            {
+                var unlocked = _config.Skills.Where(s => !s.IsInnate && CatRules.IsSkillUnlocked(cat, s))
+                    .OrderByDescending(s => s.IsHeavyAttack).ToList();
+                foreach (var skill in unlocked)
+                {
+                    if (Enumerable.Range(0, Cat.SkillSlotCount).Any(i => Equals(cat.GetSkillInSlot(i), skill.Id)))
+                        continue;
+                    var free = Enumerable.Range(0, Cat.SkillSlotCount).Where(i => cat.GetSkillInSlot(i) == null).DefaultIfEmpty(-1).First();
+                    if (free < 0 || CatRules.CanEquip(cat, free, skill.Id, _config) != SkillEquipError.None)
+                        break;
+                    CatRules.Equip(cat, free, skill.Id, _config, events);
+                }
             }
         }
 
