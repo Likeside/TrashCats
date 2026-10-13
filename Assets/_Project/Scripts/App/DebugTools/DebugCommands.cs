@@ -35,6 +35,16 @@ namespace TrashCats.App
             Publish(events);
         }
 
+        /// <summary>Like <see cref="SkipGameTime"/>, but reported as an absence (the "Пока тебя не было" summary).</summary>
+        public void SimulateAbsence(long ms)
+        {
+            _session.Tick();
+            var events = new List<DomainEvent>();
+            Simulation.AdvanceBy(_session.MutableWorld, ms, events);
+            Publish(events);
+            _bus.Publish(new OfflineProgressApplied(new OfflineSummary(ms, ms, events)));
+        }
+
         public void UnlockAllTerritories()
         {
             DebugCheats.UnlockAllTerritories(_session.MutableWorld);

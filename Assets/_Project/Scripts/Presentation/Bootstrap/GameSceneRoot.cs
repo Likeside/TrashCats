@@ -124,7 +124,7 @@ namespace TrashCats.Presentation.Bootstrap
             var debugTools = Debug.isDebugBuild || Application.isEditor;
             var debugPanel = debugTools ? new DebugPanel(overlayRoot, _overlays, session, _services.Debug, bootstrap.ResetProgress) : null;
             var results = new ResultsModal(session, overlayRoot, _overlays);
-            _offline = new OfflineSummaryModal(overlayRoot, _overlays);
+            _offline = new OfflineSummaryModal(overlayRoot, _overlays, id => factory.Portrait(session.Config.GetCat(id).ViewKey));
             _messages = new MessageQueue(overlayRoot, _overlays);
 
             // screens
