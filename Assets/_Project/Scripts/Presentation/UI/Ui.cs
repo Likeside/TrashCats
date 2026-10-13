@@ -215,7 +215,7 @@ namespace TrashCats.Presentation.UI
             colors.pressedColor = new Color(0.85f, 0.85f, 0.85f);
             button.colors = colors;
             var text = Label(image.transform, label, fontSize, TextAnchor.MiddleCenter, Palette.Ink, heading: true);
-            text.rectTransform.Fill(Skin?.button != null ? 22 : 12);
+            text.rectTransform.Place(Vector2.zero, Vector2.one, new Vector2(Skin != null ? 34 : 12, 12), new Vector2(Skin != null ? -34 : -12, -12));
             text.enableAutoSizing = true;
             text.fontSizeMax = fontSize;
             text.fontSizeMin = Mathf.Max(18, fontSize * 0.6f);
@@ -294,7 +294,7 @@ namespace TrashCats.Presentation.UI
             {
                 var picture = Picture(back.transform, "Badge", icon);
                 picture.rectTransform.pivot = new Vector2(1f, 0.5f);
-                picture.rectTransform.Place(new Vector2(0, -0.2f), new Vector2(0, 1.2f));
+                picture.rectTransform.Place(new Vector2(0, -0.05f), new Vector2(0, 1.05f));
                 var fitter = picture.gameObject.AddComponent<AspectRatioFitter>();
                 fitter.aspectMode = AspectRatioFitter.AspectMode.HeightControlsWidth;
                 fitter.aspectRatio = icon.rect.width / icon.rect.height;

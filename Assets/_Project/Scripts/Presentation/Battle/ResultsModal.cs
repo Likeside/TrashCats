@@ -37,9 +37,14 @@ namespace TrashCats.Presentation.Battle
             _title.rectTransform.Place(Vector2.zero, Vector2.one, new Vector2(50, 50), new Vector2(-50, -110));
             _badge = Ui.Badge(card.transform, 240f);
             _body = Ui.Label(card.transform, "", 34, TextAnchor.UpperLeft, Palette.Ink);
-            _body.rectTransform.Place(Vector2.zero, Vector2.one, new Vector2(60, 200), new Vector2(-60, -310));
-            // what the battle brought, as icons: food, junk, captured territory, new cat
-            _chips = Ui.Rect(card.transform, "Chips").Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(50, -300), new Vector2(-50, -170));
+            _body.rectTransform.Place(Vector2.zero, Vector2.one, new Vector2(60, 200), new Vector2(-60, -330));
+            // what the battle brought, as icons: food, junk, captured territory, new cat — one centred row under the title
+            _chips = Ui.Rect(card.transform, "Chips").Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(50, -310), new Vector2(-50, -200));
+            var row = _chips.gameObject.AddComponent<HorizontalLayoutGroup>();
+            row.childAlignment = TextAnchor.MiddleCenter;
+            row.spacing = 40;
+            row.childControlWidth = row.childControlHeight = true;
+            row.childForceExpandWidth = row.childForceExpandHeight = false;
 
             var cont = Ui.Button(card.transform, "Results_Continue", Loc.T("results_modal.01"), Palette.Primary, () => Close(false), 40);
             cont.Rect.Place(new Vector2(0, 0), new Vector2(0.5f, 0), new Vector2(40, 40), new Vector2(-15, 160));
@@ -69,13 +74,28 @@ namespace TrashCats.Presentation.Battle
                 var chips = new System.Collections.Generic.List<(string Icon, string Text)> { ("food", "+" + chipFood), ("junk", "+" + chipJunk) };
                 if (first) chips.Add(("flag", ""));
                 if (first && territory.RecruitCat is CatId newCat && !world.TryGetCat(newCat, out _)) chips.Add(("newcat", Texts.CatName(newCat)));
-                for (var i = 0; i < chips.Count; i++)
+                foreach (var (iconKey, text) in chips)
                 {
-                    var cell = Ui.Rect(_chips, "Chip").Place(new Vector2((float)i / chips.Count, 0), new Vector2((i + 1f) / chips.Count, 1));
-                    var icon = Ui.Icon(cell, chips[i].Icon);
-                    icon?.rectTransform.Place(new Vector2(0, 0), new Vector2(chips[i].Text.Length > 0 ? 0.45f : 1f, 1));
-                    var label = Ui.Label(cell, chips[i].Text, 40, TextAnchor.MiddleLeft, Palette.Paper, heading: true);
-                    label.rectTransform.Place(new Vector2(0.47f, 0), Vector2.one);
+                    // chip = icon (90 px) + its number, laid out side by side
+                    var cell = Ui.Rect(_chips, "Chip");
+                    var layout = cell.gameObject.AddComponent<HorizontalLayoutGroup>();
+                    layout.childAlignment = TextAnchor.MiddleCenter;
+                    layout.spacing = 8;
+                    layout.childControlWidth = layout.childControlHeight = true;
+                    layout.childForceExpandWidth = layout.childForceExpandHeight = false;
+                    var icon = Ui.Icon(cell, iconKey);
+                    if (icon != null)
+                    {
+                        var size = icon.gameObject.AddComponent<LayoutElement>();
+                        size.preferredWidth = 90 * icon.sprite.rect.width / icon.sprite.rect.height;
+                        size.preferredHeight = 90;
+                    }
+                    if (text.Length > 0)
+                    {
+                        var label = Ui.Label(cell, text, 40, TextAnchor.MiddleLeft, Palette.Paper, heading: true);
+                        label.textWrappingMode = TextWrappingModes.NoWrap;
+                        label.gameObject.AddComponent<LayoutElement>().preferredHeight = 90;
+                    }
                 }
             }
             var sb = new StringBuilder();
