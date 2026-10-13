@@ -29,7 +29,8 @@ namespace TrashCats.Presentation.Battle
         private readonly TMP_Text _banner;
         private readonly RectTransform _bannerRoot;
         private readonly CanvasGroup _bannerGroup;
-        private readonly TMP_Text[] _queues = new TMP_Text[2];
+        private readonly RectTransform[] _queues = new RectTransform[2];
+        private readonly List<(string Id, RoundPicture Picture)>[] _queuePictures = { new List<(string, RoundPicture)>(), new List<(string, RoundPicture)>() };
         private readonly FighterHud[] _huds = new FighterHud[2];
         private readonly CharacterView[] _views = new CharacterView[2];
         private readonly UiButton _speed;
@@ -62,14 +63,14 @@ namespace TrashCats.Presentation.Battle
             _uiRoot = root;
             Root = root.gameObject;
 
-            _title = Ui.Label(root, "", 40, TextAnchor.MiddleCenter, Palette.Paper);
-            _title.rectTransform.Place(new Vector2(0, 1), Vector2.one, new Vector2(0, -80), Vector2.zero);
+            _title = Ui.Label(root, "", 34, TextAnchor.MiddleCenter, Palette.Paper);
+            _title.rectTransform.Place(new Vector2(0, 1), Vector2.one, new Vector2(0, -64), new Vector2(0, -8));
             _title.Outlined();
             for (var side = 0; side < 2; side++)
             {
-                _queues[side] = Ui.Label(root, "", 28, side == 0 ? TextAnchor.UpperLeft : TextAnchor.UpperRight, Palette.Paper);
-                _queues[side].rectTransform.Place(new Vector2(side * 0.5f, 1), new Vector2(side * 0.5f + 0.5f, 1), new Vector2(30, -200), new Vector2(-30, -90));
-                _queues[side].Outlined();
+                // fighter queue as round portraits (combat concept): ours on the left, theirs on the right
+                _queues[side] = Ui.Rect(root, side == 0 ? "PlayerQueue" : "EnemyQueue")
+                    .Place(new Vector2(side * 0.55f, 1), new Vector2(side * 0.55f + 0.45f, 1), new Vector2(20, -210), new Vector2(-20, -70));
                 _huds[side] = new FighterHud(root, side);
             }
 
@@ -125,6 +126,7 @@ namespace TrashCats.Presentation.Battle
             var repeat = _session.World.Territories.Get(_battle.Territory).Status == TerritoryStatus.Captured
                          || _session.World.Territories.Get(_battle.Territory).Attempts > 1;
             _skip.Interactable = repeat || Debug.isDebugBuild;
+            BuildQueues();
             if (resultsOnly)
                 Skip();
             RefreshQueues();
@@ -245,16 +247,43 @@ namespace TrashCats.Presentation.Battle
             }
         }
 
+        private void BuildQueues()
+        {
+            for (var side = 0; side < 2; side++)
+            {
+                foreach (var (_, picture) in _queuePictures[side])
+                    UnityEngine.Object.Destroy(picture.Root.gameObject);
+                _queuePictures[side].Clear();
+                var queue = side == 0 ? _battle.Setup.PlayerQueue : _battle.Setup.EnemyQueue;
+                for (var i = 0; i < queue.Count; i++)
+                {
+                    var fighter = queue[i];
+                    var picture = new RoundPicture(_queues[side], "Fighter_" + fighter.Id, side == 0 ? Palette.Hex("#3F7FBF") : Palette.Hex("#B5402B"), 0.75f);
+                    // the next fighter stands nearest to the middle
+                    var x = side == 0 ? 1f - (i + 0.5f) / 3f : (i + 0.5f) / 3f;
+                    picture.Root.At(new Vector2(x, 0.5f), new Vector2(130, 130));
+                    picture.SetPicture(_characters.Portrait(fighter.ViewKey));
+                    _queuePictures[side].Add((fighter.Id, picture));
+                }
+            }
+        }
+
         private void RefreshQueues()
         {
             if (_battle == null) return;
             var log = _log.Take(_next).ToList();
             for (var side = 0; side < 2; side++)
             {
-                var queue = side == 0 ? _battle.Setup.PlayerQueue : _battle.Setup.EnemyQueue;
                 var knocked = new HashSet<string>(log.OfType<FighterKnockedOut>().Where(k => (int)k.Side == side).Select(k => k.FighterId));
-                _queues[side].text = string.Join("\n", queue.Select(f =>
-                    knocked.Contains(f.Id) ? $"<color=#888888>× {NameOf(f.Id, f.Side)}</color>" : NameOf(f.Id, f.Side)));
+                var current = _queuePictures[side].FirstOrDefault(p => !knocked.Contains(p.Id)).Id;
+                foreach (var (id, picture) in _queuePictures[side])
+                {
+                    var out_ = knocked.Contains(id);
+                    picture.Picture.color = out_ ? new Color(0.35f, 0.35f, 0.38f) : Color.white;
+                    picture.Backdrop.color = out_ ? Palette.PanelDark : side == 0 ? Palette.Hex("#3F7FBF") : Palette.Hex("#B5402B");
+                    picture.SetGold(id == current);
+                    picture.Root.localScale = Vector3.one * (id == current ? 1.15f : 0.9f);
+                }
             }
         }
 
@@ -273,20 +302,43 @@ namespace TrashCats.Presentation.Battle
         {
             var camera = Camera.main;
             if (camera == null) return;
-            var label = Ui.Label(_uiRoot, text, size, TextAnchor.MiddleCenter, color);
-            label.Outlined();
-            var rt = label.rectTransform;
+            // big hits land on a comic burst (Art Bible §6: damage numbers, the heavy ones with an explosion behind)
+            var burst = size >= 64 ? Ui.Skin?.burst : null;
+            RectTransform rt;
+            TMP_Text label;
+            if (burst != null)
+            {
+                var back = Ui.Panel(_uiRoot, "Burst", Color.white);
+                back.sprite = burst;
+                rt = back.rectTransform;
+                label = Ui.Label(rt, text, size, TextAnchor.MiddleCenter, Palette.Ink, heading: true);
+                label.rectTransform.Fill();
+                back.transform.localRotation = Quaternion.Euler(0, 0, UnityEngine.Random.Range(-10f, 10f));
+            }
+            else
+            {
+                label = Ui.Label(_uiRoot, text, size, TextAnchor.MiddleCenter, color);
+                label.Outlined();
+                rt = label.rectTransform;
+            }
             var canvas = _uiRoot.GetComponentInParent<Canvas>();
             RectTransformUtility.ScreenPointToLocalPointInRectangle(_uiRoot, camera.WorldToScreenPoint(world),
                 canvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : camera, out var local);
             rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 0.5f);
-            rt.sizeDelta = new Vector2(300, 90);
-            rt.anchoredPosition = local + _uiRoot.rect.center * 0f;
+            rt.sizeDelta = burst != null ? new Vector2(250, 160) : new Vector2(300, 90);
+            rt.anchoredPosition = local;
+            var group = rt.gameObject.AddComponent<CanvasGroup>();
+            group.blocksRaycasts = false;
+            if (burst != null)
+            {
+                rt.localScale = Vector3.one * 0.4f;
+                rt.DOScale(1f, 0.15f / _speedFactor).SetEase(Ease.OutBack).SetLink(rt.gameObject);
+            }
             DOTween.Sequence()
                 .Append(rt.DOAnchorPosY(local.y + 110, 0.8f / _speedFactor))
-                .Join(label.DOFade(0f, 0.8f / _speedFactor).SetEase(Ease.InQuad))
-                .OnComplete(() => UnityEngine.Object.Destroy(label.gameObject))
-                .SetLink(label.gameObject);
+                .Join(group.DOFade(0f, 0.8f / _speedFactor).SetEase(Ease.InQuad))
+                .OnComplete(() => UnityEngine.Object.Destroy(rt.gameObject))
+                .SetLink(rt.gameObject);
         }
 
         private static string NameOf(string id, Side side) => side == Side.Player ? Texts.CatName(new CatId(id)) : Texts.EnemyName(id);

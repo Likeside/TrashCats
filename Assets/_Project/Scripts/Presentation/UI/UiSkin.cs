@@ -38,6 +38,11 @@ namespace TrashCats.Presentation.UI
         public Sprite tape;
         public Sprite pointer;
 
+        [Header("Round pictures (map vignettes, fighter queue)")]
+        [Tooltip("White disc used as a mask")] public Sprite circle;
+        public Sprite ring;
+        public Sprite ringGold;
+
         [Tooltip("Icons by key: food, junk, energy, satiety, strength, agility, toughness, xp, lock, clock, home, map, sleep, upgrade, speed, skip, settings, crown")]
         public List<NamedSprite> icons = new List<NamedSprite>();
 

@@ -32,8 +32,11 @@ SHEETS = {
     "ui_a_buttons": ["button_a_yellow", "button_a_blue", "button_a_grey"],
     "ui_a_parts": ["hud_a"],
     "ui_a_sheet": ["panel_a"],
+    "ui_map_parts": ["map_ring", None, None, None],
     "ui_a_icons": ["icon_food", "icon_junk", "icon_hp", "icon_paw", "icon_home", "icon_map", "icon_energy", "icon_satiety"],
 }
+
+ENEMIES = ["rat", "gull", "shopcat", "crow", "raccoon", "pug", "admiral"]
 
 # cat card portraits cut straight from the concept (left, top, right, bottom)
 CONCEPT = "Docs/ArtDirection/Concepts/round1/blind/hideout_A.png"
@@ -114,6 +117,42 @@ def neutral(img):
     return Image.fromarray(np.concatenate([out, alpha], axis=2).astype(np.uint8), "RGBA")
 
 
+def drawn():
+    """Simple shapes drawn here: a circle mask for round pictures and a glowing golden ring for the map."""
+    from PIL import ImageDraw
+    size = 512
+    mask = Image.new("RGBA", (size, size), (0, 0, 0, 0))
+    ImageDraw.Draw(mask).ellipse((4, 4, size - 5, size - 5), fill=(255, 255, 255, 255))
+    mask.save(f"{OUT}/circle_mask.png")
+    ring = Image.new("RGBA", (size, size), (0, 0, 0, 0))
+    d = ImageDraw.Draw(ring)
+    d.ellipse((4, 4, size - 5, size - 5), fill=(20, 22, 30, 255))
+    d.ellipse((14, 14, size - 15, size - 15), fill=(245, 189, 55, 255))
+    d.ellipse((40, 40, size - 41, size - 41), fill=(20, 22, 30, 255))
+    d.ellipse((48, 48, size - 49, size - 49), fill=(0, 0, 0, 0))
+    ring.save(f"{OUT}/map_ring_gold.png")
+
+
+def enemy_portraits():
+    """Head-and-shoulders square cut from each enemy's first stance frame (characters face right, head on top)."""
+    for key in ENEMIES:
+        src = f"Assets/_Project/Art/Characters/{key}/Idle/{key}_idle_00.png"
+        if not os.path.exists(src):
+            continue
+        im = Image.open(src).convert("RGBA")
+        a = np.array(im)[..., 3] > 40
+        ys, xs = np.nonzero(a)
+        top, bottom = ys.min(), ys.max()
+        side = int((bottom - top) * 0.5)
+        band = a[top: top + max(4, side // 3)]
+        cx = int(np.nonzero(band)[1].mean())
+        x0 = max(0, cx - side // 2)
+        box = (x0, max(0, top - side // 12), x0 + side, max(0, top - side // 12) + side)
+        folder = f"Assets/_Project/Art/Characters/{key}/Portrait"
+        os.makedirs(folder, exist_ok=True)
+        im.crop(box).save(f"{folder}/{key}_portrait.png")
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     for sheet, names in SHEETS.items():
@@ -140,6 +179,8 @@ def main():
                 neutral(pad).save(f"{OUT}/button_white.png")
             if name == "button_a_yellow":
                 neutral(pad).save(f"{OUT}/button_a_white.png")
+    drawn()
+    enemy_portraits()
     concept = Image.open(CONCEPT).convert("RGBA")
     for key, box in PORTRAITS.items():
         folder = f"Assets/_Project/Art/Characters/{key}/Portrait"
