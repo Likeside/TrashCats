@@ -119,8 +119,9 @@ namespace TrashCats.Presentation.Hideout
             ActivityKind.Sleep => Bed,
             _ => activity.TrainedAttribute switch
             {
-                AttributeType.Strength => Can,
-                AttributeType.Agility => RopeProp,
+                // the can trains technique, the skipping rope endurance, the barbell strength
+                AttributeType.Technique => Can,
+                AttributeType.Endurance => RopeProp,
                 _ => Bench,
             },
         };
@@ -141,8 +142,8 @@ namespace TrashCats.Presentation.Hideout
                 _ => activity.TrainedAttribute switch
                 {
                     // right of the can at arm's length, hitting to the left
-                    AttributeType.Strength => new CatSpot(new Vector2(0.9521f, 0.3893f) + shift, CatClip.Punch, faceLeft: true, scale: 0.799f, depth: 0.37f + shift.y),
-                    AttributeType.Agility => new CatSpot(new Vector2(0.3115f, 0.0703f) + shift, CatClip.Rope, scale: 1.0146f, depth: 0.029f + shift.y),
+                    AttributeType.Technique => new CatSpot(new Vector2(0.9521f, 0.3893f) + shift, CatClip.Punch, faceLeft: true, scale: 0.799f, depth: 0.37f + shift.y),
+                    AttributeType.Endurance => new CatSpot(new Vector2(0.3115f, 0.0703f) + shift, CatClip.Rope, scale: 1.0146f, depth: 0.029f + shift.y),
                     // mirrored with the mat: the brick stands at the right end
                     _ => new CatSpot(Vector2.zero, CatClip.Bench, faceLeft: true, overProp: true, depth: 0.188f),
                 },

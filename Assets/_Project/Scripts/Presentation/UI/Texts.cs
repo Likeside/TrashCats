@@ -19,14 +19,14 @@ namespace TrashCats.Presentation.UI
         public static string Attribute(AttributeType attribute) => attribute switch
         {
             AttributeType.Strength => Loc.T("texts.04"),
-            AttributeType.Agility => Loc.T("texts.05"),
+            AttributeType.Technique => Loc.T("texts.05"),
             _ => Loc.T("texts.06"),
         };
 
         public static string AttributeGenitive(AttributeType attribute) => attribute switch
         {
             AttributeType.Strength => Loc.T("texts.07"),
-            AttributeType.Agility => Loc.T("texts.08"),
+            AttributeType.Technique => Loc.T("texts.08"),
             _ => Loc.T("texts.09"),
         };
 
@@ -181,8 +181,8 @@ namespace TrashCats.Presentation.UI
         public static string AttributeIcon(AttributeType attribute) => attribute switch
         {
             AttributeType.Strength => "strength",
-            AttributeType.Agility => "agility",
-            _ => "toughness",
+            AttributeType.Technique => "technique",
+            _ => "endurance",
         };
 
         /// <summary>Skin icon of what an activity yields (food, junk, an attribute, energy).</summary>

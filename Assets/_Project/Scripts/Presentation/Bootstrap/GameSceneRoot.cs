@@ -184,8 +184,8 @@ namespace TrashCats.Presentation.Bootstrap
                 ActivityKind.Scavenge => "ui_reward",
                 _ => activity.TrainedAttribute switch
                 {
-                    AttributeType.Strength => "hid_can",
-                    AttributeType.Agility => "hid_mouse",
+                    AttributeType.Technique => "hid_can",
+                    AttributeType.Endurance => "hid_mouse",
                     _ => "hid_wheel",
                 },
             };

@@ -61,19 +61,19 @@ namespace TrashCats.Tests
                 new CatDefinition
                 {
                     Id = TestIds.Ryzhy, NameKey = "cat.ryzhy", Aptitude = AttributeType.Strength,
-                    StartStrength = 3, StartAgility = 2, StartToughness = 2, StartEnergy = 100, StartSatiety = 60,
+                    StartStrength = 3, StartTechnique = 2, StartEndurance = 2, StartEnergy = 100, StartSatiety = 60,
                     ViewKey = "ryzhy",
                 },
                 new CatDefinition
                 {
-                    Id = TestIds.Shnyr, NameKey = "cat.shnyr", Aptitude = AttributeType.Agility,
-                    StartStrength = 3, StartAgility = 5, StartToughness = 3, StartEnergy = 100, StartSatiety = 50,
+                    Id = TestIds.Shnyr, NameKey = "cat.shnyr", Aptitude = AttributeType.Technique,
+                    StartStrength = 3, StartTechnique = 5, StartEndurance = 3, StartEnergy = 100, StartSatiety = 50,
                     ViewKey = "shnyr",
                 },
                 new CatDefinition
                 {
-                    Id = TestIds.Ponchik, NameKey = "cat.ponchik", Aptitude = AttributeType.Toughness,
-                    StartStrength = 5, StartAgility = 4, StartToughness = 7, StartEnergy = 100, StartSatiety = 50,
+                    Id = TestIds.Ponchik, NameKey = "cat.ponchik", Aptitude = AttributeType.Endurance,
+                    StartStrength = 5, StartTechnique = 4, StartEndurance = 7, StartEnergy = 100, StartSatiety = 50,
                     ViewKey = "ponchik",
                 },
             },
@@ -90,8 +90,8 @@ namespace TrashCats.Tests
                     DurationMs = 25_000, EnergyCost = 10, SatietyCost = 4, BaseOutput = 3,
                 },
                 Training(TestIds.TrainStr, "act.train_str", AttributeType.Strength),
-                Training(TestIds.TrainAgi, "act.train_agi", AttributeType.Agility),
-                Training(TestIds.TrainTou, "act.train_tou", AttributeType.Toughness),
+                Training(TestIds.TrainAgi, "act.train_agi", AttributeType.Technique),
+                Training(TestIds.TrainTou, "act.train_tou", AttributeType.Endurance),
                 new ActivityDefinition
                 {
                     Id = TestIds.Sleep, NameKey = "act.sleep", Kind = ActivityKind.Sleep,
@@ -111,8 +111,8 @@ namespace TrashCats.Tests
                     Effect = new ResourceOutputBonusEffect { FoodPerLevel = new[] { 0, 1, 2 }, JunkPerLevel = new[] { 0, 1, 2 } },
                 },
                 Station(TestIds.Can, "upg.can", AttributeType.Strength),
-                Station(TestIds.Mouse, "upg.mouse", AttributeType.Agility),
-                Station(TestIds.Wheel, "upg.wheel", AttributeType.Toughness),
+                Station(TestIds.Mouse, "upg.mouse", AttributeType.Technique),
+                Station(TestIds.Wheel, "upg.wheel", AttributeType.Endurance),
             },
             Combat = new CombatConfig(),
             Skills = new[]
@@ -125,17 +125,17 @@ namespace TrashCats.Tests
                 },
                 new SkillDefinition
                 {
-                    Id = TestIds.DoublePaw, NameKey = "skill.double_paw", UnlockAttribute = AttributeType.Agility, UnlockLevel = 4,
+                    Id = TestIds.DoublePaw, NameKey = "skill.double_paw", UnlockAttribute = AttributeType.Technique, UnlockLevel = 4,
                     GritCost = 10, CooldownActions = 2, Effect = SkillEffectKind.Damage, DamagePermille = 700, Hits = 2,
                 },
                 new SkillDefinition
                 {
-                    Id = TestIds.ThickFur, NameKey = "skill.thick_fur", UnlockAttribute = AttributeType.Toughness, UnlockLevel = 4,
+                    Id = TestIds.ThickFur, NameKey = "skill.thick_fur", UnlockAttribute = AttributeType.Endurance, UnlockLevel = 4,
                     GritCost = 10, CooldownActions = 5, Effect = SkillEffectKind.DamageReduction, EffectPermille = 600, EffectCount = 3,
                 },
                 new SkillDefinition
                 {
-                    Id = TestIds.Dodge, NameKey = "skill.dodge", UnlockAttribute = AttributeType.Agility, UnlockLevel = 7,
+                    Id = TestIds.Dodge, NameKey = "skill.dodge", UnlockAttribute = AttributeType.Technique, UnlockLevel = 7,
                     GritCost = 8, CooldownActions = 4, Effect = SkillEffectKind.GuaranteedEvade, EffectCount = 1,
                 },
                 new SkillDefinition
@@ -156,7 +156,7 @@ namespace TrashCats.Tests
                 Enemy(TestIds.Pug, "enemy.pug", 5, 3, 9, TestIds.ThickFur, TestIds.Bite),
                 new EnemyDefinition
                 {
-                    Id = TestIds.Admiral, NameKey = "enemy.admiral", Strength = 9, Agility = 7, Toughness = 10,
+                    Id = TestIds.Admiral, NameKey = "enemy.admiral", Strength = 9, Technique = 7, Endurance = 10,
                     Skills = new[] { TestIds.Bite, TestIds.ThickFur, TestIds.DirtyTrick }, HpMultiplierPermille = 1700, ViewKey = "admiral",
                 },
             },
@@ -204,7 +204,7 @@ namespace TrashCats.Tests
 
         private static EnemyDefinition Enemy(EnemyId id, string nameKey, int str, int agi, int tou, params SkillId[] skills) => new EnemyDefinition
         {
-            Id = id, NameKey = nameKey, Strength = str, Agility = agi, Toughness = tou, Skills = skills, ViewKey = id.Value.Replace("enemy_", ""),
+            Id = id, NameKey = nameKey, Strength = str, Technique = agi, Endurance = tou, Skills = skills, ViewKey = id.Value.Replace("enemy_", ""),
         };
     }
 }

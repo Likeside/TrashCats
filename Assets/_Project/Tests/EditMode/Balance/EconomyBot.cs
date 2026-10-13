@@ -127,7 +127,7 @@ namespace TrashCats.Tests
                 var team = _world.Cats.Where(c => c.Energy >= 50)
                     .OrderByDescending(c => AttributeTypes.All.Sum(c.GetLevel)).Take(Battles.MaxTeamSize).ToList();
                 var teamPower = team.Sum(c => AttributeTypes.All.Sum(c.GetLevel));
-                var enemyPower = target.EnemyQueue.Select(_config.GetEnemy).Sum(e => (e.Strength + e.Agility + e.Toughness) * e.HpMultiplierPermille / 1000);
+                var enemyPower = target.EnemyQueue.Select(_config.GetEnemy).Sum(e => (e.Strength + e.Technique + e.Endurance) * e.HpMultiplierPermille / 1000);
                 var ready = teamPower >= enemyPower * readiness || t - lastLoss >= retryAfterLossMs && Fights.Any(f => f.Territory == target.Id.Value);
                 if (!ready || team.Count < Math.Min(_world.Cats.Count, Battles.MaxTeamSize) || t - lastLoss < 60_000)
                     continue;
@@ -304,7 +304,7 @@ namespace TrashCats.Tests
                 Upgrades = string.Join(" ", UpgradePriority.Select(id => $"{id.Value.Replace("upg_", "")}{_world.Upgrades.GetLevel(id)}")),
             };
             foreach (var cat in _world.Cats)
-                snapshot.Levels[cat.Id] = (cat.GetLevel(AttributeType.Strength), cat.GetLevel(AttributeType.Agility), cat.GetLevel(AttributeType.Toughness));
+                snapshot.Levels[cat.Id] = (cat.GetLevel(AttributeType.Strength), cat.GetLevel(AttributeType.Technique), cat.GetLevel(AttributeType.Endurance));
             Snapshots.Add(snapshot);
         }
 

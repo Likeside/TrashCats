@@ -41,7 +41,7 @@ MonoBehaviour:
   ring: {fileID: 21300000, guid: 214bbbf7c19b801e48a3b2f6014b0425, type: 3}
   ringGold: {fileID: 21300000, guid: e6189f0f4360d9459b9e452675133e53, type: 3}
   icons:
-  - key: agility
+  - key: technique
     sprite: {fileID: 21300000, guid: b23f37c8a4114b96f9356cbf30922f56, type: 3}
   - key: clock
     sprite: {fileID: 21300000, guid: d346b0677f51cffbcb1fd66738473228, type: 3}
@@ -89,7 +89,7 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 7735cfe5653dec278ad12f87b4b970c0, type: 3}
   - key: tools
     sprite: {fileID: 21300000, guid: 967f4f8ef6f05f95aba6388485997f7e, type: 3}
-  - key: toughness
+  - key: endurance
     sprite: {fileID: 21300000, guid: 7561cd0b9773c84bd91697c5a54749c6, type: 3}
   - key: upgrade
     sprite: {fileID: 21300000, guid: 139baac32267849ef919cae74fc0551b, type: 3}

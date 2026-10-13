@@ -152,7 +152,7 @@ namespace TrashCats.Presentation.Hideout
                     var picture = Ui.Picture(box.transform, "Prop", prop);
                     if (place.Flip)
                         picture.rectTransform.localScale = new Vector3(-1f, 1f, 1f);
-                    if (activity.Kind == ActivityKind.Train && activity.TrainedAttribute == AttributeType.Strength)
+                    if (activity.Kind == ActivityKind.Train && activity.TrainedAttribute == AttributeType.Technique)
                     {
                         // the can swings from the top of its rope when punched
                         picture.rectTransform.pivot = new Vector2(0.5f, 1f);
@@ -171,7 +171,7 @@ namespace TrashCats.Presentation.Hideout
                 }
                 if (activity.Kind == ActivityKind.Rummage)
                     _dumpster = box.rectTransform;
-                if (activity.Kind == ActivityKind.Train && activity.TrainedAttribute == AttributeType.Agility)
+                if (activity.Kind == ActivityKind.Train && activity.TrainedAttribute == AttributeType.Endurance)
                     _ropeProp = box.transform.Find("Prop")?.gameObject;
                 if (scavenge)
                     _streetGap = new Vector2((min.x + max.x) * 0.5f, min.y);

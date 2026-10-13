@@ -27,8 +27,8 @@ namespace TrashCats.Domain
         public EnemyId Id { get; init; }
         public string NameKey { get; init; }
         public int Strength { get; init; } = 1;
-        public int Agility { get; init; } = 1;
-        public int Toughness { get; init; } = 1;
+        public int Technique { get; init; } = 1;
+        public int Endurance { get; init; } = 1;
         public IReadOnlyList<SkillId> Skills { get; init; } = Array.Empty<SkillId>();
 
         /// <summary>Boss HP multiplier, permille (1500 = ×1.5).</summary>

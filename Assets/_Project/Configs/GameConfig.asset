@@ -33,17 +33,17 @@ MonoBehaviour:
   combat:
     tickMs: 100
     hpBase: 40
-    hpPerToughness: 12
+    hpPerEndurance: 12
     gritBase: 20
-    gritPerToughness: 5
+    gritPerEndurance: 5
     gritRegenPerAction: 3
     damageBase: 4
     damagePerStrength: 2
     intervalBaseTicks: 16
-    intervalAgilityDivisor: 2
+    intervalTechniqueDivisor: 2
     intervalMinTicks: 10
     hitBasePermille: 750
-    hitPerAgilityDiffPermille: 40
+    hitPerTechniqueDiffPermille: 40
     hitMinPermille: 350
     hitMaxPermille: 950
     varianceMinPermille: 850
@@ -57,8 +57,8 @@ MonoBehaviour:
     nameKey: cat.ryzhy
     aptitude: 0
     startStrength: 3
-    startAgility: 2
-    startToughness: 2
+    startTechnique: 2
+    startEndurance: 2
     startEnergy: 100
     startSatiety: 60
     viewKey: ryzhy
@@ -66,8 +66,8 @@ MonoBehaviour:
     nameKey: cat.shnyr
     aptitude: 1
     startStrength: 3
-    startAgility: 5
-    startToughness: 3
+    startTechnique: 5
+    startEndurance: 3
     startEnergy: 100
     startSatiety: 50
     viewKey: shnyr
@@ -75,8 +75,8 @@ MonoBehaviour:
     nameKey: cat.ponchik
     aptitude: 2
     startStrength: 5
-    startAgility: 4
-    startToughness: 7
+    startTechnique: 4
+    startEndurance: 7
     startEnergy: 100
     startSatiety: 50
     viewKey: ponchik
@@ -159,7 +159,7 @@ MonoBehaviour:
     valuesPerLevel: 000000001400000028000000
     foodPerLevel: 
     junkPerLevel: 
-    attribute: 0
+    attribute: 1
   - id: upg_mouse
     nameKey: upg.mouse
     costs: 140000003c000000
@@ -167,7 +167,7 @@ MonoBehaviour:
     valuesPerLevel: 000000001400000028000000
     foodPerLevel: 
     junkPerLevel: 
-    attribute: 1
+    attribute: 2
   - id: upg_wheel
     nameKey: upg.wheel
     costs: 140000003c000000
@@ -175,7 +175,7 @@ MonoBehaviour:
     valuesPerLevel: 000000001400000028000000
     foodPerLevel: 
     junkPerLevel: 
-    attribute: 2
+    attribute: 0
   skills:
   - id: skill_scratch
     nameKey: skill.scratch
@@ -259,16 +259,16 @@ MonoBehaviour:
   - id: enemy_rat
     nameKey: enemy.rat
     strength: 2
-    agility: 3
-    toughness: 1
+    technique: 3
+    endurance: 1
     skills: []
     hpMultiplierPermille: 1000
     viewKey: rat
   - id: enemy_gull
     nameKey: enemy.gull
     strength: 3
-    agility: 5
-    toughness: 2
+    technique: 5
+    endurance: 2
     skills:
     - skill_double_paw
     hpMultiplierPermille: 1000
@@ -276,8 +276,8 @@ MonoBehaviour:
   - id: enemy_shopcat
     nameKey: enemy.shopcat
     strength: 5
-    agility: 3
-    toughness: 4
+    technique: 3
+    endurance: 4
     skills:
     - skill_bite
     hpMultiplierPermille: 1000
@@ -285,8 +285,8 @@ MonoBehaviour:
   - id: enemy_crow
     nameKey: enemy.crow
     strength: 4
-    agility: 6
-    toughness: 3
+    technique: 6
+    endurance: 3
     skills:
     - skill_double_paw
     - skill_dodge
@@ -295,8 +295,8 @@ MonoBehaviour:
   - id: enemy_bigrat
     nameKey: enemy.bigrat
     strength: 5
-    agility: 4
-    toughness: 4
+    technique: 4
+    endurance: 4
     skills:
     - skill_bite
     - skill_dirty_trick
@@ -305,8 +305,8 @@ MonoBehaviour:
   - id: enemy_crow_boss
     nameKey: enemy.crow_boss
     strength: 5
-    agility: 7
-    toughness: 3
+    technique: 7
+    endurance: 3
     skills:
     - skill_double_paw
     - skill_dodge
@@ -315,8 +315,8 @@ MonoBehaviour:
   - id: enemy_raccoon
     nameKey: enemy.raccoon
     strength: 7
-    agility: 5
-    toughness: 5
+    technique: 5
+    endurance: 5
     skills:
     - skill_bite
     - skill_dirty_trick
@@ -325,8 +325,8 @@ MonoBehaviour:
   - id: enemy_pug
     nameKey: enemy.pug
     strength: 5
-    agility: 3
-    toughness: 9
+    technique: 3
+    endurance: 9
     skills:
     - skill_thick_fur
     - skill_bite
@@ -335,8 +335,8 @@ MonoBehaviour:
   - id: enemy_admiral
     nameKey: enemy.admiral
     strength: 9
-    agility: 7
-    toughness: 10
+    technique: 7
+    endurance: 10
     skills:
     - skill_bite
     - skill_thick_fur

@@ -34,20 +34,20 @@ namespace TrashCats.Domain
         public string Id { get; }
         public Side Side { get; }
         public int Strength { get; }
-        public int Agility { get; }
-        public int Toughness { get; }
+        public int Technique { get; }
+        public int Endurance { get; }
         public IReadOnlyList<SkillId> Skills { get; }
         public int HpMultiplierPermille { get; }
         public string ViewKey { get; }
 
-        public FighterSnapshot(string id, Side side, int strength, int agility, int toughness, IEnumerable<SkillId> skills,
+        public FighterSnapshot(string id, Side side, int strength, int technique, int endurance, IEnumerable<SkillId> skills,
             int hpMultiplierPermille = 1000, string viewKey = null)
         {
             Id = id;
             Side = side;
             Strength = strength;
-            Agility = agility;
-            Toughness = toughness;
+            Technique = technique;
+            Endurance = endurance;
             Skills = (skills ?? Enumerable.Empty<SkillId>()).ToArray();
             HpMultiplierPermille = hpMultiplierPermille;
             ViewKey = viewKey ?? id;
@@ -61,12 +61,12 @@ namespace TrashCats.Domain
                 if (cat.GetSkillInSlot(slot) is SkillId id)
                     skills.Add(id);
             return new FighterSnapshot(cat.Id.Value, Side.Player,
-                cat.GetLevel(AttributeType.Strength), cat.GetLevel(AttributeType.Agility), cat.GetLevel(AttributeType.Toughness),
+                cat.GetLevel(AttributeType.Strength), cat.GetLevel(AttributeType.Technique), cat.GetLevel(AttributeType.Endurance),
                 skills, 1000, config.GetCat(cat.Id).ViewKey);
         }
 
         public static FighterSnapshot FromEnemy(EnemyDefinition enemy) =>
-            new FighterSnapshot(enemy.Id.Value, Side.Enemy, enemy.Strength, enemy.Agility, enemy.Toughness,
+            new FighterSnapshot(enemy.Id.Value, Side.Enemy, enemy.Strength, enemy.Technique, enemy.Endurance,
                 enemy.Skills, enemy.HpMultiplierPermille, enemy.ViewKey);
     }
 

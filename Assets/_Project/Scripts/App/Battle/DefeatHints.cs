@@ -24,7 +24,7 @@ namespace TrashCats.App
                 hints.Add("defeat.bites");
             if (playerHits.Count >= 6 && playerHits.Count(h => !h.Hit) * 100 / playerHits.Count >= 40)
                 hints.Add("defeat.misses");
-            if (hints.Count < 2 && !hasFur && team.Average(f => f.Toughness) < battle.Setup.EnemyQueue.Average(f => f.Toughness))
+            if (hints.Count < 2 && !hasFur && team.Average(f => f.Endurance) < battle.Setup.EnemyQueue.Average(f => f.Endurance))
                 hints.Add("defeat.health");
             if (hints.Count == 0)
                 hints.Add("defeat.generic");

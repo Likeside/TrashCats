@@ -55,8 +55,8 @@ namespace TrashCats.Infrastructure
             public string nameKey;
             public AttributeType aptitude;
             public int startStrength = 1;
-            public int startAgility = 1;
-            public int startToughness = 1;
+            public int startTechnique = 1;
+            public int startEndurance = 1;
             public int startEnergy = 100;
             public int startSatiety = 60;
             public string viewKey;
@@ -119,17 +119,17 @@ namespace TrashCats.Infrastructure
         {
             public int tickMs = 100;
             public int hpBase = 40;
-            public int hpPerToughness = 12;
+            public int hpPerEndurance = 12;
             public int gritBase = 20;
-            public int gritPerToughness = 5;
+            public int gritPerEndurance = 5;
             public int gritRegenPerAction = 3;
             public int damageBase = 4;
             public int damagePerStrength = 2;
             public int intervalBaseTicks = 16;
-            public int intervalAgilityDivisor = 2;
+            public int intervalTechniqueDivisor = 2;
             public int intervalMinTicks = 10;
             public int hitBasePermille = 750;
-            public int hitPerAgilityDiffPermille = 40;
+            public int hitPerTechniqueDiffPermille = 40;
             public int hitMinPermille = 350;
             public int hitMaxPermille = 950;
             public int varianceMinPermille = 850;
@@ -146,8 +146,8 @@ namespace TrashCats.Infrastructure
             public string id;
             public string nameKey;
             public int strength = 1;
-            public int agility = 1;
-            public int toughness = 1;
+            public int technique = 1;
+            public int endurance = 1;
             public List<string> skills = new List<string>();
             public int hpMultiplierPermille = 1000;
             public string viewKey;

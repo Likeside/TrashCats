@@ -3,8 +3,8 @@ namespace TrashCats.Domain
     public enum AttributeType
     {
         Strength = 0,
-        Agility = 1,
-        Toughness = 2,
+        Technique = 1,
+        Endurance = 2,
     }
 
     public enum ResourceType
@@ -20,8 +20,8 @@ namespace TrashCats.Domain
         public static readonly AttributeType[] All =
         {
             AttributeType.Strength,
-            AttributeType.Agility,
-            AttributeType.Toughness,
+            AttributeType.Technique,
+            AttributeType.Endurance,
         };
     }
 }

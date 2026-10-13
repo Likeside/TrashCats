@@ -16,7 +16,7 @@
 Строковые id с префиксами (`cat_ryzhy`, `skill_bite`, `act_train_str`, `upg_can`, `ter_alley`, `enemy_rat`). В домене — обёртки-структуры для типобезопасности:
 ```
 readonly struct CatId { string Value }   // аналогично SkillId, ActivityId, UpgradeId, TerritoryId, EnemyId
-enum AttributeType { Strength, Agility, Toughness }
+enum AttributeType { Strength, Technique, Endurance }   // бывшие Agility/Toughness, см. §4
 enum ResourceType  { Food, Junk }
 ```
 
@@ -41,7 +41,7 @@ GameConfig {
 
 CatDefinition {
     Id, NameKey, Aptitude: AttributeType,
-    StartAttributes: (Str, Agi, Tou),
+    StartAttributes: (Str, Tech, End),
     StartEnergy, StartSatiety,
     ViewKey                      // ссылка на визуал (используется только Presentation)
 }
@@ -50,7 +50,7 @@ ActivityDefinition {
     Id, Kind: Scavenge | Rummage | Train | Sleep,
     DurationMs, EnergyCost, SatietyCost,
     TrainsAttribute?: AttributeType,     // для Train
-    StationUpgradeId?: UpgradeId,        // Банка/Мышь/Колесо — вместимость 1
+    StationUpgradeId?: UpgradeId,        // upg_can (Банка, Техника) / upg_mouse (Скакалка, Выносливость) / upg_wheel (Штанга, Сила) — вместимость 1
     BaseOutput: int,                     // Еда / Хлам / Энергия сна
     Capacity: int?                       // null = без лимита, 1 = станция
 }
@@ -70,7 +70,7 @@ TerritoryDefinition {
     IsFinal: bool
 }
 
-EnemyDefinition { Id, NameKey, Str, Agi, Tou, Skills: SkillId[], HpMultiplierPermille=1000|1500, ViewKey }
+EnemyDefinition { Id, NameKey, Str, Tech, End, Skills: SkillId[], HpMultiplierPermille=1000|1500, ViewKey }
 
 SkillDefinition {
     Id, NameKey, GritCost, CooldownActions,
@@ -93,11 +93,11 @@ SkillDefinition {
 ```
 CombatConfig {
     TickMs=100,
-    HpBase=40, HpPerTou=12,
-    GritBase=20, GritPerTou=5, GritRegenPerAction=3,
+    HpBase=40, HpPerEndurance=12,
+    GritBase=20, GritPerEndurance=5, GritRegenPerAction=3,
     DamageBase=4, DamagePerStr=2,
-    IntervalBaseTicks=16, IntervalAgiDivisor=2, IntervalMinTicks=10,
-    HitBasePermille=750, HitPerAgiDiffPermille=40, HitMinPermille=350, HitMaxPermille=950,
+    IntervalBaseTicks=16, IntervalTechniqueDivisor=2, IntervalMinTicks=10,
+    HitBasePermille=750, HitPerTechniqueDiffPermille=40, HitMinPermille=350, HitMaxPermille=950,
     VarianceMinPermille=850, VarianceMaxPermille=1150,
     SuddenDeathAfterTicks=450, SuddenDeathMultPermille=2000,
     FighterEntryPauseTicks=10,
@@ -154,7 +154,7 @@ PendingBattle {
 
 ### 2.1. Боевые модели
 ```
-FighterSnapshot { string Id; Side Side; int Str, Agi, Tou; SkillId[] Skills; int HpMultiplierPermille }
+FighterSnapshot { string Id; Side Side; int Str, Tech, End; SkillId[] Skills; int HpMultiplierPermille }
 BattleSetup     { FighterSnapshot[] PlayerQueue; FighterSnapshot[] EnemyQueue }
 
 // Внутреннее состояние бойца на ринге (не сохраняется)
@@ -206,6 +206,8 @@ BattleEvent =                          // у каждого: int Tick
 ## 4. Сохранение (DTO)
 
 DTO отделены от домена, чтобы рефакторинг доменных классов не ломал сохранения. Полная схема и версии — в [SAVE_SYSTEM.md](SAVE_SYSTEM.md).
+
+Переименование атрибутов (Agility → Technique, Toughness → Endurance) и замена колеса на штангу не затронули сохранения: в `FighterSave` (бой в `PendingBattle`) поля по-прежнему называются `Agility` и `Toughness`, а id занятий (`act_train_agi`, `act_train_tou`) и улучшений (`upg_mouse` — теперь Скакалка, `upg_wheel` — теперь Штанга) оставлены прежними.
 
 ```
 SaveData {
