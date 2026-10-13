@@ -89,6 +89,19 @@ namespace TrashCats.Presentation.Hideout
             };
         }
 
+        /// <summary>
+        /// Foot point of each cat running in the wheel, solved against the sprites (wheel_idle_00 inner floor, the union
+        /// of the cat's run frames with their feet on one line): every pixel stays inside the drum and the feet stand on
+        /// its floor, in the middle of the range of fitting positions.
+        /// </summary>
+        public static Vector2? RunFoot(string viewKey) => viewKey switch
+        {
+            "ryzhy" => new Vector2(0.804f, 0.392f),
+            "shnyr" => new Vector2(0.81f, 0.388f),
+            "ponchik" => new Vector2(0.789f, 0.388f),
+            _ => null,
+        };
+
         /// <summary>Idle cats hang around in front of the door.</summary>
         public static CatSpot Idle(int index) => new CatSpot(index switch
         {

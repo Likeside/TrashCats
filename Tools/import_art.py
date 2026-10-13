@@ -38,6 +38,17 @@ def process(sheet, frames, rows, extra):
     return out, name
 
 
+def feet_on_one_line(frames):
+    """Running in place: shifts every frame so its lowest point (the foot on the ground) is on the same row."""
+    images = [Image.open(f).convert("RGBA") for f in frames]
+    lows = [int(np.nonzero(np.array(im)[..., 3] > 40)[0].max()) for im in images]
+    target = max(lows)
+    for f, im, low in zip(frames, images, lows):
+        shifted = Image.new("RGBA", im.size, (0, 0, 0, 0))
+        shifted.paste(im, (0, target - low))
+        shifted.save(f)
+
+
 def trim(path, pad=6):
     im = Image.open(path)
     box = im.getchannel("A").point(lambda v: 255 if v > 24 else 0).getbbox()
@@ -104,6 +115,8 @@ def main():
             for old in glob.glob(f"{folder}/*.png*"):
                 os.remove(old)
             frames = sorted(glob.glob(f"{out}/{base}_[0-9].png"), key=lambda p: int(p.rsplit("_", 1)[1][:-4]))
+            if clip == "Run":
+                feet_on_one_line(frames)
             for i, f in enumerate(frames):
                 put(f, f"{folder}/{key.lower()}_{clip.lower()}_{i:02d}.png")
         elif name.startswith("prop_"):
