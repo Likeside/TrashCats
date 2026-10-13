@@ -234,6 +234,7 @@ MonoBehaviour:
   characterArt: {fileID: 11400000, guid: efdd354ea489ac7c89b0bdfcc8bb432a, type: 2}
   arenaBackground: {fileID: 0}
   uiSkin: {fileID: 11400000, guid: 91151bcb605ec8eedb669bc7327629ec, type: 2}
+  audioLibrary: {fileID: 11400000, guid: 8a2cfcbc813cee19aba83bdd0b3ae65b, type: 2}
 --- !u!4 &1658623799
 Transform:
   m_ObjectHideFlags: 0

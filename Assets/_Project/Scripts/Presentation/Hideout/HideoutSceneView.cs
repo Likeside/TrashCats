@@ -32,6 +32,7 @@ namespace TrashCats.Presentation.Hideout
         private readonly CharacterViewFactory _art;
         private readonly Dictionary<CatId, CatToken> _tokens = new Dictionary<CatId, CatToken>();
         private readonly Dictionary<UpgradeId, TMP_Text> _upgradeLabels = new Dictionary<UpgradeId, TMP_Text>();
+        private readonly Dictionary<UpgradeId, RectTransform> _stations = new Dictionary<UpgradeId, RectTransform>();
         private readonly List<IDisposable> _subscriptions = new List<IDisposable>();
 
         public HideoutSceneView(GameSession session, EventBus bus, RectTransform root, Action<CatId> onCatTapped, Action<UpgradeId> onStationTapped,
@@ -65,7 +66,11 @@ namespace TrashCats.Presentation.Hideout
             _subscriptions.Add(bus.Subscribe<ActivityStarted>(e => { if (!e.IsRepeat) LayoutTokens(true); }));
             _subscriptions.Add(bus.Subscribe<ActivityStopped>(_ => LayoutTokens(true)));
             _subscriptions.Add(bus.Subscribe<ActivityCycleCompleted>(OnCycleCompleted));
-            _subscriptions.Add(bus.Subscribe<UpgradePurchased>(e => RefreshUpgrade(e.UpgradeId)));
+            _subscriptions.Add(bus.Subscribe<UpgradePurchased>(e =>
+            {
+                RefreshUpgrade(e.UpgradeId);
+                Sparkle(e.UpgradeId);
+            }));
         }
 
         /// <summary>Adds tokens for newly recruited cats.</summary>
@@ -131,6 +136,7 @@ namespace TrashCats.Presentation.Hideout
                     _upgradeLabels[upgrade.Value] = text;
                     RefreshUpgrade(upgrade.Value);
                     var id = upgrade.Value;
+                    _stations[id] = box.rectTransform;
                     box.raycastTarget = true;
                     box.gameObject.AddComponent<Button>().onClick.AddListener(() => _onStationTapped(id));
                     box.name = "Station_" + id;
@@ -150,6 +156,32 @@ namespace TrashCats.Presentation.Hideout
             };
             var label = activity.Kind == ActivityKind.Scavenge ? "Улица →" : upgrade != null ? Texts.UpgradeName(upgrade.Value) : Texts.ActivityShort(activity);
             return (label, upgrade);
+        }
+
+        /// <summary>Sparkles over a station that was just upgraded (CONTENT_SPEC §9).</summary>
+        private void Sparkle(UpgradeId id)
+        {
+            var sprite = Ui.Skin?.fxSparkle;
+            if (sprite == null || !_stations.TryGetValue(id, out var station))
+                return;
+            station.DOPunchScale(Vector3.one * 0.12f, 0.4f, 6, 0.5f);
+            for (var i = 0; i < 3; i++)
+            {
+                var image = Ui.Panel(station, "Sparkle", Color.white);
+                image.sprite = sprite;
+                image.preserveAspect = true;
+                var rt = image.rectTransform;
+                rt.anchorMin = rt.anchorMax = new Vector2(0.2f + 0.3f * i, 0.6f + 0.15f * (i % 2));
+                rt.sizeDelta = new Vector2(120, 140);
+                rt.localScale = Vector3.zero;
+                DOTween.Sequence()
+                    .AppendInterval(0.12f * i)
+                    .Append(rt.DOScale(1f, 0.2f).SetEase(Ease.OutBack))
+                    .Join(rt.DOAnchorPosY(70f, 0.8f).SetRelative())
+                    .Append(image.DOFade(0f, 0.35f))
+                    .OnComplete(() => UnityEngine.Object.Destroy(image.gameObject))
+                    .SetLink(image.gameObject);
+            }
         }
 
         private void RefreshUpgrade(UpgradeId id)

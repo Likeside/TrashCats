@@ -28,6 +28,7 @@ namespace TrashCats.Presentation.Battle
         private readonly TMP_Text _title;
         private readonly TMP_Text _banner;
         private readonly RectTransform _bannerRoot;
+        private readonly CanvasGroup _rage;
         private readonly CanvasGroup _bannerGroup;
         private readonly RectTransform[] _queues = new RectTransform[2];
         private readonly List<(string Id, RoundPicture Picture)>[] _queuePictures = { new List<(string, RoundPicture)>(), new List<(string, RoundPicture)>() };
@@ -74,6 +75,15 @@ namespace TrashCats.Presentation.Battle
                 _huds[side] = new FighterHud(root, side);
             }
 
+            // red halftone vignette while "Ярость!" lasts
+            var rage = Ui.Panel(root, "Rage", Ui.Skin?.rageVignette != null ? Color.white : new Color(0.8f, 0.1f, 0.1f, 0.25f));
+            rage.sprite = Ui.Skin?.rageVignette;
+            rage.rectTransform.Fill();
+            rage.transform.SetAsFirstSibling();
+            _rage = rage.gameObject.AddComponent<CanvasGroup>();
+            _rage.alpha = 0f;
+            _rage.blocksRaycasts = false;
+
             // skill banner: a tilted yellow comic ribbon (Art Bible §6), or outlined yellow text without the skin
             _bannerRoot = Ui.Rect(root, "Banner").Place(new Vector2(0.05f, 0.71f), new Vector2(0.95f, 0.81f));
             _bannerGroup = _bannerRoot.gameObject.AddComponent<CanvasGroup>();
@@ -103,6 +113,11 @@ namespace TrashCats.Presentation.Battle
 
         public event Action<int> SpeedChanged;
 
+        /// <summary>Battle sounds; null plays nothing.</summary>
+        public Audio.GameAudio Audio { get; set; }
+
+        private void Sound(string key, float volume = 1f) => Audio?.Play(key, volume);
+
         /// <summary>Starts replaying the current pending battle. With <paramref name="resultsOnly"/> jumps straight to the results.</summary>
         public void Play(bool resultsOnly)
         {
@@ -127,6 +142,9 @@ namespace TrashCats.Presentation.Battle
                          || _session.World.Territories.Get(_battle.Territory).Attempts > 1;
             _skip.Interactable = repeat || Debug.isDebugBuild;
             BuildQueues();
+            _rage.alpha = 0f;
+            _rage.DOKill();
+            if (!resultsOnly) Sound("cmb_bell", 0.7f);
             if (resultsOnly)
                 Skip();
             RefreshQueues();
@@ -193,6 +211,7 @@ namespace TrashCats.Presentation.Battle
                     }
 
                     _views[side] = view;
+                    if (animate && entered.Side == Side.Player) Sound("cmb_hiss", 0.6f);
                     _huds[side].Enter(NameOf(entered.FighterId, entered.Side), entered.Hp, entered.MaxHp, entered.Grit, entered.MaxGrit);
                     RefreshQueues();
                     break;
@@ -204,6 +223,7 @@ namespace TrashCats.Presentation.Battle
                     if (animate)
                     {
                         _views[side]?.PlayAttack(_session.Config.GetSkill(action.SkillId), _speedFactor);
+                        Sound("cmb_swing");
                         if (!_session.Config.GetSkill(action.SkillId).IsInnate)
                             ShowBanner(Texts.SkillName(action.SkillId) + "!");
                     }
@@ -221,6 +241,14 @@ namespace TrashCats.Presentation.Battle
                         FloatAt(Spots[target] + new Vector3(0, 4.6f + hit.HitIndex * 0.6f, 0), text, color, hit.Hit && hit.Damage >= 20 ? 64 : 52);
                         if (hit.Hit) _views[target]?.PlayHit(_speedFactor);
                         else _views[target]?.PlayDodge(target == 0, _speedFactor);
+                        var heavy = hit.Hit && hit.Damage >= 20;
+                        Sound(!hit.Hit ? "cmb_miss" : heavy ? "cmb_hit_heavy" : "cmb_hit");
+                        if (hit.Hit)
+                        {
+                            // comic impact: a star on heavy hits (with a shake), claw marks on the others
+                            Effect(Spots[target] + new Vector3(0, 2.4f + hit.HitIndex * 0.4f, 0), heavy ? Ui.Skin?.fxStar : Ui.Skin?.fxScratch, heavy ? 340 : 240);
+                            if (heavy) Shake(0.25f);
+                        }
                     }
 
                     break;
@@ -229,17 +257,33 @@ namespace TrashCats.Presentation.Battle
                     _huds[(int)status.Side].SetStatus(status.Status, status.Value);
                     break;
                 case SuddenDeathStarted _:
-                    if (animate) ShowBanner("Ярость!");
+                    if (animate)
+                    {
+                        ShowBanner("Ярость!");
+                        Sound("cmb_bell");
+                        _rage.DOKill();
+                        _rage.alpha = 0.5f;
+                        _rage.DOFade(1f, 0.5f).SetLoops(-1, LoopType.Yoyo).SetLink(_rage.gameObject);
+                    }
                     break;
                 case FighterKnockedOut ko:
                 {
                     var side = (int)ko.Side;
-                    if (animate) _views[side]?.PlayKnockOut(side == 0, _speedFactor);
+                    if (animate)
+                    {
+                        _views[side]?.PlayKnockOut(side == 0, _speedFactor);
+                        Sound("cmb_ko");
+                        Effect(Spots[side] + new Vector3(0, 0.6f, 0), Ui.Skin?.fxDust, 380);
+                        Shake(0.35f);
+                    }
                     _huds[side].KnockedOut();
                     break;
                 }
                 case BattleEnded ended:
                     ShowBanner(ended.Outcome == BattleOutcome.Victory ? "Победа!" : "Поражение");
+                    Sound(ended.Outcome == BattleOutcome.Victory ? "cmb_win" : "cmb_lose");
+                    _rage.DOKill();
+                    _rage.DOFade(0f, 0.3f).SetLink(_rage.gameObject);
                     foreach (var view in _views)
                         view?.PlayIdle();
                     _endDelay = animate ? 1.2f : 0.01f;
@@ -296,6 +340,37 @@ namespace TrashCats.Presentation.Battle
             _bannerRoot.localScale = Vector3.one * 1.3f;
             _bannerRoot.DOScale(1f, 0.2f).SetLink(_bannerRoot.gameObject);
             _bannerGroup.DOFade(0f, 0.5f).SetDelay(0.7f / _speedFactor).SetLink(_bannerRoot.gameObject);
+        }
+
+        /// <summary>A comic effect sprite popping at a world point and fading out.</summary>
+        private void Effect(Vector3 world, Sprite sprite, float size)
+        {
+            var camera = Camera.main;
+            if (sprite == null || camera == null) return;
+            var image = Ui.Panel(_uiRoot, "Fx", Color.white);
+            image.sprite = sprite;
+            image.preserveAspect = true;
+            var rt = image.rectTransform;
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(_uiRoot, camera.WorldToScreenPoint(world), null, out var local);
+            rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 0.5f);
+            rt.sizeDelta = new Vector2(size, size);
+            rt.anchoredPosition = local;
+            rt.localRotation = Quaternion.Euler(0, 0, UnityEngine.Random.Range(-20f, 20f));
+            rt.localScale = Vector3.one * 0.3f;
+            var duration = 0.35f / _speedFactor;
+            DOTween.Sequence()
+                .Append(rt.DOScale(1f, duration * 0.4f).SetEase(Ease.OutBack))
+                .Append(image.DOFade(0f, duration * 0.6f))
+                .OnComplete(() => UnityEngine.Object.Destroy(image.gameObject))
+                .SetLink(image.gameObject);
+        }
+
+        private void Shake(float strength)
+        {
+            var camera = Camera.main;
+            if (camera == null) return;
+            camera.transform.DOComplete();
+            camera.transform.DOShakePosition(0.25f / _speedFactor, strength, 18).SetLink(camera.gameObject);
         }
 
         private void FloatAt(Vector3 world, string text, Color color, int size)

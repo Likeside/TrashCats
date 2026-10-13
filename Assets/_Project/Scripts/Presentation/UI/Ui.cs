@@ -30,6 +30,9 @@ namespace TrashCats.Presentation.UI
 
         public static UiSkin Skin { get; set; }
 
+        /// <summary>Any button made by <see cref="Button"/> was pressed (click sound).</summary>
+        public static event Action ButtonClicked;
+
         public static Canvas CreateCanvas(string name, int sortingOrder)
         {
             var go = new GameObject(name, typeof(Canvas), typeof(CanvasScaler), typeof(GraphicRaycaster));
@@ -180,6 +183,7 @@ namespace TrashCats.Presentation.UI
             text.enableAutoSizing = true;
             text.fontSizeMax = fontSize;
             text.fontSizeMin = Mathf.Max(18, fontSize * 0.6f);
+            button.onClick.AddListener(() => ButtonClicked?.Invoke());
             if (onClick != null)
                 button.onClick.AddListener(() => onClick());
             var result = new UiButton(button, image, text);

@@ -23,6 +23,7 @@ namespace TrashCats.Presentation.Bootstrap
         [SerializeField] private CharacterArtRegistry characterArt;
         [SerializeField] private Sprite arenaBackground;
         [SerializeField] private UiSkin uiSkin;
+        [SerializeField] private Audio.AudioLibrary audioLibrary;
 
         private GameServices _services;
         private ScreenRouter _router;
@@ -35,6 +36,8 @@ namespace TrashCats.Presentation.Bootstrap
         private UpgradePanel _upgrades;
         private MessageQueue _messages;
         private TutorialService _tutorial;
+        private Audio.GameAudio _audio;
+        private System.Action _onButtonClicked;
         private Tutorial.TutorialOverlay _tutorialOverlay;
 
         /// <summary>Widget the tutorial points at right now (dev autoplay).</summary>
@@ -145,6 +148,38 @@ namespace TrashCats.Presentation.Bootstrap
                 var hint = Tutorial.TutorialOverlay.Hint(id);
                 if (hint != null) _messages.Enqueue(hint.Value.Title, hint.Value.Body);
             };
+
+            // sound: clicks, opened sheets/modals, music per screen (CONTENT_SPEC §10)
+            _audio = new Audio.GameAudio(audioLibrary, transform)
+            {
+                SfxVolume = _services.Settings.SfxVolume,
+                MusicVolume = _services.Settings.MusicVolume,
+            };
+            _onButtonClicked = () => _audio.Play("ui_tap");
+            Ui.ButtonClicked += _onButtonClicked;
+            _overlays.Pushed += root => _audio.Play(root.name == "Message" ? "ui_popup" : "ui_open");
+            _router.Changed += id => _audio.PlayMusic(id == ScreenId.Combat ? "music_battle" : "music_hideout");
+            _combat.Audio = _audio;
+        }
+
+        private void PlayHideoutSound(ActivityCycleCompleted e)
+        {
+            if (_router.Current != ScreenId.Hideout)
+                return;
+            var activity = _services.Config.GetActivity(e.ActivityId);
+            var key = activity.Kind switch
+            {
+                ActivityKind.Rummage => "hid_dumpster",
+                ActivityKind.Sleep => "hid_sleep",
+                ActivityKind.Scavenge => "ui_reward",
+                _ => activity.TrainedAttribute switch
+                {
+                    AttributeType.Strength => "hid_can",
+                    AttributeType.Agility => "hid_mouse",
+                    _ => "hid_wheel",
+                },
+            };
+            _audio.Play(key, activity.Kind == ActivityKind.Sleep ? 0.5f : 1f);
         }
 
         private void Subscribe()
@@ -153,9 +188,14 @@ namespace TrashCats.Presentation.Bootstrap
             var config = _services.Config;
             _subscriptions.Add(bus.Subscribe<DomainEvent>(_ => RefreshAll()));
             _subscriptions.Add(bus.Subscribe<OfflineProgressApplied>(e => _offline.Show(e.Summary)));
+            _subscriptions.Add(bus.Subscribe<ActivityCycleCompleted>(PlayHideoutSound));
+            _subscriptions.Add(bus.Subscribe<ResourcesChanged>(e => { if (e.FoodDelta < 0) _audio.Play("hid_eat"); }));
+            _subscriptions.Add(bus.Subscribe<UpgradePurchased>(_ => _audio.Play("ui_buy")));
+            _subscriptions.Add(bus.Subscribe<AttributeLevelUp>(_ => { if (_router.Current == ScreenId.Hideout) _audio.Play("hid_levelup", 0.8f); }));
             _subscriptions.Add(bus.Subscribe<CatRecruited>(e =>
             {
                 _hideout.RebuildCats();
+                _audio.Play("hid_meow");
                 var cat = config.GetCat(e.CatId);
                 _messages.Enqueue("Новый кот в банде!", $"{Texts.CatName(e.CatId)} теперь с вами.\nСклонность: {Texts.Attribute(cat.Aptitude)}.\n\nТренажёр вмещает одного кота — распредели их по станциям.");
             }));
@@ -217,7 +257,10 @@ namespace TrashCats.Presentation.Bootstrap
         private void ShowResult(CommandResult result)
         {
             if (!result.IsOk)
+            {
                 _hideout.Toast(Texts.Error(result.Error));
+                _audio.Play("ui_error");
+            }
         }
 
         private void Update()
@@ -244,6 +287,7 @@ namespace TrashCats.Presentation.Bootstrap
         private void OnDestroy()
         {
             _tutorialOverlay?.Dispose();
+            if (_onButtonClicked != null) Ui.ButtonClicked -= _onButtonClicked;
             _tutorial?.Dispose();
             foreach (var s in _subscriptions) s.Dispose();
             _hideout?.Dispose();
