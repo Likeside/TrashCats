@@ -113,6 +113,8 @@ namespace TrashCats.Presentation.Battle
 
         public event Action<int> SpeedChanged;
 
+        public CharacterView DevPlayerView => _views[0];
+
         /// <summary>Battle sounds; null plays nothing.</summary>
         public Audio.GameAudio Audio { get; set; }
 

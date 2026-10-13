@@ -129,10 +129,10 @@ TextureImporter:
       name: ryzhy_punch_03_0
       rect:
         serializedVersion: 2
-        x: 20
-        y: 18
-        width: 362
-        height: 353
+        x: 334
+        y: 17
+        width: 243
+        height: 365
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

@@ -1224,18 +1224,34 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 604ec938a0930bfcdb633062013a1a52, type: 3}
       - {fileID: 21300000, guid: 67fc9714a36df4f00b9b0c03b5521581, type: 3}
       - {fileID: 21300000, guid: 85b5cd79f91b356ec9f9d63d7d307824, type: 3}
-      fps: 12
+      - {fileID: 21300000, guid: dafeeafa48daf34e3a31d42e2a70980a, type: 3}
+      - {fileID: 21300000, guid: 9974288708698c16191429be6dffec30, type: 3}
+      - {fileID: 21300000, guid: 9beca196c89234c4c9370a531fa04e14, type: 3}
+      - {fileID: 21300000, guid: 27b643ef1723e6ba39a866d9c88a4bcf, type: 3}
+      - {fileID: 21300000, guid: 3932681a86071ab7d995c32de5b759b8, type: 3}
+      - {fileID: 21300000, guid: 40b4f9b1f2a5dcb6ab01b0b5e0fd46b7, type: 3}
+      - {fileID: 21300000, guid: d0c724a98415f5b999c02d892ec2315c, type: 3}
+      - {fileID: 21300000, guid: 952883c478f4c8d2bae343523d27c197, type: 3}
+      fps: 24
       loop: 0
-      keys: 
+      keys: 00000000030000000600000007000000080000000b0000000c0000000f000000
       pingPong: 0
       attachPoints:
       - {x: 0.125, y: 1.47}
+      - {x: 0.1483, y: 1.46}
+      - {x: 0.1717, y: 1.45}
       - {x: 0.195, y: 1.44}
+      - {x: 0.2317, y: 1.4367}
+      - {x: 0.2683, y: 1.4333}
       - {x: 0.305, y: 1.43}
       - {x: 0.455, y: 1.38}
       - {x: 0.445, y: 1.38}
+      - {x: 0.4483, y: 1.3867}
+      - {x: 0.4517, y: 1.3933}
       - {x: 0.455, y: 1.4}
       - {x: 0.175, y: 1.41}
+      - {x: 0.155, y: 1.4167}
+      - {x: 0.135, y: 1.4233}
       - {x: 0.115, y: 1.43}
       breathe: 0
       breathePeriod: 2.4

@@ -46,6 +46,9 @@ namespace TrashCats.Presentation.Bootstrap
 
         /// <summary>Dev autoplay: ends the guided tutorial so screenshots show the scene.</summary>
         public void DevSkipTutorial() => _tutorial?.Skip();
+
+        /// <summary>Dev: the cat currently in the battle ring.</summary>
+        public Characters.CharacterView DevPlayerFighter => _combat?.DevPlayerView;
         private OfflineSummaryModal _offline;
         private GameObject _background;
         private readonly List<System.IDisposable> _subscriptions = new List<System.IDisposable>();
