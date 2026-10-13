@@ -164,6 +164,12 @@ namespace TrashCats.Presentation.Dev
             yield return Shot("03c_stations");
             yield return new WaitForSeconds(0.2f);
             yield return Shot("03d_stations_later");
+            services.Session.AssignActivity(new TrashCats.Domain.CatId("cat_ponchik"), new TrashCats.Domain.ActivityId("act_train_str"));
+            services.Debug.SkipGameTime(20 * 60_000L);
+            services.Session.AssignActivity(new TrashCats.Domain.CatId("cat_ponchik"), new TrashCats.Domain.ActivityId("act_sleep"));
+            yield return new WaitForSeconds(0.8f);
+            for (var i = 0; i < 4; i++) Dismiss();
+            yield return Shot("03s_sleep");
             services.Session.AssignActivity(new TrashCats.Domain.CatId("cat_ryzhy"), new TrashCats.Domain.ActivityId("act_train_agi"));
             services.Session.AssignActivity(new TrashCats.Domain.CatId("cat_shnyr"), new TrashCats.Domain.ActivityId("act_rummage"));
             services.Session.AssignActivity(new TrashCats.Domain.CatId("cat_ponchik"), new TrashCats.Domain.ActivityId("act_scavenge"));

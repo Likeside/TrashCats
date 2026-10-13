@@ -132,10 +132,10 @@ TextureImporter:
       name: shnyr_dig_07_0
       rect:
         serializedVersion: 2
-        x: 69
-        y: 171
-        width: 107
-        height: 55
+        x: 36
+        y: 15
+        width: 138
+        height: 158
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,10 +154,10 @@ TextureImporter:
       name: shnyr_dig_07_1
       rect:
         serializedVersion: 2
-        x: 34
-        y: 15
-        width: 141
-        height: 153
+        x: 89
+        y: 169
+        width: 86
+        height: 47
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

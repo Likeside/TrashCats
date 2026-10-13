@@ -32,6 +32,7 @@ SHEETS = {
     "ui_a_buttons": ["button_a_yellow", "button_a_blue", "button_a_grey"],
     "ui_a_parts": ["hud_a"],
     "ui_a_sheet": ["panel_a"],
+    "icon_endurance": ["icon_toughness"],
     "ui_event_icons": ["icon_victory", "icon_defeat", "icon_newcat", "icon_skill", "icon_flag", "icon_levelup", "icon_final", "icon_tools"],
     "cat_busts": ["bust_ryzhy", "bust_shnyr", "bust_ponchik"],
     "fx_combat": ["fx_star", "fx_dust", "fx_scratch", "fx_sparkle"],

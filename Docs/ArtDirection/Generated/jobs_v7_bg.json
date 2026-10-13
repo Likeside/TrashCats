@@ -1,0 +1,10 @@
+[
+ {
+  "name": "bg_hideout",
+  "size": "1024x1536",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v4/bg_hideout.png"
+  ],
+  "prompt": "Redraw EXACTLY this picture: the same place, the same composition (the wall with the lit back door on the upper half, the pipes, the street gap at the right, the sky at the top right), the same comic style and colours, but with the camera moved just a little bit back (about half a metre, zoom out by only about 12%): everything on the wall is slightly smaller and there is a bit more empty cobblestone ground at the bottom. The ground stays completely empty: no dumpster, no boxes, no drain grate, no trash, no characters, no text."
+ }
+]

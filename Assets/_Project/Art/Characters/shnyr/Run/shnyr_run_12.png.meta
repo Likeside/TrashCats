@@ -129,10 +129,10 @@ TextureImporter:
       name: shnyr_run_12_0
       rect:
         serializedVersion: 2
-        x: 29
-        y: 14
-        width: 245
-        height: 333
+        x: 0
+        y: 11
+        width: 244
+        height: 396
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

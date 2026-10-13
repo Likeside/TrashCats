@@ -1,0 +1,226 @@
+[
+ {
+  "name": "run_ryzhy_0",
+  "size": "1024x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v4/ryzhy_idle8.png",
+   "Docs/ArtDirection/Generated/raw_v6/ryzhy_run3.png"
+  ],
+  "prompt": "ONE single full-body drawing of the orange tabby tomcat Ryzhy, exactly the same character, proportions and comic style as in the references (bold black ink outlines, flat colours), jogging upright on the two hind legs, strict side view, the head on the LEFT, facing LEFT, determined face. Exact pose of this running frame — CONTACT: the NEAR leg (the one closer to the viewer, drawn in the normal fur colour) is stretched forward (to the left) with its foot touching the ground; the FAR leg (the one further from the viewer, drawn clearly DARKER, in shadow) is stretched backward, its toes pushing off the ground. The far arm swings forward, the near arm back. The two legs must be easy to tell apart. Centred, the whole body visible with space around it. Solid flat pure chroma-key GREEN (#00FF00) background everywhere, no ground line, no shadow, no text."
+ },
+ {
+  "name": "run_ryzhy_1",
+  "size": "1024x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v4/ryzhy_idle8.png",
+   "Docs/ArtDirection/Generated/raw_v6/ryzhy_run3.png"
+  ],
+  "prompt": "ONE single full-body drawing of the orange tabby tomcat Ryzhy, exactly the same character, proportions and comic style as in the references (bold black ink outlines, flat colours), jogging upright on the two hind legs, strict side view, the head on the LEFT, facing LEFT, determined face. Exact pose of this running frame — DOWN: the NEAR leg (the one closer to the viewer, drawn in the normal fur colour) is bent under the body carrying the weight, foot flat on the ground; the FAR leg (the one further from the viewer, drawn clearly DARKER, in shadow) is lifted behind, knee bent, foot up near the rump. The two legs must be easy to tell apart. Centred, the whole body visible with space around it. Solid flat pure chroma-key GREEN (#00FF00) background everywhere, no ground line, no shadow, no text."
+ },
+ {
+  "name": "run_ryzhy_2",
+  "size": "1024x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v4/ryzhy_idle8.png",
+   "Docs/ArtDirection/Generated/raw_v6/ryzhy_run3.png"
+  ],
+  "prompt": "ONE single full-body drawing of the orange tabby tomcat Ryzhy, exactly the same character, proportions and comic style as in the references (bold black ink outlines, flat colours), jogging upright on the two hind legs, strict side view, the head on the LEFT, facing LEFT, determined face. Exact pose of this running frame — PASSING: the NEAR leg (the one closer to the viewer, drawn in the normal fur colour) is straight under the body on the ground; the FAR leg (the one further from the viewer, drawn clearly DARKER, in shadow) swings forward with the knee raised high in front of the body. The two legs must be easy to tell apart. Centred, the whole body visible with space around it. Solid flat pure chroma-key GREEN (#00FF00) background everywhere, no ground line, no shadow, no text."
+ },
+ {
+  "name": "run_ryzhy_3",
+  "size": "1024x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v4/ryzhy_idle8.png",
+   "Docs/ArtDirection/Generated/raw_v6/ryzhy_run3.png"
+  ],
+  "prompt": "ONE single full-body drawing of the orange tabby tomcat Ryzhy, exactly the same character, proportions and comic style as in the references (bold black ink outlines, flat colours), jogging upright on the two hind legs, strict side view, the head on the LEFT, facing LEFT, determined face. Exact pose of this running frame — REACH: the NEAR leg (the one closer to the viewer, drawn in the normal fur colour) pushes off behind the body; the FAR leg (the one further from the viewer, drawn clearly DARKER, in shadow) reaches forward in the air, about to land. Both feet almost off the ground. The two legs must be easy to tell apart. Centred, the whole body visible with space around it. Solid flat pure chroma-key GREEN (#00FF00) background everywhere, no ground line, no shadow, no text."
+ },
+ {
+  "name": "run_ryzhy_4",
+  "size": "1024x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v4/ryzhy_idle8.png",
+   "Docs/ArtDirection/Generated/raw_v6/ryzhy_run3.png"
+  ],
+  "prompt": "ONE single full-body drawing of the orange tabby tomcat Ryzhy, exactly the same character, proportions and comic style as in the references (bold black ink outlines, flat colours), jogging upright on the two hind legs, strict side view, the head on the LEFT, facing LEFT, determined face. Exact pose of this running frame — CONTACT: the FAR leg (the one further from the viewer, drawn clearly DARKER, in shadow) is stretched forward (to the left) with its foot touching the ground; the NEAR leg (the one closer to the viewer, drawn in the normal fur colour) is stretched backward, its toes pushing off. The near arm swings forward, the far arm back. The two legs must be easy to tell apart. Centred, the whole body visible with space around it. Solid flat pure chroma-key GREEN (#00FF00) background everywhere, no ground line, no shadow, no text."
+ },
+ {
+  "name": "run_ryzhy_5",
+  "size": "1024x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v4/ryzhy_idle8.png",
+   "Docs/ArtDirection/Generated/raw_v6/ryzhy_run3.png"
+  ],
+  "prompt": "ONE single full-body drawing of the orange tabby tomcat Ryzhy, exactly the same character, proportions and comic style as in the references (bold black ink outlines, flat colours), jogging upright on the two hind legs, strict side view, the head on the LEFT, facing LEFT, determined face. Exact pose of this running frame — DOWN: the FAR leg (the one further from the viewer, drawn clearly DARKER, in shadow) is bent under the body carrying the weight; the NEAR leg (the one closer to the viewer, drawn in the normal fur colour) is lifted behind, knee bent, foot up near the rump. The two legs must be easy to tell apart. Centred, the whole body visible with space around it. Solid flat pure chroma-key GREEN (#00FF00) background everywhere, no ground line, no shadow, no text."
+ },
+ {
+  "name": "run_ryzhy_6",
+  "size": "1024x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v4/ryzhy_idle8.png",
+   "Docs/ArtDirection/Generated/raw_v6/ryzhy_run3.png"
+  ],
+  "prompt": "ONE single full-body drawing of the orange tabby tomcat Ryzhy, exactly the same character, proportions and comic style as in the references (bold black ink outlines, flat colours), jogging upright on the two hind legs, strict side view, the head on the LEFT, facing LEFT, determined face. Exact pose of this running frame — PASSING: the FAR leg (the one further from the viewer, drawn clearly DARKER, in shadow) is straight under the body on the ground; the NEAR leg (the one closer to the viewer, drawn in the normal fur colour) swings forward with the knee raised high in front of the body. The two legs must be easy to tell apart. Centred, the whole body visible with space around it. Solid flat pure chroma-key GREEN (#00FF00) background everywhere, no ground line, no shadow, no text."
+ },
+ {
+  "name": "run_ryzhy_7",
+  "size": "1024x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v4/ryzhy_idle8.png",
+   "Docs/ArtDirection/Generated/raw_v6/ryzhy_run3.png"
+  ],
+  "prompt": "ONE single full-body drawing of the orange tabby tomcat Ryzhy, exactly the same character, proportions and comic style as in the references (bold black ink outlines, flat colours), jogging upright on the two hind legs, strict side view, the head on the LEFT, facing LEFT, determined face. Exact pose of this running frame — REACH: the FAR leg (the one further from the viewer, drawn clearly DARKER, in shadow) pushes off behind the body; the NEAR leg (the one closer to the viewer, drawn in the normal fur colour) reaches forward in the air, about to land. The two legs must be easy to tell apart. Centred, the whole body visible with space around it. Solid flat pure chroma-key GREEN (#00FF00) background everywhere, no ground line, no shadow, no text."
+ },
+ {
+  "name": "run_shnyr_0",
+  "size": "1024x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v4/shnyr_idle8.png",
+   "Docs/ArtDirection/Generated/raw_v6/shnyr_run3.png"
+  ],
+  "prompt": "ONE single full-body drawing of the thin grey striped cat Shnyr with huge ears and a very long tail, exactly the same character, proportions and comic style as in the references (bold black ink outlines, flat colours), jogging upright on the two hind legs, strict side view, the head on the LEFT, facing LEFT, determined face. Exact pose of this running frame — CONTACT: the NEAR leg (the one closer to the viewer, drawn in the normal fur colour) is stretched forward (to the left) with its foot touching the ground; the FAR leg (the one further from the viewer, drawn clearly DARKER, in shadow) is stretched backward, its toes pushing off the ground. The far arm swings forward, the near arm back. The two legs must be easy to tell apart. Centred, the whole body visible with space around it. Solid flat pure chroma-key GREEN (#00FF00) background everywhere, no ground line, no shadow, no text."
+ },
+ {
+  "name": "run_shnyr_1",
+  "size": "1024x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v4/shnyr_idle8.png",
+   "Docs/ArtDirection/Generated/raw_v6/shnyr_run3.png"
+  ],
+  "prompt": "ONE single full-body drawing of the thin grey striped cat Shnyr with huge ears and a very long tail, exactly the same character, proportions and comic style as in the references (bold black ink outlines, flat colours), jogging upright on the two hind legs, strict side view, the head on the LEFT, facing LEFT, determined face. Exact pose of this running frame — DOWN: the NEAR leg (the one closer to the viewer, drawn in the normal fur colour) is bent under the body carrying the weight, foot flat on the ground; the FAR leg (the one further from the viewer, drawn clearly DARKER, in shadow) is lifted behind, knee bent, foot up near the rump. The two legs must be easy to tell apart. Centred, the whole body visible with space around it. Solid flat pure chroma-key GREEN (#00FF00) background everywhere, no ground line, no shadow, no text."
+ },
+ {
+  "name": "run_shnyr_2",
+  "size": "1024x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v4/shnyr_idle8.png",
+   "Docs/ArtDirection/Generated/raw_v6/shnyr_run3.png"
+  ],
+  "prompt": "ONE single full-body drawing of the thin grey striped cat Shnyr with huge ears and a very long tail, exactly the same character, proportions and comic style as in the references (bold black ink outlines, flat colours), jogging upright on the two hind legs, strict side view, the head on the LEFT, facing LEFT, determined face. Exact pose of this running frame — PASSING: the NEAR leg (the one closer to the viewer, drawn in the normal fur colour) is straight under the body on the ground; the FAR leg (the one further from the viewer, drawn clearly DARKER, in shadow) swings forward with the knee raised high in front of the body. The two legs must be easy to tell apart. Centred, the whole body visible with space around it. Solid flat pure chroma-key GREEN (#00FF00) background everywhere, no ground line, no shadow, no text."
+ },
+ {
+  "name": "run_shnyr_3",
+  "size": "1024x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v4/shnyr_idle8.png",
+   "Docs/ArtDirection/Generated/raw_v6/shnyr_run3.png"
+  ],
+  "prompt": "ONE single full-body drawing of the thin grey striped cat Shnyr with huge ears and a very long tail, exactly the same character, proportions and comic style as in the references (bold black ink outlines, flat colours), jogging upright on the two hind legs, strict side view, the head on the LEFT, facing LEFT, determined face. Exact pose of this running frame — REACH: the NEAR leg (the one closer to the viewer, drawn in the normal fur colour) pushes off behind the body; the FAR leg (the one further from the viewer, drawn clearly DARKER, in shadow) reaches forward in the air, about to land. Both feet almost off the ground. The two legs must be easy to tell apart. Centred, the whole body visible with space around it. Solid flat pure chroma-key GREEN (#00FF00) background everywhere, no ground line, no shadow, no text."
+ },
+ {
+  "name": "run_shnyr_4",
+  "size": "1024x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v4/shnyr_idle8.png",
+   "Docs/ArtDirection/Generated/raw_v6/shnyr_run3.png"
+  ],
+  "prompt": "ONE single full-body drawing of the thin grey striped cat Shnyr with huge ears and a very long tail, exactly the same character, proportions and comic style as in the references (bold black ink outlines, flat colours), jogging upright on the two hind legs, strict side view, the head on the LEFT, facing LEFT, determined face. Exact pose of this running frame — CONTACT: the FAR leg (the one further from the viewer, drawn clearly DARKER, in shadow) is stretched forward (to the left) with its foot touching the ground; the NEAR leg (the one closer to the viewer, drawn in the normal fur colour) is stretched backward, its toes pushing off. The near arm swings forward, the far arm back. The two legs must be easy to tell apart. Centred, the whole body visible with space around it. Solid flat pure chroma-key GREEN (#00FF00) background everywhere, no ground line, no shadow, no text."
+ },
+ {
+  "name": "run_shnyr_5",
+  "size": "1024x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v4/shnyr_idle8.png",
+   "Docs/ArtDirection/Generated/raw_v6/shnyr_run3.png"
+  ],
+  "prompt": "ONE single full-body drawing of the thin grey striped cat Shnyr with huge ears and a very long tail, exactly the same character, proportions and comic style as in the references (bold black ink outlines, flat colours), jogging upright on the two hind legs, strict side view, the head on the LEFT, facing LEFT, determined face. Exact pose of this running frame — DOWN: the FAR leg (the one further from the viewer, drawn clearly DARKER, in shadow) is bent under the body carrying the weight; the NEAR leg (the one closer to the viewer, drawn in the normal fur colour) is lifted behind, knee bent, foot up near the rump. The two legs must be easy to tell apart. Centred, the whole body visible with space around it. Solid flat pure chroma-key GREEN (#00FF00) background everywhere, no ground line, no shadow, no text."
+ },
+ {
+  "name": "run_shnyr_6",
+  "size": "1024x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v4/shnyr_idle8.png",
+   "Docs/ArtDirection/Generated/raw_v6/shnyr_run3.png"
+  ],
+  "prompt": "ONE single full-body drawing of the thin grey striped cat Shnyr with huge ears and a very long tail, exactly the same character, proportions and comic style as in the references (bold black ink outlines, flat colours), jogging upright on the two hind legs, strict side view, the head on the LEFT, facing LEFT, determined face. Exact pose of this running frame — PASSING: the FAR leg (the one further from the viewer, drawn clearly DARKER, in shadow) is straight under the body on the ground; the NEAR leg (the one closer to the viewer, drawn in the normal fur colour) swings forward with the knee raised high in front of the body. The two legs must be easy to tell apart. Centred, the whole body visible with space around it. Solid flat pure chroma-key GREEN (#00FF00) background everywhere, no ground line, no shadow, no text."
+ },
+ {
+  "name": "run_shnyr_7",
+  "size": "1024x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v4/shnyr_idle8.png",
+   "Docs/ArtDirection/Generated/raw_v6/shnyr_run3.png"
+  ],
+  "prompt": "ONE single full-body drawing of the thin grey striped cat Shnyr with huge ears and a very long tail, exactly the same character, proportions and comic style as in the references (bold black ink outlines, flat colours), jogging upright on the two hind legs, strict side view, the head on the LEFT, facing LEFT, determined face. Exact pose of this running frame — REACH: the FAR leg (the one further from the viewer, drawn clearly DARKER, in shadow) pushes off behind the body; the NEAR leg (the one closer to the viewer, drawn in the normal fur colour) reaches forward in the air, about to land. The two legs must be easy to tell apart. Centred, the whole body visible with space around it. Solid flat pure chroma-key GREEN (#00FF00) background everywhere, no ground line, no shadow, no text."
+ },
+ {
+  "name": "run_ponchik_0",
+  "size": "1024x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v6/ponchik_idle_front.png",
+   "Docs/ArtDirection/Generated/raw_v6/ponchik_run3.png"
+  ],
+  "prompt": "ONE single full-body drawing of the very fat black-and-white cat Ponchik, exactly the same character, proportions and comic style as in the references (bold black ink outlines, flat colours), jogging upright on the two hind legs, strict side view, the head on the LEFT, facing LEFT, determined face. Exact pose of this running frame — CONTACT: the NEAR leg (the one closer to the viewer, drawn in the normal fur colour) is stretched forward (to the left) with its foot touching the ground; the FAR leg (the one further from the viewer, drawn clearly DARKER, in shadow) is stretched backward, its toes pushing off the ground. The far arm swings forward, the near arm back. The two legs must be easy to tell apart. Centred, the whole body visible with space around it. Solid flat pure chroma-key GREEN (#00FF00) background everywhere, no ground line, no shadow, no text."
+ },
+ {
+  "name": "run_ponchik_1",
+  "size": "1024x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v6/ponchik_idle_front.png",
+   "Docs/ArtDirection/Generated/raw_v6/ponchik_run3.png"
+  ],
+  "prompt": "ONE single full-body drawing of the very fat black-and-white cat Ponchik, exactly the same character, proportions and comic style as in the references (bold black ink outlines, flat colours), jogging upright on the two hind legs, strict side view, the head on the LEFT, facing LEFT, determined face. Exact pose of this running frame — DOWN: the NEAR leg (the one closer to the viewer, drawn in the normal fur colour) is bent under the body carrying the weight, foot flat on the ground; the FAR leg (the one further from the viewer, drawn clearly DARKER, in shadow) is lifted behind, knee bent, foot up near the rump. The two legs must be easy to tell apart. Centred, the whole body visible with space around it. Solid flat pure chroma-key GREEN (#00FF00) background everywhere, no ground line, no shadow, no text."
+ },
+ {
+  "name": "run_ponchik_2",
+  "size": "1024x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v6/ponchik_idle_front.png",
+   "Docs/ArtDirection/Generated/raw_v6/ponchik_run3.png"
+  ],
+  "prompt": "ONE single full-body drawing of the very fat black-and-white cat Ponchik, exactly the same character, proportions and comic style as in the references (bold black ink outlines, flat colours), jogging upright on the two hind legs, strict side view, the head on the LEFT, facing LEFT, determined face. Exact pose of this running frame — PASSING: the NEAR leg (the one closer to the viewer, drawn in the normal fur colour) is straight under the body on the ground; the FAR leg (the one further from the viewer, drawn clearly DARKER, in shadow) swings forward with the knee raised high in front of the body. The two legs must be easy to tell apart. Centred, the whole body visible with space around it. Solid flat pure chroma-key GREEN (#00FF00) background everywhere, no ground line, no shadow, no text."
+ },
+ {
+  "name": "run_ponchik_3",
+  "size": "1024x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v6/ponchik_idle_front.png",
+   "Docs/ArtDirection/Generated/raw_v6/ponchik_run3.png"
+  ],
+  "prompt": "ONE single full-body drawing of the very fat black-and-white cat Ponchik, exactly the same character, proportions and comic style as in the references (bold black ink outlines, flat colours), jogging upright on the two hind legs, strict side view, the head on the LEFT, facing LEFT, determined face. Exact pose of this running frame — REACH: the NEAR leg (the one closer to the viewer, drawn in the normal fur colour) pushes off behind the body; the FAR leg (the one further from the viewer, drawn clearly DARKER, in shadow) reaches forward in the air, about to land. Both feet almost off the ground. The two legs must be easy to tell apart. Centred, the whole body visible with space around it. Solid flat pure chroma-key GREEN (#00FF00) background everywhere, no ground line, no shadow, no text."
+ },
+ {
+  "name": "run_ponchik_4",
+  "size": "1024x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v6/ponchik_idle_front.png",
+   "Docs/ArtDirection/Generated/raw_v6/ponchik_run3.png"
+  ],
+  "prompt": "ONE single full-body drawing of the very fat black-and-white cat Ponchik, exactly the same character, proportions and comic style as in the references (bold black ink outlines, flat colours), jogging upright on the two hind legs, strict side view, the head on the LEFT, facing LEFT, determined face. Exact pose of this running frame — CONTACT: the FAR leg (the one further from the viewer, drawn clearly DARKER, in shadow) is stretched forward (to the left) with its foot touching the ground; the NEAR leg (the one closer to the viewer, drawn in the normal fur colour) is stretched backward, its toes pushing off. The near arm swings forward, the far arm back. The two legs must be easy to tell apart. Centred, the whole body visible with space around it. Solid flat pure chroma-key GREEN (#00FF00) background everywhere, no ground line, no shadow, no text."
+ },
+ {
+  "name": "run_ponchik_5",
+  "size": "1024x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v6/ponchik_idle_front.png",
+   "Docs/ArtDirection/Generated/raw_v6/ponchik_run3.png"
+  ],
+  "prompt": "ONE single full-body drawing of the very fat black-and-white cat Ponchik, exactly the same character, proportions and comic style as in the references (bold black ink outlines, flat colours), jogging upright on the two hind legs, strict side view, the head on the LEFT, facing LEFT, determined face. Exact pose of this running frame — DOWN: the FAR leg (the one further from the viewer, drawn clearly DARKER, in shadow) is bent under the body carrying the weight; the NEAR leg (the one closer to the viewer, drawn in the normal fur colour) is lifted behind, knee bent, foot up near the rump. The two legs must be easy to tell apart. Centred, the whole body visible with space around it. Solid flat pure chroma-key GREEN (#00FF00) background everywhere, no ground line, no shadow, no text."
+ },
+ {
+  "name": "run_ponchik_6",
+  "size": "1024x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v6/ponchik_idle_front.png",
+   "Docs/ArtDirection/Generated/raw_v6/ponchik_run3.png"
+  ],
+  "prompt": "ONE single full-body drawing of the very fat black-and-white cat Ponchik, exactly the same character, proportions and comic style as in the references (bold black ink outlines, flat colours), jogging upright on the two hind legs, strict side view, the head on the LEFT, facing LEFT, determined face. Exact pose of this running frame — PASSING: the FAR leg (the one further from the viewer, drawn clearly DARKER, in shadow) is straight under the body on the ground; the NEAR leg (the one closer to the viewer, drawn in the normal fur colour) swings forward with the knee raised high in front of the body. The two legs must be easy to tell apart. Centred, the whole body visible with space around it. Solid flat pure chroma-key GREEN (#00FF00) background everywhere, no ground line, no shadow, no text."
+ },
+ {
+  "name": "run_ponchik_7",
+  "size": "1024x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v6/ponchik_idle_front.png",
+   "Docs/ArtDirection/Generated/raw_v6/ponchik_run3.png"
+  ],
+  "prompt": "ONE single full-body drawing of the very fat black-and-white cat Ponchik, exactly the same character, proportions and comic style as in the references (bold black ink outlines, flat colours), jogging upright on the two hind legs, strict side view, the head on the LEFT, facing LEFT, determined face. Exact pose of this running frame — REACH: the FAR leg (the one further from the viewer, drawn clearly DARKER, in shadow) pushes off behind the body; the NEAR leg (the one closer to the viewer, drawn in the normal fur colour) reaches forward in the air, about to land. The two legs must be easy to tell apart. Centred, the whole body visible with space around it. Solid flat pure chroma-key GREEN (#00FF00) background everywhere, no ground line, no shadow, no text."
+ },
+ {
+  "name": "icon_endurance",
+  "size": "1024x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_ui/ui_a_icons.png"
+  ],
+  "prompt": "One single game UI icon in EXACTLY the style of the reference icons (thick black outline, flat bold comic colours, readable at 64 px): ENDURANCE / stamina: a red heart with a white running cat paw print on it and two small speed lines. Centred, nothing else. Solid flat pure chroma-key GREEN (#00FF00) background, no text."
+ }
+]

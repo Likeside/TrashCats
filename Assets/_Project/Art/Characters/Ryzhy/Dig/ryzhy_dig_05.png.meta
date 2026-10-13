@@ -138,10 +138,10 @@ TextureImporter:
       name: ryzhy_dig_05_0
       rect:
         serializedVersion: 2
-        x: 30
-        y: 165
-        width: 14
-        height: 21
+        x: 37
+        y: 163
+        width: 15
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -160,10 +160,10 @@ TextureImporter:
       name: ryzhy_dig_05_1
       rect:
         serializedVersion: 2
-        x: 45
-        y: 17
-        width: 158
-        height: 179
+        x: 51
+        y: 15
+        width: 166
+        height: 180
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -182,10 +182,10 @@ TextureImporter:
       name: ryzhy_dig_05_2
       rect:
         serializedVersion: 2
-        x: 194
+        x: 208
         y: 89
-        width: 12
-        height: 10
+        width: 11
+        height: 8
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -204,7 +204,7 @@ TextureImporter:
       name: ryzhy_dig_05_3
       rect:
         serializedVersion: 2
-        x: 196
+        x: 209
         y: 85
         width: 10
         height: 6

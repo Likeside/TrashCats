@@ -157,6 +157,7 @@ namespace TrashCats.Editor
             // idles sway there and back: ping-pong has no loop seam (no "saw")
             art.idle.pingPong = key != "wheel" && art.idle.frames.Length > 2;
             art.hideoutIdle.pingPong = art.hideoutIdle.frames.Length > 2;
+            art.dig.pingPong = art.dig.frames.Length > 2; // the kicking loop is not drawn to close
             art.idle.breathe = key == "wheel" ? 0f : art.idle.frames.Length <= 2 ? 0.012f : 0.008f;
             if (key == "wheel") art.idle.fps = art.idle.frames.Length >= 15 ? 24f : 12f;
             // card portrait cut from the concept (Tools/import_ui.py), else the first stance frame
