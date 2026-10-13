@@ -132,10 +132,10 @@ TextureImporter:
       name: ryzhy_dig_06_0
       rect:
         serializedVersion: 2
-        x: 41
-        y: 15
-        width: 152
-        height: 205
+        x: 22
+        y: 158
+        width: 17
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,10 +154,10 @@ TextureImporter:
       name: ryzhy_dig_06_1
       rect:
         serializedVersion: 2
-        x: 180
-        y: 94
-        width: 16
-        height: 21
+        x: 33
+        y: 15
+        width: 182
+        height: 179
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

@@ -129,9 +129,9 @@ TextureImporter:
       name: ponchik_hideidle_01_0
       rect:
         serializedVersion: 2
-        x: 27
-        y: 17
-        width: 326
+        x: 39
+        y: 18
+        width: 315
         height: 373
       alignment: 0
       pivot: {x: 0, y: 0}

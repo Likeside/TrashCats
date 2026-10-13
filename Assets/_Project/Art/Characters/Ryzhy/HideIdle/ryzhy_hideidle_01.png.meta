@@ -129,10 +129,10 @@ TextureImporter:
       name: ryzhy_hideidle_01_0
       rect:
         serializedVersion: 2
-        x: 51
+        x: 54
         y: 16
-        width: 255
-        height: 375
+        width: 252
+        height: 371
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

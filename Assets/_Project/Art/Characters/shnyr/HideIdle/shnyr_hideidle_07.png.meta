@@ -129,10 +129,10 @@ TextureImporter:
       name: shnyr_hideidle_07_0
       rect:
         serializedVersion: 2
-        x: 21
+        x: 25
         y: 15
-        width: 220
-        height: 370
+        width: 216
+        height: 372
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

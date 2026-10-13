@@ -5,6 +5,9 @@ TextureImporter:
   - first:
       213: -4872170832953128114
     second: shnyr_dig_07_0
+  - first:
+      213: -3128652815783022384
+    second: shnyr_dig_07_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -129,10 +132,10 @@ TextureImporter:
       name: shnyr_dig_07_0
       rect:
         serializedVersion: 2
-        x: 15
-        y: 15
-        width: 185
-        height: 211
+        x: 69
+        y: 171
+        width: 107
+        height: 55
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -143,6 +146,28 @@ TextureImporter:
       bones: []
       spriteID: e4b4fc8f072926cb0800000000000000
       internalID: -4872170832953128114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shnyr_dig_07_1
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 15
+        width: 141
+        height: 153
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d03ab127dac494d0800000000000000
+      internalID: -3128652815783022384
       vertices: []
       indices: 
       edges: []
