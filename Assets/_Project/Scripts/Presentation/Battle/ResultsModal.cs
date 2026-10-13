@@ -36,9 +36,9 @@ namespace TrashCats.Presentation.Battle
             _body = Ui.Label(card.transform, "", 34, TextAnchor.UpperLeft, Palette.Ink);
             _body.rectTransform.Place(Vector2.zero, Vector2.one, new Vector2(60, 200), new Vector2(-60, -150));
 
-            var cont = Ui.Button(card.transform, "Results_Continue", "Продолжить", Palette.Primary, () => Close(false), 40);
+            var cont = Ui.Button(card.transform, "Results_Continue", Loc.T("results_modal.01"), Palette.Primary, () => Close(false), 40);
             cont.Rect.Place(new Vector2(0, 0), new Vector2(0.5f, 0), new Vector2(40, 40), new Vector2(-15, 160));
-            var retry = Ui.Button(card.transform, "Results_Retry", "Ещё раз", Palette.Secondary, () => Close(true), 40);
+            var retry = Ui.Button(card.transform, "Results_Retry", Loc.T("results_modal.02"), Palette.Secondary, () => Close(true), 40);
             retry.Rect.Place(new Vector2(0.5f, 0), new Vector2(1f, 0), new Vector2(15, 40), new Vector2(-40, 160));
             _root.SetActive(false);
         }
@@ -54,28 +54,28 @@ namespace TrashCats.Presentation.Battle
             var victory = battle.Result.Outcome == BattleOutcome.Victory;
             var first = victory && world.Territories.Get(territory.Id).Status != TerritoryStatus.Captured;
 
-            _title.text = victory ? "ПОБЕДА!" : "Поражение";
+            _title.text = victory ? Loc.T("results_modal.03") : Loc.T("results_modal.04");
             var sb = new StringBuilder();
-            sb.AppendLine(Texts.TerritoryName(territory.Id) + (first ? " — захвачено!" : ""));
+            sb.AppendLine(Texts.TerritoryName(territory.Id) + (first ? Loc.T("results_modal.05") : ""));
             sb.AppendLine();
             if (victory)
             {
                 var (food, junk) = TerritoryProgress.Reward(territory, first);
-                sb.AppendLine($"Еда +{food}   Хлам +{junk}");
-                if (first && territory.Bonus != TerritoryBonusKind.None) sb.AppendLine($"Бонус территории: {Texts.Bonus(territory)}");
-                if (first && territory.RecruitCat is CatId recruit && !world.TryGetCat(recruit, out _)) sb.AppendLine($"В банду просится: {Texts.CatName(recruit)}!");
+                sb.AppendLine(Loc.T("results_modal.06", food, junk));
+                if (first && territory.Bonus != TerritoryBonusKind.None) sb.AppendLine(Loc.T("results_modal.07", Texts.Bonus(territory)));
+                if (first && territory.RecruitCat is CatId recruit && !world.TryGetCat(recruit, out _)) sb.AppendLine(Loc.T("results_modal.08", Texts.CatName(recruit)));
             }
 
             var fought = battle.Result.FoughtPlayerIds.Select(id => Texts.CatName(new CatId(id)));
             sb.AppendLine();
             sb.AppendLine(victory
-                ? $"{string.Join(", ", fought)}: +{config.Progression.BattleXpWin} опыта ко всем атрибутам, −{config.Needs.BattleWinEnergyCost} энергии"
-                : $"{string.Join(", ", fought)}: +{config.Progression.BattleXpLoss} опыта, сил не осталось — нужно поспать");
+                ? Loc.T("results_modal.09", string.Join(", ", fought), config.Progression.BattleXpWin, config.Needs.BattleWinEnergyCost)
+                : Loc.T("results_modal.10", string.Join(", ", fought), config.Progression.BattleXpLoss));
             if (!victory)
             {
                 sb.AppendLine();
                 foreach (var hint in DefeatHints.For(battle, config))
-                    sb.AppendLine("• " + hint);
+                    sb.AppendLine("• " + Loc.T(hint));
             }
 
             _body.text = sb.ToString();

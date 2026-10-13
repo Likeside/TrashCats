@@ -46,7 +46,7 @@ namespace TrashCats.Presentation.Hideout
             _slots.rectTransform.Place(new Vector2(0, 1), Vector2.one, new Vector2(60, -425), new Vector2(-60, -345));
             _skills = Ui.Rect(panel.transform, "Skills").Place(Vector2.zero, Vector2.one, new Vector2(30, 150), new Vector2(-30, -430));
 
-            var close = Ui.Button(panel.transform, "Details_Close", "Закрыть", Palette.Disabled, Close, 36);
+            var close = Ui.Button(panel.transform, "Details_Close", Loc.T("cat_details_sheet.01"), Palette.Disabled, Close, 36);
             close.Rect.Place(new Vector2(0.3f, 0), new Vector2(0.7f, 0), new Vector2(0, 30), new Vector2(0, 130));
             _root.SetActive(false);
         }
@@ -67,7 +67,7 @@ namespace TrashCats.Presentation.Hideout
 
             var config = _session.Config;
             var id = _catId.Value;
-            _header.text = $"{Texts.CatName(id)} · склонность: {Texts.Attribute(cat.Aptitude)}";
+            _header.text = Loc.T("cat_details_sheet.02", Texts.CatName(id), Texts.Attribute(cat.Aptitude));
             var lines = AttributeTypes.All.Select(a =>
             {
                 var level = cat.GetLevel(a);
@@ -76,9 +76,9 @@ namespace TrashCats.Presentation.Hideout
             });
             var c = config.Combat;
             _attributes.text = string.Join("\n", lines)
-                               + $"\n<size=28>HP {CombatFormulas.MaxHp(c, cat.GetLevel(AttributeType.Toughness))} · Задор {CombatFormulas.MaxGrit(c, cat.GetLevel(AttributeType.Toughness))} · урон {CombatFormulas.BaseDamage(c, cat.GetLevel(AttributeType.Strength))}</size>";
+                               + Loc.T("cat_details_sheet.03", CombatFormulas.MaxHp(c, cat.GetLevel(AttributeType.Toughness)), CombatFormulas.MaxGrit(c, cat.GetLevel(AttributeType.Toughness)), CombatFormulas.BaseDamage(c, cat.GetLevel(AttributeType.Strength)));
             var equipped = Enumerable.Range(0, Cat.SkillSlotCount).Select(cat.GetSkillInSlot).ToList();
-            _slots.text = "Слоты: " + string.Join(" | ", equipped.Select(s => s == null ? "пусто" : Texts.SkillName(s.Value))) + "  (+ Царапина всегда)";
+            _slots.text = Loc.T("cat_details_sheet.04") + string.Join(" | ", equipped.Select(s => s == null ? Loc.T("cat_details_sheet.05") : Texts.SkillName(s.Value))) + Loc.T("cat_details_sheet.06");
 
             for (var i = _skills.childCount - 1; i >= 0; i--)
                 UnityEngine.Object.Destroy(_skills.GetChild(i).gameObject);
@@ -88,10 +88,10 @@ namespace TrashCats.Presentation.Hideout
                 var skill = skills[i];
                 var unlocked = CatRules.IsSkillUnlocked(cat, skill);
                 var slot = equipped.IndexOf(skill.Id);
-                var state = !unlocked ? $"нужно {Texts.Attribute(skill.UnlockAttribute)} {skill.UnlockLevel}" : slot >= 0 ? $"в слоте {slot + 1} — нажми, чтобы снять" : "нажми, чтобы взять";
+                var state = !unlocked ? Loc.T("cat_details_sheet.07", Texts.Attribute(skill.UnlockAttribute), skill.UnlockLevel) : slot >= 0 ? Loc.T("cat_details_sheet.08", slot + 1) : Loc.T("cat_details_sheet.09");
                 var color = !unlocked ? Palette.Panel : slot >= 0 ? Palette.Primary : Palette.Secondary;
                 var skillId = skill.Id;
-                var row = Ui.Button(_skills, "Skill_" + skill.Id, $"{Texts.SkillName(skill.Id)} — {state}\n<size=24>{Texts.SkillDescription(skill)} · Задор {skill.GritCost}</size>",
+                var row = Ui.Button(_skills, "Skill_" + skill.Id, Loc.T("cat_details_sheet.10", Texts.SkillName(skill.Id), state, Texts.SkillDescription(skill), skill.GritCost),
                     color, () => Toggle(skillId), 30);
                 row.Text.Align(TextAnchor.MiddleLeft);
                 row.Rect.Place(new Vector2(0, 1f - (i + 1f) / skills.Count), new Vector2(1, 1f - (float)i / skills.Count), new Vector2(0, 5), new Vector2(0, -5));

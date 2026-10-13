@@ -40,7 +40,7 @@ namespace TrashCats.Presentation.Map
             Ui.Panel(root, "Back", Palette.Background).rectTransform.Fill();
             if (background != null)
                 Ui.Cover(root, "MapArt", background, new Color(0.7f, 0.7f, 0.78f));
-            var title = Ui.Label(root, "Район", 56, TextAnchor.MiddleCenter, Palette.Paper);
+            var title = Ui.Label(root, Loc.T("map_screen.01"), 56, TextAnchor.MiddleCenter, Palette.Paper);
             title.rectTransform.Place(new Vector2(0, 1), Vector2.one, new Vector2(0, -110), new Vector2(0, -10));
             title.Outlined();
 
@@ -59,7 +59,7 @@ namespace TrashCats.Presentation.Map
                 }
 
             // home: the dumpster yard
-            Plate(area, points[0], "Мусорка", "наше убежище", "");
+            Plate(area, points[0], Loc.T("map_screen.02"), Loc.T("map_screen.03"), "");
             var home = new RoundPicture(area, "Node_Home", Palette.PanelDark);
             home.Root.At(points[0], new Vector2(Vignette, Vignette) * 0.9f);
             home.SetPicture(sprites?.Invoke("bg_hideout"));
@@ -129,9 +129,9 @@ namespace TrashCats.Presentation.Map
                 node.Lock?.gameObject.SetActive(locked);
                 node.Paw?.gameObject.SetActive(state == TerritoryStatus.Captured);
                 node.Status.color = available ? Palette.Primary : locked ? Palette.Disabled : Palette.Hex("#9BC46A");
-                node.Status.text = locked ? "Закрыто"
-                    : available ? "Награда: " + Reward(territory, true)
-                    : $"Захвачено · {Texts.Bonus(territory)}";
+                node.Status.text = locked ? Loc.T("map_screen.04")
+                    : available ? Loc.T("map_screen.05") + Reward(territory, true)
+                    : Loc.T("map_screen.06", Texts.Bonus(territory));
 
                 node.Picture.Root.DOKill();
                 node.Picture.Root.localScale = Vector3.one;
@@ -146,7 +146,7 @@ namespace TrashCats.Presentation.Map
         {
             var (food, junk) = TerritoryProgress.Reward(territory, first);
             var recruit = first && territory.RecruitCat is CatId cat ? $", +{Texts.CatName(cat)}" : "";
-            return $"{food} еды, {junk} хлама{recruit}";
+            return Loc.T("map_screen.07", food, junk, recruit);
         }
 
         private sealed class Node

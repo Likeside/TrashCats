@@ -47,7 +47,7 @@ namespace TrashCats.Presentation.Hideout
             _title.rectTransform.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(60, -105), new Vector2(-40, -45));
             _needs = Ui.Label(panel.transform, "", 30, TextAnchor.MiddleLeft, Palette.Ink);
             _needs.rectTransform.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(60, -150), new Vector2(-40, -105));
-            var details = Ui.Button(panel.transform, "Sheet_Details", "Умения и статы", Palette.Paper, () =>
+            var details = Ui.Button(panel.transform, "Sheet_Details", Loc.T("activity_sheet.01"), Palette.Paper, () =>
             {
                 if (_catId is CatId id) onDetails(id);
             }, 28);
@@ -67,7 +67,7 @@ namespace TrashCats.Presentation.Hideout
 
             _feed = Ui.Button(panel.transform, "Sheet_Feed", "", Palette.Primary, Feed, 32);
             _feed.Rect.Place(new Vector2(0, 0), new Vector2(0.5f, 0), new Vector2(30, 40), new Vector2(-15, 150));
-            _stop = Ui.Button(panel.transform, "Stop", "Стоп", Palette.Disabled, Stop, 32);
+            _stop = Ui.Button(panel.transform, "Stop", Loc.T("activity_sheet.02"), Palette.Disabled, Stop, 32);
             _stop.Rect.Place(new Vector2(0.5f, 0), new Vector2(1f, 0), new Vector2(15, 40), new Vector2(-30, 150));
 
             _root.SetActive(false);
@@ -89,7 +89,7 @@ namespace TrashCats.Presentation.Hideout
 
             var id = _catId.Value;
             _title.text = Texts.CatName(id);
-            _needs.text = $"Энергия {cat.Energy} · Сытость {cat.Satiety} · Еда {_session.World.Food}";
+            _needs.text = Loc.T("activity_sheet.03", cat.Energy, cat.Satiety, _session.World.Food);
 
             foreach (var (activity, button) in _buttons)
             {
@@ -107,7 +107,7 @@ namespace TrashCats.Presentation.Hideout
                 {
                     var duration = _session.PreviewDuration(id, activity.Id);
                     var output = _session.PreviewOutput(id, activity.Id);
-                    var slow = duration > activity.DurationMs ? " · ×2 время" : "";
+                    var slow = duration > activity.DurationMs ? Loc.T("activity_sheet.04") : "";
                     details = $"{Texts.Seconds(duration)} · {Texts.Output(activity, output)}{slow}";
                 }
 
@@ -116,7 +116,7 @@ namespace TrashCats.Presentation.Hideout
 
             var canFeed = _session.CanFeed(id);
             _feed.Interactable = canFeed == CommandError.None;
-            _feed.Text.text = canFeed == CommandError.None ? $"Покормить (−{_session.FoodToFeed(id)} еды)" : Texts.Error(canFeed);
+            _feed.Text.text = canFeed == CommandError.None ? Loc.T("activity_sheet.05", _session.FoodToFeed(id)) : Texts.Error(canFeed);
             _stop.Interactable = cat.Activity.IsWorking;
         }
 

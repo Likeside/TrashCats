@@ -76,8 +76,8 @@ namespace TrashCats.Presentation.Bootstrap
                 // a fresh game (the new-game save in the boot scene already ticks a few milliseconds)
                 if (world.GameTimeMs < 60_000 && !world.Tutorial.Skipped && !world.Tutorial.Completed.Any()
                     && world.Territories.All.Values.All(t => t.Attempts == 0))
-                    _messages.Enqueue("Банда помойных котов",
-                        "Ты — Рыжий, кот с мусорки за рестораном.\n\nСобери банду, накачай её и захвати весь район — до самой крыши.");
+                    _messages.Enqueue(Loc.T("game_scene_root.01"),
+                        Loc.T("game_scene_root.02"));
             }
 
             _tutorial.Evaluate();
@@ -197,20 +197,20 @@ namespace TrashCats.Presentation.Bootstrap
                 _hideout.RebuildCats();
                 _audio.Play("hid_meow");
                 var cat = config.GetCat(e.CatId);
-                _messages.Enqueue("Новый кот в банде!", $"{Texts.CatName(e.CatId)} теперь с вами.\nСклонность: {Texts.Attribute(cat.Aptitude)}.\n\nТренажёр вмещает одного кота — распредели их по станциям.");
+                _messages.Enqueue(Loc.T("game_scene_root.03"), Loc.T("game_scene_root.04", Texts.CatName(e.CatId), Texts.Attribute(cat.Aptitude)));
             }));
             _subscriptions.Add(bus.Subscribe<TerritoryCaptured>(e =>
             {
                 if (e.Unlocked is TerritoryId next)
-                    _messages.Enqueue("Открыта территория", $"{Texts.TerritoryName(next)}\n\nЗагляни на карту.");
+                    _messages.Enqueue(Loc.T("game_scene_root.05"), Loc.T("game_scene_root.06", Texts.TerritoryName(next)));
             }));
             _subscriptions.Add(bus.Subscribe<SkillUnlocked>(e =>
             {
                 var skill = config.GetSkill(e.SkillId);
-                _messages.Enqueue("Новое умение!", $"{Texts.CatName(e.CatId)}: {Texts.SkillName(e.SkillId)}\n{Texts.SkillDescription(skill)}\n\nСлотов всего три — выбирай в «Умения и статы».");
+                _messages.Enqueue(Loc.T("game_scene_root.07"), Loc.T("game_scene_root.08", Texts.CatName(e.CatId), Texts.SkillName(e.SkillId), Texts.SkillDescription(skill)));
             }));
             _subscriptions.Add(bus.Subscribe<FinalReached>(_ =>
-                _messages.Enqueue("Главная банда района!", "Адмирал повержен — крыша ресторана ваша.\n\nМожно продолжать играть: тренироваться, улучшать убежище и повторять бои.")));
+                _messages.Enqueue(Loc.T("game_scene_root.09"), Loc.T("game_scene_root.10"))));
             _subscriptions.Add(bus.Subscribe<AttributeLevelUp>(e =>
             {
                 if (_router.Current == ScreenId.Hideout)

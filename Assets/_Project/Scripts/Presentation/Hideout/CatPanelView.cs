@@ -122,13 +122,13 @@ namespace TrashCats.Presentation.Hideout
                 _satiety = Ui.Bar(content, "Satiety", Palette.Satiety, "satiety");
                 _satiety.Rect.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(50, -298), new Vector2(-6, -266));
 
-                _feed = Ui.Button(content, "Feed" + index, "Покормить", Palette.Primary, () =>
+                _feed = Ui.Button(content, "Feed" + index, Loc.T("cat_panel_view.01"), Palette.Primary, () =>
                 {
                     if (_cat != null) _owner._onResult(_owner._session.FeedCat(_cat.Id));
                 }, 28);
                 _feed.Rect.Place(new Vector2(0, 0), new Vector2(1, 0), new Vector2(4, 2), new Vector2(-4, 60));
 
-                _locked = Ui.Label(background.transform, "Ещё не\nв банде", 32, TextAnchor.MiddleCenter, Palette.Disabled).gameObject;
+                _locked = Ui.Label(background.transform, Loc.T("cat_panel_view.02"), 32, TextAnchor.MiddleCenter, Palette.Disabled).gameObject;
             }
 
             public void Bind(IReadOnlyCat cat)
@@ -158,12 +158,12 @@ namespace TrashCats.Presentation.Hideout
                     : Texts.IdleStatus(cat.Activity.IdleReason);
 
                 var max = (float)session.Config.Needs.Max;
-                _energy.Set(cat.Energy / max, Ui.Skin != null ? cat.Energy.ToString() : $"Энергия {cat.Energy}");
-                _satiety.Set(cat.Satiety / max, Ui.Skin != null ? cat.Satiety.ToString() : $"Сытость {cat.Satiety}");
+                _energy.Set(cat.Energy / max, Ui.Skin != null ? cat.Energy.ToString() : Loc.T("cat_panel_view.03", cat.Energy));
+                _satiety.Set(cat.Satiety / max, Ui.Skin != null ? cat.Satiety.ToString() : Loc.T("cat_panel_view.04", cat.Satiety));
 
                 var canFeed = session.CanFeed(cat.Id);
                 _feed.Interactable = canFeed == CommandError.None;
-                _feed.Text.text = canFeed == CommandError.None ? $"Покормить (−{session.FoodToFeed(cat.Id)})" : Texts.Error(canFeed);
+                _feed.Text.text = canFeed == CommandError.None ? Loc.T("cat_panel_view.05", session.FoodToFeed(cat.Id)) : Texts.Error(canFeed);
             }
 
             public void Tick(long nowMs)

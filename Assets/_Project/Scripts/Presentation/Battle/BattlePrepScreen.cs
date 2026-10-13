@@ -48,15 +48,15 @@ namespace TrashCats.Presentation.Battle
             _title.rectTransform.Place(new Vector2(0, 1), Vector2.one, new Vector2(0, -130), new Vector2(0, -20));
             _title.Outlined();
 
-            Section(root, "Враги (по очереди)", 0.62f, 0.9f, out _enemyList);
-            Section(root, "Твоя банда — нажми, чтобы выбрать порядок", 0.2f, 0.6f, out _catList);
+            Section(root, Loc.T("battle_prep_screen.01"), 0.62f, 0.9f, out _enemyList);
+            Section(root, Loc.T("battle_prep_screen.02"), 0.2f, 0.6f, out _catList);
 
             _warning = Ui.Label(root, "", 28, TextAnchor.MiddleCenter, Palette.Primary);
             _warning.rectTransform.Place(new Vector2(0, 0.12f), new Vector2(1, 0.19f), new Vector2(30, 0), new Vector2(-30, 0));
 
-            var back = Ui.Button(root, "Prep_Back", "Назад", Palette.Disabled, () => _onBack(), 40);
+            var back = Ui.Button(root, "Prep_Back", Loc.T("battle_prep_screen.03"), Palette.Disabled, () => _onBack(), 40);
             back.Rect.Place(Vector2.zero, new Vector2(0.4f, 0.11f), new Vector2(30, 30), new Vector2(-15, 0));
-            _fight = Ui.Button(root, "Prep_Fight", "В БОЙ!", Palette.Primary, Fight, 48);
+            _fight = Ui.Button(root, "Prep_Fight", Loc.T("battle_prep_screen.04"), Palette.Primary, Fight, 48);
             _fight.Rect.Place(new Vector2(0.4f, 0), new Vector2(1f, 0.11f), new Vector2(15, 30), new Vector2(-30, 0));
         }
 
@@ -87,7 +87,7 @@ namespace TrashCats.Presentation.Battle
             {
                 var e = enemies[i];
                 var hp = CombatFormulas.MaxHp(config.Combat, e.Toughness, e.HpMultiplierPermille);
-                var skills = e.Skills.Count == 0 ? "только Царапина" : string.Join(", ", e.Skills.Select(Texts.SkillName));
+                var skills = e.Skills.Count == 0 ? Loc.T("battle_prep_screen.05") : string.Join(", ", e.Skills.Select(Texts.SkillName));
                 InfoRow(_enemyList, "PrepEnemy" + i, i, enemies.Count,
                     $"{i + 1}. {Texts.EnemyName(e.Id.Value)}   {Texts.Stats(e.Strength, e.Agility, e.Toughness)} · HP {hp}\n<size=26>{skills}</size>");
             }
@@ -100,14 +100,14 @@ namespace TrashCats.Presentation.Battle
                 var position = _order.IndexOf(cat.Id);
                 var tired = cat.Energy < config.Needs.MinEnergyForBattle;
                 var skills = Enumerable.Range(0, Cat.SkillSlotCount).Select(cat.GetSkillInSlot).Where(s => s != null).Select(s => Texts.SkillName(s.Value)).ToList();
-                var label = $"{(position >= 0 ? $"[{position + 1}] " : "")}{Texts.CatName(cat.Id)}   {Texts.Stats(cat.GetLevel(AttributeType.Strength), cat.GetLevel(AttributeType.Agility), cat.GetLevel(AttributeType.Toughness))} · энергия {cat.Energy}"
-                            + $"\n<size=26>{(skills.Count == 0 ? "только Царапина" : string.Join(", ", skills))}{(tired ? " · устал" : "")}{(cat.Activity.IsWorking ? " · занят" : "")}</size>";
+                var label = Loc.T("battle_prep_screen.06", (position >= 0 ? $"[{position + 1}] " : ""), Texts.CatName(cat.Id), Texts.Stats(cat.GetLevel(AttributeType.Strength), cat.GetLevel(AttributeType.Agility), cat.GetLevel(AttributeType.Toughness)), cat.Energy)
+                            + $"\n<size=26>{(skills.Count == 0 ? Loc.T("battle_prep_screen.05") : string.Join(", ", skills))}{(tired ? Loc.T("battle_prep_screen.07") : "")}{(cat.Activity.IsWorking ? Loc.T("battle_prep_screen.08") : "")}</size>";
                 var color = position >= 0 ? Palette.Primary : tired ? Palette.Disabled : Palette.Panel;
                 var id = cat.Id;
                 var row = Row(_catList, "PrepCat_" + cat.Id, i, Math.Max(3, cats.Count), color, label, () => Toggle(id));
                 row.Interactable = !tired || position >= 0;
 
-                var details = Ui.Button(row.Rect, "Details_" + cat.Id, "Умения", Palette.Paper, () => _onCatDetails(id), 26);
+                var details = Ui.Button(row.Rect, "Details_" + cat.Id, Loc.T("battle_prep_screen.09"), Palette.Paper, () => _onCatDetails(id), 26);
                 details.Rect.Place(new Vector2(1, 0.5f), new Vector2(1, 0.5f), new Vector2(-170, -35), new Vector2(-15, 35));
             }
 
@@ -115,9 +115,9 @@ namespace TrashCats.Presentation.Battle
             _fight.Interactable = error == CommandError.None;
             var busy = _order.Where(id => _session.World.TryGetCat(id, out var c) && c.Activity.IsWorking).Select(Texts.CatName).ToList();
             _warning.text = error != CommandError.None ? Texts.Error(error)
-                : _order.Count > 1 ? $"Порядок: {string.Join(" → ", _order.Select(Texts.CatName))}. Победитель дуэли остаётся на ринге."
-                : busy.Count > 0 ? $"{string.Join(", ", busy)} бросит текущее занятие (прогресс цикла пропадёт)"
-                : "Победитель дуэли остаётся на ринге с текущим здоровьем.";
+                : _order.Count > 1 ? Loc.T("battle_prep_screen.10", string.Join(" → ", _order.Select(Texts.CatName)))
+                : busy.Count > 0 ? Loc.T("battle_prep_screen.11", string.Join(", ", busy))
+                : Loc.T("battle_prep_screen.12");
         }
 
         private void Toggle(CatId id)

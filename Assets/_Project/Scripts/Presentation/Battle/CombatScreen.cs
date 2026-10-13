@@ -101,7 +101,7 @@ namespace TrashCats.Presentation.Battle
 
             _speed = Ui.Button(root, "Combat_Speed", "×1", Palette.Primary, ToggleSpeed, 44);
             _speed.Rect.Place(Vector2.zero, new Vector2(0.45f, 0.09f), new Vector2(30, 30), new Vector2(-15, 0));
-            _skip = Ui.Button(root, "Combat_Skip", "Пропустить", Palette.Secondary, Skip, 40);
+            _skip = Ui.Button(root, "Combat_Skip", Loc.T("combat_screen.01"), Palette.Secondary, Skip, 40);
             _skip.Rect.Place(new Vector2(0.55f, 0), new Vector2(1, 0.09f), new Vector2(15, 30), new Vector2(-30, 0));
         }
 
@@ -236,7 +236,7 @@ namespace TrashCats.Presentation.Battle
                     _huds[target].SetHp(hit.TargetHpAfter);
                     if (animate)
                     {
-                        var text = hit.Hit ? $"-{hit.Damage}" : "Мимо!";
+                        var text = hit.Hit ? $"-{hit.Damage}" : Loc.T("combat_screen.02");
                         var color = hit.Hit ? (hit.Reduced ? Palette.Disabled : Color.white) : Palette.Secondary;
                         FloatAt(Spots[target] + new Vector3(0, 4.6f + hit.HitIndex * 0.6f, 0), text, color, hit.Hit && hit.Damage >= 20 ? 64 : 52);
                         if (hit.Hit) _views[target]?.PlayHit(_speedFactor);
@@ -259,7 +259,7 @@ namespace TrashCats.Presentation.Battle
                 case SuddenDeathStarted _:
                     if (animate)
                     {
-                        ShowBanner("Ярость!");
+                        ShowBanner(Loc.T("combat_screen.03"));
                         Sound("cmb_bell");
                         _rage.DOKill();
                         _rage.alpha = 0.5f;
@@ -280,7 +280,7 @@ namespace TrashCats.Presentation.Battle
                     break;
                 }
                 case BattleEnded ended:
-                    ShowBanner(ended.Outcome == BattleOutcome.Victory ? "Победа!" : "Поражение");
+                    ShowBanner(ended.Outcome == BattleOutcome.Victory ? Loc.T("combat_screen.04") : Loc.T("combat_screen.05"));
                     Sound(ended.Outcome == BattleOutcome.Victory ? "cmb_win" : "cmb_lose");
                     _rage.DOKill();
                     _rage.DOFade(0f, 0.3f).SetLink(_rage.gameObject);
@@ -465,22 +465,22 @@ namespace TrashCats.Presentation.Battle
             }
 
             public void SetHp(int hp) => _hp.Set((float)hp / _maxHp, $"HP {hp}/{_maxHp}");
-            public void SetGrit(int grit) => _grit.Set((float)grit / _maxGrit, $"Задор {grit}");
+            public void SetGrit(int grit) => _grit.Set((float)grit / _maxGrit, Loc.T("combat_screen.06", grit));
 
             public void SetStatus(CombatStatus status, int value)
             {
                 _statuses[status] = value;
                 _status.text = string.Join("  ", _statuses.Where(p => p.Value > 0).Select(p => p.Key switch
                 {
-                    CombatStatus.Fur => $"Шерсть ×{p.Value}",
-                    CombatStatus.Evade => "Начеку",
-                    _ => $"Ослеплён {p.Value}",
+                    CombatStatus.Fur => Loc.T("combat_screen.07", p.Value),
+                    CombatStatus.Evade => Loc.T("combat_screen.08"),
+                    _ => Loc.T("combat_screen.09", p.Value),
                 }));
             }
 
             public void KnockedOut()
             {
-                _name.text += " — нокаут";
+                _name.text += Loc.T("combat_screen.10");
                 _statuses.Clear();
                 _status.text = "";
             }

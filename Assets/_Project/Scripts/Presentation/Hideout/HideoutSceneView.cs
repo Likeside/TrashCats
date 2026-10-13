@@ -154,7 +154,7 @@ namespace TrashCats.Presentation.Hideout
                 ActivityKind.Train => config.Upgrades.FirstOrDefault(u => u.Effect is TrainingXpBonusEffect t && t.Attribute == activity.TrainedAttribute)?.Id,
                 _ => null,
             };
-            var label = activity.Kind == ActivityKind.Scavenge ? "Улица →" : upgrade != null ? Texts.UpgradeName(upgrade.Value) : Texts.ActivityShort(activity);
+            var label = activity.Kind == ActivityKind.Scavenge ? Loc.T("hideout_scene_view.01") : upgrade != null ? Texts.UpgradeName(upgrade.Value) : Texts.ActivityShort(activity);
             return (label, upgrade);
         }
 
@@ -187,7 +187,7 @@ namespace TrashCats.Presentation.Hideout
         private void RefreshUpgrade(UpgradeId id)
         {
             if (_upgradeLabels.TryGetValue(id, out var text))
-                text.text = $"{Texts.UpgradeShort(id)} · ур. {_session.World.GetUpgradeLevel(id)}{(CanAfford(id) ? " (+)" : "")}";
+                text.text = Loc.T("hideout_scene_view.02", Texts.UpgradeShort(id), _session.World.GetUpgradeLevel(id), (CanAfford(id) ? " (+)" : ""));
         }
 
         private bool CanAfford(UpgradeId id)
