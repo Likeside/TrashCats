@@ -50,6 +50,8 @@ namespace TrashCats.Presentation.Characters
         public FlipbookClip hit = new FlipbookClip();
         public FlipbookClip knockOut = new FlipbookClip();
         [Tooltip("Hideout: cocky idle standing on the hind legs (loop)")] public FlipbookClip hideoutIdle = new FlipbookClip();
+        [Tooltip("Hideout: skipping rope (loop)")] public FlipbookClip rope = new FlipbookClip();
+        [Tooltip("Hideout: head first in the dumpster, rump and tail out (loop)")] public FlipbookClip dig = new FlipbookClip();
         [Tooltip("Hideout: running in the wheel (loop)")] public FlipbookClip run = new FlipbookClip();
         [Tooltip("Hideout: punching the tin can (loop)")] public FlipbookClip canPunch = new FlipbookClip();
         [Tooltip("Optional separately animated tail; attach points come from the body clips")] public FlipbookClip tail = new FlipbookClip();

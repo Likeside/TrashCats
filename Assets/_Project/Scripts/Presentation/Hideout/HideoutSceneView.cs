@@ -38,6 +38,8 @@ namespace TrashCats.Presentation.Hideout
         private UiFlipbook _wheel;
         private FlipbookClip _wheelClip;
         private RectTransform _can;
+        private GameObject _ropeProp;
+        private Vector2 _streetGap;
         private readonly List<IDisposable> _subscriptions = new List<IDisposable>();
 
         public HideoutSceneView(GameSession session, EventBus bus, RectTransform root, Action<CatId> onCatTapped, Action<UpgradeId> onStationTapped,
@@ -102,7 +104,11 @@ namespace TrashCats.Presentation.Hideout
                 var working = cat.Activity.IsWorking;
                 token.Progress.Rect.gameObject.SetActive(working);
                 if (working)
-                    token.Progress.Set(ActivitySystem.GetCycleProgress(cat, world.GameTimeMs));
+                {
+                    var progress = ActivitySystem.GetCycleProgress(cat, world.GameTimeMs);
+                    token.Progress.Set(progress);
+                    token.Away.Bar.Set(progress);
+                }
                 var reason = working ? "" : Texts.IdleBubble(cat.Activity.IdleReason);
                 token.Bubble.text = reason;
                 var back = token.Bubble.transform.parent.gameObject;
@@ -161,6 +167,10 @@ namespace TrashCats.Presentation.Hideout
                         }
                     }
                 }
+                if (activity.Kind == ActivityKind.Train && activity.TrainedAttribute == AttributeType.Agility)
+                    _ropeProp = box.transform.Find("Prop")?.gameObject;
+                if (scavenge)
+                    _streetGap = new Vector2((min.x + max.x) * 0.5f, min.y);
                 _depthItems.Add((box.transform, min.y));
                 if (activity.Kind == ActivityKind.Sleep || (activity.Kind == ActivityKind.Train && activity.TrainedAttribute == AttributeType.Toughness))
                     _propBase[activity.Kind == ActivityKind.Sleep ? ActivityKind.Sleep : ActivityKind.Train] = min.y;
@@ -313,6 +323,7 @@ namespace TrashCats.Presentation.Hideout
             if (Ui.Skin?.bubble == null) bubble.Outlined();
 
             var token = new CatToken(rt, bubble, progress) { Art = hasArt ? catArt : null, Image = image, Flipbook = flipbook, BaseColor = hasArt ? Color.white : color };
+            token.Away = AwayBadge(cat.Id, hasArt ? catArt.portrait : null);
             flipbook.FrameChanged += frame => OnCatFrame(token, frame);
             _tokens[cat.Id] = token;
         }
@@ -324,6 +335,8 @@ namespace TrashCats.Presentation.Hideout
             var groups = new Dictionary<string, int>();
             var idle = 0;
             var wheelBusy = false;
+            var ropeBusy = false;
+            var away = 0;
             for (var i = 0; i < world.Cats.Count; i++)
             {
                 var cat = world.Cats[i];
@@ -343,11 +356,20 @@ namespace TrashCats.Presentation.Hideout
                     if (spot.OverProp && index > 0)
                         spot = new HideoutLayout.CatSpot(spot.Foot + new Vector2(-0.12f * index, -0.12f), HideoutLayout.CatClip.Sit);
                     wheelBusy |= spot.Clip == HideoutLayout.CatClip.Run;
+                    ropeBusy |= spot.Clip == HideoutLayout.CatClip.Rope;
                     if (spot.Clip == HideoutLayout.CatClip.Run && token.Art != null && HideoutLayout.RunFoot(token.Art.viewKey) is Vector2 runFoot)
                         spot = new HideoutLayout.CatSpot(runFoot, spot.Clip, spot.FaceLeft, spot.OverProp, spot.Scale);
                 }
                 else
                     spot = HideoutLayout.Idle(idle++);
+
+                // out on the street: a portrait with the cycle bar at the street gap instead of the cat
+                token.Away.Root.gameObject.SetActive(spot.Hidden);
+                if (spot.Hidden)
+                {
+                    var top = _streetGap.y - 0.02f - 0.15f * away++;
+                    token.Away.Root.Place(new Vector2(_streetGap.x - 0.08f, top - 0.14f), new Vector2(_streetGap.x + 0.06f, top));
+                }
 
                 var moved = token.Placed && (spot.Foot != token.Spot.Foot || spot.Clip != token.Spot.Clip);
                 token.Spot = spot;
@@ -361,6 +383,7 @@ namespace TrashCats.Presentation.Hideout
                 token.Placed = true;
             }
 
+            _ropeProp?.SetActive(!ropeBusy);
             if (_wheel != null)
             {
                 if (wheelBusy) _wheel.Play(_wheelClip);
@@ -408,6 +431,8 @@ namespace TrashCats.Presentation.Hideout
             {
                 HideoutLayout.CatClip.Run when art.run?.frames.Length > 0 => (art.run, true),
                 HideoutLayout.CatClip.Punch when art.canPunch?.frames.Length > 0 => (art.canPunch, false),
+                HideoutLayout.CatClip.Rope when art.rope?.frames.Length > 0 => (art.rope, false),
+                HideoutLayout.CatClip.Dig when art.dig?.frames.Length > 0 => (art.dig, false),
                 HideoutLayout.CatClip.Sleep => (Pose(1) ?? Pose(0), false),
                 HideoutLayout.CatClip.Walk or HideoutLayout.CatClip.Run => (Pose(3) ?? Pose(0), false),
                 HideoutLayout.CatClip.Punch => (Pose(3) ?? Pose(0), false),
@@ -459,6 +484,8 @@ namespace TrashCats.Presentation.Hideout
         /// <summary>Punch frames (jab and hook fully extended) knock the can.</summary>
         private void OnCatFrame(CatToken token, int frame)
         {
+            if (token.Spot.Clip == HideoutLayout.CatClip.Dig && (frame == 1 || frame == 5))
+                ThrowJunk(token.Root);
             if (_can == null || token.Spot.Clip != HideoutLayout.CatClip.Punch || (frame != 2 && frame != 5))
                 return;
             _can.DOComplete();
@@ -479,6 +506,50 @@ namespace TrashCats.Presentation.Hideout
                 .SetLink(flash.gameObject);
         }
 
+        /// <summary>"Ушёл за едой": round portrait, caption and cycle bar shown at the street gap while the cat is away.</summary>
+        private (RectTransform Root, UiBar Bar) AwayBadge(CatId id, Sprite portrait)
+        {
+            var root = Ui.Rect(_frame, "Away_" + id);
+            var picture = new RoundPicture(root, "Portrait", CatColors.Backdrop(id), 0.8f);
+            picture.Root.Place(new Vector2(0.15f, 0.3f), new Vector2(0.85f, 1f));
+            picture.Root.gameObject.AddComponent<AspectRatioFitter>().aspectMode = AspectRatioFitter.AspectMode.HeightControlsWidth;
+            picture.SetPicture(portrait);
+            var caption = Ui.Label(root, Loc.T("hideout.away"), 22, TextAnchor.MiddleCenter, Palette.Paper);
+            caption.rectTransform.Place(new Vector2(-0.4f, 0.12f), new Vector2(1.4f, 0.3f));
+            var bar = Ui.Bar(root, "AwayBar", Palette.Progress);
+            bar.Rect.Place(new Vector2(0.05f, 0f), new Vector2(0.95f, 0.11f));
+            root.gameObject.SetActive(false);
+            var button = Ui.Panel(root, "Tap", new Color(0, 0, 0, 0), raycast: true);
+            button.rectTransform.Fill();
+            button.gameObject.AddComponent<Button>().onClick.AddListener(() => _onCatTapped(id));
+            return (root, bar);
+        }
+
+        /// <summary>A bit of junk (bolt, cap, can) flies out of the dumpster in an arc while a cat digs in it.</summary>
+        private void ThrowJunk(RectTransform cat)
+        {
+            var sprite = Ui.Skin?.Icon("junk");
+            if (sprite == null)
+                return;
+            var junk = Ui.Panel(_frame, "Junk", Color.white);
+            junk.sprite = sprite;
+            junk.preserveAspect = true;
+            var rt = junk.rectTransform;
+            var from = new Vector2((cat.anchorMin.x + cat.anchorMax.x) * 0.5f, cat.anchorMin.y + 0.02f);
+            rt.anchorMin = rt.anchorMax = from;
+            rt.sizeDelta = new Vector2(70, 70);
+            var dx = UnityEngine.Random.Range(60f, 160f);
+            var duration = 0.7f;
+            DOTween.Sequence()
+                .Append(rt.DOAnchorPosX(dx, duration).SetEase(Ease.Linear))
+                .Join(rt.DOAnchorPosY(140f, duration * 0.45f).SetEase(Ease.OutQuad))
+                .Insert(duration * 0.45f, rt.DOAnchorPosY(-40f, duration * 0.55f).SetEase(Ease.InQuad))
+                .Join(rt.DORotate(new Vector3(0, 0, -360f), duration, RotateMode.FastBeyond360))
+                .Append(junk.DOFade(0f, 0.2f))
+                .OnComplete(() => UnityEngine.Object.Destroy(junk.gameObject))
+                .SetLink(junk.gameObject);
+        }
+
         /// <summary>Nearer things (lower base line) draw on top; cats on or in a prop draw over it.</summary>
         private void SortByDepth()
         {
@@ -496,11 +567,12 @@ namespace TrashCats.Presentation.Hideout
             if (!_tokens.TryGetValue(e.CatId, out var token))
                 return;
 
-            token.Root.DOPunchScale(Vector3.one * 0.15f, 0.3f, 6, 0.5f);
+            var target = token.Spot.Hidden ? token.Away.Root : token.Root;
+            target.DOPunchScale(Vector3.one * 0.15f, 0.3f, 6, 0.5f);
             var text = e.Kind == ActivityKind.Train
                 ? $"+{e.Output} {Texts.AttributeGenitive(e.TrainedAttribute).ToLowerInvariant()}"
                 : Texts.Output(_session.Config.GetActivity(e.ActivityId), e.Output);
-            FloatingText.Spawn(_root, token.Root, text, Texts.OutcomeIcon(_session.Config.GetActivity(e.ActivityId)));
+            FloatingText.Spawn(_root, target, text, Texts.OutcomeIcon(_session.Config.GetActivity(e.ActivityId)));
         }
 
         private sealed class CatToken
@@ -511,6 +583,7 @@ namespace TrashCats.Presentation.Hideout
             public CharacterArt Art;
             public Image Image;
             public UiFlipbook Flipbook;
+            public (RectTransform Root, UiBar Bar) Away;
             public Color BaseColor;
             public HideoutLayout.CatSpot Spot;
             public float Depth;
