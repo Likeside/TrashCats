@@ -31,7 +31,6 @@ namespace TrashCats.Editor
 
         private static ActivityDefinition Train(AttributeType a) => new ActivityDefinition { Kind = ActivityKind.Train, TrainedAttribute = a };
         private static readonly ActivityDefinition Punch = Train(AttributeType.Strength), Rope = Train(AttributeType.Agility), Bench = Train(AttributeType.Toughness);
-        private static readonly ActivityDefinition Rummage = new ActivityDefinition { Kind = ActivityKind.Rummage };
         private static readonly ActivityDefinition Sleep = new ActivityDefinition { Kind = ActivityKind.Sleep };
 
         [MenuItem("TrashCats/Art/Build Hideout Layout Scene")]
@@ -56,22 +55,12 @@ namespace TrashCats.Editor
 
             var props = new GameObject("Props").transform;
             props.SetParent(root, false);
-            Prop(props, "Dumpster", "prop_upg_dumpster", HideoutLayout.Station(Rummage));
-            Prop(props, "Can", "prop_upg_can", HideoutLayout.Station(Punch), HideoutLayout.Dumpster.Min.y - 0.001f);
-            Prop(props, "Rope", "prop_upg_mouse", HideoutLayout.Station(Rope));
-            Prop(props, "BenchMat", "prop_bench", HideoutLayout.Bench, HideoutLayout.BenchDepth, mirror: true);
-            Prop(props, "Bed", "prop_upg_boxes", HideoutLayout.Bed);
-            var (canMin, canMax) = HideoutLayout.Station(Punch);
-            var bracket = Load(Env + "prop_bracket.png");
-            if (bracket != null)
-            {
-                // as in the game: 0.12 of the picture wide, the hook over the can's middle, the wall plate on the left
-                var hook = new Vector2((canMin.x + canMax.x) * 0.5f, canMax.y - 0.006f);
-                const float width = 0.12f;
-                var go = Put(props, "Bracket", bracket, new Vector2((hook.x + (0.108f - 0.892f) * width * 0.5f) * W, hook.y * H),
-                    width * W / (bracket.rect.width / 100f), Order(HideoutLayout.Dumpster.Min.y - 0.0009f));
-                go.name = "Bracket";
-            }
+            Prop(props, "Dumpster", HideoutLayout.Dumpster);
+            Prop(props, "Can", HideoutLayout.Can);
+            Prop(props, "Rope", HideoutLayout.RopeProp);
+            Prop(props, "BenchMat", HideoutLayout.Bench);
+            Prop(props, "Bed", HideoutLayout.Bed);
+            Prop(props, "Bracket", HideoutLayout.Bracket);
 
             var idle = new GameObject("Cats_Idle").transform;
             idle.SetParent(root, false);
@@ -123,7 +112,8 @@ namespace TrashCats.Editor
                 var b = sr.bounds;
                 lines.Add($"  {{\"path\":\"{PathOf(t, root.transform)}\",\"sprite\":\"{(sr.sprite != null ? AssetDatabase.GetAssetPath(sr.sprite) : "")}\",\"active\":{(sr.gameObject.activeInHierarchy ? "true" : "false")}," +
                           $"\"foot\":[{F(t.position.x / W)},{F(t.position.y / H)}],\"min\":[{F(b.min.x / W)},{F(b.min.y / H)}],\"max\":[{F(b.max.x / W)},{F(b.max.y / H)}]," +
-                          $"\"height\":{F(b.size.y / H)},\"flip\":{(t.lossyScale.x < 0 ? "true" : "false")},\"order\":{sr.sortingOrder}}}");
+                          $"\"height\":{F(b.size.y / H)},\"flip\":{(t.lossyScale.x < 0 != sr.flipX ? "true" : "false")},\"flipY\":{(t.lossyScale.y < 0 != sr.flipY ? "true" : "false")},\"order\":{sr.sortingOrder}," +
+                          $"\"rotation\":{F(t.eulerAngles.z)},\"scale\":[{F(Mathf.Abs(t.lossyScale.x))},{F(Mathf.Abs(t.lossyScale.y))}],\"pixels\":[{F(sr.sprite != null ? sr.sprite.rect.width : 0)},{F(sr.sprite != null ? sr.sprite.rect.height : 0)}]}}");
             }
 
             File.WriteAllText(ExportPath, "[\n" + string.Join(",\n", lines) + "\n]\n", new UTF8Encoding(false));
@@ -165,19 +155,19 @@ namespace TrashCats.Editor
             foreach (var (name, sprite, spot) in list)
             {
                 if (sprite == null) continue;
-                var h = sprite.rect.height * HideoutLayout.HeightPerPixel * HideoutLayout.DepthScale(spot.Foot.y) * spot.Scale;
-                var depth = name == "Sleep" ? HideoutLayout.Bed.Min.y - 0.002f : spot.Foot.y - 0.001f;
+                var h = spot.Height > 0f ? spot.Height : sprite.rect.height * HideoutLayout.HeightPerPixel * HideoutLayout.DepthScale(spot.Foot.y) * spot.Scale;
+                var depth = float.IsNaN(spot.Depth) ? spot.Foot.y - 0.001f : spot.Depth;
                 yield return new Pose(name, sprite, spot.Foot, h * H / (sprite.rect.height / 100f), spot.FaceLeft, Order(depth));
             }
 
             var bench = Frames(dir + "Bench").FirstOrDefault();
             if (bench != null && HideoutLayout.BenchFit(key) is var (benchFoot, benchHeight))
             {
-                var (min, max) = HideoutLayout.Bench;
+                var (min, max) = (HideoutLayout.Bench.Min, HideoutLayout.Bench.Max);
                 var size = max - min;
                 var spot = HideoutLayout.Spot(Bench, 0, key);
                 yield return new Pose("Bench", bench, min + Vector2.Scale(benchFoot, size), benchHeight * size.y * H / (bench.rect.height / 100f), spot.FaceLeft,
-                    Order(HideoutLayout.Bench.Min.y - 0.002f));
+                    Order(spot.Depth));
             }
         }
 
@@ -188,20 +178,15 @@ namespace TrashCats.Editor
             go.name = $"{key}_{pose.Name}";
         }
 
-        /// <summary>A prop fitted into its rect keeping the aspect (like the game's preserveAspect pictures).</summary>
-        private static void Prop(Transform parent, string name, string file, (Vector2 Min, Vector2 Max) rect, float? depth = null, bool mirror = false)
+        /// <summary>A prop as the game places it: bottom centre, height, rotation about that point, mirroring, order.</summary>
+        private static void Prop(Transform parent, string name, HideoutLayout.PropPlace place)
         {
-            var sprite = Load(Env + file + ".png");
+            var sprite = Load(Env + place.Sprite + ".png");
             if (sprite == null) return;
-            var (min, max) = rect;
-            var bw = (max.x - min.x) * W;
-            var bh = (max.y - min.y) * H;
-            var sw = sprite.rect.width / 100f;
-            var sh = sprite.rect.height / 100f;
-            var scale = Mathf.Min(bw / sw, bh / sh);
-            var bottom = (min.y + max.y) * 0.5f * H - sh * scale * 0.5f;
-            var go = Put(parent, name, sprite, new Vector2((min.x + max.x) * 0.5f * W, bottom), scale, Order(depth ?? min.y));
-            if (mirror) go.transform.localScale = new Vector3(-scale, scale, 1);
+            var scale = place.Size.y * H / (sprite.rect.height / 100f);
+            var go = Put(parent, name, sprite, new Vector2(place.Foot.x * W, place.Foot.y * H), scale, Order(place.Depth));
+            go.transform.localScale = new Vector3(place.Flip ? -scale : scale, scale, 1);
+            go.transform.localEulerAngles = new Vector3(0, 0, place.Rotation);
         }
 
         private static GameObject Put(Transform parent, string name, Sprite sprite, Vector2 position, float scale, int order)

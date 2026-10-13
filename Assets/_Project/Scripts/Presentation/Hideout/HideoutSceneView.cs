@@ -34,7 +34,6 @@ namespace TrashCats.Presentation.Hideout
         private readonly Dictionary<CatId, CatToken> _tokens = new Dictionary<CatId, CatToken>();
         private readonly Dictionary<UpgradeId, TMP_Text> _upgradeLabels = new Dictionary<UpgradeId, TMP_Text>();
         private readonly Dictionary<UpgradeId, RectTransform> _stations = new Dictionary<UpgradeId, RectTransform>();
-        private readonly Dictionary<ActivityKind, float> _propBase = new Dictionary<ActivityKind, float>();
         private RectTransform _can;
         private GameObject _ropeProp;
         private Vector2 _streetGap;
@@ -139,36 +138,34 @@ namespace TrashCats.Presentation.Hideout
             foreach (var activity in config.Activities)
             {
                 var (label, upgrade) = StationInfo(activity);
-                var bench = activity.Kind == ActivityKind.Train && activity.TrainedAttribute == AttributeType.Toughness;
-                // the bench mat replaced the wheel, its upgrade keeps the wheel's id
-                var prop = bench ? _art?.GetSprite("prop_bench") : upgrade != null ? _art?.GetSprite("prop_" + upgrade.Value) : null;
-                var (min, max) = HideoutLayout.Station(activity);
+                // placed as in the layout scene: sprite, rect, rotation about the bottom centre, mirroring, draw order
+                var place = HideoutLayout.Prop(activity);
+                var prop = place.Sprite != null ? _art?.GetSprite(place.Sprite) : null;
+                var (min, max) = (place.Min, place.Max);
                 var scavenge = activity.Kind == ActivityKind.Scavenge;
                 var box = Ui.Panel(_frame, "Station_" + activity.Id, scavenge || prop != null ? new Color(0, 0, 0, 0) : Palette.Station);
                 box.rectTransform.Place(min, max);
+                box.rectTransform.pivot = new Vector2(0.5f, 0f);
+                box.rectTransform.localEulerAngles = new Vector3(0, 0, place.Rotation);
                 if (prop != null)
                 {
                     var picture = Ui.Picture(box.transform, "Prop", prop);
-                    if (bench)
-                        picture.rectTransform.localScale = new Vector3(-1f, 1f, 1f); // brick stands at the right end
+                    if (place.Flip)
+                        picture.rectTransform.localScale = new Vector3(-1f, 1f, 1f);
                     if (activity.Kind == ActivityKind.Train && activity.TrainedAttribute == AttributeType.Strength)
                     {
                         // the can swings from the top of its rope when punched
                         picture.rectTransform.pivot = new Vector2(0.5f, 1f);
                         picture.rectTransform.Fill();
                         _can = picture.rectTransform;
-                        // a wrought-iron bracket sticks out of the wall; its hook holds the top of the can's rope, its
-                        // wall plate is on the left, on the wall between the door frame and the can
-                        var bracketSprite = _art?.GetSprite("prop_bracket");
+                        // a wrought-iron bracket sticks out of the wall; its hook holds the top of the can's rope
+                        var bracketSprite = _art?.GetSprite(HideoutLayout.Bracket.Sprite);
                         if (bracketSprite != null)
                         {
-                            var hook = new Vector2((min.x + max.x) * 0.5f, max.y - 0.006f);
-                            const float width = 0.12f;
-                            var height = width * HideoutLayout.PictureAspect * bracketSprite.rect.height / bracketSprite.rect.width;
                             var bracket = Ui.Panel(_frame, "Bracket", Color.white);
                             bracket.sprite = bracketSprite;
-                            bracket.rectTransform.Place(new Vector2(hook.x - 0.892f * width, hook.y), new Vector2(hook.x + 0.108f * width, hook.y + height));
-                            _depthItems.Add((bracket.transform, HideoutLayout.Dumpster.Min.y - 0.0009f));
+                            bracket.rectTransform.Place(HideoutLayout.Bracket.Min, HideoutLayout.Bracket.Max);
+                            _depthItems.Add((bracket.transform, HideoutLayout.Bracket.Depth));
                         }
                     }
                 }
@@ -178,13 +175,7 @@ namespace TrashCats.Presentation.Hideout
                     _ropeProp = box.transform.Find("Prop")?.gameObject;
                 if (scavenge)
                     _streetGap = new Vector2((min.x + max.x) * 0.5f, min.y);
-                // the can hangs over the dumpster's lid: it and its caption draw over the dumpster
-                var can = activity.Kind == ActivityKind.Train && activity.TrainedAttribute == AttributeType.Strength;
-                var depth = bench ? HideoutLayout.BenchDepth : can ? HideoutLayout.Dumpster.Min.y - 0.001f : min.y;
-                _depthItems.Add((box.transform, depth));
-                if (activity.Kind == ActivityKind.Sleep || bench)
-                    // a cat lying on the mat draws by the mat's near edge: over the idle cats standing at its far end
-                    _propBase[activity.Kind == ActivityKind.Sleep ? ActivityKind.Sleep : ActivityKind.Train] = min.y;
+                _depthItems.Add((box.transform, place.Depth));
 
                 var text = Plate(box.rectTransform, label, scavenge);
                 if (upgrade != null)
@@ -364,7 +355,7 @@ namespace TrashCats.Presentation.Hideout
                     groups[activity.Id.Value] = index + 1;
                     spot = HideoutLayout.Spot(activity, index, token.Art?.viewKey);
                     // one cat fits on the mat / on the bed; others wait beside it (behind the mat)
-                    var (bMin, bMax) = HideoutLayout.Bench;
+                    var (bMin, bMax) = (HideoutLayout.Bench.Min, HideoutLayout.Bench.Max);
                     if (spot.OverProp && index > 0)
                         spot = spot.Clip == HideoutLayout.CatClip.Bench
                             ? new HideoutLayout.CatSpot(new Vector2((bMin.x + bMax.x) * 0.5f + 0.12f * (index - 1), bMax.y + 0.01f), HideoutLayout.CatClip.Sit)
@@ -372,9 +363,9 @@ namespace TrashCats.Presentation.Hideout
                     ropeBusy |= spot.Clip == HideoutLayout.CatClip.Rope;
                     if (spot.Clip == HideoutLayout.CatClip.Bench && token.Art != null && HideoutLayout.BenchFit(token.Art.viewKey) is var (benchFoot, benchHeight))
                     {
-                        // placed and sized against the mat's rect, as in the approved previews
+                        // placed and sized against the mat's rect, as in the layout scene
                         var size = bMax - bMin;
-                        spot = new HideoutLayout.CatSpot(bMin + Vector2.Scale(benchFoot, size), spot.Clip, spot.FaceLeft, spot.OverProp, height: benchHeight * size.y);
+                        spot = new HideoutLayout.CatSpot(bMin + Vector2.Scale(benchFoot, size), spot.Clip, spot.FaceLeft, spot.OverProp, height: benchHeight * size.y, depth: spot.Depth);
                     }
                 }
                 else
@@ -396,9 +387,7 @@ namespace TrashCats.Presentation.Hideout
 
                 var moved = token.Placed && (spot.Foot != token.Spot.Foot || spot.Clip != token.Spot.Clip);
                 token.Spot = spot;
-                token.Depth = spot.OverProp && kind != null && _propBase.TryGetValue(kind == ActivityKind.Sleep ? ActivityKind.Sleep : ActivityKind.Train, out var baseY)
-                    ? baseY - 0.002f
-                    : spot.Foot.y - 0.001f;
+                token.Depth = float.IsNaN(spot.Depth) ? spot.Foot.y - 0.001f : spot.Depth;
                 if (animate && moved)
                     Teleport(token);
                 else
@@ -518,15 +507,15 @@ namespace TrashCats.Presentation.Hideout
             if (_can == null || token.Spot.Clip != HideoutLayout.CatClip.Punch || punch == null || (frame != punch.KeyFrame(2) && frame != punch.KeyFrame(5)))
                 return;
             _can.DOComplete();
-            // hit from the left: the can swings to the right
-            _can.DOPunchRotation(new Vector3(0, 0, frame == punch.KeyFrame(5) ? 16f : 10f), 0.55f, 4, 0.6f).SetLink(_can.gameObject);
+            // hit from the right: the can swings to the left
+            _can.DOPunchRotation(new Vector3(0, 0, frame == punch.KeyFrame(5) ? -16f : -10f), 0.55f, 4, 0.6f).SetLink(_can.gameObject);
             var star = Ui.Skin?.fxStar;
             if (star == null)
                 return;
             var flash = Ui.Panel(_can, "Hit", Color.white);
             flash.sprite = star;
             flash.preserveAspect = true;
-            flash.rectTransform.anchorMin = flash.rectTransform.anchorMax = new Vector2(0.25f, 0.2f); // hit from the left
+            flash.rectTransform.anchorMin = flash.rectTransform.anchorMax = new Vector2(0.75f, 0.2f); // hit from the right
             flash.rectTransform.sizeDelta = new Vector2(110, 110);
             flash.rectTransform.localScale = Vector3.one * 0.5f;
             DOTween.Sequence()
