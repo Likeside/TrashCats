@@ -22,6 +22,8 @@ namespace TrashCats.Tests
                 sb.Append(' ').Append(cat.Activity);
             }
 
+            sb.Append($"\ntutorial: skipped={world.Tutorial.Skipped} done={string.Join(",", world.Tutorial.Completed.OrderBy(x => x))}");
+
             return sb.ToString();
         }
     }

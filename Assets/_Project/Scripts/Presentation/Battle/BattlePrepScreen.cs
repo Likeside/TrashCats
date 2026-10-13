@@ -88,8 +88,8 @@ namespace TrashCats.Presentation.Battle
                 var e = enemies[i];
                 var hp = CombatFormulas.MaxHp(config.Combat, e.Toughness, e.HpMultiplierPermille);
                 var skills = e.Skills.Count == 0 ? "только Царапина" : string.Join(", ", e.Skills.Select(Texts.SkillName));
-                Row(_enemyList, "PrepEnemy" + i, i, enemies.Count, Palette.Hex("#5A3A3A"),
-                    $"{i + 1}. {Texts.EnemyName(e.Id.Value)}   {Texts.Stats(e.Strength, e.Agility, e.Toughness)} · HP {hp}\n<size=26>{skills}</size>", null);
+                InfoRow(_enemyList, "PrepEnemy" + i, i, enemies.Count,
+                    $"{i + 1}. {Texts.EnemyName(e.Id.Value)}   {Texts.Stats(e.Strength, e.Agility, e.Toughness)} · HP {hp}\n<size=26>{skills}</size>");
             }
 
             Clear(_catList);
@@ -102,11 +102,10 @@ namespace TrashCats.Presentation.Battle
                 var skills = Enumerable.Range(0, Cat.SkillSlotCount).Select(cat.GetSkillInSlot).Where(s => s != null).Select(s => Texts.SkillName(s.Value)).ToList();
                 var label = $"{(position >= 0 ? $"[{position + 1}] " : "")}{Texts.CatName(cat.Id)}   {Texts.Stats(cat.GetLevel(AttributeType.Strength), cat.GetLevel(AttributeType.Agility), cat.GetLevel(AttributeType.Toughness))} · энергия {cat.Energy}"
                             + $"\n<size=26>{(skills.Count == 0 ? "только Царапина" : string.Join(", ", skills))}{(tired ? " · устал" : "")}{(cat.Activity.IsWorking ? " · занят" : "")}</size>";
-                var color = position >= 0 ? Palette.Primary : tired ? Palette.Disabled : CatColors.For(cat.Id);
+                var color = position >= 0 ? Palette.Primary : tired ? Palette.Disabled : Palette.Panel;
                 var id = cat.Id;
                 var row = Row(_catList, "PrepCat_" + cat.Id, i, Math.Max(3, cats.Count), color, label, () => Toggle(id));
                 row.Interactable = !tired || position >= 0;
-                row.Text.color = position >= 0 ? Palette.Ink : CatColors.TextOn(color);
 
                 var details = Ui.Button(row.Rect, "Details_" + cat.Id, "Умения", Palette.Paper, () => _onCatDetails(id), 26);
                 details.Rect.Place(new Vector2(1, 0.5f), new Vector2(1, 0.5f), new Vector2(-170, -35), new Vector2(-15, 35));
@@ -154,9 +153,17 @@ namespace TrashCats.Presentation.Battle
             row.Rect.Place(new Vector2(0, y0), new Vector2(1, y1), new Vector2(0, 6), new Vector2(0, -6));
             row.Text.Align(TextAnchor.MiddleLeft);
             row.Text.rectTransform.Fill(20);
-            row.Text.color = CatColors.TextOn(color);
-            if (onClick == null) row.Button.transition = Selectable.Transition.None;
             return row;
+        }
+
+        /// <summary>Read-only line on a cream card (enemies).</summary>
+        private static void InfoRow(RectTransform list, string name, int index, int count, string text)
+        {
+            var slots = Math.Max(count, 3);
+            var card = Ui.Card(list, name, CardStyle.Strip);
+            card.rectTransform.Place(new Vector2(0, 1f - (index + 1f) / slots), new Vector2(1, 1f - (float)index / slots), new Vector2(0, 6), new Vector2(0, -6));
+            var label = Ui.Label(card.transform, text, 32, TextAnchor.MiddleLeft, Palette.Ink, heading: true);
+            label.rectTransform.Fill(28);
         }
 
         private static void Clear(RectTransform list)

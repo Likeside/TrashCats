@@ -199,7 +199,8 @@ namespace TrashCats.Presentation.Hideout
             bubble.rectTransform.Place(new Vector2(-0.5f, 1f), new Vector2(1.5f, 1f), new Vector2(0, 4), new Vector2(0, 44));
 
             var progress = Ui.Bar(rt, "Progress", Palette.Progress);
-            progress.Rect.Place(new Vector2(0.1f, 1f), new Vector2(0.9f, 1f), new Vector2(0, 2), new Vector2(0, 26));
+            // under the name at the cat's feet: above the head it ran into the station captions
+            progress.Rect.Place(new Vector2(0.05f, 0f), new Vector2(0.95f, 0f), new Vector2(0, -56), new Vector2(0, -34));
             bubble.rectTransform.Place(new Vector2(-0.5f, 1f), new Vector2(1.5f, 1f), new Vector2(0, 28), new Vector2(0, 68));
             bubble.Outlined();
 

@@ -119,7 +119,7 @@ namespace TrashCats.Presentation.Hideout
             foreach (var group in summary.LevelUps.GroupBy(e => (e.CatId, e.Attribute)))
                 sb.AppendLine($"{Texts.CatName(group.Key.CatId)}: {Texts.Attribute(group.Key.Attribute)} {group.Max(e => e.NewLevel)}");
             foreach (var unlocked in summary.SkillsUnlocked)
-                sb.AppendLine($"{Texts.CatName(unlocked.CatId)}: новое умение {unlocked.SkillId}");
+                sb.AppendLine($"{Texts.CatName(unlocked.CatId)}: новое умение {Texts.SkillName(unlocked.SkillId)}");
             foreach (var stopped in summary.Stopped)
             {
                 var reason = Texts.IdleBubble(stopped.Reason);

@@ -119,6 +119,19 @@ namespace TrashCats.App
             events => Hideout.Buy(_world.Upgrades, _world.Wallet, Config, upgradeId, events),
             SaveUrgency.Immediate);
 
+        /// <summary>Records a finished onboarding step or shown hint.</summary>
+        public void CompleteTutorialStep(string stepId)
+        {
+            if (TutorialRules.Complete(_world, stepId))
+                _save.MarkDirty(SaveUrgency.Deferred);
+        }
+
+        public void SkipTutorial()
+        {
+            TutorialRules.Skip(_world);
+            _save.MarkDirty(SaveUrgency.Immediate);
+        }
+
         private CommandResult Execute(CatId catId, Func<Cat, CommandError> validate, Action<Cat, List<DomainEvent>> apply, SaveUrgency urgency)
         {
             Tick();
