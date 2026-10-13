@@ -28,6 +28,8 @@ namespace TrashCats.Presentation.Hideout
             Walk,
             Run,
             Punch,
+            Rope,
+            Dig,
         }
 
         /// <summary>How a cat appears at a spot.</summary>
@@ -62,7 +64,7 @@ namespace TrashCats.Presentation.Hideout
             {
                 // can on a rope: its body (lower 60% of the sprite) at the punching cat's fist height (70% of the punch frame)
                 AttributeType.Strength => (new Vector2(0.08f, 0.423f), new Vector2(0.23f, 0.604f)),
-                AttributeType.Agility => (new Vector2(0.04f, 0.29f), new Vector2(0.13f, 0.34f)),   // toy mouse by the wall, behind the dumpster
+                AttributeType.Agility => (new Vector2(0.335f, 0.43f), new Vector2(0.405f, 0.6f)),  // skipping rope on a nail by the door
                 _ => (new Vector2(0.5f, 0.3f), new Vector2(1.09f, 0.74f)),                        // big wheel on the right, standing on the ground
             },
         };
@@ -74,14 +76,15 @@ namespace TrashCats.Presentation.Hideout
             return activity.Kind switch
             {
                 ActivityKind.Scavenge => new CatSpot(new Vector2(0.93f, 0.68f), CatClip.Walk, hidden: true),
-                ActivityKind.Rummage => new CatSpot(new Vector2(0.36f, 0.16f) + shift, CatClip.Walk, faceLeft: true),
+                // head first in the dumpster: the cut line of the clip hides under the bin's front rim
+                ActivityKind.Rummage => new CatSpot(new Vector2(0.135f + 0.05f * index, 0.178f), CatClip.Dig),
                 ActivityKind.Sleep => new CatSpot(new Vector2(0.82f, 0.175f) + shift * 0.5f, CatClip.Sleep, overProp: true),
                 _ => activity.TrainedAttribute switch
                 {
                     // the punching cat stands right of the can and hits to the left
                     // stands at arm's length: the fist tip (5% from the frame's edge) lands in the right quarter of the can
                     AttributeType.Strength => new CatSpot(new Vector2(0.48f, 0.29f) + shift, CatClip.Punch, faceLeft: true),
-                    AttributeType.Agility => new CatSpot(new Vector2(0.24f, 0.31f) + shift, CatClip.Walk, faceLeft: true),
+                    AttributeType.Agility => new CatSpot(new Vector2(0.4f, 0.03f) + shift, CatClip.Rope),
                     // on the lowest middle point of the drum's inner floor (x 0.48, y 0.2 of the wheel sprite);
                     // run frames keep ~8% empty space under the feet, hence a little lower
                     _ => new CatSpot(new Vector2(0.783f, 0.372f), CatClip.Run, faceLeft: true, overProp: true),
@@ -106,9 +109,9 @@ namespace TrashCats.Presentation.Hideout
         public static CatSpot Idle(int index) => new CatSpot(index switch
         {
             // the free middle ground in front, away from the can, the wheel and the bed
-            0 => new Vector2(0.46f, 0.05f),
-            1 => new Vector2(0.4f, 0.15f),
-            2 => new Vector2(0.55f, 0.13f),
+            0 => new Vector2(0.55f, 0.17f),
+            1 => new Vector2(0.36f, 0.2f),
+            2 => new Vector2(0.47f, 0.32f),
             _ => new Vector2(0.45f + 0.06f * (index - 3), 0.1f),
         }, CatClip.Sit);
     }

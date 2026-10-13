@@ -95,7 +95,7 @@ def main():
         elif name in BACKGROUNDS:
             print(f"{name} -> {BACKGROUNDS[name]}")
             put(path, f"{ENV}/{BACKGROUNDS[name]}.png")
-        elif name == "wheel_spin" or name.endswith(("_run", "_run2", "_idle8", "_canpunch", "_attack8")):
+        elif name == "wheel_spin" or (not name.startswith("prop_") and name.endswith(("_run", "_run2", "_idle8", "_canpunch", "_attack8", "_rope", "_dig"))):
             # round 3: one 8-frame clip per sheet (2x4)
             if name == "wheel_spin":
                 key, clip, extra = "wheel", "Idle", ["--anchor", "center"]
@@ -105,6 +105,9 @@ def main():
                 clip, extra = {
                     "run": ("Run", ["--anchor", "center", "--match-height", "210"]),
                     "run2": ("Run", ["--anchor", "center", "--match-height", "340", "--match-frame", "0"]),
+                    # skipping rope: scaled by a frame with the rope down (the loop over the head is taller)
+                    "rope": ("Rope", ["--anchor", "center", "--match-height", "385", "--match-frame", {"ryzhy": "2"}.get(key.lower(), "0")]),
+                    "dig": ("Dig", ["--anchor", "center", "--match-height", "230", "--match-frame", "0"]),
                     "idle8": ("HideIdle", ["--match-height", str(GUARD_HEIGHT), "--match-frame", "0"]),
                     "canpunch": ("CanPunch", ["--match-height", str(GUARD_HEIGHT), "--match-frame", "0"]),
                     "attack8": ("Attack", ["--match-height", str(GUARD_HEIGHT), "--match-frame", "0"]),
@@ -115,13 +118,13 @@ def main():
             for old in glob.glob(f"{folder}/*.png*"):
                 os.remove(old)
             frames = sorted(glob.glob(f"{out}/{base}_[0-9].png"), key=lambda p: int(p.rsplit("_", 1)[1][:-4]))
-            if clip == "Run":
-                feet_on_one_line(frames)
+            if clip in ("Run", "Dig"):
+                feet_on_one_line(frames)  # for Dig: the cut line (the bin's rim) on one row
             for i, f in enumerate(frames):
                 put(f, f"{folder}/{key.lower()}_{clip.lower()}_{i:02d}.png")
         elif name.startswith("prop_"):
             # single prop on green (round 3): key out and trim
-            key = {"prop_wheel": "prop_upg_wheel", "prop_can": "prop_upg_can", "prop_dumpster": "prop_upg_dumpster", "prop_boxes": "prop_upg_boxes"}.get(name, name)
+            key = {"prop_wheel": "prop_upg_wheel", "prop_can": "prop_upg_can", "prop_dumpster": "prop_upg_dumpster", "prop_boxes": "prop_upg_boxes", "prop_rope": "prop_upg_mouse"}.get(name, name)
             print(f"{name} -> {key}")
             out, base = process(path, 1, 1, ["--anchor", "center"])
             f = sorted(glob.glob(f"{out}/{base}_[0-9].png"))[0]

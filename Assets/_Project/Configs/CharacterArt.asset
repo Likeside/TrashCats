@@ -98,6 +98,24 @@ MonoBehaviour:
       attachPoints: []
       breathe: 0
       breathePeriod: 2.4
+    rope:
+      name: 
+      frames: []
+      fps: 10
+      loop: 1
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    dig:
+      name: 
+      frames: []
+      fps: 10
+      loop: 1
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
     run:
       name: 
       frames: []
@@ -204,6 +222,24 @@ MonoBehaviour:
       breathe: 0
       breathePeriod: 2.4
     hideoutIdle:
+      name: 
+      frames: []
+      fps: 10
+      loop: 1
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    rope:
+      name: 
+      frames: []
+      fps: 10
+      loop: 1
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    dig:
       name: 
       frames: []
       fps: 10
@@ -326,6 +362,24 @@ MonoBehaviour:
       attachPoints: []
       breathe: 0
       breathePeriod: 2.4
+    rope:
+      name: 
+      frames: []
+      fps: 10
+      loop: 1
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    dig:
+      name: 
+      frames: []
+      fps: 10
+      loop: 1
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
     run:
       name: 
       frames: []
@@ -439,6 +493,40 @@ MonoBehaviour:
       - {fileID: 21300000, guid: a41dbed01e156b7eabdba0a4871b2a83, type: 3}
       - {fileID: 21300000, guid: 7a6509b6d6b3cfe35a6b4012c4ae00c0, type: 3}
       fps: 6
+      loop: 1
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    rope:
+      name: rope
+      frames:
+      - {fileID: 21300000, guid: ec856a9e7f0930997ad4cb210ef7ddcf, type: 3}
+      - {fileID: 21300000, guid: d9826672ea08762a0b43242576367754, type: 3}
+      - {fileID: 21300000, guid: 499834352a11fbdc19b5b1e8eed79807, type: 3}
+      - {fileID: 21300000, guid: 24559cf38116eca0380795e5ba014056, type: 3}
+      - {fileID: 21300000, guid: c0a321017bf5da969a7e5ecf6113129b, type: 3}
+      - {fileID: 21300000, guid: 46eb268383e013b38987c38e80d45285, type: 3}
+      - {fileID: 21300000, guid: 6f9499573b9ca66ce91999dc8e8c6afb, type: 3}
+      - {fileID: 21300000, guid: 310ffc008e688709896ea61959d92081, type: 3}
+      fps: 9
+      loop: 1
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    dig:
+      name: dig
+      frames:
+      - {fileID: 21300000, guid: ff286bbe02099616e9e8c1451f885b22, type: 3}
+      - {fileID: 21300000, guid: 2275b4d7b302e805a8c3650e132da2e6, type: 3}
+      - {fileID: 21300000, guid: 19a6ff94d6411586185c0b93c9323310, type: 3}
+      - {fileID: 21300000, guid: 9ca6a23bdb2f833569ba91cea0a5ea47, type: 3}
+      - {fileID: 21300000, guid: 47a0234955fab000993fd6124b385172, type: 3}
+      - {fileID: 21300000, guid: 88c407324be3c5e7d9bf3e03656d06bb, type: 3}
+      - {fileID: 21300000, guid: eb9d5da1ecde3e58cb3d1faa2d27e971, type: 3}
+      - {fileID: 21300000, guid: 6b14233a385452938ad1d6d15b4f189f, type: 3}
+      fps: 8
       loop: 1
       pingPong: 0
       attachPoints: []
@@ -578,6 +666,24 @@ MonoBehaviour:
       attachPoints: []
       breathe: 0
       breathePeriod: 2.4
+    rope:
+      name: 
+      frames: []
+      fps: 10
+      loop: 1
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    dig:
+      name: 
+      frames: []
+      fps: 10
+      loop: 1
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
     run:
       name: 
       frames: []
@@ -692,6 +798,24 @@ MonoBehaviour:
       attachPoints: []
       breathe: 0
       breathePeriod: 2.4
+    rope:
+      name: 
+      frames: []
+      fps: 10
+      loop: 1
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    dig:
+      name: 
+      frames: []
+      fps: 10
+      loop: 1
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
     run:
       name: 
       frames: []
@@ -798,6 +922,24 @@ MonoBehaviour:
       breathe: 0
       breathePeriod: 2.4
     hideoutIdle:
+      name: 
+      frames: []
+      fps: 10
+      loop: 1
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    rope:
+      name: 
+      frames: []
+      fps: 10
+      loop: 1
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    dig:
       name: 
       frames: []
       fps: 10
@@ -925,6 +1067,40 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 2781e589ebc9fbfd7aa42f64c9dfcf03, type: 3}
       - {fileID: 21300000, guid: 97ee9085aa3d07b7199030fa07114c87, type: 3}
       fps: 6
+      loop: 1
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    rope:
+      name: rope
+      frames:
+      - {fileID: 21300000, guid: 17d291a6452693693a3b1dea314c321c, type: 3}
+      - {fileID: 21300000, guid: 3eb02f26b2ee48f33980dec11c45133c, type: 3}
+      - {fileID: 21300000, guid: 752fe6137e7b389249f8a5d526f44841, type: 3}
+      - {fileID: 21300000, guid: febfe3250c246366db14f9fe3bcf659d, type: 3}
+      - {fileID: 21300000, guid: 5f5821c75f8e6e8adb0c76db6400ab3d, type: 3}
+      - {fileID: 21300000, guid: 9ea0f6b313ce154aea6b4b72e2a3f042, type: 3}
+      - {fileID: 21300000, guid: 40444776fbc1f6c4a92dceec3ef5f639, type: 3}
+      - {fileID: 21300000, guid: eed7ef65a6910426ab9669acc87afe32, type: 3}
+      fps: 9
+      loop: 1
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    dig:
+      name: dig
+      frames:
+      - {fileID: 21300000, guid: 6aeae5b07eb6ce17f8b753e1f79dc3b6, type: 3}
+      - {fileID: 21300000, guid: 02169e5992398478c8b6612301bbc6fb, type: 3}
+      - {fileID: 21300000, guid: cbd2251646b2042abaa7f832171f1e9f, type: 3}
+      - {fileID: 21300000, guid: c3c1e29067d069aada46092f7796c040, type: 3}
+      - {fileID: 21300000, guid: 63a5abd7a451d576084ad9615f03db17, type: 3}
+      - {fileID: 21300000, guid: e1fb97eded611015a91034aaff6b1e23, type: 3}
+      - {fileID: 21300000, guid: 2fe737124eb2d987cb8b26ac109bb05f, type: 3}
+      - {fileID: 21300000, guid: cbdc53f45bd066edd9bec110e499779a, type: 3}
+      fps: 8
       loop: 1
       pingPong: 0
       attachPoints: []
@@ -1076,6 +1252,40 @@ MonoBehaviour:
       attachPoints: []
       breathe: 0
       breathePeriod: 2.4
+    rope:
+      name: rope
+      frames:
+      - {fileID: 21300000, guid: db2983d902969803e97dd175ce8b1929, type: 3}
+      - {fileID: 21300000, guid: 97d756bcc5dced0bebf54c902b0dd861, type: 3}
+      - {fileID: 21300000, guid: fa9e3e6f20e6110b19ee30b9385b373e, type: 3}
+      - {fileID: 21300000, guid: 3d6943a09e88e6133bb9995be2ff83bc, type: 3}
+      - {fileID: 21300000, guid: 49a64156f1f887020acc549592988855, type: 3}
+      - {fileID: 21300000, guid: 6c90e039fcc6ae77e9e8db001ae8d611, type: 3}
+      - {fileID: 21300000, guid: 375fec2f1f37666dd98d54a327140274, type: 3}
+      - {fileID: 21300000, guid: 88140c2cadb5cd72c8aed4336c613267, type: 3}
+      fps: 9
+      loop: 1
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    dig:
+      name: dig
+      frames:
+      - {fileID: 21300000, guid: 80683689345f9cfe8be3f52c75d0d49d, type: 3}
+      - {fileID: 21300000, guid: 0b38a9d5da6095df08b4ec6cbb1c8577, type: 3}
+      - {fileID: 21300000, guid: 3eb465efae65f0bc086992f7705ddcec, type: 3}
+      - {fileID: 21300000, guid: e66988283d8318335b339200a9bbce0a, type: 3}
+      - {fileID: 21300000, guid: f0271166eb99c6c5d9bb7951e92e260d, type: 3}
+      - {fileID: 21300000, guid: 7937e0d31ecb7950d96a67daff7d7ca6, type: 3}
+      - {fileID: 21300000, guid: bf38b142d2343dc94ae5b84856917a0d, type: 3}
+      - {fileID: 21300000, guid: 1dc5b582cd8b79e2499b330f60af7b81, type: 3}
+      fps: 8
+      loop: 1
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
     run:
       name: run
       frames:
@@ -1210,6 +1420,24 @@ MonoBehaviour:
       attachPoints: []
       breathe: 0
       breathePeriod: 2.4
+    rope:
+      name: 
+      frames: []
+      fps: 10
+      loop: 1
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    dig:
+      name: 
+      frames: []
+      fps: 10
+      loop: 1
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
     run:
       name: 
       frames: []
@@ -1296,6 +1524,24 @@ MonoBehaviour:
       breathe: 0
       breathePeriod: 2.4
     hideoutIdle:
+      name: 
+      frames: []
+      fps: 10
+      loop: 1
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    rope:
+      name: 
+      frames: []
+      fps: 10
+      loop: 1
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    dig:
       name: 
       frames: []
       fps: 10
@@ -1418,6 +1664,24 @@ MonoBehaviour:
       attachPoints: []
       breathe: 0
       breathePeriod: 2.4
+    rope:
+      name: 
+      frames: []
+      fps: 10
+      loop: 1
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    dig:
+      name: 
+      frames: []
+      fps: 10
+      loop: 1
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
     run:
       name: 
       frames: []
@@ -1524,6 +1788,24 @@ MonoBehaviour:
       breathe: 0
       breathePeriod: 2.4
     hideoutIdle:
+      name: 
+      frames: []
+      fps: 10
+      loop: 1
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    rope:
+      name: 
+      frames: []
+      fps: 10
+      loop: 1
+      pingPong: 0
+      attachPoints: []
+      breathe: 0
+      breathePeriod: 2.4
+    dig:
       name: 
       frames: []
       fps: 10
