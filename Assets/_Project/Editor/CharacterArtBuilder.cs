@@ -128,7 +128,7 @@ namespace TrashCats.Editor
             if (art.idle == null)
                 return null;
             art.idle.breathe = key == "wheel" ? 0f : art.idle.frames.Length <= 2 ? 0.012f : 0.008f;
-            if (key == "wheel") art.idle.fps = 12f;
+            if (key == "wheel") art.idle.fps = art.idle.frames.Length >= 15 ? 24f : 12f;
             // card portrait cut from the concept (Tools/import_ui.py), else the first stance frame
             art.portrait = Sprites(dir + "/Portrait").FirstOrDefault() ?? art.idle.frames.FirstOrDefault();
 
@@ -146,6 +146,8 @@ namespace TrashCats.Editor
         private static FlipbookClip Clip(string dir, string folder, float fps, bool loop)
         {
             var frames = Sprites($"{dir}/{folder}");
+            // clips doubled by Tools/interpolate_frames.py (8 -> 16, 8 -> 15) play at double rate: same tempo, smoother
+            if (frames.Length >= 15) fps *= 2f;
             return frames.Length == 0 ? null : new FlipbookClip { name = folder.ToLowerInvariant(), frames = frames, fps = fps, loop = loop };
         }
 

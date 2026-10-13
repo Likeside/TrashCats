@@ -129,10 +129,10 @@ TextureImporter:
       name: ryzhy_rope_01_0
       rect:
         serializedVersion: 2
-        x: 25
-        y: 15
-        width: 337
-        height: 432
+        x: 26
+        y: 48
+        width: 332
+        height: 393
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

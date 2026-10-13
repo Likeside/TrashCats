@@ -138,10 +138,10 @@ TextureImporter:
       name: wheel_idle_01_0
       rect:
         serializedVersion: 2
-        x: 27
-        y: 296
-        width: 92
-        height: 90
+        x: 26
+        y: 302
+        width: 88
+        height: 85
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -160,10 +160,10 @@ TextureImporter:
       name: wheel_idle_01_1
       rect:
         serializedVersion: 2
-        x: 32
+        x: 30
         y: 15
-        width: 315
-        height: 365
+        width: 319
+        height: 367
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -182,10 +182,10 @@ TextureImporter:
       name: wheel_idle_01_2
       rect:
         serializedVersion: 2
-        x: 19
-        y: 211
-        width: 15
-        height: 70
+        x: 17
+        y: 199
+        width: 16
+        height: 88
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -204,10 +204,10 @@ TextureImporter:
       name: wheel_idle_01_3
       rect:
         serializedVersion: 2
-        x: 22
-        y: 127
-        width: 22
-        height: 54
+        x: 20
+        y: 126
+        width: 23
+        height: 53
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

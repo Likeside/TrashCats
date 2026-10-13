@@ -11,6 +11,9 @@ TextureImporter:
   - first:
       213: 4315935973816955927
     second: wheel_idle_07_2
+  - first:
+      213: -3116348548348341160
+    second: wheel_idle_07_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -135,10 +138,10 @@ TextureImporter:
       name: wheel_idle_07_0
       rect:
         serializedVersion: 2
-        x: 40
-        y: 15
-        width: 298
-        height: 366
+        x: 26
+        y: 295
+        width: 49
+        height: 77
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -157,10 +160,10 @@ TextureImporter:
       name: wheel_idle_07_1
       rect:
         serializedVersion: 2
-        x: 41
-        y: 317
-        width: 72
-        height: 73
+        x: 35
+        y: 14
+        width: 309
+        height: 367
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,10 +182,10 @@ TextureImporter:
       name: wheel_idle_07_2
       rect:
         serializedVersion: 2
-        x: 27
-        y: 191
-        width: 15
-        height: 104
+        x: 56
+        y: 332
+        width: 72
+        height: 58
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -193,6 +196,28 @@ TextureImporter:
       bones: []
       spriteID: 71470b0c6e845eb30800000000000000
       internalID: 4315935973816955927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wheel_idle_07_3
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 180
+        width: 12
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8549463a18180c4d0800000000000000
+      internalID: -3116348548348341160
       vertices: []
       indices: 
       edges: []
