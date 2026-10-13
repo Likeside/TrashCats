@@ -1,0 +1,14 @@
+[
+ {
+  "name": "dumpster_front",
+  "size": "1536x1024",
+  "refs": ["Assets/_Project/Art/Environment/prop_upg_dumpster.png", "Assets/_Project/Art/Environment/bg_hideout.png"],
+  "prompt": "Redraw the SAME dumpster from the first reference (same rusty blue-grey metal with orange rust, same lids with the wooden plank across, black trash bag inside, the fish-bone sticker, the green bottle and banana peel at its foot), same comic style (bold black ink outlines, flat colours, hatching), but seen FROM THE FRONT the way it would stand with its long side pushed against the back brick wall of the second reference: its long front side faces the viewer and is parallel to the picture plane, its bottom edge perfectly horizontal, seen from slightly above so the top lids are a bit visible, no visible short side (or only a sliver). One object only, centred, with space around it. Solid flat pure chroma-key GREEN (#00FF00) background everywhere, no floor, no shadow on the background, no text."
+ },
+ {
+  "name": "dumpster_front_b",
+  "size": "1536x1024",
+  "refs": ["Assets/_Project/Art/Environment/prop_upg_dumpster.png", "Assets/_Project/Art/Environment/bg_hideout.png"],
+  "prompt": "Redraw the SAME dumpster from the first reference (same rusty blue-grey metal with orange rust, same lids with the wooden plank across, black trash bag inside, the fish-bone sticker, the green bottle and banana peel at its foot), same comic style (bold black ink outlines, flat colours, hatching), standing against the back brick wall of the second reference: its long front side faces the viewer almost straight on with the bottom edge horizontal, turned only very slightly so a thin strip of the LEFT short side shows, seen from slightly above with the top lids a bit visible. One object only, centred, with space around it. Solid flat pure chroma-key GREEN (#00FF00) background everywhere, no floor, no shadow on the background, no text."
+ }
+]
