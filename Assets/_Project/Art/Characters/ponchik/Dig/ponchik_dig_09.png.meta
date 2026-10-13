@@ -129,9 +129,9 @@ TextureImporter:
       name: ponchik_dig_09_0
       rect:
         serializedVersion: 2
-        x: 30
+        x: 26
         y: 15
-        width: 255
+        width: 256
         height: 250
       alignment: 0
       pivot: {x: 0, y: 0}

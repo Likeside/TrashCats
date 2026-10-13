@@ -8,9 +8,6 @@ TextureImporter:
   - first:
       213: -4906957504398873148
     second: ryzhy_dig_13_1
-  - first:
-      213: -3443187857141525317
-    second: ryzhy_dig_13_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -135,10 +132,10 @@ TextureImporter:
       name: ryzhy_dig_13_0
       rect:
         serializedVersion: 2
-        x: 45
-        y: 16
-        width: 151
-        height: 195
+        x: 69
+        y: 15
+        width: 152
+        height: 205
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -157,10 +154,10 @@ TextureImporter:
       name: ryzhy_dig_13_1
       rect:
         serializedVersion: 2
-        x: 190
-        y: 106
-        width: 10
-        height: 11
+        x: 208
+        y: 94
+        width: 16
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -171,28 +168,6 @@ TextureImporter:
       bones: []
       spriteID: 4cd2e5ed52cf6ebb0800000000000000
       internalID: -4906957504398873148
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ryzhy_dig_13_2
-      rect:
-        serializedVersion: 2
-        x: 194
-        y: 102
-        width: 10
-        height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: bb4142003e65730d0800000000000000
-      internalID: -3443187857141525317
       vertices: []
       indices: 
       edges: []

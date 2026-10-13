@@ -129,10 +129,10 @@ TextureImporter:
       name: shnyr_dig_09_0
       rect:
         serializedVersion: 2
-        x: 32
+        x: 29
         y: 15
-        width: 152
-        height: 216
+        width: 145
+        height: 200
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

@@ -507,14 +507,14 @@ namespace TrashCats.Presentation.Hideout
             if (_can == null || token.Spot.Clip != HideoutLayout.CatClip.Punch || punch == null || (frame != punch.KeyFrame(2) && frame != punch.KeyFrame(5)))
                 return;
             _can.DOComplete();
-            _can.DOPunchRotation(new Vector3(0, 0, frame == punch.KeyFrame(5) ? 16f : 10f), 0.55f, 4, 0.6f).SetLink(_can.gameObject);
+            _can.DOPunchRotation(new Vector3(0, 0, frame == punch.KeyFrame(5) ? -16f : -10f), 0.55f, 4, 0.6f).SetLink(_can.gameObject);
             var star = Ui.Skin?.fxStar;
             if (star == null)
                 return;
             var flash = Ui.Panel(_can, "Hit", Color.white);
             flash.sprite = star;
             flash.preserveAspect = true;
-            flash.rectTransform.anchorMin = flash.rectTransform.anchorMax = new Vector2(0.25f, 0.2f); // hit from the left
+            flash.rectTransform.anchorMin = flash.rectTransform.anchorMax = new Vector2(0.75f, 0.2f); // hit from the right
             flash.rectTransform.sizeDelta = new Vector2(110, 110);
             flash.rectTransform.localScale = Vector3.one * 0.5f;
             DOTween.Sequence()

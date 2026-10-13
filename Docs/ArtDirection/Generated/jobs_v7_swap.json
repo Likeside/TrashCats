@@ -1,0 +1,18 @@
+[
+ {
+  "name": "swaptest_a",
+  "size": "1024x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v7/run_ryzhy_0.png"
+  ],
+  "prompt": "Edit this drawing: keep exactly the same cat, style, size and position, but SWAP THE LEGS. Now the leg that is stretched FORWARD (to the left, foot on the ground) must be drawn BEHIND the body: partly hidden by the belly and the other leg, darker, in shadow. The leg that is drawn ON TOP, fully visible and overlapping everything, must be stretched BACKWARD (to the right), its toes pushing off the ground. Also swap the arms: the arm drawn on top swings forward. Green background as in the input."
+ },
+ {
+  "name": "swaptest_b",
+  "size": "1024x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v7/run_ryzhy_0.png"
+  ],
+  "prompt": "Mirror only the legs of this running cat, not the body: draw the same cat in the same place and style, but the leg closest to us (drawn on top) is now the BACK leg pointing to the right, and the leg further from us (darker, partly covered) is now the FRONT leg pointing to the left touching the ground. Like a walking person seen from the side at the moment the other foot is in front. Keep the green background."
+ }
+]

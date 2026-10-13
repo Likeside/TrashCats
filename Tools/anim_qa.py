@@ -46,12 +46,13 @@ def step(a, b):
     return float(np.abs(a[..., 3] - b[..., 3]).mean())
 
 
-def shift_x(ref, f, max_px):
-    """Horizontal shift (px) that best overlays the legs (lower third of the figure) of f on ref."""
+def shift_x(ref, f, max_px, upper=False):
+    """Horizontal shift (px) that best overlays f on ref: by the legs (lower third), or by the upper body for clips
+    whose legs move on purpose (run)."""
     k = 4
     rows = np.nonzero((ref[..., 3] > 0.5).any(1))[0]
-    top = rows.min() + int((rows.max() - rows.min()) * 0.67) if len(rows) else 0
-    r = ref[top::k, ::k, 3] > 0.5; g = f[top::k, ::k, 3] > 0.5
+    lo, hi = (rows.min(), rows.min() + int((rows.max() - rows.min()) * 0.5)) if upper else (rows.min() + int((rows.max() - rows.min()) * 0.67), rows.max() + 1)
+    r = ref[lo:hi:k, ::k, 3] > 0.5; g = f[lo:hi:k, ::k, 3] > 0.5
     best, best_dx = -1, 0
     for dx in range(-max_px // k, max_px // k + 1):
         rolled = np.roll(g, dx, axis=1)
@@ -86,7 +87,7 @@ def check(clip):
     if abs(worst - 1) > LIMITS["size"] and clip["role"] not in ("ko",):
         res["issues"].append(f"size {worst:.2f} (frames {[i for i, s in enumerate(sizes) if abs(s - 1) > LIMITS['size']]})")
     if clip["role"] in IN_PLACE and n > 1:
-        shifts = [shift_x(frames[0], f, 80) for f in frames]
+        shifts = [shift_x(frames[0], f, 80, upper=clip["role"] == "run") for f in frames]
         worst = max(shifts, key=abs)
         res["drift"] = worst / h
         if abs(worst) / h > LIMITS["drift"]:
@@ -103,8 +104,10 @@ def check(clip):
         if spikes and clip["role"] in IN_PLACE:
             res["issues"].append("pops at " + ", ".join(f"{seq[i]}->{seq[i + 1]} ({r:.1f}x)" for i, r in spikes))
         body = max(1.0, med)
-        smears = [i for i in range(1, n - 1)
-                  if (dark(frames[i]) - max(dark(frames[i - 1]), dark(frames[i + 1]))) / body > LIMITS["smear"]]
+        # only in-between frames can be smeared: frames not in keys (adaptive) or the odd ones of a plain doubling
+        drawn = set(clip["keys"]) if clip["keys"] else (set(range(0, n, 2)) if n >= 15 else set(range(n)))
+        smears = [i for i in range(1, n - 1) if i not in drawn
+                  and (dark(frames[i]) - max(dark(frames[i - 1]), dark(frames[i + 1]))) / body > LIMITS["smear"]]
         if smears:
             res["issues"].append(f"smear frames {smears}")
     return res, frames

@@ -1,0 +1,26 @@
+[
+ {
+  "name": "parts_ryzhy",
+  "size": "1536x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v7/run_ryzhy_0.png"
+  ],
+  "prompt": "Character parts sheet for cut-out animation of the orange tabby tomcat Ryzhy, exactly the same character, colours and comic style as the reference. Exactly 2 separate parts side by side with lots of empty space between them: LEFT: the cat's UPPER BODY in the jogging pose of the reference, strict side view facing LEFT \u2014 head, torso, both arms pumping and the tail \u2014 but WITHOUT ANY HIND LEGS: the body ends at the hips/belly with a clean rounded bottom, nothing below it. RIGHT: ONE single hind leg of the same cat on its own, standing straight up vertically (thigh at the top, knee slightly bent, foot at the bottom pointing to the left), with a rounded top end where it joins the hip. Solid flat pure chroma-key GREEN (#00FF00) background everywhere, no shadow, no text."
+ },
+ {
+  "name": "parts_shnyr",
+  "size": "1536x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v7/run_shnyr_0.png"
+  ],
+  "prompt": "Character parts sheet for cut-out animation of the thin grey striped cat Shnyr with huge ears and a very long curly tail, exactly the same character, colours and comic style as the reference. Exactly 2 separate parts side by side with lots of empty space between them: LEFT: the cat's UPPER BODY in the jogging pose of the reference, strict side view facing LEFT \u2014 head, torso, both arms pumping and the tail \u2014 but WITHOUT ANY HIND LEGS: the body ends at the hips/belly with a clean rounded bottom, nothing below it. RIGHT: ONE single hind leg of the same cat on its own, standing straight up vertically (thigh at the top, knee slightly bent, foot at the bottom pointing to the left), with a rounded top end where it joins the hip. Solid flat pure chroma-key GREEN (#00FF00) background everywhere, no shadow, no text."
+ },
+ {
+  "name": "parts_ponchik",
+  "size": "1536x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v7/run_ponchik_0.png"
+  ],
+  "prompt": "Character parts sheet for cut-out animation of the very fat black-and-white cat Ponchik, exactly the same character, colours and comic style as the reference. Exactly 2 separate parts side by side with lots of empty space between them: LEFT: the cat's UPPER BODY in the jogging pose of the reference, strict side view facing LEFT \u2014 head, torso, both arms pumping and the tail \u2014 but WITHOUT ANY HIND LEGS: the body ends at the hips/belly with a clean rounded bottom, nothing below it. RIGHT: ONE single hind leg of the same cat on its own, standing straight up vertically (thigh at the top, knee slightly bent, foot at the bottom pointing to the left), with a rounded top end where it joins the hip. Solid flat pure chroma-key GREEN (#00FF00) background everywhere, no shadow, no text."
+ }
+]

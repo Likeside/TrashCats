@@ -129,10 +129,10 @@ TextureImporter:
       name: ponchik_run_09_0
       rect:
         serializedVersion: 2
-        x: 16
-        y: 15
-        width: 319
-        height: 341
+        x: 17
+        y: 0
+        width: 280
+        height: 372
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
