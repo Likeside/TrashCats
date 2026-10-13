@@ -22,6 +22,7 @@ namespace TrashCats.Presentation.Bootstrap
 
         private SaveService _saveService;
         private AppLifecycleListener _lifecycle;
+        private PlaytestLog _playtestLog;
         private bool _ticking;
         private bool _resetting;
 
@@ -110,10 +111,23 @@ namespace TrashCats.Presentation.Bootstrap
             if (outcome.Source == SaveSource.NewGame)
                 scheduler.MarkDirty(SaveUrgency.Immediate);
 
+            // local playtest telemetry (GAME_OVERVIEW §9), next to the save
+            var sink = new FileLineSink(SaveDirectoryOverride ?? Application.persistentDataPath);
+            _playtestLog = new PlaytestLog(session, bus, clock, sink);
+            Debug.Log($"[Playtest] log: {sink.FilePath}");
+
             _lifecycle = gameObject.AddComponent<AppLifecycleListener>();
-            _lifecycle.Paused += () => { if (!_resetting) scheduler.SaveNow(); };
+            _lifecycle.Paused += () =>
+            {
+                _playtestLog.Mark("pause");
+                if (!_resetting) scheduler.SaveNow();
+            };
             _lifecycle.Quitting += () => { if (!_resetting) scheduler.SaveNow(); };
-            _lifecycle.Resumed += () => { if (_ticking) session.Tick(); };
+            _lifecycle.Resumed += () =>
+            {
+                _playtestLog.Mark("resume");
+                if (_ticking) session.Tick();
+            };
 
             return new GameServices(config, clock, bus, session, scheduler, settings, new DebugCommands(session, bus, scheduler));
         }
