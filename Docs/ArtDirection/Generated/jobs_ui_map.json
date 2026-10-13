@@ -1,0 +1,11 @@
+[
+ {
+  "name": "ui_map_parts",
+  "size": "1536x1024",
+  "refs": [
+   "Docs/ArtDirection/Concepts/round2/map_S4.png",
+   "Docs/ArtDirection/Generated/refs/ui_from_hideout_A.png"
+  ],
+  "prompt": "Game UI parts copied EXACTLY from the style of the round location frames on the first reference (map) and the UI of the second reference: thick dark navy-black ink outline, flat colours, subtle halftone. Exactly 4 separate items in one row, generous space between them: 1) an EMPTY round frame ring (like the location circles on the map): a thick dark charcoal ring with a thin bronze inner rim, the inside of the ring completely empty and filled with the same flat green as the background; 2) the same EMPTY round ring but bright glowing golden-yellow (the selected location), inside empty and green; 3) a small yellow pennant flag with a black cat paw print on a short dark pole, like the flags on the map; 4) a small dark round badge with a bronze rim, empty.\nFlat front view, no text, no letters. Solid flat pure green (#00FF00) chroma-key background everywhere (also inside the rings), no shadows on it, no scenery. Do not use green in the items."
+ }
+]
