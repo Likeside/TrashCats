@@ -68,7 +68,7 @@ namespace TrashCats.Editor
                 copy.idle = baseArt.idle; copy.attack = baseArt.attack; copy.heavyAttack = baseArt.heavyAttack;
                 copy.hit = baseArt.hit; copy.knockOut = baseArt.knockOut; copy.tail = baseArt.tail; copy.portrait = baseArt.portrait;
                 copy.hideoutPoses = baseArt.hideoutPoses;
-                copy.run = baseArt.run; copy.canPunch = baseArt.canPunch; copy.hideoutIdle = baseArt.hideoutIdle; copy.rope = baseArt.rope; copy.dig = baseArt.dig;
+                copy.run = baseArt.run; copy.canPunch = baseArt.canPunch; copy.hideoutIdle = baseArt.hideoutIdle; copy.rope = baseArt.rope; copy.dig = baseArt.dig; copy.bench = baseArt.bench;
                 copy.viewKey = key;
                 copy.tint = tint;
                 copy.battleScale = scale;
@@ -106,7 +106,7 @@ namespace TrashCats.Editor
             {
                 if (art.tint != Color.white) continue; // variants reuse another character's frames
                 foreach (var (role, clip) in new[] { ("idle", art.idle), ("attack", art.attack), ("heavy", art.heavyAttack), ("hit", art.hit), ("ko", art.knockOut),
-                             ("tail", art.tail), ("hideoutIdle", art.hideoutIdle), ("run", art.run), ("canPunch", art.canPunch), ("rope", art.rope), ("dig", art.dig) })
+                             ("tail", art.tail), ("hideoutIdle", art.hideoutIdle), ("run", art.run), ("canPunch", art.canPunch), ("rope", art.rope), ("dig", art.dig), ("bench", art.bench) })
                 {
                     if (clip?.frames == null || clip.frames.Length == 0) continue;
                     if (role == "heavy" && clip == art.attack) continue;
@@ -140,6 +140,7 @@ namespace TrashCats.Editor
                 rope = Clip(dir, "Rope", 9f, true),
                 dig = Clip(dir, "Dig", 8f, true),
                 canPunch = Clip(dir, "CanPunch", 10f, true),
+                bench = Clip(dir, "Bench", 1f, true),
                 hideoutPoses = Sprites(dir + "/Hideout"),
             };
             art.attack ??= new FlipbookClip();
@@ -152,12 +153,15 @@ namespace TrashCats.Editor
             art.rope ??= new FlipbookClip();
             art.dig ??= new FlipbookClip();
             art.canPunch ??= new FlipbookClip();
+            art.bench ??= new FlipbookClip();
             if (art.idle == null)
                 return null;
             // idles sway there and back: ping-pong has no loop seam (no "saw")
             art.idle.pingPong = key != "wheel" && art.idle.frames.Length > 2;
             art.hideoutIdle.pingPong = art.hideoutIdle.frames.Length > 2;
             art.dig.pingPong = art.dig.frames.Length > 2; // the kicking loop is not drawn to close
+            // the frames hold a whole rep (press up, faster lowering) and play one rep per second, as in the previews
+            art.bench.fps = art.bench.frames.Length;
             art.idle.breathe = key == "wheel" ? 0f : art.idle.frames.Length <= 2 ? 0.012f : 0.008f;
             if (key == "wheel") art.idle.fps = art.idle.frames.Length >= 15 ? 24f : 12f;
             // card portrait cut from the concept (Tools/import_ui.py), else the first stance frame

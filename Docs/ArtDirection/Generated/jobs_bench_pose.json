@@ -1,0 +1,11 @@
+[
+ {
+  "name": "ryzhy_bench_pose",
+  "size": "1024x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_bench/ryzhy_bench_v2.png",
+   "Docs/ArtDirection/Generated/refs/bench_pose_sketch.png"
+  ],
+  "prompt": "Draw ONE single cartoon character in the comic ink style of the FIRST image: the same orange tabby tomcat with the same home-made barbell (broom handle with taped tin cans), arms extended holding the bar up. Match the POSE of the stick figure in the SECOND image exactly: head on the right, the back lying along the grey line (an invisible bench, do not draw it), the thighs going forward-left from the hips, the knees bent at a right angle, the shins going STRAIGHT DOWN and the feet standing flat on the lower grey line (the floor) far below the body. Do not draw the stick figure, the grey lines, a bench or a floor. Solid flat pure chroma-key GREEN (#00FF00) background everywhere, no shadow, no text."
+ }
+]

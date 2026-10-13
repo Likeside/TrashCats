@@ -1,0 +1,11 @@
+[
+ {
+  "name": "ryzhy_bench",
+  "size": "1536x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v4/ryzhy_idle8.png",
+   "Docs/ArtDirection/Generated/refs/ref_ryzhy_guard.png"
+  ],
+  "prompt": "Game sprite sheet: 8 animation frames of ONE continuous looping animation in a grid of 2 rows x 4 columns, read left to right, top row first, generous empty space between frames, never mirror a frame. Character: the orange tabby tomcat Ryzhy exactly as in the references (torn left ear, smug grin, comic ink style). BENCH PRESS: the cat lies on its BACK (do NOT draw the bench \u2014 it lies on nothing, as if on an invisible bench), seen from the foot end: the hind legs and feet point towards the viewer and down, the head is further away at the top, the body foreshortened. It holds a home-made barbell with both front paws: an old broom handle with a bunch of dented tin cans tied with tape on each end. Loop: 1) bar resting on the chest, 2) starts pushing, 3) halfway up, straining face, 4) arms fully extended, bar at the top, 5) holds it, proud grin, 6) lowering, 7) halfway down, 8) bar back on the chest. The body stays on the same spot in every frame, only the arms and the bar move, the bar stays horizontal. Comic book style: bold black ink outlines, flat colours with simple shading. IMPORTANT: solid flat pure chroma-key GREEN (#00FF00) background everywhere, no bench, no floor, no shadow, no text, no frame numbers."
+ }
+]

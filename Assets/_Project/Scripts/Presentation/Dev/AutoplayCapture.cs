@@ -148,7 +148,7 @@ namespace TrashCats.Presentation.Dev
             yield return Shot("03_hideout_training");
             yield return new WaitForSeconds(0.17f);
             yield return Shot("03b_punch_frame");
-            // the whole gang at the stations: wheel, bed, dumpster
+            // the whole gang at the stations: bench mat, bed, dumpster
             var services = GameBootstrap.Instance.Services;
             services.Debug.RecruitAllAndRest();
             yield return null;

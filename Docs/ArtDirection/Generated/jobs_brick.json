@@ -1,0 +1,10 @@
+[
+ {
+  "name": "brick_flat",
+  "size": "1024x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/refs/brick_stack.png"
+  ],
+  "prompt": "Draw ONE single plain red clay brick, exactly like the MIDDLE brick of this stack: the same size proportions, the same viewing angle (seen from slightly above and from the front-left, the long front face facing the viewer, the short side face on the right, the flat top face visible), the same comic style: thick black ink outline, flat orange-red colour, small dark speckles and a few hatch strokes on the right side face. The top face is completely FLAT, NO notch, no groove. Centred. Solid flat pure chroma-key GREEN (#00FF00) background everywhere, no shadow, no text."
+ }
+]

@@ -1,0 +1,11 @@
+[
+ {
+  "name": "ryzhy_top_smirk",
+  "size": "1024x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/refs/thrust/ryzhy_f12.png",
+   "Docs/ArtDirection/Generated/refs/thrust/ryzhy_f00.png"
+  ],
+  "prompt": "Edit the FIRST image: keep EVERYTHING exactly the same (the cat, its pose with the barbell held high, arms, body, legs, size, position, colours, style, green background) and change ONLY the face expression: give it exactly the facial expression of the cat in the SECOND image \u2014 a smug half-lidded smirk with the MOUTH CLOSED, no teeth visible, one eyebrow raised. Nothing else changes."
+ }
+]

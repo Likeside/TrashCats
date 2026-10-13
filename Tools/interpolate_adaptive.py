@@ -6,7 +6,7 @@ neither neighbour has, alpha mass that does not fit between them). Smeared gaps 
 snappy); the frames are spent on the calmest clean gaps instead (up to 3 per gap, at t = k/(n+1)), so the clip still
 reaches the target count. Writes keys.json next to the frames: the new index of every original frame (the game uses it
 to time hits). Originals are backed up to ArtSource/Frames8/<path>.
-Usage: Tools/interpolate_adaptive.py <rife_dir> [--target N] [--once] [--report] <clip folder>...
+Usage: Tools/interpolate_adaptive.py <rife_dir> [--target N] [--once] [--report] [--no-backup] <clip folder>...
 """
 import glob, json, os, shutil, sys
 import numpy as np
@@ -20,7 +20,8 @@ if "--target" in args:
     i = args.index("--target"); target = int(args[i + 1]); del args[i:i + 2]
 once = "--once" in args
 report = "--report" in args
-args = [a for a in args if a not in ("--once", "--report")]
+no_backup = "--no-backup" in args  # for folders outside Assets/_Project/Art (keep your own copy)
+args = [a for a in args if a not in ("--once", "--report", "--no-backup")]
 project = os.environ.get("PROJECT_DIR", os.getcwd())
 
 sys.path.insert(0, rife_dir)
@@ -99,7 +100,7 @@ def process(folder):
             k = extra[i]
             out += [between(a, b, j / (k + 1)) for j in range(1, k + 1)]
     backup = os.path.join(project, "ArtSource", "Frames8", os.path.relpath(folder, os.path.join(project, "Assets/_Project/Art")))
-    if not os.path.exists(backup):
+    if not no_backup and not os.path.exists(backup):
         os.makedirs(backup)
         for f in files:
             shutil.copy(f, backup)

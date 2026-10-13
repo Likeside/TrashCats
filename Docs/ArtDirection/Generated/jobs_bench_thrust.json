@@ -1,0 +1,26 @@
+[
+ {
+  "name": "ryzhy_thrust",
+  "size": "1536x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/refs/thrust/ryzhy.png"
+  ],
+  "prompt": "The reference shows two frames of a bench press animation: LEFT = the bar at the chest, RIGHT = the arms fully extended with the bar up. Draw exactly 2 IN-BETWEEN frames of the SAME character side by side (left and right): frame A = the bar about one third of the way up (elbows bent, bar above the face), frame B = the bar about two thirds of the way up (arms almost straight). Keep EXACTLY the same character, size, position of the body, legs and feet, the same barbell and the same comic ink style as the reference; only the arms and the bar move. Solid flat pure chroma-key GREEN (#00FF00) background everywhere, no text, no frame numbers."
+ },
+ {
+  "name": "shnyr_thrust",
+  "size": "1536x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/refs/thrust/shnyr.png"
+  ],
+  "prompt": "The reference shows two frames of a bench press animation: LEFT = the bar at the chest, RIGHT = the arms fully extended with the bar up. Draw exactly 2 IN-BETWEEN frames of the SAME character side by side (left and right): frame A = the bar about one third of the way up (elbows bent, bar above the face), frame B = the bar about two thirds of the way up (arms almost straight). Keep EXACTLY the same character, size, position of the body, legs and feet, the same barbell and the same comic ink style as the reference; only the arms and the bar move. Solid flat pure chroma-key GREEN (#00FF00) background everywhere, no text, no frame numbers."
+ },
+ {
+  "name": "ponchik_thrust",
+  "size": "1536x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/refs/thrust/ponchik.png"
+  ],
+  "prompt": "The reference shows two frames of a bench press animation: LEFT = the bar at the chest, RIGHT = the arms fully extended with the bar up. Draw exactly 2 IN-BETWEEN frames of the SAME character side by side (left and right): frame A = the bar about one third of the way up (elbows bent, bar above the face), frame B = the bar about two thirds of the way up (arms almost straight). Keep EXACTLY the same character, size, position of the body, legs and feet, the same barbell and the same comic ink style as the reference; only the arms and the bar move. Solid flat pure chroma-key GREEN (#00FF00) background everywhere, no text, no frame numbers."
+ }
+]

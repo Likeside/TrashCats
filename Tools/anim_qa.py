@@ -21,7 +21,7 @@ OUT_MD = "TestResults/anim-qa.md"
 OUT_DIR = "TestResults/anim-qa"
 
 # clips that should stand on one spot (drift is a defect); strikes and hits move on purpose
-IN_PLACE = {"idle", "hideoutIdle", "run", "canPunch", "rope", "dig"}
+IN_PLACE = {"idle", "hideoutIdle", "run", "canPunch", "rope", "dig", "bench"}
 # clips the game does not animate (the wheel spins procedurally over its first frame)
 SKIP = {"wheel/idle"}
 LIMITS = {"size": 0.08, "drift": 0.04, "seam": 1.8, "spike": 3.0, "smear": 0.03}
