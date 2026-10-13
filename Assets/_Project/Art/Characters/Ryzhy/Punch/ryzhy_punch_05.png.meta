@@ -5,12 +5,6 @@ TextureImporter:
   - first:
       213: 6629366252491551419
     second: ryzhy_punch_05_0
-  - first:
-      213: 9116400397344207324
-    second: ryzhy_punch_05_1
-  - first:
-      213: -7881355555676571318
-    second: ryzhy_punch_05_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -135,10 +129,10 @@ TextureImporter:
       name: ryzhy_punch_05_0
       rect:
         serializedVersion: 2
-        x: 22
-        y: 16
-        width: 333
-        height: 353
+        x: 335
+        y: 18
+        width: 251
+        height: 357
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -149,50 +143,6 @@ TextureImporter:
       bones: []
       spriteID: bb2b8b59b7d300c50800000000000000
       internalID: 6629366252491551419
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ryzhy_punch_05_1
-      rect:
-        serializedVersion: 2
-        x: 361
-        y: 255
-        width: 18
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: cd17ee15cd5f38e70800000000000000
-      internalID: 9116400397344207324
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ryzhy_punch_05_2
-      rect:
-        serializedVersion: 2
-        x: 356
-        y: 222
-        width: 17
-        height: 11
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a49b85b11eccf9290800000000000000
-      internalID: -7881355555676571318
       vertices: []
       indices: 
       edges: []

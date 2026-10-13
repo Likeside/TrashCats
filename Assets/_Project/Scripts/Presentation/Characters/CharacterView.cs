@@ -35,6 +35,15 @@ namespace TrashCats.Presentation.Characters
 
         private float Facing => _enemy ? -1f : 1f;
 
+        /// <summary>Dev: holds frame <paramref name="frame"/> of the attack clip (frame-by-frame review).</summary>
+        public int DevShowAttackFrame(int frame)
+        {
+            var clip = _art?.attack;
+            if (clip == null || clip.frames.Length == 0) return 0;
+            _body.ShowFrame(clip, frame % clip.frames.Length);
+            return clip.frames.Length;
+        }
+
         public void PlayIdle()
         {
             if (_art != null && _art.HasBattleArt) _body.Play(_art.idle);

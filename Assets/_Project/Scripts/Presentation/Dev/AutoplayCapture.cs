@@ -16,11 +16,12 @@ namespace TrashCats.Presentation.Dev
         private string _dir;
         private bool _battles;
         private bool _tutorial;
+        private bool _punch;
 
         public static void AttachIfRequested(GameObject host)
         {
             var args = Environment.GetCommandLineArgs();
-            foreach (var flag in new[] { "-autoplayCapture", "-autoplayBattles", "-autoplayTutorial" })
+            foreach (var flag in new[] { "-autoplayCapture", "-autoplayBattles", "-autoplayTutorial", "-autoplayPunch" })
             {
                 var index = Array.IndexOf(args, flag);
                 if (index < 0 || index + 1 >= args.Length) continue;
@@ -28,11 +29,43 @@ namespace TrashCats.Presentation.Dev
                 capture._dir = args[index + 1];
                 capture._battles = flag == "-autoplayBattles";
                 capture._tutorial = flag == "-autoplayTutorial";
+                capture._punch = flag == "-autoplayPunch";
                 return;
             }
         }
 
-        private IEnumerator Start() => _tutorial ? TutorialRun() : _battles ? Battles() : Tour();
+        private IEnumerator Start() => _punch ? PunchFrames() : _tutorial ? TutorialRun() : _battles ? Battles() : Tour();
+
+        /// <summary>Starts a battle and freezes Ryzhy on each frame of his attack clip, one screenshot per frame (tail check).</summary>
+        private IEnumerator PunchFrames()
+        {
+            Directory.CreateDirectory(_dir);
+            yield return new WaitForSeconds(1f);
+            Dismiss();
+            GetComponent<GameSceneRoot>().DevSkipTutorial();
+            var debug = GameBootstrap.Instance.Services.Debug;
+            debug.UnlockAllTerritories();
+            Click("Tab_Map");
+            yield return null;
+            Click("Node_ter_backyard");
+            yield return null;
+            Click("Prep_Fight");
+            yield return new WaitForSeconds(0.6f);
+            var view = GetComponent<GameSceneRoot>().DevPlayerFighter;
+            if (view == null) { Application.Quit(); yield break; }
+            Time.timeScale = 0f;
+            var count = view.DevShowAttackFrame(0);
+            for (var f = 0; f < count; f++)
+            {
+                view.DevShowAttackFrame(f);
+                yield return new WaitForEndOfFrame();
+                yield return new WaitForEndOfFrame();
+                ScreenCapture.CaptureScreenshot(Path.Combine(_dir, $"p{f:00}.png"));
+                yield return new WaitForEndOfFrame();
+                yield return new WaitForEndOfFrame();
+            }
+            Application.Quit();
+        }
 
         /// <summary>
         /// New game: follows the guided tutorial like a player (taps whatever it points at), skipping game time while
