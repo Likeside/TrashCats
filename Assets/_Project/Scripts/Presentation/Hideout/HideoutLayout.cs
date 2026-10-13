@@ -58,11 +58,20 @@ namespace TrashCats.Presentation.Hideout
             }
         }
 
-        /// <summary>The bench press mat with brick stands, in the front left corner; the rect keeps the mat sprite's aspect (448/639).</summary>
-        public static readonly (Vector2 Min, Vector2 Max) Bench = (new Vector2(0.02f, 0.075f), new Vector2(0.44f, 0.075f + 0.42f * 448f / 639f * PictureAspect));
+        /// <summary>
+        /// The bench press mat with brick stands, in the left corner with its pillow end at the wall; the rect keeps the
+        /// mat sprite's aspect (448/639). Its far half lies behind the cats standing in front of it: it sorts by
+        /// <see cref="BenchDepth"/>, not by its bottom edge.
+        /// </summary>
+        public static readonly (Vector2 Min, Vector2 Max) Bench = (new Vector2(0.01f, 0.19f), new Vector2(0.43f, 0.19f + 0.42f * 448f / 639f * PictureAspect));
 
-        /// <summary>The dumpster at the back by the right wall; a cat rummaging in it is not shown, only its badge above.</summary>
-        public static readonly (Vector2 Min, Vector2 Max) Dumpster = (new Vector2(0.78f, 0.4f), new Vector2(1.04f, 0.564f));
+        public static float BenchDepth => Bench.Min.y + 0.12f;
+
+        /// <summary>
+        /// The dumpster at the back on the right, its long side against the wall and its bottom on the wall's base line;
+        /// the rect keeps the sprite's aspect (744/1167). A cat rummaging in it is not shown, only its badge above.
+        /// </summary>
+        public static readonly (Vector2 Min, Vector2 Max) Dumpster = (new Vector2(0.79f, 0.425f), new Vector2(1.03f, 0.425f + 0.24f * 744f / 1167f * PictureAspect));
 
         /// <summary>The box bed, sized for Ponchik (the biggest sleeper); the middle of its blanket is at 74% of its height.</summary>
         public static readonly (Vector2 Min, Vector2 Max) Bed = (new Vector2(0.55f, -0.02f), new Vector2(1.07f, 0.286f));
@@ -76,7 +85,7 @@ namespace TrashCats.Presentation.Hideout
             _ => activity.TrainedAttribute switch
             {
                 // can on a bracket on the wall right of the door, its body at the fist height of the punching cat
-                AttributeType.Strength => (new Vector2(0.655f, 0.491f), new Vector2(0.79f, 0.654f)),
+                AttributeType.Strength => (new Vector2(0.6975f, 0.491f), new Vector2(0.8325f, 0.654f)),
                 AttributeType.Agility => (new Vector2(0.35f, 0.497f), new Vector2(0.415f, 0.65f)),  // skipping rope on a nail by the door
                 _ => Bench,
             },
@@ -96,7 +105,7 @@ namespace TrashCats.Presentation.Hideout
                 _ => activity.TrainedAttribute switch
                 {
                     // left of the can at arm's length, hitting to the right
-                    AttributeType.Strength => new CatSpot(new Vector2(0.48f, 0.371f) + new Vector2(-shift.x, shift.y), CatClip.Punch),
+                    AttributeType.Strength => new CatSpot(new Vector2(0.525f, 0.371f) + new Vector2(-shift.x, shift.y), CatClip.Punch),
                     AttributeType.Agility => new CatSpot(new Vector2(0.49f, 0.03f) + shift, CatClip.Rope),
                     // mirrored with the mat: the brick stands at the right end
                     _ => new CatSpot(Vector2.zero, CatClip.Bench, faceLeft: true, overProp: true),
@@ -125,9 +134,9 @@ namespace TrashCats.Presentation.Hideout
         public static CatSpot Idle(string viewKey, int index) => viewKey switch
         {
             // a gang shot: Ponchik a step behind in the middle, Shnyr and Ryzhy in front, overlapping him at the shoulders
-            "ponchik" => new CatSpot(new Vector2(0.45f, 0.33f), CatClip.Sit),
-            "ryzhy" => new CatSpot(new Vector2(0.59f, 0.275f), CatClip.Sit),
-            "shnyr" => new CatSpot(new Vector2(0.31f, 0.275f), CatClip.Sit, faceLeft: true),
+            "ponchik" => new CatSpot(new Vector2(0.48f, 0.3f), CatClip.Sit),
+            "ryzhy" => new CatSpot(new Vector2(0.62f, 0.275f), CatClip.Sit),
+            "shnyr" => new CatSpot(new Vector2(0.355f, 0.275f), CatClip.Sit, faceLeft: true),
             _ => new CatSpot(new Vector2(0.4f + 0.1f * index, 0.28f), CatClip.Sit),
         };
     }

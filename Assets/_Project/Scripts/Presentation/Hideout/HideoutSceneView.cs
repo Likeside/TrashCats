@@ -157,19 +157,18 @@ namespace TrashCats.Presentation.Hideout
                         picture.rectTransform.pivot = new Vector2(0.5f, 1f);
                         picture.rectTransform.Fill();
                         _can = picture.rectTransform;
-                        // a wrought-iron bracket sticks out of the wall; its hook holds the top of the can's rope. The
-                        // sprite is drawn with the wall on the left: mirrored, the bracket hangs on the wall right of the hook
+                        // a wrought-iron bracket sticks out of the wall; its hook holds the top of the can's rope, its
+                        // wall plate is on the left, on the wall between the door frame and the can
                         var bracketSprite = _art?.GetSprite("prop_bracket");
                         if (bracketSprite != null)
                         {
                             var hook = new Vector2((min.x + max.x) * 0.5f, max.y - 0.006f);
-                            const float width = 0.17f;
+                            const float width = 0.12f;
                             var height = width * HideoutLayout.PictureAspect * bracketSprite.rect.height / bracketSprite.rect.width;
                             var bracket = Ui.Panel(_frame, "Bracket", Color.white);
                             bracket.sprite = bracketSprite;
-                            bracket.rectTransform.Place(new Vector2(hook.x - 0.108f * width, hook.y), new Vector2(hook.x + 0.892f * width, hook.y + height));
-                            bracket.rectTransform.localScale = new Vector3(-1f, 1f, 1f);
-                            _depthItems.Add((bracket.transform, min.y + 0.0001f));
+                            bracket.rectTransform.Place(new Vector2(hook.x - 0.892f * width, hook.y), new Vector2(hook.x + 0.108f * width, hook.y + height));
+                            _depthItems.Add((bracket.transform, HideoutLayout.Dumpster.Min.y - 0.0009f));
                         }
                     }
                 }
@@ -179,8 +178,12 @@ namespace TrashCats.Presentation.Hideout
                     _ropeProp = box.transform.Find("Prop")?.gameObject;
                 if (scavenge)
                     _streetGap = new Vector2((min.x + max.x) * 0.5f, min.y);
-                _depthItems.Add((box.transform, min.y));
+                // the can hangs over the dumpster's lid: it and its caption draw over the dumpster
+                var can = activity.Kind == ActivityKind.Train && activity.TrainedAttribute == AttributeType.Strength;
+                var depth = bench ? HideoutLayout.BenchDepth : can ? HideoutLayout.Dumpster.Min.y - 0.001f : min.y;
+                _depthItems.Add((box.transform, depth));
                 if (activity.Kind == ActivityKind.Sleep || bench)
+                    // a cat lying on the mat draws by the mat's near edge: over the idle cats standing at its far end
                     _propBase[activity.Kind == ActivityKind.Sleep ? ActivityKind.Sleep : ActivityKind.Train] = min.y;
 
                 var text = Plate(box.rectTransform, label, scavenge);
