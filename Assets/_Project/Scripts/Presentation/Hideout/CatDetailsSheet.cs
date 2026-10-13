@@ -89,13 +89,19 @@ namespace TrashCats.Presentation.Hideout
                 var unlocked = CatRules.IsSkillUnlocked(cat, skill);
                 var slot = equipped.IndexOf(skill.Id);
                 var state = !unlocked ? $"нужно {Texts.Attribute(skill.UnlockAttribute)} {skill.UnlockLevel}" : slot >= 0 ? $"в слоте {slot + 1} — нажми, чтобы снять" : "нажми, чтобы взять";
-                var color = !unlocked ? Palette.Disabled : slot >= 0 ? Palette.Primary : Palette.Secondary;
+                var color = !unlocked ? Palette.Panel : slot >= 0 ? Palette.Primary : Palette.Secondary;
                 var skillId = skill.Id;
                 var row = Ui.Button(_skills, "Skill_" + skill.Id, $"{Texts.SkillName(skill.Id)} — {state}\n<size=24>{Texts.SkillDescription(skill)} · Задор {skill.GritCost}</size>",
                     color, () => Toggle(skillId), 30);
                 row.Text.Align(TextAnchor.MiddleLeft);
                 row.Rect.Place(new Vector2(0, 1f - (i + 1f) / skills.Count), new Vector2(1, 1f - (float)i / skills.Count), new Vector2(0, 5), new Vector2(0, -5));
                 row.Interactable = unlocked;
+                row.Text.rectTransform.Fill(22);
+                if (!unlocked && Ui.Icon(row.Rect, "lock") is Image lockIcon)
+                {
+                    lockIcon.rectTransform.Place(new Vector2(1, 0.2f), new Vector2(1, 0.8f), new Vector2(-80, 0), new Vector2(-24, 0));
+                    row.Text.rectTransform.offsetMax = new Vector2(-90, row.Text.rectTransform.offsetMax.y);
+                }
             }
         }
 

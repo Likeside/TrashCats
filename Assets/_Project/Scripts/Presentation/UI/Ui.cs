@@ -311,6 +311,8 @@ namespace TrashCats.Presentation.UI
             }
 
             Image.color = sprite == skin.button ? color : new Color(1f, 1f, 1f, color.a);
+            // readable text on any fill: ink on light colours, paper on dark ones
+            Text.color = color.r * 0.299f + color.g * 0.587f + color.b * 0.114f > 0.5f ? Palette.Ink : Palette.Paper;
         }
 
         private static bool Same(Color a, Color b) => Mathf.Abs(a.r - b.r) + Mathf.Abs(a.g - b.g) + Mathf.Abs(a.b - b.b) < 0.02f;

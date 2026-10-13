@@ -34,6 +34,11 @@ namespace TrashCats.Presentation.Bootstrap
         private CatDetailsSheet _details;
         private UpgradePanel _upgrades;
         private MessageQueue _messages;
+        private TutorialService _tutorial;
+        private Tutorial.TutorialOverlay _tutorialOverlay;
+
+        /// <summary>Widget the tutorial points at right now (dev autoplay).</summary>
+        public string TutorialTargetName => _tutorialOverlay?.TargetName;
         private OfflineSummaryModal _offline;
         private GameObject _background;
         private readonly List<System.IDisposable> _subscriptions = new List<System.IDisposable>();
@@ -65,15 +70,14 @@ namespace TrashCats.Presentation.Bootstrap
             {
                 _router.Show(ScreenId.Hideout);
                 var world = _services.Session.World;
-                if (world.GameTimeMs == 0 && world.Territories.All.Values.All(t => t.Attempts == 0))
+                // a fresh game (the new-game save in the boot scene already ticks a few milliseconds)
+                if (world.GameTimeMs < 60_000 && !world.Tutorial.Skipped && !world.Tutorial.Completed.Any()
+                    && world.Territories.All.Values.All(t => t.Attempts == 0))
                     _messages.Enqueue("Банда помойных котов",
-                        "Ты — Рыжий, кот с мусорки за рестораном.\n\n"
-                        + "1. Нажми на кота и выбери занятие: еда, хлам, тренировка, сон.\n"
-                        + "2. Корми котов — голодные работают вдвое медленнее.\n"
-                        + "3. Тренируй Силу до 4 — откроется Укус.\n"
-                        + "4. На Карте нападай на соседей и собирай банду.");
+                        "Ты — Рыжий, кот с мусорки за рестораном.\n\nСобери банду, накачай её и захвати весь район — до самой крыши.");
             }
 
+            _tutorial.Evaluate();
             bootstrap.StartTicking();
             Dev.AutoplayCapture.AttachIfRequested(gameObject);
         }
@@ -132,6 +136,15 @@ namespace TrashCats.Presentation.Bootstrap
                 var t = overlayRoot.Find(overlay);
                 if (t != null) t.SetAsLastSibling();
             }
+
+            // onboarding: guided steps on their own top canvas, one-shot hints through the message queue
+            _tutorial = new TutorialService(session, _services.Bus);
+            _tutorialOverlay = new Tutorial.TutorialOverlay(_tutorial, session, _overlays, transform);
+            _tutorial.HintRequested += id =>
+            {
+                var hint = Tutorial.TutorialOverlay.Hint(id);
+                if (hint != null) _messages.Enqueue(hint.Value.Title, hint.Value.Body);
+            };
         }
 
         private void Subscribe()
@@ -179,6 +192,8 @@ namespace TrashCats.Presentation.Bootstrap
         {
             _prep.Open(territory);
             _router.Show(ScreenId.BattlePrep);
+            var min = _services.Config.Needs.MinEnergyForBattle;
+            _tutorial.OnPrepOpened(_services.Session.World.Cats.Count(c => c.Energy >= min));
         }
 
         private void StartCombat()
@@ -220,8 +235,16 @@ namespace TrashCats.Presentation.Bootstrap
             }
         }
 
+        private void LateUpdate()
+        {
+            if (IsBooted)
+                _tutorialOverlay.LateTick();
+        }
+
         private void OnDestroy()
         {
+            _tutorialOverlay?.Dispose();
+            _tutorial?.Dispose();
             foreach (var s in _subscriptions) s.Dispose();
             _hideout?.Dispose();
         }

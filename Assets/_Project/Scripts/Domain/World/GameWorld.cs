@@ -15,6 +15,7 @@ namespace TrashCats.Domain
         TerritoryProgress Territories { get; }
         PendingBattle PendingBattle { get; }
         bool FinalReached { get; }
+        TutorialState Tutorial { get; }
         bool TryGetCat(CatId id, out IReadOnlyCat cat);
     }
 
@@ -35,13 +36,15 @@ namespace TrashCats.Domain
         public TerritoryProgress Territories { get; }
         public PendingBattle PendingBattle { get; internal set; }
         public bool FinalReached { get; internal set; }
+        public TutorialState Tutorial { get; }
 
         IReadOnlyList<IReadOnlyCat> IReadOnlyGameWorld.Cats => _cats;
         public int Food => Wallet.Food;
         public int Junk => Wallet.Junk;
 
         public GameWorld(GameConfig config, long gameTimeMs, int saveSeed, IEnumerable<Cat> cats, Wallet wallet, UpgradeLevels upgrades,
-            TerritoryProgress territories = null, PendingBattle pendingBattle = null, bool finalReached = false)
+            TerritoryProgress territories = null, PendingBattle pendingBattle = null, bool finalReached = false,
+            TutorialState tutorial = null)
         {
             Config = config ?? throw new ArgumentNullException(nameof(config));
             if (gameTimeMs < 0) throw new ArgumentOutOfRangeException(nameof(gameTimeMs));
@@ -53,6 +56,7 @@ namespace TrashCats.Domain
             Territories = territories ?? new TerritoryProgress(config);
             PendingBattle = pendingBattle;
             FinalReached = finalReached;
+            Tutorial = tutorial ?? new TutorialState();
         }
 
         internal void AddCat(Cat cat) => _cats.Add(cat);

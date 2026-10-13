@@ -13,6 +13,9 @@ namespace TrashCats.Presentation.UI
 
         public bool IsEmpty => _stack.Count == 0;
 
+        /// <summary>The topmost open sheet or modal, or null.</summary>
+        public GameObject Top => _stack.Count == 0 ? null : _stack[_stack.Count - 1].Root;
+
         public void Push(GameObject root, Action onClosed = null)
         {
             root.SetActive(true);

@@ -76,7 +76,7 @@ namespace TrashCats.Presentation.Hideout
             {
                 _owner = owner;
 
-                var background = Ui.Card(slot, "Card", CardStyle.Strip, raycast: true);
+                var background = Ui.Card(slot, "CatCard" + index, CardStyle.Strip, raycast: true);
                 background.rectTransform.Fill();
                 background.gameObject.AddComponent<Button>().onClick.AddListener(() =>
                 {
@@ -122,7 +122,7 @@ namespace TrashCats.Presentation.Hideout
                 _satiety = Ui.Bar(content, "Satiety", Palette.Satiety, "satiety");
                 _satiety.Rect.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(50, -298), new Vector2(-6, -266));
 
-                _feed = Ui.Button(content, "Feed", "Покормить", Palette.Primary, () =>
+                _feed = Ui.Button(content, "Feed" + index, "Покормить", Palette.Primary, () =>
                 {
                     if (_cat != null) _owner._onResult(_owner._session.FeedCat(_cat.Id));
                 }, 28);

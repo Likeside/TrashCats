@@ -65,7 +65,7 @@ namespace TrashCats.Presentation.Hideout
                 _buttons.Add((activity, button));
             }
 
-            _feed = Ui.Button(panel.transform, "Feed", "", Palette.Primary, Feed, 32);
+            _feed = Ui.Button(panel.transform, "Sheet_Feed", "", Palette.Primary, Feed, 32);
             _feed.Rect.Place(new Vector2(0, 0), new Vector2(0.5f, 0), new Vector2(30, 40), new Vector2(-15, 150));
             _stop = Ui.Button(panel.transform, "Stop", "Стоп", Palette.Disabled, Stop, 32);
             _stop.Rect.Place(new Vector2(0.5f, 0), new Vector2(1f, 0), new Vector2(15, 40), new Vector2(-30, 150));

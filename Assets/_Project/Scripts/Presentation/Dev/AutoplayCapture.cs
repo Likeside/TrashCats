@@ -15,22 +15,53 @@ namespace TrashCats.Presentation.Dev
     {
         private string _dir;
         private bool _battles;
+        private bool _tutorial;
 
         public static void AttachIfRequested(GameObject host)
         {
             var args = Environment.GetCommandLineArgs();
-            foreach (var (flag, battles) in new[] { ("-autoplayCapture", false), ("-autoplayBattles", true) })
+            foreach (var flag in new[] { "-autoplayCapture", "-autoplayBattles", "-autoplayTutorial" })
             {
                 var index = Array.IndexOf(args, flag);
                 if (index < 0 || index + 1 >= args.Length) continue;
                 var capture = host.AddComponent<AutoplayCapture>();
                 capture._dir = args[index + 1];
-                capture._battles = battles;
+                capture._battles = flag == "-autoplayBattles";
+                capture._tutorial = flag == "-autoplayTutorial";
                 return;
             }
         }
 
-        private IEnumerator Start() => _battles ? Battles() : Tour();
+        private IEnumerator Start() => _tutorial ? TutorialRun() : _battles ? Battles() : Tour();
+
+        /// <summary>
+        /// New game: follows the guided tutorial like a player (taps whatever it points at), skipping game time while
+        /// nothing is asked, and captures every state.
+        /// </summary>
+        private IEnumerator TutorialRun()
+        {
+            Directory.CreateDirectory(_dir);
+            var root = GetComponent<GameSceneRoot>();
+            var debug = GameBootstrap.Instance.Services.Debug;
+            yield return new WaitForSeconds(1f);
+            for (var i = 0; i < 24; i++)
+            {
+                yield return new WaitForSeconds(0.5f);
+                var target = root.TutorialTargetName;
+                yield return Shot($"t{i:00}_{target ?? "free"}");
+                if (target != null)
+                    Click(target);
+                else if (GameObject.Find("Message_Ok") != null || GameObject.Find("Results_Continue") != null)
+                {
+                    Dismiss();
+                    Click("Results_Continue", required: false);
+                }
+                else
+                    debug.SkipGameTime(2 * 60_000L);
+            }
+
+            Application.Quit();
+        }
 
         /// <summary>Unlocks everything and fights at every territory with the whole gang, capturing each battle.</summary>
         private IEnumerator Battles()

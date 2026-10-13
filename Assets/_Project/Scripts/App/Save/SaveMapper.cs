@@ -53,6 +53,7 @@ namespace TrashCats.App
                     p => new TerritorySave { Status = p.Value.Status.ToString(), Attempts = p.Value.Attempts }),
                 PendingBattle = ToSave(world.PendingBattle),
                 FinalReached = world.FinalReached,
+                Tutorial = new TutorialSave { Completed = world.Tutorial.Completed.OrderBy(s => s).ToList(), Skipped = world.Tutorial.Skipped },
             };
         }
 
@@ -160,7 +161,8 @@ namespace TrashCats.App
 
             var world = new GameWorld(config, gameTime, data.SaveSeed, cats,
                 new Wallet(Clamp(data.Food, 0, int.MaxValue, "Food", warnings), Clamp(data.Junk, 0, int.MaxValue, "Junk", warnings)),
-                new UpgradeLevels(upgrades), new TerritoryProgress(config, territories), pending, data.FinalReached);
+                new UpgradeLevels(upgrades), new TerritoryProgress(config, territories), pending, data.FinalReached,
+                new TutorialState(data.Tutorial?.Completed, data.Tutorial?.Skipped ?? false));
 
             RepairStations(world, warnings);
             var violations = WorldInvariants.Check(world);

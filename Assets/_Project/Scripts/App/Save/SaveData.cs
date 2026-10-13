@@ -20,7 +20,14 @@ namespace TrashCats.App
         public Dictionary<string, TerritorySave> Territories = new Dictionary<string, TerritorySave>();
         public PendingBattleSave PendingBattle;
         public bool FinalReached;
+        public TutorialSave Tutorial = new TutorialSave();
         public SettingsSave Settings = new SettingsSave();
+    }
+
+    public sealed class TutorialSave
+    {
+        public List<string> Completed = new List<string>();
+        public bool Skipped;
     }
 
     public sealed class CatSave
