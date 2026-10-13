@@ -5,6 +5,9 @@ TextureImporter:
   - first:
       213: -2192306124369646480
     second: ponchik_hideidle_01_0
+  - first:
+      213: -8581124369516744766
+    second: ponchik_hideidle_01_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -129,10 +132,10 @@ TextureImporter:
       name: ponchik_hideidle_01_0
       rect:
         serializedVersion: 2
-        x: 39
-        y: 18
-        width: 315
-        height: 373
+        x: 14
+        y: 118
+        width: 21
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -143,6 +146,28 @@ TextureImporter:
       bones: []
       spriteID: 07ca80af13d5391e0800000000000000
       internalID: -2192306124369646480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ponchik_hideidle_01_1
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 15
+        width: 231
+        height: 402
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2cfa185c9d8b9e880800000000000000
+      internalID: -8581124369516744766
       vertices: []
       indices: 
       edges: []

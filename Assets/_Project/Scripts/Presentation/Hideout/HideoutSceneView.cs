@@ -35,8 +35,7 @@ namespace TrashCats.Presentation.Hideout
         private readonly Dictionary<UpgradeId, TMP_Text> _upgradeLabels = new Dictionary<UpgradeId, TMP_Text>();
         private readonly Dictionary<UpgradeId, RectTransform> _stations = new Dictionary<UpgradeId, RectTransform>();
         private readonly Dictionary<ActivityKind, float> _propBase = new Dictionary<ActivityKind, float>();
-        private UiFlipbook _wheel;
-        private FlipbookClip _wheelClip;
+        private RectTransform _wheelArcs;
         private RectTransform _can;
         private GameObject _ropeProp;
         private Vector2 _streetGap;
@@ -139,10 +138,12 @@ namespace TrashCats.Presentation.Hideout
                 var wheel = activity.Kind == ActivityKind.Train && activity.TrainedAttribute == AttributeType.Toughness ? _art?.Find("wheel") : null;
                 if (wheel != null && wheel.HasBattleArt)
                 {
-                    // the wheel is an 8-frame spin clip; it turns while a cat runs in it
+                    // one still frame of the wheel; while a cat runs, comic speed arcs circle along the rim (the drawn
+                    // spin frames do not loop seamlessly)
                     var picture = Ui.Picture(box.transform, "Prop", wheel.idle.frames[0]);
-                    _wheel = picture.gameObject.AddComponent<UiFlipbook>();
-                    _wheelClip = wheel.idle;
+                    var arcs = _art?.GetSprite("fx_wheel_arcs");
+                    if (arcs != null)
+                        _wheelArcs = WheelArcs(picture.rectTransform, wheel.idle.frames[0], arcs);
                 }
                 else if (prop != null)
                 {
@@ -351,17 +352,22 @@ namespace TrashCats.Presentation.Hideout
                     kind = activity.Kind;
                     groups.TryGetValue(activity.Id.Value, out var index);
                     groups[activity.Id.Value] = index + 1;
-                    spot = HideoutLayout.Spot(activity, index);
+                    spot = HideoutLayout.Spot(activity, index, token.Art?.viewKey);
                     // one cat fits in the wheel / on the bed; others wait beside it
                     if (spot.OverProp && index > 0)
                         spot = new HideoutLayout.CatSpot(spot.Foot + new Vector2(-0.12f * index, -0.12f), HideoutLayout.CatClip.Sit);
                     wheelBusy |= spot.Clip == HideoutLayout.CatClip.Run;
                     ropeBusy |= spot.Clip == HideoutLayout.CatClip.Rope;
-                    if (spot.Clip == HideoutLayout.CatClip.Run && token.Art != null && HideoutLayout.RunFoot(token.Art.viewKey) is Vector2 runFoot)
-                        spot = new HideoutLayout.CatSpot(runFoot, spot.Clip, spot.FaceLeft, spot.OverProp, spot.Scale);
+                    if (spot.Clip == HideoutLayout.CatClip.Run && token.Art != null && HideoutLayout.RunFit(token.Art.viewKey) is var (runFoot, runHeight))
+                    {
+                        // placed and sized inside the wheel's rect, so the cat always fits the drum
+                        var (wMin, wMax) = HideoutLayout.Wheel;
+                        var size = wMax - wMin;
+                        spot = new HideoutLayout.CatSpot(wMin + Vector2.Scale(runFoot, size), spot.Clip, spot.FaceLeft, spot.OverProp, height: runHeight * size.y);
+                    }
                 }
                 else
-                    spot = HideoutLayout.Idle(idle++);
+                    spot = HideoutLayout.Idle(token.Art?.viewKey, idle++);
 
                 // out on the street: a portrait with the cycle bar at the street gap instead of the cat
                 token.Away.Root.gameObject.SetActive(spot.Hidden);
@@ -384,10 +390,12 @@ namespace TrashCats.Presentation.Hideout
             }
 
             _ropeProp?.SetActive(!ropeBusy);
-            if (_wheel != null)
+            if (_wheelArcs != null && _wheelArcs.gameObject.activeSelf != wheelBusy)
             {
-                if (wheelBusy) _wheel.Play(_wheelClip);
-                else _wheel.Stop();
+                _wheelArcs.gameObject.SetActive(wheelBusy);
+                _wheelArcs.DOKill();
+                if (wheelBusy)
+                    _wheelArcs.DOLocalRotate(new Vector3(0, 0, 360f), 1.6f, RotateMode.FastBeyond360).SetEase(Ease.Linear).SetLoops(-1).SetLink(_wheelArcs.gameObject);
             }
 
             SortByDepth();
@@ -413,11 +421,19 @@ namespace TrashCats.Presentation.Hideout
                 }
             }
 
-            var h = size.y * HideoutLayout.HeightPerPixel * HideoutLayout.DepthScale(spot.Foot.y) * spot.Scale;
+            var h = spot.Height > 0f ? spot.Height : size.y * HideoutLayout.HeightPerPixel * HideoutLayout.DepthScale(spot.Foot.y) * spot.Scale;
             var w = h * size.x / size.y / HideoutLayout.PictureAspect;
             token.Root.Place(new Vector2(spot.Foot.x - w * 0.5f, spot.Foot.y), new Vector2(spot.Foot.x + w * 0.5f, spot.Foot.y + h));
             token.Image.rectTransform.localScale = new Vector3(spot.FaceLeft != sourceFacesLeft ? -1f : 1f, 1f, 1f);
             token.Image.color = token.BaseColor;
+
+            // a sleeping cat breathes: a slow ping-pong squash from the feet
+            var body = token.Image.rectTransform;
+            body.DOKill();
+            body.pivot = new Vector2(0.5f, 0f);
+            body.localScale = new Vector3(body.localScale.x, 1f, 1f);
+            if (spot.Clip == HideoutLayout.CatClip.Sleep)
+                body.DOScaleY(1.045f, 1.6f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo).SetLink(body.gameObject);
         }
 
         /// <summary>Clip for a hideout pose and whether its frames face left (run frames are drawn facing left).</summary>
@@ -491,14 +507,14 @@ namespace TrashCats.Presentation.Hideout
             if (_can == null || token.Spot.Clip != HideoutLayout.CatClip.Punch || punch == null || (frame != punch.KeyFrame(2) && frame != punch.KeyFrame(5)))
                 return;
             _can.DOComplete();
-            _can.DOPunchRotation(new Vector3(0, 0, frame == punch.KeyFrame(5) ? -16f : -10f), 0.55f, 4, 0.6f).SetLink(_can.gameObject);
+            _can.DOPunchRotation(new Vector3(0, 0, frame == punch.KeyFrame(5) ? 16f : 10f), 0.55f, 4, 0.6f).SetLink(_can.gameObject);
             var star = Ui.Skin?.fxStar;
             if (star == null)
                 return;
             var flash = Ui.Panel(_can, "Hit", Color.white);
             flash.sprite = star;
             flash.preserveAspect = true;
-            flash.rectTransform.anchorMin = flash.rectTransform.anchorMax = new Vector2(0.75f, 0.2f);
+            flash.rectTransform.anchorMin = flash.rectTransform.anchorMax = new Vector2(0.25f, 0.2f); // hit from the left
             flash.rectTransform.sizeDelta = new Vector2(110, 110);
             flash.rectTransform.localScale = Vector3.one * 0.5f;
             DOTween.Sequence()
@@ -525,6 +541,26 @@ namespace TrashCats.Presentation.Hideout
             button.rectTransform.Fill();
             button.gameObject.AddComponent<Button>().onClick.AddListener(() => _onCatTapped(id));
             return (root, bar);
+        }
+
+        /// <summary>
+        /// Speed arcs on the wheel's rim: a square that rotates inside a parent squashed to the rim's ellipse
+        /// (measured on the wheel sprite: drum opening x 0.19..0.66, y 0.25..0.84 from the bottom).
+        /// </summary>
+        private static RectTransform WheelArcs(RectTransform picture, Sprite wheel, Sprite arcs)
+        {
+            var ellipse = Ui.Rect(picture, "SpinEllipse");
+            ellipse.anchorMin = ellipse.anchorMax = new Vector2(0.425f, 0.545f);
+            var w = wheel.rect.width * 0.47f * 1.18f;
+            var h = wheel.rect.height * 0.59f * 1.12f;
+            // sizes are in sprite pixels: the picture is fitted with preserveAspect, so scale with its rect
+            var fit = ellipse.gameObject.AddComponent<SpinFit>();
+            fit.Init(picture, wheel, w, h);
+            var image = Ui.Panel(ellipse, "Arcs", Color.white);
+            image.sprite = arcs;
+            image.rectTransform.Fill();
+            image.gameObject.SetActive(false);
+            return image.rectTransform;
         }
 
         /// <summary>A bit of junk (bolt, cap, can) flies out of the dumpster in an arc while a cat digs in it.</summary>
