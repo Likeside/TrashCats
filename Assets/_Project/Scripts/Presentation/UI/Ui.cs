@@ -191,6 +191,35 @@ namespace TrashCats.Presentation.UI
             return result;
         }
 
+        /// <summary>Horizontal 0..1 slider: dark track, yellow fill, round handle.</summary>
+        public static Slider Slider(Transform parent, string name, float value, Action<float> onChange)
+        {
+            var track = Panel(parent, name, Skin?.barFrame != null ? Color.white : Palette.BarBack, raycast: true);
+            Sliced(track, Skin?.barFrame, 1.15f);
+            var fillArea = Rect(track.transform, "FillArea").Fill(14);
+            var fill = Panel(fillArea, "Fill", Palette.Primary);
+            fill.rectTransform.Fill();
+            var handleArea = Rect(track.transform, "HandleArea").Fill(14);
+            var handle = Panel(handleArea, "Handle", Palette.Paper, raycast: true);
+            handle.sprite = Skin?.circle;
+            handle.rectTransform.sizeDelta = new Vector2(70, 40);
+            var outline = handle.gameObject.AddComponent<Outline>();
+            outline.effectColor = Palette.Ink;
+            outline.effectDistance = new Vector2(3, -3);
+
+            var slider = track.gameObject.AddComponent<Slider>();
+            slider.fillRect = fill.rectTransform;
+            slider.handleRect = handle.rectTransform;
+            slider.targetGraphic = handle;
+            slider.direction = UnityEngine.UI.Slider.Direction.LeftToRight;
+            slider.minValue = 0f;
+            slider.maxValue = 1f;
+            slider.value = value;
+            if (onChange != null)
+                slider.onValueChanged.AddListener(v => onChange(v));
+            return slider;
+        }
+
         /// <summary>Picture filling the parent like CSS "cover" (keeps aspect, crops the overflow).</summary>
         public static Image Cover(Transform parent, string name, Sprite sprite, Color tint)
         {

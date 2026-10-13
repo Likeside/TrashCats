@@ -98,7 +98,11 @@ namespace TrashCats.Presentation.Hideout
                 token.Progress.Rect.gameObject.SetActive(working);
                 if (working)
                     token.Progress.Set(ActivitySystem.GetCycleProgress(cat, world.GameTimeMs));
-                token.Bubble.text = working ? "" : Texts.IdleBubble(cat.Activity.IdleReason);
+                var reason = working ? "" : Texts.IdleBubble(cat.Activity.IdleReason);
+                token.Bubble.text = reason;
+                var back = token.Bubble.transform.parent.gameObject;
+                if (back.activeSelf != (reason.Length > 0))
+                    back.SetActive(reason.Length > 0);
             }
         }
 
@@ -154,7 +158,7 @@ namespace TrashCats.Presentation.Hideout
                 ActivityKind.Train => config.Upgrades.FirstOrDefault(u => u.Effect is TrainingXpBonusEffect t && t.Attribute == activity.TrainedAttribute)?.Id,
                 _ => null,
             };
-            var label = activity.Kind == ActivityKind.Scavenge ? "Улица →" : upgrade != null ? Texts.UpgradeName(upgrade.Value) : Texts.ActivityShort(activity);
+            var label = activity.Kind == ActivityKind.Scavenge ? Loc.T("hideout_scene_view.01") : upgrade != null ? Texts.UpgradeName(upgrade.Value) : Texts.ActivityShort(activity);
             return (label, upgrade);
         }
 
@@ -187,7 +191,7 @@ namespace TrashCats.Presentation.Hideout
         private void RefreshUpgrade(UpgradeId id)
         {
             if (_upgradeLabels.TryGetValue(id, out var text))
-                text.text = $"{Texts.UpgradeShort(id)} · ур. {_session.World.GetUpgradeLevel(id)}{(CanAfford(id) ? " (+)" : "")}";
+                text.text = Loc.T("hideout_scene_view.02", Texts.UpgradeShort(id), _session.World.GetUpgradeLevel(id), (CanAfford(id) ? " (+)" : ""));
         }
 
         private bool CanAfford(UpgradeId id)
@@ -227,14 +231,23 @@ namespace TrashCats.Presentation.Hideout
                 name.Outlined();
             }
 
-            var bubble = Ui.Label(rt, "", 26, TextAnchor.LowerCenter, Palette.Primary);
-            bubble.rectTransform.Place(new Vector2(-0.5f, 1f), new Vector2(1.5f, 1f), new Vector2(0, 4), new Vector2(0, 44));
+            // idle reason in a comic speech bubble over the head (UI_UX §12), pulsing while the cat waits
+            var bubbleBack = Ui.Panel(rt, "Bubble", Color.white);
+            bubbleBack.sprite = Ui.Skin?.bubble;
+            bubbleBack.color = Ui.Skin?.bubble != null ? Color.white : new Color(1, 1, 1, 0);
+            bubbleBack.rectTransform.Place(new Vector2(0.45f, 1f), new Vector2(0.45f, 1f));
+            bubbleBack.rectTransform.pivot = new Vector2(0.1f, 0f);
+            bubbleBack.rectTransform.sizeDelta = new Vector2(190, 100);
+            bubbleBack.rectTransform.anchoredPosition = new Vector2(0, -6);
+            bubbleBack.gameObject.SetActive(false);
+            bubbleBack.rectTransform.DOScale(1.08f, 0.6f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine).SetLink(bubbleBack.gameObject);
+            var bubble = Ui.Label(bubbleBack.transform, "", 26, TextAnchor.MiddleCenter, Ui.Skin?.bubble != null ? Palette.Ink : Palette.Primary, heading: true);
 
             var progress = Ui.Bar(rt, "Progress", Palette.Progress);
             // under the name at the cat's feet: above the head it ran into the station captions
             progress.Rect.Place(new Vector2(0.05f, 0f), new Vector2(0.95f, 0f), new Vector2(0, -56), new Vector2(0, -34));
-            bubble.rectTransform.Place(new Vector2(-0.5f, 1f), new Vector2(1.5f, 1f), new Vector2(0, 28), new Vector2(0, 68));
-            bubble.Outlined();
+            bubble.rectTransform.Place(Vector2.zero, Vector2.one, new Vector2(12, 26), new Vector2(-12, -10));
+            if (Ui.Skin?.bubble == null) bubble.Outlined();
 
             _tokens[cat.Id] = new CatToken(rt, bubble, progress) { Art = hasArt ? catArt : null, Image = image, BaseColor = hasArt ? Color.white : color };
         }

@@ -37,6 +37,7 @@ namespace TrashCats.Presentation.Bootstrap
         private MessageQueue _messages;
         private TutorialService _tutorial;
         private Audio.GameAudio _audio;
+        private ConfirmModal _confirm;
         private System.Action _onButtonClicked;
         private Tutorial.TutorialOverlay _tutorialOverlay;
 
@@ -76,8 +77,8 @@ namespace TrashCats.Presentation.Bootstrap
                 // a fresh game (the new-game save in the boot scene already ticks a few milliseconds)
                 if (world.GameTimeMs < 60_000 && !world.Tutorial.Skipped && !world.Tutorial.Completed.Any()
                     && world.Territories.All.Values.All(t => t.Attempts == 0))
-                    _messages.Enqueue("Банда помойных котов",
-                        "Ты — Рыжий, кот с мусорки за рестораном.\n\nСобери банду, накачай её и захвати весь район — до самой крыши.");
+                    _messages.Enqueue(Loc.T("game_scene_root.01"),
+                        Loc.T("game_scene_root.02"));
             }
 
             _tutorial.Evaluate();
@@ -109,6 +110,14 @@ namespace TrashCats.Presentation.Bootstrap
             // overlays (created in the overlay layer, shown above every screen and the nav)
             _details = new CatDetailsSheet(session, overlayRoot, _overlays, ShowResult);
             _upgrades = new UpgradePanel(session, overlayRoot, _overlays, ShowResult);
+            _audio = new Audio.GameAudio(audioLibrary, transform)
+            {
+                SfxVolume = _services.Settings.SfxVolume,
+                MusicVolume = _services.Settings.MusicVolume,
+            };
+            _confirm = new ConfirmModal(overlayRoot, _overlays);
+            var settings = new SettingsPanel(overlayRoot, _overlays, _services.Settings, _audio,
+                () => _services.SaveScheduler.MarkDirty(SaveUrgency.Deferred), _confirm, bootstrap.ResetProgress);
             var debugTools = Debug.isDebugBuild || Application.isEditor;
             var debugPanel = debugTools ? new DebugPanel(overlayRoot, _overlays, session, _services.Debug, bootstrap.ResetProgress) : null;
             var results = new ResultsModal(session, overlayRoot, _overlays);
@@ -116,7 +125,7 @@ namespace TrashCats.Presentation.Bootstrap
             _messages = new MessageQueue(overlayRoot, _overlays);
 
             // screens
-            _hideout = new HideoutScreen(_services, screens, overlayRoot, _overlays, _details, _upgrades, debugPanel, ShowResult, factory);
+            _hideout = new HideoutScreen(_services, screens, overlayRoot, _overlays, _details, _upgrades, debugPanel, ShowResult, factory, settings.Open);
             _map = new MapScreen(session, screens, OpenPrep, factory.GetSprite("bg_map"), factory.GetSprite);
             _prep = new BattlePrepScreen(session, screens, () => _router.Show(ScreenId.Map), _ => StartCombat(), _details.Open);
             _combat = new CombatScreen(session, screens, transform, factory, results);
@@ -134,7 +143,7 @@ namespace TrashCats.Presentation.Bootstrap
             _router.Register(ScreenId.Map, _map.Root, withNav: true, () => _map.Refresh());
             _router.Register(ScreenId.BattlePrep, _prep.Root, withNav: false);
             _router.Register(ScreenId.Combat, _combat.Root, withNav: false);
-            foreach (var overlay in new[] { "CatDetails", "UpgradePanel", "Results", "OfflineSummary", "Message", "DebugPanel", "ActivitySheet" })
+            foreach (var overlay in new[] { "CatDetails", "UpgradePanel", "Results", "OfflineSummary", "Message", "DebugPanel", "ActivitySheet", "SettingsPanel", "Confirm" })
             {
                 var t = overlayRoot.Find(overlay);
                 if (t != null) t.SetAsLastSibling();
@@ -150,11 +159,6 @@ namespace TrashCats.Presentation.Bootstrap
             };
 
             // sound: clicks, opened sheets/modals, music per screen (CONTENT_SPEC §10)
-            _audio = new Audio.GameAudio(audioLibrary, transform)
-            {
-                SfxVolume = _services.Settings.SfxVolume,
-                MusicVolume = _services.Settings.MusicVolume,
-            };
             _onButtonClicked = () => _audio.Play("ui_tap");
             Ui.ButtonClicked += _onButtonClicked;
             _overlays.Pushed += root => _audio.Play(root.name == "Message" ? "ui_popup" : "ui_open");
@@ -197,20 +201,20 @@ namespace TrashCats.Presentation.Bootstrap
                 _hideout.RebuildCats();
                 _audio.Play("hid_meow");
                 var cat = config.GetCat(e.CatId);
-                _messages.Enqueue("Новый кот в банде!", $"{Texts.CatName(e.CatId)} теперь с вами.\nСклонность: {Texts.Attribute(cat.Aptitude)}.\n\nТренажёр вмещает одного кота — распредели их по станциям.");
+                _messages.Enqueue(Loc.T("game_scene_root.03"), Loc.T("game_scene_root.04", Texts.CatName(e.CatId), Texts.Attribute(cat.Aptitude)));
             }));
             _subscriptions.Add(bus.Subscribe<TerritoryCaptured>(e =>
             {
                 if (e.Unlocked is TerritoryId next)
-                    _messages.Enqueue("Открыта территория", $"{Texts.TerritoryName(next)}\n\nЗагляни на карту.");
+                    _messages.Enqueue(Loc.T("game_scene_root.05"), Loc.T("game_scene_root.06", Texts.TerritoryName(next)));
             }));
             _subscriptions.Add(bus.Subscribe<SkillUnlocked>(e =>
             {
                 var skill = config.GetSkill(e.SkillId);
-                _messages.Enqueue("Новое умение!", $"{Texts.CatName(e.CatId)}: {Texts.SkillName(e.SkillId)}\n{Texts.SkillDescription(skill)}\n\nСлотов всего три — выбирай в «Умения и статы».");
+                _messages.Enqueue(Loc.T("game_scene_root.07"), Loc.T("game_scene_root.08", Texts.CatName(e.CatId), Texts.SkillName(e.SkillId), Texts.SkillDescription(skill)));
             }));
             _subscriptions.Add(bus.Subscribe<FinalReached>(_ =>
-                _messages.Enqueue("Главная банда района!", "Адмирал повержен — крыша ресторана ваша.\n\nМожно продолжать играть: тренироваться, улучшать убежище и повторять бои.")));
+                _messages.Enqueue(Loc.T("game_scene_root.09"), Loc.T("game_scene_root.10"))));
             _subscriptions.Add(bus.Subscribe<AttributeLevelUp>(e =>
             {
                 if (_router.Current == ScreenId.Hideout)
@@ -271,10 +275,13 @@ namespace TrashCats.Presentation.Bootstrap
             _hideout.Tick();
             _combat.Tick(Time.deltaTime);
             var keyboard = Keyboard.current;
+            // Android "Back" arrives as Escape: close the top sheet/modal, else step back a screen, else offer to quit
             if (keyboard != null && keyboard.escapeKey.wasPressedThisFrame && !_overlays.Back())
             {
                 if (_router.Current == ScreenId.BattlePrep) _router.Show(ScreenId.Map);
                 else if (_router.Current == ScreenId.Map) _router.Show(ScreenId.Hideout);
+                else if (_router.Current == ScreenId.Hideout)
+                    _confirm.Ask(Loc.T("quit.title"), Loc.T("quit.body"), Loc.T("quit.yes"), Application.Quit);
             }
         }
 

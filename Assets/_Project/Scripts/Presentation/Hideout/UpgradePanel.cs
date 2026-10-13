@@ -51,10 +51,10 @@ namespace TrashCats.Presentation.Hideout
             var definition = config.GetUpgrade(_upgrade.Value);
             var level = _session.World.GetUpgradeLevel(definition.Id);
             var next = level < definition.MaxLevel ? definition.Costs[level] : (int?)null;
-            _text.text = $"{Texts.UpgradeName(definition.Id)}\nуровень {level} из {definition.MaxLevel}\n\n{Effect(config, definition, level)}"
-                         + (next != null ? $"\n→ {Effect(config, definition, level + 1)}" : "\nМаксимум!");
+            _text.text = Loc.T("upgrade_panel.01", Texts.UpgradeName(definition.Id), level, definition.MaxLevel, Effect(config, definition, level))
+                         + (next != null ? $"\n→ {Effect(config, definition, level + 1)}" : Loc.T("upgrade_panel.02"));
             _buy.Interactable = next != null && _session.World.Junk >= next.Value;
-            _buy.Text.text = next == null ? "Максимум" : _session.World.Junk >= next.Value ? $"Улучшить за {next} хлама" : $"Нужно {next} хлама (есть {_session.World.Junk})";
+            _buy.Text.text = next == null ? Loc.T("upgrade_panel.03") : _session.World.Junk >= next.Value ? Loc.T("upgrade_panel.04", next) : Loc.T("upgrade_panel.05", next, _session.World.Junk);
         }
 
         private void Buy()
@@ -70,9 +70,9 @@ namespace TrashCats.Presentation.Hideout
 
         private static string Effect(GameConfig config, UpgradeDefinition definition, int level) => definition.Effect switch
         {
-            SleepEnergyBonusEffect e => $"Сон: +{Base(config, ActivityKind.Sleep) + e.BonusPerLevel[level]} энергии за цикл",
-            ResourceOutputBonusEffect e => $"Добыча: +{Base(config, ActivityKind.Scavenge) + e.FoodPerLevel[level]} еды, +{Base(config, ActivityKind.Rummage) + e.JunkPerLevel[level]} хлама за цикл",
-            TrainingXpBonusEffect e => $"Тренировка {Texts.AttributeGenitive(e.Attribute).ToLowerInvariant()}: +{e.PctPerLevel[level]}% опыта",
+            SleepEnergyBonusEffect e => Loc.T("upgrade_panel.06", Base(config, ActivityKind.Sleep) + e.BonusPerLevel[level]),
+            ResourceOutputBonusEffect e => Loc.T("upgrade_panel.07", Base(config, ActivityKind.Scavenge) + e.FoodPerLevel[level], Base(config, ActivityKind.Rummage) + e.JunkPerLevel[level]),
+            TrainingXpBonusEffect e => Loc.T("upgrade_panel.08", Texts.AttributeGenitive(e.Attribute).ToLowerInvariant(), e.PctPerLevel[level]),
             _ => "",
         };
     }

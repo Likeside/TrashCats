@@ -28,7 +28,7 @@ namespace TrashCats.Presentation.UI
             _title.rectTransform.Fill(50);
             _body = Ui.Label(card.transform, "", 36, TextAnchor.MiddleCenter, Palette.Ink);
             _body.rectTransform.Place(Vector2.zero, Vector2.one, new Vector2(50, 170), new Vector2(-50, -130));
-            var ok = Ui.Button(card.transform, "Message_Ok", "Отлично!", Palette.Primary, () => _overlays.Close(_root), 40);
+            var ok = Ui.Button(card.transform, "Message_Ok", Loc.T("message_queue.01"), Palette.Primary, () => _overlays.Close(_root), 40);
             ok.Rect.Place(new Vector2(0.2f, 0), new Vector2(0.8f, 0), new Vector2(0, 40), new Vector2(0, 150));
             _root.SetActive(false);
         }

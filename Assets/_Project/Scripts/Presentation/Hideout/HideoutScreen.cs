@@ -27,7 +27,7 @@ namespace TrashCats.Presentation.Hideout
 
         public HideoutScreen(GameServices services, RectTransform parent, RectTransform overlayRoot, OverlayStack overlays,
             CatDetailsSheet details, UpgradePanel upgrades, DebugPanel debugPanel, Action<CommandResult> showResult,
-            Characters.CharacterViewFactory art)
+            Characters.CharacterViewFactory art, Action onSettings = null)
         {
             var session = services.Session;
             var root = Ui.Rect(parent, "HideoutScreen").Fill();
@@ -38,7 +38,7 @@ namespace TrashCats.Presentation.Hideout
             var panelRect = Ui.Rect(root, "CatPanel").Place(Vector2.zero, new Vector2(1, 0), new Vector2(0, NavHeight), new Vector2(0, NavHeight + PanelHeight));
 
             _sheet = new ActivitySheet(session, overlayRoot, overlays, showResult, details.Open);
-            _hud = new HudView(session, hudRect, debugPanel != null ? debugPanel.Open : (Action)null);
+            _hud = new HudView(session, hudRect, debugPanel != null ? debugPanel.Open : (Action)null, onSettings);
             _scene = new HideoutSceneView(session, services.Bus, sceneRect, _sheet.Open, upgrades.Open, art);
             _panel = new CatPanelView(session, panelRect, _sheet.Open, showResult, art);
             _toast = new ToastView(sceneRect);

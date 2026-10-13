@@ -31,9 +31,9 @@ namespace TrashCats.Presentation.UI
         {
             _nav = navRoot.gameObject;
             Ui.Card(navRoot, "NavBack", CardStyle.Tin).rectTransform.Fill();
-            _hideoutTab = Ui.Button(navRoot, "Tab_Hideout", "Убежище", Palette.Primary, () => Show(ScreenId.Hideout), 36);
+            _hideoutTab = Ui.Button(navRoot, "Tab_Hideout", Loc.T("screen_router.01"), Palette.Primary, () => Show(ScreenId.Hideout), 36);
             _hideoutTab.Rect.Place(Vector2.zero, new Vector2(0.5f, 1), new Vector2(20, 15), new Vector2(-10, -15));
-            _mapTab = Ui.Button(navRoot, "Tab_Map", "Карта", Palette.Disabled, () => Show(ScreenId.Map), 36);
+            _mapTab = Ui.Button(navRoot, "Tab_Map", Loc.T("screen_router.02"), Palette.Disabled, () => Show(ScreenId.Map), 36);
             _mapTab.Rect.Place(new Vector2(0.5f, 0), Vector2.one, new Vector2(10, 15), new Vector2(-20, -15));
             AddIcon(_hideoutTab, "home");
             AddIcon(_mapTab, "map");
@@ -69,6 +69,6 @@ namespace TrashCats.Presentation.UI
         }
 
         /// <summary>Marks the Map tab when something new is waiting there.</summary>
-        public void SetMapBadge(bool on) => _mapTab.Text.text = on ? "Карта (!)" : "Карта";
+        public void SetMapBadge(bool on) => _mapTab.Text.text = on ? Loc.T("screen_router.03") : Loc.T("screen_router.02");
     }
 }

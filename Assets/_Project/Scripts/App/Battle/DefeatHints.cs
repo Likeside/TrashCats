@@ -4,7 +4,10 @@ using TrashCats.Domain;
 
 namespace TrashCats.App
 {
-    /// <summary>Short, rule-based advice after a lost battle, read from the battle log (GDD UI_UX §9, COMBAT_DESIGN §M3-08).</summary>
+    /// <summary>
+    /// Short, rule-based advice after a lost battle, read from the battle log (GDD UI_UX §9, COMBAT_DESIGN §M3-08).
+    /// Returns localization keys (defeat.*); the presentation shows their text.
+    /// </summary>
     public static class DefeatHints
     {
         public static IReadOnlyList<string> For(PendingBattle battle, GameConfig config)
@@ -18,13 +21,13 @@ namespace TrashCats.App
             var hasFur = team.Any(f => f.Skills.Any(s => config.GetSkill(s).Effect == SkillEffectKind.DamageReduction));
 
             if (enemyHeavy >= 3 && !hasDodge)
-                hints.Add("Враг часто кусал. Возьми Уворот (Ловкость 7) или Густую шерсть (Крепость 4).");
+                hints.Add("defeat.bites");
             if (playerHits.Count >= 6 && playerHits.Count(h => !h.Hit) * 100 / playerHits.Count >= 40)
-                hints.Add("Много промахов. Подтяни Ловкость или возьми Грязный трюк (Сила 7).");
+                hints.Add("defeat.misses");
             if (hints.Count < 2 && !hasFur && team.Average(f => f.Toughness) < battle.Setup.EnemyQueue.Average(f => f.Toughness))
-                hints.Add("Не хватает здоровья. Тренируй Крепость в колесе.");
+                hints.Add("defeat.health");
             if (hints.Count == 0)
-                hints.Add("Потренируйся и попробуй снова. Порядок бойцов тоже важен: победитель остаётся на ринге.");
+                hints.Add("defeat.generic");
             return hints.Take(2).ToList();
         }
     }

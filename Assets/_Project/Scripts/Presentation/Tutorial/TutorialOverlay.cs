@@ -75,7 +75,7 @@ namespace TrashCats.Presentation.Tutorial
             _bubble.sizeDelta = new Vector2(920, 300);
             _text = Ui.Label(_bubble, "", 40, TextAnchor.MiddleCenter, Palette.Ink, heading: true);
             _text.rectTransform.Place(Vector2.zero, Vector2.one, new Vector2(50, 90), new Vector2(-50, -40));
-            var skip = Ui.Button(_bubble, "Tutorial_Skip", "Пропустить обучение", Palette.Disabled, () => _service.Skip(), 28);
+            var skip = Ui.Button(_bubble, "Tutorial_Skip", Loc.T("tutorial_overlay.01"), Palette.Disabled, () => _service.Skip(), 28);
             skip.Rect.Place(new Vector2(0.25f, 0), new Vector2(0.75f, 0), new Vector2(0, 26), new Vector2(0, 96));
 
             _root.gameObject.SetActive(false);
@@ -222,12 +222,12 @@ namespace TrashCats.Presentation.Tutorial
             var name = Texts.CatName(step.Cat);
             switch (step.Id)
             {
-                case TutorialService.Scavenge: return $"{name} голоден. Отправь его за едой!";
-                case TutorialService.Feed: return "Еда есть! Покорми кота — сытые работают быстрее.";
-                case TutorialService.Train: return "Пора качаться! Тренируй Силу на банке.";
-                case TutorialService.Equip: return "Новое умение! Возьми его в слот — в бою кот будет его применять.";
-                case TutorialService.Sleep: return $"{name} устал. Уложи его спать.";
-                case TutorialService.Fight: return step.Territory is TerritoryId t ? $"Пора проучить соседей! Нападай: {Texts.TerritoryName(t)}." : "Пора в бой!";
+                case TutorialService.Scavenge: return Loc.T("tutorial_overlay.02", name);
+                case TutorialService.Feed: return Loc.T("tutorial_overlay.03");
+                case TutorialService.Train: return Loc.T("tutorial_overlay.04");
+                case TutorialService.Equip: return Loc.T("tutorial_overlay.05");
+                case TutorialService.Sleep: return Loc.T("tutorial_overlay.06", name);
+                case TutorialService.Fight: return step.Territory is TerritoryId t ? Loc.T("tutorial_overlay.07", Texts.TerritoryName(t)) : Loc.T("tutorial_overlay.08");
                 default: return "";
             }
         }
@@ -235,9 +235,9 @@ namespace TrashCats.Presentation.Tutorial
         /// <summary>One-shot contextual hint: (title, body) for the message queue, or null.</summary>
         public static (string Title, string Body)? Hint(string id) => id switch
         {
-            TutorialService.HintJunk => ("Хлам", "Хлам тратится на улучшения.\nНажми на предмет во дворе — банку, мышь, колесо, бак или коробки."),
-            TutorialService.HintRelay => ("Порядок важен", "Бой — эстафета: победитель остаётся на ринге и бьётся со следующим.\nНажимай на котов, чтобы выбрать порядок."),
-            TutorialService.HintSlots => ("Слотов только три", "Умений больше, чем слотов.\nВыбирай под врага в «Умения и статы»."),
+            TutorialService.HintJunk => (Loc.T("tutorial_overlay.09"), Loc.T("tutorial_overlay.10")),
+            TutorialService.HintRelay => (Loc.T("tutorial_overlay.11"), Loc.T("tutorial_overlay.12")),
+            TutorialService.HintSlots => (Loc.T("tutorial_overlay.13"), Loc.T("tutorial_overlay.14")),
             _ => null,
         };
     }

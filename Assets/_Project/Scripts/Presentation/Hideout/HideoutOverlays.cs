@@ -18,7 +18,7 @@ namespace TrashCats.Presentation.Hideout
         private readonly TMP_Text _junk;
         private readonly bool _withIcons;
 
-        public HudView(GameSession session, RectTransform root, Action onDebug)
+        public HudView(GameSession session, RectTransform root, Action onDebug, Action onSettings = null)
         {
             _session = session;
             Ui.Card(root, "HudBack", CardStyle.Tin).rectTransform.Fill();
@@ -39,6 +39,15 @@ namespace TrashCats.Presentation.Hideout
                 _resources.fontSize = 44;
             }
 
+            if (onSettings != null)
+            {
+                // gear on a small square button, left of the debug button
+                var settings = Ui.Button(root, "Hud_Settings", "", Palette.Secondary, onSettings);
+                settings.Rect.Place(new Vector2(1, 0), new Vector2(1, 1), new Vector2(-260, 12), new Vector2(-170, -12));
+                var gear = Ui.Icon(settings.Rect, "settings");
+                gear?.rectTransform.Place(new Vector2(0.15f, 0.15f), new Vector2(0.85f, 0.85f));
+            }
+
             if (onDebug != null)
             {
                 var debug = Ui.Button(root, "Debug", "DBG", Palette.Disabled, onDebug, 28);
@@ -56,7 +65,7 @@ namespace TrashCats.Presentation.Hideout
                 _junk.text = _session.World.Junk.ToString();
             }
             else
-                _resources.text = $"Еда: {_session.World.Food}      Хлам: {_session.World.Junk}";
+                _resources.text = Loc.T("hideout_overlays.01", _session.World.Food, _session.World.Junk);
         }
     }
 
@@ -99,12 +108,12 @@ namespace TrashCats.Presentation.Hideout
             var panel = Ui.Card(dim.transform, "Card", CardStyle.Paper, raycast: true);
             panel.rectTransform.At(new Vector2(0.5f, 0.5f), new Vector2(900, 900));
 
-            var title = Ui.Label(panel.transform, "Пока тебя не было", 46, TextAnchor.UpperCenter, Palette.Ink);
+            var title = Ui.Label(panel.transform, Loc.T("hideout_overlays.02"), 46, TextAnchor.UpperCenter, Palette.Ink);
             title.rectTransform.Fill(40);
             _body = Ui.Label(panel.transform, "", 32, TextAnchor.UpperLeft, Palette.Ink);
             _body.rectTransform.Place(Vector2.zero, Vector2.one, new Vector2(50, 160), new Vector2(-50, -120));
 
-            var ok = Ui.Button(panel.transform, "Ok", "Отлично", Palette.Primary, () => _overlays.Close(_root));
+            var ok = Ui.Button(panel.transform, "Ok", Loc.T("hideout_overlays.03"), Palette.Primary, () => _overlays.Close(_root));
             ok.Rect.Place(new Vector2(0.25f, 0), new Vector2(0.75f, 0), new Vector2(0, 40), new Vector2(0, 140));
 
             _root.SetActive(false);
@@ -113,13 +122,13 @@ namespace TrashCats.Presentation.Hideout
         public void Show(OfflineSummary summary)
         {
             var sb = new StringBuilder();
-            sb.AppendLine($"Прошло: {Texts.Duration(summary.RealElapsedMs)}" + (summary.WasCapped ? $" (засчитано {Texts.Duration(summary.SimulatedMs)})" : ""));
-            if (summary.FoodGained > 0) sb.AppendLine($"Еда: +{summary.FoodGained}");
-            if (summary.JunkGained > 0) sb.AppendLine($"Хлам: +{summary.JunkGained}");
+            sb.AppendLine(Loc.T("hideout_overlays.04", Texts.Duration(summary.RealElapsedMs)) + (summary.WasCapped ? Loc.T("hideout_overlays.05", Texts.Duration(summary.SimulatedMs)) : ""));
+            if (summary.FoodGained > 0) sb.AppendLine(Loc.T("hideout_overlays.06", summary.FoodGained));
+            if (summary.JunkGained > 0) sb.AppendLine(Loc.T("hideout_overlays.07", summary.JunkGained));
             foreach (var group in summary.LevelUps.GroupBy(e => (e.CatId, e.Attribute)))
                 sb.AppendLine($"{Texts.CatName(group.Key.CatId)}: {Texts.Attribute(group.Key.Attribute)} {group.Max(e => e.NewLevel)}");
             foreach (var unlocked in summary.SkillsUnlocked)
-                sb.AppendLine($"{Texts.CatName(unlocked.CatId)}: новое умение {Texts.SkillName(unlocked.SkillId)}");
+                sb.AppendLine(Loc.T("hideout_overlays.08", Texts.CatName(unlocked.CatId), Texts.SkillName(unlocked.SkillId)));
             foreach (var stopped in summary.Stopped)
             {
                 var reason = Texts.IdleBubble(stopped.Reason);
@@ -160,16 +169,16 @@ namespace TrashCats.Presentation.Hideout
                     new Vector2(30, -120 - (row + 1) * 140), new Vector2(-30, -120 - row * 140 - 20));
             }
 
-            Add(0, 0, "Время ×1", () => session.DebugTimeScale = 1);
-            Add(0, 1, "Время ×5", () => session.DebugTimeScale = 5);
-            Add(1, 0, "Время ×20", () => session.DebugTimeScale = 20);
-            Add(1, 1, "+10 мин", () => debug.SkipGameTime(10 * 60_000));
-            Add(2, 0, "+100 еды", () => debug.AddResources(100, 0));
-            Add(2, 1, "+100 хлама", () => debug.AddResources(0, 100));
-            Add(3, 0, "Открыть территории", debug.UnlockAllTerritories);
-            Add(3, 1, "Все коты + отдых", debug.RecruitAllAndRest);
-            Add(4, 0, "Сбросить прогресс", resetProgress);
-            Add(4, 1, "Закрыть", () => _overlays.Close(_root));
+            Add(0, 0, Loc.T("hideout_overlays.09"), () => session.DebugTimeScale = 1);
+            Add(0, 1, Loc.T("hideout_overlays.10"), () => session.DebugTimeScale = 5);
+            Add(1, 0, Loc.T("hideout_overlays.11"), () => session.DebugTimeScale = 20);
+            Add(1, 1, Loc.T("hideout_overlays.12"), () => debug.SkipGameTime(10 * 60_000));
+            Add(2, 0, Loc.T("hideout_overlays.13"), () => debug.AddResources(100, 0));
+            Add(2, 1, Loc.T("hideout_overlays.14"), () => debug.AddResources(0, 100));
+            Add(3, 0, Loc.T("hideout_overlays.15"), debug.UnlockAllTerritories);
+            Add(3, 1, Loc.T("hideout_overlays.16"), debug.RecruitAllAndRest);
+            Add(4, 0, Loc.T("hideout_overlays.17"), resetProgress);
+            Add(4, 1, Loc.T("hideout_overlays.18"), () => _overlays.Close(_root));
 
             _root.SetActive(false);
         }
@@ -180,6 +189,6 @@ namespace TrashCats.Presentation.Hideout
             _overlays.Push(_root);
         }
 
-        private void Refresh() => _scale.text = $"Отладка · скорость ×{_session.DebugTimeScale}";
+        private void Refresh() => _scale.text = Loc.T("hideout_overlays.19", _session.DebugTimeScale);
     }
 }
