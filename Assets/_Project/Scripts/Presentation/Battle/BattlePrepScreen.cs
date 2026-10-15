@@ -22,6 +22,7 @@ namespace TrashCats.Presentation.Battle
     public sealed class BattlePrepScreen
     {
         private const float CardHeight = 222f;
+        private const float OrderStrip = 84f;
         private const float ChipIcon = 38f;
         private const int ChipFont = 27;
 
@@ -176,15 +177,15 @@ namespace TrashCats.Presentation.Battle
             row.Text.gameObject.SetActive(false);
             Info.Size(row.Image, -1, CardHeight);
             var card = row.Rect;
-            Number(card, index);
             Avatar(card, cat);
-            Body(card, Texts.CatName(cat.Id), FighterSnapshot.FromCat(cat, _session.Config), Palette.Paper, rightGap: 58);
+            Body(card, Texts.CatName(cat.Id), FighterSnapshot.FromCat(cat, _session.Config), Palette.Paper, rightGap: OrderStrip + 10);
 
-            // ▲▼ swap with the neighbour
-            var up = Arrow(card, "Up_" + cat.Id, "▲", index > 0, () => Swap(index, index - 1));
-            up.Rect.Place(new Vector2(1, 0.5f), new Vector2(1, 1), new Vector2(-60, 4), new Vector2(-12, -14));
-            var down = Arrow(card, "Down_" + cat.Id, "▼", index < _order.Count - 1, () => Swap(index, index + 1));
-            down.Rect.Place(new Vector2(1, 0), new Vector2(1, 0.5f), new Vector2(-60, 14), new Vector2(-12, -4));
+            // the order control on the right edge: big ▲, the cat's number, big ▼ (swap with the neighbour)
+            var strip = Ui.Rect(card, "Order").Place(new Vector2(1, 0), Vector2.one, new Vector2(-OrderStrip - 8, 10), new Vector2(-8, -10));
+            Arrow(strip, "Up_" + cat.Id, "▲", index > 0, () => Swap(index, index - 1)).Rect.Place(new Vector2(0, 0.64f), Vector2.one);
+            var number = Ui.Rect(strip, "Place").Place(new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(-28, -28), new Vector2(28, 28));
+            Number(number, index, centred: true);
+            Arrow(strip, "Down_" + cat.Id, "▼", index < _order.Count - 1, () => Swap(index, index + 1)).Rect.Place(Vector2.zero, new Vector2(1, 0.36f));
             if (cat.Activity.IsWorking)
                 Note(card, Loc.T("battle_prep_screen.19"));
         }
@@ -248,13 +249,15 @@ namespace TrashCats.Presentation.Battle
             return label;
         }
 
-        /// <summary>The position in its queue: a small yellow disc in the top left corner.</summary>
-        private static void Number(RectTransform card, int index)
+        /// <summary>The position in its queue: a yellow disc in the top left corner (or filling a holder).</summary>
+        private static void Number(RectTransform card, int index, bool centred = false)
         {
-            var disc = Ui.Panel(card, "Number", Palette.Primary);
+            // dark between the arrows on a yellow card, yellow in the corner of an enemy card
+            var disc = Ui.Panel(card, "Number", centred ? Palette.Ink : Palette.Primary);
             disc.sprite = Ui.Skin?.circle;
-            disc.rectTransform.Place(new Vector2(0, 1), new Vector2(0, 1), new Vector2(-10, -38), new Vector2(38, 10));
-            var label = Ui.Label(disc.transform, (index + 1).ToString(), 30, TextAnchor.MiddleCenter, Palette.Ink, heading: true);
+            if (centred) disc.rectTransform.Fill();
+            else disc.rectTransform.Place(new Vector2(0, 1), new Vector2(0, 1), new Vector2(-10, -38), new Vector2(38, 10));
+            var label = Ui.Label(disc.transform, (index + 1).ToString(), 30, TextAnchor.MiddleCenter, centred ? Palette.Primary : Palette.Ink, heading: true);
             label.rectTransform.Fill();
         }
 
@@ -313,12 +316,14 @@ namespace TrashCats.Presentation.Battle
                     label.Outlined();
         }
 
-        private static UiButton Arrow(RectTransform card, string name, string glyph, bool enabled, Action onClick)
+        /// <summary>A big arrow button; the one that cannot move the cat is greyed out (the strip keeps its shape).</summary>
+        private static UiButton Arrow(RectTransform strip, string name, string glyph, bool enabled, Action onClick)
         {
-            var arrow = Ui.Button(card, name, glyph, Palette.Paper, onClick, 26);
+            var arrow = Ui.Button(strip, name, glyph, enabled ? Palette.Secondary : Palette.Disabled, onClick, 40);
             arrow.Text.rectTransform.Fill(2);
+            arrow.Text.fontSizeMin = 30;
+            arrow.Text.color = Palette.Paper;
             arrow.Interactable = enabled;
-            arrow.Rect.gameObject.SetActive(enabled);
             return arrow;
         }
 
