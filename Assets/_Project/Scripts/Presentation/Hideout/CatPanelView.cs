@@ -139,7 +139,7 @@ namespace TrashCats.Presentation.Hideout
 
                 // the name on a light plate in the colour of the picture's backdrop: it belongs to the picture and stays quiet
                 // the name on a light darkening across the whole card, right under the picture (touching it)
-                _namePlate = Ui.Panel(content, "NamePlate", new Color(0f, 0f, 0f, 0.32f));
+                _namePlate = Ui.Panel(content, "NamePlate", new Color(0f, 0f, 0f, 0f)); // no backing, only the name
                 _namePlate.rectTransform.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(-10, NameBand - 170 - 42), new Vector2(10, NameBand - 170));
                 _portraitName = Ui.Label(_namePlate.transform, "", 30, TextAnchor.MiddleCenter, Palette.Paper, heading: true);
                 _portraitName.rectTransform.Fill(2);
@@ -166,7 +166,7 @@ namespace TrashCats.Presentation.Hideout
                 statusLayout.minHeight = 34f;
 
                 _progress = Ui.Bar(content, "Progress", Palette.Progress);
-                _progress.Rect.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(50, -218), new Vector2(-10, -206));
+                _progress.Rect.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(51, -218), new Vector2(-6, -206)); // ends like the bars below
 
                 _energy = Ui.Bar(content, "Energy", Palette.Energy, "energy");
                 _energy.Rect.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(50, -258), new Vector2(-6, -226));
