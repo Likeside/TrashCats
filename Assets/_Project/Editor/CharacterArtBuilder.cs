@@ -168,6 +168,7 @@ namespace TrashCats.Editor
             art.portrait = Sprites(dir + "/Portrait").FirstOrDefault() ?? art.idle.frames.FirstOrDefault();
             // hideout card picture with its own backdrop (Tools/cut_card_portraits.py)
             art.card = Sprites(dir + "/Card").FirstOrDefault();
+            art.avatar = Sprites(dir + "/Avatar").FirstOrDefault();
 
             var attach = dir + "/attach_points.json";
             if (File.Exists(attach))

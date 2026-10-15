@@ -38,7 +38,7 @@ namespace TrashCats.Presentation.Hideout
             var hudRect = Ui.Rect(root, "Hud").Place(new Vector2(0, 1), Vector2.one, new Vector2(0, -HudHeight), Vector2.zero);
             var panelRect = Ui.Rect(root, "CatPanel").Place(Vector2.zero, new Vector2(1, 0), new Vector2(0, NavHeight), new Vector2(0, NavHeight + PanelHeight));
 
-            _sheet = new ActivitySheet(session, overlayRoot, overlays, showResult, details.Open);
+            _sheet = new ActivitySheet(session, overlayRoot, overlays, showResult, details.Open, art);
             _hud = new HudView(session, hudRect, debugPanel != null ? debugPanel.Open : (Action)null, onSettings);
             _scene = new HideoutSceneView(session, services.Bus, sceneRect, _sheet.Open, upgrades.Open, art);
             _panel = new CatPanelView(session, panelRect, _sheet.Open, showResult, art);
@@ -49,6 +49,8 @@ namespace TrashCats.Presentation.Hideout
         {
             _scene.Tick();
             _panel.Tick();
+            if (_sheet.IsOpen)
+                _sheet.Tick();
         }
 
         public void RefreshTexts()
