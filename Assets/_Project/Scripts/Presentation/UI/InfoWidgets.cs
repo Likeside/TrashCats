@@ -39,7 +39,7 @@ namespace TrashCats.Presentation.UI
 
         public static void Size(Component c, float width, float height)
         {
-            var element = c.GetComponent<LayoutElement>() ?? c.gameObject.AddComponent<LayoutElement>();
+            var element = c.TryGetComponent<LayoutElement>(out var existing) ? existing : c.gameObject.AddComponent<LayoutElement>();
             if (width >= 0) element.preferredWidth = element.minWidth = width;
             if (height >= 0) element.preferredHeight = element.minHeight = height;
         }

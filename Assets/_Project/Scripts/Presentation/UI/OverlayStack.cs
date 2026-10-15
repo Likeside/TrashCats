@@ -24,6 +24,7 @@ namespace TrashCats.Presentation.UI
             root.SetActive(true);
             root.transform.SetAsLastSibling();
             _stack.Add((root, onClosed));
+            OverlayAnimator.Show(root);
             Pushed?.Invoke(root);
         }
 
@@ -35,7 +36,7 @@ namespace TrashCats.Presentation.UI
 
             var entry = _stack[index];
             _stack.RemoveAt(index);
-            entry.Root.SetActive(false);
+            OverlayAnimator.Hide(entry.Root);
             entry.OnClosed?.Invoke();
         }
 

@@ -167,7 +167,8 @@ namespace TrashCats.Presentation.Bootstrap
             // sound: clicks, opened sheets/modals, music per screen (CONTENT_SPEC §10)
             _onButtonClicked = () => _audio.Play("ui_tap");
             Ui.ButtonClicked += _onButtonClicked;
-            _overlays.Pushed += root => _audio.Play(root.name == "Message" ? "ui_popup" : "ui_open");
+            // bottom sheets rustle like paper as they slide up
+            _overlays.Pushed += root => _audio.Play(root.name == "Message" ? "ui_popup" : OverlayAnimator.IsBottomSheet(root) ? "ui_paper" : "ui_open");
             _router.Changed += id => _audio.PlayMusic(id == ScreenId.Combat ? "music_battle" : "music_hideout");
             _combat.Audio = _audio;
         }
