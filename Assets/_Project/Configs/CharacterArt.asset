@@ -2571,5 +2571,7 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 4ab2b903177790a49b768b947ad37c91, type: 3}
   - key: prop_upg_mouse
     sprite: {fileID: 21300000, guid: 57c71a3b0e8bcf6e29a18aefa3a21846, type: 3}
+  - key: prop_upg_mouse_outline
+    sprite: {fileID: 21300000, guid: 9e6b66956e8beb863b48d35a4895ea9c, type: 3}
   - key: prop_upg_wheel
     sprite: {fileID: 21300000, guid: b00bb7cdcd8234fdca1c5816c57e83c0, type: 3}

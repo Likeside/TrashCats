@@ -12,8 +12,8 @@ namespace TrashCats.Presentation.Hideout
     /// <summary>Bottom panel with one card per gang slot: status, cycle progress, needs and quick feeding.</summary>
     public sealed class CatPanelView
     {
-        /// <summary>Height of the name band above each card's picture (the panel grows by it).</summary>
-        public const float NameBand = Card.NameBand;
+        /// <summary>How much taller a card is than the original layout: the name band and the whole (taller) picture.</summary>
+        public const float ExtraHeight = Card.NameBand + Card.PictureExtra;
 
         private const int Slots = 3;
 
@@ -72,6 +72,9 @@ namespace TrashCats.Presentation.Hideout
             /// <summary>Height of the name band above the picture.</summary>
             public const float NameBand = 44f;
 
+            /// <summary>The pictures keep the whole window (chin included) and are taller than the layout was made for.</summary>
+            public const float PictureExtra = 32f;
+
             private static readonly Color StatusInk = Palette.Hex("#2A2118");
             private static readonly Color StatusAlert = Palette.Hex("#B3261E");
             private readonly TMP_Text _status;
@@ -107,7 +110,7 @@ namespace TrashCats.Presentation.Hideout
                 _portraitName.enableAutoSizing = true;
                 _portraitName.fontSizeMax = 32;
                 _portraitName.fontSizeMin = 22;
-                var content = Ui.Rect(_content.transform, "Body").Place(Vector2.zero, Vector2.one, Vector2.zero, new Vector2(0, -NameBand));
+                var content = Ui.Rect(_content.transform, "Body").Place(Vector2.zero, Vector2.one, Vector2.zero, new Vector2(0, -NameBand - PictureExtra));
 
                 _header = Ui.Panel(content, "Header", Color.gray);
                 if (Ui.Skin?.button != null)

@@ -36,3 +36,5 @@
 | `Props/prop_barbell_v1.png` | штанга на кирпичных стойках у матраса | `Docs/ArtDirection/Generated/raw_barbell` |
 | `Props/food_bits_v1/` | объедки, вылетающие из-за экрана, пока кот на улице | `Docs/ArtDirection/Generated/raw_food_bits` |
 | `UI/icon_skill_second_wind.png` | умение «Второе дыхание» (сердце с лапой и вихрем) | `Docs/ArtDirection/Generated/raw_icon_second_wind` |
+| `UI/cards_v4_whole` | карточки котов: окошки целиком (подбородки не срезаны), более широкие окошки сужены по бокам с сохранением рамки | `Tools/cut_card_portraits.py` |
+| `Props/prop_upg_mouse_outline_v1.png` | светящийся контур скакалки (станция занята) | `Tools/make_outline.py` |

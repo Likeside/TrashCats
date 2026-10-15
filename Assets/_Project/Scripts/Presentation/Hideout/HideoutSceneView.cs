@@ -482,7 +482,7 @@ namespace TrashCats.Presentation.Hideout
             }
 
             // the cat has the rope: it stays on its nail as a glowing ghost, so the station is still easy to find and tap
-            if (_ropeProp != null) Ghost(_ropeProp, ropeBusy);
+            if (_ropeProp != null) Ghost(_ropeProp, ropeBusy, _art?.GetSprite(HideoutLayout.RopeProp.Sprite + "_outline"));
             // the barbell is in the pressing cat's paws
             _barbell?.SetActive(!benchBusy);
             _rummaging = rummaging;
@@ -491,21 +491,32 @@ namespace TrashCats.Presentation.Hideout
             SortByDepth();
         }
 
-        /// <summary>A prop in use: see-through with a pulsing warm outline; back to normal when free.</summary>
-        private static void Ghost(GameObject prop, bool on)
+        /// <summary>
+        /// A prop in use (the cat has it): only its glowing outline (Tools/make_outline.py) stays, gently pulsing, so the
+        /// station is still easy to find and tap; the picture comes back when it is free.
+        /// </summary>
+        private static void Ghost(GameObject prop, bool on, Sprite outlineSprite)
         {
             var image = prop.GetComponent<Image>();
-            var outline = prop.GetComponent<Outline>() ?? prop.AddComponent<Outline>();
-            outline.effectColor = new Color(1f, 0.85f, 0.35f, 0.85f);
-            outline.effectDistance = new Vector2(3f, -3f);
-            outline.useGraphicAlpha = false;
-            if (outline.enabled == on && image.color.a < 1f == on)
+            var glow = prop.transform.Find("Outline")?.GetComponent<Image>();
+            if (glow == null && outlineSprite != null)
+            {
+                glow = Ui.Panel(prop.transform, "Outline", Color.white);
+                glow.sprite = outlineSprite;
+                glow.preserveAspect = true;
+                glow.rectTransform.Fill();
+                glow.gameObject.SetActive(false);
+            }
+            if (glow == null || glow.gameObject.activeSelf == on)
                 return;
-            outline.enabled = on;
-            image.DOKill();
-            image.color = new Color(1f, 1f, 1f, on ? 0.3f : 1f);
+            glow.gameObject.SetActive(on);
+            image.color = new Color(1f, 1f, 1f, on ? 0f : 1f);
+            glow.DOKill();
             if (on)
-                image.DOFade(0.5f, 0.8f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo).SetLink(prop);
+            {
+                glow.color = new Color(1f, 1f, 1f, 0.55f);
+                glow.DOFade(1f, 0.8f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo).SetLink(glow.gameObject);
+            }
         }
 
         /// <summary>
