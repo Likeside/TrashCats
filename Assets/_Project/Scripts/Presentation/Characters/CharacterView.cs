@@ -101,7 +101,7 @@ namespace TrashCats.Presentation.Characters
                 _visual.DORotate(new Vector3(0, 0, leftSide ? 80 : -80), 0.4f / speed).SetLink(Root.gameObject);
             }
 
-            _renderer.DOFade(0.35f, 0.6f / speed).SetLink(Root.gameObject);
+            // the knocked-out fighter stays fully visible (no fading out)
         }
 
         public void Destroy()

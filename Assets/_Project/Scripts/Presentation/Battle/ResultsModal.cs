@@ -73,7 +73,7 @@ namespace TrashCats.Presentation.Battle
                 var (chipFood, chipJunk) = TerritoryProgress.Reward(territory, first);
                 var chips = new System.Collections.Generic.List<(string Icon, string Text)> { ("food", "+" + chipFood), ("junk", "+" + chipJunk) };
                 if (first) chips.Add(("flag", ""));
-                if (first && territory.RecruitCat is CatId newCat && !world.TryGetCat(newCat, out _)) chips.Add(("newcat", Texts.CatName(newCat)));
+                if (first && territory.RecruitCat is CatId newCat && !world.TryGetCat(newCat, out _)) chips.Add((Texts.NewCatIcon(config.GetCat(newCat)), Texts.CatName(newCat)));
                 foreach (var (iconKey, text) in chips)
                 {
                     // chip = icon (90 px) + its number, laid out side by side

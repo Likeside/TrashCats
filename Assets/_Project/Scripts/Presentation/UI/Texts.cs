@@ -211,6 +211,10 @@ namespace TrashCats.Presentation.UI
             _ => "endurance",
         };
 
+        /// <summary>"New cat" icon with that cat's face (icon_newcat_&lt;viewkey&gt;), else the generic one.</summary>
+        public static string NewCatIcon(CatDefinition cat) =>
+            cat.ViewKey != null && Ui.Skin?.Icon("newcat_" + cat.ViewKey) != null ? "newcat_" + cat.ViewKey : "newcat";
+
         /// <summary>Skin icon of what an activity yields (food, junk, an attribute, energy).</summary>
         public static string OutcomeIcon(ActivityDefinition activity) => activity.Kind switch
         {
