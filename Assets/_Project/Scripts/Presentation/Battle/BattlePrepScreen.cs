@@ -232,20 +232,40 @@ namespace TrashCats.Presentation.Battle
             Info.Size(row.Image, 310, 200);
             var card = row.Rect;
             var avatar = Avatar(card, cat, size: 96f, top: true);
-            // a tired cat: only the card's backing is grey, the avatar and the texts stay as they are
+            // a tired cat: only the card's backing is grey, the avatar stays as it is, the texts are dark on it
             var name = Ui.Label(card, Texts.CatName(cat.Id), 28, TextAnchor.MiddleLeft, Palette.Paper, heading: true);
             name.rectTransform.Place(new Vector2(0, 1), Vector2.one, new Vector2(132, -70), new Vector2(-14, -18));
-            name.Outlined();
+            Readable(name, tired);
             var energy = Ui.Bar(card, "Energy", Palette.Energy, "energy");
             energy.Rect.Place(new Vector2(0, 1), Vector2.one, new Vector2(176, -112), new Vector2(-18, -82));
             energy.Set(cat.Energy / (float)config.Needs.Max, cat.Energy.ToString());
             var status = Info.Row(card, "Status", 6f, TextAnchor.MiddleLeft);
             status.Place(Vector2.zero, new Vector2(1, 0), new Vector2(20, 14), new Vector2(-14, 74));
             if (tired) Info.Icon(status, "sleep", 34f);
-            var text = Info.Text(status, tired ? reason : Loc.T("battle_prep_screen.22"), 22, Palette.Paper);
+            var text = Info.Text(status, tired ? reason : Loc.T("battle_prep_screen.22"), 21, Palette.Paper);
             text.textWrappingMode = TextWrappingModes.Normal;
-            Info.Size(text, 250, 56);
-            text.Outlined();
+            Info.Size(text, 236, 56);
+            text.enableAutoSizing = true; // two lines inside the card
+            text.fontSizeMax = 21;
+            text.fontSizeMin = 15;
+            Readable(text, tired);
+        }
+
+        /// <summary>
+        /// White outlined lettering on a coloured card; on the pale grey card of a tired cat it washed out, so there the
+        /// text is plain dark ink without the outline.
+        /// </summary>
+        private static void Readable(TMP_Text label, bool onGrey)
+        {
+            if (!onGrey)
+            {
+                label.Outlined();
+                return;
+            }
+            if (label.font != null) label.fontSharedMaterial = label.font.material;
+            label.outlineWidth = 0f;
+            label.color = Palette.Hex("#2A2118");
+            label.fontStyle = FontStyles.Bold;
         }
 
         /// <summary>A fighter card with a single thin frame (no inner line); content is padded from that frame.</summary>
