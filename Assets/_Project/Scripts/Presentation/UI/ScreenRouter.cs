@@ -32,9 +32,10 @@ namespace TrashCats.Presentation.UI
             _nav = navRoot.gameObject;
             Ui.Card(navRoot, "NavBack", CardStyle.Tin).rectTransform.Fill();
             _hideoutTab = Ui.Button(navRoot, "Tab_Hideout", Loc.T("screen_router.01"), Palette.Primary, () => Show(ScreenId.Hideout), 36);
-            _hideoutTab.Rect.Place(Vector2.zero, new Vector2(0.5f, 1), new Vector2(20, 15), new Vector2(-10, -15));
+            // the tabs sit inside the tin panel's frame (they stuck out over it)
+            _hideoutTab.Rect.Place(Vector2.zero, new Vector2(0.5f, 1), new Vector2(26, 30), new Vector2(-8, -30));
             _mapTab = Ui.Button(navRoot, "Tab_Map", Loc.T("screen_router.02"), Palette.Disabled, () => Show(ScreenId.Map), 36);
-            _mapTab.Rect.Place(new Vector2(0.5f, 0), Vector2.one, new Vector2(10, 15), new Vector2(-20, -15));
+            _mapTab.Rect.Place(new Vector2(0.5f, 0), Vector2.one, new Vector2(8, 30), new Vector2(-26, -30));
             AddIcon(_hideoutTab, "home");
             AddIcon(_mapTab, "map");
         }

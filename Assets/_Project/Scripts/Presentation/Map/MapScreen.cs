@@ -22,7 +22,7 @@ namespace TrashCats.Presentation.Map
         private const float Vignette = 260f;
 
         /// <summary>Bottom navigation height (the path stays above it).</summary>
-        private const float NavHeight = 130f;
+        private const float NavHeight = Hideout.HideoutScreen.NavHeight;
 
         private readonly GameSession _session;
         private readonly Action<TerritoryId> _onOpen;
