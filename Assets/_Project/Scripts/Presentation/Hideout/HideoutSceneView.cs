@@ -170,7 +170,11 @@ namespace TrashCats.Presentation.Hideout
                     }
                 }
                 if (activity.Kind == ActivityKind.Rummage)
+                {
                     _dumpster = box.rectTransform;
+                    box.rectTransform.offsetMin += new Vector2(HideoutLayout.DumpsterShift, 0f);
+                    box.rectTransform.offsetMax += new Vector2(HideoutLayout.DumpsterShift, 0f);
+                }
                 if (activity.Kind == ActivityKind.Train && activity.TrainedAttribute == AttributeType.Endurance)
                     _ropeProp = box.transform.Find("Prop")?.gameObject;
                 if (scavenge)
@@ -561,7 +565,8 @@ namespace TrashCats.Presentation.Hideout
             var from = new Vector2(Mathf.Lerp(_dumpster.anchorMin.x, _dumpster.anchorMax.x, UnityEngine.Random.Range(0.25f, 0.7f)), _dumpster.anchorMax.y - 0.03f);
             rt.anchorMin = rt.anchorMax = from;
             rt.sizeDelta = Vector2.one * UnityEngine.Random.Range(40f, 60f);
-            var dx = UnityEngine.Random.Range(-90f, 50f);
+            rt.anchoredPosition = new Vector2(HideoutLayout.DumpsterShift, 0f);
+            var dx = HideoutLayout.DumpsterShift + UnityEngine.Random.Range(-90f, 50f);
             var duration = UnityEngine.Random.Range(0.6f, 0.8f);
             DOTween.Sequence()
                 .Append(rt.DOAnchorPosX(dx, duration).SetEase(Ease.Linear))
