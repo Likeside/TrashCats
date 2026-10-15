@@ -14,7 +14,7 @@ namespace TrashCats.Presentation.Hideout
     public sealed class HideoutScreen : IDisposable
     {
         public const float HudHeight = 110f;
-        public const float NavHeight = 130f;
+        public const float NavHeight = 160f;
         private const float PanelHeight = 430f + CatPanelView.ExtraHeight;
 
         private readonly HudView _hud;
