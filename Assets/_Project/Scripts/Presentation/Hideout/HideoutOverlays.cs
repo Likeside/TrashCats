@@ -67,7 +67,9 @@ namespace TrashCats.Presentation.Hideout
             plate.pixelsPerUnitMultiplier = 3f;
             plate.rectTransform.Place(new Vector2(0.3f, 0.08f), new Vector2(1f, 0.92f));
             var picture = Ui.Icon(block, icon);
-            picture.rectTransform.Place(new Vector2(0f, 0f), new Vector2(0.36f, 1f));
+            // set by hand in the editor: a bit smaller and nudged right, so it stays on the bar
+            picture.rectTransform.Place(new Vector2(0f, 0f), new Vector2(0.36f, 1f), new Vector2(41.5f, 2f), new Vector2(41.5f, 2f));
+            picture.rectTransform.localScale = new Vector3(0.85f, 0.85f, 1f);
             var label = Ui.Label(plate.transform, "", 46, TextAnchor.MiddleCenter, Palette.Paper, heading: true);
             label.rectTransform.Fill(4);
             return label;
