@@ -192,6 +192,8 @@ namespace TrashCats.Presentation.Battle
                 case ActionPerformed action: // until the frame of the attack clip where the blow lands
                     return _views[(int)action.Side]?.StrikeDelay(_session.Config.GetSkill(action.SkillId)) ?? 0.3f;
                 case HitResolved _:
+                    // the knock-out plays right on the blow that causes it
+                    if (_next < _log.Count && _log[_next] is FighterKnockedOut) return 0f;
                     var nextIsHit = _next < _log.Count && _log[_next] is HitResolved;
                     return nextIsHit ? 0.28f : 0.6f;
                 case FighterKnockedOut _: return 0.9f;
@@ -265,7 +267,8 @@ namespace TrashCats.Presentation.Battle
                         var text = hit.Hit ? $"-{hit.Damage}" : Loc.T("combat_screen.02");
                         var color = hit.Hit ? (hit.Reduced ? Palette.Disabled : Color.white) : Palette.Secondary;
                         FloatAt(Spots[target] + new Vector3(0, 4.6f + hit.HitIndex * 0.6f, 0), text, color, hit.Hit && hit.Damage >= 20 ? 64 : 52);
-                        if (hit.Hit) _views[target]?.PlayHit(_speedFactor);
+                        // the fatal blow goes straight into the knock-out (a hit reaction would delay it and then reset to idle)
+                        if (hit.Hit && hit.TargetHpAfter > 0) _views[target]?.PlayHit(_speedFactor);
                         else _views[target]?.PlayDodge(target == 0, _speedFactor);
                         var heavy = hit.Hit && hit.Damage >= 20;
                         Sound(!hit.Hit ? "cmb_miss" : heavy ? "cmb_hit_heavy" : "cmb_hit");
