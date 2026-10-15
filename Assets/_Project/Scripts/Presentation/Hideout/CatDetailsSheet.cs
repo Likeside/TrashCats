@@ -11,30 +11,42 @@ using UnityEngine.UI;
 namespace TrashCats.Presentation.Hideout
 {
     /// <summary>
-    /// Cat details (Docs/GDD/UI_UX.md §5): attributes as icon + level + XP bar, combat stats as icon chips, the skill
-    /// slots with the equipped skills' icons, and the skill list with icons, costs and the progress towards locked ones.
+    /// Cat details (Docs/GDD/UI_UX.md §5). A header with the avatar, name, aptitude plate and a close cross; then three
+    /// framed blocks: attributes (icon, level, XP bar), combat stats with the attribute each one comes from, and skills —
+    /// the slots as sockets (numbered; empty ones say so), the always-on basic hit, a hint, the skills the cat can take
+    /// (an equipped one carries its slot number) and, under a divider, the locked ones in compact rows with their progress.
     /// </summary>
     public sealed class CatDetailsSheet
     {
+        private const float Side = 50f;
+        private const float SlotHeight = 120f;
+        private const float RowHeight = 124f;
+        private const float LockedRowHeight = 78f;
+
         private readonly GameSession _session;
         private readonly OverlayStack _overlays;
         private readonly Action<CommandResult> _onResult;
+        private readonly Characters.CharacterViewFactory _art;
         private readonly GameObject _root;
+        private readonly Image _avatar;
         private readonly TMP_Text _header;
         private readonly RectTransform _aptitude;
         private readonly RectTransform _attributes;
         private readonly RectTransform _combat;
         private readonly RectTransform _slots;
+        private readonly RectTransform _innate;
         private readonly RectTransform _skills;
         private CatId? _catId;
 
         public bool IsOpen => _catId != null;
 
-        public CatDetailsSheet(GameSession session, RectTransform parent, OverlayStack overlays, Action<CommandResult> onResult)
+        public CatDetailsSheet(GameSession session, RectTransform parent, OverlayStack overlays, Action<CommandResult> onResult,
+            Characters.CharacterViewFactory art = null)
         {
             _session = session;
             _overlays = overlays;
             _onResult = onResult;
+            _art = art;
 
             var dim = Ui.Panel(parent, "CatDetails", Palette.Dim, raycast: true);
             dim.rectTransform.Fill();
@@ -43,22 +55,72 @@ namespace TrashCats.Presentation.Hideout
             var panel = Ui.Card(dim.transform, "Sheet", CardStyle.Paper, raycast: true);
             panel.rectTransform.Place(Vector2.zero, new Vector2(1, 0.88f));
 
+            // header: avatar, name, aptitude plate, close cross
+            _avatar = Ui.Panel(panel.transform, "Avatar", Color.white);
+            _avatar.preserveAspect = true;
+            _avatar.rectTransform.Place(new Vector2(0, 1), new Vector2(0, 1), new Vector2(Side, -206), new Vector2(Side + 160, -46));
             _header = Ui.Label(panel.transform, "", 50, TextAnchor.MiddleLeft, Palette.Ink, heading: true);
-            _header.rectTransform.Place(new Vector2(0, 1), new Vector2(0.5f, 1), new Vector2(60, -120), new Vector2(0, -50));
-            _aptitude = Info.Row(panel.transform, "Aptitude", 8f, TextAnchor.MiddleRight);
-            _aptitude.Place(new Vector2(0.5f, 1), Vector2.one, new Vector2(0, -120), new Vector2(-80, -50));
+            _header.rectTransform.Place(new Vector2(0, 1), Vector2.one, new Vector2(Side + 186, -112), new Vector2(-150, -46));
+            var plate = Ui.Panel(panel.transform, "AptitudePlate", Ui.Skin?.barFrame != null ? Color.white : new Color(0, 0, 0, 0.5f));
+            plate.sprite = Ui.Skin?.barFrame;
+            plate.type = Image.Type.Sliced;
+            plate.pixelsPerUnitMultiplier = 2.4f;
+            plate.rectTransform.Place(new Vector2(0, 1), Vector2.one, new Vector2(Side + 180, -196), new Vector2(-150, -124));
+            _aptitude = Info.Row(plate.transform, "Aptitude", 10f, TextAnchor.MiddleLeft);
+            _aptitude.Place(Vector2.zero, Vector2.one, new Vector2(24, 6), new Vector2(-20, -6));
 
-            _attributes = Info.Column(panel.transform, "Attributes", 6f);
-            _attributes.Place(new Vector2(0, 1), Vector2.one, new Vector2(60, -380), new Vector2(-60, -130));
-            _combat = Info.Row(panel.transform, "Combat", 36f, TextAnchor.MiddleLeft);
-            _combat.Place(new Vector2(0, 1), Vector2.one, new Vector2(60, -460), new Vector2(-60, -390));
-            _slots = Info.Row(panel.transform, "Slots", 16f, TextAnchor.MiddleLeft);
-            _slots.Place(new Vector2(0, 1), Vector2.one, new Vector2(60, -585), new Vector2(-60, -475));
-            _skills = Ui.Rect(panel.transform, "Skills").Place(Vector2.zero, Vector2.one, new Vector2(30, 150), new Vector2(-30, -600));
+            var close = Ui.Button(panel.transform, "Details_Close", "×", Palette.Disabled, Close, 60);
+            close.Rect.Place(new Vector2(1, 1), new Vector2(1, 1), new Vector2(-136, -146), new Vector2(-40, -50));
+            close.Text.rectTransform.Fill(4);
 
-            var close = Ui.Button(panel.transform, "Details_Close", Loc.T("cat_details_sheet.01"), Palette.Disabled, Close, 36);
-            close.Rect.Place(new Vector2(0.3f, 0), new Vector2(0.7f, 0), new Vector2(0, 30), new Vector2(0, 130));
+            // attributes
+            var attributes = Block(panel.transform, "AttributesBlock", Loc.T("cat_details_sheet.18"), -222, -486);
+            _attributes = Info.Column(attributes, "Attributes", 6f);
+            _attributes.Place(Vector2.zero, Vector2.one, new Vector2(30, 16), new Vector2(-30, -60));
+
+            // combat: what the attributes give in a fight
+            var combat = Block(panel.transform, "CombatBlock", Loc.T("cat_details_sheet.19"), -496, -676);
+            _combat = Info.Row(combat, "Combat", 10f, TextAnchor.MiddleCenter);
+            _combat.Place(Vector2.zero, Vector2.one, new Vector2(24, 14), new Vector2(-24, -58));
+            var layout = _combat.GetComponent<HorizontalLayoutGroup>();
+            layout.childForceExpandWidth = true;
+
+            // skills: sockets, the basic hit, a hint, the list
+            var skills = Block(panel.transform, "SkillsBlock", Loc.T("cat_details_sheet.20"), -686, 30, fromBottom: true);
+            _slots = Info.Row(skills, "Slots", 16f, TextAnchor.MiddleLeft);
+            _slots.Place(new Vector2(0, 1), Vector2.one, new Vector2(30, -60 - SlotHeight), new Vector2(-30, -60));
+            var slotsLayout = _slots.GetComponent<HorizontalLayoutGroup>();
+            slotsLayout.childForceExpandWidth = true;
+            _innate = Info.Row(skills, "Innate", 10f, TextAnchor.MiddleLeft);
+            _innate.Place(new Vector2(0, 1), Vector2.one, new Vector2(34, -60 - SlotHeight - 56), new Vector2(-30, -60 - SlotHeight - 8));
+            var hint = Ui.Label(skills, Loc.T("cat_details_sheet.21"), 24, TextAnchor.MiddleLeft, Palette.Ink, heading: false);
+            hint.rectTransform.Place(new Vector2(0, 1), Vector2.one, new Vector2(34, -60 - SlotHeight - 100), new Vector2(-30, -60 - SlotHeight - 58));
+            hint.enableAutoSizing = true;
+            hint.fontSizeMin = 18;
+            hint.fontSizeMax = 24;
+            _skills = Info.Column(skills, "Skills", 8f);
+            _skills.Place(Vector2.zero, Vector2.one, new Vector2(24, 20), new Vector2(-24, -60 - SlotHeight - 108));
+
             _root.SetActive(false);
+        }
+
+        /// <summary>A framed group with a title in its top left corner; returns the frame to fill.</summary>
+        private static RectTransform Block(Transform panel, string name, string title, float top, float bottom, bool fromBottom = false)
+        {
+            var frame = Ui.Panel(panel, name, Ui.Skin?.catCard != null ? Color.white : new Color(0, 0, 0, 0.06f));
+            if (Ui.Skin?.catCard != null)
+            {
+                frame.sprite = Ui.Skin.catCard;
+                frame.type = Image.Type.Sliced;
+                frame.pixelsPerUnitMultiplier = 2.2f;
+            }
+            if (fromBottom)
+                frame.rectTransform.Place(Vector2.zero, Vector2.one, new Vector2(Side - 20, bottom), new Vector2(-Side + 20, top));
+            else
+                frame.rectTransform.Place(new Vector2(0, 1), Vector2.one, new Vector2(Side - 20, bottom), new Vector2(-Side + 20, top));
+            var label = Ui.Label(frame.transform, title, 30, TextAnchor.MiddleLeft, Palette.Ink, heading: true);
+            label.rectTransform.Place(new Vector2(0, 1), Vector2.one, new Vector2(34, -58), new Vector2(-30, -14));
+            return frame.rectTransform;
         }
 
         public void Open(CatId catId)
@@ -77,10 +139,17 @@ namespace TrashCats.Presentation.Hideout
 
             var config = _session.Config;
             var id = _catId.Value;
+            var viewKey = config.GetCat(id).ViewKey;
+            var avatar = viewKey != null ? _art?.Avatar(viewKey) ?? _art?.Portrait(viewKey) : null;
+            _avatar.sprite = avatar;
+            _avatar.enabled = avatar != null;
             _header.text = Texts.CatName(id);
+
+            // aptitude: what it means, not just its name
             Clear(_aptitude);
-            Info.Text(_aptitude, Loc.T("cat_details_sheet.11"), 28, Palette.Ink, height: 60);
-            Info.Chip(_aptitude, Texts.AttributeIcon(cat.Aptitude), Texts.Attribute(cat.Aptitude), 56f, 32, Palette.Ink);
+            Info.Icon(_aptitude, Texts.AttributeIcon(cat.Aptitude), 48f);
+            Info.Text(_aptitude, Loc.T("cat_details_sheet.24", Texts.Attribute(cat.Aptitude), config.Progression.AptitudeBonusPct), 28, Palette.Paper)
+                .Outlined();
 
             // attributes: icon, name, level, XP towards the next level on a bar
             Clear(_attributes);
@@ -90,98 +159,156 @@ namespace TrashCats.Presentation.Hideout
                 var max = level >= config.Progression.MaxLevel;
                 var next = max ? 1 : config.Progression.XpToNext(level);
                 var xp = max ? next : cat.GetXp(a);
-                Info.AttributeRow(_attributes, Texts.AttributeIcon(a), Texts.Attribute(a), level, (float)xp / next, max ? "MAX" : $"{xp}/{next}", a == cat.Aptitude);
+                Info.AttributeRow(_attributes, Texts.AttributeIcon(a), Texts.Attribute(a), level, (float)xp / next, max ? "MAX" : $"{xp}/{next}", a == cat.Aptitude, 62f);
             }
 
+            // combat stats, each with the attribute it grows from
             var c = config.Combat;
+            var strength = cat.GetLevel(AttributeType.Strength);
+            var technique = cat.GetLevel(AttributeType.Technique);
             var endurance = cat.GetLevel(AttributeType.Endurance);
+            var interval = CombatFormulas.IntervalTicks(c, technique) * c.TickMs / 1000f;
             Clear(_combat);
-            Info.Chip(_combat, "hp", $"HP {CombatFormulas.MaxHp(c, endurance)}", 60f, 34, Palette.Ink);
-            Info.Chip(_combat, "paw", Loc.T("cat_details_sheet.12", CombatFormulas.MaxGrit(c, endurance)), 60f, 34, Palette.Ink);
-            Info.Chip(_combat, "skill_scratch", Loc.T("cat_details_sheet.13", CombatFormulas.BaseDamage(c, cat.GetLevel(AttributeType.Strength))), 60f, 34, Palette.Ink);
+            CombatStat("hp", $"HP {CombatFormulas.MaxHp(c, endurance)}", AttributeType.Endurance, endurance);
+            CombatStat("paw", Loc.T("cat_details_sheet.12", CombatFormulas.MaxGrit(c, endurance)), AttributeType.Endurance, endurance);
+            CombatStat("skill_scratch", Loc.T("cat_details_sheet.13", CombatFormulas.BaseDamage(c, strength)), AttributeType.Strength, strength);
+            CombatStat("speed", Loc.T("cat_details_sheet.26", interval.ToString("0.#")), AttributeType.Technique, technique);
 
-            // the slots: the equipped skill's icon and name, or an empty frame; the scratch is always there
+            // the slots as sockets
             var equipped = Enumerable.Range(0, Cat.SkillSlotCount).Select(cat.GetSkillInSlot).ToList();
             Clear(_slots);
             for (var i = 0; i < equipped.Count; i++)
-            {
-                var slot = Ui.Panel(_slots, "Slot" + i, equipped[i] != null ? Palette.Primary : new Color(0, 0, 0, 0.12f));
-                Info.Size(slot, 250, 100);
-                var row = Info.Row(slot.transform, "Content", 10f, TextAnchor.MiddleLeft);
-                row.Fill(10);
-                if (equipped[i] is SkillId skill)
-                {
-                    Info.Icon(row, Texts.SkillIcon(skill), 70f);
-                    Info.Text(row, Texts.SkillName(skill), 26, Palette.Paper).Outlined();
-                }
-                else
-                    Info.Text(row, Loc.T("cat_details_sheet.14", i + 1), 24, Palette.Ink, heading: false);
-            }
+                Slot(i, equipped[i]);
+            Clear(_innate);
             var innate = config.Skills.FirstOrDefault(s => s.IsInnate);
             if (innate != null)
             {
-                var always = Info.Row(_slots, "Innate", 6f, TextAnchor.MiddleLeft);
-                Info.Size(always, -1, 100);
-                Info.Icon(always, Texts.SkillIcon(innate.Id), 60f);
-                Info.Text(always, Loc.T("cat_details_sheet.15"), 26, Palette.Ink);
+                Info.Icon(_innate, Texts.SkillIcon(innate.Id), 40f);
+                Info.Text(_innate, Loc.T("cat_details_sheet.25", Texts.SkillName(innate.Id)), 24, Palette.Ink, heading: false);
             }
 
-            for (var i = _skills.childCount - 1; i >= 0; i--)
-                UnityEngine.Object.Destroy(_skills.GetChild(i).gameObject);
+            // the list: what can be taken, then the locked ones under a divider
+            Clear(_skills);
             var skills = config.Skills.Where(s => !s.IsInnate).ToList();
-            for (var i = 0; i < skills.Count; i++)
-                SkillRow(cat, skills[i], equipped.IndexOf(skills[i].Id), i, skills.Count);
+            var open = skills.Where(s => CatRules.IsSkillUnlocked(cat, s)).ToList();
+            var locked = skills.Except(open).ToList();
+            foreach (var skill in open)
+                SkillRow(skill, equipped.IndexOf(skill.Id));
+            if (locked.Count > 0)
+            {
+                var divider = Info.Text(_skills, Loc.T("cat_details_sheet.22"), 26, Palette.Ink, height: 40f);
+                divider.alignment = TextAlignmentOptions.MidlineLeft;
+                foreach (var skill in locked)
+                    LockedRow(cat, skill);
+            }
         }
 
-        /// <summary>
-        /// One skill: icon, name and state, what it does, its grit cost; a locked one shows the required attribute's
-        /// progress on a bar instead of being greyed out without a hint.
-        /// </summary>
-        private void SkillRow(IReadOnlyCat cat, SkillDefinition skill, int slot, int index, int count)
+        /// <summary>One combat stat: icon and value, and under it the attribute it comes from.</summary>
+        private void CombatStat(string icon, string value, AttributeType source, int level)
         {
-            var unlocked = CatRules.IsSkillUnlocked(cat, skill);
-            var color = !unlocked ? Palette.Panel : slot >= 0 ? Palette.Primary : Palette.Secondary;
+            var cell = Info.Column(_combat, "Stat_" + icon, 2f);
+            cell.GetComponent<VerticalLayoutGroup>().childAlignment = TextAnchor.MiddleCenter;
+            var top = Info.Row(cell, "Value", 6f, TextAnchor.MiddleCenter);
+            Info.Size(top, -1, 54);
+            Info.Chip(top, icon, value, 48f, 30, Palette.Ink);
+            var from = Info.Row(cell, "From", 4f, TextAnchor.MiddleCenter);
+            Info.Size(from, -1, 36);
+            Info.Text(from, "←", 22, Palette.Ink, heading: false);
+            Info.Chip(from, Texts.AttributeIcon(source), $"{Texts.Attribute(source)} {level}", 32f, 22, Palette.Ink, heading: false);
+        }
+
+        /// <summary>A socket: dark frame with its number; the equipped skill (tap to take it off) or "+ Пусто".</summary>
+        private void Slot(int index, SkillId? skill)
+        {
+            var socket = Ui.Panel(_slots, "Slot" + index, Ui.Skin?.barFrame != null ? Color.white : Palette.PanelDark, raycast: skill != null);
+            socket.sprite = Ui.Skin?.barFrame;
+            socket.type = Image.Type.Sliced;
+            socket.pixelsPerUnitMultiplier = 2f;
+            if (skill == null) socket.color = new Color(1f, 1f, 1f, 0.45f);
+            Info.Size(socket, -1, SlotHeight);
+            var content = Info.Row(socket.transform, "Content", 8f, TextAnchor.MiddleCenter);
+            content.Place(Vector2.zero, Vector2.one, new Vector2(46, 10), new Vector2(-16, -10));
+            if (skill is SkillId taken)
+            {
+                Info.Icon(content, Texts.SkillIcon(taken), 66f);
+                var name = Info.Text(content, Texts.SkillName(taken), 24, Palette.Paper);
+                name.Outlined();
+                name.textWrappingMode = TextWrappingModes.Normal;
+                Info.Size(name, 120, 90);
+                socket.gameObject.AddComponent<Button>().onClick.AddListener(() => Toggle(taken));
+            }
+            else
+                Info.Text(content, "+ " + Loc.T("cat_details_sheet.23"), 28, Palette.Paper).Outlined();
+            Number(socket.rectTransform, index, skill != null);
+        }
+
+        /// <summary>Slot number in a small disc in the top left corner (the same disc marks the skill in the list).</summary>
+        private static void Number(RectTransform parent, int index, bool taken)
+        {
+            var disc = Ui.Panel(parent, "Number", taken ? Palette.Primary : Palette.Disabled);
+            disc.sprite = Ui.Skin?.circle;
+            disc.rectTransform.Place(new Vector2(0, 1), new Vector2(0, 1), new Vector2(-8, -36), new Vector2(36, 8));
+            var label = Ui.Label(disc.transform, (index + 1).ToString(), 26, TextAnchor.MiddleCenter, Palette.Ink, heading: true);
+            label.rectTransform.Fill();
+        }
+
+        /// <summary>A skill the cat can take: icon, name, what it does, grit cost; an equipped one is yellow with its slot number.</summary>
+        private void SkillRow(SkillDefinition skill, int slot)
+        {
             var skillId = skill.Id;
-            var row = Ui.Button(_skills, "Skill_" + skill.Id, "", color, () => Toggle(skillId), 30);
-            row.Rect.Place(new Vector2(0, 1f - (index + 1f) / count), new Vector2(1, 1f - (float)index / count), new Vector2(0, 5), new Vector2(0, -5));
-            row.Interactable = unlocked;
+            var row = Ui.Button(_skills, "Skill_" + skill.Id, "", slot >= 0 ? Palette.Primary : Palette.Secondary, () => Toggle(skillId), 30);
+            Info.Size(row.Image, -1, RowHeight);
             row.Text.gameObject.SetActive(false);
 
             var icon = Ui.Icon(row.Rect, Texts.SkillIcon(skill.Id));
-            if (icon != null)
-            {
-                icon.rectTransform.Place(new Vector2(0, 0.12f), new Vector2(0, 0.88f), new Vector2(30, 0), new Vector2(150, 0));
-                if (!unlocked) icon.color = new Color(1, 1, 1, 0.45f);
-            }
+            icon?.rectTransform.Place(new Vector2(0, 0.12f), new Vector2(0, 0.88f), new Vector2(34, 0), new Vector2(144, 0));
+            if (slot >= 0)
+                Number(row.Rect, slot, true);
 
-            var state = !unlocked ? "" : slot >= 0 ? Loc.T("cat_details_sheet.16", slot + 1) : Loc.T("cat_details_sheet.09");
-            var title = Ui.Label(row.Rect, $"{Texts.SkillName(skill.Id)}  <size=24>{state}</size>", 34, TextAnchor.MiddleLeft, Palette.Paper, heading: true);
-            title.rectTransform.Place(new Vector2(0, 0.55f), new Vector2(1, 1), new Vector2(170, 0), new Vector2(-200, -10));
-            var description = Ui.Label(row.Rect, Texts.SkillDescription(skill), 26, TextAnchor.MiddleLeft, Palette.Paper, heading: true);
-            description.rectTransform.Place(new Vector2(0, 0.1f), new Vector2(1, 0.55f), new Vector2(170, 0), new Vector2(-200, 0));
-
-            // grit cost on the right
-            var cost = Info.Row(row.Rect, "Cost", 4f, TextAnchor.MiddleRight);
-            cost.Place(new Vector2(1, 0.5f), new Vector2(1, 0.5f), new Vector2(-190, -40), new Vector2(-24, 40));
-            Info.Chip(cost, "paw", skill.GritCost.ToString(), 56f, 32, Palette.Paper);
-
-            if (!unlocked)
-            {
-                // the attribute the skill waits for, as progress: "Техника 3/7"
-                var have = cat.GetLevel(skill.UnlockAttribute);
-                var need = Info.Row(row.Rect, "Need", 8f, TextAnchor.MiddleLeft);
-                need.Place(new Vector2(0, 0.1f), new Vector2(1, 0.5f), new Vector2(170, 0), new Vector2(-200, 0));
-                description.gameObject.SetActive(false);
-                Info.Icon(need, "lock", 44f);
-                Info.Icon(need, Texts.AttributeIcon(skill.UnlockAttribute), 44f);
-                var bar = Ui.Bar(need, "Progress", Palette.Progress);
-                Info.Size(bar.Rect, 260, 40);
-                bar.Set((float)have / Mathf.Max(1, skill.UnlockLevel), $"{have}/{skill.UnlockLevel}");
-                Info.Text(need, Loc.T("cat_details_sheet.17", Texts.Attribute(skill.UnlockAttribute), skill.UnlockLevel), 24, Palette.Paper);
-            }
-            // light text with an ink outline reads on every row colour (taken, free, locked)
+            var title = Ui.Label(row.Rect, Texts.SkillName(skill.Id), 32, TextAnchor.MiddleLeft, Palette.Paper, heading: true);
+            title.rectTransform.Place(new Vector2(0, 0.52f), new Vector2(1, 1), new Vector2(166, 0), new Vector2(-170, -12));
+            var description = Ui.Label(row.Rect, Texts.SkillDescription(skill), 24, TextAnchor.MiddleLeft, Palette.Paper, heading: true);
+            description.rectTransform.Place(new Vector2(0, 0), new Vector2(1, 0.52f), new Vector2(166, 14), new Vector2(-170, 0));
+            description.enableAutoSizing = true;
+            description.fontSizeMin = 18;
+            description.fontSizeMax = 24;
+            Cost(row.Rect, skill);
             foreach (var label in row.Rect.GetComponentsInChildren<TMP_Text>(true))
                 label.Outlined();
+        }
+
+        /// <summary>A locked skill in one compact line: faded icon, name, lock, the attribute's progress, grit cost.</summary>
+        private void LockedRow(IReadOnlyCat cat, SkillDefinition skill)
+        {
+            var row = Ui.Panel(_skills, "Skill_" + skill.Id, Ui.Skin?.button != null ? Palette.Disabled : Palette.Panel);
+            if (Ui.Skin?.button != null)
+            {
+                row.sprite = Ui.Skin.button;
+                row.type = Image.Type.Sliced;
+                row.gameObject.AddComponent<SliceFit>();
+            }
+            Info.Size(row, -1, LockedRowHeight);
+            var line = Info.Row(row.transform, "Line", 10f, TextAnchor.MiddleLeft);
+            line.Place(Vector2.zero, Vector2.one, new Vector2(30, 6), new Vector2(-150, -6));
+            var icon = Info.Icon(line, Texts.SkillIcon(skill.Id), 56f);
+            if (icon != null) icon.color = new Color(1f, 1f, 1f, 0.5f);
+            Info.Text(line, Texts.SkillName(skill.Id), 26, Palette.Paper).Outlined();
+            Info.Icon(line, "lock", 36f);
+            Info.Icon(line, Texts.AttributeIcon(skill.UnlockAttribute), 36f);
+            var have = cat.GetLevel(skill.UnlockAttribute);
+            var bar = Ui.Bar(line, "Progress", Palette.Progress);
+            Info.Size(bar.Rect, 150, 34);
+            bar.Set((float)have / Mathf.Max(1, skill.UnlockLevel), $"{have}/{skill.UnlockLevel}");
+            Cost(row.rectTransform, skill);
+            foreach (var label in row.GetComponentsInChildren<TMP_Text>(true))
+                label.Outlined();
+        }
+
+        private static void Cost(RectTransform row, SkillDefinition skill)
+        {
+            var cost = Info.Row(row, "Cost", 4f, TextAnchor.MiddleRight);
+            cost.Place(new Vector2(1, 0.5f), new Vector2(1, 0.5f), new Vector2(-150, -36), new Vector2(-30, 36));
+            Info.Chip(cost, "paw", skill.GritCost.ToString(), 50f, 30, Palette.Paper);
         }
 
         private static void Clear(RectTransform rect)
@@ -202,12 +329,12 @@ namespace TrashCats.Presentation.Hideout
             else
             {
                 var free = slots.IndexOf(null);
-                result = free >= 0 ? _session.EquipSkill(_catId.Value, free, skill) : CommandResult.Fail(CommandError.AlreadyEquipped);
                 if (free < 0)
                 {
                     _onResult(CommandResult.Fail(CommandError.InvalidSlot));
                     return;
                 }
+                result = _session.EquipSkill(_catId.Value, free, skill);
             }
 
             _onResult(result);
