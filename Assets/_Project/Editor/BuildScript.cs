@@ -42,6 +42,14 @@ namespace TrashCats.Editor
                 BuildOptions.None, new[] { AnimationTestSceneBuilder.ScenePath });
         }
 
+        [MenuItem("TrashCats/Build/Linux All Animations")]
+        public static void BuildLinuxAllAnimations()
+        {
+            AllAnimationsSceneBuilder.Build();
+            Build(BuildTarget.StandaloneLinux64, Path.Combine("Builds", "LinuxAllAnimations", "TrashCatsAllAnimations.x86_64"),
+                BuildOptions.None, new[] { AllAnimationsSceneBuilder.ScenePath });
+        }
+
         private static void Build(BuildTarget target, string path, BuildOptions options, string[] scenes = null)
         {
             Directory.CreateDirectory(Path.GetDirectoryName(path) ?? ".");
