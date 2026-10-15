@@ -232,7 +232,7 @@ namespace TrashCats.Presentation.Battle
             Info.Size(row.Image, 310, 200);
             var card = row.Rect;
             var avatar = Avatar(card, cat, size: 96f, top: true);
-            if (tired && avatar != null) avatar.color = new Color(1f, 1f, 1f, 0.5f);
+            // a tired cat: only the card's backing is grey, the avatar and the texts stay as they are
             var name = Ui.Label(card, Texts.CatName(cat.Id), 28, TextAnchor.MiddleLeft, Palette.Paper, heading: true);
             name.rectTransform.Place(new Vector2(0, 1), Vector2.one, new Vector2(132, -70), new Vector2(-14, -18));
             name.Outlined();
