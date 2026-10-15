@@ -38,3 +38,4 @@
 | `UI/icon_skill_second_wind.png` | умение «Второе дыхание» (сердце с лапой и вихрем) | `Docs/ArtDirection/Generated/raw_icon_second_wind` |
 | `UI/cards_v4_whole` | карточки котов: окошки целиком (подбородки не срезаны), более широкие окошки сужены по бокам с сохранением рамки | `Tools/cut_card_portraits.py` |
 | `Props/prop_upg_mouse_outline_v1.png` | светящийся контур скакалки (станция занята) | `Tools/make_outline.py` |
+| `UI/card_plain_v1.png` | бумажная карточка с одной рамкой (panel_a без внутренней линии) | `Tools/make_plain_card.py` |

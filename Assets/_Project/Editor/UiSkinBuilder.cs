@@ -65,6 +65,7 @@ namespace TrashCats.Editor
             skin.paper = Sprite("panel_a") ?? Sprite("panel_paper");
             skin.tin = Sprite("hud_a") ?? Sprite("panel_tin");
             skin.catCard = Sprite("card_cat");
+            skin.plainCard = Sprite("card_plain");
             skin.barFrame = Sprite("hud_a") ?? Sprite("bar_frame");
             // the concept's bars are plain tracks with an icon beside them (Ui.Bar), not badge bars
             skin.badgeBars = new List<NamedSprite>();

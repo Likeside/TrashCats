@@ -25,6 +25,9 @@ namespace TrashCats.Presentation.Audio
             _library = library;
             var go = new GameObject("Audio");
             go.transform.SetParent(parent, false);
+            // the scenes are built from code and have no listener: without one nothing is heard (all sounds are 2D)
+            if (Object.FindAnyObjectByType<AudioListener>() == null)
+                go.AddComponent<AudioListener>();
             for (var i = 0; i < Voices; i++)
                 _voices[i] = go.AddComponent<AudioSource>();
             for (var i = 0; i < 2; i++)

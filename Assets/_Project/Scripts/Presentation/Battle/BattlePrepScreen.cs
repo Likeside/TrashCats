@@ -22,9 +22,12 @@ namespace TrashCats.Presentation.Battle
     public sealed class BattlePrepScreen
     {
         private const float CardHeight = 222f;
-        private const float OrderStrip = 72f;
-        private const float ChipIcon = 38f;
-        private const int ChipFont = 27;
+        private const float OrderStrip = 62f;
+        private const float ChipIcon = 34f;
+        private const int ChipFont = 26;
+        /// <summary>Inner padding of a fighter card from its (single) frame.</summary>
+        private const float Pad = 24f;
+        private const float AvatarSize = 112f;
 
         private readonly GameSession _session;
         private readonly Action _onBack;
@@ -143,7 +146,6 @@ namespace TrashCats.Presentation.Battle
             {
                 var e = enemies[i];
                 var card = Card(_enemies, "PrepEnemy" + i, CardStyle.Strip);
-                Number(card, i);
                 Picture(card, _art?.Portrait(e.ViewKey), new Color(0.27f, 0.22f, 0.2f), round: true);
                 Body(card, Texts.EnemyName(e.Id.Value), FighterSnapshot.FromEnemy(e), Palette.Ink);
             }
@@ -179,14 +181,25 @@ namespace TrashCats.Presentation.Battle
             background.raycastTarget = true;
             background.gameObject.AddComponent<Button>().onClick.AddListener(() => Remove(id));
             Avatar(card, cat);
-            Body(card, Texts.CatName(cat.Id), FighterSnapshot.FromCat(cat, _session.Config), Palette.Paper, rightGap: OrderStrip + 28);
+            Body(card, Texts.CatName(cat.Id), FighterSnapshot.FromCat(cat, _session.Config), Palette.Ink, rightGap: Pad + OrderStrip + 14);
 
-            // the order control on the right edge: big ▲, the cat's number, big ▼ (swap with the neighbour)
-            var strip = Ui.Rect(card, "Order").Place(new Vector2(1, 0), Vector2.one, new Vector2(-OrderStrip - 22, 22), new Vector2(-22, -22));
-            Arrow(strip, "Up_" + cat.Id, "▲", index > 0, () => Swap(index, index - 1)).Rect.Place(new Vector2(0, 0.64f), Vector2.one);
-            var number = Ui.Rect(strip, "Place").Place(new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(-28, -28), new Vector2(28, 28));
-            Number(number, index, centred: true);
-            Arrow(strip, "Down_" + cat.Id, "▼", index < _order.Count - 1, () => Swap(index, index + 1)).Rect.Place(Vector2.zero, new Vector2(1, 0.36f));
+            // the order control on the right edge, one dark plate: ▲ (if it can go up), the cat's number, ▼ (if it can go
+            // down); arrows that could not move the cat are not drawn
+            var plate = Ui.Panel(card, "Order", Palette.Ink);
+            if (Ui.Skin?.button != null)
+            {
+                plate.sprite = Ui.Skin.button;
+                plate.type = Image.Type.Sliced;
+                plate.pixelsPerUnitMultiplier = 3f;
+            }
+            plate.rectTransform.Place(new Vector2(1, 0), Vector2.one, new Vector2(-Pad - OrderStrip, Pad - 4), new Vector2(-Pad, -Pad + 4));
+            var label = Ui.Label(plate.transform, (index + 1).ToString(), 40, TextAnchor.MiddleCenter, Palette.Primary, heading: true);
+            label.rectTransform.Place(new Vector2(0, 0.33f), new Vector2(1, 0.67f));
+            label.Outlined();
+            if (index > 0)
+                Arrow(plate.rectTransform, "Up_" + cat.Id, "▲", () => Swap(index, index - 1)).Rect.Place(new Vector2(0, 0.67f), Vector2.one, new Vector2(5, 0), new Vector2(-5, -5));
+            if (index < _order.Count - 1)
+                Arrow(plate.rectTransform, "Down_" + cat.Id, "▼", () => Swap(index, index + 1)).Rect.Place(Vector2.zero, new Vector2(1, 0.33f), new Vector2(5, 5), new Vector2(-5, 0));
             if (cat.Activity.IsWorking)
                 Note(card, Loc.T("battle_prep_screen.19"));
         }
@@ -198,7 +211,6 @@ namespace TrashCats.Presentation.Battle
             slot.type = Image.Type.Sliced;
             slot.pixelsPerUnitMultiplier = 2f;
             Info.Size(slot, -1, CardHeight);
-            Number(slot.rectTransform, index);
             var label = Ui.Label(slot.transform, Loc.T("battle_prep_screen.20"), 26, TextAnchor.MiddleCenter, Palette.Paper);
             label.rectTransform.Fill(30);
             label.Outlined();
@@ -236,9 +248,16 @@ namespace TrashCats.Presentation.Battle
             text.Outlined();
         }
 
+        /// <summary>A fighter card with a single thin frame (no inner line); content is padded from that frame.</summary>
         private static RectTransform Card(RectTransform column, string name, CardStyle style)
         {
             var card = Ui.Card(column, name, style);
+            if (Ui.Skin?.plainCard != null)
+            {
+                card.sprite = Ui.Skin.plainCard;
+                card.type = Image.Type.Sliced;
+                card.pixelsPerUnitMultiplier = 3.2f;
+            }
             Info.Size(card, -1, CardHeight);
             return card.rectTransform;
         }
@@ -250,20 +269,8 @@ namespace TrashCats.Presentation.Battle
             return label;
         }
 
-        /// <summary>The position in its queue: a yellow disc in the top left corner (or filling a holder).</summary>
-        private static void Number(RectTransform card, int index, bool centred = false)
-        {
-            // dark between the arrows on a yellow card, yellow in the corner of an enemy card
-            var disc = Ui.Panel(card, "Number", centred ? Palette.Ink : Palette.Primary);
-            disc.sprite = Ui.Skin?.circle;
-            if (centred) disc.rectTransform.Fill();
-            else disc.rectTransform.Place(new Vector2(0, 1), new Vector2(0, 1), new Vector2(-10, -38), new Vector2(38, 10));
-            var label = Ui.Label(disc.transform, (index + 1).ToString(), 30, TextAnchor.MiddleCenter, centred ? Palette.Primary : Palette.Ink, heading: true);
-            label.rectTransform.Fill();
-        }
-
         /// <summary>Square avatar on the left (tap = the cat's skills and stats), with a small skill badge in its corner.</summary>
-        private Image Avatar(RectTransform card, IReadOnlyCat cat, float size = 132f, bool top = false)
+        private Image Avatar(RectTransform card, IReadOnlyCat cat, float size = AvatarSize, bool top = false)
         {
             var viewKey = _session.Config.GetCat(cat.Id).ViewKey;
             var sprite = viewKey != null ? _art?.Avatar(viewKey) ?? _art?.Portrait(viewKey) : null;
@@ -274,7 +281,7 @@ namespace TrashCats.Presentation.Battle
             if (top)
                 image.rectTransform.Place(new Vector2(0, 1), new Vector2(0, 1), new Vector2(18, -18 - size), new Vector2(18 + size, -18));
             else
-                image.rectTransform.Place(new Vector2(0, 0.5f), new Vector2(0, 0.5f), new Vector2(26, -size / 2), new Vector2(26 + size, size / 2));
+                image.rectTransform.Place(new Vector2(0, 0.5f), new Vector2(0, 0.5f), new Vector2(Pad, -size / 2), new Vector2(Pad + size, size / 2));
             var id = cat.Id;
             image.gameObject.AddComponent<Button>().onClick.AddListener(() => _onCatDetails(id));
             if (Ui.Icon(image.transform, "skill") is Image badge)
@@ -284,7 +291,7 @@ namespace TrashCats.Presentation.Battle
 
         private static void Picture(RectTransform card, Sprite sprite, Color backdrop, bool round)
         {
-            var holder = Ui.Rect(card, "Portrait").Place(new Vector2(0, 0.5f), new Vector2(0, 0.5f), new Vector2(26, -66), new Vector2(158, 66));
+            var holder = Ui.Rect(card, "Portrait").Place(new Vector2(0, 0.5f), new Vector2(0, 0.5f), new Vector2(Pad, -AvatarSize / 2), new Vector2(Pad + AvatarSize, AvatarSize / 2));
             var picture = new RoundPicture(holder, "Round", backdrop, 0.8f);
             picture.Root.Fill();
             picture.SetPicture(sprite);
@@ -295,17 +302,17 @@ namespace TrashCats.Presentation.Battle
         {
             var c = _session.Config.Combat;
             var column = Info.Column(card, "Body", 2f);
-            column.Place(Vector2.zero, Vector2.one, new Vector2(166, 14), new Vector2(-rightGap, -14));
+            column.Place(Vector2.zero, Vector2.one, new Vector2(Pad + AvatarSize + 16, Pad - 6), new Vector2(-rightGap, -Pad + 6));
             var title = Info.Text(column, name, 34, color, height: 52f);
             title.enableAutoSizing = true;
             title.fontSizeMin = 22;
             title.fontSizeMax = 34;
-            var stats = Info.Row(column, "Stats", 4f, TextAnchor.MiddleLeft);
+            var stats = Info.Row(column, "Stats", 14f, TextAnchor.MiddleLeft);
             Info.Size(stats, -1, 56);
-            Info.Chip(stats, "skill_scratch", CombatFormulas.BaseDamage(c, f.Strength).ToString(), ChipIcon, ChipFont, color);
+            Chip(stats, "skill_scratch", CombatFormulas.BaseDamage(c, f.Strength).ToString(), color);
             var interval = CombatFormulas.IntervalTicks(c, f.Technique) * c.TickMs / 1000f;
-            Info.Chip(stats, "speed", interval.ToString("0.#"), ChipIcon, ChipFont, color);
-            Info.Chip(stats, "hp", CombatFormulas.MaxHp(c, f.Endurance, f.HpMultiplierPermille).ToString(), ChipIcon, ChipFont, color);
+            Chip(stats, "speed", interval.ToString("0.#"), color);
+            Chip(stats, "hp", CombatFormulas.MaxHp(c, f.Endurance, f.HpMultiplierPermille).ToString(), color);
             var skills = Info.Row(column, "Skills", 6f, TextAnchor.MiddleLeft);
             Info.Size(skills, -1, 56);
             if (f.Skills.Count == 0)
@@ -317,14 +324,22 @@ namespace TrashCats.Presentation.Battle
                     label.Outlined();
         }
 
-        /// <summary>A big arrow button; the one that cannot move the cat is greyed out (the strip keeps its shape).</summary>
-        private static UiButton Arrow(RectTransform strip, string name, string glyph, bool enabled, Action onClick)
+        /// <summary>Icon and number with air between them.</summary>
+        private static void Chip(RectTransform row, string icon, string text, Color color)
         {
-            var arrow = Ui.Button(strip, name, glyph, enabled ? Palette.Secondary : Palette.Disabled, onClick, 40);
+            var chip = Info.Row(row, "Chip_" + icon, 7f);
+            Info.Size(chip, -1, 56);
+            Info.Icon(chip, icon, ChipIcon);
+            Info.Text(chip, text, ChipFont, color, height: 56);
+        }
+
+        /// <summary>A big arrow button on the order plate.</summary>
+        private static UiButton Arrow(RectTransform plate, string name, string glyph, Action onClick)
+        {
+            var arrow = Ui.Button(plate, name, glyph, Palette.Secondary, onClick, 34);
             arrow.Text.rectTransform.Fill(2);
-            arrow.Text.fontSizeMin = 30;
+            arrow.Text.fontSizeMin = 26;
             arrow.Text.color = Palette.Paper;
-            arrow.Interactable = enabled;
             return arrow;
         }
 
