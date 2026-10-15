@@ -57,6 +57,7 @@ namespace TrashCats.Presentation.Characters
         [Tooltip("Hideout: punching the tin can (loop)")] public FlipbookClip canPunch = new FlipbookClip();
         [Tooltip("Optional separately animated tail; attach points come from the body clips")] public FlipbookClip tail = new FlipbookClip();
         [Tooltip("Static picture for UI (hideout tokens, cards)")] public Sprite portrait;
+        [Tooltip("Hideout cat card: portrait on its coloured backdrop, cut from the concept (fills the card window)")] public Sprite card;
         [Tooltip("Hideout (four-legged) pictures: sitting, sleeping, eating, walking")] public Sprite[] hideoutPoses = Array.Empty<Sprite>();
 
         public Sprite HideoutPose(int index) => hideoutPoses != null && index < hideoutPoses.Length ? hideoutPoses[index] : null;

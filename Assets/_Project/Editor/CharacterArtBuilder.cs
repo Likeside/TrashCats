@@ -166,6 +166,8 @@ namespace TrashCats.Editor
             if (key == "wheel") art.idle.fps = art.idle.frames.Length >= 15 ? 24f : 12f;
             // card portrait cut from the concept (Tools/import_ui.py), else the first stance frame
             art.portrait = Sprites(dir + "/Portrait").FirstOrDefault() ?? art.idle.frames.FirstOrDefault();
+            // hideout card picture with its own backdrop (Tools/cut_card_portraits.py)
+            art.card = Sprites(dir + "/Card").FirstOrDefault();
 
             var attach = dir + "/attach_points.json";
             if (File.Exists(attach))

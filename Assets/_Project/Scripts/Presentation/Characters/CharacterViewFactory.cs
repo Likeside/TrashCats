@@ -24,6 +24,8 @@ namespace TrashCats.Presentation.Characters
 
         public Sprite Portrait(string viewKey) => Find(viewKey)?.portrait;
 
+        public Sprite Card(string viewKey) => Find(viewKey)?.card;
+
         public Sprite GetSprite(string key) => _registry != null ? _registry.GetSprite(key) : null;
 
         private SpriteRenderer _arenaRenderer;
