@@ -121,6 +121,10 @@ MonoBehaviour:
     clips:
     - {fileID: 8300000, guid: c2f37c32446852eabb001ba21616561e, type: 3}
     volume: 1
+  - key: ui_paper
+    clips:
+    - {fileID: 8300000, guid: e7780eee9f64e870fb170c4d149ac159, type: 3}
+    volume: 1
   - key: ui_popup
     clips:
     - {fileID: 8300000, guid: e3c114bf4b2b4d97da1d2cbdd9dc6611, type: 3}

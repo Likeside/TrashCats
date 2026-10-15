@@ -53,7 +53,7 @@ All sounds are CC0 (public domain); credit is not required but given with thanks
 - **IgnasD**, "Meow" (opengameart.org/content/meow) — CC0.
 - **omfgdude**, "Chill lofi inspired" (opengameart.org/content/chill-lofi-inspired) — CC0. Hideout music.
 - **Emma_MA**, "jazz n brass loop" (opengameart.org/content/jazz-n-brass-loop) — CC0. Battle music.
-- `cmb_hiss`, `cmb_miss`: synthesised by Tools/import_audio.py.
+- `cmb_hiss`, `cmb_miss`, `ui_paper`: synthesised by Tools/import_audio.py.
 """
 
 
@@ -91,7 +91,21 @@ def synth(rate=44100):
     smooth = np.convolve(noise2, kernel, mode="same")
     env2 = np.sin(np.pi * t2 / t2[-1]) ** 2
     whoosh = (smooth * 3.0 + np.diff(noise2, prepend=0) * 0.15) * env2 * 0.6
-    return {"cmb_hiss": hiss, "cmb_miss": whoosh}
+    # paper: a sheet slid out of a pile - a soft swish with dense crackles (tiny bright noise grains) that swell and fade
+    k = int(rate * 0.42)
+    t3 = np.arange(k) / rate
+    swish = np.convolve(rng.standard_normal(k), np.ones(40) / 40, mode="same") * 2.2
+    crackle = np.zeros(k)
+    for _ in range(260):
+        at = int(rng.beta(2.2, 2.6) * (k - 200))
+        length = int(rng.integers(30, 160))
+        grain = np.diff(rng.standard_normal(length + 1)) * np.hanning(length) * rng.uniform(0.2, 1.0)
+        crackle[at: at + length] += grain
+    env3 = np.sin(np.pi * np.clip(t3 / t3[-1], 0, 1)) ** 1.5
+    paper = (swish * 0.5 + crackle * 0.45) * env3
+    paper = paper / np.max(np.abs(paper))
+    paper = np.tanh(paper * 2.6) / np.tanh(2.6) * 0.9  # soft-limited: as loud as the other UI sounds
+    return {"cmb_hiss": hiss, "cmb_miss": whoosh, "ui_paper": paper}
 
 
 def main():

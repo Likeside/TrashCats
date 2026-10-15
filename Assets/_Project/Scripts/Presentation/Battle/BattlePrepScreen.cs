@@ -22,7 +22,7 @@ namespace TrashCats.Presentation.Battle
     public sealed class BattlePrepScreen
     {
         private const float CardHeight = 222f;
-        private const float OrderStrip = 84f;
+        private const float OrderStrip = 72f;
         private const float ChipIcon = 38f;
         private const int ChipFont = 27;
 
@@ -69,16 +69,16 @@ namespace TrashCats.Presentation.Battle
             _title.Outlined();
 
             // the two queues face to face
-            var ring = Ui.Rect(root, "Ring").Place(new Vector2(0, 1), Vector2.one, new Vector2(36, -890), new Vector2(-36, -130));
-            Caption(ring, Loc.T("battle_prep_screen.15"), new Vector2(0, 1), new Vector2(0.47f, 1), TextAnchor.MiddleLeft);
-            Caption(ring, Loc.T("battle_prep_screen.16"), new Vector2(0.53f, 1), new Vector2(1, 1), TextAnchor.MiddleLeft);
+            var ring = Ui.Rect(root, "Ring").Place(new Vector2(0, 1), Vector2.one, new Vector2(24, -890), new Vector2(-24, -130));
+            Caption(ring, Loc.T("battle_prep_screen.15"), new Vector2(0, 1), new Vector2(0.44f, 1), TextAnchor.MiddleLeft);
+            Caption(ring, Loc.T("battle_prep_screen.16"), new Vector2(0.56f, 1), new Vector2(1, 1), TextAnchor.MiddleLeft);
             var vs = Ui.Label(ring, "VS", 44, TextAnchor.MiddleCenter, Palette.Primary, heading: true);
             vs.rectTransform.Place(new Vector2(0.44f, 1), new Vector2(0.56f, 1), new Vector2(0, -52), Vector2.zero);
             vs.Outlined();
             _queue = Info.Column(ring, "Queue", 14f);
-            _queue.Place(Vector2.zero, new Vector2(0.47f, 1), Vector2.zero, new Vector2(0, -58));
+            _queue.Place(Vector2.zero, new Vector2(0.5f, 1), Vector2.zero, new Vector2(-8, -58));
             _enemies = Info.Column(ring, "Enemies", 14f);
-            _enemies.Place(new Vector2(0.53f, 0), Vector2.one, Vector2.zero, new Vector2(0, -58));
+            _enemies.Place(new Vector2(0.5f, 0), Vector2.one, new Vector2(8, 0), new Vector2(0, -58));
 
             // the reserve
             var reserve = Ui.Rect(root, "ReserveBox").Place(new Vector2(0, 1), Vector2.one, new Vector2(36, -1180), new Vector2(-36, -905));
@@ -173,15 +173,16 @@ namespace TrashCats.Presentation.Battle
         private void QueueCat(IReadOnlyCat cat, int index)
         {
             var id = cat.Id;
-            var row = Ui.Button(_queue, "PrepCat_" + cat.Id, "", Palette.Primary, () => Remove(id), 30);
-            row.Text.gameObject.SetActive(false);
-            Info.Size(row.Image, -1, CardHeight);
-            var card = row.Rect;
+            var card = Card(_queue, "PrepCat_" + cat.Id, CardStyle.Strip);
+            var background = card.GetComponent<Image>();
+            background.color = Ui.Skin != null ? new Color(1f, 0.74f, 0.25f) : Palette.Primary;
+            background.raycastTarget = true;
+            background.gameObject.AddComponent<Button>().onClick.AddListener(() => Remove(id));
             Avatar(card, cat);
-            Body(card, Texts.CatName(cat.Id), FighterSnapshot.FromCat(cat, _session.Config), Palette.Paper, rightGap: OrderStrip + 10);
+            Body(card, Texts.CatName(cat.Id), FighterSnapshot.FromCat(cat, _session.Config), Palette.Paper, rightGap: OrderStrip + 28);
 
             // the order control on the right edge: big ▲, the cat's number, big ▼ (swap with the neighbour)
-            var strip = Ui.Rect(card, "Order").Place(new Vector2(1, 0), Vector2.one, new Vector2(-OrderStrip - 8, 10), new Vector2(-8, -10));
+            var strip = Ui.Rect(card, "Order").Place(new Vector2(1, 0), Vector2.one, new Vector2(-OrderStrip - 22, 22), new Vector2(-22, -22));
             Arrow(strip, "Up_" + cat.Id, "▲", index > 0, () => Swap(index, index - 1)).Rect.Place(new Vector2(0, 0.64f), Vector2.one);
             var number = Ui.Rect(strip, "Place").Place(new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(-28, -28), new Vector2(28, 28));
             Number(number, index, centred: true);
