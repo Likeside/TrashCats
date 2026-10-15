@@ -1,0 +1,56 @@
+[
+ {
+  "name": "ryzhy_rope_poses",
+  "size": "1536x1024",
+  "refs": [
+   "Assets/_Project/Art/Characters/Ryzhy/HideIdle/ryzhy_hideidle_00.png",
+   "Docs/ArtDirection/Generated/raw_v8_rope/ryzhy_rope.png"
+  ],
+  "prompt": "Game sprite sheet: 8 animation frames of ONE continuous looping skipping-rope animation in a grid of 2 rows x 4 columns, read left to right, top row first, generous empty space between frames, never mirror a frame. Character: the orange tabby tomcat Ryzhy, EXACTLY as in the FIRST reference (same body proportions, head size, colours, camera angle). The poses and the hop are those of the SECOND reference frame by frame, BUT DRAW NO ROPE AT ALL: the cat only holds one small dark wooden rope handle in each front paw, the handles pointing outwards, the paws at hip height on both sides of the body, at the same place in every frame. Frames: 1-2 standing tall; 3 knees bending; 4 pushing off; 5 in the air (feet clearly above the ground line); 6 landing with bent knees; 7-8 standing tall. The feet on the same ground line in every frame except frame 5. The SAME facial expression in all 8 frames (exactly the face of the FIRST reference: the same eyes, brows and mouth, no blinking, no grimaces, no change of expression). The SAME fur colours, brightness and line weight in every frame as in the FIRST reference (do not make the fur duller or the head bigger). Comic book style exactly like the references: bold black ink outlines, flat colours with simple shading and light hatching. IMPORTANT: the background of the whole sheet MUST be solid flat pure chroma-key GREEN (#00FF00) everywhere, no ground line, no shadow, no scenery, no text, no frame numbers. Do not use green on the character."
+ },
+ {
+  "name": "ryzhy_bench_poses",
+  "size": "1536x1024",
+  "refs": [
+   "Assets/_Project/Art/Characters/Ryzhy/HideIdle/ryzhy_hideidle_00.png",
+   "Docs/ArtDirection/Generated/raw_bench/ryzhy_bench_v3.png"
+  ],
+  "prompt": "Game sprite sheet: 8 animation frames of ONE continuous looping bench-press animation in a grid of 2 rows x 4 columns, read left to right, top row first, generous empty space between frames, never mirror a frame. Character: the orange tabby tomcat Ryzhy, EXACTLY as in the FIRST reference (same body proportions, colours). The pose and camera angle are those of the SECOND reference (lying on the back on an invisible bench, head on the right, legs down to the floor), frame by frame, BUT DRAW NO BARBELL AT ALL: both front paws are clenched fists gripping an invisible horizontal bar, the two fists always at the same height as each other and the same distance apart. Loop: 1) fists on the chest, 2) starting to push, 3) halfway up, 4) arms fully extended straight up, 5) holding up, 6) lowering, 7) halfway down, 8) fists back on the chest. Body, head, legs and feet stay exactly in place in every frame, only the arms move. The SAME facial expression in all 8 frames (exactly the face of the FIRST reference: the same eyes, brows and mouth, no blinking, no grimaces, no change of expression). The SAME fur colours, brightness and line weight in every frame as in the FIRST reference (do not make the fur duller or the head bigger). Comic book style exactly like the references. IMPORTANT: no bench, no barbell, no floor line. IMPORTANT: the background of the whole sheet MUST be solid flat pure chroma-key GREEN (#00FF00) everywhere, no ground line, no shadow, no scenery, no text, no frame numbers. Do not use green on the character."
+ },
+ {
+  "name": "shnyr_rope_poses",
+  "size": "1536x1024",
+  "refs": [
+   "Assets/_Project/Art/Characters/shnyr/HideIdle/shnyr_hideidle_00.png",
+   "Docs/ArtDirection/Generated/raw_v8_rope/shnyr_rope.png"
+  ],
+  "prompt": "Game sprite sheet: 8 animation frames of ONE continuous looping skipping-rope animation in a grid of 2 rows x 4 columns, read left to right, top row first, generous empty space between frames, never mirror a frame. Character: the thin grey striped cat Shnyr with huge ears, EXACTLY as in the FIRST reference (same body proportions, head size, colours, camera angle). The poses and the hop are those of the SECOND reference frame by frame, BUT DRAW NO ROPE AT ALL: the cat only holds one small dark wooden rope handle in each front paw, the handles pointing outwards, the paws at hip height on both sides of the body, at the same place in every frame. Frames: 1-2 standing tall; 3 knees bending; 4 pushing off; 5 in the air (feet clearly above the ground line); 6 landing with bent knees; 7-8 standing tall. The feet on the same ground line in every frame except frame 5. The SAME facial expression in all 8 frames (exactly the face of the FIRST reference: the same eyes, brows and mouth, no blinking, no grimaces, no change of expression). The SAME fur colours, brightness and line weight in every frame as in the FIRST reference (do not make the fur duller or the head bigger). Comic book style exactly like the references: bold black ink outlines, flat colours with simple shading and light hatching. IMPORTANT: the background of the whole sheet MUST be solid flat pure chroma-key GREEN (#00FF00) everywhere, no ground line, no shadow, no scenery, no text, no frame numbers. Do not use green on the character."
+ },
+ {
+  "name": "shnyr_bench_poses",
+  "size": "1536x1024",
+  "refs": [
+   "Assets/_Project/Art/Characters/shnyr/HideIdle/shnyr_hideidle_00.png",
+   "Docs/ArtDirection/Generated/raw_bench/shnyr_bench.png"
+  ],
+  "prompt": "Game sprite sheet: 8 animation frames of ONE continuous looping bench-press animation in a grid of 2 rows x 4 columns, read left to right, top row first, generous empty space between frames, never mirror a frame. Character: the thin grey striped cat Shnyr with huge ears, EXACTLY as in the FIRST reference (same body proportions, colours). The pose and camera angle are those of the SECOND reference (lying on the back on an invisible bench, head on the right, legs down to the floor), frame by frame, BUT DRAW NO BARBELL AT ALL: both front paws are clenched fists gripping an invisible horizontal bar, the two fists always at the same height as each other and the same distance apart. Loop: 1) fists on the chest, 2) starting to push, 3) halfway up, 4) arms fully extended straight up, 5) holding up, 6) lowering, 7) halfway down, 8) fists back on the chest. Body, head, legs and feet stay exactly in place in every frame, only the arms move. The SAME facial expression in all 8 frames (exactly the face of the FIRST reference: the same eyes, brows and mouth, no blinking, no grimaces, no change of expression). The SAME fur colours, brightness and line weight in every frame as in the FIRST reference (do not make the fur duller or the head bigger). Comic book style exactly like the references. IMPORTANT: no bench, no barbell, no floor line. IMPORTANT: the background of the whole sheet MUST be solid flat pure chroma-key GREEN (#00FF00) everywhere, no ground line, no shadow, no scenery, no text, no frame numbers. Do not use green on the character."
+ },
+ {
+  "name": "ponchik_rope_poses",
+  "size": "1536x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v9_ponchik/ponchik_front.png",
+   "Docs/ArtDirection/Generated/raw_v9_ponchik/ponchik_rope.png"
+  ],
+  "prompt": "Game sprite sheet: 8 animation frames of ONE continuous looping skipping-rope animation in a grid of 2 rows x 4 columns, read left to right, top row first, generous empty space between frames, never mirror a frame. Character: the very fat black-and-white cat Ponchik, EXACTLY as in the FIRST reference (same body proportions, head size, colours, camera angle). The poses and the hop are those of the SECOND reference frame by frame, BUT DRAW NO ROPE AT ALL: the cat only holds one small dark wooden rope handle in each front paw, the handles pointing outwards, the paws at hip height on both sides of the body, at the same place in every frame. Frames: 1-2 standing tall; 3 knees bending; 4 pushing off; 5 in the air (feet clearly above the ground line); 6 landing with bent knees; 7-8 standing tall. The feet on the same ground line in every frame except frame 5. The SAME facial expression in all 8 frames (exactly the face of the FIRST reference: the same eyes, brows and mouth, no blinking, no grimaces, no change of expression). The SAME fur colours, brightness and line weight in every frame as in the FIRST reference (do not make the fur duller or the head bigger). Comic book style exactly like the references: bold black ink outlines, flat colours with simple shading and light hatching. IMPORTANT: the background of the whole sheet MUST be solid flat pure chroma-key GREEN (#00FF00) everywhere, no ground line, no shadow, no scenery, no text, no frame numbers. Do not use green on the character."
+ },
+ {
+  "name": "ponchik_bench_poses",
+  "size": "1536x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v9_ponchik/ponchik_front.png",
+   "Docs/ArtDirection/Generated/raw_bench/ponchik_bench.png"
+  ],
+  "prompt": "Game sprite sheet: 8 animation frames of ONE continuous looping bench-press animation in a grid of 2 rows x 4 columns, read left to right, top row first, generous empty space between frames, never mirror a frame. Character: the very fat black-and-white cat Ponchik, EXACTLY as in the FIRST reference (same body proportions, colours). The pose and camera angle are those of the SECOND reference (lying on the back on an invisible bench, head on the right, legs down to the floor), frame by frame, BUT DRAW NO BARBELL AT ALL: both front paws are clenched fists gripping an invisible horizontal bar, the two fists always at the same height as each other and the same distance apart. Loop: 1) fists on the chest, 2) starting to push, 3) halfway up, 4) arms fully extended straight up, 5) holding up, 6) lowering, 7) halfway down, 8) fists back on the chest. Body, head, legs and feet stay exactly in place in every frame, only the arms move. The SAME facial expression in all 8 frames (exactly the face of the FIRST reference: the same eyes, brows and mouth, no blinking, no grimaces, no change of expression). The SAME fur colours, brightness and line weight in every frame as in the FIRST reference (do not make the fur duller or the head bigger). Comic book style exactly like the references. IMPORTANT: no bench, no barbell, no floor line. IMPORTANT: the background of the whole sheet MUST be solid flat pure chroma-key GREEN (#00FF00) everywhere, no ground line, no shadow, no scenery, no text, no frame numbers. Do not use green on the character."
+ }
+]

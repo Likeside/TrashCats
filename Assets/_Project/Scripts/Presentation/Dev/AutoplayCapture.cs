@@ -25,6 +25,7 @@ namespace TrashCats.Presentation.Dev
             {
                 var index = Array.IndexOf(args, flag);
                 if (index < 0 || index + 1 >= args.Length) continue;
+                Application.runInBackground = true; // the automated run must not pause when its window loses focus
                 var capture = host.AddComponent<AutoplayCapture>();
                 capture._dir = args[index + 1];
                 capture._battles = flag == "-autoplayBattles";

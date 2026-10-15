@@ -121,6 +121,7 @@ namespace TrashCats.Presentation.Hideout
                     continue;
                 var working = cat.Activity.IsWorking;
                 var visible = token.Root.gameObject.activeInHierarchy;
+                HeldProps(token, visible);
                 var bar = working && visible;
                 if (token.Progress.Rect.gameObject.activeSelf != bar)
                     token.Progress.Rect.gameObject.SetActive(bar);
@@ -190,6 +191,77 @@ namespace TrashCats.Presentation.Hideout
             if (_corners[0].y < _sceneCorners[0].y + margin) dy = _sceneCorners[0].y + margin - _corners[0].y;
             else if (_corners[1].y > top - margin) dy = top - margin - _corners[1].y;
             item.position += new Vector3(dx, dy, 0f);
+        }
+
+        /// <summary>Barbell length, share of the bench frame's width.</summary>
+        private const float HeldBarbellWidth = 0.62f;
+        /// <summary>Rope thickness in sprite pixels.</summary>
+        private const float RopePixels = 5f;
+
+        /// <summary>
+        /// The skipping rope and the barbell are drawn by the game between the hands marked on every frame
+        /// (FlipbookClip.handles): the rope swings with the clip's phase and passes behind the cat on the way up,
+        /// the barbell lies in the fists. Hidden for other clips.
+        /// </summary>
+        private void HeldProps(CatToken token, bool visible)
+        {
+            var clip = token.Flipbook.Clip;
+            var hands = clip?.handles;
+            var hasHands = visible && hands != null && hands.Length > 0 && clip.frames.Length > 0;
+            var h = hasHands ? hands[Mathf.Clamp(token.Flipbook.Frame, 0, hands.Length - 1)] : default;
+            var image = token.Image.rectTransform;
+
+            var rope = hasHands && token.Spot.Clip == HideoutLayout.CatClip.Rope;
+            if (rope && token.Rope == null)
+            {
+                var go = new GameObject("Rope", typeof(RectTransform), typeof(CanvasRenderer), typeof(RopeGraphic));
+                go.transform.SetParent(token.Root, false);
+                token.Rope = go.GetComponent<RopeGraphic>();
+                token.Rope.raycastTarget = false;
+                token.Rope.rectTransform.Fill();
+            }
+            if (token.Rope != null)
+            {
+                token.Rope.gameObject.SetActive(rope);
+                if (rope)
+                {
+                    var rt = token.Rope.rectTransform;
+                    rt.pivot = image.pivot;
+                    rt.localScale = image.localScale;
+                    token.Rope.Width = RopePixels * image.rect.height / clip.frames[0].rect.height;
+                    token.Rope.Set(new Vector2(h.x, h.y), new Vector2(h.z, h.w), token.Flipbook.Phase);
+                    // behind the body on the way up, in front on the way down
+                    if (token.Rope.Behind) rt.SetSiblingIndex(image.GetSiblingIndex());
+                    else rt.SetSiblingIndex(image.GetSiblingIndex() + 1);
+                }
+            }
+
+            var bench = hasHands && token.Spot.Clip == HideoutLayout.CatClip.Bench;
+            if (bench && token.HeldBarbell == null && _art?.GetSprite(HideoutLayout.Barbell.Sprite) is Sprite barbellSprite)
+            {
+                token.HeldBarbell = Ui.Panel(image, "HeldBarbell", Color.white);
+                token.HeldBarbell.sprite = barbellSprite;
+                var rt = token.HeldBarbell.rectTransform;
+                rt.anchorMin = rt.anchorMax = Vector2.zero;
+                rt.pivot = new Vector2(0.5f, 0.5f);
+            }
+            if (token.HeldBarbell != null)
+            {
+                token.HeldBarbell.gameObject.SetActive(bench);
+                if (bench)
+                {
+                    var size = image.rect.size;
+                    var left = new Vector2(h.x * size.x, h.y * size.y);
+                    var right = new Vector2(h.z * size.x, h.w * size.y);
+                    var rt = token.HeldBarbell.rectTransform;
+                    var sprite = token.HeldBarbell.sprite;
+                    var width = HeldBarbellWidth * size.x;
+                    rt.sizeDelta = new Vector2(width, width * sprite.rect.height / sprite.rect.width);
+                    rt.anchoredPosition = (left + right) * 0.5f;
+                    var d = right - left;
+                    rt.localEulerAngles = new Vector3(0, 0, Mathf.Atan2(d.y, d.x) * Mathf.Rad2Deg);
+                }
+            }
         }
 
         /// <summary>
@@ -773,6 +845,9 @@ namespace TrashCats.Presentation.Hideout
             public CharacterArt Art;
             public Image Image;
             public UiFlipbook Flipbook;
+            /// <summary>Props the game draws in the cat's hands (the frames have only the hands).</summary>
+            public RopeGraphic Rope;
+            public Image HeldBarbell;
             public (RectTransform Root, UiBar Bar, TMP_Text Caption) Away;
             public Color BaseColor;
             public HideoutLayout.CatSpot Spot;

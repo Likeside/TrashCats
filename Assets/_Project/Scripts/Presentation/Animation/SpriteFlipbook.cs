@@ -26,6 +26,9 @@ namespace TrashCats.Presentation.Animation
         [Tooltip("Optional per-frame attachment point (local units from the sprite pivot), e.g. where the tail joins the body.")]
         public Vector2[] attachPoints = Array.Empty<Vector2>();
 
+        [Tooltip("Optional per-frame hands (left x, left y, right x, right y in 0..1 of the frame, y up): where a prop drawn by the game is held - the rope's handles, the barbell's grip.")]
+        public Vector4[] handles = Array.Empty<Vector4>();
+
         [Tooltip("Procedural breathing: relative vertical stretch (0 = off). Scales around the sprite pivot (the planted foot).")]
         [Range(0f, 0.05f)] public float breathe;
         [Min(0.1f)] public float breathePeriod = 2.4f;
@@ -63,6 +66,8 @@ namespace TrashCats.Presentation.Animation
         public event Action<FlipbookClip> Finished;
 
         public FlipbookClip Current => _clip;
+        /// <summary>Position in the loop, 0..1 (continuous, between frames too).</summary>
+        public float Phase => _clip == null ? 0f : Mathf.Repeat(_time * _clip.fps, _clip.SequenceLength) / _clip.SequenceLength;
         public int FrameIndex { get; private set; }
 
         private bool _initialized;

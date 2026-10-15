@@ -19,6 +19,10 @@ namespace TrashCats.Presentation.Animation
         private bool _breathing;
 
         public FlipbookClip Clip => _clip;
+        /// <summary>Frame shown now.</summary>
+        public int Frame => _frame;
+        /// <summary>Position in the loop, 0..1 (continuous, between frames too).</summary>
+        public float Phase => _clip == null ? 0f : Mathf.Repeat(_time * _clip.fps, _clip.SequenceLength) / _clip.SequenceLength;
         public event Action<int> FrameChanged;
 
         /// <summary>Plays from the first frame; null or empty clips stop on the current picture.</summary>
