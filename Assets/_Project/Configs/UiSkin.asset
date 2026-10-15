@@ -25,6 +25,8 @@ MonoBehaviour:
   paperBorderScale: 1.6
   tin: {fileID: 21300000, guid: 3f37af50a0da218deb173a257e175648, type: 3}
   tinBorderScale: 2
+  catCard: {fileID: 21300000, guid: 28ad1c12e1a1d09babd475069118b86f, type: 3}
+  catCardBorderScale: 1.7
   barFrame: {fileID: 21300000, guid: 3f37af50a0da218deb173a257e175648, type: 3}
   badgeBars: []
   ribbon: {fileID: 21300000, guid: 3ec80d3d66d3b6efa8912860d9e5b3e7, type: 3}

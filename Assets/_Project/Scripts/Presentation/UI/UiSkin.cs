@@ -30,6 +30,8 @@ namespace TrashCats.Presentation.UI
         public float paperBorderScale = 1.6f;
         [Tooltip("Dark painted tin (HUD, navigation)")] public Sprite tin;
         public float tinBorderScale = 2f;
+        [Tooltip("Rounded cat card of the hideout, cut from the concept")] public Sprite catCard;
+        public float catCardBorderScale = 1.7f;
 
         [Header("Bars and decorations")]
         public Sprite barFrame;
