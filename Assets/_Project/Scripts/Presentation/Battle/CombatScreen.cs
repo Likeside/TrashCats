@@ -258,6 +258,7 @@ namespace TrashCats.Presentation.Battle
                 {
                     var target = 1 - (int)hit.AttackerSide;
                     _huds[target].SetHp(hit.TargetHpAfter);
+                    if (hit.TargetGritAfter >= 0) _huds[target].SetGrit(hit.TargetGritAfter);
                     if (animate)
                     {
                         var text = hit.Hit ? $"-{hit.Damage}" : Loc.T("combat_screen.02");

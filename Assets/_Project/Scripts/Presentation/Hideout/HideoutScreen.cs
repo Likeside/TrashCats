@@ -15,7 +15,7 @@ namespace TrashCats.Presentation.Hideout
     {
         public const float HudHeight = 110f;
         public const float NavHeight = 130f;
-        private const float PanelHeight = 430f;
+        private const float PanelHeight = 430f + CatPanelView.NameBand;
 
         private readonly HudView _hud;
         private readonly HideoutSceneView _scene;

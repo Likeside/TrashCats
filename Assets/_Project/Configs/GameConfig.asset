@@ -34,9 +34,10 @@ MonoBehaviour:
     tickMs: 100
     hpBase: 40
     hpPerEndurance: 12
-    gritBase: 20
-    gritPerEndurance: 5
-    gritRegenPerAction: 3
+    gritMax: 60
+    gritStart: 12
+    gritPerAction: 5
+    gritPerHitTaken: 3
     damageBase: 4
     damagePerStrength: 2
     intervalBaseTicks: 16

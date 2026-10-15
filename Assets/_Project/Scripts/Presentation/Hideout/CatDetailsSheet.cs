@@ -170,7 +170,7 @@ namespace TrashCats.Presentation.Hideout
             var interval = CombatFormulas.IntervalTicks(c, technique) * c.TickMs / 1000f;
             Clear(_combat);
             CombatStat("hp", $"HP {CombatFormulas.MaxHp(c, endurance)}", AttributeType.Endurance, endurance);
-            CombatStat("paw", Loc.T("cat_details_sheet.12", CombatFormulas.MaxGrit(c, endurance)), AttributeType.Endurance, endurance);
+            CombatStat("paw", Loc.T("cat_details_sheet.12", c.GritMax), null, 0);
             CombatStat("skill_scratch", Loc.T("cat_details_sheet.13", CombatFormulas.BaseDamage(c, strength)), AttributeType.Strength, strength);
             CombatStat("speed", Loc.T("cat_details_sheet.26", interval.ToString("0.#")), AttributeType.Technique, technique);
 
@@ -203,8 +203,8 @@ namespace TrashCats.Presentation.Hideout
             }
         }
 
-        /// <summary>One combat stat: icon and value, and under it the attribute it comes from.</summary>
-        private void CombatStat(string icon, string value, AttributeType source, int level)
+        /// <summary>One combat stat: icon and value, and under it the attribute it comes from (grit: built up in the fight).</summary>
+        private void CombatStat(string icon, string value, AttributeType? source, int level)
         {
             var cell = Info.Column(_combat, "Stat_" + icon, 2f);
             cell.GetComponent<VerticalLayoutGroup>().childAlignment = TextAnchor.MiddleCenter;
@@ -213,8 +213,13 @@ namespace TrashCats.Presentation.Hideout
             Info.Chip(top, icon, value, 48f, 30, Palette.Ink);
             var from = Info.Row(cell, "From", 4f, TextAnchor.MiddleCenter);
             Info.Size(from, -1, 36);
-            Info.Text(from, "←", 22, Palette.Ink, heading: false);
-            Info.Chip(from, Texts.AttributeIcon(source), $"{Texts.Attribute(source)} {level}", 32f, 22, Palette.Ink, heading: false);
+            if (source is AttributeType attribute)
+            {
+                Info.Text(from, "←", 22, Palette.Ink, heading: false);
+                Info.Chip(from, Texts.AttributeIcon(attribute), $"{Texts.Attribute(attribute)} {level}", 32f, 22, Palette.Ink, heading: false);
+            }
+            else
+                Info.Text(from, Loc.T("cat_details_sheet.27"), 22, Palette.Ink, heading: false);
         }
 
         /// <summary>A socket: dark frame with its number; the equipped skill (tap to take it off) or "+ Пусто".</summary>

@@ -13,7 +13,6 @@ namespace TrashCats.Tests
         public void DerivedStats_FollowGddTable()
         {
             Assert.That(new[] { 2, 5, 10 }.Select(t => CombatFormulas.MaxHp(_c, t)), Is.EqualTo(new[] { 64, 100, 160 }));
-            Assert.That(new[] { 2, 5, 10 }.Select(t => CombatFormulas.MaxGrit(_c, t)), Is.EqualTo(new[] { 30, 45, 70 }));
             Assert.That(new[] { 2, 5, 10 }.Select(s => CombatFormulas.BaseDamage(_c, s)), Is.EqualTo(new[] { 8, 14, 24 }));
             Assert.That(new[] { 2, 5, 10, 30 }.Select(a => CombatFormulas.IntervalTicks(_c, a)), Is.EqualTo(new[] { 15, 14, 11, 10 }));
             Assert.That(CombatFormulas.MaxHp(_c, 10, 1500), Is.EqualTo(240));
@@ -216,7 +215,7 @@ namespace TrashCats.Tests
         }
 
         // Filled from the first run of the current rules (see test output).
-        private const string ReferenceSnapshot = "Victory 160 51 -799673517";
+        private const string ReferenceSnapshot = "Victory 160 51 1509509381";
 
         private double WinRate(FighterSnapshot player, FighterSnapshot enemy, int runs = 400)
         {

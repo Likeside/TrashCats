@@ -10,7 +10,6 @@ namespace TrashCats.Domain
         public static int MaxHp(CombatConfig c, int endurance, int multiplierPermille = 1000) =>
             (int)((long)(c.HpBase + c.HpPerEndurance * endurance) * multiplierPermille / 1000);
 
-        public static int MaxGrit(CombatConfig c, int endurance) => c.GritBase + c.GritPerEndurance * endurance;
 
         public static int BaseDamage(CombatConfig c, int strength) => c.DamageBase + c.DamagePerStrength * strength;
 
@@ -160,13 +159,13 @@ namespace TrashCats.Domain
                     Snapshot = s,
                     Side = side,
                     MaxHp = CombatFormulas.MaxHp(_c, s.Endurance, s.HpMultiplierPermille),
-                    MaxGrit = CombatFormulas.MaxGrit(_c, s.Endurance),
+                    MaxGrit = _c.GritMax,
                     Interval = CombatFormulas.IntervalTicks(_c, s.Technique),
                     Skills = s.Skills.Select(_config.GetSkill).Where(k => !k.IsInnate).ToList(),
                     Innate = _innate,
                 };
                 f.Hp = f.MaxHp;
-                f.Grit = f.MaxGrit;
+                f.Grit = Math.Min(_c.GritStart, f.MaxGrit); // grit builds up in the fight
                 f.Timer = f.Interval;
                 if (side == Side.Player)
                     _fought.Add(s.Id);
@@ -195,7 +194,7 @@ namespace TrashCats.Domain
                 self.Grit -= skill.GritCost;
                 if (skill.CooldownActions > 0)
                     self.Cooldowns[skill.Id] = skill.CooldownActions;
-                self.Grit = Math.Min(self.MaxGrit, self.Grit + _c.GritRegenPerAction);
+                self.Grit = Math.Min(self.MaxGrit, self.Grit + _c.GritPerAction);
                 _log.Add(new ActionPerformed(_tick, self.Side, self.Snapshot.Id, skill.Id, self.Grit));
 
                 switch (skill.Effect)
@@ -253,7 +252,9 @@ namespace TrashCats.Domain
                     var damage = CombatFormulas.Damage(baseDamage, skill.DamagePermille, variance,
                         reduced ? _furPermille : 1000, _suddenDeath ? _c.SuddenDeathPermille : 1000);
                     opponent.Hp = Math.Max(0, opponent.Hp - damage);
-                    _log.Add(new HitResolved(_tick, self.Side, hit, true, damage, opponent.Hp, false, reduced));
+                    // a hit taken fires the fighter up
+                    opponent.Grit = Math.Min(opponent.MaxGrit, opponent.Grit + _c.GritPerHitTaken);
+                    _log.Add(new HitResolved(_tick, self.Side, hit, true, damage, opponent.Hp, false, reduced, opponent.Grit));
                     if (reduced)
                     {
                         opponent.Fur--;
