@@ -39,7 +39,8 @@ SHEETS = {
     "cat_busts": ["bust_ryzhy", "bust_shnyr", "bust_ponchik"],
     "fx_combat": ["fx_star", "fx_dust", "fx_scratch", "fx_sparkle"],
     "ui_map_parts": ["map_ring", None, None, None],
-    "ui_a_icons": ["icon_food", "icon_junk", "icon_hp", "icon_paw", "icon_home", "icon_map", "icon_energy", "icon_satiety"],
+    # satiety is a fish now (raw_icon_satiety, Tools/cut_icon.py); the bowl is kept as ArtSource/UI/icon_satiety_v1_bowl.png
+    "ui_a_icons": ["icon_food", "icon_junk", "icon_hp", "icon_paw", "icon_home", "icon_map", "icon_energy", None],
 }
 
 ENEMIES = ["rat", "gull", "shopcat", "crow", "raccoon", "pug", "admiral"]

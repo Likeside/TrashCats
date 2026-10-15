@@ -14,7 +14,7 @@ namespace TrashCats.Presentation.Hideout
     /// <summary>
     /// Bottom sheet for one cat (Docs/GDD/UI_UX.md §4.1): a header with the cat's avatar, name, status and needs; six
     /// activities with what they cost and bring as icons (or what is missing), the current one with its cycle bar and the
-    /// sensible next step pulsing; Feed with the food it takes and the satiety it gives, and Stop while the cat works.
+    /// sensible next step gently pulsing; Feed with the food it takes and the satiety it gives, and Stop while the cat works.
     /// </summary>
     public sealed class ActivitySheet
     {
@@ -37,10 +37,10 @@ namespace TrashCats.Presentation.Hideout
         private readonly RectTransform _feedRow;
         private readonly TMP_Text _feedSpend;
         private readonly TMP_Text _feedGain;
-        private readonly GameObject _feedTag;
         private readonly UiButton _stop;
         private CatId? _catId;
         private bool _fitFeed;
+        private bool _feedAdvised;
 
         public bool IsOpen => _catId != null;
 
@@ -89,8 +89,9 @@ namespace TrashCats.Presentation.Hideout
             // skills and stats: a compact light button with its icon, it no longer outshouts the activities
             var details = Ui.Button(panel.transform, "Sheet_Details", Loc.T("activity_sheet.01"), Palette.Paper, OpenDetails, 28);
             details.Rect.Place(new Vector2(1, 1), new Vector2(1, 1), new Vector2(-262, -232), new Vector2(-40, -44));
-            details.Text.rectTransform.Place(new Vector2(0, 0), new Vector2(1, 0.42f), new Vector2(18, 14), new Vector2(-18, 0));
-            details.Text.fontSizeMin = 20;
+            details.Text.rectTransform.Place(new Vector2(0, 0), new Vector2(1, 0.42f), new Vector2(30, 18), new Vector2(-30, 0));
+            details.Text.fontSizeMax = 26;
+            details.Text.fontSizeMin = 18;
             if (Ui.Icon(details.Rect, "skill") is Image skillIcon)
                 skillIcon.rectTransform.Place(new Vector2(0.5f, 0.42f), new Vector2(0.5f, 1f), new Vector2(-56, 0), new Vector2(56, -16));
 
@@ -106,16 +107,14 @@ namespace TrashCats.Presentation.Hideout
                 _buttons.Add(button);
             }
 
-            // Feed: "Feed  [food] −4  →  +40 satiety"; the gang's food is spent, so it lives here and not in the header
+            // Feed: "Feed  [food] −4  →  [satiety] +40"; the gang's food is spent, so it lives here and not in the header
             _feed = Ui.Button(panel.transform, "Sheet_Feed", "", Palette.Primary, Feed, 32);
             _feedRow = Info.Row(_feed.Rect, "FeedRow", 10f, TextAnchor.MiddleCenter);
             _feedRow.Fill();
             Info.Text(_feedRow, Loc.T("activity_sheet.03"), 32, Palette.Ink);
             _feedSpend = Info.Chip(_feedRow, "food", "", 46f, 30, Palette.Ink).GetComponentInChildren<TMP_Text>();
             Info.Text(_feedRow, "→", 30, Palette.Ink);
-            // the gain in words: the food and satiety icons look alike at this size
-            _feedGain = Info.Text(_feedRow, "", 30, Palette.Ink);
-            _feedTag = Tag(_feed.Rect);
+            _feedGain = Info.Chip(_feedRow, "satiety", "", 46f, 30, Palette.Ink).GetComponentInChildren<TMP_Text>();
 
             _stop = Ui.Button(panel.transform, "Stop", Loc.T("activity_sheet.02"), Palette.Disabled, Stop, 32);
             _stop.Rect.Place(new Vector2(0.5f, 0), new Vector2(1f, 0), new Vector2(15, 40), new Vector2(-30, 150));
@@ -175,9 +174,9 @@ namespace TrashCats.Presentation.Hideout
             {
                 var spend = _session.FoodToFeed(id);
                 _feedSpend.text = "−" + spend;
-                _feedGain.text = Loc.T("activity_sheet.06", Mathf.Min(spend * config.Needs.SatietyPerFood, config.Needs.Max - cat.Satiety));
+                _feedGain.text = "+" + Mathf.Min(spend * config.Needs.SatietyPerFood, config.Needs.Max - cat.Satiety);
             }
-            Recommend(_feed.Rect, _feedTag, canFeed == CommandError.None && CatRules.IsHungry(cat, config));
+            Recommend(_feed.Rect, ref _feedAdvised, canFeed == CommandError.None && CatRules.IsHungry(cat, config));
 
             // Stop only while the cat works; Feed takes the whole row otherwise
             _stop.Rect.gameObject.SetActive(working);
@@ -237,27 +236,16 @@ namespace TrashCats.Presentation.Hideout
             Refresh();
         }
 
-        /// <summary>"Recommended" plate on the top edge of a button.</summary>
-        private static GameObject Tag(RectTransform button)
+        /// <summary>Gently pulses the button while it is the sensible next step.</summary>
+        private static void Recommend(RectTransform button, ref bool state, bool on)
         {
-            var plate = Ui.Panel(button, "Recommended", Palette.Ink);
-            plate.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(-110, -8), new Vector2(110, 30));
-            var label = Ui.Label(plate.transform, Loc.T("activity_sheet.05"), 24, TextAnchor.MiddleCenter, Palette.Primary);
-            label.rectTransform.Fill(2);
-            plate.gameObject.SetActive(false);
-            return plate.gameObject;
-        }
-
-        /// <summary>Pulses the button and shows its tag while it is the sensible next step.</summary>
-        private static void Recommend(RectTransform button, GameObject tag, bool on)
-        {
-            if (tag.activeSelf == on)
+            if (state == on)
                 return;
-            tag.SetActive(on);
+            state = on;
             button.DOKill();
             button.localScale = Vector3.one;
             if (on)
-                button.DOScale(1.04f, 0.6f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo).SetLink(button.gameObject);
+                button.DOScale(1.015f, 0.7f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo).SetLink(button.gameObject);
         }
 
         private static List<ActivityDefinition> OrderedActivities(GameConfig config)
@@ -304,8 +292,8 @@ namespace TrashCats.Presentation.Hideout
             private readonly Color _timeColor;
             private readonly TMP_Text _reason;
             private readonly CycleBar _cycle;
-            private readonly GameObject _tag;
             private bool _current;
+            private bool _advised;
 
             public ActivityDefinition Activity { get; }
             public UiButton Button { get; }
@@ -324,7 +312,7 @@ namespace TrashCats.Presentation.Hideout
                     left = 0.26f;
                 }
                 _gain = Ui.Label(rect, "", 32, TextAnchor.LowerRight, Palette.Paper, heading: true);
-                _gain.rectTransform.Place(new Vector2(0.02f, 0.06f), new Vector2(0.25f, 0.6f));
+                _gain.rectTransform.Place(new Vector2(0f, 0f), new Vector2(0.25f, 0.6f), new Vector2(20, 16), Vector2.zero);
                 _gain.Outlined();
 
                 Button.Text.rectTransform.Place(new Vector2(left, 0.46f), new Vector2(1f, 1f), new Vector2(0, 0), new Vector2(-24, -14));
@@ -344,7 +332,6 @@ namespace TrashCats.Presentation.Hideout
 
                 _cycle = new CycleBar(rect, "Cycle");
                 _cycle.Root.Place(new Vector2(0.06f, 0f), new Vector2(0.94f, 0f), new Vector2(0, 14), new Vector2(0, 24));
-                _tag = Tag(rect);
             }
 
             public void ShowAvailable(long durationMs, int output)
@@ -380,7 +367,7 @@ namespace TrashCats.Presentation.Hideout
                 if (_current) _cycle.Set(progress01);
             }
 
-            public void SetRecommended(bool on) => Recommend(Button.Rect, _tag, on);
+            public void SetRecommended(bool on) => Recommend(Button.Rect, ref _advised, on);
         }
     }
 }

@@ -109,11 +109,11 @@ namespace TrashCats.Presentation.Battle
                 var row = Row(_catList, "PrepCat_" + cat.Id, i, Math.Max(3, cats.Count), color, "", () => Toggle(id));
                 row.Interactable = !tired || position >= 0;
                 row.Text.gameObject.SetActive(false);
-                var content = Ui.Rect(row.Rect, "Content").Place(Vector2.zero, Vector2.one, new Vector2(36, 10), new Vector2(-200, -10)); // room for the "Умения" button
+                var content = Ui.Rect(row.Rect, "Content").Place(Vector2.zero, Vector2.one, new Vector2(48, 12), new Vector2(-218, -12)); // room for the "Умения" button
                 Fighter(content, (position >= 0 ? $"[{position + 1}] " : "") + Texts.CatName(cat.Id), cat.GetLevel(AttributeType.Strength), cat.GetLevel(AttributeType.Technique),
                     cat.GetLevel(AttributeType.Endurance), ("energy", cat.Energy.ToString()), skills, status, Palette.Paper);
                 var details = Ui.Button(row.Rect, "Details_" + cat.Id, Loc.T("battle_prep_screen.09"), Palette.Paper, () => _onCatDetails(id), 26);
-                details.Rect.Place(new Vector2(1, 0.5f), new Vector2(1, 0.5f), new Vector2(-170, -35), new Vector2(-15, 35));
+                details.Rect.Place(new Vector2(1, 0.5f), new Vector2(1, 0.5f), new Vector2(-200, -35), new Vector2(-36, 35));
             }
 
             var error = _session.CanStartBattle(_territory, _order);
@@ -173,7 +173,7 @@ namespace TrashCats.Presentation.Battle
             var slots = Math.Max(count, 3);
             var card = Ui.Card(list, name, CardStyle.Strip);
             card.rectTransform.Place(new Vector2(0, 1f - (index + 1f) / slots), new Vector2(1, 1f - (float)index / slots), new Vector2(0, 6), new Vector2(0, -6));
-            return Ui.Rect(card.transform, "Content").Place(Vector2.zero, Vector2.one, new Vector2(30, 10), new Vector2(-30, -10));
+            return Ui.Rect(card.transform, "Content").Place(Vector2.zero, Vector2.one, new Vector2(46, 12), new Vector2(-46, -12));
         }
 
         /// <summary>

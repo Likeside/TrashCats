@@ -46,7 +46,7 @@ namespace TrashCats.Presentation.Hideout
             _header = Ui.Label(panel.transform, "", 50, TextAnchor.MiddleLeft, Palette.Ink, heading: true);
             _header.rectTransform.Place(new Vector2(0, 1), new Vector2(0.5f, 1), new Vector2(60, -120), new Vector2(0, -50));
             _aptitude = Info.Row(panel.transform, "Aptitude", 8f, TextAnchor.MiddleRight);
-            _aptitude.Place(new Vector2(0.5f, 1), Vector2.one, new Vector2(0, -120), new Vector2(-60, -50));
+            _aptitude.Place(new Vector2(0.5f, 1), Vector2.one, new Vector2(0, -120), new Vector2(-80, -50));
 
             _attributes = Info.Column(panel.transform, "Attributes", 6f);
             _attributes.Place(new Vector2(0, 1), Vector2.one, new Vector2(60, -380), new Vector2(-60, -130));

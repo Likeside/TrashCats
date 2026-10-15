@@ -114,10 +114,10 @@ namespace TrashCats.Presentation.UI
                 _win = Ui.Panel(inner, "Win", Palette.Hex("#4CAF3F")).rectTransform;
                 _loss = Ui.Panel(inner, "Loss", Palette.Warning).rectTransform;
                 _winText = Ui.Label(frame.transform, "", 30, TextAnchor.MiddleLeft, Palette.Paper, heading: true);
-                _winText.rectTransform.Fill(16);
+                _winText.rectTransform.Place(Vector2.zero, Vector2.one, new Vector2(30, 4), new Vector2(-30, -4));
                 _winText.Outlined();
                 _lossText = Ui.Label(frame.transform, "", 30, TextAnchor.MiddleRight, Palette.Paper, heading: true);
-                _lossText.rectTransform.Fill(16);
+                _lossText.rectTransform.Place(Vector2.zero, Vector2.one, new Vector2(30, 4), new Vector2(-30, -4));
                 _lossText.Outlined();
             }
 

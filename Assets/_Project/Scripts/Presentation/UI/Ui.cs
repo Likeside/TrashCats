@@ -279,6 +279,16 @@ namespace TrashCats.Presentation.UI
             return image;
         }
 
+        /// <summary>Width / height of the widest icon a bar can carry.</summary>
+        private static float BadgeSlotAspect()
+        {
+            var widest = 1f;
+            foreach (var key in new[] { "energy", "satiety", "hp", "paw" })
+                if (Skin?.Icon(key) is Sprite sprite)
+                    widest = Mathf.Max(widest, sprite.rect.width / sprite.rect.height);
+            return widest;
+        }
+
         /// <param name="badge">Icon drawn just left of the bar (energy, satiety, hp, grit); leave room for it.</param>
         public static UiBar Bar(Transform parent, string name, Color fill, string badge = null)
         {
@@ -292,13 +302,20 @@ namespace TrashCats.Presentation.UI
             var icon = badge != null ? Skin?.Icon(badge == "grit" ? "paw" : badge) : null;
             if (icon != null)
             {
-                var picture = Picture(back.transform, "Badge", icon);
-                picture.rectTransform.pivot = new Vector2(1f, 0.5f);
-                picture.rectTransform.Place(new Vector2(0, -0.05f), new Vector2(0, 1.05f));
+                // a slot as wide as the widest bar icon, the icon at its left: bars stacked in a group line their icons up
+                var slot = Rect(back.transform, "BadgeSlot");
+                slot.pivot = new Vector2(1f, 0.5f);
+                slot.Place(new Vector2(0, -0.05f), new Vector2(0, 1.05f));
+                var slotFit = slot.gameObject.AddComponent<AspectRatioFitter>();
+                slotFit.aspectMode = AspectRatioFitter.AspectMode.HeightControlsWidth;
+                slotFit.aspectRatio = BadgeSlotAspect();
+                slot.anchoredPosition = new Vector2(-6, 0);
+                var picture = Picture(slot, "Badge", icon);
+                picture.rectTransform.pivot = new Vector2(0f, 0.5f);
+                picture.rectTransform.Place(Vector2.zero, new Vector2(0, 1));
                 var fitter = picture.gameObject.AddComponent<AspectRatioFitter>();
                 fitter.aspectMode = AspectRatioFitter.AspectMode.HeightControlsWidth;
                 fitter.aspectRatio = icon.rect.width / icon.rect.height;
-                picture.rectTransform.anchoredPosition = new Vector2(-4, 0);
             }
             var fillImage = Panel(channel, "Fill", fill);
             fillImage.rectTransform.Fill();
