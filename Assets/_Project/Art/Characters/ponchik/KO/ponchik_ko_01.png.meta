@@ -8,6 +8,12 @@ TextureImporter:
   - first:
       213: -2765166759950931903
     second: ponchik_ko_01_1
+  - first:
+      213: -5095150837296207274
+    second: ponchik_ko_01_2
+  - first:
+      213: 7254725215171936230
+    second: ponchik_ko_01_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -132,10 +138,10 @@ TextureImporter:
       name: ponchik_ko_01_0
       rect:
         serializedVersion: 2
-        x: 127
-        y: 15
-        width: 218
-        height: 349
+        x: 79
+        y: 281
+        width: 19
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,10 +160,10 @@ TextureImporter:
       name: ponchik_ko_01_1
       rect:
         serializedVersion: 2
-        x: 221
-        y: 354
-        width: 12
-        height: 7
+        x: 88
+        y: 11
+        width: 227
+        height: 356
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -168,6 +174,50 @@ TextureImporter:
       bones: []
       spriteID: 14828687b7720a9d0800000000000000
       internalID: -2765166759950931903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ponchik_ko_01_2
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 130
+        width: 22
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65aece90f436a49b0800000000000000
+      internalID: -5095150837296207274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ponchik_ko_01_3
+      rect:
+        serializedVersion: 2
+        x: 308
+        y: 160
+        width: 23
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ef74616526fda460800000000000000
+      internalID: 7254725215171936230
       vertices: []
       indices: 
       edges: []
