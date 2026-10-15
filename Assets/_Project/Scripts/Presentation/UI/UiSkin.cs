@@ -31,6 +31,7 @@ namespace TrashCats.Presentation.UI
         [Tooltip("Dark painted tin (HUD, navigation)")] public Sprite tin;
         public float tinBorderScale = 2f;
         [Tooltip("Rounded cat card of the hideout, cut from the concept")] public Sprite catCard;
+        [Tooltip("Paper card with a single frame (panel_a without its inner line, Tools/make_plain_card.py)")] public Sprite plainCard;
         public float catCardBorderScale = 1.7f;
 
         [Header("Bars and decorations")]

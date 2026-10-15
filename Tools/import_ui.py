@@ -63,6 +63,7 @@ SLICES = {
     "panel_paper": (120, 70, 120, 118),
     "panel_tin": (110, 110, 110, 110),
     "card_cat": (52, 52, 52, 52),  # Tools/cut_card_portraits.py
+    "card_plain": (80, 80, 80, 80),  # Tools/make_plain_card.py
     "bar_frame": (48, 44, 48, 44),
     "bar_energy": (178, 52, 48, 52),
     "bar_satiety": (178, 52, 48, 52),
