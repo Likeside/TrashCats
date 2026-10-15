@@ -28,7 +28,7 @@ namespace TrashCats.Presentation.Hideout
             _onResult = onResult;
             _art = art;
 
-            Ui.Card(root, "PanelBack", CardStyle.Tin).rectTransform.Fill();
+            // no backing strip: the cards stand on the scene, as in the concept
             for (var i = 0; i < Slots; i++)
             {
                 var slot = Ui.Rect(root, "Slot" + i);
@@ -79,6 +79,11 @@ namespace TrashCats.Presentation.Hideout
 
                 var background = Ui.Card(slot, "CatCard" + index, CardStyle.Strip, raycast: true);
                 background.rectTransform.Fill();
+                if (Ui.Skin?.catCard != null)
+                {
+                    background.sprite = Ui.Skin.catCard;
+                    background.pixelsPerUnitMultiplier = Ui.Skin.catCardBorderScale;
+                }
                 background.gameObject.AddComponent<Button>().onClick.AddListener(() =>
                 {
                     if (_cat != null) _owner._onCardTapped(_cat.Id);
@@ -104,19 +109,21 @@ namespace TrashCats.Presentation.Hideout
                 var window = Ui.Rect(border.transform, "Window").Fill(4);
                 _backdrop = Ui.Panel(window, "Backdrop", Palette.PanelDark);
                 _backdrop.rectTransform.Fill();
-                // the concept's card picture (portrait already on its backdrop) covers the whole window when there is one
-                window.gameObject.AddComponent<RectMask2D>();
-                _card = Ui.Panel(window, "Card", Color.white);
-                _card.rectTransform.pivot = new Vector2(0.5f, 1f); // ears stay in; the extra goes off the bottom, under the name
-                _card.gameObject.AddComponent<AspectRatioFitter>().aspectMode = AspectRatioFitter.AspectMode.EnvelopeParent;
+                // the concept's card picture: a rounded framed window with the ears sticking out over its top edge.
+                // The frame touches the picture's sides and bottom, so it is laid out by width from the bottom.
+                _card = Ui.Panel(content, "Card", Color.white);
+                _card.rectTransform.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(0, -170), new Vector2(0, -170));
+                _card.rectTransform.pivot = new Vector2(0.5f, 0f);
+                var fitter = _card.gameObject.AddComponent<AspectRatioFitter>();
+                fitter.aspectMode = AspectRatioFitter.AspectMode.WidthControlsHeight;
                 // the bust is clipped at the bottom and sides only: the ears stick out over the card, like in the concept
                 var clip = Ui.Rect(border.transform, "BustClip").Place(Vector2.zero, Vector2.one, new Vector2(4, 4), new Vector2(-4, 110));
                 clip.gameObject.AddComponent<RectMask2D>();
                 _portrait = Ui.Panel(clip, "Portrait", Color.white);
                 _portrait.preserveAspect = true;
                 _portrait.rectTransform.Place(new Vector2(0.04f, 0f), new Vector2(0.96f, 1f), Vector2.zero, new Vector2(0, -40));
-                _portraitName = Ui.Label(border.transform, "", 34, TextAnchor.LowerCenter, Palette.Paper, heading: true);
-                _portraitName.rectTransform.Fill(4);
+                _portraitName = Ui.Label(content, "", 34, TextAnchor.LowerCenter, Palette.Paper, heading: true);
+                _portraitName.rectTransform.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(4, -166), new Vector2(-4, -60));
                 _portraitName.Outlined();
 
                 _status = Ui.Label(content, "", 26, TextAnchor.MiddleCenter, Palette.Ink);
@@ -154,9 +161,7 @@ namespace TrashCats.Presentation.Hideout
                 var key = session.Config.GetCat(cat.Id).ViewKey;
                 var card = key != null ? _owner._art?.Card(key) : null;
                 var portrait = card ?? (key != null ? _owner._art?.Portrait(key) : null);
-                _portrait.transform.parent.parent.gameObject.SetActive(portrait != null);
-                _portrait.transform.parent.gameObject.SetActive(card == null);
-                _backdrop.gameObject.SetActive(card == null);
+                _portrait.transform.parent.parent.gameObject.SetActive(portrait != null && card == null);
                 _card.gameObject.SetActive(card != null);
                 if (card != null)
                 {
@@ -165,6 +170,7 @@ namespace TrashCats.Presentation.Hideout
                 }
                 _backdrop.color = CatColors.Backdrop(cat.Id);
                 _header.gameObject.SetActive(portrait == null);
+                _portraitName.gameObject.SetActive(portrait != null);
                 if (portrait != null)
                 {
                     if (card == null) _portrait.sprite = portrait;
