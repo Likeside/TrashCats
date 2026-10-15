@@ -203,8 +203,10 @@ namespace TrashCats.Presentation.Hideout
         /// Idle cats in a row in the middle of the yard: Ponchik in the centre facing the player, Ryzhy on the right
         /// looking right, Shnyr on the left looking left (as placed in the layout scene); others fill in behind.
         /// </summary>
-        public static CatSpot Idle(string viewKey, int index) => viewKey switch
+        public static CatSpot Idle(string viewKey, int index, bool alone = false) => viewKey switch
         {
+            // alone in the gang (the start of the game): in the middle, on Ponchik's spot, a little smaller as it is farther
+            "ryzhy" when alone => new CatSpot(new Vector2(0.5859f, 0.2473f), CatClip.Sit, height: 0.2761f * DepthScale(0.2473f) / DepthScale(0.2223f), depth: 0.299f),
             // a gang shot: Ponchik a step behind in the middle, Shnyr and Ryzhy in front, overlapping him at the shoulders
             "ponchik" => new CatSpot(new Vector2(0.5859f, 0.2473f), CatClip.Sit, height: 0.2876f, depth: 0.299f),
             "ryzhy" => new CatSpot(new Vector2(0.6514f, 0.2223f), CatClip.Sit, height: 0.2761f, depth: 0.274f),

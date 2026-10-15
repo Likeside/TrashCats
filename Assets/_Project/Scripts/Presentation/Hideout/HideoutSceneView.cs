@@ -455,7 +455,7 @@ namespace TrashCats.Presentation.Hideout
                     }
                 }
                 else
-                    spot = HideoutLayout.Idle(token.Art?.viewKey, idle++);
+                    spot = HideoutLayout.Idle(token.Art?.viewKey, idle++, alone: world.Cats.Count == 1);
 
                 // out on the street or in the dumpster: a portrait with the cycle bar instead of the cat, right over the
                 // dumpster or above it under the street gap (it fits under the HUD); more cats go to the left
