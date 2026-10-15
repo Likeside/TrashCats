@@ -52,3 +52,21 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+# Frames drawn in the air keep their height (restored from the archive after grounding, 2026-10-16): the leaping heavy
+# attacks, and hit / knock-out frames where the fighter flies back or falls (archived gap under the feet >= AIRBORNE).
+LEAPS = {("shnyr", "heavy"), ("ponchik", "heavy")}
+AIRBORNE = 45
+
+
+def restore_airborne():
+    import glob
+    for path in sorted(glob.glob(os.path.join(ARCHIVE, "*", "*", "*.png"))):
+        character, role = path.split(os.sep)[-3:-1]
+        a = np.array(Image.open(path).convert("RGBA"))[..., 3] > ALPHA
+        gap = a.shape[0] - 1 - np.nonzero(a.any(1))[0].max()
+        if (character, role) in LEAPS or (role in ("hit", "ko") and gap >= AIRBORNE):
+            target = next(c for c in glob.glob(f"Assets/_Project/Art/Characters/*/*/{os.path.basename(path)}"))
+            shutil.copy2(path, target)
+            print(f"restored {target} (gap {gap})")
