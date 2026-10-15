@@ -48,10 +48,10 @@ namespace TrashCats.Tests
         }
 
         [Test]
-        public void Station_HoldsOneCat_ButOpenActivitiesHoldEveryone()
+        public void EveryStation_HoldsOneCat()
         {
-            var a = TestCats.Make(TestIds.Ryzhy);
-            var b = TestCats.Make(TestIds.Shnyr);
+            var a = TestCats.Make(TestIds.Ryzhy, energy: 50);
+            var b = TestCats.Make(TestIds.Shnyr, energy: 50);
             var world = TestWorlds.Make(_config, cats: new[] { a, b });
 
             ActivitySystem.Start(world, a, TestIds.TrainStr, _events);
@@ -60,8 +60,12 @@ namespace TrashCats.Tests
             Assert.That(ActivitySystem.CanStart(world, b, TestIds.TrainStr), Is.EqualTo(ActivityError.StationBusy));
             Assert.That(ActivitySystem.CanStart(world, b, TestIds.TrainAgi), Is.EqualTo(ActivityError.None));
 
-            ActivitySystem.Start(world, a, TestIds.Scavenge, _events);
-            ActivitySystem.Start(world, b, TestIds.Scavenge, _events);
+            // the street, the dumpster and the bed too (two cats did sleep on one bed)
+            foreach (var activity in new[] { TestIds.Scavenge, TestIds.Rummage, TestIds.Sleep })
+            {
+                ActivitySystem.Start(world, a, activity, _events);
+                Assert.That(ActivitySystem.CanStart(world, b, activity), Is.EqualTo(ActivityError.StationBusy), activity.Value);
+            }
             Assert.That(ActivitySystem.CanStart(world, b, TestIds.TrainStr), Is.EqualTo(ActivityError.None));
         }
 

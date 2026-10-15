@@ -89,7 +89,7 @@ MonoBehaviour:
     satietyCost: 4
     baseOutput: 3
     trainedAttribute: 0
-    capacity: 0
+    capacity: 1
   - id: act_rummage
     nameKey: act.rummage
     kind: 1
@@ -98,7 +98,7 @@ MonoBehaviour:
     satietyCost: 4
     baseOutput: 3
     trainedAttribute: 0
-    capacity: 0
+    capacity: 1
   - id: act_train_str
     nameKey: act.train_str
     kind: 2
@@ -134,7 +134,7 @@ MonoBehaviour:
     satietyCost: 0
     baseOutput: 25
     trainedAttribute: 0
-    capacity: 0
+    capacity: 1
   upgrades:
   - id: upg_boxes
     nameKey: upg.boxes

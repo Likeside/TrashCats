@@ -1,0 +1,8 @@
+[
+ {
+  "name": "prop_barbell",
+  "size": "1536x1024",
+  "refs": ["Assets/_Project/Art/Characters/Ryzhy/Bench/bench_00.png", "Assets/_Project/Art/Environment/prop_bench.png", "Assets/_Project/Art/Environment/prop_upg_dumpster_v1_angled.png"],
+  "prompt": "One game prop in EXACTLY the style of the references (comic style, thick black ink outline, gritty hand-painted texture, warm dusk light). The prop = the SAME home-made barbell the cat lifts in the first reference: a long wooden broom handle with a big taped tin can (weight) on each end, exactly the same colours, cans, tape and proportions. Lying horizontally at rest, seen from the front and slightly from above as if it rests across two brick stands (do NOT draw the bricks, the mat or a cat), the whole barbell in frame with space around it, no ground, no shadow, no scenery. Solid flat pure chroma-key GREEN (#00FF00) background everywhere."
+ }
+]

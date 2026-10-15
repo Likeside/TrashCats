@@ -82,12 +82,12 @@ namespace TrashCats.Tests
                 new ActivityDefinition
                 {
                     Id = TestIds.Scavenge, NameKey = "act.scavenge", Kind = ActivityKind.Scavenge,
-                    DurationMs = 20_000, EnergyCost = 10, SatietyCost = 4, BaseOutput = 3,
+                    DurationMs = 20_000, EnergyCost = 10, SatietyCost = 4, BaseOutput = 3, Capacity = 1,
                 },
                 new ActivityDefinition
                 {
                     Id = TestIds.Rummage, NameKey = "act.rummage", Kind = ActivityKind.Rummage,
-                    DurationMs = 25_000, EnergyCost = 10, SatietyCost = 4, BaseOutput = 3,
+                    DurationMs = 25_000, EnergyCost = 10, SatietyCost = 4, BaseOutput = 3, Capacity = 1,
                 },
                 Training(TestIds.TrainStr, "act.train_str", AttributeType.Strength),
                 Training(TestIds.TrainAgi, "act.train_agi", AttributeType.Technique),
@@ -95,7 +95,7 @@ namespace TrashCats.Tests
                 new ActivityDefinition
                 {
                     Id = TestIds.Sleep, NameKey = "act.sleep", Kind = ActivityKind.Sleep,
-                    DurationMs = 15_000, EnergyCost = 0, SatietyCost = 0, BaseOutput = 25,
+                    DurationMs = 15_000, EnergyCost = 0, SatietyCost = 0, BaseOutput = 25, Capacity = 1,
                 },
             },
             Upgrades = new[]

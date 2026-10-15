@@ -28,3 +28,10 @@
 |---|---|---|
 | `UI/icon_satiety_v1_bowl.png` | сытость: миска (путалась с едой) | лист `ui_a_icons` |
 | `UI/icon_satiety_v2_fish.png` | сытость: рыба (текущая) | `Docs/ArtDirection/Generated/raw_icon_satiety`, `Tools/cut_icon.py` |
+
+## Пропсы убежища (сгенерированные 2026-10-15)
+| Файл | Что это | Источник |
+|---|---|---|
+| `Props/prop_exit_sign_v1.png` | указатель EXIT (станция «Улица», левый нижний угол) | `Docs/ArtDirection/Generated/raw_exit` |
+| `Props/prop_barbell_v1.png` | штанга на кирпичных стойках у матраса | `Docs/ArtDirection/Generated/raw_barbell` |
+| `Props/food_bits_v1/` | объедки, вылетающие из-за экрана, пока кот на улице | `Docs/ArtDirection/Generated/raw_food_bits` |

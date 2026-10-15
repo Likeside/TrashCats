@@ -1,0 +1,8 @@
+[
+ {
+  "name": "prop_exit_sign",
+  "size": "1024x1024",
+  "refs": ["Assets/_Project/Art/Environment/prop_upg_dumpster_v1_angled.png", "Assets/_Project/Art/Environment/prop_bracket.png", "Assets/_Project/Art/Environment/bg_hideout.png"],
+  "prompt": "One game prop for the back yard of the third reference, in EXACTLY the style of the first two references (comic style, thick black ink outline, gritty hand-painted texture, warm dusk lighting, slightly worn). The prop = a home-made street EXIT SIGN: a short weathered wooden post stuck in a small stack of two old red bricks, with a battered wooden arrow board nailed to it, the arrow pointing to the LEFT, the word EXIT painted on the arrow in chunky hand-painted white letters, a rusty nail head or two, maybe a scrap of string. Seen slightly from the front, standing upright, whole object in frame with some space around it, no ground, no shadow, no scenery. Solid flat pure chroma-key GREEN (#00FF00) background everywhere."
+ }
+]

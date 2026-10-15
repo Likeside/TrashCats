@@ -2533,6 +2533,12 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 411d07a56dbec68949e2ec2f2b4459b0, type: 3}
   - key: bg_map
     sprite: {fileID: 21300000, guid: 5acc1b7dedfbc782b8e854ba5cff45a0, type: 3}
+  - key: fx_food_bone
+    sprite: {fileID: 21300000, guid: 9536611aa9635f2a5830cc3b3368f9c6, type: 3}
+  - key: fx_food_head
+    sprite: {fileID: 21300000, guid: 25c218e7ef48bc579a178c6ad15d6f63, type: 3}
+  - key: fx_food_stew
+    sprite: {fileID: 21300000, guid: d2c82614b8c17a86f8f650d8fcd1bdd0, type: 3}
   - key: fx_wheel_arcs
     sprite: {fileID: 21300000, guid: a095f65187009af30879f2bd6c621b0f, type: 3}
   - key: icon_energy
@@ -2547,10 +2553,14 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 92f3dc1861eb3114daa13230cca36230, type: 3}
   - key: icon_strength
     sprite: {fileID: 21300000, guid: 6f97afbe19985c736bd0e2c2562acee1, type: 3}
+  - key: prop_barbell
+    sprite: {fileID: 21300000, guid: dbbfd885367fe9808ae974eaa4bd7ab7, type: 3}
   - key: prop_bench
     sprite: {fileID: 21300000, guid: 2c25623fd7d04660f812e8e282518cb3, type: 3}
   - key: prop_bracket
     sprite: {fileID: 21300000, guid: 3cc1d7aecbdc2fd7f8ea99fd760dd46e, type: 3}
+  - key: prop_exit_sign
+    sprite: {fileID: 21300000, guid: bf52a286024f67cd39d22c23820f521b, type: 3}
   - key: prop_upg_boxes
     sprite: {fileID: 21300000, guid: 78d51e62bc1d37d3eae2a616c675eea1, type: 3}
   - key: prop_upg_can

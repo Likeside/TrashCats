@@ -112,12 +112,32 @@ namespace TrashCats.Presentation.Hideout
         /// <summary>The skipping rope on a nail by the door.</summary>
         public static readonly PropPlace RopeProp = new PropPlace("prop_upg_mouse", new Vector2(0.3097f, 0.5206f), new Vector2(0.065f, 0.1059f), depth: 0.497f);
 
-        /// <summary>The street gap on the right (no picture, only the caption).</summary>
-        public static readonly PropPlace StreetGap = new PropPlace(null, new Vector2(0.878f, 0.722f), new Vector2(0.144f, 0.108f));
+        /// <summary>
+        /// The barbell resting with its cans on the mat's two brick stands, in 0..1 of the mat picture as drawn (before the
+        /// mirroring): bottom centre, size, tilt (the stands stand at different heights). Hidden while a cat presses it.
+        /// </summary>
+        public static readonly (string Sprite, Vector2 Bottom, Vector2 Size, float Rotation) Barbell =
+            ("prop_barbell", new Vector2(0.667f, 0.897f), new Vector2(0.642f, 0.19f), -7.3f);
+
+        /// <summary>The way out to the street: an EXIT signpost in the empty front left corner.</summary>
+        /// Nearer to the camera than the cat on the skipping rope: a bit bigger, lower, and drawn over it.
+        public static readonly PropPlace ExitSign = new PropPlace("prop_exit_sign", new Vector2(0.115f, 0.025f), new Vector2(0.2283f, 0.22f), depth: 0.0f);
+
+        /// <summary>
+        /// Top of the head in the first frame of each cat's idle clip (as drawn, facing right; 0..1 of the frame), where
+        /// the speech bubble's tail points.
+        /// </summary>
+        public static Vector2 IdleHead(string viewKey) => viewKey switch
+        {
+            "ryzhy" => new Vector2(0.66f, 0.95f),
+            "shnyr" => new Vector2(0.43f, 0.96f),
+            "ponchik" => new Vector2(0.49f, 0.96f),
+            _ => new Vector2(0.5f, 0.95f),
+        };
 
         public static PropPlace Prop(ActivityDefinition activity) => activity.Kind switch
         {
-            ActivityKind.Scavenge => StreetGap,
+            ActivityKind.Scavenge => ExitSign,
             ActivityKind.Rummage => Dumpster,
             ActivityKind.Sleep => Bed,
             _ => activity.TrainedAttribute switch
@@ -149,7 +169,7 @@ namespace TrashCats.Presentation.Hideout
             var shift = new Vector2(-0.09f * index, -0.03f * index);
             return activity.Kind switch
             {
-                ActivityKind.Scavenge => new CatSpot(StreetGap.Foot, CatClip.Walk, hidden: true),
+                ActivityKind.Scavenge => new CatSpot(ExitSign.Foot, CatClip.Walk, hidden: true),
                 ActivityKind.Rummage => new CatSpot(new Vector2(Dumpster.Foot.x, Dumpster.Max.y), CatClip.Walk, hidden: true),
                 // lying on the blanket, drawn over the bed
                 ActivityKind.Sleep => new CatSpot(new Vector2(0.8438f, 0.2135f) + shift * 0.5f, CatClip.Sleep, overProp: true, scale: 1.147f, depth: -0.022f),

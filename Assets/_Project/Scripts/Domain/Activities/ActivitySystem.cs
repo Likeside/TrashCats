@@ -139,12 +139,17 @@ namespace TrashCats.Domain
         {
             var config = world.Config;
             if (definition.Kind == ActivityKind.Sleep)
-                return cat.Energy >= config.Needs.Max ? ActivityError.EnergyFull : ActivityError.None;
-
-            // "MAX" is more useful to the player than "tired" when both apply.
-            if (definition.Kind == ActivityKind.Train && cat.GetLevel(definition.TrainedAttribute) >= config.Progression.MaxLevel)
-                return ActivityError.AttributeMaxed;
-            if (CatRules.IsTired(cat, config)) return ActivityError.Tired;
+            {
+                if (cat.Energy >= config.Needs.Max) return ActivityError.EnergyFull;
+            }
+            else
+            {
+                // "MAX" is more useful to the player than "tired" when both apply.
+                if (definition.Kind == ActivityKind.Train && cat.GetLevel(definition.TrainedAttribute) >= config.Progression.MaxLevel)
+                    return ActivityError.AttributeMaxed;
+                if (CatRules.IsTired(cat, config)) return ActivityError.Tired;
+            }
+            // every station holds as many cats as its capacity (one each since 2026-10-15)
             if (definition.Capacity > 0 && CountOthersOn(world, cat, definition.Id) >= definition.Capacity)
                 return ActivityError.StationBusy;
             return ActivityError.None;
