@@ -617,10 +617,9 @@ MonoBehaviour:
       - {fileID: 21300000, guid: d5e0b1e3366fa4f3887ae6a1233e2c00, type: 3}
       - {fileID: 21300000, guid: 19c6d46e5d76cde81a3c1e1ec177d26f, type: 3}
       - {fileID: 21300000, guid: ca4a98b77c686061da5b319f408ab146, type: 3}
-      - {fileID: 21300000, guid: 2bb7706d792a6a896b0c4a694a7ac8ef, type: 3}
-      fps: 10
+      fps: 8
       loop: 0
-      keys: 00000000020000000300000004000000
+      keys: 
       pingPong: 0
       attachPoints: []
       breathe: 0

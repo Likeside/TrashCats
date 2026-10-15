@@ -1,0 +1,20 @@
+[
+ {
+  "name": "ponchik_front",
+  "size": "1024x1024",
+  "refs": [
+   "ArtSource/Characters/ponchik/v_hideidle_before_v9/ponchik_hideidle_00.png",
+   "Assets/_Project/Art/Characters/ponchik/Idle/ponchik_idle_00.png"
+  ],
+  "prompt": "One game sprite: the very fat black-and-white cat Ponchik standing upright on the hind legs, front paws crossed on the chest, EXACTLY the pose and the camera angle of the FIRST reference: facing the viewer straight on (en face), face and belly to the viewer, symmetrical, feet apart. Use the BODY PROPORTIONS of the SECOND reference (the same cat seen from the side in a fighting stance): a huge round belly that takes most of the body, a SMALL head sitting low on the shoulders, short thick legs. The first reference has the right camera angle and pose but its head is too big and its belly too small. Same colours and the same grumpy half-closed eyes. Whole body in frame. Comic book style exactly like the references: bold black ink outlines, flat colours with simple shading and light hatching. IMPORTANT: solid flat pure chroma-key GREEN (#00FF00) background everywhere, no ground line, no shadow, no scenery, no text. Do not use green on the character."
+ },
+ {
+  "name": "ponchik_rope",
+  "size": "1536x1024",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v8_rope/ponchik_rope.png",
+   "Assets/_Project/Art/Characters/ponchik/Idle/ponchik_idle_00.png"
+  ],
+  "prompt": "Game sprite sheet: 8 animation frames of ONE continuous looping skipping-rope animation in a grid of 2 rows x 4 columns, read left to right, top row first, generous empty space between frames, never mirror a frame. Redraw the FIRST reference frame by frame: the same 8 frames, the same rope positions in each frame, the same jump in frame 5, the same camera angle (the cat faces the viewer straight on, en face, face and belly to the viewer). Change ONLY the cat's body proportions: Use the BODY PROPORTIONS of the SECOND reference (the same cat seen from the side in a fighting stance): a huge round belly that takes most of the body, a SMALL head sitting low on the shoulders, short thick legs. The first reference has the right camera angle and pose but its head is too big and its belly too small. Comic book style exactly like the references: bold black ink outlines, flat colours with simple shading and light hatching. IMPORTANT: the background of the whole sheet MUST be solid flat pure chroma-key GREEN (#00FF00) everywhere, no ground line, no shadow, no scenery, no text, no frame numbers. Do not use green on the character."
+ }
+]
