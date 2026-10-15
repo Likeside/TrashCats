@@ -12,29 +12,45 @@ using UnityEngine.UI;
 namespace TrashCats.Presentation.Hideout
 {
     /// <summary>
-    /// Bottom sheet for one cat: six activities with duration/result previews or the reason they are unavailable,
-    /// plus Feed and Stop (Docs/GDD/UI_UX.md §4.1).
+    /// Bottom sheet for one cat (Docs/GDD/UI_UX.md §4.1): a header with the cat's avatar, name, status and needs; six
+    /// activities with what they cost and bring as icons (or what is missing), the current one with its cycle bar and the
+    /// sensible next step pulsing; Feed with the food it takes and the satiety it gives, and Stop while the cat works.
     /// </summary>
     public sealed class ActivitySheet
     {
+        private const float ChipHeight = 34f;
+        private const int ChipFont = 26;
+
         private readonly GameSession _session;
         private readonly OverlayStack _overlays;
         private readonly Action<CommandResult> _onResult;
+        private readonly Characters.CharacterViewFactory _art;
         private readonly GameObject _root;
+        private readonly Image _avatar;
         private readonly TMP_Text _title;
-        private readonly TMP_Text _needs;
-        private readonly List<(ActivityDefinition Activity, UiButton Button)> _buttons = new List<(ActivityDefinition, UiButton)>();
+        private readonly TMP_Text _status;
+        private readonly CycleBar _statusCycle;
+        private readonly UiBar _energy;
+        private readonly UiBar _satiety;
+        private readonly List<ActivityButton> _buttons = new List<ActivityButton>();
         private readonly UiButton _feed;
+        private readonly RectTransform _feedRow;
+        private readonly TMP_Text _feedSpend;
+        private readonly TMP_Text _feedGain;
+        private readonly GameObject _feedTag;
         private readonly UiButton _stop;
         private CatId? _catId;
+        private bool _fitFeed;
 
         public bool IsOpen => _catId != null;
 
-        public ActivitySheet(GameSession session, RectTransform parent, OverlayStack overlays, Action<CommandResult> onResult, Action<CatId> onDetails)
+        public ActivitySheet(GameSession session, RectTransform parent, OverlayStack overlays, Action<CommandResult> onResult, Action<CatId> onDetails,
+            Characters.CharacterViewFactory art = null)
         {
             _session = session;
             _overlays = overlays;
             _onResult = onResult;
+            _art = art;
 
             var dim = Ui.Panel(parent, "ActivitySheet", Palette.Dim, raycast: true);
             dim.rectTransform.Fill();
@@ -44,50 +60,63 @@ namespace TrashCats.Presentation.Hideout
             var panel = Ui.Card(dim.transform, "Sheet", CardStyle.Paper, raycast: true);
             panel.rectTransform.Place(Vector2.zero, new Vector2(1f, 0f), Vector2.zero, new Vector2(0, 980));
 
-            // name and needs on the left half, the details button on the right: nothing overlaps
-            _title = Ui.Label(panel.transform, "", 44, TextAnchor.MiddleLeft, Palette.Ink);
-            _title.rectTransform.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(60, -105), new Vector2(-520, -45));
-            _needs = Ui.Label(panel.transform, "", 30, TextAnchor.MiddleLeft, Palette.Ink);
-            _needs.rectTransform.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(60, -150), new Vector2(-520, -105));
-            _needs.enableAutoSizing = true;
-            _needs.fontSizeMin = 20;
-            _needs.fontSizeMax = 30;
-
-            // big yellow "skills and stats" button with an icon that gently pulses, so it is hard to miss
-            var details = Ui.Button(panel.transform, "Sheet_Details", Loc.T("activity_sheet.01"), Palette.Primary, () =>
+            void OpenDetails()
             {
                 if (_catId is CatId id) onDetails(id);
-            }, 34);
-            details.Rect.Place(new Vector2(1, 1), new Vector2(1, 1), new Vector2(-500, -165), new Vector2(-40, -35));
-            if (Ui.Icon(details.Rect, "skill") is Image icon)
-            {
-                icon.rectTransform.Place(new Vector2(0, 0.12f), new Vector2(0, 0.88f), new Vector2(26, 0), new Vector2(126, 0));
-                details.Text.rectTransform.offsetMin = new Vector2(130, details.Text.rectTransform.offsetMin.y);
             }
-            details.Text.Outlined();
-            details.Rect.DOScale(1.05f, 0.7f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo).SetLink(details.Rect.gameObject);
+
+            // header: avatar (tap = skills and stats), name, what the cat is doing, energy and satiety
+            _avatar = Ui.Panel(panel.transform, "Avatar", Color.white, raycast: true);
+            _avatar.preserveAspect = true;
+            _avatar.rectTransform.Place(new Vector2(0, 1), new Vector2(0, 1), new Vector2(44, -226), new Vector2(224, -46));
+            _avatar.gameObject.AddComponent<Button>().onClick.AddListener(OpenDetails);
+
+            _title = Ui.Label(panel.transform, "", 46, TextAnchor.MiddleLeft, Palette.Ink);
+            _title.rectTransform.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(248, -98), new Vector2(-290, -44));
+            _status = Ui.Label(panel.transform, "", 28, TextAnchor.MiddleLeft, Palette.Ink, heading: false);
+            _status.rectTransform.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(248, -134), new Vector2(-290, -98));
+            _status.enableAutoSizing = true;
+            _status.fontSizeMin = 20;
+            _status.fontSizeMax = 28;
+            _statusCycle = new CycleBar(panel.transform, "StatusCycle");
+            _statusCycle.Root.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(250, -146), new Vector2(-292, -136));
+
+            _energy = Ui.Bar(panel.transform, "Energy", Palette.Energy, "energy");
+            _energy.Rect.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(298, -190), new Vector2(-292, -154));
+            _satiety = Ui.Bar(panel.transform, "Satiety", Palette.Satiety, "satiety");
+            _satiety.Rect.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(298, -232), new Vector2(-292, -196));
+
+            // skills and stats: a compact light button with its icon, it no longer outshouts the activities
+            var details = Ui.Button(panel.transform, "Sheet_Details", Loc.T("activity_sheet.01"), Palette.Paper, OpenDetails, 28);
+            details.Rect.Place(new Vector2(1, 1), new Vector2(1, 1), new Vector2(-262, -232), new Vector2(-40, -44));
+            details.Text.rectTransform.Place(new Vector2(0, 0), new Vector2(1, 0.42f), new Vector2(18, 14), new Vector2(-18, 0));
+            details.Text.fontSizeMin = 20;
+            if (Ui.Icon(details.Rect, "skill") is Image skillIcon)
+                skillIcon.rectTransform.Place(new Vector2(0.5f, 0.42f), new Vector2(0.5f, 1f), new Vector2(-56, 0), new Vector2(56, -16));
 
             var activities = OrderedActivities(session.Config);
             for (var i = 0; i < activities.Count; i++)
             {
-                var activity = activities[i];
                 var col = i % 2;
                 var row = i / 2;
-                var button = Ui.Button(panel.transform, "Activity_" + activity.Id, "", Palette.Secondary, () => Assign(activity.Id), 30);
-                // what the activity brings: food, junk, an attribute or energy
-                var outcome = Ui.Icon(button.Rect, Texts.OutcomeIcon(activity));
-                if (outcome != null)
-                {
-                    outcome.rectTransform.Place(new Vector2(0.03f, 0.12f), new Vector2(0.27f, 0.88f));
-                    button.Text.rectTransform.anchorMin = new Vector2(0.27f, button.Text.rectTransform.anchorMin.y);
-                }
-                button.Rect.Place(new Vector2(col * 0.5f, 1f), new Vector2((col + 1) * 0.5f, 1f),
-                    new Vector2(30, -160 - (row + 1) * 180), new Vector2(-30, -160 - row * 180 - 20));
-                _buttons.Add((activity, button));
+                var activity = activities[i];
+                var button = new ActivityButton(panel.transform, activity, () => Assign(activity.Id));
+                button.Button.Rect.Place(new Vector2(col * 0.5f, 1f), new Vector2((col + 1) * 0.5f, 1f),
+                    new Vector2(col == 0 ? 30 : 15, -250 - row * 186 - 166), new Vector2(col == 0 ? -15 : -30, -250 - row * 186));
+                _buttons.Add(button);
             }
 
+            // Feed: "Feed  [food] −4  →  +40 satiety"; the gang's food is spent, so it lives here and not in the header
             _feed = Ui.Button(panel.transform, "Sheet_Feed", "", Palette.Primary, Feed, 32);
-            _feed.Rect.Place(new Vector2(0, 0), new Vector2(0.5f, 0), new Vector2(30, 40), new Vector2(-15, 150));
+            _feedRow = Info.Row(_feed.Rect, "FeedRow", 10f, TextAnchor.MiddleCenter);
+            _feedRow.Fill();
+            Info.Text(_feedRow, Loc.T("activity_sheet.03"), 32, Palette.Ink);
+            _feedSpend = Info.Chip(_feedRow, "food", "", 46f, 30, Palette.Ink).GetComponentInChildren<TMP_Text>();
+            Info.Text(_feedRow, "→", 30, Palette.Ink);
+            // the gain in words: the food and satiety icons look alike at this size
+            _feedGain = Info.Text(_feedRow, "", 30, Palette.Ink);
+            _feedTag = Tag(_feed.Rect);
+
             _stop = Ui.Button(panel.transform, "Stop", Loc.T("activity_sheet.02"), Palette.Disabled, Stop, 32);
             _stop.Rect.Place(new Vector2(0.5f, 0), new Vector2(1f, 0), new Vector2(15, 40), new Vector2(-30, 150));
 
@@ -109,36 +138,81 @@ namespace TrashCats.Presentation.Hideout
                 return;
 
             var id = _catId.Value;
+            var config = _session.Config;
+            var working = cat.Activity.IsWorking;
+            var viewKey = config.GetCat(id).ViewKey;
+            var avatar = viewKey != null ? _art?.Avatar(viewKey) ?? _art?.Portrait(viewKey) : null;
+            _avatar.sprite = avatar;
+            _avatar.enabled = avatar != null;
+
             _title.text = Texts.CatName(id);
-            _needs.text = Loc.T("activity_sheet.03", cat.Energy, cat.Satiety, _session.World.Food);
+            _status.text = working ? Texts.Doing(config.GetActivity(cat.Activity.ActivityId)) : Texts.IdleStatus(cat.Activity.IdleReason);
+            _statusCycle.Root.gameObject.SetActive(working);
+            var max = (float)config.Needs.Max;
+            _energy.Set(cat.Energy / max, cat.Energy.ToString());
+            _satiety.Set(cat.Satiety / max, cat.Satiety.ToString());
 
-            foreach (var (activity, button) in _buttons)
+            var tired = CatRules.IsTired(cat, config);
+            foreach (var button in _buttons)
             {
+                var activity = button.Activity;
                 var error = _session.CanAssign(id, activity.Id);
-                var current = cat.Activity.IsWorking && cat.Activity.ActivityId == activity.Id;
-                button.Interactable = error == CommandError.None;
-                button.SetColor(current ? Palette.Primary : Palette.Secondary);
-
-                string details;
-                if (error != CommandError.None)
-                {
-                    details = Texts.Error(error);
-                }
+                var current = working && cat.Activity.ActivityId == activity.Id;
+                if (error == CommandError.None)
+                    button.ShowAvailable(_session.PreviewDuration(id, activity.Id), _session.PreviewOutput(id, activity.Id));
                 else
-                {
-                    var duration = _session.PreviewDuration(id, activity.Id);
-                    var output = _session.PreviewOutput(id, activity.Id);
-                    var slow = duration > activity.DurationMs ? Loc.T("activity_sheet.04") : "";
-                    details = $"{Texts.Seconds(duration)} · {Texts.Output(activity, output)}{slow}";
-                }
-
-                button.Text.text = $"{Texts.ActivityName(activity)}\n<size=26>{details}</size>";
+                    button.ShowUnavailable(error == CommandError.Tired ? Loc.T("activity_sheet.04", config.Needs.TiredThreshold) : Texts.Error(error));
+                button.SetCurrent(current);
+                // a tired cat should sleep: say so
+                button.SetRecommended(activity.Kind == ActivityKind.Sleep && tired && !current && error == CommandError.None);
             }
 
             var canFeed = _session.CanFeed(id);
             _feed.Interactable = canFeed == CommandError.None;
-            _feed.Text.text = canFeed == CommandError.None ? Loc.T("activity_sheet.05", _session.FoodToFeed(id)) : Texts.Error(canFeed);
-            _stop.Interactable = cat.Activity.IsWorking;
+            _feedRow.gameObject.SetActive(canFeed == CommandError.None);
+            _feed.Text.text = canFeed == CommandError.None ? "" : Texts.Error(canFeed);
+            if (canFeed == CommandError.None)
+            {
+                var spend = _session.FoodToFeed(id);
+                _feedSpend.text = "−" + spend;
+                _feedGain.text = Loc.T("activity_sheet.06", Mathf.Min(spend * config.Needs.SatietyPerFood, config.Needs.Max - cat.Satiety));
+            }
+            Recommend(_feed.Rect, _feedTag, canFeed == CommandError.None && CatRules.IsHungry(cat, config));
+
+            // Stop only while the cat works; Feed takes the whole row otherwise
+            _stop.Rect.gameObject.SetActive(working);
+            _feed.Rect.Place(new Vector2(0, 0), new Vector2(working ? 0.5f : 1f, 0), new Vector2(30, 40), new Vector2(working ? -15 : -30, 150));
+            // text sizes are known only once the sheet is shown: fit on the next tick
+            _fitFeed = true;
+
+            Tick();
+        }
+
+        /// <summary>Shrinks the feed line to the button (half the width while Stop is shown).</summary>
+        private void FitFeedRow()
+        {
+            _feedRow.localScale = Vector3.one;
+            LayoutRebuilder.ForceRebuildLayoutImmediate(_feedRow);
+            var need = LayoutUtility.GetPreferredWidth(_feedRow);
+            var room = _feed.Rect.rect.width - 60f;
+            var scale = need > room && need > 0f ? room / need : 1f;
+            _feedRow.localScale = new Vector3(scale, scale, 1f);
+        }
+
+        /// <summary>Cycle bars of the current activity; call every frame while open.</summary>
+        public void Tick()
+        {
+            if (_fitFeed && _root.activeInHierarchy)
+            {
+                _fitFeed = false;
+                FitFeedRow();
+            }
+            if (_catId == null || !_session.World.TryGetCat(_catId.Value, out var cat) || !cat.Activity.IsWorking)
+                return;
+            var progress = ActivitySystem.GetCycleProgress(cat, _session.World.GameTimeMs);
+            _statusCycle.Set(progress);
+            foreach (var button in _buttons)
+                button.SetProgress(progress);
         }
 
         private void Assign(ActivityId activityId)
@@ -163,6 +237,29 @@ namespace TrashCats.Presentation.Hideout
             Refresh();
         }
 
+        /// <summary>"Recommended" plate on the top edge of a button.</summary>
+        private static GameObject Tag(RectTransform button)
+        {
+            var plate = Ui.Panel(button, "Recommended", Palette.Ink);
+            plate.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(-110, -8), new Vector2(110, 30));
+            var label = Ui.Label(plate.transform, Loc.T("activity_sheet.05"), 24, TextAnchor.MiddleCenter, Palette.Primary);
+            label.rectTransform.Fill(2);
+            plate.gameObject.SetActive(false);
+            return plate.gameObject;
+        }
+
+        /// <summary>Pulses the button and shows its tag while it is the sensible next step.</summary>
+        private static void Recommend(RectTransform button, GameObject tag, bool on)
+        {
+            if (tag.activeSelf == on)
+                return;
+            tag.SetActive(on);
+            button.DOKill();
+            button.localScale = Vector3.one;
+            if (on)
+                button.DOScale(1.04f, 0.6f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo).SetLink(button.gameObject);
+        }
+
         private static List<ActivityDefinition> OrderedActivities(GameConfig config)
         {
             int Order(ActivityDefinition a) => a.Kind switch
@@ -174,6 +271,116 @@ namespace TrashCats.Presentation.Hideout
             };
 
             return config.Activities.OrderBy(Order).ToList();
+        }
+
+        /// <summary>Thin cycle progress bar: a dark track with a blue fill.</summary>
+        private sealed class CycleBar
+        {
+            private readonly RectTransform _fill;
+
+            public RectTransform Root { get; }
+
+            public CycleBar(Transform parent, string name)
+            {
+                var track = Ui.Panel(parent, name, new Color(0f, 0f, 0f, 0.35f));
+                Root = track.rectTransform;
+                var fill = Ui.Panel(track.transform, "Fill", Palette.Progress);
+                _fill = fill.rectTransform;
+                _fill.Place(Vector2.zero, new Vector2(0f, 1f));
+            }
+
+            public void Set(float progress01) => _fill.anchorMax = new Vector2(Mathf.Clamp01(progress01), 1f);
+        }
+
+        /// <summary>
+        /// One activity: what it brings as a big icon with "+N" on it, the name, and below either its time and costs as
+        /// icon chips or what is missing to start it.
+        /// </summary>
+        private sealed class ActivityButton
+        {
+            private readonly TMP_Text _gain;
+            private readonly RectTransform _chips;
+            private readonly TMP_Text _time;
+            private readonly Color _timeColor;
+            private readonly TMP_Text _reason;
+            private readonly CycleBar _cycle;
+            private readonly GameObject _tag;
+            private bool _current;
+
+            public ActivityDefinition Activity { get; }
+            public UiButton Button { get; }
+
+            public ActivityButton(Transform parent, ActivityDefinition activity, Action onClick)
+            {
+                Activity = activity;
+                Button = Ui.Button(parent, "Activity_" + activity.Id, Texts.ActivityName(activity), Palette.Secondary, onClick, 30);
+                var rect = Button.Rect;
+
+                var left = 0.04f;
+                var outcome = Ui.Icon(rect, Texts.OutcomeIcon(activity));
+                if (outcome != null)
+                {
+                    outcome.rectTransform.Place(new Vector2(0.03f, 0.12f), new Vector2(0.25f, 0.88f));
+                    left = 0.26f;
+                }
+                _gain = Ui.Label(rect, "", 32, TextAnchor.LowerRight, Palette.Paper, heading: true);
+                _gain.rectTransform.Place(new Vector2(0.02f, 0.06f), new Vector2(0.25f, 0.6f));
+                _gain.Outlined();
+
+                Button.Text.rectTransform.Place(new Vector2(left, 0.46f), new Vector2(1f, 1f), new Vector2(0, 0), new Vector2(-24, -14));
+                Button.Text.fontSizeMin = 22;
+
+                _chips = Info.Row(rect, "Chips", 14f, TextAnchor.MiddleCenter);
+                _chips.Place(new Vector2(left, 0.1f), new Vector2(1f, 0.46f), Vector2.zero, new Vector2(-24, 0));
+                _time = Info.Chip(_chips, "clock", "", ChipHeight, ChipFont, Palette.Ink).GetComponentInChildren<TMP_Text>();
+                _timeColor = _time.color;
+                if (activity.EnergyCost > 0)
+                    Info.Chip(_chips, "energy", "−" + activity.EnergyCost, ChipHeight, ChipFont, Palette.Ink);
+                if (activity.SatietyCost > 0)
+                    Info.Chip(_chips, "satiety", "−" + activity.SatietyCost, ChipHeight, ChipFont, Palette.Ink);
+
+                _reason = Ui.Label(rect, "", 26, TextAnchor.MiddleCenter, Palette.Ink, heading: true);
+                _reason.rectTransform.Place(new Vector2(left, 0.1f), new Vector2(1f, 0.46f), Vector2.zero, new Vector2(-24, 0));
+
+                _cycle = new CycleBar(rect, "Cycle");
+                _cycle.Root.Place(new Vector2(0.06f, 0f), new Vector2(0.94f, 0f), new Vector2(0, 14), new Vector2(0, 24));
+                _tag = Tag(rect);
+            }
+
+            public void ShowAvailable(long durationMs, int output)
+            {
+                Button.Interactable = true;
+                _chips.gameObject.SetActive(true);
+                _reason.gameObject.SetActive(false);
+                _gain.text = "+" + output;
+                // a hungry cat works twice as slowly: the time turns red
+                var slow = durationMs > Activity.DurationMs;
+                _time.text = Texts.Seconds(durationMs) + (slow ? " ×2" : "");
+                _time.color = slow ? Palette.Warning : _timeColor;
+            }
+
+            public void ShowUnavailable(string reason)
+            {
+                Button.Interactable = false;
+                _chips.gameObject.SetActive(false);
+                _reason.gameObject.SetActive(true);
+                _reason.text = reason;
+                _gain.text = "";
+            }
+
+            public void SetCurrent(bool current)
+            {
+                _current = current;
+                Button.SetColor(current ? Palette.Primary : Palette.Secondary);
+                _cycle.Root.gameObject.SetActive(current);
+            }
+
+            public void SetProgress(float progress01)
+            {
+                if (_current) _cycle.Set(progress01);
+            }
+
+            public void SetRecommended(bool on) => Recommend(Button.Rect, _tag, on);
         }
     }
 }

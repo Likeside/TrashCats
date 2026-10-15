@@ -148,8 +148,18 @@ namespace TrashCats.Presentation.Dev
             yield return Shot("03_hideout_training");
             yield return new WaitForSeconds(0.17f);
             yield return Shot("03b_punch_frame");
-            // the whole gang at the stations: bench mat, bed, dumpster
+            // the activity sheet of a working cat (cycle bars, Stop), then of a tired and hungry one (Sleep and Feed advised)
             var services = GameBootstrap.Instance.Services;
+            Click("Cat_cat_ryzhy");
+            yield return Shot("02b_sheet_working");
+            Click("ActivitySheet");
+            services.Debug.SkipGameTime(10 * 60 * 1000);
+            yield return null;
+            Dismiss(); Dismiss();
+            Click("Cat_cat_ryzhy");
+            yield return Shot("02c_sheet_tired");
+            Click("ActivitySheet");
+            // the whole gang at the stations: bench mat, bed, dumpster
             services.Debug.RecruitAllAndRest();
             yield return null;
             Dismiss(); Dismiss();

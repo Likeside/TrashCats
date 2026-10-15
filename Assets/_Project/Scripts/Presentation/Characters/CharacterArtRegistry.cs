@@ -58,6 +58,7 @@ namespace TrashCats.Presentation.Characters
         [Tooltip("Optional separately animated tail; attach points come from the body clips")] public FlipbookClip tail = new FlipbookClip();
         [Tooltip("Static picture for UI (hideout tokens, cards)")] public Sprite portrait;
         [Tooltip("Hideout cat card: portrait on its coloured backdrop, cut from the concept (fills the card window)")] public Sprite card;
+        [Tooltip("Square avatar with a rounded ink frame (activity sheet header)")] public Sprite avatar;
         [Tooltip("Hideout (four-legged) pictures: sitting, sleeping, eating, walking")] public Sprite[] hideoutPoses = Array.Empty<Sprite>();
 
         public Sprite HideoutPose(int index) => hideoutPoses != null && index < hideoutPoses.Length ? hideoutPoses[index] : null;

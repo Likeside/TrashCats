@@ -182,6 +182,7 @@ MonoBehaviour:
       breathePeriod: 2.4
     portrait: {fileID: 21300000, guid: d27da17b37b72d8358bb65d8bdc893a8, type: 3}
     card: {fileID: 0}
+    avatar: {fileID: 0}
     hideoutPoses: []
   - viewKey: crow
     battleScale: 1.05
@@ -352,6 +353,7 @@ MonoBehaviour:
       breathePeriod: 2.4
     portrait: {fileID: 21300000, guid: fc262390673f752838490a18e0a54ec0, type: 3}
     card: {fileID: 0}
+    avatar: {fileID: 0}
     hideoutPoses: []
   - viewKey: gull
     battleScale: 1.05
@@ -522,6 +524,7 @@ MonoBehaviour:
       breathePeriod: 2.4
     portrait: {fileID: 21300000, guid: e71570547570d91b89a74ecda0cd6af4, type: 3}
     card: {fileID: 0}
+    avatar: {fileID: 0}
     hideoutPoses: []
   - viewKey: ponchik
     battleScale: 1.3
@@ -788,6 +791,7 @@ MonoBehaviour:
       breathePeriod: 2.4
     portrait: {fileID: 21300000, guid: 29a0f474b98073c80843c31b5bf5c5b5, type: 3}
     card: {fileID: 21300000, guid: 1c29ae169c6291fdaaaaecc7ab87915b, type: 3}
+    avatar: {fileID: 21300000, guid: 8241a131beec43098a281896d9206182, type: 3}
     hideoutPoses:
     - {fileID: 21300000, guid: d545c6202ca9c1248afb8b0214a565e4, type: 3}
     - {fileID: 21300000, guid: a6128fe2df4649888bdc63d6d461e419, type: 3}
@@ -962,6 +966,7 @@ MonoBehaviour:
       breathePeriod: 2.4
     portrait: {fileID: 21300000, guid: 4a0c050739dabf6499e0423faeec181c, type: 3}
     card: {fileID: 0}
+    avatar: {fileID: 0}
     hideoutPoses: []
   - viewKey: raccoon
     battleScale: 1.25
@@ -1132,6 +1137,7 @@ MonoBehaviour:
       breathePeriod: 2.4
     portrait: {fileID: 21300000, guid: 85e9884923bb24e4e8d7adb6f65d34a4, type: 3}
     card: {fileID: 0}
+    avatar: {fileID: 0}
     hideoutPoses: []
   - viewKey: rat
     battleScale: 1
@@ -1302,6 +1308,7 @@ MonoBehaviour:
       breathePeriod: 2.4
     portrait: {fileID: 21300000, guid: 789e0e8fd8779937b9e4ab105c864c5c, type: 3}
     card: {fileID: 0}
+    avatar: {fileID: 0}
     hideoutPoses: []
   - viewKey: ryzhy
     battleScale: 1.25
@@ -1586,6 +1593,7 @@ MonoBehaviour:
       breathePeriod: 2.4
     portrait: {fileID: 21300000, guid: 6d5d874621a7f3051aed5f00db88de9b, type: 3}
     card: {fileID: 21300000, guid: e6b5f45e980413d37a5dbdf763ad1c05, type: 3}
+    avatar: {fileID: 21300000, guid: dcb41ccbe18f9d8b685f1b376bf27f7f, type: 3}
     hideoutPoses:
     - {fileID: 21300000, guid: 2d5d31ccfbeed0c3e9feea13a2f29838, type: 3}
     - {fileID: 21300000, guid: cc7c661d943bd4281886fd4cf8ff5ee0, type: 3}
@@ -1848,6 +1856,7 @@ MonoBehaviour:
       breathePeriod: 2.4
     portrait: {fileID: 21300000, guid: 33c299b18ba2dd0b498e17e17832c0bc, type: 3}
     card: {fileID: 21300000, guid: 95e2afb16eee0d12596e2963870b8bc0, type: 3}
+    avatar: {fileID: 21300000, guid: 47c579131028133878d0073ee7d38fde, type: 3}
     hideoutPoses:
     - {fileID: 21300000, guid: 1e4b152b8d2d4635ba43a0995b121c57, type: 3}
     - {fileID: 21300000, guid: 055680a4bdc8f8f3da848e7fc23185b8, type: 3}
@@ -2022,6 +2031,7 @@ MonoBehaviour:
       breathePeriod: 2.4
     portrait: {fileID: 21300000, guid: 09d0f0532bee156ef90696c02a220b62, type: 3}
     card: {fileID: 0}
+    avatar: {fileID: 0}
     hideoutPoses: []
   - viewKey: wheel
     battleScale: 1.2
@@ -2164,6 +2174,7 @@ MonoBehaviour:
       breathePeriod: 2.4
     portrait: {fileID: 21300000, guid: 779591b30c4ba0e1ba14b14d6fad19ba, type: 3}
     card: {fileID: 0}
+    avatar: {fileID: 0}
     hideoutPoses: []
   - viewKey: crow_boss
     battleScale: 1.2
@@ -2334,6 +2345,7 @@ MonoBehaviour:
       breathePeriod: 2.4
     portrait: {fileID: 21300000, guid: fc262390673f752838490a18e0a54ec0, type: 3}
     card: {fileID: 0}
+    avatar: {fileID: 0}
     hideoutPoses: []
   - viewKey: bigrat
     battleScale: 1.3
@@ -2504,6 +2516,7 @@ MonoBehaviour:
       breathePeriod: 2.4
     portrait: {fileID: 21300000, guid: 789e0e8fd8779937b9e4ab105c864c5c, type: 3}
     card: {fileID: 0}
+    avatar: {fileID: 0}
     hideoutPoses: []
   sprites:
   - key: arena_alley

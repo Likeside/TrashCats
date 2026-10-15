@@ -10,7 +10,7 @@ paper, as a 9-sliced sprite.
 
 v1 (ArtSource/UI/cards_v1_concept): window inside its frame, the whole cat in it.
 v2 (ArtSource/UI/cards_v2_ears): cut-out cat over a drawn frame (rejected: the cat and the card cut separately).
-v3 (ArtSource/UI/cards_v3_window): this one.
+v3 (ArtSource/UI/cards_v3_window): this one, plus square avatars for the activity sheet (<cat>_avatar.png).
 Needs numpy and Pillow.  Usage: python3 Tools/cut_card_portraits.py
 """
 import os
@@ -30,6 +30,13 @@ PAPER_LUMA = 150
 SCALE = 2
 SS = 4  # supersampling of the panel mask
 ARCHIVE = "ArtSource/UI/cards_v3_window"
+
+# square avatars (activity sheet header): a square of the window's inside around the face, no ears out
+AVATARS = {"Ryzhy": (96, 1081, 270, 1255), "shnyr": (392, 1080, 543, 1231), "ponchik": (699, 1080, 851, 1232)}
+AVATAR_SIZE = 256
+AVATAR_BORDER = 10  # ink frame, output px
+AVATAR_RADIUS = 30
+INK_COLOR = (24, 20, 18)
 
 # the card itself: Shnyr's card from the concept (outer edge of its ink outline), the inside painted over with paper
 PANEL = (353, 1052, 667, 1362)
@@ -92,6 +99,23 @@ def card(src, key):
     return image
 
 
+def avatar(src, key):
+    """Square picture with a rounded ink frame, as rounded as the card windows."""
+    picture = Image.fromarray(src).crop(AVATARS[key]).resize((AVATAR_SIZE, AVATAR_SIZE), Image.LANCZOS).convert("RGBA")
+    k = SS
+    size = AVATAR_SIZE * k
+    outer = Image.new("L", (size, size), 0)
+    ImageDraw.Draw(outer).rounded_rectangle((0, 0, size - 1, size - 1), AVATAR_RADIUS * k, fill=255)
+    inner = Image.new("L", (size, size), 0)
+    b = AVATAR_BORDER * k
+    ImageDraw.Draw(inner).rounded_rectangle((b, b, size - 1 - b, size - 1 - b), (AVATAR_RADIUS - AVATAR_BORDER * 0.6) * k, fill=255)
+    outer, inner = (m.resize((AVATAR_SIZE, AVATAR_SIZE), Image.LANCZOS) for m in (outer, inner))
+    out = Image.new("RGBA", picture.size, INK_COLOR + (255,))
+    out = Image.composite(picture, out, inner)
+    out.putalpha(outer)
+    return out
+
+
 def panel(src):
     """9-sliced card: the concept's rounded cardboard frame with an ink line and a paper inside."""
     left, top, right, bottom = PANEL
@@ -128,6 +152,11 @@ def main():
         os.makedirs(folder, exist_ok=True)
         image.save(f"{folder}/{key.lower()}_card.png")
         print(key, image.size)
+        face = avatar(src, key)
+        face.save(f"{ARCHIVE}/{key.lower()}_avatar.png")
+        folder = f"Assets/_Project/Art/Characters/{key}/Avatar"
+        os.makedirs(folder, exist_ok=True)
+        face.save(f"{folder}/{key.lower()}_avatar.png")
     panel(src)
 
 
