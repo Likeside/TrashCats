@@ -121,6 +121,9 @@ namespace TrashCats.Presentation.Hideout
         public static readonly (string Sprite, Vector2 Seat, Vector2 Size, float Rotation, float BarUnderside) Barbell =
             ("prop_barbell", new Vector2(0.667f, 0.905f), new Vector2(0.98f, 0.291f), -7.3f, 0.49f);
 
+        /// <summary>Where the barbell's plate hangs: on the wall over the barbell, in 0..1 of the mat's box (top of the plate).</summary>
+        public static readonly Vector2 BenchPlate = new Vector2(0.27f, 1.38f);
+
         /// <summary>The way out to the street: an EXIT signpost in the empty front left corner.</summary>
         /// Nearer to the camera than the cat on the skipping rope: a bit bigger, lower, and drawn over it.
         public static readonly PropPlace ExitSign = new PropPlace("prop_exit_sign", new Vector2(0.115f, 0.025f), new Vector2(0.2283f, 0.22f), depth: 0.0f);
