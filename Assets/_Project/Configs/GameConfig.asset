@@ -32,19 +32,16 @@ MonoBehaviour:
   - cat_ryzhy
   combat:
     tickMs: 100
-    hpBase: 40
-    hpPerEndurance: 12
+    attributePctPerLevel: 10
+    hpBase: 70
     gritMax: 60
     gritStart: 12
     gritPerAction: 5
     gritPerHitTaken: 3
-    damageBase: 4
-    damagePerStrength: 2
+    damageBase: 10
     intervalBaseTicks: 16
-    intervalTechniqueDivisor: 2
-    intervalMinTicks: 10
-    hitBasePermille: 750
-    hitPerTechniqueDiffPermille: 40
+    intervalMinTicks: 5
+    hitBasePermille: 800
     hitMinPermille: 350
     hitMaxPermille: 950
     varianceMinPermille: 850
@@ -256,11 +253,24 @@ MonoBehaviour:
     hits: 1
     effectPermille: 200
     effectCount: 3
+  - id: skill_second_wind
+    nameKey: skill.second_wind
+    isInnate: 0
+    unlockAttribute: 2
+    unlockLevel: 7
+    gritCost: 15
+    cooldownActions: 99
+    effect: 4
+    damagePermille: 1000
+    hitModifierPermille: 0
+    hits: 1
+    effectPermille: 300
+    effectCount: 0
   enemies:
   - id: enemy_rat
     nameKey: enemy.rat
     strength: 2
-    technique: 3
+    technique: 2
     endurance: 1
     skills: []
     hpMultiplierPermille: 1000
@@ -342,7 +352,7 @@ MonoBehaviour:
     - skill_bite
     - skill_thick_fur
     - skill_dirty_trick
-    hpMultiplierPermille: 1700
+    hpMultiplierPermille: 2200
     viewKey: admiral
   territories:
   - id: ter_backyard

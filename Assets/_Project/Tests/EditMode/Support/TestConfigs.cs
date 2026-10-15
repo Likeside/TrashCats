@@ -26,6 +26,7 @@ namespace TrashCats.Tests
         public static readonly SkillId DoublePaw = new SkillId("skill_double_paw");
         public static readonly SkillId ThickFur = new SkillId("skill_thick_fur");
         public static readonly SkillId Dodge = new SkillId("skill_dodge");
+        public static readonly SkillId SecondWind = new SkillId("skill_second_wind");
         public static readonly SkillId DirtyTrick = new SkillId("skill_dirty_trick");
 
         public static readonly EnemyId Rat = new EnemyId("enemy_rat");
@@ -110,9 +111,9 @@ namespace TrashCats.Tests
                     Id = TestIds.Dumpster, NameKey = "upg.dumpster", Costs = new[] { 20, 60 },
                     Effect = new ResourceOutputBonusEffect { FoodPerLevel = new[] { 0, 1, 2 }, JunkPerLevel = new[] { 0, 1, 2 } },
                 },
-                Station(TestIds.Can, "upg.can", AttributeType.Strength),
-                Station(TestIds.Mouse, "upg.mouse", AttributeType.Technique),
-                Station(TestIds.Wheel, "upg.wheel", AttributeType.Endurance),
+                Station(TestIds.Can, "upg.can", AttributeType.Technique),
+                Station(TestIds.Mouse, "upg.mouse", AttributeType.Endurance),
+                Station(TestIds.Wheel, "upg.wheel", AttributeType.Strength),
             },
             Combat = new CombatConfig(),
             Skills = new[]
@@ -143,10 +144,15 @@ namespace TrashCats.Tests
                     Id = TestIds.DirtyTrick, NameKey = "skill.dirty_trick", UnlockAttribute = AttributeType.Strength, UnlockLevel = 7,
                     GritCost = 12, CooldownActions = 6, Effect = SkillEffectKind.AccuracyDebuff, EffectPermille = 200, EffectCount = 3,
                 },
+                new SkillDefinition
+                {
+                    Id = TestIds.SecondWind, NameKey = "skill.second_wind", UnlockAttribute = AttributeType.Endurance, UnlockLevel = 7,
+                    GritCost = 15, CooldownActions = 99, Effect = SkillEffectKind.Heal, EffectPermille = 300,
+                },
             },
             Enemies = new[]
             {
-                Enemy(TestIds.Rat, "enemy.rat", 2, 3, 1),
+                Enemy(TestIds.Rat, "enemy.rat", 2, 2, 1),
                 Enemy(TestIds.Gull, "enemy.gull", 3, 5, 2, TestIds.DoublePaw),
                 Enemy(TestIds.ShopCat, "enemy.shopcat", 5, 3, 4, TestIds.Bite),
                 Enemy(TestIds.Crow, "enemy.crow", 4, 6, 3, TestIds.DoublePaw, TestIds.Dodge),
@@ -157,7 +163,7 @@ namespace TrashCats.Tests
                 new EnemyDefinition
                 {
                     Id = TestIds.Admiral, NameKey = "enemy.admiral", Strength = 9, Technique = 7, Endurance = 10,
-                    Skills = new[] { TestIds.Bite, TestIds.ThickFur, TestIds.DirtyTrick }, HpMultiplierPermille = 1700, ViewKey = "admiral",
+                    Skills = new[] { TestIds.Bite, TestIds.ThickFur, TestIds.DirtyTrick }, HpMultiplierPermille = 2200, ViewKey = "admiral",
                 },
             },
             Territories = new[]

@@ -35,3 +35,4 @@
 | `Props/prop_exit_sign_v1.png` | указатель EXIT (станция «Улица», левый нижний угол) | `Docs/ArtDirection/Generated/raw_exit` |
 | `Props/prop_barbell_v1.png` | штанга на кирпичных стойках у матраса | `Docs/ArtDirection/Generated/raw_barbell` |
 | `Props/food_bits_v1/` | объедки, вылетающие из-за экрана, пока кот на улице | `Docs/ArtDirection/Generated/raw_food_bits` |
+| `UI/icon_skill_second_wind.png` | умение «Второе дыхание» (сердце с лапой и вихрем) | `Docs/ArtDirection/Generated/raw_icon_second_wind` |

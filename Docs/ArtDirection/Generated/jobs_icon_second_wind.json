@@ -1,0 +1,8 @@
+[
+ {
+  "name": "icon_skill_second_wind",
+  "size": "1024x1024",
+  "refs": ["Assets/_Project/Art/UI/icon_skill_thick_fur.png", "Assets/_Project/Art/UI/icon_skill_bite.png", "Assets/_Project/Art/UI/icon_endurance.png"],
+  "prompt": "One game UI skill icon in EXACTLY the style of the reference icons (thick black ink outline, flat bold colour with a subtle halftone dot texture, a light rim highlight, chunky readable silhouette, comic style, no text, no frame). The skill = SECOND WIND (the cat gets its breath back and heals): a big cartoon heart with a white cat paw print on it (like the third reference) with a swirling gust of fresh wind wrapping around it and a few small sparkles and a little green plus sign, warm red heart with mint-green wind swirls. Centred, fills most of a square area. Solid flat pure chroma-key GREEN (#00FF00) background everywhere, no shadows on the background."
+ }
+]

@@ -12,20 +12,22 @@ namespace TrashCats.Tests
         [Test]
         public void DerivedStats_FollowGddTable()
         {
-            Assert.That(new[] { 2, 5, 10 }.Select(t => CombatFormulas.MaxHp(_c, t)), Is.EqualTo(new[] { 64, 100, 160 }));
-            Assert.That(new[] { 2, 5, 10 }.Select(s => CombatFormulas.BaseDamage(_c, s)), Is.EqualTo(new[] { 8, 14, 24 }));
-            Assert.That(new[] { 2, 5, 10, 30 }.Select(a => CombatFormulas.IntervalTicks(_c, a)), Is.EqualTo(new[] { 15, 14, 11, 10 }));
-            Assert.That(CombatFormulas.MaxHp(_c, 10, 1500), Is.EqualTo(240));
-            Assert.That(CombatFormulas.MaxHp(_c, 10, 2000), Is.EqualTo(320));
+            // every level adds 10% of the stat's base: HP from Endurance, damage from Strength, speed from Technique
+            Assert.That(new[] { 0, 2, 5, 10 }.Select(t => CombatFormulas.MaxHp(_c, t)), Is.EqualTo(new[] { 70, 84, 105, 140 }));
+            Assert.That(new[] { 0, 2, 5, 10 }.Select(s => CombatFormulas.BaseDamage(_c, s)), Is.EqualTo(new[] { 10, 12, 15, 20 }));
+            Assert.That(new[] { 0, 2, 5, 10, 40 }.Select(a => CombatFormulas.IntervalTicks(_c, a)), Is.EqualTo(new[] { 16, 13, 11, 8, 5 }));
+            Assert.That(CombatFormulas.MaxHp(_c, 10, 1500), Is.EqualTo(210));
+            Assert.That(CombatFormulas.MaxHp(_c, 10, 2000), Is.EqualTo(280));
         }
 
         [Test]
         public void HitChance_IsClamped()
         {
-            Assert.That(CombatFormulas.HitChancePermille(_c, 2, 3, 0), Is.EqualTo(710));
-            Assert.That(CombatFormulas.HitChancePermille(_c, 2, 3, -100), Is.EqualTo(610));
-            Assert.That(CombatFormulas.HitChancePermille(_c, 1, 20, 0), Is.EqualTo(350));
-            Assert.That(CombatFormulas.HitChancePermille(_c, 20, 1, 0), Is.EqualTo(950));
+            // the same accuracy for everyone; only skills and statuses move it
+            Assert.That(CombatFormulas.HitChancePermille(_c, 0), Is.EqualTo(800));
+            Assert.That(CombatFormulas.HitChancePermille(_c, -100), Is.EqualTo(700));
+            Assert.That(CombatFormulas.HitChancePermille(_c, -900), Is.EqualTo(350));
+            Assert.That(CombatFormulas.HitChancePermille(_c, 400), Is.EqualTo(950));
         }
 
         [Test]
@@ -167,7 +169,8 @@ namespace TrashCats.Tests
         public void SuddenDeath_EndsLongDuels()
         {
             // Two tanks with fur would fight for a very long time without sudden death.
-            var r = Run(new BattleSetup(new[] { P("tank", 1, 1, 10, TestIds.ThickFur) }, new[] { E("tank2", 1, 1, 10, TestIds.ThickFur) }));
+            var r = Run(new BattleSetup(new[] { P("tank", 0, 0, 10, TestIds.ThickFur, TestIds.SecondWind) },
+                new[] { E("tank2", 0, 0, 10, TestIds.ThickFur, TestIds.SecondWind) }));
 
             Assert.That(r.Log.OfType<SuddenDeathStarted>().Any(), Is.True);
             Assert.That(r.TotalTicks, Is.LessThan(_config.Combat.SafetyMaxTicks));
@@ -194,8 +197,8 @@ namespace TrashCats.Tests
         [Test]
         public void GddFirstFight_TrainedRyzhyBeatsRatMostOfTheTime()
         {
-            var trained = WinRate(P("ryzhy", 4, 2, 2, TestIds.Bite), E("rat", 2, 3, 1));
-            var untrained = WinRate(P("ryzhy", 3, 2, 2), E("rat", 2, 3, 1));
+            var trained = WinRate(P("ryzhy", 4, 2, 2, TestIds.Bite), E("rat", 2, 2, 1));
+            var untrained = WinRate(P("ryzhy", 3, 2, 2), E("rat", 2, 2, 1));
 
             Assert.That(trained, Is.GreaterThan(0.9));
             Assert.That(untrained, Is.LessThan(trained));
@@ -215,7 +218,7 @@ namespace TrashCats.Tests
         }
 
         // Filled from the first run of the current rules (see test output).
-        private const string ReferenceSnapshot = "Victory 160 51 1509509381";
+        private const string ReferenceSnapshot = "Victory 144 54 1872725009";
 
         private double WinRate(FighterSnapshot player, FighterSnapshot enemy, int runs = 400)
         {
