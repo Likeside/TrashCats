@@ -31,6 +31,7 @@ MonoBehaviour:
       keys: 00000000020000000400000006000000
       pingPong: 1
       attachPoints: []
+      handles: []
       breathe: 0.008
       breathePeriod: 2.4
     attack:
@@ -57,6 +58,7 @@ MonoBehaviour:
       keys: 00000000010000000200000005000000070000000a0000000c0000000f000000
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     heavyAttack:
@@ -83,6 +85,7 @@ MonoBehaviour:
       keys: 00000000010000000200000005000000070000000a0000000c0000000f000000
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     hit:
@@ -97,6 +100,7 @@ MonoBehaviour:
       keys: 00000000010000000200000003000000
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     knockOut:
@@ -112,6 +116,7 @@ MonoBehaviour:
       keys: 00000000020000000300000004000000
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     hideoutIdle:
@@ -122,6 +127,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     rope:
@@ -132,6 +138,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     dig:
@@ -142,6 +149,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     run:
@@ -152,6 +160,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     bench:
@@ -162,6 +171,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     canPunch:
@@ -172,6 +182,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     tail:
@@ -182,6 +193,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     portrait: {fileID: 21300000, guid: d27da17b37b72d8358bb65d8bdc893a8, type: 3}
@@ -206,6 +218,7 @@ MonoBehaviour:
       keys: 00000000020000000400000006000000
       pingPong: 1
       attachPoints: []
+      handles: []
       breathe: 0.008
       breathePeriod: 2.4
     attack:
@@ -232,6 +245,7 @@ MonoBehaviour:
       keys: 00000000040000000500000006000000090000000a0000000b0000000f000000
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     heavyAttack:
@@ -258,6 +272,7 @@ MonoBehaviour:
       keys: 00000000040000000500000006000000090000000a0000000b0000000f000000
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     hit:
@@ -273,6 +288,7 @@ MonoBehaviour:
       keys: 00000000010000000300000004000000
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     knockOut:
@@ -289,6 +305,7 @@ MonoBehaviour:
       keys: 00000000020000000300000005000000
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     hideoutIdle:
@@ -299,6 +316,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     rope:
@@ -309,6 +327,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     dig:
@@ -319,6 +338,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     run:
@@ -329,6 +349,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     bench:
@@ -339,6 +360,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     canPunch:
@@ -349,6 +371,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     tail:
@@ -359,6 +382,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     portrait: {fileID: 21300000, guid: fc262390673f752838490a18e0a54ec0, type: 3}
@@ -383,6 +407,7 @@ MonoBehaviour:
       keys: 00000000020000000400000006000000
       pingPong: 1
       attachPoints: []
+      handles: []
       breathe: 0.008
       breathePeriod: 2.4
     attack:
@@ -409,6 +434,7 @@ MonoBehaviour:
       keys: 0000000001000000020000000300000007000000080000000b0000000f000000
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     heavyAttack:
@@ -435,6 +461,7 @@ MonoBehaviour:
       keys: 0000000001000000020000000300000007000000080000000b0000000f000000
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     hit:
@@ -449,6 +476,7 @@ MonoBehaviour:
       keys: 00000000010000000200000003000000
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     knockOut:
@@ -464,6 +492,7 @@ MonoBehaviour:
       keys: 00000000020000000300000004000000
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     hideoutIdle:
@@ -474,6 +503,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     rope:
@@ -484,6 +514,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     dig:
@@ -494,6 +525,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     run:
@@ -504,6 +536,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     bench:
@@ -514,6 +547,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     canPunch:
@@ -524,6 +558,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     tail:
@@ -534,6 +569,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     portrait: {fileID: 21300000, guid: e71570547570d91b89a74ecda0cd6af4, type: 3}
@@ -552,6 +588,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0.012
       breathePeriod: 2.6
     attack:
@@ -578,6 +615,7 @@ MonoBehaviour:
       keys: 0000000001000000020000000300000006000000090000000c0000000f000000
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     heavyAttack:
@@ -592,6 +630,7 @@ MonoBehaviour:
       keys: 00000000010000000200000003000000
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     hit:
@@ -608,6 +647,7 @@ MonoBehaviour:
       keys: 00000000020000000400000005000000
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     knockOut:
@@ -622,6 +662,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     hideoutIdle:
@@ -633,6 +674,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0.012
       breathePeriod: 2.6
     rope:
@@ -646,11 +688,36 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 46eb268383e013b38987c38e80d45285, type: 3}
       - {fileID: 21300000, guid: 6f9499573b9ca66ce91999dc8e8c6afb, type: 3}
       - {fileID: 21300000, guid: 310ffc008e688709896ea61959d92081, type: 3}
-      fps: 9
+      - {fileID: 21300000, guid: 6230e62ac40a998a2b82d2db34a2c919, type: 3}
+      - {fileID: 21300000, guid: 56c79334e8f27c62c9dfd72f2af13c28, type: 3}
+      - {fileID: 21300000, guid: bc1819a084465351faae9b805dadd129, type: 3}
+      - {fileID: 21300000, guid: 48e8404186fbdaaa082d08d67d667311, type: 3}
+      - {fileID: 21300000, guid: bdab771226716e6ecafcb9d861100372, type: 3}
+      - {fileID: 21300000, guid: 946cd0bbd4b868d6ebfc33e3f914ca99, type: 3}
+      - {fileID: 21300000, guid: d63e64c4b45d3c512b4af25b1bba47e4, type: 3}
+      - {fileID: 21300000, guid: 994725535f6903e35bba6f6f97fb43d1, type: 3}
+      fps: 18
       loop: 1
-      keys: 
+      keys: 00000000020000000400000006000000080000000a0000000c0000000e000000
       pingPong: 0
       attachPoints: []
+      handles:
+      - {x: 0.1396, y: 0.393, z: 0.8756, w: 0.3971}
+      - {x: 0.1485, y: 0.3899, z: 0.8668, w: 0.3951}
+      - {x: 0.1574, y: 0.3868, z: 0.8579, w: 0.393}
+      - {x: 0.1599, y: 0.3848, z: 0.8604, w: 0.3879}
+      - {x: 0.1624, y: 0.3827, z: 0.8629, w: 0.3827}
+      - {x: 0.1574, y: 0.3796, z: 0.8604, w: 0.3827}
+      - {x: 0.1523, y: 0.3765, z: 0.8579, w: 0.3827}
+      - {x: 0.1548, y: 0.4126, z: 0.8629, w: 0.4156}
+      - {x: 0.1574, y: 0.4486, z: 0.868, w: 0.4486}
+      - {x: 0.1523, y: 0.4105, z: 0.8756, w: 0.4156}
+      - {x: 0.1472, y: 0.3724, z: 0.8832, w: 0.3827}
+      - {x: 0.1523, y: 0.3879, z: 0.8883, w: 0.393}
+      - {x: 0.1574, y: 0.4033, z: 0.8934, w: 0.4033}
+      - {x: 0.1548, y: 0.3951, z: 0.8845, w: 0.3951}
+      - {x: 0.1523, y: 0.3868, z: 0.8756, w: 0.3868}
+      - {x: 0.1459, y: 0.3899, z: 0.8756, w: 0.392}
       breathe: 0
       breathePeriod: 2.4
     dig:
@@ -677,6 +744,7 @@ MonoBehaviour:
       keys: 00000000020000000400000006000000080000000a0000000c0000000e000000
       pingPong: 1
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     run:
@@ -703,45 +771,58 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     bench:
       name: bench
       frames:
-      - {fileID: 21300000, guid: 3743fa07b26608e9b9cef21116d295ec, type: 3}
-      - {fileID: 21300000, guid: 5749c57cb83007a5aa17354346066633, type: 3}
-      - {fileID: 21300000, guid: 145aab016809c0acc867d7567cf58156, type: 3}
-      - {fileID: 21300000, guid: 88e6d40a7a25b6e00ba8a20859b1b672, type: 3}
-      - {fileID: 21300000, guid: ed8099ce0818338bcb7ec9c690ee4531, type: 3}
-      - {fileID: 21300000, guid: 54bcfa731b374b31cb7de9890c64e0c2, type: 3}
-      - {fileID: 21300000, guid: 7e552b56b1b8b25d5b3806bbf1ae605e, type: 3}
-      - {fileID: 21300000, guid: 5368ce21024a61b9c93e6d42b03a256f, type: 3}
-      - {fileID: 21300000, guid: ade49f0814dc0eea28119bd3547a09e5, type: 3}
-      - {fileID: 21300000, guid: 3ddb5541dd0f77cb097d3b94cabf2c29, type: 3}
-      - {fileID: 21300000, guid: 20770cb2fbb92382eb0cceff47b567a7, type: 3}
-      - {fileID: 21300000, guid: f5b462257cdc57ee789050778e1506fb, type: 3}
-      - {fileID: 21300000, guid: 8e98c7fd53c772f97a71130c891f36d7, type: 3}
-      - {fileID: 21300000, guid: 5140b66493e1902e0b7abcaa0cc6648c, type: 3}
-      - {fileID: 21300000, guid: 1729316dc56a14c738c744b87012f907, type: 3}
-      - {fileID: 21300000, guid: f75b55a3f27875b42a84d53e79ad34a6, type: 3}
-      - {fileID: 21300000, guid: de46a2df89ae3ba04b9a0a305fc53477, type: 3}
-      - {fileID: 21300000, guid: cf350e9d275829c4d9e6f7a43d736b72, type: 3}
-      - {fileID: 21300000, guid: a6ff21cff8c43742a95c9c59fd077530, type: 3}
-      - {fileID: 21300000, guid: 07635d861d81c76d196f64d0eeeaf25b, type: 3}
-      - {fileID: 21300000, guid: d8868847d5c440242bcc8c87b554850b, type: 3}
-      - {fileID: 21300000, guid: ddf93a780dd45a7ea86a039dae2503ba, type: 3}
-      - {fileID: 21300000, guid: 62d66f0352d60fdf7a48ca1aab532288, type: 3}
-      - {fileID: 21300000, guid: 5c6ee3b02cb39d572a60390bfea75892, type: 3}
-      - {fileID: 21300000, guid: 4d9b175d39f8ac96e9234414bda64134, type: 3}
-      - {fileID: 21300000, guid: 474c3fb1e8668762d947cc64d2c8e66a, type: 3}
-      - {fileID: 21300000, guid: 0fc2b332f027296cc9e9fd3ee6962013, type: 3}
-      - {fileID: 21300000, guid: 21f94abc36e83fe9f9ac5c1805a8ea3a, type: 3}
-      - {fileID: 21300000, guid: 83dcd1c4e42df9e40bc75a1eed69e863, type: 3}
-      fps: 29
+      - {fileID: 21300000, guid: 4fcda8e118ee057db9b7bd84a52d4012, type: 3}
+      - {fileID: 21300000, guid: 2f7c12961b8055933afa5caa32e245da, type: 3}
+      - {fileID: 21300000, guid: c227d2ac85bfcab59bbf79cde33feb0d, type: 3}
+      - {fileID: 21300000, guid: 71743a1704409ed47b470ce229550c90, type: 3}
+      - {fileID: 21300000, guid: 24030326043fef7648050ba4500f7d14, type: 3}
+      - {fileID: 21300000, guid: d5a6682aeb9e272348faa8af80f33240, type: 3}
+      - {fileID: 21300000, guid: 3596665985d5cf03c8225af9fc593628, type: 3}
+      - {fileID: 21300000, guid: 12859e42977dd26f2bc3c2045941f7ed, type: 3}
+      - {fileID: 21300000, guid: b277930ba48e73822988fd9004ee22f2, type: 3}
+      - {fileID: 21300000, guid: 0a449d459c38b33c4ae13563086ab3e0, type: 3}
+      - {fileID: 21300000, guid: 3af19509aa3e36f8c9869612795c5b2f, type: 3}
+      - {fileID: 21300000, guid: 568794aa530a7aa35b200e0538ce52c0, type: 3}
+      - {fileID: 21300000, guid: 2373e4de6a48feae4a0cc4aba126e299, type: 3}
+      - {fileID: 21300000, guid: aa12545001f591397b0e88f4ee56c55a, type: 3}
+      - {fileID: 21300000, guid: e98483986776080d988a508d275d03e9, type: 3}
+      - {fileID: 21300000, guid: 2920705d3947f6607b5dbd3fb75185be, type: 3}
+      - {fileID: 21300000, guid: 01986a60bbea01b738ebf465cfa879d7, type: 3}
+      - {fileID: 21300000, guid: 7526b4f437870d1bca3704a92bac14b5, type: 3}
+      - {fileID: 21300000, guid: 7524c0f4528bd2d7fbf7f64ea9d2e21b, type: 3}
+      - {fileID: 21300000, guid: 21fdd1c9420b1ec8086bee31adb0c63d, type: 3}
+      fps: 20
       loop: 1
-      keys: 
+      keys: 000000000300000006000000070000000a0000000b0000000e00000011000000
       pingPong: 0
       attachPoints: []
+      handles:
+      - {x: 0.4545, y: 0.5512, z: 0.6713, w: 0.5235}
+      - {x: 0.4359, y: 0.5826, z: 0.6946, w: 0.5531}
+      - {x: 0.4172, y: 0.614, z: 0.7179, w: 0.5826}
+      - {x: 0.3986, y: 0.6454, z: 0.7413, w: 0.6122}
+      - {x: 0.3862, y: 0.6805, z: 0.7483, w: 0.6325}
+      - {x: 0.3737, y: 0.7156, z: 0.7552, w: 0.6528}
+      - {x: 0.3613, y: 0.7507, z: 0.7622, w: 0.6731}
+      - {x: 0.4662, y: 0.9529, z: 0.6713, w: 0.9391}
+      - {x: 0.4623, y: 0.9566, z: 0.6713, w: 0.9428}
+      - {x: 0.4584, y: 0.9603, z: 0.6713, w: 0.9464}
+      - {x: 0.4545, y: 0.964, z: 0.6713, w: 0.9501}
+      - {x: 0.3706, y: 0.7313, z: 0.7669, w: 0.6759}
+      - {x: 0.3753, y: 0.7119, z: 0.7591, w: 0.6639}
+      - {x: 0.38, y: 0.6925, z: 0.7514, w: 0.6519}
+      - {x: 0.3846, y: 0.6731, z: 0.7436, w: 0.6399}
+      - {x: 0.4087, y: 0.6343, z: 0.7195, w: 0.603}
+      - {x: 0.4328, y: 0.5956, z: 0.6954, w: 0.566}
+      - {x: 0.4569, y: 0.5568, z: 0.6713, w: 0.5291}
+      - {x: 0.4561, y: 0.5549, z: 0.6713, w: 0.5272}
+      - {x: 0.4553, y: 0.5531, z: 0.6713, w: 0.5254}
       breathe: 0
       breathePeriod: 2.4
     canPunch:
@@ -768,6 +849,7 @@ MonoBehaviour:
       keys: 00000000020000000400000006000000080000000a0000000c0000000e000000
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     tail:
@@ -778,6 +860,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     portrait: {fileID: 21300000, guid: 29a0f474b98073c80843c31b5bf5c5b5, type: 3}
@@ -806,6 +889,7 @@ MonoBehaviour:
       keys: 00000000020000000400000006000000
       pingPong: 1
       attachPoints: []
+      handles: []
       breathe: 0.008
       breathePeriod: 2.4
     attack:
@@ -832,6 +916,7 @@ MonoBehaviour:
       keys: 0000000002000000030000000600000007000000090000000c0000000f000000
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     heavyAttack:
@@ -858,6 +943,7 @@ MonoBehaviour:
       keys: 0000000002000000030000000600000007000000090000000c0000000f000000
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     hit:
@@ -873,6 +959,7 @@ MonoBehaviour:
       keys: 00000000020000000300000004000000
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     knockOut:
@@ -887,6 +974,7 @@ MonoBehaviour:
       keys: 00000000010000000200000003000000
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     hideoutIdle:
@@ -897,6 +985,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     rope:
@@ -907,6 +996,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     dig:
@@ -917,6 +1007,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     run:
@@ -927,6 +1018,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     bench:
@@ -937,6 +1029,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     canPunch:
@@ -947,6 +1040,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     tail:
@@ -957,6 +1051,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     portrait: {fileID: 21300000, guid: 4a0c050739dabf6499e0423faeec181c, type: 3}
@@ -981,6 +1076,7 @@ MonoBehaviour:
       keys: 00000000020000000400000006000000
       pingPong: 1
       attachPoints: []
+      handles: []
       breathe: 0.008
       breathePeriod: 2.4
     attack:
@@ -1007,6 +1103,7 @@ MonoBehaviour:
       keys: 0000000001000000020000000300000006000000090000000c0000000f000000
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     heavyAttack:
@@ -1033,6 +1130,7 @@ MonoBehaviour:
       keys: 0000000001000000020000000300000006000000090000000c0000000f000000
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     hit:
@@ -1047,6 +1145,7 @@ MonoBehaviour:
       keys: 00000000010000000200000003000000
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     knockOut:
@@ -1061,6 +1160,7 @@ MonoBehaviour:
       keys: 00000000010000000200000003000000
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     hideoutIdle:
@@ -1071,6 +1171,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     rope:
@@ -1081,6 +1182,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     dig:
@@ -1091,6 +1193,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     run:
@@ -1101,6 +1204,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     bench:
@@ -1111,6 +1215,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     canPunch:
@@ -1121,6 +1226,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     tail:
@@ -1131,6 +1237,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     portrait: {fileID: 21300000, guid: 85e9884923bb24e4e8d7adb6f65d34a4, type: 3}
@@ -1155,6 +1262,7 @@ MonoBehaviour:
       keys: 00000000020000000400000006000000
       pingPong: 1
       attachPoints: []
+      handles: []
       breathe: 0.008
       breathePeriod: 2.4
     attack:
@@ -1181,6 +1289,7 @@ MonoBehaviour:
       keys: 00000000010000000200000005000000070000000a0000000c0000000f000000
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     heavyAttack:
@@ -1207,6 +1316,7 @@ MonoBehaviour:
       keys: 00000000010000000200000005000000070000000a0000000c0000000f000000
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     hit:
@@ -1221,6 +1331,7 @@ MonoBehaviour:
       keys: 00000000010000000200000003000000
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     knockOut:
@@ -1236,6 +1347,7 @@ MonoBehaviour:
       keys: 00000000020000000300000004000000
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     hideoutIdle:
@@ -1246,6 +1358,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     rope:
@@ -1256,6 +1369,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     dig:
@@ -1266,6 +1380,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     run:
@@ -1276,6 +1391,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     bench:
@@ -1286,6 +1402,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     canPunch:
@@ -1296,6 +1413,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     tail:
@@ -1306,6 +1424,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     portrait: {fileID: 21300000, guid: 789e0e8fd8779937b9e4ab105c864c5c, type: 3}
@@ -1325,6 +1444,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints:
       - {x: 0.12, y: 1.49}
+      handles: []
       breathe: 0.012
       breathePeriod: 2.6
     attack:
@@ -1367,6 +1487,7 @@ MonoBehaviour:
       - {x: 0.155, y: 1.4167}
       - {x: 0.135, y: 1.4233}
       - {x: 0.115, y: 1.43}
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     heavyAttack:
@@ -1384,6 +1505,7 @@ MonoBehaviour:
       keys: 00000000020000000400000006000000
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     hit:
@@ -1399,6 +1521,7 @@ MonoBehaviour:
       keys: 00000000020000000300000004000000
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     knockOut:
@@ -1413,6 +1536,7 @@ MonoBehaviour:
       keys: 00000000010000000200000003000000
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     hideoutIdle:
@@ -1424,6 +1548,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0.012
       breathePeriod: 2.6
     rope:
@@ -1437,11 +1562,36 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 9ea0f6b313ce154aea6b4b72e2a3f042, type: 3}
       - {fileID: 21300000, guid: 40444776fbc1f6c4a92dceec3ef5f639, type: 3}
       - {fileID: 21300000, guid: eed7ef65a6910426ab9669acc87afe32, type: 3}
-      fps: 9
+      - {fileID: 21300000, guid: 8e5aba5cbdc7775e3bb502e4ea87214d, type: 3}
+      - {fileID: 21300000, guid: 1230e0c4fdf31c217b1027e5fd5d2e91, type: 3}
+      - {fileID: 21300000, guid: 9cac9c528663dee3bb7fc50f2488f1ff, type: 3}
+      - {fileID: 21300000, guid: aea8be49960b2e3c1866414d9d9ba47d, type: 3}
+      - {fileID: 21300000, guid: 005ce3f167f5989c8a80edebbdae8dc3, type: 3}
+      - {fileID: 21300000, guid: 58e3725d8b9b6d6528063081b6fd673e, type: 3}
+      - {fileID: 21300000, guid: 696094f0eb561bcea9f05bfe0c81d6ab, type: 3}
+      - {fileID: 21300000, guid: da4c75dfc22dcaa9cb5d02dd00d795f0, type: 3}
+      fps: 18
       loop: 1
-      keys: 
+      keys: 00000000020000000400000006000000080000000a0000000c0000000e000000
       pingPong: 0
       attachPoints: []
+      handles:
+      - {x: 0.1842, y: 0.417, z: 0.8553, w: 0.417}
+      - {x: 0.1842, y: 0.417, z: 0.8553, w: 0.417}
+      - {x: 0.1842, y: 0.417, z: 0.8553, w: 0.417}
+      - {x: 0.1776, y: 0.4028, z: 0.8553, w: 0.4028}
+      - {x: 0.1711, y: 0.3886, z: 0.8553, w: 0.3886}
+      - {x: 0.1737, y: 0.3799, z: 0.8579, w: 0.3777}
+      - {x: 0.1763, y: 0.3712, z: 0.8605, w: 0.3668}
+      - {x: 0.1776, y: 0.4039, z: 0.8579, w: 0.4017}
+      - {x: 0.1789, y: 0.4367, z: 0.8553, w: 0.4367}
+      - {x: 0.1789, y: 0.429, z: 0.8592, w: 0.4269}
+      - {x: 0.1789, y: 0.4214, z: 0.8632, w: 0.417}
+      - {x: 0.1816, y: 0.4214, z: 0.8632, w: 0.417}
+      - {x: 0.1842, y: 0.4214, z: 0.8632, w: 0.417}
+      - {x: 0.1842, y: 0.4181, z: 0.8632, w: 0.4159}
+      - {x: 0.1842, y: 0.4148, z: 0.8632, w: 0.4148}
+      - {x: 0.1842, y: 0.4159, z: 0.8592, w: 0.4159}
       breathe: 0
       breathePeriod: 2.4
     dig:
@@ -1468,6 +1618,7 @@ MonoBehaviour:
       keys: 00000000010000000300000006000000090000000c0000000d0000000f000000
       pingPong: 1
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     run:
@@ -1494,41 +1645,58 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     bench:
       name: bench
       frames:
-      - {fileID: 21300000, guid: 972975ff2767e11f897e4806fdeefe16, type: 3}
-      - {fileID: 21300000, guid: 1cc7862281337c02fbeae37615d29b97, type: 3}
-      - {fileID: 21300000, guid: 3d8d6581237701109bc6fc394b80ca32, type: 3}
-      - {fileID: 21300000, guid: 25cd29d853389bf0f988ff7ecb5d554a, type: 3}
-      - {fileID: 21300000, guid: 82dfe3fb1d16d5c75b3abf76302690d6, type: 3}
-      - {fileID: 21300000, guid: 73506952dbbb252b986480801f4273e2, type: 3}
-      - {fileID: 21300000, guid: db32d1bb038e5bc91a9c3c6d4af64414, type: 3}
-      - {fileID: 21300000, guid: afca61310c231d02abd7398e3c618ca8, type: 3}
-      - {fileID: 21300000, guid: c1a0f1c2d6a71f5848db8f6f653dc4c3, type: 3}
-      - {fileID: 21300000, guid: 92177d8ec4c5bf6ea8fcad5d4c0665f8, type: 3}
-      - {fileID: 21300000, guid: e361b5cd5c82e70ef9b0dd3e0e701bfd, type: 3}
-      - {fileID: 21300000, guid: ec01f5bd063367ac28c58f1ca1dc1269, type: 3}
-      - {fileID: 21300000, guid: 0766bd5b89ead4ecf95e05dc278a1855, type: 3}
-      - {fileID: 21300000, guid: 45ca70b32ccfd98939c89a2dc0c633a8, type: 3}
-      - {fileID: 21300000, guid: 214105c86b29c5bfa905b056b7309447, type: 3}
-      - {fileID: 21300000, guid: 46975b876ed9367609c91d85aee1fb46, type: 3}
-      - {fileID: 21300000, guid: 0453217b9e205ecc9b432081d9136d48, type: 3}
-      - {fileID: 21300000, guid: 27ca842a8900e56469754ff4c2ddb9a7, type: 3}
-      - {fileID: 21300000, guid: 135c75d93cc4bbb2586ee16c79138c26, type: 3}
-      - {fileID: 21300000, guid: 2be0591471f89b0bb8f70a18122a7c2a, type: 3}
-      - {fileID: 21300000, guid: 558cecb4c0733773e8e49a5b0f420ea2, type: 3}
-      - {fileID: 21300000, guid: 99dc15718235439beb5a416486ec8fd6, type: 3}
-      - {fileID: 21300000, guid: b4bfc54fbfb5aefeda8223c0dcc2217a, type: 3}
-      - {fileID: 21300000, guid: 7cd1784bf2dbf0903ab85e496f9a7a2a, type: 3}
-      - {fileID: 21300000, guid: 041f24e2267d0da5885f2d2edf815ad7, type: 3}
-      fps: 25
+      - {fileID: 21300000, guid: 0e3bfd3a2bebe02eb9f7fa990f16bc95, type: 3}
+      - {fileID: 21300000, guid: a9995d70cfc49b0979cae02774788c07, type: 3}
+      - {fileID: 21300000, guid: d89da7bd2b0bef18e8ad79684a78152b, type: 3}
+      - {fileID: 21300000, guid: 2d69aefbdbad5ebc5aa2e93f59ffccdc, type: 3}
+      - {fileID: 21300000, guid: 8fcbb7628babea3caa96561c4c61ffb6, type: 3}
+      - {fileID: 21300000, guid: f3bf8909ee8e55627b9f39cc75f994f5, type: 3}
+      - {fileID: 21300000, guid: 286df580ffd54c181b65dc2d898dd61c, type: 3}
+      - {fileID: 21300000, guid: 1fde077354568f495b1d83c22b56e338, type: 3}
+      - {fileID: 21300000, guid: 14f01933b36941465b65b4e8bf1a82ef, type: 3}
+      - {fileID: 21300000, guid: 872587542a1bd158a87a1315e23fdaae, type: 3}
+      - {fileID: 21300000, guid: 19791cd6a2ba93500b158e9d06df95c5, type: 3}
+      - {fileID: 21300000, guid: 564954d3c180de5f080a11e6fd2e03df, type: 3}
+      - {fileID: 21300000, guid: 0a7a7cceccff7f172944102975a6d58e, type: 3}
+      - {fileID: 21300000, guid: b5a2679362bb1b7f6965e0f62b6820c6, type: 3}
+      - {fileID: 21300000, guid: b9d5ea4e3a2acbe948fe913838ed65bf, type: 3}
+      - {fileID: 21300000, guid: 7f6028d6e5810561f96bf7a5519d0971, type: 3}
+      - {fileID: 21300000, guid: ea0d85a6357ac5cf989343b5b8b1dfac, type: 3}
+      - {fileID: 21300000, guid: adf7c86676a23ff71aca1f5871ed2f7a, type: 3}
+      - {fileID: 21300000, guid: c971582a9b1b3c444af895c4e12ea6d7, type: 3}
+      - {fileID: 21300000, guid: 8d329d7f3ea0ecea1b6986e20bbf8340, type: 3}
+      fps: 20
       loop: 1
-      keys: 
+      keys: 000000000300000006000000090000000c0000000d0000001000000011000000
       pingPong: 0
       attachPoints: []
+      handles:
+      - {x: 0.5, y: 0.511, z: 0.6136, w: 0.4918}
+      - {x: 0.4659, y: 0.5549, z: 0.6076, w: 0.5375}
+      - {x: 0.4318, y: 0.5989, z: 0.6015, w: 0.5833}
+      - {x: 0.3977, y: 0.6429, z: 0.5955, w: 0.6291}
+      - {x: 0.4015, y: 0.6813, z: 0.6144, w: 0.6612}
+      - {x: 0.4053, y: 0.7198, z: 0.6333, w: 0.6932}
+      - {x: 0.4091, y: 0.7582, z: 0.6523, w: 0.7253}
+      - {x: 0.4432, y: 0.8004, z: 0.6659, w: 0.7747}
+      - {x: 0.4773, y: 0.8425, z: 0.6795, w: 0.8242}
+      - {x: 0.5114, y: 0.8846, z: 0.6932, w: 0.8736}
+      - {x: 0.5076, y: 0.8727, z: 0.6932, w: 0.859}
+      - {x: 0.5038, y: 0.8608, z: 0.6932, w: 0.8443}
+      - {x: 0.5, y: 0.8489, z: 0.6932, w: 0.8297}
+      - {x: 0.4477, y: 0.794, z: 0.6364, w: 0.7747}
+      - {x: 0.45, y: 0.7729, z: 0.6417, w: 0.7537}
+      - {x: 0.4523, y: 0.7518, z: 0.647, w: 0.7326}
+      - {x: 0.4545, y: 0.7308, z: 0.6523, w: 0.7115}
+      - {x: 0.5114, y: 0.511, z: 0.6364, w: 0.4918}
+      - {x: 0.5076, y: 0.511, z: 0.6288, w: 0.4918}
+      - {x: 0.5038, y: 0.511, z: 0.6212, w: 0.4918}
       breathe: 0
       breathePeriod: 2.4
     canPunch:
@@ -1555,6 +1723,7 @@ MonoBehaviour:
       keys: 00000000020000000400000006000000080000000a0000000c0000000e000000
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     tail:
@@ -1573,6 +1742,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     portrait: {fileID: 21300000, guid: 6d5d874621a7f3051aed5f00db88de9b, type: 3}
@@ -1595,6 +1765,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0.012
       breathePeriod: 2.6
     attack:
@@ -1619,6 +1790,7 @@ MonoBehaviour:
       keys: 000000000100000002000000030000000700000008000000090000000d000000
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     heavyAttack:
@@ -1633,6 +1805,7 @@ MonoBehaviour:
       keys: 00000000010000000200000003000000
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     hit:
@@ -1647,6 +1820,7 @@ MonoBehaviour:
       keys: 00000000010000000200000003000000
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     knockOut:
@@ -1661,6 +1835,7 @@ MonoBehaviour:
       keys: 00000000010000000200000003000000
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     hideoutIdle:
@@ -1672,6 +1847,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0.012
       breathePeriod: 2.6
     rope:
@@ -1685,11 +1861,36 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 6c90e039fcc6ae77e9e8db001ae8d611, type: 3}
       - {fileID: 21300000, guid: 375fec2f1f37666dd98d54a327140274, type: 3}
       - {fileID: 21300000, guid: 88140c2cadb5cd72c8aed4336c613267, type: 3}
-      fps: 9
+      - {fileID: 21300000, guid: 2227121eb0b761a54b8d66f8ad7804af, type: 3}
+      - {fileID: 21300000, guid: 2da4a1019f5ad39f29761204b5641aeb, type: 3}
+      - {fileID: 21300000, guid: 787cf2c7697b92866b25d732c1b5a579, type: 3}
+      - {fileID: 21300000, guid: f85ab4597b52bf0bcb93ad9706f0d1c3, type: 3}
+      - {fileID: 21300000, guid: 1b2b2b4fd07ed0d998830b530575201e, type: 3}
+      - {fileID: 21300000, guid: bf65440817cf3827896f346c79188053, type: 3}
+      - {fileID: 21300000, guid: 34af9579dacf45af980287328c91d025, type: 3}
+      - {fileID: 21300000, guid: 82a7eda0a4e52375d8448a5b9e8c15f8, type: 3}
+      fps: 18
       loop: 1
-      keys: 
+      keys: 00000000020000000400000006000000080000000a0000000c0000000e000000
       pingPong: 0
       attachPoints: []
+      handles:
+      - {x: 0.2903, y: 0.4254, z: 0.8774, w: 0.4408}
+      - {x: 0.2903, y: 0.4254, z: 0.8774, w: 0.4408}
+      - {x: 0.2903, y: 0.4254, z: 0.8774, w: 0.4408}
+      - {x: 0.2952, y: 0.3871, z: 0.879, w: 0.3991}
+      - {x: 0.3, y: 0.3487, z: 0.8806, w: 0.3575}
+      - {x: 0.2952, y: 0.3531, z: 0.8871, w: 0.3629}
+      - {x: 0.2903, y: 0.3575, z: 0.8935, w: 0.3684}
+      - {x: 0.2903, y: 0.3958, z: 0.8935, w: 0.4046}
+      - {x: 0.2903, y: 0.4342, z: 0.8935, w: 0.4408}
+      - {x: 0.2919, y: 0.4101, z: 0.8935, w: 0.4211}
+      - {x: 0.2935, y: 0.386, z: 0.8935, w: 0.4013}
+      - {x: 0.2919, y: 0.4101, z: 0.8887, w: 0.4178}
+      - {x: 0.2903, y: 0.4342, z: 0.8839, w: 0.4342}
+      - {x: 0.2903, y: 0.4298, z: 0.8855, w: 0.432}
+      - {x: 0.2903, y: 0.4254, z: 0.8871, w: 0.4298}
+      - {x: 0.2903, y: 0.4254, z: 0.8823, w: 0.4353}
       breathe: 0
       breathePeriod: 2.4
     dig:
@@ -1714,6 +1915,7 @@ MonoBehaviour:
       keys: 000000000400000005000000090000000a0000000b0000000c0000000d000000
       pingPong: 1
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     run:
@@ -1740,41 +1942,58 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     bench:
       name: bench
       frames:
-      - {fileID: 21300000, guid: b810f1d5dcd8e29dabd3ef6488bdd803, type: 3}
-      - {fileID: 21300000, guid: b479b3594c026d8398dd67f84f60971d, type: 3}
-      - {fileID: 21300000, guid: f5251b89d8198e11ca89f48277578113, type: 3}
-      - {fileID: 21300000, guid: 1aaf92320b3681677ab12c225416380d, type: 3}
-      - {fileID: 21300000, guid: 605731cb7d483a907a9be8b3a1e7cc0f, type: 3}
-      - {fileID: 21300000, guid: 04e9057d14d30c2cfb1ebcc82d2646f1, type: 3}
-      - {fileID: 21300000, guid: 0ed559c460b4c7f8f878b6c52ac05206, type: 3}
-      - {fileID: 21300000, guid: b1729b681b860fbefb9d3abe5f89ba3a, type: 3}
-      - {fileID: 21300000, guid: 462f56ce9bab8b480b1e72171d3b4be8, type: 3}
-      - {fileID: 21300000, guid: 1b6818d4ac09dac0e8eddc24db7ccc96, type: 3}
-      - {fileID: 21300000, guid: b307938263e9278489403646686dd9b6, type: 3}
-      - {fileID: 21300000, guid: 66bc6c88667799459aef2a82dd43e0da, type: 3}
-      - {fileID: 21300000, guid: 1e74d2315a0209c88a0d8f3b652bc8f6, type: 3}
-      - {fileID: 21300000, guid: 902e7e6187d7f7b1fa7937e653687646, type: 3}
-      - {fileID: 21300000, guid: a17d9bd4867fdcda193c1ff5470bff70, type: 3}
-      - {fileID: 21300000, guid: 696bd7486c769c64589c5f79f57b37d6, type: 3}
-      - {fileID: 21300000, guid: 16573d40a65d9290bae8ba03e6e0290c, type: 3}
-      - {fileID: 21300000, guid: 063157f516f10b81a8214047a5385b42, type: 3}
-      - {fileID: 21300000, guid: fba7ca3dcbc3f7b4b95e9bf15aa1e979, type: 3}
-      - {fileID: 21300000, guid: b63f75721e1bf7598ad0c35481c70122, type: 3}
-      - {fileID: 21300000, guid: a9f144aba814cd2d4b34c2775f10d76d, type: 3}
-      - {fileID: 21300000, guid: f6c6f5c4f74afbc7fb97b9960dfa7d75, type: 3}
-      - {fileID: 21300000, guid: 15d8c50e97151416faa85a3d4e616e93, type: 3}
-      - {fileID: 21300000, guid: c8224dd36d6757655887c79a87a0420a, type: 3}
-      - {fileID: 21300000, guid: 2bc987c3d2e9641c09e64bb8412c34b0, type: 3}
-      fps: 25
+      - {fileID: 21300000, guid: 8e8eab54852f9177fb9f06b38b222ced, type: 3}
+      - {fileID: 21300000, guid: 02c6dac4fdcde94f2bc6d08c9e045170, type: 3}
+      - {fileID: 21300000, guid: 740eef023a8b4822db82f41857220fc2, type: 3}
+      - {fileID: 21300000, guid: 4730bdbfc0dfd9cf2a82f6400914129a, type: 3}
+      - {fileID: 21300000, guid: 36732ca8aaec4a9948dc1f4eb8d3f774, type: 3}
+      - {fileID: 21300000, guid: 8236d9cdf8733f3689d4209069abf27b, type: 3}
+      - {fileID: 21300000, guid: 87b0c908bab192a7bb1fa516c8c0b6ba, type: 3}
+      - {fileID: 21300000, guid: 2551ccbc3cbba09f0be5f6f4df4339cb, type: 3}
+      - {fileID: 21300000, guid: 8b0ce571335b62bb9b4eb8e898d1a9ba, type: 3}
+      - {fileID: 21300000, guid: 243502a4818f124c98468551eb5455e6, type: 3}
+      - {fileID: 21300000, guid: 571b7a6218c6d8de593252b3ab9e99ff, type: 3}
+      - {fileID: 21300000, guid: 523cea4e55251c2639ee8e07dcd0c004, type: 3}
+      - {fileID: 21300000, guid: 2095922d8eae21abf811fbd80970dfda, type: 3}
+      - {fileID: 21300000, guid: 46ab48536935ce81daa0aad6fc14e282, type: 3}
+      - {fileID: 21300000, guid: 43989683c4d13624f8e87af7d089dd52, type: 3}
+      - {fileID: 21300000, guid: ba599815bab6a5b09bb4ec84ddfaa118, type: 3}
+      - {fileID: 21300000, guid: 896532c94817cf441ad615e71f1416a2, type: 3}
+      - {fileID: 21300000, guid: 3b5407ca8e177ab08992e6efda1902ed, type: 3}
+      - {fileID: 21300000, guid: 70a0350f4dd0b40cca8d0ef44c587959, type: 3}
+      - {fileID: 21300000, guid: 346acfdf581314569b6ab2c2d1fbbb50, type: 3}
+      fps: 20
       loop: 1
-      keys: 
+      keys: 000000000300000006000000070000000a0000000b0000000e00000011000000
       pingPong: 0
       attachPoints: []
+      handles:
+      - {x: 0.479, y: 0.5081, z: 0.6029, w: 0.4892}
+      - {x: 0.4727, y: 0.5358, z: 0.6401, w: 0.5027}
+      - {x: 0.4664, y: 0.5636, z: 0.6772, w: 0.5161}
+      - {x: 0.4601, y: 0.5914, z: 0.7143, w: 0.5296}
+      - {x: 0.4524, y: 0.6129, z: 0.7269, w: 0.5475}
+      - {x: 0.4447, y: 0.6344, z: 0.7395, w: 0.5654}
+      - {x: 0.437, y: 0.6559, z: 0.7521, w: 0.5833}
+      - {x: 0.4601, y: 0.8925, z: 0.6828, w: 0.871}
+      - {x: 0.4615, y: 0.8943, z: 0.6842, w: 0.8737}
+      - {x: 0.4629, y: 0.8961, z: 0.6856, w: 0.8763}
+      - {x: 0.4643, y: 0.8978, z: 0.687, w: 0.879}
+      - {x: 0.4286, y: 0.6102, z: 0.7227, w: 0.5565}
+      - {x: 0.4356, y: 0.6057, z: 0.7199, w: 0.5502}
+      - {x: 0.4426, y: 0.6013, z: 0.7171, w: 0.5439}
+      - {x: 0.4496, y: 0.5968, z: 0.7143, w: 0.5376}
+      - {x: 0.4587, y: 0.5672, z: 0.6772, w: 0.5215}
+      - {x: 0.4678, y: 0.5376, z: 0.6401, w: 0.5054}
+      - {x: 0.4769, y: 0.5081, z: 0.6029, w: 0.4892}
+      - {x: 0.4776, y: 0.5081, z: 0.6029, w: 0.4892}
+      - {x: 0.4783, y: 0.5081, z: 0.6029, w: 0.4892}
       breathe: 0
       breathePeriod: 2.4
     canPunch:
@@ -1801,6 +2020,7 @@ MonoBehaviour:
       keys: 0000000003000000040000000500000006000000070000000a0000000d000000
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     tail:
@@ -1811,6 +2031,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     portrait: {fileID: 21300000, guid: 33c299b18ba2dd0b498e17e17832c0bc, type: 3}
@@ -1839,6 +2060,7 @@ MonoBehaviour:
       keys: 00000000020000000400000006000000
       pingPong: 1
       attachPoints: []
+      handles: []
       breathe: 0.008
       breathePeriod: 2.4
     attack:
@@ -1865,6 +2087,7 @@ MonoBehaviour:
       keys: 00000000020000000300000005000000070000000a0000000c0000000f000000
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     heavyAttack:
@@ -1891,6 +2114,7 @@ MonoBehaviour:
       keys: 00000000020000000300000005000000070000000a0000000c0000000f000000
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     hit:
@@ -1905,6 +2129,7 @@ MonoBehaviour:
       keys: 00000000010000000200000003000000
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     knockOut:
@@ -1919,6 +2144,7 @@ MonoBehaviour:
       keys: 00000000010000000200000003000000
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     hideoutIdle:
@@ -1929,6 +2155,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     rope:
@@ -1939,6 +2166,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     dig:
@@ -1949,6 +2177,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     run:
@@ -1959,6 +2188,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     bench:
@@ -1969,6 +2199,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     canPunch:
@@ -1979,6 +2210,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     tail:
@@ -1989,6 +2221,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     portrait: {fileID: 21300000, guid: 09d0f0532bee156ef90696c02a220b62, type: 3}
@@ -2022,6 +2255,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     attack:
@@ -2032,6 +2266,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     heavyAttack:
@@ -2042,6 +2277,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     hit:
@@ -2052,6 +2288,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     knockOut:
@@ -2062,6 +2299,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     hideoutIdle:
@@ -2072,6 +2310,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     rope:
@@ -2082,6 +2321,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     dig:
@@ -2092,6 +2332,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     run:
@@ -2102,6 +2343,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     bench:
@@ -2112,6 +2354,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     canPunch:
@@ -2122,6 +2365,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     tail:
@@ -2132,6 +2376,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     portrait: {fileID: 21300000, guid: 779591b30c4ba0e1ba14b14d6fad19ba, type: 3}
@@ -2156,6 +2401,7 @@ MonoBehaviour:
       keys: 00000000020000000400000006000000
       pingPong: 1
       attachPoints: []
+      handles: []
       breathe: 0.008
       breathePeriod: 2.4
     attack:
@@ -2182,6 +2428,7 @@ MonoBehaviour:
       keys: 00000000040000000500000006000000090000000a0000000b0000000f000000
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     heavyAttack:
@@ -2208,6 +2455,7 @@ MonoBehaviour:
       keys: 00000000040000000500000006000000090000000a0000000b0000000f000000
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     hit:
@@ -2223,6 +2471,7 @@ MonoBehaviour:
       keys: 00000000010000000300000004000000
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     knockOut:
@@ -2239,6 +2488,7 @@ MonoBehaviour:
       keys: 00000000020000000300000005000000
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     hideoutIdle:
@@ -2249,6 +2499,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     rope:
@@ -2259,6 +2510,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     dig:
@@ -2269,6 +2521,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     run:
@@ -2279,6 +2532,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     bench:
@@ -2289,6 +2543,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     canPunch:
@@ -2299,6 +2554,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     tail:
@@ -2309,6 +2565,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     portrait: {fileID: 21300000, guid: fc262390673f752838490a18e0a54ec0, type: 3}
@@ -2333,6 +2590,7 @@ MonoBehaviour:
       keys: 00000000020000000400000006000000
       pingPong: 1
       attachPoints: []
+      handles: []
       breathe: 0.008
       breathePeriod: 2.4
     attack:
@@ -2359,6 +2617,7 @@ MonoBehaviour:
       keys: 00000000010000000200000005000000070000000a0000000c0000000f000000
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     heavyAttack:
@@ -2385,6 +2644,7 @@ MonoBehaviour:
       keys: 00000000010000000200000005000000070000000a0000000c0000000f000000
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     hit:
@@ -2399,6 +2659,7 @@ MonoBehaviour:
       keys: 00000000010000000200000003000000
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     knockOut:
@@ -2414,6 +2675,7 @@ MonoBehaviour:
       keys: 00000000020000000300000004000000
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     hideoutIdle:
@@ -2424,6 +2686,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     rope:
@@ -2434,6 +2697,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     dig:
@@ -2444,6 +2708,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     run:
@@ -2454,6 +2719,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     bench:
@@ -2464,6 +2730,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     canPunch:
@@ -2474,6 +2741,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     tail:
@@ -2484,6 +2752,7 @@ MonoBehaviour:
       keys: 
       pingPong: 0
       attachPoints: []
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     portrait: {fileID: 21300000, guid: 789e0e8fd8779937b9e4ab105c864c5c, type: 3}

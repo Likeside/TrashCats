@@ -212,7 +212,15 @@ namespace TrashCats.Editor
                 keys = Regex.Matches(File.ReadAllText(keysPath), @"\d+").Cast<Match>().Select(m => int.Parse(m.Value)).ToArray();
             if (keys.Length > 0) fps *= (float)frames.Length / keys.Length;
             else if (frames.Length >= 15) fps *= 2f;
-            return frames.Length == 0 ? null : new FlipbookClip { name = folder.ToLowerInvariant(), frames = frames, fps = fps, loop = loop, keys = keys };
+            // the hands that hold a prop the game draws (rope, barbell), one per frame (Tools/pose_handles.py)
+            var handles = new Vector4[0];
+            var handlesPath = $"{dir}/{folder}/handles.json";
+            if (File.Exists(handlesPath))
+            {
+                var v = Regex.Matches(File.ReadAllText(handlesPath), @"-?\d+(\.\d+)?").Cast<Match>().Select(m => float.Parse(m.Value, CultureInfo.InvariantCulture)).ToArray();
+                handles = Enumerable.Range(0, v.Length / 4).Select(i => new Vector4(v[i * 4], v[i * 4 + 1], v[i * 4 + 2], v[i * 4 + 3])).ToArray();
+            }
+            return frames.Length == 0 ? null : new FlipbookClip { name = folder.ToLowerInvariant(), frames = frames, fps = fps, loop = loop, keys = keys, handles = handles };
         }
 
         private static Sprite[] Sprites(string folder)
