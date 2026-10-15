@@ -13,6 +13,9 @@ namespace TrashCats.Domain
 
         /// <summary>Enemy debuff: lower hit chance for the enemy's next N actions.</summary>
         AccuracyDebuff = 3,
+
+        /// <summary>Self heal: restores EffectPermille of max HP (Second Wind).</summary>
+        Heal = 4,
     }
 
     public sealed class SkillDefinition

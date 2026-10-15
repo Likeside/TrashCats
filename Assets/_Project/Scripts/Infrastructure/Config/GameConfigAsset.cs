@@ -118,19 +118,16 @@ namespace TrashCats.Infrastructure
         public sealed class CombatEntry
         {
             public int tickMs = 100;
-            public int hpBase = 40;
-            public int hpPerEndurance = 12;
+            public int attributePctPerLevel = 10;
+            public int hpBase = 70;
             public int gritMax = 60;
             public int gritStart = 12;
             public int gritPerAction = 5;
             public int gritPerHitTaken = 3;
-            public int damageBase = 4;
-            public int damagePerStrength = 2;
+            public int damageBase = 10;
             public int intervalBaseTicks = 16;
-            public int intervalTechniqueDivisor = 2;
-            public int intervalMinTicks = 10;
-            public int hitBasePermille = 750;
-            public int hitPerTechniqueDiffPermille = 40;
+            public int intervalMinTicks = 5;
+            public int hitBasePermille = 800;
             public int hitMinPermille = 350;
             public int hitMaxPermille = 950;
             public int varianceMinPermille = 850;

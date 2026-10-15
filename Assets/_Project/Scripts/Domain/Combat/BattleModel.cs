@@ -196,6 +196,22 @@ namespace TrashCats.Domain
         public override string ToString() => $"{Tick}: {Side} {Status}={Value}";
     }
 
+    public sealed class Healed : BattleEvent
+    {
+        public Side Side { get; }
+        public int Amount { get; }
+        public int HpAfter { get; }
+
+        public Healed(int tick, Side side, int amount, int hpAfter) : base(tick)
+        {
+            Side = side;
+            Amount = amount;
+            HpAfter = hpAfter;
+        }
+
+        public override string ToString() => $"{Tick}: {Side} heals +{Amount} -> {HpAfter}";
+    }
+
     public sealed class SuddenDeathStarted : BattleEvent
     {
         public SuddenDeathStarted(int tick) : base(tick)

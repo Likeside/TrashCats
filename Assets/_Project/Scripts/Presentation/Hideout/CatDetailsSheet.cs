@@ -169,10 +169,11 @@ namespace TrashCats.Presentation.Hideout
             var endurance = cat.GetLevel(AttributeType.Endurance);
             var interval = CombatFormulas.IntervalTicks(c, technique) * c.TickMs / 1000f;
             Clear(_combat);
+            // one attribute — one stat, each level +10% of its base, in the attributes' order
+            CombatStat("skill_scratch", Loc.T("cat_details_sheet.13", CombatFormulas.BaseDamage(c, strength)), AttributeType.Strength, strength);
+            CombatStat("speed", Loc.T("cat_details_sheet.26", interval.ToString("0.##")), AttributeType.Technique, technique);
             CombatStat("hp", $"HP {CombatFormulas.MaxHp(c, endurance)}", AttributeType.Endurance, endurance);
             CombatStat("paw", Loc.T("cat_details_sheet.12", c.GritMax), null, 0);
-            CombatStat("skill_scratch", Loc.T("cat_details_sheet.13", CombatFormulas.BaseDamage(c, strength)), AttributeType.Strength, strength);
-            CombatStat("speed", Loc.T("cat_details_sheet.26", interval.ToString("0.#")), AttributeType.Technique, technique);
 
             // the slots as sockets
             var equipped = Enumerable.Range(0, Cat.SkillSlotCount).Select(cat.GetSkillInSlot).ToList();
@@ -216,7 +217,7 @@ namespace TrashCats.Presentation.Hideout
             if (source is AttributeType attribute)
             {
                 Info.Text(from, "←", 22, Palette.Ink, heading: false);
-                Info.Chip(from, Texts.AttributeIcon(attribute), $"{Texts.Attribute(attribute)} {level}", 32f, 22, Palette.Ink, heading: false);
+                Info.Chip(from, Texts.AttributeIcon(attribute), $"{level} · +{CombatFormulas.LevelPercent(_session.Config.Combat, level) - 100}%", 32f, 22, Palette.Ink, heading: false);
             }
             else
                 Info.Text(from, Loc.T("cat_details_sheet.27"), 22, Palette.Ink, heading: false);

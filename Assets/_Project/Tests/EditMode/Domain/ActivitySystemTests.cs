@@ -157,12 +157,12 @@ namespace TrashCats.Tests
         }
 
         [TestCase(AttributeType.Strength, 0, 15)]   // aptitude +50%
-        [TestCase(AttributeType.Strength, 2, 19)]   // aptitude +50%, Can lvl 2 +40%
+        [TestCase(AttributeType.Strength, 2, 19)]   // aptitude +50%, bench (Wheel) lvl 2 +40%
         [TestCase(AttributeType.Technique, 0, 10)]
         public void Training_GrantsXpWithAptitudeAndStationBonus(AttributeType attribute, int stationLevel, int expectedXp)
         {
             var cat = TestCats.Make(TestIds.Ryzhy, aptitude: AttributeType.Strength);
-            var station = attribute == AttributeType.Strength ? TestIds.Can : TestIds.Mouse;
+            var station = attribute == AttributeType.Strength ? TestIds.Wheel : TestIds.Can;
             var activity = attribute == AttributeType.Strength ? TestIds.TrainStr : TestIds.TrainAgi;
             var world = TestWorlds.Make(_config, upgrades: new[] { TestWorlds.Level(station, stationLevel) }, cats: cat);
             ActivitySystem.Start(world, cat, activity, _events);
@@ -181,7 +181,7 @@ namespace TrashCats.Tests
             ActivitySystem.Start(world, cat, TestIds.TrainStr, _events);
             Simulation.AdvanceTo(world, 10_000, _events);
 
-            Hideout.Buy(world.Upgrades, world.Wallet, _config, TestIds.Can, _events);
+            Hideout.Buy(world.Upgrades, world.Wallet, _config, TestIds.Wheel, _events);
             Simulation.AdvanceTo(world, 30_000, _events);
 
             Assert.That(_events.Single<ActivityCycleCompleted>().Output, Is.EqualTo(12));
@@ -238,7 +238,7 @@ namespace TrashCats.Tests
         public void Training_StopsAtMaxLevel()
         {
             var cat = TestCats.Make(TestIds.Ryzhy, str: 9, aptitude: AttributeType.Strength);
-            var world = TestWorlds.Make(_config, upgrades: new[] { TestWorlds.Level(TestIds.Can, 2) }, cats: cat);
+            var world = TestWorlds.Make(_config, upgrades: new[] { TestWorlds.Level(TestIds.Wheel, 2) }, cats: cat);
             ActivitySystem.Start(world, cat, TestIds.TrainStr, _events);
 
             Simulation.AdvanceTo(world, 30_000 * 6, _events); // 106 XP needed, 19 per cycle

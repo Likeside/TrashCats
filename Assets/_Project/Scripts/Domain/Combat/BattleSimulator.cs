@@ -7,18 +7,26 @@ namespace TrashCats.Domain
     /// <summary>Integer combat formulas (Docs/GDD/COMBAT_DESIGN.md §4).</summary>
     public static class CombatFormulas
     {
+        /// <summary>Base × (100% + <see cref="CombatConfig.AttributePctPerLevel"/>% per level), the same shape for every attribute.</summary>
+        public static int Scaled(CombatConfig c, int baseValue, int level) => (int)((long)baseValue * (100 + c.AttributePctPerLevel * level) / 100);
+
+        /// <summary>How many times its base an attribute level makes its stat, in percent (level 5 -> 150).</summary>
+        public static int LevelPercent(CombatConfig c, int level) => 100 + c.AttributePctPerLevel * level;
+
+        /// <summary>Endurance: HP.</summary>
         public static int MaxHp(CombatConfig c, int endurance, int multiplierPermille = 1000) =>
-            (int)((long)(c.HpBase + c.HpPerEndurance * endurance) * multiplierPermille / 1000);
+            (int)((long)Scaled(c, c.HpBase, endurance) * multiplierPermille / 1000);
 
+        /// <summary>Strength: damage of a plain hit.</summary>
+        public static int BaseDamage(CombatConfig c, int strength) => Scaled(c, c.DamageBase, strength);
 
-        public static int BaseDamage(CombatConfig c, int strength) => c.DamageBase + c.DamagePerStrength * strength;
-
+        /// <summary>Technique: attack speed — the base interval divided by the level's share, rounded.</summary>
         public static int IntervalTicks(CombatConfig c, int technique) =>
-            Math.Max(c.IntervalMinTicks, c.IntervalBaseTicks - technique / c.IntervalTechniqueDivisor);
+            Math.Max(c.IntervalMinTicks, (c.IntervalBaseTicks * 100 + LevelPercent(c, technique) / 2) / LevelPercent(c, technique));
 
-        public static int HitChancePermille(CombatConfig c, int attackerTechnique, int defenderTechnique, int modifierPermille) =>
-            Math.Clamp(c.HitBasePermille + c.HitPerTechniqueDiffPermille * (attackerTechnique - defenderTechnique) + modifierPermille,
-                c.HitMinPermille, c.HitMaxPermille);
+        /// <summary>The same accuracy for everyone; only skills and statuses change it.</summary>
+        public static int HitChancePermille(CombatConfig c, int modifierPermille) =>
+            Math.Clamp(c.HitBasePermille + modifierPermille, c.HitMinPermille, c.HitMaxPermille);
 
         /// <summary>Damage of one landed hit; every factor in permille, rounded once at the end, at least 1.</summary>
         public static int Damage(int baseDamage, params int[] permilleFactors)
@@ -137,7 +145,7 @@ namespace TrashCats.Domain
                 var eReady = _enemy.Timer <= 0;
                 if (pReady && eReady)
                 {
-                    var playerFirst = _player.Snapshot.Technique >= _enemy.Snapshot.Technique;
+                    var playerFirst = _player.Interval <= _enemy.Interval; // the faster one strikes first
                     return playerFirst ? new[] { _player, _enemy } : new[] { _enemy, _player };
                 }
 
@@ -214,6 +222,11 @@ namespace TrashCats.Domain
                         opponent.Blinded = skill.EffectCount;
                         _log.Add(new StatusChanged(_tick, opponent.Side, CombatStatus.Blinded, opponent.Blinded));
                         break;
+                    case SkillEffectKind.Heal:
+                        var heal = Math.Min(self.MaxHp - self.Hp, self.MaxHp * skill.EffectPermille / 1000);
+                        self.Hp += heal;
+                        _log.Add(new Healed(_tick, self.Side, heal, self.Hp));
+                        break;
                 }
 
                 // Dirty Trick lasts for the blinded fighter's next N actions of any kind.
@@ -237,7 +250,7 @@ namespace TrashCats.Domain
                 }
 
                 var blind = self.Blinded > 0 ? -_blindPenaltyPermille : 0;
-                var chance = CombatFormulas.HitChancePermille(_c, self.Snapshot.Technique, opponent.Snapshot.Technique, skill.HitModifierPermille + blind);
+                var chance = CombatFormulas.HitChancePermille(_c, skill.HitModifierPermille + blind);
                 var baseDamage = CombatFormulas.BaseDamage(_c, self.Snapshot.Strength);
                 for (var hit = 0; hit < skill.Hits && opponent.Hp > 0; hit++)
                 {
@@ -315,12 +328,15 @@ namespace TrashCats.Domain
         }
 
         public const int FurHpThresholdPermille = 600;
+        public const int HealHpThresholdPermille = 350;
 
         public static SkillDefinition Choose(IReadOnlyList<SkillDefinition> skills, SkillDefinition innate, Func<SkillDefinition, bool> ready,
             SelfState self, Threat opponent)
         {
             SkillDefinition First(Func<SkillDefinition, bool> match) => skills.FirstOrDefault(s => match(s) && ready(s));
 
+            if (self.HpPermille <= HealHpThresholdPermille && First(s => s.Effect == SkillEffectKind.Heal) is { } heal)
+                return heal;
             if (!self.FurActive && self.HpPermille <= FurHpThresholdPermille && First(s => s.Effect == SkillEffectKind.DamageReduction) is { } fur)
                 return fur;
             if (!self.EvadeActive && opponent.HeavyAttackReady && First(s => s.Effect == SkillEffectKind.GuaranteedEvade) is { } dodge)

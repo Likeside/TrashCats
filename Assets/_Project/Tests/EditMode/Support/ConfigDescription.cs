@@ -25,7 +25,7 @@ namespace TrashCats.Tests
             foreach (var x in c.Skills)
                 sb.AppendLine($"skill {x.Id} {x.NameKey} {x.IsInnate} {x.UnlockAttribute} {x.UnlockLevel} grit {x.GritCost} cd {x.CooldownActions} {x.Effect} dmg {x.DamagePermille} hit {x.HitModifierPermille} x{x.Hits} eff {x.EffectPermille}/{x.EffectCount}");
             var k = c.Combat;
-            sb.AppendLine($"combat {k.TickMs} {k.HpBase} {k.HpPerEndurance} {k.GritMax} {k.GritStart} {k.GritPerAction} {k.GritPerHitTaken} {k.DamageBase} {k.DamagePerStrength} {k.IntervalBaseTicks} {k.IntervalTechniqueDivisor} {k.IntervalMinTicks} {k.HitBasePermille} {k.HitPerTechniqueDiffPermille} {k.HitMinPermille} {k.HitMaxPermille} {k.VarianceMinPermille} {k.VarianceMaxPermille} {k.SuddenDeathAfterTicks} {k.SuddenDeathPermille} {k.FighterEntryPauseTicks} {k.SafetyMaxTicks}");
+            sb.AppendLine($"combat {k.TickMs} {k.AttributePctPerLevel} {k.HpBase} {k.GritMax} {k.GritStart} {k.GritPerAction} {k.GritPerHitTaken} {k.DamageBase} {k.IntervalBaseTicks} {k.IntervalMinTicks} {k.HitBasePermille} {k.HitMinPermille} {k.HitMaxPermille} {k.VarianceMinPermille} {k.VarianceMaxPermille} {k.SuddenDeathAfterTicks} {k.SuddenDeathPermille} {k.FighterEntryPauseTicks} {k.SafetyMaxTicks}");
             foreach (var x in c.Enemies)
                 sb.AppendLine($"enemy {x.Id} {x.NameKey} {x.Strength}/{x.Technique}/{x.Endurance} [{string.Join(",", x.Skills)}] hp {x.HpMultiplierPermille} {x.ViewKey}");
             foreach (var x in c.Territories)

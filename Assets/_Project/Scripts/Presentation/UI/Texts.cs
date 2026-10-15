@@ -167,6 +167,7 @@ namespace TrashCats.Presentation.UI
             "skill_thick_fur" => Loc.T("texts.69"),
             "skill_dodge" => Loc.T("texts.70"),
             "skill_dirty_trick" => Loc.T("texts.71"),
+            "skill_second_wind" => Loc.T("texts.86"),
             _ => id.Value,
         };
 
@@ -176,6 +177,7 @@ namespace TrashCats.Presentation.UI
             SkillEffectKind.Damage => s.DamagePermille > 1000 ? Loc.T("texts.73", s.DamagePermille / 1000f, s.HitModifierPermille / 10) : Loc.T("texts.74"),
             SkillEffectKind.DamageReduction => Loc.T("texts.75", s.EffectCount, 100 - s.EffectPermille / 10),
             SkillEffectKind.GuaranteedEvade => Loc.T("texts.76"),
+            SkillEffectKind.Heal => Loc.T("texts.87", s.EffectPermille / 10),
             _ => Loc.T("texts.77", s.EffectPermille / 10, s.EffectCount),
         };
 

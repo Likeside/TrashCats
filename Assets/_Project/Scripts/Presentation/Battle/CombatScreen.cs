@@ -196,6 +196,7 @@ namespace TrashCats.Presentation.Battle
                     return nextIsHit ? 0.28f : 0.6f;
                 case FighterKnockedOut _: return 0.9f;
                 case SuddenDeathStarted _: return 0.8f;
+                case Healed _: return 0.6f;
                 default: return 0f;
             }
         }
@@ -281,6 +282,17 @@ namespace TrashCats.Presentation.Battle
                 case StatusChanged status:
                     _huds[(int)status.Side].SetStatus(status.Status, status.Value);
                     break;
+                case Healed healed:
+                {
+                    var side = (int)healed.Side;
+                    _huds[side].SetHp(healed.HpAfter);
+                    if (animate)
+                    {
+                        FloatAt(Spots[side] + new Vector3(0, 4.6f, 0), "+" + healed.Amount, Info.Gain, 60);
+                        Effect(Spots[side] + new Vector3(0, 2.6f, 0), Ui.Skin?.fxSparkle, 300);
+                    }
+                    break;
+                }
                 case SuddenDeathStarted _:
                     if (animate)
                     {

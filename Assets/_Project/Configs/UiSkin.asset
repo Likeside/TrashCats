@@ -91,6 +91,8 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 0954458a6e248fc59ba3caf4f81eb944, type: 3}
   - key: skill_scratch
     sprite: {fileID: 21300000, guid: 94459ee4000c890d8935dcef7d241c56, type: 3}
+  - key: skill_second_wind
+    sprite: {fileID: 21300000, guid: 7bd6046cdaf3fdea1835ec8db1f7985c, type: 3}
   - key: skill_thick_fur
     sprite: {fileID: 21300000, guid: a391e816bcd400770a581c3e5f4b97c8, type: 3}
   - key: skip
