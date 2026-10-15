@@ -145,7 +145,7 @@ namespace TrashCats.Presentation.Hideout
             _avatar.enabled = avatar != null;
 
             _title.text = Texts.CatName(id);
-            _status.text = working ? Texts.Doing(config.GetActivity(cat.Activity.ActivityId)) : Texts.IdleStatus(cat.Activity.IdleReason);
+            _status.text = working ? Texts.Doing(config.GetActivity(cat.Activity.ActivityId)) : Texts.IdleStatus(Texts.CurrentIdle(cat, config));
             _statusCycle.Root.gameObject.SetActive(working);
             var max = (float)config.Needs.Max;
             _energy.Set(cat.Energy / max, cat.Energy.ToString());

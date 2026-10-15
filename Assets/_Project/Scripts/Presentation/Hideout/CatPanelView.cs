@@ -66,7 +66,10 @@ namespace TrashCats.Presentation.Hideout
             private readonly Image _card;
             private readonly TMP_Text _name;
             private TMP_Text _portraitName;
+            private static readonly Color StatusInk = Palette.Hex("#2A2118");
+            private static readonly Color StatusAlert = Palette.Hex("#B3261E");
             private readonly TMP_Text _status;
+            private readonly Image _statusIcon;
             private readonly UiBar _progress;
             private readonly UiBar _energy;
             private readonly UiBar _satiety;
@@ -126,11 +129,23 @@ namespace TrashCats.Presentation.Hideout
                 _portraitName.rectTransform.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(4, -166), new Vector2(-4, -60));
                 _portraitName.Outlined();
 
-                _status = Ui.Label(content, "", 26, TextAnchor.MiddleCenter, Palette.Ink);
-                _status.rectTransform.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(10, -204), new Vector2(-10, -174));
+                // what the cat does, or why it waits with the reason's icon (sleep, fish, energy) — the scene has no bubbles
+                var statusRow = Info.Row(content, "Status", 4f, TextAnchor.MiddleCenter);
+                statusRow.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(10, -206), new Vector2(-10, -172));
+                _statusIcon = Ui.Panel(statusRow, "Icon", Color.white);
+                _statusIcon.preserveAspect = true;
+                Info.Size(_statusIcon, 32, 32);
+                // dark body text without the comic outline: small white outlined lettering was unreadable on the paper
+                _status = Ui.Label(statusRow, "", 26, TextAnchor.MiddleCenter, Palette.Ink, heading: false);
+                if (_status.font != null) _status.fontSharedMaterial = _status.font.material;
+                _status.outlineWidth = 0f;
+                _status.fontStyle = FontStyles.Bold;
                 _status.enableAutoSizing = true;
                 _status.fontSizeMax = 26;
                 _status.fontSizeMin = 18;
+                var statusLayout = _status.gameObject.AddComponent<LayoutElement>();
+                statusLayout.flexibleWidth = 1f;
+                statusLayout.minHeight = 34f;
 
                 _progress = Ui.Bar(content, "Progress", Palette.Progress);
                 _progress.Rect.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(50, -218), new Vector2(-10, -206));
@@ -181,9 +196,15 @@ namespace TrashCats.Presentation.Hideout
                 }
                 _name.color = CatColors.TextOn(color);
                 _name.text = Texts.CatName(cat.Id);
+                var reason = Texts.CurrentIdle(cat, session.Config);
+                var reasonIcon = Texts.IdleIcon(reason) is string iconKey ? Ui.Skin?.Icon(iconKey) : null;
+                _statusIcon.sprite = reasonIcon;
+                _statusIcon.gameObject.SetActive(reasonIcon != null);
+                // tired or hungry: in red, it needs the player
+                _status.color = reason is IdleReason.Tired or IdleReason.Hungry ? StatusAlert : StatusInk;
                 _status.text = cat.Activity.IsWorking
                     ? Texts.Doing(session.Config.GetActivity(cat.Activity.ActivityId))
-                    : Texts.IdleStatus(cat.Activity.IdleReason);
+                    : Texts.IdleStatus(reason);
 
                 var max = (float)session.Config.Needs.Max;
                 _energy.Set(cat.Energy / max, Ui.Skin != null ? cat.Energy.ToString() : Loc.T("cat_panel_view.03", cat.Energy));

@@ -16,8 +16,9 @@ namespace TrashCats.Presentation.Hideout
     /// <summary>
     /// Hideout scene: the background picture with station props and cats placed in the picture's own 0..1 space
     /// (<see cref="HideoutLayout"/>), so everything stays on its spot on any screen. Cats walk to the station of their
-    /// activity, show a cycle progress bar, an idle-reason bubble and floating results; nearer things draw on top.
-    /// Station captions sort with their props; cycle bars and bubbles live in layers over the whole scene; all of them
+    /// activity, show a cycle progress bar and floating results (why an idle cat waits is on its card); nearer things
+    /// draw on top.
+    /// Station captions sort with their props; cycle bars live in a layer over the whole scene; both
     /// follow their cat or prop every frame and are kept inside the visible part of the scene. Without art the props and cats are graybox
     /// boxes on the same spots.
     /// </summary>
@@ -37,7 +38,6 @@ namespace TrashCats.Presentation.Hideout
         private readonly Dictionary<UpgradeId, TMP_Text> _upgradeLabels = new Dictionary<UpgradeId, TMP_Text>();
         private readonly Dictionary<UpgradeId, RectTransform> _stations = new Dictionary<UpgradeId, RectTransform>();
         private readonly RectTransform _barLayer;
-        private readonly RectTransform _bubbleLayer;
         private readonly List<(RectTransform Plate, RectTransform Box, bool Centred)> _captions = new List<(RectTransform, RectTransform, bool)>();
         private readonly Vector3[] _corners = new Vector3[4];
         private readonly Vector3[] _sceneCorners = new Vector3[4];
@@ -76,7 +76,6 @@ namespace TrashCats.Presentation.Hideout
                 picture.rectTransform.Fill();
             }
             _barLayer = Ui.Rect(_frame, "CycleBars").Fill();
-            _bubbleLayer = Ui.Rect(_frame, "Bubbles").Fill();
             BuildStations();
             foreach (var cat in session.World.Cats)
                 AddToken(cat);
@@ -145,13 +144,6 @@ namespace TrashCats.Presentation.Hideout
                     KeepInScene(token.Away.Root, true, token.Away.Root.rect.width * 0.8f);
                     AvoidCaptions(token.Away.Root, below: false);
                 }
-
-                var reason = working || !visible ? "" : Texts.IdleBubble(cat.Activity.IdleReason);
-                var holder = token.Bubble.Root.parent.gameObject;
-                if (holder.activeSelf != (reason.Length > 0))
-                    holder.SetActive(reason.Length > 0);
-                if (reason.Length > 0)
-                    PlaceBubble(token, reason, Texts.IdleIcon(cat.Activity.IdleReason));
             }
 
 
@@ -216,22 +208,6 @@ namespace TrashCats.Presentation.Hideout
                     continue;
                 item.position += Vector3.up * (below ? pMin.y - gap - iMax.y : pMax.y + gap - iMin.y);
             }
-        }
-
-        /// <summary>
-        /// The idle bubble's tail comes out of the top of the cat's head; it opens to the left when there is no room on
-        /// the right.
-        /// </summary>
-        private void PlaceBubble(CatToken token, string text, string icon)
-        {
-            token.Bubble.Set(text, icon);
-            var head = HideoutLayout.IdleHead(token.Art?.viewKey);
-            if (token.Image.rectTransform.localScale.x < 0f)
-                head.x = 1f - head.x;
-            var holder = (RectTransform)token.Bubble.Root.parent;
-            holder.position = Point(token.Root, head);
-            var width = token.Bubble.Root.rect.width * Scale;
-            token.Bubble.SetFlipped(holder.position.x + width > _sceneCorners[2].x - 10f * Scale);
         }
 
         public void Dispose()
@@ -425,16 +401,6 @@ namespace TrashCats.Presentation.Hideout
             var id = cat.Id;
             button.onClick.AddListener(() => _onCatTapped(id));
 
-            // idle reason with its icon in a comic speech bubble coming out of the head (UI_UX §12), pulsing while the
-            // cat waits; the holder sits on the head and pulses, the bubble inside may be mirrored
-            var holder = Ui.Rect(_bubbleLayer, "Bubble_" + cat.Id);
-            holder.anchorMin = holder.anchorMax = new Vector2(0.5f, 0.5f);
-            holder.sizeDelta = Vector2.zero;
-            var bubble = new SpeechBubble(holder, "Bubble", new Vector2(240, 104), 28);
-            bubble.Root.anchoredPosition = Vector2.zero;
-            holder.gameObject.SetActive(false);
-            holder.DOScale(1.06f, 0.6f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine).SetLink(holder.gameObject);
-
             // a small cycle bar over the busy cat's head
             var progress = Ui.Bar(_barLayer, "Progress_" + cat.Id, Palette.Progress);
             progress.Rect.anchorMin = progress.Rect.anchorMax = new Vector2(0.5f, 0.5f);
@@ -442,7 +408,7 @@ namespace TrashCats.Presentation.Hideout
             progress.Rect.sizeDelta = new Vector2(96, 16);
             progress.Rect.gameObject.SetActive(false);
 
-            var token = new CatToken(rt, bubble, progress) { Art = hasArt ? catArt : null, Image = image, Flipbook = flipbook, BaseColor = hasArt ? Color.white : color };
+            var token = new CatToken(rt, progress) { Art = hasArt ? catArt : null, Image = image, Flipbook = flipbook, BaseColor = hasArt ? Color.white : color };
             token.Away = AwayBadge(cat.Id, hasArt ? catArt.portrait : null);
             flipbook.FrameChanged += frame => OnCatFrame(token, frame);
             _tokens[cat.Id] = token;
@@ -753,9 +719,8 @@ namespace TrashCats.Presentation.Hideout
             var first = _frame.Find("BackgroundArt") != null ? 1 : 0;
             for (var i = 0; i < items.Count; i++)
                 items[i].Item.SetSiblingIndex(first + i);
-            // over everything: cycle bars (they step out of the captions' way), then bubbles
+            // over everything: the cycle bars (they step out of the captions' way)
             _barLayer.SetAsLastSibling();
-            _bubbleLayer.SetAsLastSibling();
         }
 
         private void OnCycleCompleted(ActivityCycleCompleted e)
@@ -774,7 +739,6 @@ namespace TrashCats.Presentation.Hideout
         private sealed class CatToken
         {
             public RectTransform Root { get; }
-            public SpeechBubble Bubble { get; }
             public UiBar Progress { get; }
             public CharacterArt Art;
             public Image Image;
@@ -785,10 +749,9 @@ namespace TrashCats.Presentation.Hideout
             public float Depth;
             public bool Placed;
 
-            public CatToken(RectTransform root, SpeechBubble bubble, UiBar progress)
+            public CatToken(RectTransform root, UiBar progress)
             {
                 Root = root;
-                Bubble = bubble;
                 Progress = progress;
             }
         }
