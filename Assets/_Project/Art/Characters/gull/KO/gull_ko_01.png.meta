@@ -5,12 +5,6 @@ TextureImporter:
   - first:
       213: -1791720699419943108
     second: gull_ko_01_0
-  - first:
-      213: 2118548346128289116
-    second: gull_ko_01_1
-  - first:
-      213: -2452886374220735968
-    second: gull_ko_01_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -135,10 +129,10 @@ TextureImporter:
       name: gull_ko_01_0
       rect:
         serializedVersion: 2
-        x: 116
-        y: 127
-        width: 14
-        height: 22
+        x: 186
+        y: 14
+        width: 260
+        height: 372
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -149,50 +143,6 @@ TextureImporter:
       bones: []
       spriteID: c3f1c5e44878227e0800000000000000
       internalID: -1791720699419943108
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: gull_ko_01_1
-      rect:
-        serializedVersion: 2
-        x: 118
-        y: 133
-        width: 18
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: c5dc77a0f78966d10800000000000000
-      internalID: 2118548346128289116
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: gull_ko_01_2
-      rect:
-        serializedVersion: 2
-        x: 132
-        y: 24
-        width: 222
-        height: 288
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 02a5d2ea6d895fdd0800000000000000
-      internalID: -2452886374220735968
       vertices: []
       indices: 
       edges: []

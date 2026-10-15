@@ -11,15 +11,6 @@ TextureImporter:
   - first:
       213: -633684237969799057
     second: gull_ko_03_2
-  - first:
-      213: 6627933595040477634
-    second: gull_ko_03_3
-  - first:
-      213: 5582723650805646710
-    second: gull_ko_03_4
-  - first:
-      213: 4922731508308045163
-    second: gull_ko_03_5
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -144,10 +135,10 @@ TextureImporter:
       name: gull_ko_03_0
       rect:
         serializedVersion: 2
-        x: 86
-        y: 184
-        width: 18
-        height: 18
+        x: 83
+        y: 62
+        width: 339
+        height: 241
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,10 +157,10 @@ TextureImporter:
       name: gull_ko_03_1
       rect:
         serializedVersion: 2
-        x: 106
-        y: 197
-        width: 15
-        height: 10
+        x: 131
+        y: 296
+        width: 41
+        height: 34
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -188,10 +179,10 @@ TextureImporter:
       name: gull_ko_03_2
       rect:
         serializedVersion: 2
-        x: 122
-        y: 185
-        width: 25
-        height: 23
+        x: 138
+        y: 288
+        width: 46
+        height: 36
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -202,72 +193,6 @@ TextureImporter:
       bones: []
       spriteID: f68cb000b83b437f0800000000000000
       internalID: -633684237969799057
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: gull_ko_03_3
-      rect:
-        serializedVersion: 2
-        x: 15
-        y: 32
-        width: 289
-        height: 148
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2c1f3470d762bfb50800000000000000
-      internalID: 6627933595040477634
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: gull_ko_03_4
-      rect:
-        serializedVersion: 2
-        x: 50
-        y: 158
-        width: 23
-        height: 25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6754175f491d97d40800000000000000
-      internalID: 5582723650805646710
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: gull_ko_03_5
-      rect:
-        serializedVersion: 2
-        x: 108
-        y: 176
-        width: 19
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b6de25d993e015440800000000000000
-      internalID: 4922731508308045163
       vertices: []
       indices: 
       edges: []

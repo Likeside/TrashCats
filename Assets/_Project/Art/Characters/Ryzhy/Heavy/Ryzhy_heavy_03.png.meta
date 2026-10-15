@@ -129,10 +129,10 @@ TextureImporter:
       name: Ryzhy_heavy_03_0
       rect:
         serializedVersion: 2
-        x: 306
+        x: 337
         y: 15
-        width: 260
-        height: 377
+        width: 343
+        height: 279
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

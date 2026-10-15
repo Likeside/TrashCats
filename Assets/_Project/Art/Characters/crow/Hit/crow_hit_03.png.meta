@@ -129,10 +129,10 @@ TextureImporter:
       name: crow_hit_03_0
       rect:
         serializedVersion: 2
-        x: 147
-        y: 16
-        width: 247
-        height: 370
+        x: 60
+        y: 69
+        width: 270
+        height: 305
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

@@ -11,6 +11,9 @@ TextureImporter:
   - first:
       213: 5471181666265075694
     second: ponchik_heavy_02_2
+  - first:
+      213: -2121544896403486135
+    second: ponchik_heavy_02_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -135,10 +138,10 @@ TextureImporter:
       name: ponchik_heavy_02_0
       rect:
         serializedVersion: 2
-        x: 53
-        y: 15
-        width: 461
-        height: 327
+        x: 75
+        y: 13
+        width: 424
+        height: 299
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -157,10 +160,10 @@ TextureImporter:
       name: ponchik_heavy_02_1
       rect:
         serializedVersion: 2
-        x: 188
-        y: 332
-        width: 25
-        height: 30
+        x: 200
+        y: 302
+        width: 23
+        height: 31
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,10 +182,10 @@ TextureImporter:
       name: ponchik_heavy_02_2
       rect:
         serializedVersion: 2
-        x: 371
-        y: 318
-        width: 29
-        height: 39
+        x: 366
+        y: 289
+        width: 28
+        height: 37
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -193,6 +196,28 @@ TextureImporter:
       bones: []
       spriteID: eef0c57ecba8deb40800000000000000
       internalID: 5471181666265075694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ponchik_heavy_02_3
+      rect:
+        serializedVersion: 2
+        x: 349
+        y: 11
+        width: 19
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 94ac3da3822ce82e0800000000000000
+      internalID: -2121544896403486135
       vertices: []
       indices: 
       edges: []

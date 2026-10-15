@@ -8,9 +8,6 @@ TextureImporter:
   - first:
       213: 2759924368227112124
     second: gull_ko_02_1
-  - first:
-      213: -2422956672205086183
-    second: gull_ko_02_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -135,10 +132,10 @@ TextureImporter:
       name: gull_ko_02_0
       rect:
         serializedVersion: 2
-        x: 69
-        y: 65
-        width: 267
-        height: 190
+        x: 142
+        y: 143
+        width: 27
+        height: 53
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -157,10 +154,10 @@ TextureImporter:
       name: gull_ko_02_1
       rect:
         serializedVersion: 2
-        x: 106
-        y: 250
-        width: 32
-        height: 25
+        x: 164
+        y: 12
+        width: 280
+        height: 365
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -171,28 +168,6 @@ TextureImporter:
       bones: []
       spriteID: cb41f1717983d4620800000000000000
       internalID: 2759924368227112124
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: gull_ko_02_2
-      rect:
-        serializedVersion: 2
-        x: 111
-        y: 243
-        width: 36
-        height: 29
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 912ad077ebdef5ed0800000000000000
-      internalID: -2422956672205086183
       vertices: []
       indices: 
       edges: []

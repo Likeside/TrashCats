@@ -11,21 +11,6 @@ TextureImporter:
   - first:
       213: 1276924200488254105
     second: rat_ko_03_2
-  - first:
-      213: 7990443067428303648
-    second: rat_ko_03_3
-  - first:
-      213: 9172005459770285174
-    second: rat_ko_03_4
-  - first:
-      213: -5540885621733242634
-    second: rat_ko_03_5
-  - first:
-      213: 4913109346295579556
-    second: rat_ko_03_6
-  - first:
-      213: -8802170216052974732
-    second: rat_ko_03_7
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -150,10 +135,10 @@ TextureImporter:
       name: rat_ko_03_0
       rect:
         serializedVersion: 2
-        x: 324
-        y: 148
-        width: 24
-        height: 20
+        x: 185
+        y: 45
+        width: 343
+        height: 245
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -172,10 +157,10 @@ TextureImporter:
       name: rat_ko_03_1
       rect:
         serializedVersion: 2
-        x: 353
-        y: 157
-        width: 34
-        height: 31
+        x: 347
+        y: 279
+        width: 17
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -194,10 +179,10 @@ TextureImporter:
       name: rat_ko_03_2
       rect:
         serializedVersion: 2
-        x: 383
-        y: 135
-        width: 27
-        height: 26
+        x: 505
+        y: 106
+        width: 24
+        height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -208,116 +193,6 @@ TextureImporter:
       bones: []
       spriteID: 99ab33f7bcb88b110800000000000000
       internalID: 1276924200488254105
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: rat_ko_03_3
-      rect:
-        serializedVersion: 2
-        x: 402
-        y: 160
-        width: 16
-        height: 14
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 023fb0872a1c3ee60800000000000000
-      internalID: 7990443067428303648
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: rat_ko_03_4
-      rect:
-        serializedVersion: 2
-        x: 425
-        y: 139
-        width: 23
-        height: 25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 67c1d8bce52894f70800000000000000
-      internalID: 9172005459770285174
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: rat_ko_03_5
-      rect:
-        serializedVersion: 2
-        x: 87
-        y: 15
-        width: 368
-        height: 133
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6f8458742e1da13b0800000000000000
-      internalID: -5540885621733242634
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: rat_ko_03_6
-      rect:
-        serializedVersion: 2
-        x: 451
-        y: 40
-        width: 15
-        height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 4a389907beede2440800000000000000
-      internalID: 4913109346295579556
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: rat_ko_03_7
-      rect:
-        serializedVersion: 2
-        x: 454
-        y: 54
-        width: 13
-        height: 10
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 47b93ab03d868d580800000000000000
-      internalID: -8802170216052974732
       vertices: []
       indices: 
       edges: []

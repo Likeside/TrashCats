@@ -162,6 +162,13 @@ namespace TrashCats.Editor
             art.dig.pingPong = art.dig.frames.Length > 2; // the kicking loop is not drawn to close
             // the frames hold a whole rep (press up, faster lowering) and play one rep per second, as in the previews
             art.bench.fps = art.bench.frames.Length;
+            // the cats' idles are one still picture that breathes (the drawn idle loops jittered and did not loop
+            // cleanly); enemies keep their drawn stances
+            if (Cats.Contains(key))
+            {
+                art.idle = Still(art.idle);
+                art.hideoutIdle = Still(art.hideoutIdle);
+            }
             art.idle.breathe = key == "wheel" ? 0f : art.idle.frames.Length <= 2 ? 0.012f : 0.008f;
             if (key == "wheel") art.idle.fps = art.idle.frames.Length >= 15 ? 24f : 12f;
             // card portrait cut from the concept (Tools/import_ui.py), else the first stance frame
@@ -179,6 +186,20 @@ namespace TrashCats.Editor
             }
 
             return art;
+        }
+
+        private static readonly HashSet<string> Cats = new HashSet<string> { "ryzhy", "shnyr", "ponchik" };
+
+        /// <summary>The first frame of a clip as a breathing still.</summary>
+        private static FlipbookClip Still(FlipbookClip clip)
+        {
+            if (clip == null || clip.frames == null || clip.frames.Length == 0)
+                return clip;
+            return new FlipbookClip
+            {
+                name = clip.name, frames = new[] { clip.frames[0] }, fps = 1f, loop = true, breathe = 0.012f, breathePeriod = 2.6f,
+                attachPoints = clip.attachPoints != null && clip.attachPoints.Length > 0 ? new[] { clip.attachPoints[0] } : clip.attachPoints,
+            };
         }
 
         private static FlipbookClip Clip(string dir, string folder, float fps, bool loop)

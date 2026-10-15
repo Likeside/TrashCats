@@ -129,10 +129,10 @@ TextureImporter:
       name: crow_idle_03_0
       rect:
         serializedVersion: 2
-        x: 83
+        x: 82
         y: 15
-        width: 245
-        height: 372
+        width: 247
+        height: 370
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

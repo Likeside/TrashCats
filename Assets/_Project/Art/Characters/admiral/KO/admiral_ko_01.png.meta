@@ -129,10 +129,10 @@ TextureImporter:
       name: admiral_ko_01_0
       rect:
         serializedVersion: 2
-        x: 209
-        y: 16
-        width: 250
-        height: 318
+        x: 250
+        y: 14
+        width: 296
+        height: 377
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

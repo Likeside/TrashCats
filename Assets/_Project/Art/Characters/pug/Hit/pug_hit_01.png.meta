@@ -129,10 +129,10 @@ TextureImporter:
       name: pug_hit_01_0
       rect:
         serializedVersion: 2
-        x: 209
-        y: 70
-        width: 221
-        height: 317
+        x: 272
+        y: 48
+        width: 248
+        height: 372
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

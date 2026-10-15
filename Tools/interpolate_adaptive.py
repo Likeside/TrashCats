@@ -6,7 +6,7 @@ neither neighbour has, alpha mass that does not fit between them). Smeared gaps 
 snappy); the frames are spent on the calmest clean gaps instead (up to 3 per gap, at t = k/(n+1)), so the clip still
 reaches the target count. Writes keys.json next to the frames: the new index of every original frame (the game uses it
 to time hits). Originals are backed up to ArtSource/Frames8/<path>.
-Usage: Tools/interpolate_adaptive.py <rife_dir> [--target N] [--once] [--report] [--no-backup] <clip folder>...
+Usage: Tools/interpolate_adaptive.py <rife_dir> [--target N] [--max-per-gap N] [--once] [--report] [--no-backup] <clip folder>...
 """
 import glob, json, os, shutil, sys
 import numpy as np
@@ -19,6 +19,9 @@ target = 16
 if "--target" in args:
     i = args.index("--target"); target = int(args[i + 1]); del args[i:i + 2]
 once = "--once" in args
+max_per_gap = 3  # --max-per-gap 1: at most one in-between per gap (keeps the drawn timing of short one-shot clips)
+if "--max-per-gap" in args:
+    i = args.index("--max-per-gap"); max_per_gap = int(args[i + 1]); del args[i:i + 2]
 report = "--report" in args
 no_backup = "--no-backup" in args  # for folders outside Assets/_Project/Art (keep your own copy)
 args = [a for a in args if a not in ("--once", "--report", "--no-backup")]
@@ -83,7 +86,7 @@ def process(folder):
     for g in sorted(clean, key=lambda g: moves[g]):
         if need == 0: break
         extra[g] = 1; need -= 1
-    for level in (2, 3):
+    for level in range(2, max_per_gap + 1):
         for g in sorted(clean, key=lambda g: moves[g]):
             if need == 0: break
             if extra[g] == level - 1:

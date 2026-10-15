@@ -4,7 +4,10 @@ using UnityEngine.UI;
 
 namespace TrashCats.Presentation.Animation
 {
-    /// <summary>Plays a <see cref="FlipbookClip"/> on a UI Image (hideout cats and props); reports frame changes.</summary>
+    /// <summary>
+    /// Plays a <see cref="FlipbookClip"/> on a UI Image (hideout cats and props); reports frame changes. A clip with
+    /// <see cref="FlipbookClip.breathe"/> also breathes: a slow stretch up from the bottom pivot (a static idle picture).
+    /// </summary>
     [RequireComponent(typeof(Image))]
     public sealed class UiFlipbook : MonoBehaviour
     {
@@ -12,6 +15,8 @@ namespace TrashCats.Presentation.Animation
         private FlipbookClip _clip;
         private float _time;
         private int _frame = -1;
+        private float _breathTime;
+        private bool _breathing;
 
         public FlipbookClip Clip => _clip;
         public event Action<int> FrameChanged;
@@ -24,14 +29,36 @@ namespace TrashCats.Presentation.Animation
             _clip = clip != null && clip.frames != null && clip.frames.Length > 0 ? clip : null;
             _time = 0f;
             _frame = -1;
+            ResetBreath();
             Apply(0);
         }
 
-        public void Stop() => _clip = null;
+        public void Stop()
+        {
+            _clip = null;
+            ResetBreath();
+        }
+
+        private void ResetBreath()
+        {
+            if (!_breathing) return;
+            _breathing = false;
+            var scale = transform.localScale;
+            transform.localScale = new Vector3(Mathf.Sign(scale.x), 1f, scale.z);
+        }
 
         private void Update()
         {
             if (_clip == null) return;
+            if (_clip.breathe > 0f)
+            {
+                // the side the picture faces (the x sign) is kept; the bottom pivot stays planted
+                _breathing = true;
+                _breathTime += Time.deltaTime;
+                var wave = Mathf.Sin(_breathTime * 2f * Mathf.PI / _clip.breathePeriod) * _clip.breathe;
+                var scale = transform.localScale;
+                transform.localScale = new Vector3(Mathf.Sign(scale.x) * (1f - wave * 0.5f), 1f + wave, scale.z);
+            }
             _time += Time.deltaTime;
             var step = (int)(_time * _clip.fps);
             var length = _clip.SequenceLength;

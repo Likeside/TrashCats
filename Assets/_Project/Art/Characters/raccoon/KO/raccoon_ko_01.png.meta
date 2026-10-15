@@ -11,15 +11,6 @@ TextureImporter:
   - first:
       213: -4239136489166644127
     second: raccoon_ko_01_2
-  - first:
-      213: 3802347206406957739
-    second: raccoon_ko_01_3
-  - first:
-      213: 3800346621939832759
-    second: raccoon_ko_01_4
-  - first:
-      213: 205709200821761098
-    second: raccoon_ko_01_5
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -144,10 +135,10 @@ TextureImporter:
       name: raccoon_ko_01_0
       rect:
         serializedVersion: 2
-        x: 202
-        y: 307
-        width: 16
-        height: 13
+        x: 156
+        y: 12
+        width: 304
+        height: 333
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,10 +157,10 @@ TextureImporter:
       name: raccoon_ko_01_1
       rect:
         serializedVersion: 2
-        x: 219
-        y: 306
-        width: 22
-        height: 17
+        x: 268
+        y: 334
+        width: 28
+        height: 28
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -188,10 +179,10 @@ TextureImporter:
       name: raccoon_ko_01_2
       rect:
         serializedVersion: 2
-        x: 239
-        y: 315
-        width: 25
-        height: 22
+        x: 295
+        y: 331
+        width: 24
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -202,72 +193,6 @@ TextureImporter:
       bones: []
       spriteID: 16c53d0b2df8b25c0800000000000000
       internalID: -4239136489166644127
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: raccoon_ko_01_3
-      rect:
-        serializedVersion: 2
-        x: 263
-        y: 313
-        width: 21
-        height: 17
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: baae59673a6a4c430800000000000000
-      internalID: 3802347206406957739
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: raccoon_ko_01_4
-      rect:
-        serializedVersion: 2
-        x: 283
-        y: 302
-        width: 23
-        height: 22
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 7b754181e1b8db430800000000000000
-      internalID: 3800346621939832759
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: raccoon_ko_01_5
-      rect:
-        serializedVersion: 2
-        x: 140
-        y: 30
-        width: 268
-        height: 284
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a44b202ad63dad200800000000000000
-      internalID: 205709200821761098
       vertices: []
       indices: 
       edges: []

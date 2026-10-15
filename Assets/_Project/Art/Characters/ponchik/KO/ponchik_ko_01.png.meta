@@ -8,15 +8,6 @@ TextureImporter:
   - first:
       213: -2765166759950931903
     second: ponchik_ko_01_1
-  - first:
-      213: -5095150837296207274
-    second: ponchik_ko_01_2
-  - first:
-      213: 7254725215171936230
-    second: ponchik_ko_01_3
-  - first:
-      213: 8224184043055535566
-    second: ponchik_ko_01_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -141,10 +132,10 @@ TextureImporter:
       name: ponchik_ko_01_0
       rect:
         serializedVersion: 2
-        x: 76
-        y: 279
-        width: 17
-        height: 22
+        x: 127
+        y: 15
+        width: 218
+        height: 349
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -163,10 +154,10 @@ TextureImporter:
       name: ponchik_ko_01_1
       rect:
         serializedVersion: 2
-        x: 84
-        y: 24
-        width: 216
-        height: 335
+        x: 221
+        y: 354
+        width: 12
+        height: 7
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -177,72 +168,6 @@ TextureImporter:
       bones: []
       spriteID: 14828687b7720a9d0800000000000000
       internalID: -2765166759950931903
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ponchik_ko_01_2
-      rect:
-        serializedVersion: 2
-        x: 75
-        y: 135
-        width: 18
-        height: 55
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 65aece90f436a49b0800000000000000
-      internalID: -5095150837296207274
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ponchik_ko_01_3
-      rect:
-        serializedVersion: 2
-        x: 294
-        y: 170
-        width: 14
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6ef74616526fda460800000000000000
-      internalID: 7254725215171936230
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ponchik_ko_01_4
-      rect:
-        serializedVersion: 2
-        x: 303
-        y: 164
-        width: 10
-        height: 29
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ec5d2c540db222270800000000000000
-      internalID: 8224184043055535566
       vertices: []
       indices: 
       edges: []

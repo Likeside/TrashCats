@@ -129,10 +129,10 @@ TextureImporter:
       name: rat_hit_02_0
       rect:
         serializedVersion: 2
-        x: 44
-        y: 80
-        width: 306
-        height: 270
+        x: 48
+        y: 89
+        width: 357
+        height: 316
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

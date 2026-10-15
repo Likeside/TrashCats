@@ -8,6 +8,9 @@ TextureImporter:
   - first:
       213: -3186599919868719710
     second: crow_ko_01_1
+  - first:
+      213: -2966400474344275418
+    second: crow_ko_01_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -132,10 +135,10 @@ TextureImporter:
       name: crow_ko_01_0
       rect:
         serializedVersion: 2
-        x: 154
-        y: 23
-        width: 196
-        height: 305
+        x: 198
+        y: 15
+        width: 228
+        height: 363
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,10 +157,10 @@ TextureImporter:
       name: crow_ko_01_1
       rect:
         serializedVersion: 2
-        x: 195
-        y: 304
-        width: 18
-        height: 23
+        x: 299
+        y: 378
+        width: 16
+        height: 6
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -168,6 +171,28 @@ TextureImporter:
       bones: []
       spriteID: 2adcfe6914ce6c3d0800000000000000
       internalID: -3186599919868719710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crow_ko_01_2
+      rect:
+        serializedVersion: 2
+        x: 345
+        y: 355
+        width: 32
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 622c8293c7a35d6d0800000000000000
+      internalID: -2966400474344275418
       vertices: []
       indices: 
       edges: []

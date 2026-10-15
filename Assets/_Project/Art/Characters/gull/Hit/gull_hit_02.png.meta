@@ -129,10 +129,10 @@ TextureImporter:
       name: gull_hit_02_0
       rect:
         serializedVersion: 2
-        x: 159
-        y: 78
-        width: 265
-        height: 276
+        x: 183
+        y: 89
+        width: 315
+        height: 327
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
