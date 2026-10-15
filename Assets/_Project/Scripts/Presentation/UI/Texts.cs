@@ -84,6 +84,17 @@ namespace TrashCats.Presentation.UI
             _ => "",
         };
 
+        /// <summary>
+        /// Why an idle cat waits, as it stands now: a cat stopped tired or hungry that has since been rested or fed just
+        /// waits (the stored reason is the one it stopped with).
+        /// </summary>
+        public static IdleReason CurrentIdle(IReadOnlyCat cat, GameConfig config) => cat.Activity.IsWorking ? IdleReason.None : cat.Activity.IdleReason switch
+        {
+            IdleReason.Tired when !CatRules.IsTired(cat, config) => IdleReason.None,
+            IdleReason.Hungry when !CatRules.IsHungry(cat, config) => IdleReason.None,
+            var reason => reason,
+        };
+
         /// <summary>Skin icon next to the idle reason in a speech bubble: tired = sleep, hungry = food, rested = energy.</summary>
         public static string IdleIcon(IdleReason reason) => reason switch
         {

@@ -154,6 +154,10 @@ namespace TrashCats.Presentation.UI
             var tin = style == CardStyle.Tin;
             var sprite = tin ? Skin?.tin : Skin?.paper;
             var image = Panel(parent, name, sprite != null ? Color.white : tin ? Palette.PanelDark : Palette.Panel, raycast);
+            // a tap on the card itself (an empty spot, an empty slot) stops here: otherwise it bubbles up to the dimmed
+            // backdrop's button and closes the window
+            if (raycast && image.GetComponent<ClickBlocker>() == null)
+                image.gameObject.AddComponent<ClickBlocker>();
             Sliced(image, sprite);
             if (sprite != null)
                 image.pixelsPerUnitMultiplier = tin ? Skin.tinBorderScale : Skin.paperBorderScale * (style == CardStyle.Strip ? 1.6f : 1f);
@@ -324,6 +328,12 @@ namespace TrashCats.Presentation.UI
                 label.Outlined();
             return new UiBar(back.rectTransform, fillImage.rectTransform, label);
         }
+    }
+
+    /// <summary>Swallows pointer clicks so they do not bubble up to a parent's button.</summary>
+    public sealed class ClickBlocker : MonoBehaviour, UnityEngine.EventSystems.IPointerClickHandler
+    {
+        public void OnPointerClick(UnityEngine.EventSystems.PointerEventData eventData) { }
     }
 
     /// <summary>Keeps a bar's fill channel inside the frame's dark inner area when the frame's borders rescale.</summary>
