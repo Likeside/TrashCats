@@ -69,6 +69,7 @@ namespace TrashCats.Presentation.Hideout
             private readonly Image _card;
             private readonly TMP_Text _name;
             private TMP_Text _portraitName;
+            private Image _namePlate;
             /// <summary>Height of the name band above the picture.</summary>
             public const float NameBand = 44f;
 
@@ -102,14 +103,7 @@ namespace TrashCats.Presentation.Hideout
                 });
 
                 _content = Ui.Rect(background.transform, "Content").Fill(Ui.Skin != null ? 16 : 0).gameObject;
-                // the name in its own band above the picture (it no longer covers the cat), the rest below it
-                _portraitName = Ui.Label(_content.transform, "", 32, TextAnchor.MiddleCenter, StatusInk, heading: true);
-                _portraitName.rectTransform.Place(new Vector2(0, 1), Vector2.one, new Vector2(4, -NameBand), new Vector2(-4, 0));
-                if (_portraitName.font != null) _portraitName.fontSharedMaterial = _portraitName.font.material;
-                _portraitName.color = StatusInk;
-                _portraitName.enableAutoSizing = true;
-                _portraitName.fontSizeMax = 32;
-                _portraitName.fontSizeMin = 22;
+                // the picture on top (ears over the card's edge), the name in its own band under it, then the rest
                 var content = Ui.Rect(_content.transform, "Body").Place(Vector2.zero, Vector2.one, Vector2.zero, new Vector2(0, -NameBand - PictureExtra));
 
                 _header = Ui.Panel(content, "Header", Color.gray);
@@ -132,7 +126,7 @@ namespace TrashCats.Presentation.Hideout
                 // the concept's card picture: a rounded framed window with the ears sticking out over its top edge.
                 // The frame touches the picture's sides and bottom, so it is laid out by width from the bottom.
                 _card = Ui.Panel(content, "Card", Color.white);
-                _card.rectTransform.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(0, -170), new Vector2(0, -170));
+                _card.rectTransform.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(0, NameBand - 170), new Vector2(0, NameBand - 170));
                 _card.rectTransform.pivot = new Vector2(0.5f, 0f);
                 var fitter = _card.gameObject.AddComponent<AspectRatioFitter>();
                 fitter.aspectMode = AspectRatioFitter.AspectMode.WidthControlsHeight;
@@ -142,6 +136,21 @@ namespace TrashCats.Presentation.Hideout
                 _portrait = Ui.Panel(clip, "Portrait", Color.white);
                 _portrait.preserveAspect = true;
                 _portrait.rectTransform.Place(new Vector2(0.04f, 0f), new Vector2(0.96f, 1f), Vector2.zero, new Vector2(0, -40));
+
+                // the name on a light plate in the colour of the picture's backdrop: it belongs to the picture and stays quiet
+                _namePlate = Ui.Panel(content, "NamePlate", Color.white);
+                if (Ui.Skin?.button != null)
+                {
+                    _namePlate.sprite = Ui.Skin.button;
+                    _namePlate.type = Image.Type.Sliced;
+                    _namePlate.gameObject.AddComponent<SliceFit>();
+                }
+                _namePlate.rectTransform.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(14, NameBand - 170 - NameBand + 2), new Vector2(-14, NameBand - 170 - 4));
+                _portraitName = Ui.Label(_namePlate.transform, "", 30, TextAnchor.MiddleCenter, Palette.Paper, heading: true);
+                _portraitName.rectTransform.Fill(2);
+                _portraitName.enableAutoSizing = true;
+                _portraitName.fontSizeMax = 30;
+                _portraitName.fontSizeMin = 20;
 
                 // what the cat does, or why it waits with the reason's icon (sleep, fish, energy) — the scene has no bubbles
                 var statusRow = Info.Row(content, "Status", 4f, TextAnchor.MiddleCenter);
@@ -202,7 +211,8 @@ namespace TrashCats.Presentation.Hideout
                 }
                 _backdrop.color = CatColors.Backdrop(cat.Id);
                 _header.gameObject.SetActive(portrait == null);
-                _portraitName.gameObject.SetActive(portrait != null);
+                _namePlate.gameObject.SetActive(portrait != null);
+                _namePlate.color = CatColors.Backdrop(cat.Id) * new Color(1f, 1f, 1f, 0.85f);
                 if (portrait != null)
                 {
                     if (card == null) _portrait.sprite = portrait;
