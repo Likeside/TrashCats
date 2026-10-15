@@ -97,8 +97,8 @@ namespace TrashCats.Presentation.Hideout
         /// <summary>The dumpster at the back on the right; a cat rummaging in it is not shown, only its badge above.</summary>
         public static readonly PropPlace Dumpster = new PropPlace("prop_upg_dumpster_v1_angled", new Vector2(0.9538f, 0.4165f), new Vector2(0.2774f, 0.1742f), -1.41f, true, 0.425f);
 
-        /// <summary>The dumpster's nudge in canvas units: right and down (set by hand in the editor, 2026-10-15).</summary>
-        public static readonly Vector2 DumpsterShift = new Vector2(40f, -36.7f);
+        /// <summary>The dumpster's nudge in canvas units, right and up (set by hand in the editor, 2026-10-15).</summary>
+        public static readonly Vector2 DumpsterShift = new Vector2(75.1f, 15.5f);
 
         /// <summary>The box bed, sized for Ponchik (the biggest sleeper).</summary>
         public static readonly PropPlace Bed = new PropPlace("prop_upg_boxes", new Vector2(0.915f, 0.0117f), new Vector2(0.52f, 0.3055f), 0f, true, -0.02f);
