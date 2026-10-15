@@ -208,7 +208,7 @@ namespace TrashCats.Presentation.Bootstrap
                 _hideout.RebuildCats();
                 _audio.Play("hid_meow");
                 var cat = config.GetCat(e.CatId);
-                _messages.Enqueue(Loc.T("game_scene_root.03"), Loc.T("game_scene_root.04", Texts.CatName(e.CatId), Texts.Attribute(cat.Aptitude)), "newcat");
+                _messages.Enqueue(Loc.T("game_scene_root.03"), Loc.T("game_scene_root.04", Texts.CatName(e.CatId), Texts.Attribute(cat.Aptitude)), Texts.NewCatIcon(cat));
             }));
             _subscriptions.Add(bus.Subscribe<TerritoryCaptured>(e =>
             {

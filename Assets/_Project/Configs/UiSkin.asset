@@ -74,6 +74,12 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 65fc5eefc3b4adf3f816d6eadacf84e3, type: 3}
   - key: newcat
     sprite: {fileID: 21300000, guid: 2c69bda1dbdc6e0aba79855d4406ce03, type: 3}
+  - key: newcat_ponchik
+    sprite: {fileID: 21300000, guid: 2d05cd44706d9f76d8827e07820d8b0c, type: 3}
+  - key: newcat_ryzhy
+    sprite: {fileID: 21300000, guid: d2254466c09f4afc5b10c468408b3708, type: 3}
+  - key: newcat_shnyr
+    sprite: {fileID: 21300000, guid: d1742e4c41aa66c248147cac0837967d, type: 3}
   - key: paw
     sprite: {fileID: 21300000, guid: 8eb7a3bff1ac8358fbab47c116783f28, type: 3}
   - key: satiety

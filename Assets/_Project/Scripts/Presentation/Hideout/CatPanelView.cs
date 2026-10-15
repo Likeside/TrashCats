@@ -138,14 +138,9 @@ namespace TrashCats.Presentation.Hideout
                 _portrait.rectTransform.Place(new Vector2(0.04f, 0f), new Vector2(0.96f, 1f), Vector2.zero, new Vector2(0, -40));
 
                 // the name on a light plate in the colour of the picture's backdrop: it belongs to the picture and stays quiet
-                _namePlate = Ui.Panel(content, "NamePlate", Color.white);
-                if (Ui.Skin?.button != null)
-                {
-                    _namePlate.sprite = Ui.Skin.button;
-                    _namePlate.type = Image.Type.Sliced;
-                    _namePlate.gameObject.AddComponent<SliceFit>();
-                }
-                _namePlate.rectTransform.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(14, NameBand - 170 - NameBand + 2), new Vector2(-14, NameBand - 170 - 4));
+                // the name on a light darkening across the whole card, right under the picture (touching it)
+                _namePlate = Ui.Panel(content, "NamePlate", new Color(0f, 0f, 0f, 0.32f));
+                _namePlate.rectTransform.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(-10, NameBand - 170 - 42), new Vector2(10, NameBand - 170));
                 _portraitName = Ui.Label(_namePlate.transform, "", 30, TextAnchor.MiddleCenter, Palette.Paper, heading: true);
                 _portraitName.rectTransform.Fill(2);
                 _portraitName.enableAutoSizing = true;
@@ -212,7 +207,6 @@ namespace TrashCats.Presentation.Hideout
                 _backdrop.color = CatColors.Backdrop(cat.Id);
                 _header.gameObject.SetActive(portrait == null);
                 _namePlate.gameObject.SetActive(portrait != null);
-                _namePlate.color = CatColors.Backdrop(cat.Id) * new Color(1f, 1f, 1f, 0.85f);
                 if (portrait != null)
                 {
                     if (card == null) _portrait.sprite = portrait;
