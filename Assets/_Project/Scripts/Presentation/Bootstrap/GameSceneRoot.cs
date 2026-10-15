@@ -133,7 +133,7 @@ namespace TrashCats.Presentation.Bootstrap
             // screens
             _hideout = new HideoutScreen(_services, screens, overlayRoot, _overlays, _details, _upgrades, debugPanel, ShowResult, factory, settings.Open);
             _map = new MapScreen(session, screens, OpenPrep, factory.GetSprite("bg_map"), factory.GetSprite);
-            _prep = new BattlePrepScreen(session, screens, () => _router.Show(ScreenId.Map), _ => StartCombat(), _details.Open);
+            _prep = new BattlePrepScreen(session, screens, () => _router.Show(ScreenId.Map), _ => StartCombat(), _details.Open, factory);
             _combat = new CombatScreen(session, screens, transform, factory, results);
             _combat.SetSpeed(_services.Settings.BattleSpeed);
             _combat.SpeedChanged += speed =>
