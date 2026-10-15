@@ -135,10 +135,10 @@ TextureImporter:
       name: ponchik_hit_02_0
       rect:
         serializedVersion: 2
-        x: 131
-        y: 16
-        width: 369
-        height: 406
+        x: 237
+        y: 15
+        width: 309
+        height: 415
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -157,10 +157,10 @@ TextureImporter:
       name: ponchik_hit_02_1
       rect:
         serializedVersion: 2
-        x: 176
-        y: 409
-        width: 16
-        height: 17
+        x: 387
+        y: 406
+        width: 26
+        height: 36
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,10 +179,10 @@ TextureImporter:
       name: ponchik_hit_02_2
       rect:
         serializedVersion: 2
-        x: 280
-        y: 405
-        width: 19
-        height: 21
+        x: 428
+        y: 399
+        width: 47
+        height: 60
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

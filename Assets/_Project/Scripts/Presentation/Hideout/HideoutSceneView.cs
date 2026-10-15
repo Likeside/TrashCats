@@ -550,7 +550,7 @@ namespace TrashCats.Presentation.Hideout
             var size = clip != null && clip.frames.Length > 0 ? clip.frames[0].rect.size : GrayboxCat;
             if (clip != null)
             {
-                if (clip.frames.Length > 1) token.Flipbook.Play(clip);
+                if (clip.frames.Length > 1 || clip.breathe > 0f) token.Flipbook.Play(clip);
                 else
                 {
                     token.Flipbook.Stop();

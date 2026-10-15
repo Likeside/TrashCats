@@ -129,10 +129,10 @@ TextureImporter:
       name: shopcat_hit_01_0
       rect:
         serializedVersion: 2
-        x: 133
-        y: 70
-        width: 214
-        height: 307
+        x: 170
+        y: 81
+        width: 260
+        height: 371
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

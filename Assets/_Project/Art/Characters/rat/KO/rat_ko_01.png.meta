@@ -17,6 +17,9 @@ TextureImporter:
   - first:
       213: 8259705439974534963
     second: rat_ko_01_4
+  - first:
+      213: 1467837160359992066
+    second: rat_ko_01_5
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -141,10 +144,10 @@ TextureImporter:
       name: rat_ko_01_0
       rect:
         serializedVersion: 2
-        x: 152
-        y: 20
-        width: 207
-        height: 272
+        x: 204
+        y: 14
+        width: 236
+        height: 331
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -163,9 +166,9 @@ TextureImporter:
       name: rat_ko_01_1
       rect:
         serializedVersion: 2
-        x: 318
-        y: 284
-        width: 15
+        x: 434
+        y: 326
+        width: 12
         height: 8
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -185,10 +188,10 @@ TextureImporter:
       name: rat_ko_01_2
       rect:
         serializedVersion: 2
-        x: 343
-        y: 258
-        width: 19
-        height: 23
+        x: 445
+        y: 314
+        width: 13
+        height: 18
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -207,10 +210,10 @@ TextureImporter:
       name: rat_ko_01_3
       rect:
         serializedVersion: 2
-        x: 346
-        y: 230
-        width: 15
-        height: 7
+        x: 430
+        y: 309
+        width: 13
+        height: 9
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -229,10 +232,10 @@ TextureImporter:
       name: rat_ko_01_4
       rect:
         serializedVersion: 2
-        x: 349
-        y: 215
-        width: 13
-        height: 10
+        x: 434
+        y: 276
+        width: 18
+        height: 6
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -243,6 +246,28 @@ TextureImporter:
       bones: []
       spriteID: 33f2b0bf55e50a270800000000000000
       internalID: 8259705439974534963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat_ko_01_5
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 261
+        width: 20
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20b1063de1ece5410800000000000000
+      internalID: 1467837160359992066
       vertices: []
       indices: 
       edges: []

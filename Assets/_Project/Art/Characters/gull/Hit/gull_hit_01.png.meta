@@ -8,15 +8,6 @@ TextureImporter:
   - first:
       213: -1872046149984767056
     second: gull_hit_01_1
-  - first:
-      213: -505979871223162998
-    second: gull_hit_01_2
-  - first:
-      213: -7779709398260032817
-    second: gull_hit_01_3
-  - first:
-      213: 2777521814889509105
-    second: gull_hit_01_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -141,10 +132,10 @@ TextureImporter:
       name: gull_hit_01_0
       rect:
         serializedVersion: 2
-        x: 167
-        y: 381
-        width: 15
-        height: 14
+        x: 151
+        y: 70
+        width: 274
+        height: 369
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -163,10 +154,10 @@ TextureImporter:
       name: gull_hit_01_1
       rect:
         serializedVersion: 2
-        x: 197
-        y: 370
-        width: 23
-        height: 25
+        x: 200
+        y: 423
+        width: 17
+        height: 18
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -177,72 +168,6 @@ TextureImporter:
       bones: []
       spriteID: 0b33503f1f72506e0800000000000000
       internalID: -1872046149984767056
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: gull_hit_01_2
-      rect:
-        serializedVersion: 2
-        x: 245
-        y: 363
-        width: 29
-        height: 26
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a87de38ecf56af8f0800000000000000
-      internalID: -505979871223162998
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: gull_hit_01_3
-      rect:
-        serializedVersion: 2
-        x: 125
-        y: 65
-        width: 242
-        height: 310
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: fca51fc558be80490800000000000000
-      internalID: -7779709398260032817
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: gull_hit_01_4
-      rect:
-        serializedVersion: 2
-        x: 157
-        y: 363
-        width: 15
-        height: 13
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 1f0336cef5dbb8620800000000000000
-      internalID: 2777521814889509105
       vertices: []
       indices: 
       edges: []

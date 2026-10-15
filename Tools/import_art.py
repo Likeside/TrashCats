@@ -107,8 +107,9 @@ def main():
                     "run3": ("Run", ["--anchor", "center", "--match-height", "340", "--match-frame", "0"]),
                     "front": ("HideIdle", ["--anchor", "center", "--match-height", "400", "--match-frame", "0"]),
                     "run2": ("Run", ["--anchor", "center", "--match-height", "340", "--match-frame", "0"]),
-                    # skipping rope: scaled by a frame with the rope down (the loop over the head is taller)
-                    "rope": ("Rope", ["--anchor", "center", "--match-height", "385", "--match-frame", {"ryzhy": "2"}.get(key.lower(), "0")]),
+                    # skipping rope (raw_v8_rope: one rope turn, fixed phases): scaled by frame 7, the cat standing with the
+                    # rope behind the back (no loop over the head, which is taller)
+                    "rope": ("Rope", ["--anchor", "center", "--match-height", "385", "--match-frame", "6"]),
                     "dig": ("Dig", ["--anchor", "center", "--match-height", "230", "--match-frame", "0"]),
                     "idle8": ("HideIdle", ["--match-height", str(GUARD_HEIGHT), "--match-frame", "0"]),
                     "canpunch": ("CanPunch", ["--match-height", str(GUARD_HEIGHT), "--match-frame", "0"]),

@@ -132,10 +132,10 @@ TextureImporter:
       name: pug_ko_00_0
       rect:
         serializedVersion: 2
-        x: 215
-        y: 15
-        width: 180
-        height: 294
+        x: 267
+        y: 12
+        width: 230
+        height: 370
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,10 +154,10 @@ TextureImporter:
       name: pug_ko_00_1
       rect:
         serializedVersion: 2
-        x: 340
-        y: 294
-        width: 21
-        height: 21
+        x: 426
+        y: 364
+        width: 26
+        height: 29
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

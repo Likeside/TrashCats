@@ -5,6 +5,9 @@ TextureImporter:
   - first:
       213: -240845370217199102
     second: ponchik_hit_03_0
+  - first:
+      213: 2121651296422523721
+    second: ponchik_hit_03_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -129,10 +132,10 @@ TextureImporter:
       name: ponchik_hit_03_0
       rect:
         serializedVersion: 2
-        x: 277
-        y: 18
-        width: 335
-        height: 370
+        x: 184
+        y: 15
+        width: 341
+        height: 409
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -143,6 +146,28 @@ TextureImporter:
       bones: []
       spriteID: 20a086e696858acf0800000000000000
       internalID: -240845370217199102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ponchik_hit_03_1
+      rect:
+        serializedVersion: 2
+        x: 341
+        y: 407
+        width: 20
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 943f284fc9e917d10800000000000000
+      internalID: 2121651296422523721
       vertices: []
       indices: 
       edges: []

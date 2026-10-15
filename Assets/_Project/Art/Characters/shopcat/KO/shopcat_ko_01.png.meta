@@ -132,10 +132,10 @@ TextureImporter:
       name: shopcat_ko_01_0
       rect:
         serializedVersion: 2
-        x: 121
-        y: 28
-        width: 226
-        height: 254
+        x: 170
+        y: 11
+        width: 325
+        height: 369
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,10 +154,10 @@ TextureImporter:
       name: shopcat_ko_01_1
       rect:
         serializedVersion: 2
-        x: 348
-        y: 166
-        width: 6
-        height: 27
+        x: 496
+        y: 211
+        width: 12
+        height: 39
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

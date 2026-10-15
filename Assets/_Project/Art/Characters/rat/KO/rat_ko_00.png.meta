@@ -138,10 +138,10 @@ TextureImporter:
       name: rat_ko_00_0
       rect:
         serializedVersion: 2
-        x: 191
-        y: 19
-        width: 219
-        height: 291
+        x: 222
+        y: 11
+        width: 261
+        height: 345
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -160,10 +160,10 @@ TextureImporter:
       name: rat_ko_00_1
       rect:
         serializedVersion: 2
-        x: 242
-        y: 285
-        width: 33
-        height: 29
+        x: 270
+        y: 312
+        width: 55
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -182,10 +182,10 @@ TextureImporter:
       name: rat_ko_00_2
       rect:
         serializedVersion: 2
-        x: 321
-        y: 305
-        width: 23
-        height: 20
+        x: 378
+        y: 350
+        width: 27
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -204,10 +204,10 @@ TextureImporter:
       name: rat_ko_00_3
       rect:
         serializedVersion: 2
-        x: 396
-        y: 285
-        width: 20
-        height: 17
+        x: 471
+        y: 325
+        width: 22
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

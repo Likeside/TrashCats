@@ -14,12 +14,6 @@ TextureImporter:
   - first:
       213: -7051316033924269595
     second: crow_ko_03_3
-  - first:
-      213: 7916523437069135104
-    second: crow_ko_03_4
-  - first:
-      213: 7721982692062299138
-    second: crow_ko_03_5
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -144,10 +138,10 @@ TextureImporter:
       name: crow_ko_03_0
       rect:
         serializedVersion: 2
-        x: 107
-        y: 132
-        width: 24
-        height: 18
+        x: 25
+        y: 43
+        width: 358
+        height: 264
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,10 +160,10 @@ TextureImporter:
       name: crow_ko_03_1
       rect:
         serializedVersion: 2
-        x: 127
-        y: 136
-        width: 20
-        height: 23
+        x: 184
+        y: 301
+        width: 37
+        height: 31
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -188,10 +182,10 @@ TextureImporter:
       name: crow_ko_03_2
       rect:
         serializedVersion: 2
-        x: 151
-        y: 147
-        width: 15
-        height: 12
+        x: 18
+        y: 226
+        width: 20
+        height: 28
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -210,10 +204,10 @@ TextureImporter:
       name: crow_ko_03_3
       rect:
         serializedVersion: 2
-        x: 166
-        y: 141
-        width: 22
-        height: 19
+        x: 21
+        y: 101
+        width: 26
+        height: 43
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -224,50 +218,6 @@ TextureImporter:
       bones: []
       spriteID: 5e97de63d61b42e90800000000000000
       internalID: -7051316033924269595
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: crow_ko_03_4
-      rect:
-        serializedVersion: 2
-        x: 184
-        y: 131
-        width: 29
-        height: 22
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 00d6f8a5f142ddd60800000000000000
-      internalID: 7916523437069135104
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: crow_ko_03_5
-      rect:
-        serializedVersion: 2
-        x: 33
-        y: 15
-        width: 320
-        height: 126
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 204861a785ef92b60800000000000000
-      internalID: 7721982692062299138
       vertices: []
       indices: 
       edges: []

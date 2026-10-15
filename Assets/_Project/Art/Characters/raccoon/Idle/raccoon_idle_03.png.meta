@@ -129,10 +129,10 @@ TextureImporter:
       name: raccoon_idle_03_0
       rect:
         serializedVersion: 2
-        x: 184
+        x: 179
         y: 15
-        width: 258
-        height: 372
+        width: 263
+        height: 373
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

@@ -129,9 +129,9 @@ TextureImporter:
       name: shopcat_idle_02_0
       rect:
         serializedVersion: 2
-        x: 117
-        y: 16
-        width: 246
+        x: 121
+        y: 15
+        width: 243
         height: 371
       alignment: 0
       pivot: {x: 0, y: 0}

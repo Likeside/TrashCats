@@ -129,9 +129,9 @@ TextureImporter:
       name: Ryzhy_hit_01_0
       rect:
         serializedVersion: 2
-        x: 295
-        y: 25
-        width: 317
+        x: 302
+        y: 15
+        width: 286
         height: 357
       alignment: 0
       pivot: {x: 0, y: 0}

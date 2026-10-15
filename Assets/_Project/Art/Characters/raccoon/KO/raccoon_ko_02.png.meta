@@ -135,10 +135,10 @@ TextureImporter:
       name: raccoon_ko_02_0
       rect:
         serializedVersion: 2
-        x: 138
-        y: 192
-        width: 8
-        height: 21
+        x: 152
+        y: 183
+        width: 24
+        height: 29
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -157,10 +157,10 @@ TextureImporter:
       name: raccoon_ko_02_1
       rect:
         serializedVersion: 2
-        x: 139
-        y: 37
-        width: 286
-        height: 221
+        x: 155
+        y: 12
+        width: 321
+        height: 253
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,10 +179,10 @@ TextureImporter:
       name: raccoon_ko_02_2
       rect:
         serializedVersion: 2
-        x: 411
-        y: 131
-        width: 17
-        height: 21
+        x: 461
+        y: 120
+        width: 21
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
