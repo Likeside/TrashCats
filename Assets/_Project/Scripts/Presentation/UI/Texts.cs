@@ -84,6 +84,16 @@ namespace TrashCats.Presentation.UI
             _ => "",
         };
 
+        /// <summary>Skin icon next to the idle reason in a speech bubble: tired = sleep, hungry = food, rested = energy.</summary>
+        public static string IdleIcon(IdleReason reason) => reason switch
+        {
+            IdleReason.Tired => "sleep",
+            IdleReason.Hungry => "satiety",
+            IdleReason.SleepDone => "energy",
+            IdleReason.AfterBattle => "sleep",
+            _ => null,
+        };
+
         public static string IdleStatus(IdleReason reason) => reason switch
         {
             IdleReason.Tired => Loc.T("texts.34"),

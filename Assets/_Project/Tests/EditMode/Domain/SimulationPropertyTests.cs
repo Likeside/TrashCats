@@ -76,14 +76,18 @@ namespace TrashCats.Tests
             var world = TestWorlds.Make(_config, food: 0, cats: cats);
             var events = new List<DomainEvent>();
 
-            // Naive player: whoever is idle scavenges if possible, otherwise sleeps.
+            // Naive player: whoever is idle scavenges if possible, otherwise sleeps; a cat may only have to wait for a
+            // station another cat holds (one cat per station), never be stuck for its own reasons.
             for (var step = 0; step < 20 && world.Food == 0; step++)
             {
                 foreach (var cat in world.Cats.Where(c => !c.Activity.IsWorking))
                 {
-                    var activity = ActivitySystem.CanStart(world, cat, TestIds.Scavenge) == ActivityError.None ? TestIds.Scavenge : TestIds.Sleep;
-                    Assert.That(ActivitySystem.CanStart(world, cat, activity), Is.EqualTo(ActivityError.None),
-                        $"{cat.Id} (E{cat.Energy} S{cat.Satiety}) can neither scavenge nor sleep");
+                    var scavenge = ActivitySystem.CanStart(world, cat, TestIds.Scavenge);
+                    var activity = scavenge == ActivityError.None ? TestIds.Scavenge : TestIds.Sleep;
+                    var error = ActivitySystem.CanStart(world, cat, activity);
+                    if (error == ActivityError.StationBusy || (error == ActivityError.EnergyFull && scavenge == ActivityError.StationBusy))
+                        continue;
+                    Assert.That(error, Is.EqualTo(ActivityError.None), $"{cat.Id} (E{cat.Energy} S{cat.Satiety}) can neither scavenge nor sleep");
                     ActivitySystem.Start(world, cat, activity, events);
                 }
 

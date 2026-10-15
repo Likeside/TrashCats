@@ -52,11 +52,12 @@ namespace TrashCats.Tests
             var b = TestCats.Make(TestIds.Shnyr);
             var world = TestWorlds.Make(_config, cats: new[] { a, b });
             var events = new List<DomainEvent>();
-            ActivitySystem.Start(world, b, TestIds.Scavenge, events);
-            ActivitySystem.Start(world, a, TestIds.Scavenge, events);
+            // two trainings of the same length on different stations
+            ActivitySystem.Start(world, b, TestIds.TrainAgi, events);
+            ActivitySystem.Start(world, a, TestIds.TrainStr, events);
             events.Clear();
 
-            Simulation.AdvanceTo(world, 20_000, events);
+            Simulation.AdvanceTo(world, 30_000, events);
 
             Assert.That(events.OfType<ActivityCycleCompleted>().Select(e => e.CatId), Is.EqualTo(new[] { TestIds.Ryzhy, TestIds.Shnyr }));
         }

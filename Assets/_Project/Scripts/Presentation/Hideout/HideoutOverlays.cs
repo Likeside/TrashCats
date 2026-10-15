@@ -221,9 +221,8 @@ namespace TrashCats.Presentation.Hideout
                 var shown = waiting.Take(MaxRows * 2).ToList();
                 for (var i = 0; i < shown.Count; i++)
                 {
-                    if (i % 2 == 0) row = Row(TextAnchor.MiddleLeft, 16);
-                    Portrait(row, shown[i].CatId);
-                    Bubble(row, Texts.IdleBubble(shown[i].Reason));
+                    if (i % 2 == 0) row = Row(TextAnchor.MiddleLeft, 16, RowHeight + 24);
+                    CatWithBubble(row, shown[i].CatId, shown[i].Reason);
                     if (i % 2 == 0 && i + 1 < shown.Count) Spacer(row, 24);
                 }
             }
@@ -234,10 +233,10 @@ namespace TrashCats.Presentation.Hideout
             _overlays.Push(_root);
         }
 
-        private RectTransform Row(TextAnchor align, float spacing)
+        private RectTransform Row(TextAnchor align, float spacing, float height = RowHeight)
         {
             var row = Ui.Rect(_content, "Row");
-            row.gameObject.AddComponent<LayoutElement>().preferredHeight = RowHeight;
+            row.gameObject.AddComponent<LayoutElement>().preferredHeight = height;
             var layout = row.gameObject.AddComponent<HorizontalLayoutGroup>();
             layout.childAlignment = align;
             layout.spacing = spacing;
@@ -281,14 +280,23 @@ namespace TrashCats.Presentation.Hideout
 
         private static void Spacer(RectTransform row, float width) => Fixed(Ui.Rect(row, "Gap"), width, RowHeight);
 
-        /// <summary>The idle reason in a comic speech bubble next to the cat.</summary>
-        private static void Bubble(RectTransform row, string text)
+        /// <summary>
+        /// The cat's round portrait with the idle reason (and its icon) in a speech bubble whose tail comes out of the
+        /// portrait's right side, so it is clear who says it.
+        /// </summary>
+        private void CatWithBubble(RectTransform row, TrashCats.Domain.CatId cat, TrashCats.Domain.IdleReason reason)
         {
-            var back = Ui.Panel(row, "Bubble", Ui.Skin?.bubble != null ? Color.white : new Color(0, 0, 0, 0));
-            back.sprite = Ui.Skin?.bubble;
-            Fixed(back, 170, 86);
-            var label = Ui.Label(back.transform, text, 26, TextAnchor.MiddleCenter, Palette.Paper, heading: true);
-            label.rectTransform.Place(Vector2.zero, Vector2.one, new Vector2(12, 22), new Vector2(-12, -8));
+            const float bubbleWidth = 210f;
+            var cell = Ui.Rect(row, "CatBubble");
+            Fixed(cell, RowHeight + bubbleWidth - 20f, RowHeight + 24);
+            var portrait = Ui.Rect(cell, "Portrait").Place(Vector2.zero, Vector2.zero, Vector2.zero, new Vector2(RowHeight, RowHeight));
+            var picture = new RoundPicture(portrait, "Round", CatColors.Backdrop(cat), 0.8f);
+            picture.Root.Fill();
+            picture.SetPicture(_portrait?.Invoke(cat));
+            var bubble = new SpeechBubble(cell, "Bubble", new Vector2(bubbleWidth, 80), 26);
+            bubble.Root.anchorMin = bubble.Root.anchorMax = Vector2.zero;
+            bubble.Root.anchoredPosition = new Vector2(RowHeight * 0.92f, RowHeight * 0.5f);
+            bubble.Set(Texts.IdleBubble(reason), Texts.IdleIcon(reason));
         }
     }
 
