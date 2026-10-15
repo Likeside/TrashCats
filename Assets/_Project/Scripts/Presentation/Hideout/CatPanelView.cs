@@ -127,7 +127,10 @@ namespace TrashCats.Presentation.Hideout
                 _portraitName.Outlined();
 
                 _status = Ui.Label(content, "", 26, TextAnchor.MiddleCenter, Palette.Ink);
-                _status.rectTransform.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(4, -204), new Vector2(-4, -174));
+                _status.rectTransform.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(10, -204), new Vector2(-10, -174));
+                _status.enableAutoSizing = true;
+                _status.fontSizeMax = 26;
+                _status.fontSizeMin = 18;
 
                 _progress = Ui.Bar(content, "Progress", Palette.Progress);
                 _progress.Rect.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(50, -218), new Vector2(-10, -206));

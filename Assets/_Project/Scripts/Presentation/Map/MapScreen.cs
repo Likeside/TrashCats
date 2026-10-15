@@ -99,15 +99,24 @@ namespace TrashCats.Presentation.Map
             var rt = plate.rectTransform;
             rt.anchorMin = rt.anchorMax = point;
             rt.pivot = new Vector2(right ? 0f : 1f, 0.5f);
-            rt.sizeDelta = new Vector2(430, 170);
+            rt.sizeDelta = new Vector2(430, 186);
             rt.anchoredPosition = new Vector2(right ? Vignette * 0.42f : -Vignette * 0.42f, 0);
 
             var title = Ui.Label(plate.transform, name, 34, TextAnchor.UpperCenter, Palette.Paper, heading: true);
-            title.rectTransform.Place(Vector2.zero, Vector2.one, new Vector2(right ? 70 : 24, 0), new Vector2(right ? -24 : -70, -20));
+            // text keeps clear of the frame; the circle overlaps the plate on one side
+            var near = right ? 72 : 34;
+            var far = right ? -34 : -72;
+            title.rectTransform.Place(new Vector2(0, 0.62f), Vector2.one, new Vector2(near, 0), new Vector2(far, -22));
             var who = Ui.Label(plate.transform, enemies, 24, TextAnchor.MiddleCenter, Palette.Disabled);
-            who.rectTransform.Place(Vector2.zero, Vector2.one, new Vector2(right ? 70 : 24, 0), new Vector2(right ? -24 : -70, -6));
-            var what = Ui.Label(plate.transform, status, 24, TextAnchor.LowerCenter, Palette.Primary);
-            what.rectTransform.Place(Vector2.zero, Vector2.one, new Vector2(right ? 70 : 24, 20), new Vector2(right ? -24 : -70, 0));
+            who.rectTransform.Place(new Vector2(0, 0.4f), new Vector2(1, 0.64f), new Vector2(near, 0), new Vector2(far, 0));
+            var what = Ui.Label(plate.transform, status, 24, TextAnchor.MiddleCenter, Palette.Primary);
+            what.rectTransform.Place(Vector2.zero, new Vector2(1, 0.42f), new Vector2(near, 22), new Vector2(far, 0));
+            foreach (var label in new[] { title, who, what })
+            {
+                label.enableAutoSizing = true;
+                label.fontSizeMax = label.fontSize;
+                label.fontSizeMin = 18;
+            }
             return (title, who, what);
         }
 

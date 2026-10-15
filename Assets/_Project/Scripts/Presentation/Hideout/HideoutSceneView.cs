@@ -220,7 +220,7 @@ namespace TrashCats.Presentation.Hideout
         private static void FitPlate(TMP_Text text)
         {
             var size = text.GetPreferredValues(text.text);
-            ((RectTransform)text.transform.parent).sizeDelta = new Vector2(size.x + 40f, size.y + 14f);
+            ((RectTransform)text.transform.parent).sizeDelta = new Vector2(size.x + 56f, size.y + 18f);
         }
 
         private (string Label, UpgradeId? Upgrade) StationInfo(ActivityDefinition activity)
