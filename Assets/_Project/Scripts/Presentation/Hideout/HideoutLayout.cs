@@ -113,11 +113,13 @@ namespace TrashCats.Presentation.Hideout
         public static readonly PropPlace RopeProp = new PropPlace("prop_upg_mouse", new Vector2(0.3097f, 0.5206f), new Vector2(0.065f, 0.1059f), depth: 0.497f);
 
         /// <summary>
-        /// The barbell resting with its cans on the mat's two brick stands, in 0..1 of the mat picture as drawn (before the
-        /// mirroring): bottom centre, size, tilt (the stands stand at different heights). Hidden while a cat presses it.
+        /// The barbell laid with the ends of its bar on the mat's two brick stands, the cans hanging outside them; in 0..1
+        /// of the mat picture as drawn (before the mirroring): where the bar rests (middle between the stands' tops), size,
+        /// tilt (the stands stand at different heights) and the bar's underside as a share of the sprite height from its
+        /// bottom (the pivot). Hidden while a cat presses it.
         /// </summary>
-        public static readonly (string Sprite, Vector2 Bottom, Vector2 Size, float Rotation) Barbell =
-            ("prop_barbell", new Vector2(0.667f, 0.897f), new Vector2(0.642f, 0.19f), -7.3f);
+        public static readonly (string Sprite, Vector2 Seat, Vector2 Size, float Rotation, float BarUnderside) Barbell =
+            ("prop_barbell", new Vector2(0.667f, 0.905f), new Vector2(0.98f, 0.291f), -7.3f, 0.49f);
 
         /// <summary>The way out to the street: an EXIT signpost in the empty front left corner.</summary>
         /// Nearer to the camera than the cat on the skipping rope: a bit bigger, lower, and drawn over it.

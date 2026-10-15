@@ -17,8 +17,8 @@ namespace TrashCats.Presentation.Hideout
     /// Hideout scene: the background picture with station props and cats placed in the picture's own 0..1 space
     /// (<see cref="HideoutLayout"/>), so everything stays on its spot on any screen. Cats walk to the station of their
     /// activity, show a cycle progress bar, an idle-reason bubble and floating results; nearer things draw on top.
-    /// Cycle bars, station captions and bubbles live in layers over the whole scene (in that order), follow their cat or
-    /// prop every frame and are kept inside the visible part of the scene. Without art the props and cats are graybox
+    /// Station captions sort with their props; cycle bars and bubbles live in layers over the whole scene; all of them
+    /// follow their cat or prop every frame and are kept inside the visible part of the scene. Without art the props and cats are graybox
     /// boxes on the same spots.
     /// </summary>
     public sealed class HideoutSceneView : IDisposable
@@ -37,7 +37,6 @@ namespace TrashCats.Presentation.Hideout
         private readonly Dictionary<UpgradeId, TMP_Text> _upgradeLabels = new Dictionary<UpgradeId, TMP_Text>();
         private readonly Dictionary<UpgradeId, RectTransform> _stations = new Dictionary<UpgradeId, RectTransform>();
         private readonly RectTransform _barLayer;
-        private readonly RectTransform _captionLayer;
         private readonly RectTransform _bubbleLayer;
         private readonly List<(RectTransform Plate, RectTransform Box, bool Centred)> _captions = new List<(RectTransform, RectTransform, bool)>();
         private readonly Vector3[] _corners = new Vector3[4];
@@ -77,7 +76,6 @@ namespace TrashCats.Presentation.Hideout
                 picture.rectTransform.Fill();
             }
             _barLayer = Ui.Rect(_frame, "CycleBars").Fill();
-            _captionLayer = Ui.Rect(_frame, "Captions").Fill();
             _bubbleLayer = Ui.Rect(_frame, "Bubbles").Fill();
             BuildStations();
             foreach (var cat in session.World.Cats)
@@ -295,15 +293,17 @@ namespace TrashCats.Presentation.Hideout
                     // the barbell rests on the brick stands; a child of the mat picture, so it is mirrored and tilted with it
                     var barbell = Ui.Panel(mat, "Barbell", Color.white);
                     barbell.sprite = barbellSprite;
-                    var (bottom, size, tilt) = (HideoutLayout.Barbell.Bottom, HideoutLayout.Barbell.Size, HideoutLayout.Barbell.Rotation);
-                    barbell.rectTransform.Place(new Vector2(bottom.x - size.x * 0.5f, bottom.y), new Vector2(bottom.x + size.x * 0.5f, bottom.y + size.y));
-                    barbell.rectTransform.pivot = new Vector2(0.5f, 0f);
+                    var (rest, size, tilt, under) = (HideoutLayout.Barbell.Seat, HideoutLayout.Barbell.Size, HideoutLayout.Barbell.Rotation,
+                        HideoutLayout.Barbell.BarUnderside);
+                    var corner = new Vector2(rest.x - size.x * 0.5f, rest.y - size.y * under);
+                    barbell.rectTransform.Place(corner, corner + size);
+                    barbell.rectTransform.pivot = new Vector2(0.5f, under);
                     barbell.rectTransform.localEulerAngles = new Vector3(0, 0, tilt);
                     _barbell = barbell.gameObject;
                 }
                 _depthItems.Add((box.transform, place.Depth));
 
-                var text = Plate(box.rectTransform, label);
+                var text = Plate(box.rectTransform, label, place.Depth);
                 if (upgrade != null)
                 {
                     _upgradeLabels[upgrade.Value] = text;
@@ -319,11 +319,11 @@ namespace TrashCats.Presentation.Hideout
 
         /// <summary>
         /// Station caption on a small dark plate that hugs the text, under the prop's base, so it does not float in the
-        /// air; it lives in the caption layer over the cats and the cycle bars and follows the prop (see Tick).
+        /// air; it is drawn in the depth order right in front of its prop and follows the prop (see Tick).
         /// </summary>
-        private TMP_Text Plate(RectTransform box, string caption, bool centred = false)
+        private TMP_Text Plate(RectTransform box, string caption, float depth, bool centred = false)
         {
-            var plate = Ui.Panel(_captionLayer, "Caption_" + box.name, Ui.Skin?.barFrame != null ? Color.white : new Color(0, 0, 0, 0.55f));
+            var plate = Ui.Panel(_frame, "Caption_" + box.name, Ui.Skin?.barFrame != null ? Color.white : new Color(0, 0, 0, 0.55f));
             plate.sprite = Ui.Skin?.barFrame;
             plate.type = Image.Type.Sliced;
             plate.pixelsPerUnitMultiplier = 2.6f;
@@ -331,6 +331,8 @@ namespace TrashCats.Presentation.Hideout
             rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 0.5f);
             rt.pivot = new Vector2(0.5f, centred ? 0.5f : 1f);
             _captions.Add((rt, box, centred));
+            // just in front of its prop: a cat nearer to the camera than the prop draws over the caption
+            _depthItems.Add((rt, depth - 0.0005f));
             var text = Ui.Label(plate.transform, caption, 34, TextAnchor.MiddleCenter, Palette.Paper);
             text.textWrappingMode = TextWrappingModes.NoWrap;
             text.rectTransform.Fill();
@@ -751,9 +753,8 @@ namespace TrashCats.Presentation.Hideout
             var first = _frame.Find("BackgroundArt") != null ? 1 : 0;
             for (var i = 0; i < items.Count; i++)
                 items[i].Item.SetSiblingIndex(first + i);
-            // over everything: cycle bars, then captions (never hidden by a bar), then bubbles
+            // over everything: cycle bars (they step out of the captions' way), then bubbles
             _barLayer.SetAsLastSibling();
-            _captionLayer.SetAsLastSibling();
             _bubbleLayer.SetAsLastSibling();
         }
 
