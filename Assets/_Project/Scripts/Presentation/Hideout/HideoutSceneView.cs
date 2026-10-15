@@ -38,7 +38,7 @@ namespace TrashCats.Presentation.Hideout
         private readonly Dictionary<UpgradeId, TMP_Text> _upgradeLabels = new Dictionary<UpgradeId, TMP_Text>();
         private readonly Dictionary<UpgradeId, RectTransform> _stations = new Dictionary<UpgradeId, RectTransform>();
         private readonly RectTransform _barLayer;
-        private readonly List<(RectTransform Plate, RectTransform Box, bool Centred)> _captions = new List<(RectTransform, RectTransform, bool)>();
+        private readonly List<(RectTransform Plate, RectTransform Box, Vector2 At)> _captions = new List<(RectTransform, RectTransform, Vector2)>();
         private readonly Vector3[] _corners = new Vector3[4];
         private readonly Vector3[] _sceneCorners = new Vector3[4];
         private RectTransform _can;
@@ -110,9 +110,9 @@ namespace TrashCats.Presentation.Hideout
             var world = _session.World;
             _root.GetWorldCorners(_sceneCorners);
             // captions first: the cycle bars and away badges step out of their way
-            foreach (var (plate, box, centred) in _captions)
+            foreach (var (plate, box, at) in _captions)
             {
-                plate.position = Point(box, new Vector2(0.5f, centred ? 0.5f : 0f)) + (centred ? Vector3.zero : Vector3.down * (4f * Scale));
+                plate.position = Point(box, at) + Vector3.down * (4f * Scale);
                 KeepInScene(plate, true);
             }
             foreach (var cat in world.Cats)
@@ -168,7 +168,8 @@ namespace TrashCats.Presentation.Hideout
         private Vector3 Point(RectTransform rect, Vector2 at)
         {
             rect.GetWorldCorners(_corners);
-            return Vector3.Lerp(Vector3.Lerp(_corners[0], _corners[3], at.x), Vector3.Lerp(_corners[1], _corners[2], at.x), at.y);
+            // unclamped: a point may lie outside the rect (the barbell's plate on the wall above the mat)
+            return Vector3.LerpUnclamped(Vector3.LerpUnclamped(_corners[0], _corners[3], at.x), Vector3.LerpUnclamped(_corners[1], _corners[2], at.x), at.y);
         }
 
         /// <summary>Moves an overlay item back inside the visible scene (under the top bar), with a margin.</summary>
@@ -223,7 +224,7 @@ namespace TrashCats.Presentation.Hideout
             var config = _session.Config;
             foreach (var activity in config.Activities)
             {
-                var (label, upgrade) = StationInfo(activity);
+                var (_, upgrade) = StationInfo(activity);
                 // placed as in the layout scene: sprite, rect, rotation about the bottom centre, mirroring, draw order
                 var place = HideoutLayout.Prop(activity);
                 var prop = place.Sprite != null ? _art?.GetSprite(place.Sprite) : null;
@@ -279,7 +280,10 @@ namespace TrashCats.Presentation.Hideout
                 }
                 _depthItems.Add((box.transform, place.Depth));
 
-                var text = Plate(box.rectTransform, label, place.Depth);
+                // the mat's plate hangs on the wall over the barbell (the EXIT sign stands in front of the mat)
+                var bench = activity.Kind == ActivityKind.Train && activity.TrainedAttribute == AttributeType.Strength;
+                var text = Plate(box.rectTransform, Texts.OutcomeIcon(activity), bench ? HideoutLayout.Bench.Depth + 0.2f : place.Depth,
+                    bench ? HideoutLayout.BenchPlate : (Vector2?)null);
                 if (upgrade != null)
                 {
                     _upgradeLabels[upgrade.Value] = text;
@@ -293,11 +297,16 @@ namespace TrashCats.Presentation.Hideout
             }
         }
 
+        private const float PlateIcon = 46f;
+        private const float PlatePad = 16f;
+        private const float PlateHeight = 80f;
+
         /// <summary>
-        /// Station caption on a small dark plate that hugs the text, under the prop's base, so it does not float in the
-        /// air; it is drawn in the depth order right in front of its prop and follows the prop (see Tick).
+        /// Station plate: a small dark rectangle under the prop's base with the icon of what the station trains or brings
+        /// and its upgrade level (no words). It is drawn in the depth order right in front of its prop and follows the
+        /// prop (see Tick).
         /// </summary>
-        private TMP_Text Plate(RectTransform box, string caption, float depth, bool centred = false)
+        private TMP_Text Plate(RectTransform box, string icon, float depth, Vector2? at = null)
         {
             var plate = Ui.Panel(_frame, "Caption_" + box.name, Ui.Skin?.barFrame != null ? Color.white : new Color(0, 0, 0, 0.55f));
             plate.sprite = Ui.Skin?.barFrame;
@@ -305,22 +314,31 @@ namespace TrashCats.Presentation.Hideout
             plate.pixelsPerUnitMultiplier = 2.6f;
             var rt = plate.rectTransform;
             rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 0.5f);
-            rt.pivot = new Vector2(0.5f, centred ? 0.5f : 1f);
-            _captions.Add((rt, box, centred));
+            rt.pivot = new Vector2(0.5f, 1f);
+            _captions.Add((rt, box, at ?? new Vector2(0.5f, 0f)));
             // just in front of its prop: a cat nearer to the camera than the prop draws over the caption
             _depthItems.Add((rt, depth - 0.0005f));
-            var text = Ui.Label(plate.transform, caption, 34, TextAnchor.MiddleCenter, Palette.Paper);
+            var picture = Ui.Icon(plate.transform, icon);
+            if (picture != null)
+            {
+                picture.rectTransform.anchorMin = picture.rectTransform.anchorMax = new Vector2(0f, 0.5f);
+                picture.rectTransform.pivot = new Vector2(0f, 0.5f);
+                picture.rectTransform.sizeDelta = new Vector2(PlateIcon, PlateIcon);
+                picture.rectTransform.anchoredPosition = new Vector2(PlatePad, 0f);
+            }
+            var text = Ui.Label(plate.transform, "", 34, TextAnchor.MiddleLeft, Palette.Paper, heading: true);
             text.textWrappingMode = TextWrappingModes.NoWrap;
-            text.rectTransform.Fill();
+            text.rectTransform.Place(Vector2.zero, Vector2.one, new Vector2(PlatePad + PlateIcon + 6f, 0f), new Vector2(-PlatePad, 0f));
             FitPlate(text);
             return text;
         }
 
-        /// <summary>Sizes a caption plate to its text plus padding.</summary>
+        /// <summary>Sizes a station plate to its icon and level (just the icon when there is no level).</summary>
         private static void FitPlate(TMP_Text text)
         {
-            var size = text.GetPreferredValues(text.text);
-            ((RectTransform)text.transform.parent).sizeDelta = new Vector2(size.x + 60f, size.y + 20f);
+            // nearly square: the icon sits well inside the frame
+            var width = string.IsNullOrEmpty(text.text) ? 0f : text.GetPreferredValues(text.text).x + 6f;
+            ((RectTransform)text.transform.parent).sizeDelta = new Vector2(Mathf.Max(PlateHeight, PlatePad * 2f + PlateIcon + width), PlateHeight);
         }
 
         private (string Label, UpgradeId? Upgrade) StationInfo(ActivityDefinition activity)
@@ -367,7 +385,8 @@ namespace TrashCats.Presentation.Hideout
         {
             if (!_upgradeLabels.TryGetValue(id, out var text))
                 return;
-            text.text = Loc.T("hideout_scene_view.02", Texts.UpgradeShort(id), _session.World.GetUpgradeLevel(id), (CanAfford(id) ? " (+)" : ""));
+            // the level; a green "+" when the upgrade is affordable now
+            text.text = Loc.T("hideout_scene_view.02", _session.World.GetUpgradeLevel(id), CanAfford(id) ? " <color=#8BE36B>+</color>" : "");
             FitPlate(text);
         }
 
