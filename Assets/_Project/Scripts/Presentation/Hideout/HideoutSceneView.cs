@@ -172,8 +172,8 @@ namespace TrashCats.Presentation.Hideout
                 if (activity.Kind == ActivityKind.Rummage)
                 {
                     _dumpster = box.rectTransform;
-                    box.rectTransform.offsetMin += new Vector2(HideoutLayout.DumpsterShift, 0f);
-                    box.rectTransform.offsetMax += new Vector2(HideoutLayout.DumpsterShift, 0f);
+                    box.rectTransform.offsetMin += HideoutLayout.DumpsterShift;
+                    box.rectTransform.offsetMax += HideoutLayout.DumpsterShift;
                 }
                 if (activity.Kind == ActivityKind.Train && activity.TrainedAttribute == AttributeType.Endurance)
                     _ropeProp = box.transform.Find("Prop")?.gameObject;
@@ -565,13 +565,14 @@ namespace TrashCats.Presentation.Hideout
             var from = new Vector2(Mathf.Lerp(_dumpster.anchorMin.x, _dumpster.anchorMax.x, UnityEngine.Random.Range(0.25f, 0.7f)), _dumpster.anchorMax.y - 0.03f);
             rt.anchorMin = rt.anchorMax = from;
             rt.sizeDelta = Vector2.one * UnityEngine.Random.Range(40f, 60f);
-            rt.anchoredPosition = new Vector2(HideoutLayout.DumpsterShift, 0f);
-            var dx = HideoutLayout.DumpsterShift + UnityEngine.Random.Range(-90f, 50f);
+            var shift = HideoutLayout.DumpsterShift;
+            rt.anchoredPosition = shift;
+            var dx = shift.x + UnityEngine.Random.Range(-90f, 50f);
             var duration = UnityEngine.Random.Range(0.6f, 0.8f);
             DOTween.Sequence()
                 .Append(rt.DOAnchorPosX(dx, duration).SetEase(Ease.Linear))
-                .Join(rt.DOAnchorPosY(140f, duration * 0.45f).SetEase(Ease.OutQuad))
-                .Insert(duration * 0.45f, rt.DOAnchorPosY(-90f, duration * 0.55f).SetEase(Ease.InQuad))
+                .Join(rt.DOAnchorPosY(shift.y + 140f, duration * 0.45f).SetEase(Ease.OutQuad))
+                .Insert(duration * 0.45f, rt.DOAnchorPosY(shift.y - 90f, duration * 0.55f).SetEase(Ease.InQuad))
                 .Join(rt.DORotate(new Vector3(0, 0, dx < 0 ? 360f : -360f), duration, RotateMode.FastBeyond360))
                 .Append(junk.DOFade(0f, 0.2f))
                 .OnComplete(() => UnityEngine.Object.Destroy(junk.gameObject))
