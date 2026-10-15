@@ -12,6 +12,9 @@ namespace TrashCats.Presentation.Hideout
     /// <summary>Bottom panel with one card per gang slot: status, cycle progress, needs and quick feeding.</summary>
     public sealed class CatPanelView
     {
+        /// <summary>Height of the name band above each card's picture (the panel grows by it).</summary>
+        public const float NameBand = Card.NameBand;
+
         private const int Slots = 3;
 
         private readonly GameSession _session;
@@ -66,6 +69,9 @@ namespace TrashCats.Presentation.Hideout
             private readonly Image _card;
             private readonly TMP_Text _name;
             private TMP_Text _portraitName;
+            /// <summary>Height of the name band above the picture.</summary>
+            public const float NameBand = 44f;
+
             private static readonly Color StatusInk = Palette.Hex("#2A2118");
             private static readonly Color StatusAlert = Palette.Hex("#B3261E");
             private readonly TMP_Text _status;
@@ -93,7 +99,15 @@ namespace TrashCats.Presentation.Hideout
                 });
 
                 _content = Ui.Rect(background.transform, "Content").Fill(Ui.Skin != null ? 16 : 0).gameObject;
-                var content = _content.transform;
+                // the name in its own band above the picture (it no longer covers the cat), the rest below it
+                _portraitName = Ui.Label(_content.transform, "", 32, TextAnchor.MiddleCenter, StatusInk, heading: true);
+                _portraitName.rectTransform.Place(new Vector2(0, 1), Vector2.one, new Vector2(4, -NameBand), new Vector2(-4, 0));
+                if (_portraitName.font != null) _portraitName.fontSharedMaterial = _portraitName.font.material;
+                _portraitName.color = StatusInk;
+                _portraitName.enableAutoSizing = true;
+                _portraitName.fontSizeMax = 32;
+                _portraitName.fontSizeMin = 22;
+                var content = Ui.Rect(_content.transform, "Body").Place(Vector2.zero, Vector2.one, Vector2.zero, new Vector2(0, -NameBand));
 
                 _header = Ui.Panel(content, "Header", Color.gray);
                 if (Ui.Skin?.button != null)
@@ -125,9 +139,6 @@ namespace TrashCats.Presentation.Hideout
                 _portrait = Ui.Panel(clip, "Portrait", Color.white);
                 _portrait.preserveAspect = true;
                 _portrait.rectTransform.Place(new Vector2(0.04f, 0f), new Vector2(0.96f, 1f), Vector2.zero, new Vector2(0, -40));
-                _portraitName = Ui.Label(content, "", 34, TextAnchor.LowerCenter, Palette.Paper, heading: true);
-                _portraitName.rectTransform.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(4, -166), new Vector2(-4, -60));
-                _portraitName.Outlined();
 
                 // what the cat does, or why it waits with the reason's icon (sleep, fish, energy) — the scene has no bubbles
                 var statusRow = Info.Row(content, "Status", 4f, TextAnchor.MiddleCenter);

@@ -6,9 +6,12 @@ namespace TrashCats.Domain
         public int TickMs { get; init; } = 100;
         public int HpBase { get; init; } = 40;
         public int HpPerEndurance { get; init; } = 12;
-        public int GritBase { get; init; } = 20;
-        public int GritPerEndurance { get; init; } = 5;
-        public int GritRegenPerAction { get; init; } = 3;
+        /// <summary>Grit builds up during a fight (Punch Club style): a fighter enters with <see cref="GritStart"/>, gains
+        /// it with its own actions and with the hits it takes, up to <see cref="GritMax"/>; no attribute raises it.</summary>
+        public int GritMax { get; init; } = 60;
+        public int GritStart { get; init; } = 12;
+        public int GritPerAction { get; init; } = 5;
+        public int GritPerHitTaken { get; init; } = 3;
         public int DamageBase { get; init; } = 4;
         public int DamagePerStrength { get; init; } = 2;
         public int IntervalBaseTicks { get; init; } = 16;

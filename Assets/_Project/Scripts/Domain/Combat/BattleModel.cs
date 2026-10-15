@@ -161,9 +161,12 @@ namespace TrashCats.Domain
         public int TargetHpAfter { get; }
         public bool Evaded { get; }
         public bool Reduced { get; }
+        /// <summary>The target's grit after the hit (a hit taken builds grit up).</summary>
+        public int TargetGritAfter { get; }
 
-        public HitResolved(int tick, Side attackerSide, int hitIndex, bool hit, int damage, int targetHpAfter, bool evaded, bool reduced) : base(tick)
+        public HitResolved(int tick, Side attackerSide, int hitIndex, bool hit, int damage, int targetHpAfter, bool evaded, bool reduced, int targetGritAfter = -1) : base(tick)
         {
+            TargetGritAfter = targetGritAfter;
             AttackerSide = attackerSide;
             HitIndex = hitIndex;
             Hit = hit;

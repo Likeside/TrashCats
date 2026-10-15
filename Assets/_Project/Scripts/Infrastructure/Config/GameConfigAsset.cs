@@ -120,9 +120,10 @@ namespace TrashCats.Infrastructure
             public int tickMs = 100;
             public int hpBase = 40;
             public int hpPerEndurance = 12;
-            public int gritBase = 20;
-            public int gritPerEndurance = 5;
-            public int gritRegenPerAction = 3;
+            public int gritMax = 60;
+            public int gritStart = 12;
+            public int gritPerAction = 5;
+            public int gritPerHitTaken = 3;
             public int damageBase = 4;
             public int damagePerStrength = 2;
             public int intervalBaseTicks = 16;
