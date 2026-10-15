@@ -291,7 +291,8 @@ namespace TrashCats.Presentation.Hideout
             private readonly TMP_Text _time;
             private readonly Color _timeColor;
             private readonly TMP_Text _reason;
-            private readonly CycleBar _cycle;
+            private readonly RectTransform _fillMask;
+            private readonly RectTransform _fill;
             private bool _current;
             private bool _advised;
 
@@ -303,6 +304,24 @@ namespace TrashCats.Presentation.Hideout
                 Activity = activity;
                 Button = Ui.Button(parent, "Activity_" + activity.Id, Texts.ActivityName(activity), Palette.Secondary, onClick, 30);
                 var rect = Button.Rect;
+
+                // the cycle's progress: the button fills with its yellow from left to right (under the icon and the text);
+                // a mask as wide as the progress over a full-size yellow button
+                _fillMask = Ui.Rect(rect, "CycleFill");
+                _fillMask.Place(Vector2.zero, new Vector2(0f, 1f));
+                _fillMask.gameObject.AddComponent<RectMask2D>();
+                _fillMask.SetAsFirstSibling();
+                var fill = Ui.Panel(_fillMask, "Fill", Ui.Skin?.buttonPrimary != null ? Color.white : Palette.Primary);
+                if (Ui.Skin?.buttonPrimary != null)
+                {
+                    fill.sprite = Ui.Skin.buttonPrimary;
+                    fill.type = Image.Type.Sliced;
+                    fill.gameObject.AddComponent<SliceFit>().heightShare = 1.05f;
+                }
+                _fill = fill.rectTransform;
+                _fill.anchorMin = _fill.anchorMax = new Vector2(0f, 0.5f);
+                _fill.pivot = new Vector2(0f, 0.5f);
+                _fillMask.gameObject.SetActive(false);
 
                 var left = 0.04f;
                 var outcome = Ui.Icon(rect, Texts.OutcomeIcon(activity));
@@ -330,8 +349,6 @@ namespace TrashCats.Presentation.Hideout
                 _reason = Ui.Label(rect, "", 26, TextAnchor.MiddleCenter, Palette.Ink, heading: true);
                 _reason.rectTransform.Place(new Vector2(left, 0.1f), new Vector2(1f, 0.46f), Vector2.zero, new Vector2(-24, 0));
 
-                _cycle = new CycleBar(rect, "Cycle");
-                _cycle.Root.Place(new Vector2(0.06f, 0f), new Vector2(0.94f, 0f), new Vector2(0, 14), new Vector2(0, 24));
             }
 
             public void ShowAvailable(long durationMs, int output)
@@ -358,13 +375,16 @@ namespace TrashCats.Presentation.Hideout
             public void SetCurrent(bool current)
             {
                 _current = current;
-                Button.SetColor(current ? Palette.Primary : Palette.Secondary);
-                _cycle.Root.gameObject.SetActive(current);
+                // the busy one is a pale button that fills with yellow as the cycle goes
+                Button.SetColor(current ? Palette.Disabled : Palette.Secondary);
+                _fillMask.gameObject.SetActive(current);
             }
 
             public void SetProgress(float progress01)
             {
-                if (_current) _cycle.Set(progress01);
+                if (!_current) return;
+                _fill.sizeDelta = Button.Rect.rect.size;
+                _fillMask.anchorMax = new Vector2(Mathf.Clamp01(progress01), 1f);
             }
 
             public void SetRecommended(bool on) => Recommend(Button.Rect, ref _advised, on);

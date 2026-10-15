@@ -10,7 +10,9 @@ paper, as a 9-sliced sprite.
 
 v1 (ArtSource/UI/cards_v1_concept): window inside its frame, the whole cat in it.
 v2 (ArtSource/UI/cards_v2_ears): cut-out cat over a drawn frame (rejected: the cat and the card cut separately).
-v3 (ArtSource/UI/cards_v3_window): this one, plus square avatars for the activity sheet (<cat>_avatar.png).
+v3 (ArtSource/UI/cards_v3_window): window and ears, taller windows shortened from the bottom (cut the chins), plus square
+avatars for the activity sheet (<cat>_avatar.png).
+v4 (ArtSource/UI/cards_v4_whole): whole windows, wider ones narrowed at the sides instead.
 Needs numpy and Pillow.  Usage: python3 Tools/cut_card_portraits.py
 """
 import os
@@ -23,13 +25,18 @@ CONCEPT = "Docs/ArtDirection/Concepts/round1/blind/hideout_A.png"
 # window of each card with its ink frame (left, top, right, bottom)
 WINDOWS = {"Ryzhy": (39, 1077, 326, 1260), "shnyr": (376, 1076, 645, 1236), "ponchik": (694, 1077, 985, 1237)}
 EARS_TOP = 1066  # just under the card's inner ink line: the paper band the ears stick out into
-ASPECT = 1.84  # frame width / height, the same for every cat (the game lays the cards out alike)
-BOTTOM_FRAME = 7  # rows of the concept's bottom frame put back under a shortened window
+# frame width / height, the same for every cat (the game lays the cards out alike): the tallest window's (Ryzhy), so
+# no window loses its bottom (the chin); wider windows lose backdrop from their sides instead
+ASPECT = min((r - l) / (b - t) for l, t, r, b in WINDOWS.values())
+SIDE_FRAME = 10  # columns of the concept's side frame (with the rounded corners) kept when a window is narrowed
+# where a narrowed window loses its backdrop: 0 = all from the right, 0.5 = evenly (Shnyr's head is left of the middle)
+TRIM_LEFT_SHARE = {"shnyr": 0.0}
+PAPER = (226, 196, 152)
 MARGIN = 3  # paper taken around the window so the fill can go round it
 PAPER_LUMA = 150
 SCALE = 2
 SS = 4  # supersampling of the panel mask
-ARCHIVE = "ArtSource/UI/cards_v3_window"
+ARCHIVE = "ArtSource/UI/cards_v4_whole"
 
 # square avatars (activity sheet header): a square of the window's inside around the face, no ears out
 AVATARS = {"Ryzhy": (96, 1081, 270, 1255), "shnyr": (392, 1080, 543, 1231), "ponchik": (699, 1080, 851, 1232)}
@@ -83,12 +90,22 @@ def outline_mask(piece):
 
 def card(src, key):
     left, top, right, bottom = WINDOWS[key]
-    width = right - left
-    height = min(bottom - top, round(width / ASPECT))
+    width = round((bottom - top) * ASPECT)
     m = MARGIN
-    # the paper band with the ear tips, the window's top part and the concept's own bottom frame, with paper around
-    piece = np.concatenate([src[EARS_TOP: top + height - BOTTOM_FRAME, left - m: right + m],
-                            src[bottom - BOTTOM_FRAME: bottom + m, left - m: right + m]])
+    # the paper band with the ear tips and the whole window, with paper around; a window wider than the common aspect
+    # keeps its own side frames and loses backdrop next to them (the cat in the middle stays whole)
+    rows = slice(EARS_TOP, bottom + m)
+    if width >= right - left:
+        piece = src[rows, left - m: right + m]
+    else:
+        inner = width - 2 * SIDE_FRAME
+        trim = (right - left) - width
+        start = left + SIDE_FRAME + round(trim * TRIM_LEFT_SHARE.get(key, 0.5))
+        piece = np.concatenate([src[rows, left - m: left + SIDE_FRAME], src[rows, start: start + inner],
+                                src[rows, right - SIDE_FRAME: right + m]], axis=1)
+    # under the window's frame the concept has the card's text: plain paper there, so it does not stick to the frame
+    piece = piece.copy()
+    piece[bottom - EARS_TOP:] = PAPER
     mask = outline_mask(piece.astype(int))
     ys, xs = np.nonzero(mask)
     box = (xs.min(), 0, xs.max() + 1, ys.max() + 1)  # the frame touches the sides and the bottom
