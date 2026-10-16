@@ -1,0 +1,34 @@
+[
+ {
+  "name": "logo_fc_a",
+  "refs": [
+   "Assets/_Project/Art/UI/logo.png"
+  ],
+  "prompt": "Game logo exactly in the style of the FIRST reference (a riveted dark tin plate with chunky hand-drawn comic letters, warm orange-yellow fill with a thick black ink outline, a dark brown 3D drop shadow, scratches and halftone texture). Text in three lines: TRASH on top, CATS below it, big, exactly like the reference; under them a smaller third line FIGHT CLUB, about half the letter height, in the same style but in a red-orange colour, slightly tilted, like a stamped label on a strip of torn cardboard or duct tape across the bottom of the plate. Spelled exactly T-R-A-S-H, C-A-T-S, F-I-G-H-T C-L-U-B, nothing else written. Centered, the plate fills most of the image. Outside the plate: solid flat pure chroma-key GREEN (#00FF00) background everywhere. Do not use green in the logo.",
+  "size": "1536x1024"
+ },
+ {
+  "name": "logo_fc_b",
+  "refs": [
+   "Assets/_Project/Art/UI/logo.png"
+  ],
+  "prompt": "Game logo exactly in the style of the FIRST reference (a riveted dark tin plate with chunky hand-drawn comic letters, warm orange-yellow fill with a thick black ink outline, a dark brown 3D drop shadow, scratches and halftone texture). Text in three lines: TRASH on top, CATS below it, big, exactly like the reference; under them a smaller third line FIGHT CLUB, about half the letter height, in the same style but in a red-orange colour, slightly tilted, like a stamped label on a strip of torn cardboard or duct tape across the bottom of the plate. Spelled exactly T-R-A-S-H, C-A-T-S, F-I-G-H-T C-L-U-B, nothing else written. Centered, the plate fills most of the image. Outside the plate: solid flat pure chroma-key GREEN (#00FF00) background everywhere. Do not use green in the logo.",
+  "size": "1536x1024"
+ },
+ {
+  "name": "logo_fc_c",
+  "refs": [
+   "Assets/_Project/Art/UI/logo.png"
+  ],
+  "prompt": "Game logo exactly in the style of the FIRST reference (a riveted dark tin plate with chunky hand-drawn comic letters, warm orange-yellow fill with a thick black ink outline, a dark brown 3D drop shadow, scratches and halftone texture). Text in three lines: TRASH on top, CATS below it, big, exactly like the reference; under them a smaller third line FIGHT CLUB, about half the letter height, in the same style but in a red-orange colour, slightly tilted, like a stamped label on a strip of torn cardboard or duct tape across the bottom of the plate. Spelled exactly T-R-A-S-H, C-A-T-S, F-I-G-H-T C-L-U-B, nothing else written. Centered, the plate fills most of the image. Outside the plate: solid flat pure chroma-key GREEN (#00FF00) background everywhere. Do not use green in the logo.",
+  "size": "1536x1024"
+ },
+ {
+  "name": "logo_fc_d",
+  "refs": [
+   "Assets/_Project/Art/UI/logo.png"
+  ],
+  "prompt": "Game logo exactly in the style of the FIRST reference (a riveted dark tin plate with chunky hand-drawn comic letters, warm orange-yellow fill with a thick black ink outline, a dark brown 3D drop shadow, scratches and halftone texture). Text in three lines: TRASH on top, CATS below it, big, exactly like the reference; under them a smaller third line FIGHT CLUB, about half the letter height, in the same style but in a red-orange colour, slightly tilted, like a stamped label on a strip of torn cardboard or duct tape across the bottom of the plate. Spelled exactly T-R-A-S-H, C-A-T-S, F-I-G-H-T C-L-U-B, nothing else written. Centered, the plate fills most of the image. Outside the plate: solid flat pure chroma-key GREEN (#00FF00) background everywhere. Do not use green in the logo.",
+  "size": "1536x1024"
+ }
+]

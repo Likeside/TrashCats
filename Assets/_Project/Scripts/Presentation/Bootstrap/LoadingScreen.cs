@@ -51,12 +51,12 @@ namespace TrashCats.Presentation.Bootstrap
             {
                 var plate = Ui.Picture(root, "Logo", logo);
                 plate.preserveAspect = true;
-                plate.rectTransform.Place(new Vector2(0.12f, 1f), new Vector2(0.88f, 1f), new Vector2(0, -560), new Vector2(0, -90));
+                plate.rectTransform.Place(new Vector2(0.1f, 1f), new Vector2(0.9f, 1f), new Vector2(0, -600), new Vector2(0, -60));
                 plate.rectTransform.localEulerAngles = new Vector3(0, 0, -3f);
             }
             else
             {
-                var title = Ui.Label(root, "TRASH CATS", 150, TextAnchor.MiddleCenter, Palette.Primary, heading: true);
+                var title = Ui.Label(root, "TRASH CATS: FIGHT CLUB", 150, TextAnchor.MiddleCenter, Palette.Primary, heading: true);
                 title.rectTransform.Place(new Vector2(0f, 0.8f), new Vector2(1f, 0.95f), new Vector2(40, 0), new Vector2(-40, 0));
             }
 

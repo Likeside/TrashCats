@@ -1,0 +1,42 @@
+[
+ {
+  "name": "loading5_a",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v24_loading_icon/loading3_a.png",
+   "Docs/ArtDirection/Generated/raw_v24_loading_icon/loading_c.png",
+   "Docs/ArtDirection/Generated/raw_v24_loading_icon/ref_idle_gang.png"
+  ],
+  "prompt": "Redraw the FIRST image as a new loading screen illustration (portrait 2:3, the same gritty comic-book style, dusk alley, city rooftops at sunset). Keep the three cats of the FIRST image with EXACTLY their looks, proportions, poses and actions: Ryzhy (orange tabby) with the barbell of tin cans on his shoulder and one foot up on a tin can, Shnyr (thin grey striped cat) crouching and flipping a bottle cap, Ponchik (huge round black-and-white cat, small head) sprawled on trash bags munching a fish skeleton. Change ONLY the composition: bring them TOGETHER into one TIGHT GROUP in the CENTRE of the picture, close to each other and overlapping a little, like a gang portrait (as close together as the cats in the SECOND reference): Ryzhy in the middle a bit higher on the dumpster, Shnyr right at his left side on a crate, Ponchik right at his right side on the trash bags. The SECOND reference is only for the grouping, do not copy its poses. Keep their sizes relative to each other as in the THIRD reference. Leave the TOP third of the picture as sky (a logo goes there) and the BOTTOM sixth as darker ground. No text, no letters, no logo.",
+  "size": "1024x1536"
+ },
+ {
+  "name": "loading5_b",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v24_loading_icon/loading3_a.png",
+   "Docs/ArtDirection/Generated/raw_v24_loading_icon/loading_c.png",
+   "Docs/ArtDirection/Generated/raw_v24_loading_icon/ref_idle_gang.png"
+  ],
+  "prompt": "Redraw the FIRST image as a new loading screen illustration (portrait 2:3, the same gritty comic-book style, dusk alley, city rooftops at sunset). Keep the three cats of the FIRST image with EXACTLY their looks, proportions, poses and actions: Ryzhy (orange tabby) with the barbell of tin cans on his shoulder and one foot up on a tin can, Shnyr (thin grey striped cat) crouching and flipping a bottle cap, Ponchik (huge round black-and-white cat, small head) sprawled on trash bags munching a fish skeleton. Change ONLY the composition: bring them TOGETHER into one TIGHT GROUP in the CENTRE of the picture, close to each other and overlapping a little, like a gang portrait (as close together as the cats in the SECOND reference): Ryzhy in the middle a bit higher on the dumpster, Shnyr right at his left side on a crate, Ponchik right at his right side on the trash bags. The SECOND reference is only for the grouping, do not copy its poses. Keep their sizes relative to each other as in the THIRD reference. Leave the TOP third of the picture as sky (a logo goes there) and the BOTTOM sixth as darker ground. No text, no letters, no logo.",
+  "size": "1024x1536"
+ },
+ {
+  "name": "loading5_c",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v24_loading_icon/loading3_a.png",
+   "Docs/ArtDirection/Generated/raw_v24_loading_icon/loading_c.png",
+   "Docs/ArtDirection/Generated/raw_v24_loading_icon/ref_idle_gang.png"
+  ],
+  "prompt": "Redraw the FIRST image as a new loading screen illustration (portrait 2:3, the same gritty comic-book style, dusk alley, city rooftops at sunset). Keep the three cats of the FIRST image with EXACTLY their looks, proportions, poses and actions: Ryzhy (orange tabby) with the barbell of tin cans on his shoulder and one foot up on a tin can, Shnyr (thin grey striped cat) crouching and flipping a bottle cap, Ponchik (huge round black-and-white cat, small head) sprawled on trash bags munching a fish skeleton. Change ONLY the composition: bring them TOGETHER into one TIGHT GROUP in the CENTRE of the picture, close to each other and overlapping a little, like a gang portrait (as close together as the cats in the SECOND reference): Ryzhy in the middle a bit higher on the dumpster, Shnyr right at his left side on a crate, Ponchik right at his right side on the trash bags. The SECOND reference is only for the grouping, do not copy its poses. Keep their sizes relative to each other as in the THIRD reference. Leave the TOP third of the picture as sky (a logo goes there) and the BOTTOM sixth as darker ground. No text, no letters, no logo.",
+  "size": "1024x1536"
+ },
+ {
+  "name": "loading5_d",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v24_loading_icon/loading3_a.png",
+   "Docs/ArtDirection/Generated/raw_v24_loading_icon/loading_c.png",
+   "Docs/ArtDirection/Generated/raw_v24_loading_icon/ref_idle_gang.png"
+  ],
+  "prompt": "Redraw the FIRST image as a new loading screen illustration (portrait 2:3, the same gritty comic-book style, dusk alley, city rooftops at sunset). Keep the three cats of the FIRST image with EXACTLY their looks, proportions, poses and actions: Ryzhy (orange tabby) with the barbell of tin cans on his shoulder and one foot up on a tin can, Shnyr (thin grey striped cat) crouching and flipping a bottle cap, Ponchik (huge round black-and-white cat, small head) sprawled on trash bags munching a fish skeleton. Change ONLY the composition: bring them TOGETHER into one TIGHT GROUP in the CENTRE of the picture, close to each other and overlapping a little, like a gang portrait (as close together as the cats in the SECOND reference): Ryzhy in the middle a bit higher on the dumpster, Shnyr right at his left side on a crate, Ponchik right at his right side on the trash bags. The SECOND reference is only for the grouping, do not copy its poses. Keep their sizes relative to each other as in the THIRD reference. Leave the TOP third of the picture as sky (a logo goes there) and the BOTTOM sixth as darker ground. No text, no letters, no logo.",
+  "size": "1024x1536"
+ }
+]
