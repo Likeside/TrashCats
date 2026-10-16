@@ -1,0 +1,42 @@
+[
+ {
+  "name": "edit_up2_a",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v23_ryzhy_bench_top/edit_base_up_a.png",
+   "Docs/ArtDirection/Generated/raw_v23_ryzhy_bench_top/ref_11.png"
+  ],
+  "mask": "Docs/ArtDirection/Generated/raw_v23_ryzhy_bench_top/edit_mask_08.png",
+  "prompt": "The FIRST image is a bench press frame of the orange tabby tomcat Ryzhy lying on his back, the barbell just above his forehead. Edit ONLY the masked area: RAISE the barbell a little more, by about the height of one fist, so the stick is at the tips of his ears; the elbows a little less bent than now, NOT straight; NOT as high as the SECOND reference (the top). Keep his head, face, body, belly, legs and feet EXACTLY as they are. The barbell stays the same size, horizontal, one straight unbroken stick, gripped by both fists between the can bundles; the arms keep their length and thickness. Same comic style, colours and line weight. The background MUST stay solid flat pure chroma-key GREEN (#00FF00) everywhere, also in the edited area, never black, no shadow, no text.",
+  "size": "1024x1024"
+ },
+ {
+  "name": "edit_up2_b",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v23_ryzhy_bench_top/edit_base_up_a.png",
+   "Docs/ArtDirection/Generated/raw_v23_ryzhy_bench_top/ref_11.png"
+  ],
+  "mask": "Docs/ArtDirection/Generated/raw_v23_ryzhy_bench_top/edit_mask_08.png",
+  "prompt": "The FIRST image is a bench press frame of the orange tabby tomcat Ryzhy lying on his back, the barbell just above his forehead. Edit ONLY the masked area: RAISE the barbell a little more, by about the height of one fist, so the stick is at the tips of his ears; the elbows a little less bent than now, NOT straight; NOT as high as the SECOND reference (the top). Keep his head, face, body, belly, legs and feet EXACTLY as they are. The barbell stays the same size, horizontal, one straight unbroken stick, gripped by both fists between the can bundles; the arms keep their length and thickness. Same comic style, colours and line weight. The background MUST stay solid flat pure chroma-key GREEN (#00FF00) everywhere, also in the edited area, never black, no shadow, no text.",
+  "size": "1024x1024"
+ },
+ {
+  "name": "edit_up2_c",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v23_ryzhy_bench_top/edit_base_up_a.png",
+   "Docs/ArtDirection/Generated/raw_v23_ryzhy_bench_top/ref_11.png"
+  ],
+  "mask": "Docs/ArtDirection/Generated/raw_v23_ryzhy_bench_top/edit_mask_08.png",
+  "prompt": "The FIRST image is a bench press frame of the orange tabby tomcat Ryzhy lying on his back, the barbell just above his forehead. Edit ONLY the masked area: RAISE the barbell a little more, by about the height of one fist, so the stick is at the tips of his ears; the elbows a little less bent than now, NOT straight; NOT as high as the SECOND reference (the top). Keep his head, face, body, belly, legs and feet EXACTLY as they are. The barbell stays the same size, horizontal, one straight unbroken stick, gripped by both fists between the can bundles; the arms keep their length and thickness. Same comic style, colours and line weight. The background MUST stay solid flat pure chroma-key GREEN (#00FF00) everywhere, also in the edited area, never black, no shadow, no text.",
+  "size": "1024x1024"
+ },
+ {
+  "name": "edit_up2_d",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v23_ryzhy_bench_top/edit_base_up_a.png",
+   "Docs/ArtDirection/Generated/raw_v23_ryzhy_bench_top/ref_11.png"
+  ],
+  "mask": "Docs/ArtDirection/Generated/raw_v23_ryzhy_bench_top/edit_mask_08.png",
+  "prompt": "The FIRST image is a bench press frame of the orange tabby tomcat Ryzhy lying on his back, the barbell just above his forehead. Edit ONLY the masked area: RAISE the barbell a little more, by about the height of one fist, so the stick is at the tips of his ears; the elbows a little less bent than now, NOT straight; NOT as high as the SECOND reference (the top). Keep his head, face, body, belly, legs and feet EXACTLY as they are. The barbell stays the same size, horizontal, one straight unbroken stick, gripped by both fists between the can bundles; the arms keep their length and thickness. Same comic style, colours and line weight. The background MUST stay solid flat pure chroma-key GREEN (#00FF00) everywhere, also in the edited area, never black, no shadow, no text.",
+  "size": "1024x1024"
+ }
+]

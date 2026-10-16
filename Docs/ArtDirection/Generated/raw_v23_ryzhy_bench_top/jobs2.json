@@ -1,0 +1,62 @@
+[
+ {
+  "name": "edit_down_a",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v23_ryzhy_bench_top/edit_base_11.png",
+   "Docs/ArtDirection/Generated/raw_v23_ryzhy_bench_top/ref_11.png"
+  ],
+  "mask": "Docs/ArtDirection/Generated/raw_v23_ryzhy_bench_top/edit_mask_11.png",
+  "prompt": "The FIRST image is the top of a bench press of the orange tabby tomcat Ryzhy lying on his back (arms extended up holding a barbell). Edit ONLY the masked area: LOWER the barbell a little so the stick is just above the tips of his ears, and bend his elbows a little (arms not fully straight). Keep his head, face, body, belly, legs and feet EXACTLY as they are. The barbell stays the same size, horizontal, one straight unbroken stick, gripped by both fists between the can bundles; the arms keep their length and thickness. Same comic style, colours and line weight. Keep the solid flat pure chroma-key GREEN (#00FF00) background, no shadow, no text.",
+  "size": "1024x1024"
+ },
+ {
+  "name": "edit_down_b",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v23_ryzhy_bench_top/edit_base_11.png",
+   "Docs/ArtDirection/Generated/raw_v23_ryzhy_bench_top/ref_11.png"
+  ],
+  "mask": "Docs/ArtDirection/Generated/raw_v23_ryzhy_bench_top/edit_mask_11.png",
+  "prompt": "The FIRST image is the top of a bench press of the orange tabby tomcat Ryzhy lying on his back (arms extended up holding a barbell). Edit ONLY the masked area: LOWER the barbell a little so the stick is just above the tips of his ears, and bend his elbows a little (arms not fully straight). Keep his head, face, body, belly, legs and feet EXACTLY as they are. The barbell stays the same size, horizontal, one straight unbroken stick, gripped by both fists between the can bundles; the arms keep their length and thickness. Same comic style, colours and line weight. Keep the solid flat pure chroma-key GREEN (#00FF00) background, no shadow, no text.",
+  "size": "1024x1024"
+ },
+ {
+  "name": "edit_down_c",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v23_ryzhy_bench_top/edit_base_11.png",
+   "Docs/ArtDirection/Generated/raw_v23_ryzhy_bench_top/ref_11.png"
+  ],
+  "mask": "Docs/ArtDirection/Generated/raw_v23_ryzhy_bench_top/edit_mask_11.png",
+  "prompt": "The FIRST image is the top of a bench press of the orange tabby tomcat Ryzhy lying on his back (arms extended up holding a barbell). Edit ONLY the masked area: LOWER the barbell a little so the stick is just above the tips of his ears, and bend his elbows a little (arms not fully straight). Keep his head, face, body, belly, legs and feet EXACTLY as they are. The barbell stays the same size, horizontal, one straight unbroken stick, gripped by both fists between the can bundles; the arms keep their length and thickness. Same comic style, colours and line weight. Keep the solid flat pure chroma-key GREEN (#00FF00) background, no shadow, no text.",
+  "size": "1024x1024"
+ },
+ {
+  "name": "edit_up_a",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v23_ryzhy_bench_top/edit_base_08.png",
+   "Docs/ArtDirection/Generated/raw_v23_ryzhy_bench_top/ref_11.png"
+  ],
+  "mask": "Docs/ArtDirection/Generated/raw_v23_ryzhy_bench_top/edit_mask_08.png",
+  "prompt": "The FIRST image is a bench press frame of the orange tabby tomcat Ryzhy lying on his back, the barbell held just in front of his eyes. Edit ONLY the masked area: RAISE the barbell a little so the stick is just above his forehead, between the eyebrows and the ear tips, the elbows bent at a right angle, the fists beside the top of his head. Keep his head, face, body, belly, legs and feet EXACTLY as they are. The barbell stays the same size, horizontal, one straight unbroken stick, gripped by both fists between the can bundles; the arms keep their length and thickness. Same comic style, colours and line weight. Keep the solid flat pure chroma-key GREEN (#00FF00) background, no shadow, no text.",
+  "size": "1024x1024"
+ },
+ {
+  "name": "edit_up_b",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v23_ryzhy_bench_top/edit_base_08.png",
+   "Docs/ArtDirection/Generated/raw_v23_ryzhy_bench_top/ref_11.png"
+  ],
+  "mask": "Docs/ArtDirection/Generated/raw_v23_ryzhy_bench_top/edit_mask_08.png",
+  "prompt": "The FIRST image is a bench press frame of the orange tabby tomcat Ryzhy lying on his back, the barbell held just in front of his eyes. Edit ONLY the masked area: RAISE the barbell a little so the stick is just above his forehead, between the eyebrows and the ear tips, the elbows bent at a right angle, the fists beside the top of his head. Keep his head, face, body, belly, legs and feet EXACTLY as they are. The barbell stays the same size, horizontal, one straight unbroken stick, gripped by both fists between the can bundles; the arms keep their length and thickness. Same comic style, colours and line weight. Keep the solid flat pure chroma-key GREEN (#00FF00) background, no shadow, no text.",
+  "size": "1024x1024"
+ },
+ {
+  "name": "edit_up_c",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v23_ryzhy_bench_top/edit_base_08.png",
+   "Docs/ArtDirection/Generated/raw_v23_ryzhy_bench_top/ref_11.png"
+  ],
+  "mask": "Docs/ArtDirection/Generated/raw_v23_ryzhy_bench_top/edit_mask_08.png",
+  "prompt": "The FIRST image is a bench press frame of the orange tabby tomcat Ryzhy lying on his back, the barbell held just in front of his eyes. Edit ONLY the masked area: RAISE the barbell a little so the stick is just above his forehead, between the eyebrows and the ear tips, the elbows bent at a right angle, the fists beside the top of his head. Keep his head, face, body, belly, legs and feet EXACTLY as they are. The barbell stays the same size, horizontal, one straight unbroken stick, gripped by both fists between the can bundles; the arms keep their length and thickness. Same comic style, colours and line weight. Keep the solid flat pure chroma-key GREEN (#00FF00) background, no shadow, no text.",
+  "size": "1024x1024"
+ }
+]
