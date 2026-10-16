@@ -3,7 +3,8 @@
 lower body (rows from lock_y down, under the arms) of the first cell is fitted to the old frame's by scale and shift,
 every other cell keeps that scale and is shifted onto the first one by its lower body, so the cat lies still on the mat
 and keeps its size (HideoutLayout.BenchFit stays valid).
-Usage: fit_bench_cells.py <sheet> <old frame png> <out dir> <stem> <lock_y> [cells, e.g. 0,2,4,6,7]
+Usage: fit_bench_cells.py <sheet> <old frame png> <out dir> <stem> <lock_y> [cells, e.g. 0,2,4,6,7] [--feet]
+--feet: the other cells are placed by their feet (lowest row, middle of the feet) instead of the lower-body overlap.
 """
 import os
 import sys
@@ -26,14 +27,31 @@ def score(ref, cand, lock_y):
 
 
 def fit_shift(ref, a, k, W, H, lock_y, guess, step, reach):
+    small = C.scaled(a, k)
     best, arg = None, guess
     for dy in range(-reach, reach + 1, step):
         for dx in range(-reach, reach + 1, step):
             ox, oy = guess[0] + dx, guess[1] + dy
-            s = score(ref, C.mask(place(a, k, W, H, ox, oy)), lock_y)
+            out = np.zeros((H, W, 4), np.uint8)
+            C.paste(out, small, ox, oy)
+            s = score(ref, C.mask(out), lock_y)
             if best is None or s < best:
                 best, arg = s, (ox, oy)
     return best, arg
+
+
+def fit_wide(ref, a, k, W, H, lock_y, guess):
+    """Coarse then fine: cells of the second sheet row are often drawn at another spot of their cell."""
+    _, arg = fit_shift(ref, a, k, W, H, lock_y, guess, 4, 60)
+    return fit_shift(ref, a, k, W, H, lock_y, arg, 1, 4)
+
+
+def feet(m, band=30):
+    """Middle x of the pixels in the lowest rows (both feet) and the lowest row."""
+    ys = np.nonzero(m.any(1))[0]
+    bottom = ys.max()
+    xs = np.nonzero(m[bottom - band:bottom + 1])[1]
+    return (xs.min() + xs.max()) / 2, bottom
 
 
 def main():
@@ -42,7 +60,7 @@ def main():
     H, W = old.shape[:2]
     ref = C.mask(old)
     cells = [a for _, a in C.cells(sheet)]
-    pick = [int(v) for v in sys.argv[6].split(",")] if len(sys.argv) > 6 else range(len(cells))
+    pick = [int(v) for v in sys.argv[6].split(",")] if len(sys.argv) > 6 and sys.argv[6][0].isdigit() else list(range(len(cells)))
     first = cells[pick[0]]
     # scale: the feet-to-knee part of the old frame and of the cell, by the width of everything under lock_y
     rx0, _, rx1, ry1 = C.bbox(ref[lock_y:])
@@ -64,8 +82,16 @@ def main():
     _, shift0 = fit_shift(ref, first, k, W, H, lock_y, shift0, 1, 3)
     base = C.mask(place(first, k, W, H, *shift0))
     os.makedirs(out, exist_ok=True)
+    feet0 = feet(C.mask(C.scaled(first, k)))
     for n, i in enumerate(pick):
-        shift = shift0 if n == 0 else fit_shift(base, cells[i], k, W, H, lock_y, shift0, 1, 12)[1]
+        if n == 0:
+            shift = shift0
+        elif "--feet" in sys.argv:
+            # the feet stay planted: the lowest row and the middle of the feet as in the first cell
+            f = feet(C.mask(C.scaled(cells[i], k)))
+            shift = (shift0[0] + round(feet0[0] - f[0]), shift0[1] + feet0[1] - f[1])
+        else:
+            shift = fit_wide(base, cells[i], k, W, H, lock_y, shift0)[1]
         Image.fromarray(place(cells[i], k, W, H, *shift)).save(f"{out}/{stem}_{n:02d}.png")
         print(i, "->", n, "shift", shift)
     print("scale", round(float(k), 3))
