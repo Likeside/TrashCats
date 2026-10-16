@@ -129,10 +129,10 @@ TextureImporter:
       name: shnyr_rope_03_0
       rect:
         serializedVersion: 2
-        x: 28
-        y: 15
-        width: 248
-        height: 358
+        x: 20
+        y: 13
+        width: 262
+        height: 346
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

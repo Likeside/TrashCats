@@ -129,10 +129,10 @@ TextureImporter:
       name: ponchik_rope_13_0
       rect:
         serializedVersion: 2
-        x: 30
+        x: 31
         y: 15
-        width: 339
-        height: 392
+        width: 336
+        height: 381
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
