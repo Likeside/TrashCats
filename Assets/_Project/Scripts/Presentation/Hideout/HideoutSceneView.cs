@@ -1107,10 +1107,9 @@ namespace TrashCats.Presentation.Hideout
     /// </summary>
     public static class ResultPopup
     {
-        // the number and the icons 10% smaller than first made (2026-10-16)
-        private const float Height = 67f;
-        private const float IconSize = 49f;
-        private const float Pad = 15f;
+        private const float Height = 74f;
+        private const float IconSize = 54f;
+        private const float Pad = 16f;
 
         public static void Spawn(RectTransform parent, Vector3 from, int amount, string icon, bool levelUp)
         {
@@ -1118,6 +1117,7 @@ namespace TrashCats.Presentation.Hideout
             var rt = plate.rectTransform;
             rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 0.5f);
             rt.pivot = new Vector2(0.5f, 0f);
+            // the number 10% smaller than first made, the plate as it was (2026-10-16)
             var label = Ui.Label(rt, "+" + amount, 41, TextAnchor.MiddleLeft, Palette.Ink, heading: true);
             label.textWrappingMode = TextWrappingModes.NoWrap;
             var textWidth = label.GetPreferredValues(label.text).x;
