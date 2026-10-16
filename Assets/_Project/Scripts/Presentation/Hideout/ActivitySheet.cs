@@ -117,7 +117,7 @@ namespace TrashCats.Presentation.Hideout
             _feedGain = Info.Chip(_feedRow, "satiety", "", 46f, 30, Palette.Ink).GetComponentInChildren<TMP_Text>();
 
             _stop = Ui.Button(panel.transform, "Stop", Loc.T("activity_sheet.02"), Palette.Disabled, Stop, 32);
-            _stop.Rect.Place(new Vector2(0.5f, 0), new Vector2(1f, 0), new Vector2(15, 40), new Vector2(-30, 150));
+            _stop.Rect.Place(new Vector2(0.5f, 0), new Vector2(1f, 0), new Vector2(15, 40), new Vector2(-30, 170));
 
             _root.SetActive(false);
         }
@@ -180,7 +180,7 @@ namespace TrashCats.Presentation.Hideout
 
             // Stop only while the cat works; Feed takes the whole row otherwise
             _stop.Rect.gameObject.SetActive(working);
-            _feed.Rect.Place(new Vector2(0, 0), new Vector2(working ? 0.5f : 1f, 0), new Vector2(30, 40), new Vector2(working ? -15 : -30, 150));
+            _feed.Rect.Place(new Vector2(0, 0), new Vector2(working ? 0.5f : 1f, 0), new Vector2(30, 40), new Vector2(working ? -15 : -30, 170));
             // text sizes are known only once the sheet is shown: fit on the next tick
             _fitFeed = true;
 

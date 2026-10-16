@@ -1,0 +1,38 @@
+[
+ {
+  "name": "ryzhy_half_a",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v21_ryzhy_bench_inbetween/ref_green_06.png",
+   "Docs/ArtDirection/Generated/raw_v21_ryzhy_bench_inbetween/ref_green_07.png"
+  ],
+  "prompt": "ONE game sprite of the orange tabby tomcat Ryzhy lying on his back pressing a barbell (a wooden stick with two bundles of tin cans tied with rope), on a solid flat pure chroma-key GREEN (#00FF00) background. The FIRST reference is the frame before (the barbell just above his eyes, elbows bent), the SECOND reference is the frame after (arms extended up). Draw the frame EXACTLY HALFWAY between them: the elbows half straightened (bent at about 130 degrees), the barbell exactly halfway between its height in the two references (above the top of his head, the bundles of cans at the height of his ears' tips and a bit above). VERY IMPORTANT: everything except the arms and the barbell is EXACTLY as in the references: the same size, position and angle of the head, face (calm smirk), body, belly, legs and feet; the barbell the same size, horizontal; the arms keep their length and thickness. Same place in the picture as the references. Comic book style exactly like the references. IMPORTANT: the background MUST be solid flat pure chroma-key GREEN (#00FF00) everywhere, no shadow, no text. Do not use green on the character.",
+  "size": "1024x1024"
+ },
+ {
+  "name": "ryzhy_half_b",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v21_ryzhy_bench_inbetween/ref_green_06.png",
+   "Docs/ArtDirection/Generated/raw_v21_ryzhy_bench_inbetween/ref_green_07.png"
+  ],
+  "prompt": "ONE game sprite of the orange tabby tomcat Ryzhy lying on his back pressing a barbell (a wooden stick with two bundles of tin cans tied with rope), on a solid flat pure chroma-key GREEN (#00FF00) background. The FIRST reference is the frame before (the barbell just above his eyes, elbows bent), the SECOND reference is the frame after (arms extended up). Draw the frame EXACTLY HALFWAY between them: the elbows half straightened (bent at about 130 degrees), the barbell exactly halfway between its height in the two references (above the top of his head, the bundles of cans at the height of his ears' tips and a bit above). VERY IMPORTANT: everything except the arms and the barbell is EXACTLY as in the references: the same size, position and angle of the head, face (calm smirk), body, belly, legs and feet; the barbell the same size, horizontal; the arms keep their length and thickness. Same place in the picture as the references. Comic book style exactly like the references. IMPORTANT: the background MUST be solid flat pure chroma-key GREEN (#00FF00) everywhere, no shadow, no text. Do not use green on the character.",
+  "size": "1024x1024"
+ },
+ {
+  "name": "ryzhy_half_c",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v21_ryzhy_bench_inbetween/ref_green_06.png",
+   "Docs/ArtDirection/Generated/raw_v21_ryzhy_bench_inbetween/ref_green_07.png"
+  ],
+  "prompt": "ONE game sprite of the orange tabby tomcat Ryzhy lying on his back pressing a barbell (a wooden stick with two bundles of tin cans tied with rope), on a solid flat pure chroma-key GREEN (#00FF00) background. The FIRST reference is the frame before (the barbell just above his eyes, elbows bent), the SECOND reference is the frame after (arms extended up). Draw the frame EXACTLY HALFWAY between them: the elbows half straightened (bent at about 130 degrees), the barbell exactly halfway between its height in the two references (above the top of his head, the bundles of cans at the height of his ears' tips and a bit above). VERY IMPORTANT: everything except the arms and the barbell is EXACTLY as in the references: the same size, position and angle of the head, face (calm smirk), body, belly, legs and feet; the barbell the same size, horizontal; the arms keep their length and thickness. Same place in the picture as the references. Comic book style exactly like the references. IMPORTANT: the background MUST be solid flat pure chroma-key GREEN (#00FF00) everywhere, no shadow, no text. Do not use green on the character.",
+  "size": "1024x1024"
+ },
+ {
+  "name": "ryzhy_half_d",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v21_ryzhy_bench_inbetween/ref_green_06.png",
+   "Docs/ArtDirection/Generated/raw_v21_ryzhy_bench_inbetween/ref_green_07.png"
+  ],
+  "prompt": "ONE game sprite of the orange tabby tomcat Ryzhy lying on his back pressing a barbell (a wooden stick with two bundles of tin cans tied with rope), on a solid flat pure chroma-key GREEN (#00FF00) background. The FIRST reference is the frame before (the barbell just above his eyes, elbows bent), the SECOND reference is the frame after (arms extended up). Draw the frame EXACTLY HALFWAY between them: the elbows half straightened (bent at about 130 degrees), the barbell exactly halfway between its height in the two references (above the top of his head, the bundles of cans at the height of his ears' tips and a bit above). VERY IMPORTANT: everything except the arms and the barbell is EXACTLY as in the references: the same size, position and angle of the head, face (calm smirk), body, belly, legs and feet; the barbell the same size, horizontal; the arms keep their length and thickness. Same place in the picture as the references. Comic book style exactly like the references. IMPORTANT: the background MUST be solid flat pure chroma-key GREEN (#00FF00) everywhere, no shadow, no text. Do not use green on the character.",
+  "size": "1024x1024"
+ }
+]

@@ -1,0 +1,30 @@
+[
+ {
+  "name": "ryzhy_inbetween_masked_a",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v21_ryzhy_bench_inbetween/base.png",
+   "Assets/_Project/Art/Characters/Ryzhy/Bench/ryzhy_bench_06.png",
+   "Assets/_Project/Art/Characters/Ryzhy/Bench/ryzhy_bench_07.png"
+  ],
+  "mask": "Docs/ArtDirection/Generated/raw_v21_ryzhy_bench_inbetween/mask.png",
+  "prompt": "The FIRST image is a sprite sheet of 4 animation frames in a 2x2 grid (read left to right, top row first) of the orange tabby tomcat Ryzhy pressing a barbell (a wooden stick with two bundles of tin cans tied with rope) while lying on his back. Frame 1 (top left) and frame 4 (bottom right) are given: frame 1 has the elbows still bent with the barbell just above his face, frame 4 is the top with the arms extended up. Draw ONLY frames 2 and 3 (the empty masked cells): the two IN-BETWEEN frames of this one smooth push, frame 2 one third of the way from frame 1 to frame 4, frame 3 two thirds of the way, the barbell rising in EVEN steps (the barbell's height and the arms' extension exactly between the given frames). VERY IMPORTANT: in frames 2 and 3 everything except the arms and the barbell is EXACTLY as in frames 1 and 4: the same position in the cell, size and angle of the head, face (the same calm smirk), body, belly, legs and feet; the barbell is the same size and stays horizontal; the arms keep their length and thickness. Same comic style, colours and line weight as the given frames. Keep the solid flat pure chroma-key GREEN (#00FF00) background, no shadow, no text, no frame numbers."
+ },
+ {
+  "name": "ryzhy_inbetween_masked_b",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v21_ryzhy_bench_inbetween/base.png",
+   "Assets/_Project/Art/Characters/Ryzhy/Bench/ryzhy_bench_06.png",
+   "Assets/_Project/Art/Characters/Ryzhy/Bench/ryzhy_bench_07.png"
+  ],
+  "mask": "Docs/ArtDirection/Generated/raw_v21_ryzhy_bench_inbetween/mask.png",
+  "prompt": "The FIRST image is a sprite sheet of 4 animation frames in a 2x2 grid (read left to right, top row first) of the orange tabby tomcat Ryzhy pressing a barbell (a wooden stick with two bundles of tin cans tied with rope) while lying on his back. Frame 1 (top left) and frame 4 (bottom right) are given: frame 1 has the elbows still bent with the barbell just above his face, frame 4 is the top with the arms extended up. Draw ONLY frames 2 and 3 (the empty masked cells): the two IN-BETWEEN frames of this one smooth push, frame 2 one third of the way from frame 1 to frame 4, frame 3 two thirds of the way, the barbell rising in EVEN steps (the barbell's height and the arms' extension exactly between the given frames). VERY IMPORTANT: in frames 2 and 3 everything except the arms and the barbell is EXACTLY as in frames 1 and 4: the same position in the cell, size and angle of the head, face (the same calm smirk), body, belly, legs and feet; the barbell is the same size and stays horizontal; the arms keep their length and thickness. Same comic style, colours and line weight as the given frames. Keep the solid flat pure chroma-key GREEN (#00FF00) background, no shadow, no text, no frame numbers."
+ },
+ {
+  "name": "ryzhy_inbetween_full_a",
+  "refs": [
+   "Assets/_Project/Art/Characters/Ryzhy/Bench/ryzhy_bench_06.png",
+   "Assets/_Project/Art/Characters/Ryzhy/Bench/ryzhy_bench_07.png"
+  ],
+  "prompt": "Game sprite sheet: 4 animation frames in a 2x2 grid (read left to right, top row first) of ONE smooth part of a bench press of the orange tabby tomcat Ryzhy lying on his back. The FIRST reference is frame 1 (elbows still bent, the barbell just above his face), the SECOND reference is frame 4 (the top, the arms extended up): copy them exactly as frames 1 and 4. Frames 2 and 3 are the IN-BETWEENS: the barbell one third and two thirds of the way up, in EVEN steps. VERY IMPORTANT: everything except the arms and the barbell stays EXACTLY the same in all 4 frames: the same position, size and angle of the head, face, body, belly, legs and feet; the barbell is the same size and horizontal; the arms keep their length. Comic book style exactly like the references. IMPORTANT: the background MUST be solid flat pure chroma-key GREEN (#00FF00) everywhere, no shadow, no text, no frame numbers. Do not use green on the character."
+ }
+]
