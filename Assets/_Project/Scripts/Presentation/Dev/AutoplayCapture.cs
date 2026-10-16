@@ -258,7 +258,7 @@ namespace TrashCats.Presentation.Dev
             Application.Quit();
         }
 
-        /// <summary>Ponchik on the bench, Ryzhy and Shnyr on the skipping rope: a burst of screenshots (the press, landing dust).</summary>
+        /// <summary>Ponchik on the skipping rope, Ryzhy on the bench, Shnyr at the can: a burst of screenshots (the press, landing dust).</summary>
         private IEnumerator Gym()
         {
             Directory.CreateDirectory(_dir);
@@ -272,7 +272,7 @@ namespace TrashCats.Presentation.Dev
             var session = services.Session;
             foreach (var cat in session.World.Cats)
             {
-                var activity = cat.Id.Value == "cat_ponchik" ? "act_train_str" : "act_train_tou";
+                var activity = cat.Id.Value switch { "cat_ponchik" => "act_train_tou", "cat_ryzhy" => "act_train_str", _ => "act_train_agi" };
                 session.AssignActivity(cat.Id, new Domain.ActivityId(activity));
             }
             yield return new WaitForSeconds(1.5f);
