@@ -83,6 +83,18 @@ namespace TrashCats.Tests
         }
 
         [Test]
+        public void FightStep_WaitsUntilTheCatIsRested()
+        {
+            var done = new[] { TutorialService.Scavenge, TutorialService.Bar, TutorialService.Feed, TutorialService.Train, TutorialService.Sleep };
+            Start(WorldWith(TestCats.Make(TestIds.Ryzhy, energy: 25), done));
+            _session.AssignActivity(TestIds.Ryzhy, TestIds.TrainStr);
+            Assert.That(Step, Is.Not.EqualTo(TutorialService.Fight), "training with little energy left: it would tire on the way");
+
+            _session.StopActivity(TestIds.Ryzhy);
+            Assert.That(Step, Is.EqualTo(TutorialService.Fight), "idle with enough energy");
+        }
+
+        [Test]
         public void UnlockedSkill_AsksToEquip_UntilEquipped()
         {
             var cat = TestCats.Make(TestIds.Ryzhy, str: 4);
