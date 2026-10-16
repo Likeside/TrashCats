@@ -3,8 +3,8 @@ guid: f85ab4597b52bf0bcb93ad9706f0d1c3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8744340067068050816
-    second: shnyr_rope_11_0
+      213: -8441597067111785090
+    second: shnyr_rope_10_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: shnyr_rope_11_0
+      name: shnyr_rope_10_0
       rect:
         serializedVersion: 2
-        x: 23
-        y: 15
-        width: 256
-        height: 364
+        x: 16
+        y: 12
+        width: 264
+        height: 360
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 08d7ec426f22a5970800000000000000
-      internalID: 8744340067068050816
+      spriteID: e7d92d5613c69da80800000000000000
+      internalID: -8441597067111785090
       vertices: []
       indices: 
       edges: []

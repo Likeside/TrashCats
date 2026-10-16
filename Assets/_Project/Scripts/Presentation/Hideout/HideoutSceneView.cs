@@ -38,6 +38,8 @@ namespace TrashCats.Presentation.Hideout
         private readonly Dictionary<UpgradeId, TMP_Text> _upgradeLabels = new Dictionary<UpgradeId, TMP_Text>();
         private readonly Dictionary<UpgradeId, RectTransform> _stations = new Dictionary<UpgradeId, RectTransform>();
         private readonly RectTransform _barLayer;
+        /// <summary>Station plate of every activity: the busy cats' cycle bars stand over it.</summary>
+        private readonly Dictionary<string, RectTransform> _plates = new Dictionary<string, RectTransform>();
         private readonly List<(RectTransform Plate, RectTransform Box, Vector2 At)> _captions = new List<(RectTransform, RectTransform, Vector2)>();
         private readonly Vector3[] _corners = new Vector3[4];
         private readonly Vector3[] _sceneCorners = new Vector3[4];
@@ -123,28 +125,31 @@ namespace TrashCats.Presentation.Hideout
                 var visible = token.Root.gameObject.activeInHierarchy;
                 HeldProps(token, visible);
                 NextBenchVariant(token);
-                var bar = working && visible;
+                var bar = working && (visible || token.Spot.Hidden) && token.Plate != null;
                 if (token.Progress.Rect.gameObject.activeSelf != bar)
                     token.Progress.Rect.gameObject.SetActive(bar);
                 if (working)
                 {
                     var progress = ActivitySystem.GetCycleProgress(cat, world.GameTimeMs);
                     token.Progress.Set(progress);
-                    token.Away.Bar.Set(progress);
                 }
                 if (bar)
                 {
-                    // just over the head (over the raised barbell on the bench)
-                    var barY = token.Spot.Clip == HideoutLayout.CatClip.Bench ? 0.8f : 1f;
-                    token.Progress.Rect.position = Point(token.Root, new Vector2(0.5f, barY)) + Vector3.up * (14f * Scale);
+                    // a little over its station's plate; more cats at one station stand side by side
+                    token.Plate.GetWorldCorners(_corners);
+                    var top = new Vector3((_corners[1].x + _corners[2].x) * 0.5f, Mathf.Max(_corners[1].y, _corners[2].y), 0f);
+                    token.Progress.Rect.position = top + new Vector3(token.PlateSlot * (ProgressWidth + 12f), BarGap) * Scale;
                     KeepInScene(token.Progress.Rect, true);
-                    AvoidCaptions(token.Progress.Rect, below: true);
-                }
-                if (token.Away.Root.gameObject.activeSelf)
-                {
-                    // its caption is wider than the portrait
-                    KeepInScene(token.Away.Root, true, token.Away.Root.rect.width * 0.8f);
-                    AvoidCaptions(token.Away.Root, below: false);
+                    // the portrait of a cat out of sight sits a little over its bar
+                    if (token.Away.Root.gameObject.activeSelf)
+                    {
+                        token.Progress.Rect.GetWorldCorners(_corners);
+                        token.Away.Root.position = new Vector3((_corners[1].x + _corners[2].x) * 0.5f, _corners[1].y + BarGap * Scale, 0f);
+                        // its caption is wider than the portrait: both step in from the screen edge together
+                        var x = token.Away.Root.position.x;
+                        KeepInScene(token.Away.Root, true, token.Away.Root.rect.width * 0.45f);
+                        token.Progress.Rect.position += Vector3.right * (token.Away.Root.position.x - x);
+                    }
                 }
             }
 
@@ -287,6 +292,9 @@ namespace TrashCats.Presentation.Hideout
             token.BenchPhase = phase;
         }
 
+        private const float ProgressWidth = 89f; // 96 - 20% + 15%
+        private const float BarGap = 8f;
+
         /// <summary>
         /// Moves an item off any station caption it would overlap (the caption stays readable): under it (a cycle bar,
         /// closer to the cat's head) or over it.
@@ -379,6 +387,7 @@ namespace TrashCats.Presentation.Hideout
                 var bench = activity.Kind == ActivityKind.Train && activity.TrainedAttribute == AttributeType.Strength;
                 var text = Plate(box.rectTransform, Texts.OutcomeIcon(activity), bench ? HideoutLayout.Bench.Depth + 0.2f : place.Depth,
                     bench ? HideoutLayout.BenchPlate : (Vector2?)null);
+                _plates[activity.Id.Value] = (RectTransform)text.transform.parent;
                 if (upgrade != null)
                 {
                     _upgradeLabels[upgrade.Value] = text;
@@ -519,7 +528,7 @@ namespace TrashCats.Presentation.Hideout
             var progress = Ui.Bar(_barLayer, "Progress_" + cat.Id, Palette.Progress);
             progress.Rect.anchorMin = progress.Rect.anchorMax = new Vector2(0.5f, 0.5f);
             progress.Rect.pivot = new Vector2(0.5f, 0f);
-            progress.Rect.sizeDelta = new Vector2(96, 16);
+            progress.Rect.sizeDelta = new Vector2(ProgressWidth, 18);
             progress.Rect.gameObject.SetActive(false);
 
             var token = new CatToken(rt, progress) { Art = hasArt ? catArt : null, Image = image, Flipbook = flipbook, BaseColor = hasArt ? Color.white : color };
@@ -552,6 +561,8 @@ namespace TrashCats.Presentation.Hideout
                     kind = activity.Kind;
                     groups.TryGetValue(activity.Id.Value, out var index);
                     groups[activity.Id.Value] = index + 1;
+                    token.Plate = _plates.TryGetValue(activity.Id.Value, out var plate) ? plate : null;
+                    token.PlateSlot = index;
                     spot = HideoutLayout.Spot(activity, index, token.Art?.viewKey);
                     // one cat fits on the mat / on the bed; others wait beside it (behind the mat)
                     var (bMin, bMax) = (HideoutLayout.Bench.Min, HideoutLayout.Bench.Max);
@@ -582,6 +593,7 @@ namespace TrashCats.Presentation.Hideout
                         ? new Vector2(spot.Foot.x - 0.09f - 0.13f * rummaging++, spot.Foot.y + 0.002f)
                         : new Vector2(spot.Foot.x + 0.105f + 0.13f * away++, spot.Foot.y + 0.01f); // right of the EXIT sign
                     token.Away.Root.Place(at, at + new Vector2(badge, badge));
+                    token.Away.Root.pivot = new Vector2(0.5f, 0f); // stood on its cycle bar in Tick
                     token.Away.Caption.text = Loc.T(rummage ? "hideout.rummaging" : "hideout.away");
                 }
 
@@ -759,25 +771,23 @@ namespace TrashCats.Presentation.Hideout
         }
 
         /// <summary>
-        /// "Ушёл за едой" / "роется в мусоре": round portrait, caption and cycle bar shown at the street gap or over the
-        /// dumpster while the cat is out of sight.
+        /// "Ушёл за едой" / "роется в мусоре": round portrait with its caption over it, shown a little over the cat's
+        /// cycle bar (which stands over the street's / the dumpster's plate) while the cat is out of sight.
         /// </summary>
-        private (RectTransform Root, UiBar Bar, TMP_Text Caption) AwayBadge(CatId id, Sprite portrait)
+        private (RectTransform Root, TMP_Text Caption) AwayBadge(CatId id, Sprite portrait)
         {
             var root = Ui.Rect(_frame, "Away_" + id);
             var picture = new RoundPicture(root, "Portrait", CatColors.Backdrop(id), 0.8f);
-            picture.Root.Place(new Vector2(0.15f, 0.3f), new Vector2(0.85f, 1f));
+            picture.Root.Place(new Vector2(0.1f, 0f), new Vector2(0.9f, 0.8f));
             picture.Root.gameObject.AddComponent<AspectRatioFitter>().aspectMode = AspectRatioFitter.AspectMode.HeightControlsWidth;
             picture.SetPicture(portrait);
             var caption = Ui.Label(root, Loc.T("hideout.away"), 22, TextAnchor.MiddleCenter, Palette.Paper);
-            caption.rectTransform.Place(new Vector2(-0.4f, 0.12f), new Vector2(1.4f, 0.3f));
-            var bar = Ui.Bar(root, "AwayBar", Palette.Progress);
-            bar.Rect.Place(new Vector2(0.05f, 0f), new Vector2(0.95f, 0.11f));
+            caption.rectTransform.Place(new Vector2(-0.4f, 0.8f), new Vector2(1.4f, 1f));
             root.gameObject.SetActive(false);
             var button = Ui.Panel(root, "Tap", new Color(0, 0, 0, 0), raycast: true);
             button.rectTransform.Fill();
             button.gameObject.AddComponent<Button>().onClick.AddListener(() => _onCatTapped(id));
-            return (root, bar, caption);
+            return (root, caption);
         }
 
         /// <summary>A bit of junk (bolt, cap, can) pops up out of the dumpster and tumbles down over its front.</summary>
@@ -878,9 +888,12 @@ namespace TrashCats.Presentation.Hideout
             /// <summary>Bench press: the push-up variant played and the clip phase last tick (a drop = a rep ended).</summary>
             public int BenchVariant;
             public float BenchPhase;
-            public (RectTransform Root, UiBar Bar, TMP_Text Caption) Away;
+            public (RectTransform Root, TMP_Text Caption) Away;
             public Color BaseColor;
             public HideoutLayout.CatSpot Spot;
+            /// <summary>Plate of the station the cat works at (its cycle bar stands over it) and its place among the cats there.</summary>
+            public RectTransform Plate;
+            public int PlateSlot;
             public float Depth;
             public bool Placed;
 
