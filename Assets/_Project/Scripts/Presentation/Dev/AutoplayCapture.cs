@@ -18,11 +18,12 @@ namespace TrashCats.Presentation.Dev
         private bool _tutorial;
         private bool _punch;
         private bool _gym;
+        private bool _heads;
 
         public static void AttachIfRequested(GameObject host)
         {
             var args = Environment.GetCommandLineArgs();
-            foreach (var flag in new[] { "-autoplayCapture", "-autoplayBattles", "-autoplayTutorial", "-autoplayPunch", "-autoplayGym" })
+            foreach (var flag in new[] { "-autoplayCapture", "-autoplayBattles", "-autoplayTutorial", "-autoplayPunch", "-autoplayGym", "-autoplayHeads" })
             {
                 var index = Array.IndexOf(args, flag);
                 if (index < 0 || index + 1 >= args.Length) continue;
@@ -33,11 +34,12 @@ namespace TrashCats.Presentation.Dev
                 capture._tutorial = flag == "-autoplayTutorial";
                 capture._punch = flag == "-autoplayPunch";
                 capture._gym = flag == "-autoplayGym";
+                capture._heads = flag == "-autoplayHeads";
                 return;
             }
         }
 
-        private IEnumerator Start() => _gym ? Gym() : _punch ? PunchFrames() : _tutorial ? TutorialRun() : _battles ? Battles() : Tour();
+        private IEnumerator Start() => _heads ? Heads() : _gym ? Gym() : _punch ? PunchFrames() : _tutorial ? TutorialRun() : _battles ? Battles() : Tour();
 
         /// <summary>Starts a battle and freezes Ryzhy on each frame of his attack clip, one screenshot per frame (tail check).</summary>
         private IEnumerator PunchFrames()
@@ -258,6 +260,46 @@ namespace TrashCats.Presentation.Dev
             Application.Quit();
         }
 
+        /// <summary>
+        /// Every cat alone at every station of the yard: a screenshot and the scene description (heads.txt) each, for
+        /// the cycle result popups' start points (Tools/popup_points.py).
+        /// </summary>
+        private IEnumerator Heads()
+        {
+            Directory.CreateDirectory(_dir);
+            yield return new WaitForSeconds(1f);
+            Dismiss();
+            var root = GetComponent<GameSceneRoot>();
+            root.DevSkipTutorial();
+            var services = GameBootstrap.Instance.Services;
+            var session = services.Session;
+            var log = new System.Text.StringBuilder();
+            foreach (var who in new[] { "cat_ryzhy", "cat_shnyr", "cat_ponchik" })
+            {
+                foreach (var activity in new[] { "act_train_str", "act_train_agi", "act_train_tou", "act_sleep" })
+                {
+                    services.Debug.RecruitAllAndRest();
+                    foreach (var cat in session.World.Cats) session.StopActivity(cat.Id);
+                    var id = new Domain.CatId(who);
+                    if (activity == "act_sleep")
+                    {
+                        // a rested cat does not lie down: a few reps first
+                        session.AssignActivity(id, new Domain.ActivityId("act_train_str"));
+                        services.Debug.SkipGameTime(30_000);
+                        session.StopActivity(id);
+                    }
+                    session.AssignActivity(id, new Domain.ActivityId(activity));
+                    yield return new WaitForSeconds(0.8f);
+                    for (var i = 0; i < 4; i++) Dismiss();
+                    yield return new WaitForSeconds(0.3f);
+                    yield return Shot($"{who}_{activity}");
+                    log.Append($"# {who} {activity}\n").Append(root.DevDescribeHideout());
+                }
+            }
+            File.WriteAllText(Path.Combine(_dir, "heads.txt"), log.ToString());
+            Application.Quit();
+        }
+
         /// <summary>Ponchik on the skipping rope, Ryzhy on the bench, Shnyr at the can: a burst of screenshots (the press, landing dust).</summary>
         private IEnumerator Gym()
         {
@@ -282,6 +324,15 @@ namespace TrashCats.Presentation.Dev
                 yield return new WaitForEndOfFrame();
                 ScreenCapture.CaptureScreenshot(Path.Combine(_dir, $"gym_{i:00}.png"));
                 yield return new WaitForSeconds(0.05f);
+            }
+            // the cycle result popups over the stations (a level-up adds its badge)
+            for (var i = 0; i < 8; i++)
+            {
+                services.Debug.SkipGameTime(10_000);
+                yield return new WaitForSeconds(0.3f);
+                yield return new WaitForEndOfFrame();
+                ScreenCapture.CaptureScreenshot(Path.Combine(_dir, $"gym_popup_{i}.png"));
+                yield return new WaitForSeconds(0.1f);
             }
             // the street's own upgrade (the EXIT sign), apart from the dumpster's
             services.Debug.AddResources(0, 100);

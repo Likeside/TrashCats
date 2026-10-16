@@ -90,3 +90,7 @@
 - `Docs/ArtDirection/Generated/raw_v24_loading_icon`: фон `loading3_a` (айдл-спрайты котов — референс только внешности и пропорций, `ref_idle_gang.png`; позы свои: Рыжий со штангой на баке, Шнырь с пробкой, Пончик с рыбьим скелетом; `loading2_*` скопировали позы айдлов, `loading_*` исказили пропорции), лого `logo_c` (табличка вырезана из чёрного фона), иконка `icon_c`. Копии: `ArtSource/UI/loading_bg_v1|v2.png`, `logo_v1.png`, `app_icon_v1.png`.
 - В игру: `Art/UI/loading_bg.png`, `Art/UI/logo.png`, `Art/AppIcon/app_icon.png`; меню TrashCats/Art/Apply Loading Screen And App Icon прописывает их в Boot-сцену и Player Settings.
 - Переделка (2026-10-16): фон `loading5_c` — коты из `loading3_a` (свои позы) собраны плотной группой в центре (`loading4_*` скопировали позы композиционного референса). Название игры «Trash Cats: Fight Club»: лого `logo_fc2_b` — прежняя табличка + плашка FIGHT CLUB, дорисованная по маске (`logo_fc_*` без маски строку не добавили). Копии: `ArtSource/UI/loading_bg_v4.png`, `logo_v2_fight_club.png`.
+
+## Стрелка апгрейда и звуки занятий (2026-10-16)
+- `Docs/ArtDirection/Generated/raw_v25_arrow`: зелёная стрелка по образцу `icon_upgrade` (`ref_upgrade.png`), взята `arrow_b`, фон-маджента вырезан → `Art/UI/icon_upgrade_ready.png` (копия `ArtSource/UI/icon_upgrade_ready_v1.png`). Заменила зелёный «+» на табличке станции, когда апгрейд по карману.
+- Звуки занятий (`hid_rope`, `hid_bench`, `hid_canpunch`, `hid_rummage`, `hid_food`): `Tools/make_activity_sfx.py` смешивает CC0-сэмплы Kenney из `ArtSource/Audio` с синтезированным шумом.

@@ -25,6 +25,8 @@ namespace TrashCats.Editor
         {
             { "ui_tap", 0.5f }, { "cmb_swing", 0.45f }, { "cmb_miss", 0.6f }, { "hid_sleep", 0.6f }, { "hid_wheel", 0.6f },
             { "music_hideout", 0.55f }, { "music_battle", 0.5f },
+            // the activities' sounds repeat all the time: kept in the background (2026-10-16)
+            { "hid_rope", 0.3f }, { "hid_bench", 0.35f }, { "hid_canpunch", 0.4f }, { "hid_rummage", 0.35f }, { "hid_food", 0.8f },
         };
 
         [MenuItem("TrashCats/Audio/Rebuild Audio Library")]

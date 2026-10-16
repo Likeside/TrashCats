@@ -512,8 +512,10 @@ namespace TrashCats.Presentation.Battle
                 _name.rectTransform.Place(new Vector2(0, 1), Vector2.one, new Vector2(0, -50), Vector2.zero);
                 _name.Outlined();
                 _hp = Ui.Bar(box, "Hp", Palette.Hex("#D9402B"), "hp");
+                _hp.Animated = true;
                 _hp.Rect.Place(new Vector2(0, 1), Vector2.one, new Vector2(46, -100), new Vector2(0, -62));
                 _grit = Ui.Bar(box, "Grit", Palette.Hex("#3F7FBF"), "grit");
+                _grit.Animated = true;
                 _grit.Rect.Place(new Vector2(0, 1), Vector2.one, new Vector2(46, -144), new Vector2(0, -110));
                 _status = Ui.Label(box, "", 26, TextAnchor.UpperCenter, Palette.Primary);
                 _status.Outlined();

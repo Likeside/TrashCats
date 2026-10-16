@@ -135,6 +135,32 @@ namespace TrashCats.Presentation.Hideout
             _ => new Vector2(0.5f, 0f),
         };
 
+        /// <summary>
+        /// The skipping rope's landing frame: the middle of each foot's sole (0..1 of the frame, as drawn, facing right),
+        /// where the dust puffs out; the cats stand with their feet set differently wide.
+        /// </summary>
+        public static Vector2[] RopeFeet(string viewKey) => viewKey switch
+        {
+            "ryzhy" => new[] { new Vector2(0.422f, 0.039f), new Vector2(0.634f, 0.039f) },
+            "shnyr" => new[] { new Vector2(0.537f, 0.037f), new Vector2(0.706f, 0.037f) },
+            "ponchik" => new[] { new Vector2(0.354f, 0.035f), new Vector2(0.666f, 0.035f) },
+            _ => new[] { new Vector2(0.41f, 0.04f), new Vector2(0.59f, 0.04f) },
+        };
+
+        /// <summary>
+        /// Where the popup with a cycle's result starts (picture space): over the station, at the top of the head of a
+        /// cat working there, averaged over the cats and the frames of their clip (Tools/popup_points.py on the
+        /// "-autoplayHeads" capture). Null for the stations whose cat is out of sight (its portrait is used).
+        /// </summary>
+        public static Vector2? PopupAt(ActivityDefinition activity) => activity.Kind switch
+        {
+            ActivityKind.Sleep => new Vector2(0.8440f, 0.3443f),
+            ActivityKind.Train when activity.TrainedAttribute == AttributeType.Strength => new Vector2(0.1897f, 0.4434f),
+            ActivityKind.Train when activity.TrainedAttribute == AttributeType.Technique => new Vector2(0.8673f, 0.5750f),
+            ActivityKind.Train when activity.TrainedAttribute == AttributeType.Endurance => new Vector2(0.3268f, 0.3772f),
+            _ => null,
+        };
+
         /// <summary>The way out to the street: an EXIT signpost in the empty front left corner.</summary>
         /// Nearer to the camera than the cat on the skipping rope: a bit bigger, lower, and drawn over it.
         public static readonly PropPlace ExitSign = new PropPlace("prop_exit_sign", new Vector2(0.115f, 0.025f), new Vector2(0.2283f, 0.22f), depth: 0.0f);

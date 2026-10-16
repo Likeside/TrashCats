@@ -82,14 +82,18 @@ namespace TrashCats.Presentation.Hideout
             _statusCycle.Root.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(250, -146), new Vector2(-292, -136));
 
             _energy = Ui.Bar(panel.transform, "Energy", Palette.Energy, "energy");
+            _energy.Animated = true;
             _energy.Rect.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(298, -190), new Vector2(-292, -154));
             _satiety = Ui.Bar(panel.transform, "Satiety", Palette.Satiety, "satiety");
+            _satiety.Animated = true;
             _satiety.Rect.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(298, -232), new Vector2(-292, -196));
 
             // skills and stats: a compact light button with its icon, it no longer outshouts the activities
             var details = Ui.Button(panel.transform, "Sheet_Details", Loc.T("activity_sheet.01"), Palette.Paper, OpenDetails, 28);
             details.Rect.Place(new Vector2(1, 1), new Vector2(1, 1), new Vector2(-262, -232), new Vector2(-40, -44));
-            details.Text.rectTransform.Place(new Vector2(0, 0), new Vector2(1, 0.42f), new Vector2(30, 18), new Vector2(-30, 0));
+            // the grey shadow under the button (44 of the sprite's 374 px, about 23 here) is its bottom edge: the words
+            // stand clear of it
+            details.Text.rectTransform.Place(new Vector2(0, 0), new Vector2(1, 0.42f), new Vector2(30, 31), new Vector2(-30, 0));
             details.Text.fontSizeMax = 26;
             details.Text.fontSizeMin = 18;
             if (Ui.Icon(details.Rect, "skill") is Image skillIcon)

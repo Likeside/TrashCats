@@ -47,6 +47,9 @@ namespace TrashCats.Presentation.Bootstrap
         /// <summary>Dev autoplay: ends the guided tutorial so screenshots show the scene.</summary>
         public void DevSkipTutorial() => _tutorial?.Skip();
 
+        /// <summary>Dev: the hideout picture and the cats on screen (see HideoutSceneView.DevDescribe).</summary>
+        public string DevDescribeHideout() => _hideout?.DevDescribeScene();
+
         /// <summary>Dev: the cat currently in the battle ring.</summary>
         public Characters.CharacterView DevPlayerFighter => _combat?.DevPlayerView;
         private OfflineSummaryModal _offline;
@@ -132,6 +135,7 @@ namespace TrashCats.Presentation.Bootstrap
 
             // screens
             _hideout = new HideoutScreen(_services, screens, overlayRoot, _overlays, _details, _upgrades, debugPanel, ShowResult, factory, settings.Open);
+            _hideout.Sound += (key, volume) => _audio.Play(key, volume);
             _map = new MapScreen(session, screens, OpenPrep, factory.GetSprite("bg_map"), factory.GetSprite);
             _prep = new BattlePrepScreen(session, screens, () => _router.Show(ScreenId.Map), _ => StartCombat(), _details.Open, factory);
             _combat = new CombatScreen(session, screens, transform, factory, results);
@@ -184,7 +188,7 @@ namespace TrashCats.Presentation.Bootstrap
             {
                 ActivityKind.Rummage => "hid_dumpster",
                 ActivityKind.Sleep => "hid_sleep",
-                ActivityKind.Scavenge => "ui_reward",
+                ActivityKind.Scavenge => "hid_food",
                 _ => activity.TrainedAttribute switch
                 {
                     AttributeType.Technique => "hid_can",

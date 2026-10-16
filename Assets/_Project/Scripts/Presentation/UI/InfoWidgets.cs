@@ -1,3 +1,4 @@
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -121,13 +122,27 @@ namespace TrashCats.Presentation.UI
                 _lossText.Outlined();
             }
 
+            private float _shown = -1f;
+            private Tween _slide;
+
+            /// <summary>The split slides to a new chance (it jumps the first time).</summary>
             public void Set(float win01, string winText, string lossText)
             {
                 win01 = Mathf.Clamp01(win01);
-                _win.Place(Vector2.zero, new Vector2(win01, 1));
-                _loss.Place(new Vector2(win01, 0), Vector2.one);
                 _winText.text = winText;
                 _lossText.text = lossText;
+                _slide?.Kill();
+                if (_shown < 0f)
+                    Show(win01);
+                else if (!Mathf.Approximately(_shown, win01))
+                    _slide = DOTween.To(() => _shown, Show, win01, 0.35f).SetEase(Ease.OutCubic).SetLink(Rect.gameObject);
+            }
+
+            private void Show(float win01)
+            {
+                _shown = win01;
+                _win.Place(Vector2.zero, new Vector2(win01, 1));
+                _loss.Place(new Vector2(win01, 0), Vector2.one);
             }
         }
     }

@@ -237,6 +237,7 @@ namespace TrashCats.Presentation.Battle
             name.rectTransform.Place(new Vector2(0, 1), Vector2.one, new Vector2(132, -70), new Vector2(-14, -18));
             Readable(name, tired);
             var energy = Ui.Bar(card, "Energy", Palette.Energy, "energy");
+            energy.Animated = true;
             energy.Rect.Place(new Vector2(0, 1), Vector2.one, new Vector2(176, -112), new Vector2(-18, -82));
             energy.Set(cat.Energy / (float)config.Needs.Max, cat.Energy.ToString());
             var status = Info.Row(card, "Status", 6f, TextAnchor.MiddleLeft);
