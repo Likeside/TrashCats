@@ -789,43 +789,12 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 3596665985d5cf03c8225af9fc593628, type: 3}
       - {fileID: 21300000, guid: 12859e42977dd26f2bc3c2045941f7ed, type: 3}
       - {fileID: 21300000, guid: b277930ba48e73822988fd9004ee22f2, type: 3}
-      - {fileID: 21300000, guid: 0a449d459c38b33c4ae13563086ab3e0, type: 3}
-      - {fileID: 21300000, guid: 3af19509aa3e36f8c9869612795c5b2f, type: 3}
-      - {fileID: 21300000, guid: 568794aa530a7aa35b200e0538ce52c0, type: 3}
-      - {fileID: 21300000, guid: 2373e4de6a48feae4a0cc4aba126e299, type: 3}
-      - {fileID: 21300000, guid: aa12545001f591397b0e88f4ee56c55a, type: 3}
-      - {fileID: 21300000, guid: e98483986776080d988a508d275d03e9, type: 3}
-      - {fileID: 21300000, guid: 2920705d3947f6607b5dbd3fb75185be, type: 3}
-      - {fileID: 21300000, guid: 01986a60bbea01b738ebf465cfa879d7, type: 3}
-      - {fileID: 21300000, guid: 7526b4f437870d1bca3704a92bac14b5, type: 3}
-      - {fileID: 21300000, guid: 7524c0f4528bd2d7fbf7f64ea9d2e21b, type: 3}
-      - {fileID: 21300000, guid: 21fdd1c9420b1ec8086bee31adb0c63d, type: 3}
-      fps: 20
+      fps: 12.307693
       loop: 1
-      keys: 000000000300000006000000070000000a0000000b0000000e00000011000000
-      pingPong: 0
+      keys: 000000000400000008000000
+      pingPong: 1
       attachPoints: []
-      handles:
-      - {x: 0.4545, y: 0.5512, z: 0.6713, w: 0.5235}
-      - {x: 0.4359, y: 0.5826, z: 0.6946, w: 0.5531}
-      - {x: 0.4172, y: 0.614, z: 0.7179, w: 0.5826}
-      - {x: 0.3986, y: 0.6454, z: 0.7413, w: 0.6122}
-      - {x: 0.3862, y: 0.6805, z: 0.7483, w: 0.6325}
-      - {x: 0.3737, y: 0.7156, z: 0.7552, w: 0.6528}
-      - {x: 0.3613, y: 0.7507, z: 0.7622, w: 0.6731}
-      - {x: 0.4662, y: 0.9529, z: 0.6713, w: 0.9391}
-      - {x: 0.4623, y: 0.9566, z: 0.6713, w: 0.9428}
-      - {x: 0.4584, y: 0.9603, z: 0.6713, w: 0.9464}
-      - {x: 0.4545, y: 0.964, z: 0.6713, w: 0.9501}
-      - {x: 0.3706, y: 0.7313, z: 0.7669, w: 0.6759}
-      - {x: 0.3753, y: 0.7119, z: 0.7591, w: 0.6639}
-      - {x: 0.38, y: 0.6925, z: 0.7514, w: 0.6519}
-      - {x: 0.3846, y: 0.6731, z: 0.7436, w: 0.6399}
-      - {x: 0.4087, y: 0.6343, z: 0.7195, w: 0.603}
-      - {x: 0.4328, y: 0.5956, z: 0.6954, w: 0.566}
-      - {x: 0.4569, y: 0.5568, z: 0.6713, w: 0.5291}
-      - {x: 0.4561, y: 0.5549, z: 0.6713, w: 0.5272}
-      - {x: 0.4553, y: 0.5531, z: 0.6713, w: 0.5254}
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     benchVariants:
@@ -840,43 +809,12 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 3596665985d5cf03c8225af9fc593628, type: 3}
       - {fileID: 21300000, guid: 12859e42977dd26f2bc3c2045941f7ed, type: 3}
       - {fileID: 21300000, guid: b277930ba48e73822988fd9004ee22f2, type: 3}
-      - {fileID: 21300000, guid: 0a449d459c38b33c4ae13563086ab3e0, type: 3}
-      - {fileID: 21300000, guid: 3af19509aa3e36f8c9869612795c5b2f, type: 3}
-      - {fileID: 21300000, guid: 568794aa530a7aa35b200e0538ce52c0, type: 3}
-      - {fileID: 21300000, guid: 2373e4de6a48feae4a0cc4aba126e299, type: 3}
-      - {fileID: 21300000, guid: aa12545001f591397b0e88f4ee56c55a, type: 3}
-      - {fileID: 21300000, guid: e98483986776080d988a508d275d03e9, type: 3}
-      - {fileID: 21300000, guid: 2920705d3947f6607b5dbd3fb75185be, type: 3}
-      - {fileID: 21300000, guid: 01986a60bbea01b738ebf465cfa879d7, type: 3}
-      - {fileID: 21300000, guid: 7526b4f437870d1bca3704a92bac14b5, type: 3}
-      - {fileID: 21300000, guid: 7524c0f4528bd2d7fbf7f64ea9d2e21b, type: 3}
-      - {fileID: 21300000, guid: 21fdd1c9420b1ec8086bee31adb0c63d, type: 3}
-      fps: 20
+      fps: 12.307693
       loop: 1
-      keys: 000000000300000006000000070000000a0000000b0000000e00000011000000
-      pingPong: 0
+      keys: 000000000400000008000000
+      pingPong: 1
       attachPoints: []
-      handles:
-      - {x: 0.4545, y: 0.5512, z: 0.6713, w: 0.5235}
-      - {x: 0.4359, y: 0.5826, z: 0.6946, w: 0.5531}
-      - {x: 0.4172, y: 0.614, z: 0.7179, w: 0.5826}
-      - {x: 0.3986, y: 0.6454, z: 0.7413, w: 0.6122}
-      - {x: 0.3862, y: 0.6805, z: 0.7483, w: 0.6325}
-      - {x: 0.3737, y: 0.7156, z: 0.7552, w: 0.6528}
-      - {x: 0.3613, y: 0.7507, z: 0.7622, w: 0.6731}
-      - {x: 0.4662, y: 0.9529, z: 0.6713, w: 0.9391}
-      - {x: 0.4623, y: 0.9566, z: 0.6713, w: 0.9428}
-      - {x: 0.4584, y: 0.9603, z: 0.6713, w: 0.9464}
-      - {x: 0.4545, y: 0.964, z: 0.6713, w: 0.9501}
-      - {x: 0.3706, y: 0.7313, z: 0.7669, w: 0.6759}
-      - {x: 0.3753, y: 0.7119, z: 0.7591, w: 0.6639}
-      - {x: 0.38, y: 0.6925, z: 0.7514, w: 0.6519}
-      - {x: 0.3846, y: 0.6731, z: 0.7436, w: 0.6399}
-      - {x: 0.4087, y: 0.6343, z: 0.7195, w: 0.603}
-      - {x: 0.4328, y: 0.5956, z: 0.6954, w: 0.566}
-      - {x: 0.4569, y: 0.5568, z: 0.6713, w: 0.5291}
-      - {x: 0.4561, y: 0.5549, z: 0.6713, w: 0.5272}
-      - {x: 0.4553, y: 0.5531, z: 0.6713, w: 0.5254}
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     canPunch:
@@ -1708,94 +1646,36 @@ MonoBehaviour:
     bench:
       name: bench
       frames:
-      - {fileID: 21300000, guid: 8aaeadb408e7702759c3f4d40e3bb5d4, type: 3}
-      - {fileID: 21300000, guid: 94f9841de9802f891862f6caf144b3c3, type: 3}
-      - {fileID: 21300000, guid: 6062c19a34d72a1a89e1e247eb7b3d29, type: 3}
-      - {fileID: 21300000, guid: 4ff97bad489ad486b80a39c60a482f36, type: 3}
-      - {fileID: 21300000, guid: 51ffcd503a778d00b8a1cb1f8975c960, type: 3}
-      - {fileID: 21300000, guid: 9042a54ee423cf728bc158637ada142d, type: 3}
-      - {fileID: 21300000, guid: a81ae07e76196a127bf2edf3e319d20e, type: 3}
-      fps: 9.230769
+      - {fileID: 21300000, guid: e15784f6215d7eb0d877a344dd3db1b8, type: 3}
+      - {fileID: 21300000, guid: 527a7d7a889bda29f843ab50eda8a605, type: 3}
+      - {fileID: 21300000, guid: 971ee9a4b507005b8b43ac165ae72f56, type: 3}
+      - {fileID: 21300000, guid: b4ecad8d3affeee62bd65be57973448a, type: 3}
+      - {fileID: 21300000, guid: 24c12e6aadcf8efb8aec5ca4820b4b3c, type: 3}
+      - {fileID: 21300000, guid: 014a205764884fd8e91a629e2e9757f8, type: 3}
+      - {fileID: 21300000, guid: 83e673fe02d78a6caba1a5a1a7ac4ce3, type: 3}
+      - {fileID: 21300000, guid: 43526da6334121fe1ac47552b65c8dd3, type: 3}
+      fps: 10.769231
       loop: 1
-      keys: 00000000020000000300000006000000
+      keys: 00000000020000000300000007000000
       pingPong: 1
       attachPoints: []
-      handles:
-      - {x: 0.4091, y: 0.533, z: 0.6432, w: 0.511}
-      - {x: 0.3841, y: 0.6429, z: 0.6909, w: 0.6209}
-      - {x: 0.3591, y: 0.7527, z: 0.7386, w: 0.7308}
-      - {x: 0.3636, y: 0.8352, z: 0.7159, w: 0.8489}
-      - {x: 0.3621, y: 0.8626, z: 0.7106, w: 0.8718}
-      - {x: 0.3606, y: 0.8901, z: 0.7053, w: 0.8947}
-      - {x: 0.3591, y: 0.9176, z: 0.7, w: 0.9176}
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     benchVariants:
     - name: bench
       frames:
-      - {fileID: 21300000, guid: 8aaeadb408e7702759c3f4d40e3bb5d4, type: 3}
-      - {fileID: 21300000, guid: 94f9841de9802f891862f6caf144b3c3, type: 3}
-      - {fileID: 21300000, guid: 6062c19a34d72a1a89e1e247eb7b3d29, type: 3}
-      - {fileID: 21300000, guid: 4ff97bad489ad486b80a39c60a482f36, type: 3}
-      - {fileID: 21300000, guid: 51ffcd503a778d00b8a1cb1f8975c960, type: 3}
-      - {fileID: 21300000, guid: 9042a54ee423cf728bc158637ada142d, type: 3}
-      - {fileID: 21300000, guid: a81ae07e76196a127bf2edf3e319d20e, type: 3}
-      fps: 9.230769
-      loop: 1
-      keys: 00000000020000000300000006000000
-      pingPong: 1
-      attachPoints: []
-      handles:
-      - {x: 0.4091, y: 0.533, z: 0.6432, w: 0.511}
-      - {x: 0.3841, y: 0.6429, z: 0.6909, w: 0.6209}
-      - {x: 0.3591, y: 0.7527, z: 0.7386, w: 0.7308}
-      - {x: 0.3636, y: 0.8352, z: 0.7159, w: 0.8489}
-      - {x: 0.3621, y: 0.8626, z: 0.7106, w: 0.8718}
-      - {x: 0.3606, y: 0.8901, z: 0.7053, w: 0.8947}
-      - {x: 0.3591, y: 0.9176, z: 0.7, w: 0.9176}
-      breathe: 0
-      breathePeriod: 2.4
-    - name: bench2
-      frames:
-      - {fileID: 21300000, guid: 18f78695155b1354da9be80e13d3eaff, type: 3}
-      - {fileID: 21300000, guid: 231c025eafb737d28ace5a8b8b90c663, type: 3}
-      - {fileID: 21300000, guid: 61776a5d3fa6cb3608e0fe4fce8f892a, type: 3}
-      - {fileID: 21300000, guid: e65306443e42b04ccada8184b13622d2, type: 3}
-      - {fileID: 21300000, guid: 498eca86e55fd15fc9553e870ebd7e64, type: 3}
-      - {fileID: 21300000, guid: 0e370094b98cda3578e36813c0bd6c94, type: 3}
-      - {fileID: 21300000, guid: 7ae33130e47c7ce3790b1be36f210d14, type: 3}
-      - {fileID: 21300000, guid: d6afcabd1eba15bd49d87d86a556159a, type: 3}
-      - {fileID: 21300000, guid: f8d92951f723ac34fb8a1a7942478f5b, type: 3}
-      fps: 12.307693
-      loop: 1
-      keys: 00000000020000000500000008000000
-      pingPong: 1
-      attachPoints: []
-      handles:
-      - {x: 0.3818, y: 0.4835, z: 0.6432, w: 0.4423}
-      - {x: 0.3784, y: 0.5495, z: 0.6716, w: 0.5288}
-      - {x: 0.375, y: 0.6154, z: 0.7, w: 0.6154}
-      - {x: 0.3811, y: 0.6447, z: 0.703, w: 0.6447}
-      - {x: 0.3871, y: 0.674, z: 0.7061, w: 0.674}
-      - {x: 0.3932, y: 0.7033, z: 0.7091, w: 0.7033}
-      - {x: 0.3909, y: 0.7179, z: 0.7, w: 0.7179}
-      - {x: 0.3886, y: 0.7326, z: 0.6909, w: 0.7326}
-      - {x: 0.3864, y: 0.7473, z: 0.6818, w: 0.7473}
-      breathe: 0
-      breathePeriod: 2.4
-    - name: bench3
-      frames:
-      - {fileID: 21300000, guid: 22c499899e137e4bc921cfb63b4505bf, type: 3}
-      - {fileID: 21300000, guid: 7afeaf9a80bef1425a37affa5af5676d, type: 3}
-      - {fileID: 21300000, guid: b151f88a9ace31375badc0f068723eb6, type: 3}
-      - {fileID: 21300000, guid: c20c41bb3450e8755b4ae3e332b639c4, type: 3}
-      - {fileID: 21300000, guid: d37db91505468167aab7ecdb305d3da6, type: 3}
-      - {fileID: 21300000, guid: b55ce75e04701f05f973e2e949291aa6, type: 3}
-      - {fileID: 21300000, guid: 686d6e97df515f1a39c588e44e25bd82, type: 3}
-      - {fileID: 21300000, guid: f93e6c76768459e62ade5f26a2fdb409, type: 3}
+      - {fileID: 21300000, guid: e15784f6215d7eb0d877a344dd3db1b8, type: 3}
+      - {fileID: 21300000, guid: 527a7d7a889bda29f843ab50eda8a605, type: 3}
+      - {fileID: 21300000, guid: 971ee9a4b507005b8b43ac165ae72f56, type: 3}
+      - {fileID: 21300000, guid: b4ecad8d3affeee62bd65be57973448a, type: 3}
+      - {fileID: 21300000, guid: 24c12e6aadcf8efb8aec5ca4820b4b3c, type: 3}
+      - {fileID: 21300000, guid: 014a205764884fd8e91a629e2e9757f8, type: 3}
+      - {fileID: 21300000, guid: 83e673fe02d78a6caba1a5a1a7ac4ce3, type: 3}
+      - {fileID: 21300000, guid: 43526da6334121fe1ac47552b65c8dd3, type: 3}
       fps: 10.769231
       loop: 1
-      keys: 00000000010000000400000007000000
+      keys: 00000000020000000300000007000000
       pingPong: 1
       attachPoints: []
       handles: []
@@ -1964,16 +1844,15 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 375fec2f1f37666dd98d54a327140274, type: 3}
       - {fileID: 21300000, guid: 88140c2cadb5cd72c8aed4336c613267, type: 3}
       - {fileID: 21300000, guid: 2227121eb0b761a54b8d66f8ad7804af, type: 3}
-      - {fileID: 21300000, guid: 2da4a1019f5ad39f29761204b5641aeb, type: 3}
       - {fileID: 21300000, guid: 787cf2c7697b92866b25d732c1b5a579, type: 3}
       - {fileID: 21300000, guid: f85ab4597b52bf0bcb93ad9706f0d1c3, type: 3}
+      - {fileID: 21300000, guid: e95ff69c4d27c6f34a9dce165621c09c, type: 3}
       - {fileID: 21300000, guid: 1b2b2b4fd07ed0d998830b530575201e, type: 3}
       - {fileID: 21300000, guid: bf65440817cf3827896f346c79188053, type: 3}
-      - {fileID: 21300000, guid: 34af9579dacf45af980287328c91d025, type: 3}
       - {fileID: 21300000, guid: 82a7eda0a4e52375d8448a5b9e8c15f8, type: 3}
-      fps: 18
+      fps: 16.875
       loop: 1
-      keys: 00000000020000000400000006000000080000000a0000000c0000000e000000
+      keys: 0000000002000000040000000600000008000000090000000b0000000d000000
       pingPong: 0
       attachPoints: []
       handles:
@@ -1986,7 +1865,6 @@ MonoBehaviour:
       - {x: 0.2903, y: 0.3575, z: 0.8935, w: 0.3684}
       - {x: 0.2903, y: 0.3958, z: 0.8935, w: 0.4046}
       - {x: 0.2903, y: 0.4342, z: 0.8935, w: 0.4408}
-      - {x: 0.2919, y: 0.4101, z: 0.8935, w: 0.4211}
       - {x: 0.2935, y: 0.386, z: 0.8935, w: 0.4013}
       - {x: 0.2919, y: 0.4101, z: 0.8887, w: 0.4178}
       - {x: 0.2903, y: 0.4342, z: 0.8839, w: 0.4342}
@@ -2050,96 +1928,24 @@ MonoBehaviour:
     bench:
       name: bench
       frames:
-      - {fileID: 21300000, guid: 7ac01c0c8a2b3d40da5d489c8b1f8f70, type: 3}
-      - {fileID: 21300000, guid: 4d1649fcc7ccb4655a65989bd950c397, type: 3}
-      - {fileID: 21300000, guid: fa15ac516475aed10a2112ee412f8a77, type: 3}
-      - {fileID: 21300000, guid: 76298a03353a7bf779a05e99d637de9a, type: 3}
-      - {fileID: 21300000, guid: d97f2add14a7dcf1d9e79cea2b60d7c6, type: 3}
-      - {fileID: 21300000, guid: fba09a6a95372c2da86ce173d4e12d3b, type: 3}
-      - {fileID: 21300000, guid: a7600cd502ee95c97b142bd5a3c11be7, type: 3}
-      - {fileID: 21300000, guid: 0463f132de4f4607facb41fbbb732b94, type: 3}
-      - {fileID: 21300000, guid: bf5a5c392f8e154c395cabed09e3d660, type: 3}
-      - {fileID: 21300000, guid: bd9a938b650d463f4b10efbf52938049, type: 3}
-      - {fileID: 21300000, guid: e0d2a01e917b9343b85e7cf378233dae, type: 3}
-      fps: 15.384616
+      - {fileID: 21300000, guid: a30f83cf6eab23c308e8c403c2ad58c7, type: 3}
+      - {fileID: 21300000, guid: 6ac47074a2b2b4eeda4832abfbd7528e, type: 3}
+      - {fileID: 21300000, guid: 16e7a3597950f92258de93488f0b2374, type: 3}
+      - {fileID: 21300000, guid: 9070db1041904dbdea48cc09f735ba24, type: 3}
+      - {fileID: 21300000, guid: c6197cba9a1b020d7b4bf3424eb271c3, type: 3}
+      - {fileID: 21300000, guid: bf19ccba2d0d4be7fb947f7aeae1a322, type: 3}
+      - {fileID: 21300000, guid: b5016bdef7f7c553a927bf82506d6cad, type: 3}
+      - {fileID: 21300000, guid: ec13fa783c10ed15084c042a3385ade4, type: 3}
+      fps: 10.769231
       loop: 1
-      keys: 000000000300000006000000090000000a000000
+      keys: 00000000030000000500000007000000
       pingPong: 1
       attachPoints: []
-      handles:
-      - {x: 0.4559, y: 0.4785, z: 0.6954, w: 0.4328}
-      - {x: 0.4475, y: 0.4901, z: 0.701, w: 0.4427}
-      - {x: 0.4391, y: 0.5018, z: 0.7066, w: 0.4525}
-      - {x: 0.4307, y: 0.5134, z: 0.7122, w: 0.4624}
-      - {x: 0.4223, y: 0.5367, z: 0.7283, w: 0.4857}
-      - {x: 0.4139, y: 0.56, z: 0.7444, w: 0.509}
-      - {x: 0.4055, y: 0.5833, z: 0.7605, w: 0.5323}
-      - {x: 0.3852, y: 0.5914, z: 0.7584, w: 0.5412}
-      - {x: 0.3648, y: 0.5995, z: 0.7563, w: 0.5502}
-      - {x: 0.3445, y: 0.6075, z: 0.7542, w: 0.5591}
-      - {x: 0.395, y: 0.7177, z: 0.729, w: 0.6801}
+      handles: []
       breathe: 0
       breathePeriod: 2.4
     benchVariants:
     - name: bench
-      frames:
-      - {fileID: 21300000, guid: 7ac01c0c8a2b3d40da5d489c8b1f8f70, type: 3}
-      - {fileID: 21300000, guid: 4d1649fcc7ccb4655a65989bd950c397, type: 3}
-      - {fileID: 21300000, guid: fa15ac516475aed10a2112ee412f8a77, type: 3}
-      - {fileID: 21300000, guid: 76298a03353a7bf779a05e99d637de9a, type: 3}
-      - {fileID: 21300000, guid: d97f2add14a7dcf1d9e79cea2b60d7c6, type: 3}
-      - {fileID: 21300000, guid: fba09a6a95372c2da86ce173d4e12d3b, type: 3}
-      - {fileID: 21300000, guid: a7600cd502ee95c97b142bd5a3c11be7, type: 3}
-      - {fileID: 21300000, guid: 0463f132de4f4607facb41fbbb732b94, type: 3}
-      - {fileID: 21300000, guid: bf5a5c392f8e154c395cabed09e3d660, type: 3}
-      - {fileID: 21300000, guid: bd9a938b650d463f4b10efbf52938049, type: 3}
-      - {fileID: 21300000, guid: e0d2a01e917b9343b85e7cf378233dae, type: 3}
-      fps: 15.384616
-      loop: 1
-      keys: 000000000300000006000000090000000a000000
-      pingPong: 1
-      attachPoints: []
-      handles:
-      - {x: 0.4559, y: 0.4785, z: 0.6954, w: 0.4328}
-      - {x: 0.4475, y: 0.4901, z: 0.701, w: 0.4427}
-      - {x: 0.4391, y: 0.5018, z: 0.7066, w: 0.4525}
-      - {x: 0.4307, y: 0.5134, z: 0.7122, w: 0.4624}
-      - {x: 0.4223, y: 0.5367, z: 0.7283, w: 0.4857}
-      - {x: 0.4139, y: 0.56, z: 0.7444, w: 0.509}
-      - {x: 0.4055, y: 0.5833, z: 0.7605, w: 0.5323}
-      - {x: 0.3852, y: 0.5914, z: 0.7584, w: 0.5412}
-      - {x: 0.3648, y: 0.5995, z: 0.7563, w: 0.5502}
-      - {x: 0.3445, y: 0.6075, z: 0.7542, w: 0.5591}
-      - {x: 0.395, y: 0.7177, z: 0.729, w: 0.6801}
-      breathe: 0
-      breathePeriod: 2.4
-    - name: bench2
-      frames:
-      - {fileID: 21300000, guid: 377a5834d03de8430ac90171670b121a, type: 3}
-      - {fileID: 21300000, guid: e1521ffc65195ad8e9de7ce10fc49c2b, type: 3}
-      - {fileID: 21300000, guid: 2665654ff9648d557acf45471d0920c8, type: 3}
-      - {fileID: 21300000, guid: 57221aac0096add58911ebe860c92a61, type: 3}
-      - {fileID: 21300000, guid: d26a3d5def74fcb5e8ba785245147c72, type: 3}
-      - {fileID: 21300000, guid: f496d6f6be32cbe49ac297653da09ab4, type: 3}
-      - {fileID: 21300000, guid: 8f53a8f4994e680e480850f75e2e9fc7, type: 3}
-      - {fileID: 21300000, guid: 77d32c26a9fb7b5b88e03e6eb363eb55, type: 3}
-      fps: 10.769231
-      loop: 1
-      keys: 00000000030000000400000007000000
-      pingPong: 1
-      attachPoints: []
-      handles:
-      - {x: 0.4664, y: 0.5161, z: 0.7059, w: 0.4462}
-      - {x: 0.4496, y: 0.5358, z: 0.7255, w: 0.4713}
-      - {x: 0.4328, y: 0.5556, z: 0.7451, w: 0.4964}
-      - {x: 0.416, y: 0.5753, z: 0.7647, w: 0.5215}
-      - {x: 0.4286, y: 0.672, z: 0.7731, w: 0.6452}
-      - {x: 0.4272, y: 0.681, z: 0.7654, w: 0.6514}
-      - {x: 0.4258, y: 0.69, z: 0.7577, w: 0.6577}
-      - {x: 0.4244, y: 0.6989, z: 0.75, w: 0.664}
-      breathe: 0
-      breathePeriod: 2.4
-    - name: bench3
       frames:
       - {fileID: 21300000, guid: a30f83cf6eab23c308e8c403c2ad58c7, type: 3}
       - {fileID: 21300000, guid: 6ac47074a2b2b4eeda4832abfbd7528e, type: 3}

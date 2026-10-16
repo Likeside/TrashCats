@@ -4,7 +4,8 @@ cells to the current clip by the width of the legs and aligns every cell by the 
 canvas, padded (wider for a drawn barbell, taller for raised fists). Prints for every cell the head offset (face
 template of one cell, see --face) and the top of the fists / barbell, to pick and order the frames.
 Usage: compose_variant.py <sheet> <ref frame png> <out_dir> [--cols 4] [--rows 2] [--pad-x 0] [--pad-top 0]
-       [--face x0,y0,x1,y1 (in the ref canvas)] [--face-cell 1]
+       [--face x0,y0,x1,y1 (in the ref canvas)] [--face-cell 1] [--fit legs|height] (height: cell 0 as tall as the ref,
+       for a redrawn body whose legs differ)
 """
 import os
 import sys
@@ -37,6 +38,7 @@ def main():
     pad_x, pad_top = int(opt("--pad-x", 0)), int(opt("--pad-top", 0))
     face = opt("--face", None)
     face_cell = int(opt("--face-cell", 1))
+    fit = opt("--fit", "legs")
     sheet, ref_png, out = sys.argv[1], sys.argv[2], sys.argv[3]
     os.makedirs(out, exist_ok=True)
     rgb = np.array(Image.open(sheet).convert("RGB"))
@@ -64,6 +66,11 @@ def main():
     k = 1.0
     for _ in range(3):  # the band is measured in the cell's own pixels
         k = leg_width(rm, band_ref) / np.median([leg_width(C.mask(a), round(band_ref / k)) for a in cells])
+    if fit == "height":
+        def tall(m):
+            ys = np.nonzero(m.any(1))[0]
+            return ys.max() - ys.min()
+        k = tall(rm) / tall(C.mask(cells[0]))
     print("scale", round(k, 3), "canvas", W, H)
     rx0, ry0, rx1, ry1 = C.bbox(big_ref)
     placed = []

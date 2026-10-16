@@ -129,10 +129,10 @@ TextureImporter:
       name: ponchik_bench_07_0
       rect:
         serializedVersion: 2
-        x: 88
+        x: 143
         y: 15
-        width: 226
-        height: 342
+        width: 373
+        height: 292
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

@@ -192,13 +192,14 @@ namespace TrashCats.Presentation.Hideout
         /// <summary>
         /// A cat pressing on the mat, relative to the mat's unrotated rect: bottom centre of the frame box (0..1 of the
         /// rect) and the box height as a share of the rect height. Ponchik as placed in the layout scene; Ryzhy and Shnyr
-        /// keep their offsets to him from the approved previews (Tools/compose_bench_preview.py).
+        /// keep their offsets to him from the approved previews (Tools/compose_bench_preview.py). The fit was made for
+        /// frames of Canvas pixels high; taller frames (a drawn barbell sticks out above) keep the cat's size and feet.
         /// </summary>
-        public static (Vector2 Foot, float Height)? BenchFit(string viewKey) => viewKey switch
+        public static (Vector2 Foot, float Height, float Canvas)? BenchFit(string viewKey) => viewKey switch
         {
-            "ryzhy" => (new Vector2(0.6247f, 0.0736f), 1.506f),
-            "shnyr" => (new Vector2(0.6257f, 0.0886f), 1.31f),
-            "ponchik" => (new Vector2(0.6407f, 0.0856f), 1.494f),
+            "ryzhy" => (new Vector2(0.56f, 0.06f), 1.506f, 364f / 0.78f), // drawn barbell frames (2026-10-16): a longer body, smaller
+            "shnyr" => (new Vector2(0.6257f, 0.0886f), 1.31f, 372f),
+            "ponchik" => (new Vector2(0.62f, 0.07f), 1.494f, 361f / 0.8f),
             _ => null,
         };
 
