@@ -78,7 +78,7 @@ namespace TrashCats.Presentation.Battle
             var vs = Ui.Label(ring, "VS", 44, TextAnchor.MiddleCenter, Palette.Primary, heading: true);
             vs.rectTransform.Place(new Vector2(0.44f, 1), new Vector2(0.56f, 1), new Vector2(0, -52), Vector2.zero);
             vs.Outlined();
-            _queue = Info.Column(ring, "Queue", 14f);
+            _queue = Info.Column(ring, "Prep_Queue", 14f);
             _queue.Place(Vector2.zero, new Vector2(0.5f, 1), Vector2.zero, new Vector2(-8, -58));
             _enemies = Info.Column(ring, "Enemies", 14f);
             _enemies.Place(new Vector2(0.5f, 0), Vector2.one, new Vector2(8, 0), new Vector2(0, -58));
@@ -394,7 +394,11 @@ namespace TrashCats.Presentation.Battle
             if (a < 0 || b < 0 || a >= _order.Count || b >= _order.Count) return;
             (_order[a], _order[b]) = (_order[b], _order[a]);
             Refresh();
+            OrderChanged?.Invoke();
         }
+
+        /// <summary>The player reordered the fighters (arrows or the best-order button).</summary>
+        public event Action OrderChanged;
 
         private void ApplyBest()
         {
@@ -402,6 +406,7 @@ namespace TrashCats.Presentation.Battle
             _order.Clear();
             _order.AddRange(_bestOrder.Order);
             Refresh();
+            OrderChanged?.Invoke();
         }
 
         private void Warn(string text)

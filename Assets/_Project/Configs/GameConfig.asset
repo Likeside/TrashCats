@@ -20,6 +20,7 @@ MonoBehaviour:
   minEnergyForBattle: 20
   offlineCapMs: 3600000
   offlineSummaryMinMs: 60000
+  firstCycleMs: 4000
   maxLevel: 10
   xpBase: 10
   xpPerLevel: 12

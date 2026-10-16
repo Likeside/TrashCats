@@ -53,11 +53,18 @@ namespace TrashCats.Domain
             events.Add(new ActivityStopped(cat.Id, activityId, reason));
         }
 
-        /// <summary>Cycle duration for this cat right now (hunger doubles affected activities).</summary>
+        /// <summary>
+        /// Cycle duration for this cat right now (hunger doubles affected activities). While the tutorial runs, the
+        /// first cycle of every activity is short (<see cref="TimeConfig.FirstCycleMs"/>).
+        /// </summary>
         public static long CycleDuration(GameWorld world, IReadOnlyCat cat, ActivityDefinition definition)
         {
             var hungry = definition.AffectedByHunger && CatRules.IsHungry(cat, world.Config);
-            return hungry ? definition.DurationMs * world.Config.Needs.HungryDurationMultiplier : definition.DurationMs;
+            var duration = hungry ? definition.DurationMs * world.Config.Needs.HungryDurationMultiplier : definition.DurationMs;
+            var first = world.Config.Time.FirstCycleMs;
+            if (first > 0 && !world.Tutorial.Skipped && !world.Tutorial.IsDone(TutorialRules.FirstCycleDone(definition.Id)))
+                duration = Math.Min(duration, first);
+            return duration;
         }
 
         /// <summary>Progress of the current cycle in [0, 1]; 0 when the cat is not working.</summary>
@@ -83,6 +90,8 @@ namespace TrashCats.Domain
             CatRules.ChangeNeeds(cat, -definition.EnergyCost, -definition.SatietyCost, config, events);
             var output = ApplyOutput(world, cat, definition, modifiers, events);
             events.Add(new ActivityCycleCompleted(cat.Id, definition.Id, definition.Kind, output, definition.TrainedAttribute));
+            if (config.Time.FirstCycleMs > 0 && !world.Tutorial.Skipped)
+                TutorialRules.Complete(world, TutorialRules.FirstCycleDone(definition.Id));
 
             var reason = StopReason(world, cat, definition, state.HungryOverride);
             if (reason == IdleReason.None)

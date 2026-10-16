@@ -873,7 +873,12 @@ namespace TrashCats.Presentation.Hideout
                 ? $"+{e.Output} {Texts.AttributeGenitive(e.TrainedAttribute).ToLowerInvariant()}"
                 : Texts.Output(_session.Config.GetActivity(e.ActivityId), e.Output);
             FloatingText.Spawn(_root, target, text, Texts.OutcomeIcon(_session.Config.GetActivity(e.ActivityId)));
+            if (e.Kind == ActivityKind.Scavenge || e.Kind == ActivityKind.Rummage)
+                Loot?.Invoke(target, e.Kind == ActivityKind.Scavenge ? "food" : "junk");
         }
+
+        /// <summary>Food or junk was brought in at this spot (the HUD flies it into its counter).</summary>
+        public event Action<RectTransform, string> Loot;
 
         private sealed class CatToken
         {

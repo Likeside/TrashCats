@@ -45,7 +45,7 @@ namespace TrashCats.Infrastructure
                 SatietyPerFood = a.satietyPerFood,
                 MinEnergyForBattle = a.minEnergyForBattle,
             },
-            Time = new TimeConfig { OfflineCapMs = a.offlineCapMs, OfflineSummaryMinMs = a.offlineSummaryMinMs },
+            Time = new TimeConfig { OfflineCapMs = a.offlineCapMs, OfflineSummaryMinMs = a.offlineSummaryMinMs, FirstCycleMs = a.firstCycleMs },
             Progression = new ProgressionConfig
             {
                 MaxLevel = a.maxLevel,

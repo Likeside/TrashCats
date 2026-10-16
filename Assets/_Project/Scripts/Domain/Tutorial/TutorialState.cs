@@ -29,5 +29,8 @@ namespace TrashCats.Domain
         public static bool Complete(GameWorld world, string id) => world.Tutorial.Complete(id);
 
         public static void Skip(GameWorld world) => world.Tutorial.Skipped = true;
+
+        /// <summary>Marker of an activity whose first cycle is done (the short onboarding cycle is used up).</summary>
+        public static string FirstCycleDone(ActivityId activity) => "c_" + activity.Value;
     }
 }

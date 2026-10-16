@@ -79,6 +79,12 @@ namespace TrashCats.Domain
     {
         public long OfflineCapMs { get; init; } = 60L * 60 * 1000;
         public long OfflineSummaryMinMs { get; init; } = 60L * 1000;
+
+        /// <summary>
+        /// Onboarding: the very first cycle of every activity lasts at most this long while the tutorial runs (the
+        /// first minute is not spent watching a bar); 0 turns it off.
+        /// </summary>
+        public long FirstCycleMs { get; init; }
     }
 
     public sealed class ProgressionConfig

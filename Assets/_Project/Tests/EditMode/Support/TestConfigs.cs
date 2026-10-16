@@ -51,10 +51,10 @@ namespace TrashCats.Tests
     /// </summary>
     public static class TestConfigs
     {
-        public static GameConfig Default() => new GameConfig
+        public static GameConfig Default(long firstCycleMs = 0) => new GameConfig
         {
             Needs = new NeedsConfig(),
-            Time = new TimeConfig(),
+            Time = new TimeConfig { FirstCycleMs = firstCycleMs },
             Progression = new ProgressionConfig { XpPerLevel = 12 },
             Start = new StartConfig { Food = 10, Junk = 0, Cats = new[] { TestIds.Ryzhy } },
             Cats = new[]
