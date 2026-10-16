@@ -197,7 +197,7 @@ namespace TrashCats.Presentation.Hideout
         /// </summary>
         public static (Vector2 Foot, float Height, float Canvas)? BenchFit(string viewKey) => viewKey switch
         {
-            "ryzhy" => (new Vector2(0.56f, 0.06f), 1.506f, 364f / 0.78f), // drawn barbell frames (2026-10-16): a longer body, smaller
+            "ryzhy" => (new Vector2(0.6247f, 0.0736f), 1.506f, 364f), // the barbell frames keep the ryzhy_v2 scale, 60 px taller
             "shnyr" => (new Vector2(0.6257f, 0.0886f), 1.31f, 372f),
             "ponchik" => (new Vector2(0.6407f, 0.0856f), 1.494f, 361f), // the barbell frames keep his pixel size, 80 px taller
             _ => null,
