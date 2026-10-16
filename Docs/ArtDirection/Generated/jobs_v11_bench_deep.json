@@ -1,0 +1,20 @@
+[
+ {
+  "name": "ryzhy_bench_deep_a",
+  "refs": [
+   "Assets/_Project/Art/Characters/Ryzhy/HideIdle/ryzhy_hideidle_00.png",
+   "Docs/ArtDirection/Generated/raw_v11_bench_deep/ref_ryzhy_bench_key0.png"
+  ],
+  "prompt": "Game sprite sheet: 4 animation frames of the BOTTOM part of a bench press, in a grid of 2 rows x 4 columns would be wrong - use a grid of 2 rows x 2 columns, read left to right, top row first, generous empty space between frames, never mirror a frame. Character: the orange tabby tomcat Ryzhy, EXACTLY as in the FIRST reference (colours, line weight), drawn EXACTLY as in the SECOND reference: same size, same camera angle, lying on his back on an invisible bench, head on the right, legs down to the floor, the same face. Frame 1 is an exact copy of the SECOND reference (fists at shoulder height, elbows bent). Frames 2-4 lower the invisible bar further to the bottom of a real bench press: 2) the fists come down a little, the elbows drop lower, 3) the lowest point: the fists just above the chest, the same distance apart as in the reference, the elbows bent deeply and dropped BELOW the level of the chest, sticking out sideways past the sides of the torso, upper arms almost horizontal, 4) the same lowest point as frame 3 (a tiny bit of tension). The two fists always at the same height as each other. Body, head, legs and feet stay exactly in place in every frame, only the arms move. The SAME facial expression in all 4 frames, exactly the face of the SECOND reference, no change of expression. Comic book style exactly like the references. IMPORTANT: no bench, no barbell, no floor line. IMPORTANT: the background of the whole sheet MUST be solid flat pure chroma-key GREEN (#00FF00) everywhere, no shadow, no scenery, no text, no frame numbers. Do not use green on the character.",
+  "size": "1536x1024"
+ },
+ {
+  "name": "ryzhy_bench_deep_b",
+  "refs": [
+   "Assets/_Project/Art/Characters/Ryzhy/HideIdle/ryzhy_hideidle_00.png",
+   "Docs/ArtDirection/Generated/raw_v11_bench_deep/ref_ryzhy_bench_key0.png"
+  ],
+  "prompt": "Game sprite sheet: 4 animation frames of the BOTTOM part of a bench press, in a grid of 2 rows x 4 columns would be wrong - use a grid of 2 rows x 2 columns, read left to right, top row first, generous empty space between frames, never mirror a frame. Character: the orange tabby tomcat Ryzhy, EXACTLY as in the FIRST reference (colours, line weight), drawn EXACTLY as in the SECOND reference: same size, same camera angle, lying on his back on an invisible bench, head on the right, legs down to the floor, the same face. Frame 1 is an exact copy of the SECOND reference (fists at shoulder height, elbows bent). Frames 2-4 lower the invisible bar further to the bottom of a real bench press: 2) the fists come down a little, the elbows drop lower, 3) the lowest point: the fists just above the chest, the same distance apart as in the reference, the elbows bent deeply and dropped BELOW the level of the chest, sticking out sideways past the sides of the torso, upper arms almost horizontal, 4) the same lowest point as frame 3 (a tiny bit of tension). The two fists always at the same height as each other. Body, head, legs and feet stay exactly in place in every frame, only the arms move. The SAME facial expression in all 4 frames, exactly the face of the SECOND reference, no change of expression. Comic book style exactly like the references. IMPORTANT: no bench, no barbell, no floor line. IMPORTANT: the background of the whole sheet MUST be solid flat pure chroma-key GREEN (#00FF00) everywhere, no shadow, no scenery, no text, no frame numbers. Do not use green on the character.",
+  "size": "1536x1024"
+ }
+]

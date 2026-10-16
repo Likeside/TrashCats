@@ -194,7 +194,7 @@ namespace TrashCats.Presentation.Hideout
         }
 
         /// <summary>Barbell length, share of the bench frame's width.</summary>
-        private const float HeldBarbellWidth = 0.62f;
+        public const float HeldBarbellWidth = 0.76f;
         /// <summary>Rope thickness in sprite pixels.</summary>
         private const float RopePixels = 5f;
 
