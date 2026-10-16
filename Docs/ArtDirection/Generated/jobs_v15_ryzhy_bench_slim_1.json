@@ -1,0 +1,20 @@
+[
+ {
+  "name": "ryzhy_bottom_slim_a",
+  "refs": [
+   "Assets/_Project/Art/Characters/Ryzhy/HideIdle/ryzhy_hideidle_00.png",
+   "Docs/ArtDirection/Generated/raw_v15_ryzhy_bench_slim/ref_ryzhy_bottom.png"
+  ],
+  "prompt": "One single game sprite of the orange tabby tomcat Ryzhy, centered, with empty space around. BODY: EXACTLY the build and proportions of the FIRST reference: an athletic, muscular street tomcat with a broad chest, a cream chest stripe, a slim waist, a flat belly (NOT fat, NOT chubby, no round belly), long strong legs; the same head size relative to the body, the same colours, stripes and line weight. POSE and camera angle EXACTLY as the SECOND reference: lying on his back on an invisible bench, head on the right raised a little, three-quarter view, hind legs bent and down to the floor, both front paws clenched fists just above the chest, the elbows bent deeply and dropped beside the torso, the fists about shoulder width apart. Face exactly as the FIRST reference: the confident smirk, half-closed eyes, one brow raised. Tail hidden behind the body. Comic book style exactly like the references. No bench, no barbell, no floor line, no shadow. IMPORTANT: the background MUST be solid flat pure chroma-key GREEN (#00FF00) everywhere, no text. Do not use green on the character.",
+  "size": "1024x1024"
+ },
+ {
+  "name": "ryzhy_bottom_slim_b",
+  "refs": [
+   "Assets/_Project/Art/Characters/Ryzhy/HideIdle/ryzhy_hideidle_00.png",
+   "Docs/ArtDirection/Generated/raw_v15_ryzhy_bench_slim/ref_ryzhy_bottom.png"
+  ],
+  "prompt": "One single game sprite of the orange tabby tomcat Ryzhy, centered, with empty space around. BODY: EXACTLY the build and proportions of the FIRST reference: an athletic, muscular street tomcat with a broad chest, a cream chest stripe, a slim waist, a flat belly (NOT fat, NOT chubby, no round belly), long strong legs; the same head size relative to the body, the same colours, stripes and line weight. POSE and camera angle EXACTLY as the SECOND reference: lying on his back on an invisible bench, head on the right raised a little, three-quarter view, hind legs bent and down to the floor, both front paws clenched fists just above the chest, the elbows bent deeply and dropped beside the torso, the fists about shoulder width apart. Face exactly as the FIRST reference: the confident smirk, half-closed eyes, one brow raised. Tail hidden behind the body. Comic book style exactly like the references. No bench, no barbell, no floor line, no shadow. IMPORTANT: the background MUST be solid flat pure chroma-key GREEN (#00FF00) everywhere, no text. Do not use green on the character.",
+  "size": "1024x1024"
+ }
+]

@@ -161,12 +161,12 @@ namespace TrashCats.Editor
             }
 
             var bench = Frames(dir + "Bench").FirstOrDefault();
-            if (bench != null && HideoutLayout.BenchFit(key) is var (benchFoot, benchHeight))
+            if (bench != null && HideoutLayout.BenchFit(key) is var (benchFoot, benchHeight, benchCanvas))
             {
                 var (min, max) = (HideoutLayout.Bench.Min, HideoutLayout.Bench.Max);
                 var size = max - min;
                 var spot = HideoutLayout.Spot(Bench, 0, key);
-                yield return new Pose("Bench", bench, min + Vector2.Scale(benchFoot, size), benchHeight * size.y * H / (bench.rect.height / 100f), spot.FaceLeft,
+                yield return new Pose("Bench", bench, min + Vector2.Scale(benchFoot, size), benchHeight * size.y * (bench.rect.height / benchCanvas) * H / (bench.rect.height / 100f), spot.FaceLeft,
                     Order(spot.Depth));
             }
         }

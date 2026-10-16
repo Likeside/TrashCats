@@ -561,7 +561,7 @@ namespace TrashCats.Presentation.Hideout
                             : new HideoutLayout.CatSpot(spot.Foot + new Vector2(-0.12f * index, -0.12f), HideoutLayout.CatClip.Sit);
                     ropeBusy |= spot.Clip == HideoutLayout.CatClip.Rope;
                     benchBusy |= spot.Clip == HideoutLayout.CatClip.Bench;
-                    if (spot.Clip == HideoutLayout.CatClip.Bench && token.Art != null && HideoutLayout.BenchFit(token.Art.viewKey) is var (benchFoot, benchHeight))
+                    if (spot.Clip == HideoutLayout.CatClip.Bench && token.Art != null && HideoutLayout.BenchFit(token.Art.viewKey) is var (benchFoot, benchHeight, _))
                     {
                         // placed and sized against the mat's rect, as in the layout scene
                         var size = bMax - bMin;
@@ -654,9 +654,9 @@ namespace TrashCats.Presentation.Hideout
             }
 
             var h = spot.Height > 0f ? spot.Height : size.y * HideoutLayout.HeightPerPixel * HideoutLayout.DepthScale(spot.Foot.y) * spot.Scale;
-            // a bench variant on a bigger canvas (a drawn barbell sticks out) keeps the cat's size: BenchFit is for the first clip
-            if (spot.Clip == HideoutLayout.CatClip.Bench && spot.Height > 0f && clip != null && token.Art?.bench?.frames.Length > 0)
-                h *= size.y / token.Art.bench.frames[0].rect.height;
+            // frames on a bigger canvas than the fit was made for (a drawn barbell sticks out) keep the cat's size
+            if (spot.Clip == HideoutLayout.CatClip.Bench && spot.Height > 0f && clip != null && HideoutLayout.BenchFit(token.Art?.viewKey) is var (_, _, canvas))
+                h *= size.y / canvas;
             var w = h * size.x / size.y / HideoutLayout.PictureAspect;
             token.Root.Place(new Vector2(spot.Foot.x - w * 0.5f, spot.Foot.y), new Vector2(spot.Foot.x + w * 0.5f, spot.Foot.y + h));
             token.Image.rectTransform.localScale = new Vector3(spot.FaceLeft != sourceFacesLeft ? -1f : 1f, 1f, 1f);
