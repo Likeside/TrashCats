@@ -29,6 +29,9 @@ namespace TrashCats.Presentation.Animation
         [Tooltip("Optional per-frame hands (left x, left y, right x, right y in 0..1 of the frame, y up): where a prop drawn by the game is held - the rope's handles, the barbell's grip.")]
         public Vector4[] handles = Array.Empty<Vector4>();
 
+        [Tooltip("Frames where the feet hit the ground (skipping rope landings, from keys.json \"contacts\"): dust flies from under the feet.")]
+        public int[] contacts = Array.Empty<int>();
+
         [Tooltip("Procedural breathing: relative vertical stretch (0 = off). Scales around the sprite pivot (the planted foot).")]
         [Range(0f, 0.05f)] public float breathe;
         [Min(0.1f)] public float breathePeriod = 2.4f;

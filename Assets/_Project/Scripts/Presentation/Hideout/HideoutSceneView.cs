@@ -757,9 +757,46 @@ namespace TrashCats.Presentation.Hideout
                 .SetLink(dust.gameObject);
         }
 
-        /// <summary>Punch frames (jab and hook fully extended) knock the can.</summary>
+        /// <summary>A few small puffs of dust fly out to both sides from under the feet of a cat landing on the ground.</summary>
+        private void LandingDust(RectTransform cat)
+        {
+            var sprite = Ui.Skin?.fxDust;
+            if (sprite == null || !cat.gameObject.activeInHierarchy)
+                return;
+            var foot = new Vector2((cat.anchorMin.x + cat.anchorMax.x) * 0.5f, cat.anchorMin.y);
+            var feet = cat.rect.width * 0.18f;
+            for (var i = 0; i < 4; i++)
+            {
+                var side = i % 2 == 0 ? -1f : 1f;
+                var dust = Ui.Panel(_frame, "Dust", new Color(1f, 1f, 1f, 0.85f));
+                dust.sprite = sprite;
+                dust.preserveAspect = true;
+                dust.raycastTarget = false;
+                dust.transform.SetSiblingIndex(cat.GetSiblingIndex() + 1);
+                var rt = dust.rectTransform;
+                rt.anchorMin = rt.anchorMax = foot;
+                rt.pivot = new Vector2(0.5f, 0.3f);
+                var size = UnityEngine.Random.Range(34f, 52f);
+                rt.sizeDelta = new Vector2(size, size);
+                rt.anchoredPosition = new Vector2(side * UnityEngine.Random.Range(0.2f, 0.8f) * feet, 0f);
+                rt.localScale = Vector3.one * 0.5f;
+                var to = rt.anchoredPosition + new Vector2(side * UnityEngine.Random.Range(45f, 85f), UnityEngine.Random.Range(6f, 22f));
+                var duration = UnityEngine.Random.Range(0.35f, 0.5f);
+                DOTween.Sequence()
+                    .Append(rt.DOAnchorPos(to, duration).SetEase(Ease.OutQuad))
+                    .Join(rt.DOScale(UnityEngine.Random.Range(1f, 1.3f), duration).SetEase(Ease.OutQuad))
+                    .Join(dust.DOFade(0f, duration).SetEase(Ease.InQuad))
+                    .OnComplete(() => UnityEngine.Object.Destroy(dust.gameObject))
+                    .SetLink(dust.gameObject);
+            }
+        }
+
+        /// <summary>Punch frames (jab and hook fully extended) knock the can; skipping rope landings kick up dust.</summary>
         private void OnCatFrame(CatToken token, int frame)
         {
+            var rope = token.Art?.rope;
+            if (token.Spot.Clip == HideoutLayout.CatClip.Rope && rope?.contacts != null && System.Array.IndexOf(rope.contacts, frame) >= 0)
+                LandingDust(token.Root);
             // the jab and the hook are the originally drawn frames 2 and 5
             var punch = token.Art?.canPunch;
             if (_can == null || token.Spot.Clip != HideoutLayout.CatClip.Punch || punch == null || (frame != punch.KeyFrame(2) && frame != punch.KeyFrame(5)))

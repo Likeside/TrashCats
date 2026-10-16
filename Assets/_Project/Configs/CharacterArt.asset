@@ -32,6 +32,7 @@ MonoBehaviour:
       pingPong: 1
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0.008
       breathePeriod: 2.4
     attack:
@@ -59,6 +60,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     heavyAttack:
@@ -86,6 +88,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     hit:
@@ -101,6 +104,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     knockOut:
@@ -117,6 +121,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     hideoutIdle:
@@ -128,6 +133,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     rope:
@@ -139,6 +145,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     dig:
@@ -150,6 +157,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     run:
@@ -161,6 +169,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     bench:
@@ -172,6 +181,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     benchVariants: []
@@ -184,6 +194,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     tail:
@@ -195,6 +206,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     portrait: {fileID: 21300000, guid: d27da17b37b72d8358bb65d8bdc893a8, type: 3}
@@ -220,6 +232,7 @@ MonoBehaviour:
       pingPong: 1
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0.008
       breathePeriod: 2.4
     attack:
@@ -247,6 +260,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     heavyAttack:
@@ -274,6 +288,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     hit:
@@ -290,6 +305,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     knockOut:
@@ -307,6 +323,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     hideoutIdle:
@@ -318,6 +335,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     rope:
@@ -329,6 +347,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     dig:
@@ -340,6 +359,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     run:
@@ -351,6 +371,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     bench:
@@ -362,6 +383,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     benchVariants: []
@@ -374,6 +396,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     tail:
@@ -385,6 +408,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     portrait: {fileID: 21300000, guid: fc262390673f752838490a18e0a54ec0, type: 3}
@@ -410,6 +434,7 @@ MonoBehaviour:
       pingPong: 1
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0.008
       breathePeriod: 2.4
     attack:
@@ -437,6 +462,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     heavyAttack:
@@ -464,6 +490,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     hit:
@@ -479,6 +506,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     knockOut:
@@ -495,6 +523,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     hideoutIdle:
@@ -506,6 +535,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     rope:
@@ -517,6 +547,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     dig:
@@ -528,6 +559,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     run:
@@ -539,6 +571,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     bench:
@@ -550,6 +583,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     benchVariants: []
@@ -562,6 +596,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     tail:
@@ -573,6 +608,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     portrait: {fileID: 21300000, guid: e71570547570d91b89a74ecda0cd6af4, type: 3}
@@ -592,6 +628,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0.012
       breathePeriod: 2.6
     attack:
@@ -619,6 +656,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     heavyAttack:
@@ -634,6 +672,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     hit:
@@ -651,6 +690,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     knockOut:
@@ -666,6 +706,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     hideoutIdle:
@@ -678,6 +719,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0.012
       breathePeriod: 2.6
     rope:
@@ -699,7 +741,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 946cd0bbd4b868d6ebfc33e3f914ca99, type: 3}
       - {fileID: 21300000, guid: d63e64c4b45d3c512b4af25b1bba47e4, type: 3}
       - {fileID: 21300000, guid: 994725535f6903e35bba6f6f97fb43d1, type: 3}
-      fps: 18
+      fps: 20.699999
       loop: 1
       keys: 00000000020000000400000006000000080000000a0000000c0000000e000000
       pingPong: 0
@@ -721,6 +763,7 @@ MonoBehaviour:
       - {x: 0.1523, y: 0.3796, z: 0.8705, w: 0.3879}
       - {x: 0.1574, y: 0.3868, z: 0.8579, w: 0.393}
       - {x: 0.1582, y: 0.3861, z: 0.8587, w: 0.3913}
+      contacts: 0c000000
       breathe: 0
       breathePeriod: 2.4
     dig:
@@ -748,6 +791,7 @@ MonoBehaviour:
       pingPong: 1
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     run:
@@ -775,6 +819,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     bench:
@@ -786,10 +831,11 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 71743a1704409ed47b470ce229550c90, type: 3}
       fps: 4.6153846
       loop: 1
-      keys: 000000000200000003000000
+      keys: 00000000010000000200000003000000
       pingPong: 1
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     benchVariants:
@@ -801,10 +847,11 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 71743a1704409ed47b470ce229550c90, type: 3}
       fps: 4.6153846
       loop: 1
-      keys: 000000000200000003000000
+      keys: 00000000010000000200000003000000
       pingPong: 1
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     canPunch:
@@ -832,6 +879,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     tail:
@@ -843,6 +891,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     portrait: {fileID: 21300000, guid: 29a0f474b98073c80843c31b5bf5c5b5, type: 3}
@@ -872,6 +921,7 @@ MonoBehaviour:
       pingPong: 1
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0.008
       breathePeriod: 2.4
     attack:
@@ -899,6 +949,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     heavyAttack:
@@ -926,6 +977,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     hit:
@@ -942,6 +994,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     knockOut:
@@ -957,6 +1010,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     hideoutIdle:
@@ -968,6 +1022,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     rope:
@@ -979,6 +1034,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     dig:
@@ -990,6 +1046,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     run:
@@ -1001,6 +1058,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     bench:
@@ -1012,6 +1070,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     benchVariants: []
@@ -1024,6 +1083,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     tail:
@@ -1035,6 +1095,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     portrait: {fileID: 21300000, guid: 4a0c050739dabf6499e0423faeec181c, type: 3}
@@ -1060,6 +1121,7 @@ MonoBehaviour:
       pingPong: 1
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0.008
       breathePeriod: 2.4
     attack:
@@ -1087,6 +1149,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     heavyAttack:
@@ -1114,6 +1177,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     hit:
@@ -1129,6 +1193,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     knockOut:
@@ -1144,6 +1209,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     hideoutIdle:
@@ -1155,6 +1221,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     rope:
@@ -1166,6 +1233,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     dig:
@@ -1177,6 +1245,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     run:
@@ -1188,6 +1257,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     bench:
@@ -1199,6 +1269,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     benchVariants: []
@@ -1211,6 +1282,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     tail:
@@ -1222,6 +1294,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     portrait: {fileID: 21300000, guid: 85e9884923bb24e4e8d7adb6f65d34a4, type: 3}
@@ -1247,6 +1320,7 @@ MonoBehaviour:
       pingPong: 1
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0.008
       breathePeriod: 2.4
     attack:
@@ -1274,6 +1348,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     heavyAttack:
@@ -1301,6 +1376,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     hit:
@@ -1316,6 +1392,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     knockOut:
@@ -1332,6 +1409,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     hideoutIdle:
@@ -1343,6 +1421,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     rope:
@@ -1354,6 +1433,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     dig:
@@ -1365,6 +1445,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     run:
@@ -1376,6 +1457,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     bench:
@@ -1387,6 +1469,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     benchVariants: []
@@ -1399,6 +1482,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     tail:
@@ -1410,6 +1494,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     portrait: {fileID: 21300000, guid: 789e0e8fd8779937b9e4ab105c864c5c, type: 3}
@@ -1430,6 +1515,7 @@ MonoBehaviour:
       attachPoints:
       - {x: 0.12, y: 1.49}
       handles: []
+      contacts: 
       breathe: 0.012
       breathePeriod: 2.6
     attack:
@@ -1473,6 +1559,7 @@ MonoBehaviour:
       - {x: 0.135, y: 1.4233}
       - {x: 0.115, y: 1.43}
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     heavyAttack:
@@ -1491,6 +1578,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     hit:
@@ -1507,6 +1595,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     knockOut:
@@ -1522,6 +1611,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     hideoutIdle:
@@ -1534,6 +1624,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0.012
       breathePeriod: 2.6
     rope:
@@ -1555,7 +1646,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 58e3725d8b9b6d6528063081b6fd673e, type: 3}
       - {fileID: 21300000, guid: 696094f0eb561bcea9f05bfe0c81d6ab, type: 3}
       - {fileID: 21300000, guid: da4c75dfc22dcaa9cb5d02dd00d795f0, type: 3}
-      fps: 18
+      fps: 20.699999
       loop: 1
       keys: 00000000020000000400000006000000080000000a0000000c0000000e000000
       pingPong: 0
@@ -1577,6 +1668,7 @@ MonoBehaviour:
       - {x: 0.1842, y: 0.4148, z: 0.8632, w: 0.4148}
       - {x: 0.1842, y: 0.4159, z: 0.8592, w: 0.4159}
       - {x: 0.1842, y: 0.417, z: 0.8553, w: 0.417}
+      contacts: 0a000000
       breathe: 0
       breathePeriod: 2.4
     dig:
@@ -1604,6 +1696,7 @@ MonoBehaviour:
       pingPong: 1
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     run:
@@ -1631,6 +1724,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     bench:
@@ -1650,6 +1744,7 @@ MonoBehaviour:
       pingPong: 1
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     benchVariants:
@@ -1669,6 +1764,7 @@ MonoBehaviour:
       pingPong: 1
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     canPunch:
@@ -1696,6 +1792,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     tail:
@@ -1715,6 +1812,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     portrait: {fileID: 21300000, guid: 6d5d874621a7f3051aed5f00db88de9b, type: 3}
@@ -1738,6 +1836,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0.012
       breathePeriod: 2.6
     attack:
@@ -1763,6 +1862,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     heavyAttack:
@@ -1778,6 +1878,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     hit:
@@ -1793,6 +1894,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     knockOut:
@@ -1808,6 +1910,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     hideoutIdle:
@@ -1820,6 +1923,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0.012
       breathePeriod: 2.6
     rope:
@@ -1841,7 +1945,7 @@ MonoBehaviour:
       - {fileID: 21300000, guid: 34af9579dacf45af980287328c91d025, type: 3}
       - {fileID: 21300000, guid: 82a7eda0a4e52375d8448a5b9e8c15f8, type: 3}
       - {fileID: 21300000, guid: 8d74c1191fa9b265c8294f389e588748, type: 3}
-      fps: 18
+      fps: 20.699999
       loop: 1
       keys: 00000000020000000400000006000000080000000a0000000c0000000e000000
       pingPong: 0
@@ -1863,6 +1967,7 @@ MonoBehaviour:
       - {x: 0.3, y: 0.3487, z: 0.8806, w: 0.3575}
       - {x: 0.2984, y: 0.3502, z: 0.8828, w: 0.3593}
       - {x: 0.2968, y: 0.3516, z: 0.8849, w: 0.3611}
+      contacts: 0a000000
       breathe: 0
       breathePeriod: 2.4
     dig:
@@ -1888,6 +1993,7 @@ MonoBehaviour:
       pingPong: 1
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     run:
@@ -1915,6 +2021,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     bench:
@@ -1932,6 +2039,7 @@ MonoBehaviour:
       pingPong: 1
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     benchVariants:
@@ -1949,6 +2057,7 @@ MonoBehaviour:
       pingPong: 1
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     canPunch:
@@ -1976,6 +2085,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     tail:
@@ -1987,6 +2097,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     portrait: {fileID: 21300000, guid: 33c299b18ba2dd0b498e17e17832c0bc, type: 3}
@@ -2016,6 +2127,7 @@ MonoBehaviour:
       pingPong: 1
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0.008
       breathePeriod: 2.4
     attack:
@@ -2043,6 +2155,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     heavyAttack:
@@ -2070,6 +2183,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     hit:
@@ -2085,6 +2199,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     knockOut:
@@ -2100,6 +2215,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     hideoutIdle:
@@ -2111,6 +2227,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     rope:
@@ -2122,6 +2239,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     dig:
@@ -2133,6 +2251,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     run:
@@ -2144,6 +2263,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     bench:
@@ -2155,6 +2275,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     benchVariants: []
@@ -2167,6 +2288,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     tail:
@@ -2178,6 +2300,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     portrait: {fileID: 21300000, guid: 09d0f0532bee156ef90696c02a220b62, type: 3}
@@ -2212,6 +2335,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     attack:
@@ -2223,6 +2347,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     heavyAttack:
@@ -2234,6 +2359,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     hit:
@@ -2245,6 +2371,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     knockOut:
@@ -2256,6 +2383,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     hideoutIdle:
@@ -2267,6 +2395,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     rope:
@@ -2278,6 +2407,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     dig:
@@ -2289,6 +2419,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     run:
@@ -2300,6 +2431,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     bench:
@@ -2311,6 +2443,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     benchVariants: []
@@ -2323,6 +2456,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     tail:
@@ -2334,6 +2468,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     portrait: {fileID: 21300000, guid: 779591b30c4ba0e1ba14b14d6fad19ba, type: 3}
@@ -2359,6 +2494,7 @@ MonoBehaviour:
       pingPong: 1
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0.008
       breathePeriod: 2.4
     attack:
@@ -2386,6 +2522,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     heavyAttack:
@@ -2413,6 +2550,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     hit:
@@ -2429,6 +2567,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     knockOut:
@@ -2446,6 +2585,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     hideoutIdle:
@@ -2457,6 +2597,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     rope:
@@ -2468,6 +2609,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     dig:
@@ -2479,6 +2621,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     run:
@@ -2490,6 +2633,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     bench:
@@ -2501,6 +2645,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     benchVariants: []
@@ -2513,6 +2658,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     tail:
@@ -2524,6 +2670,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     portrait: {fileID: 21300000, guid: fc262390673f752838490a18e0a54ec0, type: 3}
@@ -2549,6 +2696,7 @@ MonoBehaviour:
       pingPong: 1
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0.008
       breathePeriod: 2.4
     attack:
@@ -2576,6 +2724,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     heavyAttack:
@@ -2603,6 +2752,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     hit:
@@ -2618,6 +2768,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     knockOut:
@@ -2634,6 +2785,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     hideoutIdle:
@@ -2645,6 +2797,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     rope:
@@ -2656,6 +2809,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     dig:
@@ -2667,6 +2821,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     run:
@@ -2678,6 +2833,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     bench:
@@ -2689,6 +2845,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     benchVariants: []
@@ -2701,6 +2858,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     tail:
@@ -2712,6 +2870,7 @@ MonoBehaviour:
       pingPong: 0
       attachPoints: []
       handles: []
+      contacts: 
       breathe: 0
       breathePeriod: 2.4
     portrait: {fileID: 21300000, guid: 789e0e8fd8779937b9e4ab105c864c5c, type: 3}
