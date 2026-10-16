@@ -20,12 +20,24 @@ namespace TrashCats.Editor
         [MenuItem("TrashCats/Build/Android Development APK")]
         public static void BuildAndroid()
         {
+            PrepareAndroid();
+            Build(BuildTarget.Android, Path.Combine("Builds", "Android", "TrashCats-dev.apk"), BuildOptions.Development);
+        }
+
+        /// <summary>APK for device tests without the development flag (no debug button, no dev overlay, release speed).</summary>
+        [MenuItem("TrashCats/Build/Android Test APK (no debug)")]
+        public static void BuildAndroidTest()
+        {
+            PrepareAndroid();
+            Build(BuildTarget.Android, Path.Combine("Builds", "Android", "TrashCats-test.apk"), BuildOptions.None);
+        }
+
+        private static void PrepareAndroid()
+        {
             PlayerSettings.SetApplicationIdentifier(NamedBuildTarget.Android, AndroidId);
             PlayerSettings.SetScriptingBackend(NamedBuildTarget.Android, ScriptingImplementation.IL2CPP);
             PlayerSettings.Android.targetArchitectures = AndroidArchitecture.ARM64;
             EditorUserBuildSettings.buildAppBundle = false;
-
-            Build(BuildTarget.Android, Path.Combine("Builds", "Android", "TrashCats-dev.apk"), BuildOptions.Development);
         }
 
         [MenuItem("TrashCats/Build/Linux Game")]
