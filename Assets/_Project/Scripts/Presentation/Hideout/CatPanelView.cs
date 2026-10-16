@@ -178,7 +178,7 @@ namespace TrashCats.Presentation.Hideout
                 {
                     if (_cat != null) _owner._onResult(_owner._session.FeedCat(_cat.Id));
                 }, 28);
-                _feed.Rect.Place(new Vector2(0, 0), new Vector2(1, 0), new Vector2(4, 2), new Vector2(-4, 78));
+                _feed.Rect.Place(new Vector2(0, 0), new Vector2(1, 0), new Vector2(4, 2), new Vector2(-4, 74));
 
                 _locked = Ui.Label(background.transform, Loc.T("cat_panel_view.02"), 32, TextAnchor.MiddleCenter, Palette.Disabled).gameObject;
             }
