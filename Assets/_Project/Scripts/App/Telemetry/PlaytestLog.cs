@@ -49,6 +49,8 @@ namespace TrashCats.App
             _subscriptions.Add(bus.Subscribe<BattleCompleted>(e => Write("battle_end", ("territory", e.Territory.Value), ("outcome", e.Outcome.ToString()))));
             _subscriptions.Add(bus.Subscribe<CatRecruited>(e => Write("recruit", ("cat", e.CatId.Value))));
             _subscriptions.Add(bus.Subscribe<FinalReached>(_ => Write("final")));
+            // onboarding funnel: when each step showed and was done, which hints came up, where the player skipped
+            _subscriptions.Add(bus.Subscribe<TutorialProgress>(e => Write("tutorial", ("step", e.Step), ("state", e.State))));
             Write("session", ("cats", session.World.Cats.Count));
         }
 

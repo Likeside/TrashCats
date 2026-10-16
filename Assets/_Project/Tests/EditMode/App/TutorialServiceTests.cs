@@ -39,6 +39,8 @@ namespace TrashCats.Tests
 
         private string Step => _tutorial.Current?.Id;
 
+        private long RyzhyCycleMs() => _session.World.TryGetCat(TestIds.Ryzhy, out var cat) ? cat.Activity.CycleDurationMs : -1;
+
         private void Pass(long ms)
         {
             _clock.Advance(ms);
@@ -52,7 +54,7 @@ namespace TrashCats.Tests
             Assert.That(_tutorial.Current.Cat, Is.EqualTo(TestIds.Ryzhy));
 
             _session.AssignActivity(TestIds.Ryzhy, TestIds.Scavenge);
-            Assert.That(Step, Is.Null, "waits for the first haul before asking to feed");
+            Assert.That(Step, Is.EqualTo(TutorialService.Bar), "while the first cycle runs: what the bar means");
 
             Pass(20_000);
             Assert.That(Step, Is.EqualTo(TutorialService.Feed));
@@ -125,13 +127,68 @@ namespace TrashCats.Tests
         }
 
         [Test]
-        public void RelayHint_OnlyWithTwoOrMoreCats_Once()
+        public void TiredHint_WhenPrepShowsATiredCat_Once()
         {
-            _tutorial.OnPrepOpened(1);
+            _tutorial.OnPrepOpened(1, 0);
             Assert.That(_hints, Is.Empty);
-            _tutorial.OnPrepOpened(2);
-            _tutorial.OnPrepOpened(3);
-            Assert.That(_hints, Is.EqualTo(new[] { TutorialService.HintRelay }));
+            _tutorial.OnPrepOpened(1, 1);
+            _tutorial.OnPrepOpened(1, 2);
+            Assert.That(_hints, Is.EqualTo(new[] { TutorialService.HintTired }));
+        }
+
+        [Test]
+        public void OrderStep_OnlyAfterTheFirstFight_WithTwoRestedCats()
+        {
+            var done = new[] { TutorialService.Scavenge, TutorialService.Bar, TutorialService.Feed, TutorialService.Train, TutorialService.Equip, TutorialService.Sleep };
+            Start(new GameWorld(_config, 0, 1, new[] { TestCats.Make(TestIds.Ryzhy), TestCats.Make(TestIds.Shnyr) }, new Wallet(20, 0), new UpgradeLevels(),
+                tutorial: new TutorialState(done)));
+            Assert.That(_tutorial.Steps.Any(s => s.Id == TutorialService.Order), Is.False, "the first fight is fought alone");
+
+            _session.CompleteTutorialStep(TutorialService.Fight);
+            _tutorial.Evaluate();
+            var order = _tutorial.Steps.Single(s => s.Id == TutorialService.Order);
+            Assert.That(order.Cat, Is.EqualTo(TestIds.Shnyr), "the second fighter tells about the order");
+
+            _tutorial.OnOrderChanged();
+            Assert.That(_tutorial.Steps.Any(s => s.Id == TutorialService.Order), Is.False);
+        }
+
+        [Test]
+        public void UpgradeStep_OnceJunkIsEnough_DoneOnPurchase()
+        {
+            var done = new[] { TutorialService.Scavenge, TutorialService.Bar, TutorialService.Feed, TutorialService.Train };
+            Start(new GameWorld(_config, 0, 1, new[] { TestCats.Make(TestIds.Ryzhy) }, new Wallet(20, 0), new UpgradeLevels(), tutorial: new TutorialState(done)));
+            Assert.That(_tutorial.Steps.Any(s => s.Id == TutorialService.Upgrade), Is.False, "no junk yet");
+
+            Start(new GameWorld(_config, 0, 1, new[] { TestCats.Make(TestIds.Ryzhy) }, new Wallet(20, 500), new UpgradeLevels(), tutorial: new TutorialState(done)));
+            var step = _tutorial.Steps.Single(s => s.Id == TutorialService.Upgrade);
+            Assert.That(_session.BuyUpgrade(step.Upgrade.Value).IsOk, Is.True);
+            Assert.That(_tutorial.Steps.Any(s => s.Id == TutorialService.Upgrade), Is.False);
+        }
+
+        [Test]
+        public void FirstCycle_IsShortWhileTheTutorialRuns_OncePerActivity()
+        {
+            _tutorial.Dispose();
+            _config = TestConfigs.Default(firstCycleMs: 4_000);
+            Start(GameWorld.CreateNew(_config, 1));
+
+            _session.AssignActivity(TestIds.Ryzhy, TestIds.Scavenge);
+            Assert.That(RyzhyCycleMs(), Is.EqualTo(4_000));
+            Pass(4_000);
+            Assert.That(RyzhyCycleMs(), Is.EqualTo(20_000), "the next cycle is a normal one");
+        }
+
+        [Test]
+        public void FirstCycle_NormalOnceTheTutorialIsSkipped()
+        {
+            _tutorial.Dispose();
+            _config = TestConfigs.Default(firstCycleMs: 4_000);
+            Start(GameWorld.CreateNew(_config, 1));
+            _tutorial.Skip();
+
+            _session.AssignActivity(TestIds.Ryzhy, TestIds.Scavenge);
+            Assert.That(RyzhyCycleMs(), Is.EqualTo(20_000));
         }
 
         [Test]

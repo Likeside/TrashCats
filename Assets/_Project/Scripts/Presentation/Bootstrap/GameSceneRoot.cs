@@ -157,7 +157,9 @@ namespace TrashCats.Presentation.Bootstrap
 
             // onboarding: guided steps on their own top canvas, one-shot hints through the message queue
             _tutorial = new TutorialService(session, _services.Bus);
-            _tutorialOverlay = new Tutorial.TutorialOverlay(_tutorial, session, _overlays, transform);
+            _tutorialOverlay = new Tutorial.TutorialOverlay(_tutorial, session, _overlays, transform, id => factory.Portrait(session.Config.GetCat(id).ViewKey));
+            _prep.OrderChanged += _tutorial.OnOrderChanged;
+            _combat.TakeTip = _tutorial.TakeTip;
             _tutorial.HintRequested += id =>
             {
                 var hint = Tutorial.TutorialOverlay.Hint(id);
@@ -244,7 +246,8 @@ namespace TrashCats.Presentation.Bootstrap
             _prep.Open(territory);
             _router.Show(ScreenId.BattlePrep);
             var min = _services.Config.Needs.MinEnergyForBattle;
-            _tutorial.OnPrepOpened(_services.Session.World.Cats.Count(c => c.Energy >= min));
+            var cats = _services.Session.World.Cats;
+            _tutorial.OnPrepOpened(cats.Count(c => c.Energy >= min), cats.Count(c => c.Energy < min));
         }
 
         private void StartCombat()

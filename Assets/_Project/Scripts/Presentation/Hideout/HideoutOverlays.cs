@@ -17,10 +17,12 @@ namespace TrashCats.Presentation.Hideout
         private readonly TMP_Text _resources;
         private readonly TMP_Text _junk;
         private readonly bool _withIcons;
+        private readonly RectTransform _root;
 
         public HudView(GameSession session, RectTransform root, Action onDebug, Action onSettings = null)
         {
             _session = session;
+            _root = root;
             var food = Ui.Skin?.Icon("food");
             var junk = Ui.Skin?.Icon("junk");
             _withIcons = food != null && junk != null;
@@ -73,6 +75,43 @@ namespace TrashCats.Presentation.Hideout
             var label = Ui.Label(plate.transform, "", 46, TextAnchor.MiddleCenter, Palette.Paper, heading: true);
             label.rectTransform.Fill(4);
             return label;
+        }
+
+        /// <summary>
+        /// A haul flies from where it was got (the station, the away portrait) into its counter, which bumps when it
+        /// lands: the player sees where the resources come from.
+        /// </summary>
+        public void Collect(RectTransform from, string icon)
+        {
+            var block = _root.Find("HudPill/Block_" + icon) as RectTransform;
+            var sprite = Ui.Skin?.Icon(icon);
+            if (block == null || sprite == null || from == null)
+                return;
+            var corners = new Vector3[4];
+            from.GetWorldCorners(corners);
+            for (var i = 0; i < 3; i++)
+            {
+                var piece = Ui.Panel(_root, "Loot", Color.white);
+                piece.sprite = sprite;
+                piece.preserveAspect = true;
+                piece.raycastTarget = false;
+                var rt = piece.rectTransform;
+                rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 0.5f);
+                rt.sizeDelta = new Vector2(64, 64);
+                rt.position = Vector3.Lerp(corners[1], corners[2], 0.5f) + new Vector3(UnityEngine.Random.Range(-30f, 30f), UnityEngine.Random.Range(-20f, 20f), 0f) * rt.lossyScale.x;
+                var last = i == 2;
+                DOTween.Sequence()
+                    .AppendInterval(0.12f * i)
+                    .Append(rt.DOMove(block.position, 0.55f).SetEase(Ease.InCubic))
+                    .Join(rt.DOScale(0.7f, 0.55f))
+                    .OnComplete(() =>
+                    {
+                        UnityEngine.Object.Destroy(piece.gameObject);
+                        block.DOKill(true);
+                        block.DOPunchScale(Vector3.one * (last ? 0.25f : 0.12f), 0.25f, 6, 0.6f);
+                    })
+                    .SetLink(piece.gameObject);
+            }
         }
 
         public void Refresh()

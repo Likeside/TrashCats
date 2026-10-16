@@ -23,6 +23,8 @@ namespace TrashCats.Infrastructure
         [Header("Time")]
         public long offlineCapMs = 3_600_000;
         public long offlineSummaryMinMs = 60_000;
+        [Tooltip("Onboarding: the first cycle of every activity lasts at most this long while the tutorial runs (0 = off)")]
+        public long firstCycleMs = 4_000;
 
         [Header("Progression")]
         public int maxLevel = 10;

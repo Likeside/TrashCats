@@ -118,6 +118,32 @@ namespace TrashCats.Presentation.Battle
         /// <summary>Battle sounds; null plays nothing.</summary>
         public Audio.GameAudio Audio { get; set; }
 
+        /// <summary>Onboarding: true the first time a one-shot tip is asked for (TutorialService.TakeTip).</summary>
+        public Func<string, bool> TakeTip { get; set; }
+
+        private TMP_Text _tip;
+
+        /// <summary>A short line over the arena for a couple of seconds; the fight does not stop for it.</summary>
+        private void Tip(string id, string text)
+        {
+            if (TakeTip == null || !TakeTip(id))
+                return;
+            if (_tip == null)
+            {
+                _tip = Ui.Label(Root.transform, "", 34, TextAnchor.MiddleCenter, Palette.Paper, heading: true);
+                _tip.name = "Combat_Tip";
+                _tip.rectTransform.Place(new Vector2(0.05f, 0.62f), new Vector2(0.95f, 0.7f));
+                _tip.enableAutoSizing = true;
+                _tip.fontSizeMin = 24;
+                _tip.fontSizeMax = 34;
+                _tip.Outlined();
+            }
+            _tip.DOKill();
+            _tip.text = text;
+            _tip.alpha = 0f;
+            DOTween.Sequence().Append(_tip.DOFade(1f, 0.25f)).AppendInterval(2.6f).Append(_tip.DOFade(0f, 0.4f)).SetLink(_tip.gameObject);
+        }
+
         private void Sound(string key, float volume = 1f) => Audio?.Play(key, volume);
 
         /// <summary>Starts replaying the current pending battle. With <paramref name="resultsOnly"/> jumps straight to the results.</summary>
@@ -247,6 +273,12 @@ namespace TrashCats.Presentation.Battle
                 {
                     var side = (int)action.Side;
                     _huds[side].SetGrit(action.GritAfter);
+                    if (animate && action.Side == Side.Player)
+                    {
+                        // the first fights: what the Grit bar is for, the first skill, the second wind
+                        if (_session.Config.GetSkill(action.SkillId).IsInnate) Tip(TutorialService.TipGrit, Loc.T("combat_screen.11"));
+                        else Tip(TutorialService.TipSkill, Loc.T("combat_screen.12"));
+                    }
                     if (animate)
                     {
                         _views[side]?.PlayAttack(_session.Config.GetSkill(action.SkillId), _speedFactor);
@@ -289,6 +321,8 @@ namespace TrashCats.Presentation.Battle
                 {
                     var side = (int)healed.Side;
                     _huds[side].SetHp(healed.HpAfter);
+                    if (animate && healed.Side == Side.Player)
+                        Tip(TutorialService.TipHeal, Loc.T("combat_screen.13"));
                     if (animate)
                     {
                         FloatAt(Spots[side] + new Vector3(0, 4.6f, 0), "+" + healed.Amount, Info.Gain, 60);

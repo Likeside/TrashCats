@@ -4,6 +4,7 @@ using System.Linq;
 using DG.Tweening;
 using TrashCats.App;
 using TrashCats.Domain;
+using TrashCats.Presentation.Hideout;
 using TrashCats.Presentation.UI;
 using TMPro;
 using UnityEngine;
@@ -12,10 +13,12 @@ using UnityEngine.UI;
 namespace TrashCats.Presentation.Tutorial
 {
     /// <summary>
-    /// Guided-chain overlay (Docs/GDD/UI_UX.md §11): dims everything except the widget the step asks for, blocks taps
-    /// outside it, points at it with the cat-paw pointer and says one short phrase; "Пропустить обучение" ends the chain.
-    /// Widgets are found by object name, deepest first (e.g. the activity button if the sheet is open, else the cat
-    /// card). The overlay waits (hidden) while another modal covers the target or the target is missing / disabled.
+    /// Guided-chain overlay (Docs/GDD/UI_UX.md §11): points at the widget the step asks for with the cat-paw pointer and
+    /// a ring, and the cat the step is about says one short phrase in its own voice (its portrait by the bubble);
+    /// "Пропустить обучение" ends the chain. The first steps also dim everything else and block taps outside the target;
+    /// soft steps only point. Widgets are found by object name, deepest first (e.g. the activity button if the sheet is
+    /// open, else the cat in the yard, else its card). Of the waiting steps the first one whose target is on screen is
+    /// shown; the overlay hides while another modal covers the target or the target is missing / disabled.
     /// </summary>
     public sealed class TutorialOverlay : IDisposable
     {
@@ -27,6 +30,10 @@ namespace TrashCats.Presentation.Tutorial
         private readonly OverlayStack _overlays;
         private readonly RectTransform _root;
         private readonly RectTransform[] _blockers = new RectTransform[4];
+        private readonly Image[] _blockerImages = new Image[4];
+        private static readonly Color Dim = new Color(0f, 0f, 0f, 0.74f);
+        private readonly RoundPicture _speaker;
+        private readonly Func<CatId, Sprite> _portrait;
         private readonly RectTransform _frame;
         private readonly RectTransform[] _ring = new RectTransform[4];
         private const float RingWidth = 7f;
@@ -37,24 +44,28 @@ namespace TrashCats.Presentation.Tutorial
         /// <summary>Name of the highlighted widget, or null when nothing is highlighted (dev autoplay).</summary>
         public string TargetName => _root.gameObject.activeSelf && _target != null ? _target.name : null;
 
+        private IReadOnlyList<TutorialStep> _steps = Array.Empty<TutorialStep>();
         private TutorialStep _step;
         private RectTransform _target;
         private float _nextLookup;
 
-        public TutorialOverlay(TutorialService service, GameSession session, OverlayStack overlays, Transform parent)
+        public TutorialOverlay(TutorialService service, GameSession session, OverlayStack overlays, Transform parent, Func<CatId, Sprite> portrait = null)
         {
             _service = service;
             _session = session;
             _overlays = overlays;
+            _portrait = portrait;
 
             // own canvas above every screen, sheet and modal
             var canvas = Ui.CreateCanvas("Tutorial", 50);
             canvas.transform.SetParent(parent, false);
             _root = Ui.Rect(canvas.transform, "TutorialOverlay").Fill();
 
-            var dim = new Color(0f, 0f, 0f, 0.74f);
             for (var i = 0; i < 4; i++)
-                _blockers[i] = Ui.Panel(_root, "Block" + i, dim, raycast: true).rectTransform;
+            {
+                _blockerImages[i] = Ui.Panel(_root, "Block" + i, Dim, raycast: true);
+                _blockers[i] = _blockerImages[i].rectTransform;
+            }
 
             // a bright yellow ring around the hole; the target itself stays untouched and tappable
             _frame = Ui.Rect(_root, "Frame");
@@ -72,30 +83,60 @@ namespace TrashCats.Presentation.Tutorial
             var bubble = Ui.Card(_root, "Bubble", CardStyle.Paper, raycast: true);
             _bubble = bubble.rectTransform;
             _bubble.anchorMin = _bubble.anchorMax = new Vector2(0.5f, 0.5f);
-            _bubble.sizeDelta = new Vector2(920, 300);
-            _text = Ui.Label(_bubble, "", 40, TextAnchor.MiddleCenter, Palette.Ink, heading: true);
-            _text.rectTransform.Place(Vector2.zero, Vector2.one, new Vector2(50, 90), new Vector2(-50, -40));
+            _bubble.sizeDelta = new Vector2(940, 330);
+            // the cat that talks, by the left edge of the bubble
+            _speaker = new RoundPicture(_bubble, "Speaker", Palette.Disabled, 0.8f);
+            _speaker.Root.anchorMin = _speaker.Root.anchorMax = new Vector2(0f, 1f);
+            _speaker.Root.pivot = new Vector2(0.5f, 0.5f);
+            _speaker.Root.sizeDelta = new Vector2(190, 190);
+            _speaker.Root.anchoredPosition = new Vector2(70, -40);
+            _text = Ui.Label(_bubble, "", 36, TextAnchor.MiddleCenter, Palette.Ink, heading: true);
+            _text.rectTransform.Place(Vector2.zero, Vector2.one, new Vector2(185, 96), new Vector2(-40, -30));
+            _text.enableAutoSizing = true;
+            _text.fontSizeMin = 26;
+            _text.fontSizeMax = 36;
             var skip = Ui.Button(_bubble, "Tutorial_Skip", Loc.T("tutorial_overlay.01"), Palette.Disabled, () => _service.Skip(), 28);
             skip.Rect.Place(new Vector2(0.25f, 0), new Vector2(0.75f, 0), new Vector2(0, 26), new Vector2(0, 96));
 
             _root.gameObject.SetActive(false);
-            _service.StepChanged += OnStepChanged;
-            OnStepChanged(_service.Current);
+            _service.StepsChanged += OnStepsChanged;
+            OnStepsChanged(_service.Steps);
         }
 
-        public void Dispose() => _service.StepChanged -= OnStepChanged;
+        public void Dispose() => _service.StepsChanged -= OnStepsChanged;
 
-        private void OnStepChanged(TutorialStep step)
+        private void OnStepsChanged(IReadOnlyList<TutorialStep> steps)
         {
-            _step = step;
-            _target = null;
+            _steps = steps;
             _nextLookup = 0f;
-            if (step != null)
-                _text.text = Phrase(step);
+            if (steps.Count == 0)
+                Show(null);
+        }
+
+        /// <summary>Switches the shown step: its phrase, its speaker, hard or soft.</summary>
+        private void Show(TutorialStep step)
+        {
+            if (Equals(step, _step))
+                return;
+            _step = step;
             _pointer.DOKill();
             _pointerBob = false;
             if (step == null)
+            {
+                _target = null;
                 _root.gameObject.SetActive(false);
+                return;
+            }
+
+            _text.text = Phrase(step);
+            _speaker.Backdrop.color = CatColors.Backdrop(step.Cat);
+            _speaker.SetPicture(_portrait?.Invoke(step.Cat));
+            _speaker.Root.gameObject.SetActive(_portrait?.Invoke(step.Cat) != null);
+            foreach (var blocker in _blockerImages)
+            {
+                blocker.color = step.Soft ? new Color(0, 0, 0, 0) : Dim;
+                blocker.raycastTarget = !step.Soft;
+            }
         }
 
         private bool _pointerBob;
@@ -103,14 +144,30 @@ namespace TrashCats.Presentation.Tutorial
         /// <summary>Call every frame (after the UI has laid out).</summary>
         public void LateTick()
         {
-            if (_step == null)
+            if (_steps.Count == 0)
                 return;
 
             if (Time.unscaledTime >= _nextLookup)
             {
                 _nextLookup = Time.unscaledTime + LookupInterval;
-                _target = FindTarget(_step);
+                // the first waiting step whose widget is on screen now
+                TutorialStep shown = null;
+                RectTransform target = null;
+                foreach (var step in _steps)
+                {
+                    target = FindTarget(step);
+                    if (target != null && IsReachable(target))
+                    {
+                        shown = step;
+                        break;
+                    }
+                    target = null;
+                }
+                Show(shown);
+                _target = target;
             }
+            if (_step == null)
+                return;
 
             var visible = _target != null && IsReachable(_target);
             if (_root.gameObject.activeSelf != visible)
@@ -202,17 +259,22 @@ namespace TrashCats.Presentation.Tutorial
             var cats = _session.World.Cats;
             var index = Math.Max(0, cats.ToList().FindIndex(c => c.Id.Equals(step.Cat)));
             var card = "CatCard" + index;
+            // the cat right in the yard first (tapping it opens the same sheet as its card)
+            var yard = "Cat_" + step.Cat;
             string Activity(ActivityKind kind, AttributeType? attribute = null) =>
                 "Activity_" + config.Activities.First(a => a.Kind == kind && (attribute == null || a.TrainedAttribute == attribute)).Id;
 
             switch (step.Id)
             {
-                case TutorialService.Scavenge: return new[] { Activity(ActivityKind.Scavenge), card };
+                case TutorialService.Scavenge: return new[] { Activity(ActivityKind.Scavenge), yard, card };
+                case TutorialService.Bar: return new[] { "Progress_" + step.Cat };
                 case TutorialService.Feed: return new[] { "Sheet_Feed", "Feed" + index };
-                case TutorialService.Train: return new[] { Activity(ActivityKind.Train, AttributeType.Strength), card };
+                case TutorialService.Train: return new[] { Activity(ActivityKind.Train, AttributeType.Strength), yard, card };
                 case TutorialService.Equip: return new[] { "Skill_" + step.Skill, "Sheet_Details", card };
-                case TutorialService.Sleep: return new[] { Activity(ActivityKind.Sleep), card };
+                case TutorialService.Sleep: return new[] { Activity(ActivityKind.Sleep), yard, card };
                 case TutorialService.Fight: return new[] { "Prep_Fight", "Node_" + step.Territory, "Tab_Map" };
+                case TutorialService.Upgrade: return new[] { "Upgrade_Buy", "Station_" + step.Upgrade };
+                case TutorialService.Order: return new[] { "Prep_Queue" };
                 default: return Array.Empty<string>();
             }
         }
@@ -223,11 +285,14 @@ namespace TrashCats.Presentation.Tutorial
             switch (step.Id)
             {
                 case TutorialService.Scavenge: return Loc.T("tutorial_overlay.02", name);
+                case TutorialService.Bar: return Loc.T("tutorial_overlay.15");
                 case TutorialService.Feed: return Loc.T("tutorial_overlay.03");
                 case TutorialService.Train: return Loc.T("tutorial_overlay.04");
                 case TutorialService.Equip: return Loc.T("tutorial_overlay.05");
                 case TutorialService.Sleep: return Loc.T("tutorial_overlay.06", name);
                 case TutorialService.Fight: return step.Territory is TerritoryId t ? Loc.T("tutorial_overlay.07", Texts.TerritoryName(t)) : Loc.T("tutorial_overlay.08");
+                case TutorialService.Upgrade: return Loc.T("tutorial_overlay.16");
+                case TutorialService.Order: return Loc.T("tutorial_overlay.17");
                 default: return "";
             }
         }
@@ -237,6 +302,8 @@ namespace TrashCats.Presentation.Tutorial
             TutorialService.HintJunk => "junk",
             TutorialService.HintRelay => "paw",
             TutorialService.HintSlots => "skill",
+            TutorialService.HintTired => "energy",
+            TutorialService.HintOffline => "clock",
             _ => null,
         };
 
@@ -246,6 +313,8 @@ namespace TrashCats.Presentation.Tutorial
             TutorialService.HintJunk => (Loc.T("tutorial_overlay.09"), Loc.T("tutorial_overlay.10")),
             TutorialService.HintRelay => (Loc.T("tutorial_overlay.11"), Loc.T("tutorial_overlay.12")),
             TutorialService.HintSlots => (Loc.T("tutorial_overlay.13"), Loc.T("tutorial_overlay.14")),
+            TutorialService.HintTired => (Loc.T("tutorial_overlay.18"), Loc.T("tutorial_overlay.19")),
+            TutorialService.HintOffline => (Loc.T("tutorial_overlay.20"), Loc.T("tutorial_overlay.21")),
             _ => null,
         };
     }
