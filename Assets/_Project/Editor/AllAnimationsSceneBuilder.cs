@@ -24,7 +24,7 @@ namespace TrashCats.Editor
 
         private static readonly string[] Roles =
         {
-            "idle", "attack", "heavyAttack", "hit", "knockOut", "tail", "hideoutIdle", "rope", "dig", "run", "bench", "canPunch",
+            "idle", "attack", "heavyAttack", "hit", "knockOut", "tail", "hideoutIdle", "rope", "dig", "run", "bench", "bench2", "bench3", "canPunch",
         };
 
         [MenuItem("TrashCats/Dev/Rebuild All Animations Scene")]

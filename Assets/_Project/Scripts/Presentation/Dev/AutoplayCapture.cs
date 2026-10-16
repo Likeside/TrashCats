@@ -194,14 +194,20 @@ namespace TrashCats.Presentation.Dev
             for (var i = 0; i < 4; i++) Dismiss();
             yield return Shot("03s_sleep");
             // each cat on the bench, then rested again for the dumpster and the street
-            foreach (var who in new[] { "cat_ryzhy", "cat_ponchik" })
+            foreach (var who in new[] { "cat_ryzhy", "cat_shnyr", "cat_ponchik" })
             {
                 foreach (var cat in services.Session.World.Cats) services.Session.StopActivity(cat.Id);
                 services.Debug.RecruitAllAndRest();
-                services.Session.AssignActivity(new TrashCats.Domain.CatId(who), new TrashCats.Domain.ActivityId("act_train_tou"));
+                services.Session.AssignActivity(new TrashCats.Domain.CatId(who), new TrashCats.Domain.ActivityId("act_train_str"));
                 yield return new WaitForSeconds(0.8f);
                 for (var i = 0; i < 4; i++) Dismiss();
                 yield return Shot("03b_bench_" + who);
+                // the push-up variants change after every rep
+                for (var rep = 1; rep <= 3 && who != "cat_ponchik"; rep++)
+                {
+                    yield return new WaitForSeconds(1.45f);
+                    yield return Shot($"03b_bench_{who}_{rep}");
+                }
             }
             foreach (var cat in services.Session.World.Cats) services.Session.StopActivity(cat.Id);
             services.Debug.RecruitAllAndRest();

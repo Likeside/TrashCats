@@ -79,7 +79,7 @@ namespace TrashCats.Presentation.Dev
                 _ropeInk = Line("RopeInk", material, new Color(0.11f, 0.08f, 0.06f), 0.095f);
                 _rope = Line("Rope", material, new Color(0.62f, 0.4f, 0.2f), 0.05f);
             }
-            else if (role == "bench" && registry.GetSprite("prop_barbell") is Sprite sprite)
+            else if (role.StartsWith("bench") && registry.GetSprite("prop_barbell") is Sprite sprite)
             {
                 // the sprite's pivot is its bottom centre: a holder at the grip with the sprite half its height lower
                 var holder = new GameObject("HeldBarbell").transform;
@@ -154,6 +154,8 @@ namespace TrashCats.Presentation.Dev
             "dig" => art.dig,
             "run" => art.run,
             "bench" => art.bench,
+            "bench2" => art.benchVariants.Length > 1 ? art.benchVariants[1] : null,
+            "bench3" => art.benchVariants.Length > 2 ? art.benchVariants[2] : null,
             "canPunch" => art.canPunch,
             _ => null,
         };

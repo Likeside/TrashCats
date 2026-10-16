@@ -68,7 +68,7 @@ namespace TrashCats.Editor
                 copy.idle = baseArt.idle; copy.attack = baseArt.attack; copy.heavyAttack = baseArt.heavyAttack;
                 copy.hit = baseArt.hit; copy.knockOut = baseArt.knockOut; copy.tail = baseArt.tail; copy.portrait = baseArt.portrait;
                 copy.hideoutPoses = baseArt.hideoutPoses;
-                copy.run = baseArt.run; copy.canPunch = baseArt.canPunch; copy.hideoutIdle = baseArt.hideoutIdle; copy.rope = baseArt.rope; copy.dig = baseArt.dig; copy.bench = baseArt.bench;
+                copy.run = baseArt.run; copy.canPunch = baseArt.canPunch; copy.hideoutIdle = baseArt.hideoutIdle; copy.rope = baseArt.rope; copy.dig = baseArt.dig; copy.bench = baseArt.bench; copy.benchVariants = baseArt.benchVariants;
                 copy.viewKey = key;
                 copy.tint = tint;
                 copy.battleScale = scale;
@@ -106,7 +106,8 @@ namespace TrashCats.Editor
             {
                 if (art.tint != Color.white) continue; // variants reuse another character's frames
                 foreach (var (role, clip) in new[] { ("idle", art.idle), ("attack", art.attack), ("heavy", art.heavyAttack), ("hit", art.hit), ("ko", art.knockOut),
-                             ("tail", art.tail), ("hideoutIdle", art.hideoutIdle), ("run", art.run), ("canPunch", art.canPunch), ("rope", art.rope), ("dig", art.dig), ("bench", art.bench) })
+                             ("tail", art.tail), ("hideoutIdle", art.hideoutIdle), ("run", art.run), ("canPunch", art.canPunch), ("rope", art.rope), ("dig", art.dig), ("bench", art.bench) }
+                             .Concat(art.benchVariants.Skip(1).Select((c, i) => ("bench" + (i + 2), c))))
                 {
                     if (clip?.frames == null || clip.frames.Length == 0) continue;
                     if (role == "heavy" && clip == art.attack) continue;
@@ -162,6 +163,11 @@ namespace TrashCats.Editor
             art.dig.pingPong = art.dig.frames.Length > 2; // the kicking loop is not drawn to close
             // the frames hold a whole rep (press up, faster lowering) and play one rep per second, as in the previews
             art.bench.fps = art.bench.frames.Length;
+            // push-up variants played ping-pong (up and back down), one rep in BenchRepSeconds
+            art.benchVariants = new[] { art.bench, Clip(dir, "Bench2", 1f, true), Clip(dir, "Bench3", 1f, true) }
+                .Where(c => c?.frames != null && c.frames.Length > 0).ToArray();
+            foreach (var variant in art.benchVariants.Where(c => c.pingPong))
+                variant.fps = variant.SequenceLength / BenchRepSeconds;
             // the cats' idles are one still picture that breathes (the drawn idle loops jittered and did not loop
             // cleanly); enemies keep their drawn stances
             if (Cats.Contains(key))
@@ -187,6 +193,8 @@ namespace TrashCats.Editor
 
             return art;
         }
+
+        private const float BenchRepSeconds = 1.3f;
 
         private static readonly HashSet<string> Cats = new HashSet<string> { "ryzhy", "shnyr", "ponchik" };
 
@@ -220,7 +228,9 @@ namespace TrashCats.Editor
                 var v = Regex.Matches(File.ReadAllText(handlesPath), @"-?\d+(\.\d+)?").Cast<Match>().Select(m => float.Parse(m.Value, CultureInfo.InvariantCulture)).ToArray();
                 handles = Enumerable.Range(0, v.Length / 4).Select(i => new Vector4(v[i * 4], v[i * 4 + 1], v[i * 4 + 2], v[i * 4 + 3])).ToArray();
             }
-            return frames.Length == 0 ? null : new FlipbookClip { name = folder.ToLowerInvariant(), frames = frames, fps = fps, loop = loop, keys = keys, handles = handles };
+            // "pingPong": true in keys.json: the frames go one way (a push up) and play there and back
+            var pingPong = File.Exists(keysPath) && Regex.IsMatch(File.ReadAllText(keysPath), @"""pingPong""\s*:\s*true");
+            return frames.Length == 0 ? null : new FlipbookClip { name = folder.ToLowerInvariant(), frames = frames, fps = fps, loop = loop, keys = keys, handles = handles, pingPong = pingPong };
         }
 
         private static Sprite[] Sprites(string folder)

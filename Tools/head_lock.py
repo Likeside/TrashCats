@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Moves the head of every key frame to one place with a smooth local warp (no cut seams) - Ryzhy bench, 2026-10-16.
-The face template box (x0..y1) is in the frame of the bench canvas. Usage: head_lock.py <dir with key_N.png> <n> <ref key> <head cx> <head cy> <target dx> <target dy>
+The face template box (x0..y1) is in the frame of the bench canvas. Usage: head_lock.py <dir with key_N.png> <n> <ref key> <head cx> <head cy> <target dx> <target dy> [face x0,y0,x1,y1]
 """
 import sys, numpy as np
 from PIL import Image
@@ -8,7 +8,7 @@ from scipy import ndimage
 d, n, ref, cx, cy = sys.argv[1], int(sys.argv[2]), int(sys.argv[3]), float(sys.argv[4]), float(sys.argv[5])
 tx, ty = float(sys.argv[6]), float(sys.argv[7])  # target offset of the head relative to the ref key
 keys=[np.array(Image.open(f"{d}/key_{i}.png")).astype(np.float32) for i in range(n)]
-x0,y0,x1,y1 = 280,128,335,165
+x0,y0,x1,y1 = [int(v) for v in sys.argv[8].split(",")] if len(sys.argv) > 8 else (280,128,335,165)
 T = keys[ref][y0:y1, x0:x1]
 def find(k):
     best=None
