@@ -18,6 +18,8 @@ namespace TrashCats.Presentation.Characters
         private readonly Transform _visual;
         private readonly bool _enemy;
         private readonly Color _baseColor;
+        // a knocked-out fighter stays down: idles queued by an earlier hit or attack must not stand him up again
+        private bool _down;
 
         public Transform Root { get; }
 
@@ -46,7 +48,7 @@ namespace TrashCats.Presentation.Characters
 
         public void PlayIdle()
         {
-            if (_art != null && _art.HasBattleArt) _body.Play(_art.idle);
+            if (!_down && _art != null && _art.HasBattleArt) _body.Play(_art.idle);
         }
 
         /// <summary>Seconds (at ×1) from the start of the attack to the frame where the blow lands (drawn frame 4).</summary>
@@ -73,7 +75,7 @@ namespace TrashCats.Presentation.Characters
 
         public void PlayHit(int speed)
         {
-            if (_art?.hit?.frames != null && _art.hit.frames.Length > 0)
+            if (!_down && _art?.hit?.frames != null && _art.hit.frames.Length > 0)
             {
                 _body.Play(_art.hit);
                 DOVirtual.DelayedCall(_art.hit.Duration / speed, PlayIdle).SetLink(Root.gameObject);
@@ -90,6 +92,7 @@ namespace TrashCats.Presentation.Characters
 
         public void PlayKnockOut(bool leftSide, int speed)
         {
+            _down = true;
             if (_art?.knockOut?.frames != null && _art.knockOut.frames.Length > 0)
             {
                 var ko = _art.knockOut;

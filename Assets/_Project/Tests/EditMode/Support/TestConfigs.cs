@@ -1,3 +1,4 @@
+using System;
 using TrashCats.Domain;
 
 namespace TrashCats.Tests
@@ -56,9 +57,9 @@ namespace TrashCats.Tests
         /// The game's config: activity durations halved on 2026-10-16. Unit tests run on <see cref="Default"/>, whose
         /// durations keep the values their timings were written for; everything else is the same.
         /// </summary>
-        public static GameConfig Shipped() => Default(durationScale: 0.5f);
+        public static GameConfig Shipped() => Default(durationScale: 0.5f, pace: 1.5f);
 
-        public static GameConfig Default(long firstCycleMs = 0, float durationScale = 1f) => new GameConfig
+        public static GameConfig Default(long firstCycleMs = 0, float durationScale = 1f, float pace = 1f) => new GameConfig
         {
             Needs = new NeedsConfig(),
             Time = new TimeConfig { FirstCycleMs = firstCycleMs },
@@ -90,20 +91,20 @@ namespace TrashCats.Tests
                 new ActivityDefinition
                 {
                     Id = TestIds.Scavenge, NameKey = "act.scavenge", Kind = ActivityKind.Scavenge,
-                    DurationMs = Ms(20_000, durationScale), EnergyCost = 10, SatietyCost = 4, BaseOutput = 3, Capacity = 1,
+                    DurationMs = Ms(20_000, durationScale / pace), EnergyCost = Per(10, pace), SatietyCost = Per(4, pace), BaseOutput = Per(3, pace), Capacity = 1,
                 },
                 new ActivityDefinition
                 {
                     Id = TestIds.Rummage, NameKey = "act.rummage", Kind = ActivityKind.Rummage,
-                    DurationMs = Ms(25_000, durationScale), EnergyCost = 10, SatietyCost = 4, BaseOutput = 3, Capacity = 1,
+                    DurationMs = Ms(25_000, durationScale / pace), EnergyCost = Per(10, pace), SatietyCost = Per(4, pace), BaseOutput = Per(3, pace), Capacity = 1,
                 },
-                Training(TestIds.TrainStr, "act.train_str", AttributeType.Strength, durationScale),
-                Training(TestIds.TrainAgi, "act.train_agi", AttributeType.Technique, durationScale),
-                Training(TestIds.TrainTou, "act.train_tou", AttributeType.Endurance, durationScale),
+                Training(TestIds.TrainStr, "act.train_str", AttributeType.Strength, durationScale, pace),
+                Training(TestIds.TrainAgi, "act.train_agi", AttributeType.Technique, durationScale, pace),
+                Training(TestIds.TrainTou, "act.train_tou", AttributeType.Endurance, durationScale, pace),
                 new ActivityDefinition
                 {
                     Id = TestIds.Sleep, NameKey = "act.sleep", Kind = ActivityKind.Sleep,
-                    DurationMs = Ms(15_000, durationScale), EnergyCost = 0, SatietyCost = 0, BaseOutput = 25, Capacity = 1,
+                    DurationMs = Ms(15_000, durationScale / pace), EnergyCost = 0, SatietyCost = 0, BaseOutput = Per(25, pace), Capacity = 1,
                 },
             },
             Upgrades = new[]
@@ -210,10 +211,13 @@ namespace TrashCats.Tests
 
         private static long Ms(long ms, float scale) => (long)(ms * scale);
 
-        private static ActivityDefinition Training(ActivityId id, string nameKey, AttributeType attribute, float durationScale) => new ActivityDefinition
+        // the shipped cycles run 1.5 times quicker (2026-10-16) and pay proportionally less, rounded
+        private static int Per(int value, float pace) => (int)Math.Round(value / pace, MidpointRounding.AwayFromZero);
+
+        private static ActivityDefinition Training(ActivityId id, string nameKey, AttributeType attribute, float durationScale, float pace) => new ActivityDefinition
         {
             Id = id, NameKey = nameKey, Kind = ActivityKind.Train, TrainedAttribute = attribute,
-            DurationMs = Ms(30_000, durationScale), EnergyCost = 15, SatietyCost = 14, BaseOutput = 10, Capacity = 1,
+            DurationMs = Ms(30_000, durationScale / pace), EnergyCost = Per(15, pace), SatietyCost = Per(14, pace), BaseOutput = Per(10, pace), Capacity = 1,
         };
 
         private static UpgradeDefinition Station(UpgradeId id, string nameKey, AttributeType attribute) => new UpgradeDefinition

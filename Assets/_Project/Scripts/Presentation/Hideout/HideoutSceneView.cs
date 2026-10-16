@@ -83,6 +83,7 @@ namespace TrashCats.Presentation.Hideout
 
             _subscriptions.Add(bus.Subscribe<ActivityStarted>(e => { if (!e.IsRepeat) LayoutTokens(true); }));
             _subscriptions.Add(bus.Subscribe<ActivityStopped>(_ => LayoutTokens(true)));
+            _subscriptions.Add(bus.Subscribe<AttributeLevelUp>(e => _levelUps[e.CatId] = Time.frameCount));
             _subscriptions.Add(bus.Subscribe<ActivityCycleCompleted>(OnCycleCompleted));
             _subscriptions.Add(bus.Subscribe<UpgradePurchased>(e =>
             {
@@ -122,6 +123,7 @@ namespace TrashCats.Presentation.Hideout
                 var working = cat.Activity.IsWorking;
                 var visible = token.Root.gameObject.activeInHierarchy;
                 HeldProps(token, visible);
+                ActivitySounds(token, visible);
                 NextBenchVariant(token);
                 var bar = working && (visible || token.Spot.Hidden) && token.Plate != null;
                 if (token.Progress.Rect.gameObject.activeSelf != bar)
@@ -153,6 +155,13 @@ namespace TrashCats.Presentation.Hideout
             }
 
 
+            // rustling and clinks from the dumpster while someone digs in it
+            if (_rummaging > 0 && _root.gameObject.activeInHierarchy && (_rummageSound -= Time.deltaTime) <= 0f)
+            {
+                _rummageSound = UnityEngine.Random.Range(1.1f, 1.7f);
+                Sound?.Invoke("hid_rummage", 1f);
+            }
+
             // junk tumbles out of the dumpster while someone rummages in it
             if (_rummaging > 0 && _dumpster != null && (_junkTimer -= Time.deltaTime) <= 0f)
             {
@@ -169,6 +178,56 @@ namespace TrashCats.Presentation.Hideout
         }
 
         private float Scale => _root.lossyScale.x;
+
+        /// <summary>A sound to play (key, volume): the activities' own noises in time with the animation.</summary>
+        public event Action<string, float> Sound;
+
+        private float _rummageSound;
+
+        /// <summary>
+        /// The skipping rope slaps the ground when it passes under the feet (half way through its turn); the barbell's
+        /// cans rattle as every press starts upwards (the clip starts over).
+        /// </summary>
+        private void ActivitySounds(CatToken token, bool visible)
+        {
+            var clip = token.Spot.Clip;
+            if (!visible || (clip != HideoutLayout.CatClip.Rope && clip != HideoutLayout.CatClip.Bench) || token.Flipbook.Clip == null)
+            {
+                token.SoundPhase = -1f;
+                return;
+            }
+            var phase = token.Flipbook.Phase;
+            var last = token.SoundPhase;
+            token.SoundPhase = phase;
+            if (last < 0f)
+                return;
+            if (clip == HideoutLayout.CatClip.Rope && last < 0.5f && phase >= 0.5f)
+                Sound?.Invoke("hid_rope", 1f);
+            else if (clip == HideoutLayout.CatClip.Bench && phase < last - 0.5f)
+                Sound?.Invoke("hid_bench", 1f);
+        }
+
+        /// <summary>
+        /// Dev: where the picture and every visible cat are on screen (px) and which frames the cat plays, one line each:
+        /// "picture x0 y0 x1 y1" and "cat id clip x0 y0 x1 y1 flipped frame,frame,..." (Tools/popup_points.py).
+        /// </summary>
+        public string DevDescribe()
+        {
+            var sb = new System.Text.StringBuilder();
+            _frame.GetWorldCorners(_corners);
+            sb.AppendLine($"picture {_corners[0].x:F1} {_corners[0].y:F1} {_corners[2].x:F1} {_corners[2].y:F1}");
+            foreach (var pair in _tokens)
+            {
+                var token = pair.Value;
+                if (!token.Root.gameObject.activeInHierarchy) continue;
+                token.Root.GetWorldCorners(_corners);
+                var (clip, _) = ClipFor(token, token.Spot.Clip);
+                var frames = clip?.frames == null ? "" : string.Join(",", clip.frames.Select(f => f.name));
+                var flipped = token.Image.rectTransform.localScale.x < 0f ? 1 : 0;
+                sb.AppendLine($"cat {pair.Key.Value} {token.Spot.Clip} {_corners[0].x:F1} {_corners[0].y:F1} {_corners[2].x:F1} {_corners[2].y:F1} {flipped} {frames}");
+            }
+            return sb.ToString();
+        }
 
         /// <summary>World position of a point given in 0..1 of a (possibly rotated) rect.</summary>
         private Vector3 Point(RectTransform rect, Vector2 at)
@@ -408,6 +467,10 @@ namespace TrashCats.Presentation.Hideout
                     box.raycastTarget = true;
                     box.gameObject.AddComponent<Button>().onClick.AddListener(() => _onStationTapped(id));
                     box.name = "Station_" + id;
+                    // the plate opens the upgrade too
+                    var plateImage = text.transform.parent.GetComponent<Image>();
+                    plateImage.raycastTarget = true;
+                    plateImage.gameObject.AddComponent<Button>().onClick.AddListener(() => _onStationTapped(id));
                 }
             }
         }
@@ -448,12 +511,43 @@ namespace TrashCats.Presentation.Hideout
             return text;
         }
 
-        /// <summary>Sizes a station plate to its icon and level (just the icon when there is no level).</summary>
-        private static void FitPlate(TMP_Text text)
+        private const float PlateArrow = 44f;
+
+        /// <summary>
+        /// Sizes a station plate to its icon and level (just the icon when there is no level); the green arrow of an
+        /// affordable upgrade stands after the level.
+        /// </summary>
+        private static void FitPlate(TMP_Text text, Image arrow = null)
         {
             // nearly square: the icon sits well inside the frame
             var width = string.IsNullOrEmpty(text.text) ? 0f : text.GetPreferredValues(text.text).x + 6f;
-            ((RectTransform)text.transform.parent).sizeDelta = new Vector2(Mathf.Max(PlateHeight, PlatePad * 2f + PlateIcon + width), PlateHeight);
+            var withArrow = arrow != null && arrow.gameObject.activeSelf;
+            if (withArrow)
+                arrow.rectTransform.anchoredPosition = new Vector2(PlatePad + PlateIcon + 6f + width + PlateArrow * 0.5f, 0f);
+            var extra = withArrow ? PlateArrow + 4f : 0f;
+            ((RectTransform)text.transform.parent).sizeDelta = new Vector2(Mathf.Max(PlateHeight, PlatePad * 2f + PlateIcon + width + extra), PlateHeight);
+        }
+
+        /// <summary>The green arrow of an affordable upgrade on a station plate, gently pulsing (made on first use).</summary>
+        private Image UpgradeArrow(TMP_Text text, bool on)
+        {
+            var plate = text.transform.parent;
+            var arrow = plate.Find("UpgradeArrow")?.GetComponent<Image>();
+            if (arrow == null)
+            {
+                if (!on) return null;
+                arrow = Ui.Icon(plate, "upgrade_ready");
+                if (arrow == null) return null;
+                arrow.name = "UpgradeArrow";
+                arrow.raycastTarget = false;
+                var rt = arrow.rectTransform;
+                rt.anchorMin = rt.anchorMax = new Vector2(0f, 0.5f);
+                rt.pivot = new Vector2(0.5f, 0.5f);
+                rt.sizeDelta = new Vector2(PlateArrow, PlateArrow);
+                rt.DOScale(1.08f, 0.9f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo).SetLink(arrow.gameObject);
+            }
+            arrow.gameObject.SetActive(on);
+            return arrow;
         }
 
         private (string Label, UpgradeId? Upgrade) StationInfo(ActivityDefinition activity)
@@ -502,9 +596,9 @@ namespace TrashCats.Presentation.Hideout
         {
             if (!_upgradeLabels.TryGetValue(id, out var text))
                 return;
-            // the level; a green "+" when the upgrade is affordable now
-            text.text = Loc.T("hideout_scene_view.02", _session.World.GetUpgradeLevel(id), CanAfford(id) ? " <color=#8BE36B>+</color>" : "");
-            FitPlate(text);
+            // the level; a green arrow when the upgrade is affordable now
+            text.text = Loc.T("hideout_scene_view.02", _session.World.GetUpgradeLevel(id), "");
+            FitPlate(text, UpgradeArrow(text, CanAfford(id)));
         }
 
         private bool CanAfford(UpgradeId id)
@@ -755,37 +849,48 @@ namespace TrashCats.Presentation.Hideout
                 .SetLink(dust.gameObject);
         }
 
-        /// <summary>A few small puffs of dust fly out to both sides from under the feet of a cat landing on the ground.</summary>
-        private void LandingDust(RectTransform cat)
+        /// <summary>
+        /// A few small puffs of dust fly out to both sides from under each foot of a cat landing on the ground (each
+        /// cat's own feet, <see cref="HideoutLayout.RopeFeet"/>).
+        /// </summary>
+        private void LandingDust(CatToken token)
         {
             var sprite = Ui.Skin?.fxDust;
+            var cat = token.Root;
             if (sprite == null || !cat.gameObject.activeInHierarchy)
                 return;
-            var foot = new Vector2((cat.anchorMin.x + cat.anchorMax.x) * 0.5f, cat.anchorMin.y);
-            var feet = cat.rect.width * 0.18f;
-            for (var i = 0; i < 4; i++)
+            var flipped = token.Image.rectTransform.localScale.x < 0f;
+            var feet = HideoutLayout.RopeFeet(token.Art?.viewKey);
+            for (var f = 0; f < feet.Length; f++)
             {
-                var side = i % 2 == 0 ? -1f : 1f;
-                var dust = Ui.Panel(_frame, "Dust", new Color(1f, 1f, 1f, 0.85f));
-                dust.sprite = sprite;
-                dust.preserveAspect = true;
-                dust.raycastTarget = false;
-                dust.transform.SetSiblingIndex(cat.GetSiblingIndex() + 1);
-                var rt = dust.rectTransform;
-                rt.anchorMin = rt.anchorMax = foot;
-                rt.pivot = new Vector2(0.5f, 0.3f);
-                var size = UnityEngine.Random.Range(34f, 52f);
-                rt.sizeDelta = new Vector2(size, size);
-                rt.anchoredPosition = new Vector2(side * UnityEngine.Random.Range(0.2f, 0.8f) * feet, 0f);
-                rt.localScale = Vector3.one * 0.5f;
-                var to = rt.anchoredPosition + new Vector2(side * UnityEngine.Random.Range(45f, 85f), UnityEngine.Random.Range(6f, 22f));
-                var duration = UnityEngine.Random.Range(0.35f, 0.5f);
-                DOTween.Sequence()
-                    .Append(rt.DOAnchorPos(to, duration).SetEase(Ease.OutQuad))
-                    .Join(rt.DOScale(UnityEngine.Random.Range(1f, 1.3f), duration).SetEase(Ease.OutQuad))
-                    .Join(dust.DOFade(0f, duration).SetEase(Ease.InQuad))
-                    .OnComplete(() => UnityEngine.Object.Destroy(dust.gameObject))
-                    .SetLink(dust.gameObject);
+                var x = flipped ? 1f - feet[f].x : feet[f].x;
+                var foot = new Vector2(Mathf.Lerp(cat.anchorMin.x, cat.anchorMax.x, x), Mathf.Lerp(cat.anchorMin.y, cat.anchorMax.y, feet[f].y));
+                // the outer side of each foot gets the bigger puff
+                var outer = f == 0 ? -1f : 1f;
+                for (var i = 0; i < 2; i++)
+                {
+                    var side = i == 0 ? outer : -outer;
+                    var dust = Ui.Panel(_frame, "Dust", new Color(1f, 1f, 1f, 0.85f));
+                    dust.sprite = sprite;
+                    dust.preserveAspect = true;
+                    dust.raycastTarget = false;
+                    dust.transform.SetSiblingIndex(cat.GetSiblingIndex() + 1);
+                    var rt = dust.rectTransform;
+                    rt.anchorMin = rt.anchorMax = foot;
+                    rt.pivot = new Vector2(0.5f, 0.3f);
+                    var size = UnityEngine.Random.Range(30f, 46f) * (i == 0 ? 1f : 0.8f);
+                    rt.sizeDelta = new Vector2(size, size);
+                    rt.anchoredPosition = new Vector2(side * UnityEngine.Random.Range(4f, 12f), 0f);
+                    rt.localScale = Vector3.one * 0.5f;
+                    var to = rt.anchoredPosition + new Vector2(side * UnityEngine.Random.Range(35f, 70f) * (i == 0 ? 1f : 0.6f), UnityEngine.Random.Range(6f, 20f));
+                    var duration = UnityEngine.Random.Range(0.35f, 0.5f);
+                    DOTween.Sequence()
+                        .Append(rt.DOAnchorPos(to, duration).SetEase(Ease.OutQuad))
+                        .Join(rt.DOScale(UnityEngine.Random.Range(1f, 1.3f), duration).SetEase(Ease.OutQuad))
+                        .Join(dust.DOFade(0f, duration).SetEase(Ease.InQuad))
+                        .OnComplete(() => UnityEngine.Object.Destroy(dust.gameObject))
+                        .SetLink(dust.gameObject);
+                }
             }
         }
 
@@ -794,12 +899,13 @@ namespace TrashCats.Presentation.Hideout
         {
             var rope = token.Art?.rope;
             if (token.Spot.Clip == HideoutLayout.CatClip.Rope && rope?.contacts != null && System.Array.IndexOf(rope.contacts, frame) >= 0)
-                LandingDust(token.Root);
+                LandingDust(token);
             // the jab and the hook are the originally drawn frames 2 and 5
             var punch = token.Art?.canPunch;
             if (_can == null || token.Spot.Clip != HideoutLayout.CatClip.Punch || punch == null || (frame != punch.KeyFrame(2) && frame != punch.KeyFrame(5)))
                 return;
             _can.DOComplete();
+            Sound?.Invoke("hid_canpunch", frame == punch.KeyFrame(5) ? 1f : 0.8f);
             // hit from the right: the can swings to the left
             _can.DOPunchRotation(new Vector3(0, 0, frame == punch.KeyFrame(5) ? -16f : -10f), 0.55f, 4, 0.6f).SetLink(_can.gameObject);
             var star = Ui.Skin?.fxStar;
@@ -914,13 +1020,26 @@ namespace TrashCats.Presentation.Hideout
 
             var target = token.Spot.Hidden ? token.Away.Root : token.Root;
             target.DOPunchScale(Vector3.one * 0.15f, 0.3f, 6, 0.5f);
-            var text = e.Kind == ActivityKind.Train
-                ? $"+{e.Output} {Texts.AttributeGenitive(e.TrainedAttribute).ToLowerInvariant()}"
-                : Texts.Output(_session.Config.GetActivity(e.ActivityId), e.Output);
-            FloatingText.Spawn(_root, target, text, Texts.OutcomeIcon(_session.Config.GetActivity(e.ActivityId)));
+            var activity = _session.Config.GetActivity(e.ActivityId);
+            // over the station where the cats' heads are on average; a cat out of sight: over its portrait
+            Vector3 from;
+            if (!token.Spot.Hidden && HideoutLayout.PopupAt(activity) is Vector2 at)
+                from = Point(_frame, at);
+            else
+            {
+                target.GetWorldCorners(_corners);
+                from = (_corners[1] + _corners[2]) * 0.5f;
+            }
+            // the level-up is published right before its cycle's result (a battle's level-up is long gone by then)
+            var levelUp = e.Kind == ActivityKind.Train && _levelUps.TryGetValue(e.CatId, out var frame) && frame == Time.frameCount;
+            _levelUps.Remove(e.CatId);
+            ResultPopup.Spawn(_barLayer, from, e.Output, Texts.OutcomeIcon(activity), levelUp);
             if (e.Kind == ActivityKind.Scavenge || e.Kind == ActivityKind.Rummage)
                 Loot?.Invoke(target, e.Kind == ActivityKind.Scavenge ? "food" : "junk");
         }
+
+        /// <summary>Frame of each cat's last level-up.</summary>
+        private readonly Dictionary<CatId, int> _levelUps = new Dictionary<CatId, int>();
 
         /// <summary>Food or junk was brought in at this spot (the HUD flies it into its counter).</summary>
         public event Action<RectTransform, string> Loot;
@@ -938,6 +1057,8 @@ namespace TrashCats.Presentation.Hideout
             /// <summary>Bench press: the push-up variant played and the clip phase last tick (a drop = a rep ended).</summary>
             public int BenchVariant;
             public float BenchPhase;
+            /// <summary>Clip phase last tick for the rope's and the barbell's sounds (-1: not playing).</summary>
+            public float SoundPhase = -1f;
             public (RectTransform Root, TMP_Text Caption) Away;
             public Color BaseColor;
             public HideoutLayout.CatSpot Spot;
@@ -980,38 +1101,52 @@ namespace TrashCats.Presentation.Hideout
             background.r * 0.299f + background.g * 0.587f + background.b * 0.114f > 0.5f ? Palette.Ink : Palette.Paper;
     }
 
-    /// <summary>Rising, fading text above a target (cycle results).</summary>
-    public static class FloatingText
+    /// <summary>
+    /// A cycle's result over the station: "+7" and the icon of what was got on a small paper plate (a level-up adds its
+    /// badge), rising and fading.
+    /// </summary>
+    public static class ResultPopup
     {
-        public static void Spawn(RectTransform parent, RectTransform target, string text, string icon = null)
-        {
-            var label = Ui.Label(parent, text, 34, TextAnchor.MiddleCenter, Palette.Primary);
-            var sprite = icon != null ? Ui.Skin?.Icon(icon) : null;
-            if (sprite != null)
-            {
-                var picture = Ui.Panel(label.transform, "Icon", Color.white);
-                picture.sprite = sprite;
-                picture.preserveAspect = true;
-                picture.rectTransform.anchorMin = picture.rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
-                picture.rectTransform.sizeDelta = new Vector2(64, 64);
-                picture.rectTransform.anchoredPosition = new Vector2(-label.preferredWidth * 0.5f - 38f, 0);
-                picture.DOFade(0f, 1.1f).SetEase(Ease.InQuad).SetLink(picture.gameObject);
-            }
-            var rt = label.rectTransform;
-            rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 0.5f);
-            rt.sizeDelta = new Vector2(320, 50);
-            // above the target's head, wherever the target lives in the hierarchy
-            var corners = new Vector3[4];
-            target.GetWorldCorners(corners);
-            rt.position = (corners[1] + corners[2]) * 0.5f;
-            rt.anchoredPosition += new Vector2(0, 60);
-            label.Outlined();
+        // the number and the icons 10% smaller than first made (2026-10-16)
+        private const float Height = 67f;
+        private const float IconSize = 49f;
+        private const float Pad = 15f;
 
+        public static void Spawn(RectTransform parent, Vector3 from, int amount, string icon, bool levelUp)
+        {
+            var plate = Ui.Card(parent, "ResultPopup", CardStyle.Strip);
+            var rt = plate.rectTransform;
+            rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 0.5f);
+            rt.pivot = new Vector2(0.5f, 0f);
+            var label = Ui.Label(rt, "+" + amount, 41, TextAnchor.MiddleLeft, Palette.Ink, heading: true);
+            label.textWrappingMode = TextWrappingModes.NoWrap;
+            var textWidth = label.GetPreferredValues(label.text).x;
+            var x = Pad;
+            label.rectTransform.Place(new Vector2(0f, 0f), new Vector2(0f, 1f), new Vector2(x, 0f), new Vector2(x + textWidth, 0f));
+            x += textWidth + 6f;
+            foreach (var key in levelUp ? new[] { icon, "levelup" } : new[] { icon })
+            {
+                var picture = Ui.Icon(rt, key);
+                if (picture == null) continue;
+                picture.raycastTarget = false;
+                picture.rectTransform.anchorMin = picture.rectTransform.anchorMax = new Vector2(0f, 0.5f);
+                picture.rectTransform.pivot = new Vector2(0f, 0.5f);
+                picture.rectTransform.sizeDelta = new Vector2(IconSize, IconSize);
+                picture.rectTransform.anchoredPosition = new Vector2(x, 0f);
+                x += IconSize + 6f;
+            }
+            rt.sizeDelta = new Vector2(x - 6f + Pad, Height);
+            rt.position = from;
+
+            var group = plate.gameObject.AddComponent<CanvasGroup>();
+            group.blocksRaycasts = false;
+            rt.localScale = Vector3.one * 0.6f;
             DOTween.Sequence()
-                .Append(rt.DOAnchorPosY(rt.anchoredPosition.y + 90, 1.1f).SetEase(Ease.OutCubic))
-                .Join(label.DOFade(0f, 1.1f).SetEase(Ease.InQuad))
-                .OnComplete(() => UnityEngine.Object.Destroy(label.gameObject))
-                .SetLink(label.gameObject);
+                .Append(rt.DOScale(1f, 0.18f).SetEase(Ease.OutBack))
+                .Join(rt.DOAnchorPosY(rt.anchoredPosition.y + 110f, 1.4f).SetEase(Ease.OutCubic))
+                .Insert(0.8f, group.DOFade(0f, 0.6f).SetEase(Ease.InQuad))
+                .OnComplete(() => UnityEngine.Object.Destroy(plate.gameObject))
+                .SetLink(plate.gameObject);
         }
     }
 }

@@ -58,12 +58,24 @@ MonoBehaviour:
     clips:
     - {fileID: 8300000, guid: 7e630bc40f3c4c8999e523d71f989bed, type: 3}
     volume: 1
+  - key: hid_bench
+    clips:
+    - {fileID: 8300000, guid: ebf6ed632646e5718b077ad63011d07d, type: 3}
+    - {fileID: 8300000, guid: 3c73b62189c32f6fe84b280a4dc28bf1, type: 3}
+    - {fileID: 8300000, guid: fc5d6245f2537533f83d6c68fc196c85, type: 3}
+    volume: 0.35
   - key: hid_can
     clips:
     - {fileID: 8300000, guid: fcb93731211061dafb2493248cdbdd05, type: 3}
     - {fileID: 8300000, guid: ff9ffffd38d6cf2c995ee5a476220d7f, type: 3}
     - {fileID: 8300000, guid: 36d00c7dd62f176f797babb4d976f0d3, type: 3}
     volume: 1
+  - key: hid_canpunch
+    clips:
+    - {fileID: 8300000, guid: 5bfbc2a329b0850bdbae4b00d4b409c6, type: 3}
+    - {fileID: 8300000, guid: d708e1337191a634584fa24eee10e0a0, type: 3}
+    - {fileID: 8300000, guid: ab574ddc6bf656ed3a22c5d679f57271, type: 3}
+    volume: 0.4
   - key: hid_dumpster
     clips:
     - {fileID: 8300000, guid: a4ed37ae3fbb8e39690a07d0aad150b4, type: 3}
@@ -74,6 +86,12 @@ MonoBehaviour:
     clips:
     - {fileID: 8300000, guid: 8185423f5c9d99901851341877769289, type: 3}
     volume: 1
+  - key: hid_food
+    clips:
+    - {fileID: 8300000, guid: c61803973294ddc81ab281002571eed2, type: 3}
+    - {fileID: 8300000, guid: 268c820d5171ad6bc836a5772feb35a2, type: 3}
+    - {fileID: 8300000, guid: 2080eacbd32caaad7ae9a4e72bb1959c, type: 3}
+    volume: 0.8
   - key: hid_levelup
     clips:
     - {fileID: 8300000, guid: 2f80c1945e7ac8e88a648f71fb98934c, type: 3}
@@ -88,6 +106,18 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 08bd1ec2de7d3b31498eba225055b1ab, type: 3}
     - {fileID: 8300000, guid: d14a4089f44058513a3a518691066c80, type: 3}
     volume: 1
+  - key: hid_rope
+    clips:
+    - {fileID: 8300000, guid: 384fb750b356c49839d69d3a1567c52a, type: 3}
+    - {fileID: 8300000, guid: 571595878f686d29480df0afaafd0abb, type: 3}
+    - {fileID: 8300000, guid: 253e0c904d5470f208d3e0ba4cafee61, type: 3}
+    volume: 0.3
+  - key: hid_rummage
+    clips:
+    - {fileID: 8300000, guid: 8315a381e0e960d03904e37dae8b766b, type: 3}
+    - {fileID: 8300000, guid: f8c8e1c7ceb91d54d957ac0668131ebe, type: 3}
+    - {fileID: 8300000, guid: 182a31364fb54daaea5b189991ace0b7, type: 3}
+    volume: 0.35
   - key: hid_sleep
     clips:
     - {fileID: 8300000, guid: 0590f55b8c4c5c888806e0d481703f67, type: 3}

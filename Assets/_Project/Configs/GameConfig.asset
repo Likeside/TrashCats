@@ -83,55 +83,55 @@ MonoBehaviour:
   - id: act_scavenge
     nameKey: act.scavenge
     kind: 0
-    durationMs: 10000
-    energyCost: 10
-    satietyCost: 4
-    baseOutput: 3
+    durationMs: 6666
+    energyCost: 7
+    satietyCost: 3
+    baseOutput: 2
     trainedAttribute: 0
     capacity: 1
   - id: act_rummage
     nameKey: act.rummage
     kind: 1
-    durationMs: 12500
-    energyCost: 10
-    satietyCost: 4
-    baseOutput: 3
+    durationMs: 8333
+    energyCost: 7
+    satietyCost: 3
+    baseOutput: 2
     trainedAttribute: 0
     capacity: 1
   - id: act_train_str
     nameKey: act.train_str
     kind: 2
-    durationMs: 15000
-    energyCost: 15
-    satietyCost: 14
-    baseOutput: 10
+    durationMs: 10000
+    energyCost: 10
+    satietyCost: 9
+    baseOutput: 7
     trainedAttribute: 0
     capacity: 1
   - id: act_train_agi
     nameKey: act.train_agi
     kind: 2
-    durationMs: 15000
-    energyCost: 15
-    satietyCost: 14
-    baseOutput: 10
+    durationMs: 10000
+    energyCost: 10
+    satietyCost: 9
+    baseOutput: 7
     trainedAttribute: 1
     capacity: 1
   - id: act_train_tou
     nameKey: act.train_tou
     kind: 2
-    durationMs: 15000
-    energyCost: 15
-    satietyCost: 14
-    baseOutput: 10
+    durationMs: 10000
+    energyCost: 10
+    satietyCost: 9
+    baseOutput: 7
     trainedAttribute: 2
     capacity: 1
   - id: act_sleep
     nameKey: act.sleep
     kind: 3
-    durationMs: 7500
+    durationMs: 5000
     energyCost: 0
     satietyCost: 0
-    baseOutput: 25
+    baseOutput: 17
     trainedAttribute: 0
     capacity: 1
   upgrades:

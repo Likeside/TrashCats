@@ -428,11 +428,30 @@ namespace TrashCats.Presentation.UI
             Label = label;
         }
 
+        /// <summary>
+        /// The fill slides to a new value instead of jumping (energy, satiety, hp, grit); bars set every frame (cycle
+        /// progress, loading) leave it off.
+        /// </summary>
+        public bool Animated { get; set; }
+
+        private const float SlideSeconds = 0.35f;
+        private float _target = -1f;
+
         public void Set(float value01, string label = null)
         {
-            _fill.anchorMax = new Vector2(Mathf.Clamp01(value01), 1f);
+            value01 = Mathf.Clamp01(value01);
             if (label != null)
                 Label.text = label;
+            if (!Animated)
+            {
+                _fill.anchorMax = new Vector2(value01, 1f);
+                return;
+            }
+            if (Mathf.Approximately(value01, _target))
+                return;
+            _target = value01;
+            _fill.DOKill();
+            _fill.DOAnchorMax(new Vector2(value01, 1f), SlideSeconds).SetEase(Ease.OutCubic).SetLink(_fill.gameObject);
         }
     }
 

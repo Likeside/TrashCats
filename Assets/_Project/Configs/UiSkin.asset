@@ -117,6 +117,8 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 967f4f8ef6f05f95aba6388485997f7e, type: 3}
   - key: upgrade
     sprite: {fileID: 21300000, guid: 139baac32267849ef919cae74fc0551b, type: 3}
+  - key: upgrade_ready
+    sprite: {fileID: 21300000, guid: a58b107080a26f601b32a1b6d1abed49, type: 3}
   - key: victory
     sprite: {fileID: 21300000, guid: 07577f8a6799889578af90a078f9f615, type: 3}
   - key: xp

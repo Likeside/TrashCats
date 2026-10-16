@@ -1,0 +1,18 @@
+## arrow_b (1024x1024, refs: ref_upgrade.png)
+
+```
+Game UI icon in exactly the same hand-drawn style as the reference icon: a chunky upward arrow with a thick black ink outline, scratchy worn paint texture, subtle halftone dots, slight wobble of a hand-inked comic line. Same shape and proportions as the reference arrow, but painted a bright fresh GREEN (lime to grass green, lighter highlight on the upper left, darker green shading on the lower right) instead of yellow. Single centered arrow, nothing else, no text, no star. Flat solid pure magenta #FF00FF background filling the whole image, no shadow on the background.
+```
+
+## arrow_a (1024x1024, refs: ref_upgrade.png)
+
+```
+Game UI icon in exactly the same hand-drawn style as the reference icon: a chunky upward arrow with a thick black ink outline, scratchy worn paint texture, subtle halftone dots, slight wobble of a hand-inked comic line. Same shape and proportions as the reference arrow, but painted a bright fresh GREEN (lime to grass green, lighter highlight on the upper left, darker green shading on the lower right) instead of yellow. Single centered arrow, nothing else, no text, no star. Flat solid pure magenta #FF00FF background filling the whole image, no shadow on the background.
+```
+
+## arrow_c (1024x1024, refs: ref_upgrade.png)
+
+```
+Game UI icon in exactly the same hand-drawn style as the reference icon: a chunky upward arrow with a thick black ink outline, scratchy worn paint texture, subtle halftone dots, slight wobble of a hand-inked comic line. Same shape and proportions as the reference arrow, but painted a bright fresh GREEN (lime to grass green, lighter highlight on the upper left, darker green shading on the lower right) instead of yellow. Single centered arrow, nothing else, no text, no star. Flat solid pure magenta #FF00FF background filling the whole image, no shadow on the background.
+```
+

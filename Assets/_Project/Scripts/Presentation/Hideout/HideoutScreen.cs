@@ -14,7 +14,7 @@ namespace TrashCats.Presentation.Hideout
     public sealed class HideoutScreen : IDisposable
     {
         public const float HudHeight = 110f;
-        public const float NavHeight = 160f;
+        public const float NavHeight = 176f; // +10% (2026-10-16)
         private const float PanelHeight = 430f + CatPanelView.ExtraHeight;
 
         private readonly HudView _hud;
@@ -64,6 +64,15 @@ namespace TrashCats.Presentation.Hideout
         }
 
         public void RebuildCats() => _scene.SyncCats();
+
+        public string DevDescribeScene() => _scene.DevDescribe();
+
+        /// <summary>The activities' sounds in the yard (key, volume).</summary>
+        public event Action<string, float> Sound
+        {
+            add => _scene.Sound += value;
+            remove => _scene.Sound -= value;
+        }
 
         public void Toast(string message, string icon = null) => _toast.Show(message, icon);
 

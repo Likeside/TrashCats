@@ -169,9 +169,11 @@ namespace TrashCats.Presentation.Hideout
                 _progress.Rect.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(51, -218), new Vector2(-6, -206)); // ends like the bars below
 
                 _energy = Ui.Bar(content, "Energy", Palette.Energy, "energy");
+                _energy.Animated = true;
                 _energy.Rect.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(50, -258), new Vector2(-6, -226));
 
                 _satiety = Ui.Bar(content, "Satiety", Palette.Satiety, "satiety");
+                _satiety.Animated = true;
                 _satiety.Rect.Place(new Vector2(0, 1), new Vector2(1, 1), new Vector2(50, -298), new Vector2(-6, -266));
 
                 _feed = Ui.Button(content, "Feed" + index, Loc.T("cat_panel_view.01"), Palette.Primary, () =>

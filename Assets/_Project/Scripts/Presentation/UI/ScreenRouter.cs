@@ -27,15 +27,19 @@ namespace TrashCats.Presentation.UI
         public ScreenId Current { get; private set; }
         public event Action<ScreenId> Changed;
 
+        /// <summary>Inside of the tin panel's rim: left, bottom, right, top.</summary>
+        private static readonly Vector4 Rim = new Vector4(23, 27, 23, 18);
+
         public ScreenRouter(RectTransform navRoot)
         {
             _nav = navRoot.gameObject;
             Ui.Card(navRoot, "NavBack", CardStyle.Tin).rectTransform.Fill();
             _hideoutTab = Ui.Button(navRoot, "Tab_Hideout", Loc.T("screen_router.01"), Palette.Primary, () => Show(ScreenId.Hideout), 36);
-            // the tabs sit inside the tin panel's frame (they stuck out over it)
-            _hideoutTab.Rect.Place(Vector2.zero, new Vector2(0.5f, 1), new Vector2(26, 30), new Vector2(-8, -30));
+            // the tabs fill the tin panel's dark inside, up to its rim (hud_a: the rim is 44 px at the sides, 35 px on top,
+            // 53 px at the bottom, drawn at half size)
+            _hideoutTab.Rect.Place(Vector2.zero, new Vector2(0.5f, 1), new Vector2(Rim.x, Rim.y), new Vector2(-6, -Rim.w));
             _mapTab = Ui.Button(navRoot, "Tab_Map", Loc.T("screen_router.02"), Palette.Disabled, () => Show(ScreenId.Map), 36);
-            _mapTab.Rect.Place(new Vector2(0.5f, 0), Vector2.one, new Vector2(8, 30), new Vector2(-26, -30));
+            _mapTab.Rect.Place(new Vector2(0.5f, 0), Vector2.one, new Vector2(6, Rim.y), new Vector2(-Rim.z, -Rim.w));
             AddIcon(_hideoutTab, "home");
             AddIcon(_mapTab, "map");
         }

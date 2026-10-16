@@ -36,7 +36,8 @@ namespace TrashCats.Presentation.Hideout
             {
                 // the concept's top bar: a wide dark rounded bar; each resource is one centred block (icon + number on a plate)
                 var pill = Ui.Card(root, "HudPill", CardStyle.Tin);
-                pill.rectTransform.Place(new Vector2(0.02f, 0.06f), new Vector2(0.75f, 0.94f));
+                // centred on the screen; the settings gear sits in the top right corner (2026-10-16)
+                pill.rectTransform.Place(new Vector2(0.135f, 0.06f), new Vector2(0.865f, 0.94f));
                 pill.pixelsPerUnitMultiplier = 2.6f;
                 _resources = Group(pill.rectTransform, 0.04f, "food");
                 _junk = Group(pill.rectTransform, 0.52f, "junk");
@@ -45,7 +46,8 @@ namespace TrashCats.Presentation.Hideout
             if (onSettings != null)
             {
                 var settings = Ui.Button(root, "Hud_Settings", "", Palette.Secondary, onSettings);
-                settings.Rect.Place(new Vector2(0.75f, 0.12f), new Vector2(0.86f, 0.88f));
+                // as tall as the resource bar
+                settings.Rect.Place(new Vector2(0.87f, 0.06f), new Vector2(0.98f, 0.94f));
                 var gear = Ui.Icon(settings.Rect, "settings");
                 gear?.rectTransform.Place(new Vector2(0.18f, 0.18f), new Vector2(0.82f, 0.82f));
             }
@@ -53,7 +55,8 @@ namespace TrashCats.Presentation.Hideout
             if (onDebug != null)
             {
                 var debug = Ui.Button(root, "Debug", "DBG", Palette.Disabled, onDebug, 26);
-                debug.Rect.Place(new Vector2(0.87f, 0.12f), new Vector2(0.98f, 0.88f));
+                // editor only: under the settings gear
+                debug.Rect.Place(new Vector2(0.87f, -0.8f), new Vector2(0.98f, -0.04f));
             }
 
             Refresh();
