@@ -129,10 +129,10 @@ TextureImporter:
       name: ryzhy_bench_04_0
       rect:
         serializedVersion: 2
-        x: 79
-        y: 71
-        width: 333
-        height: 300
+        x: 27
+        y: 69
+        width: 363
+        height: 305
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

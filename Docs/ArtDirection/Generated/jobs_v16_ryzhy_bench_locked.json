@@ -1,0 +1,46 @@
+[
+ {
+  "name": "ryzhy_bench_slim_barbell_c",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v15_ryzhy_bench_slim/masked_ryzhy_slim2_base.png",
+   "Assets/_Project/Art/Characters/Ryzhy/HideIdle/ryzhy_hideidle_00.png",
+   "Docs/ArtDirection/Generated/raw_v15_ryzhy_bench_slim/ref_barbell.png"
+  ],
+  "prompt": "The FIRST image is a sprite sheet of 8 frames (2 rows x 4 columns, read left to right, top row first), all 8 frames are the same picture of the orange tabby tomcat Ryzhy lying on his back. Edit ONLY the masked area: redraw the arms so the 8 frames become ONE smooth bench-press push from the lowest point up: frame 1 stays as it is (the fists just above the chest), frames 2-8 push up in small, EVEN steps, frame 8 is the top: the fists above the head, the arms extended up but still a little bent at the elbows. Both front paws grip a BARBELL like the THIRD reference (a wooden stick with two bundles of tin cans tied with rope at its ends), always horizontal, the same size in every frame and fully visible, the fists hold the stick between the can bundles, about shoulder width apart, always at the same height as each other. The arms keep their natural length and thickness. VERY IMPORTANT: the body must NOT get longer or shorter and must not move: keep the head in exactly the same place, the face (same expression), the athletic body, the shoulders, the legs and the feet EXACTLY as they are in every frame (do not make him fatter), the barbell never covers the face. Colours, fur and line weight exactly like the SECOND reference. The background everywhere, also in the edited area, MUST be solid flat pure chroma-key GREEN (#00FF00), no black, no shadow, no scenery, no text, no frame numbers.",
+  "size": "1536x1024",
+  "mask": "Docs/ArtDirection/Generated/raw_v15_ryzhy_bench_slim/masked_ryzhy_slim2_mask.png"
+ },
+ {
+  "name": "ryzhy_bench_slim_barbell_d",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v15_ryzhy_bench_slim/masked_ryzhy_slim2_base.png",
+   "Assets/_Project/Art/Characters/Ryzhy/HideIdle/ryzhy_hideidle_00.png",
+   "Docs/ArtDirection/Generated/raw_v15_ryzhy_bench_slim/ref_barbell.png"
+  ],
+  "prompt": "The FIRST image is a sprite sheet of 8 frames (2 rows x 4 columns, read left to right, top row first), all 8 frames are the same picture of the orange tabby tomcat Ryzhy lying on his back. Edit ONLY the masked area: redraw the arms so the 8 frames become ONE smooth bench-press push from the lowest point up: frame 1 stays as it is (the fists just above the chest), frames 2-8 push up in small, EVEN steps, frame 8 is the top: the fists above the head, the arms extended up but still a little bent at the elbows. Both front paws grip a BARBELL like the THIRD reference (a wooden stick with two bundles of tin cans tied with rope at its ends), always horizontal, the same size in every frame and fully visible, the fists hold the stick between the can bundles, about shoulder width apart, always at the same height as each other. The arms keep their natural length and thickness. VERY IMPORTANT: the body must NOT get longer or shorter and must not move: keep the head in exactly the same place, the face (same expression), the athletic body, the shoulders, the legs and the feet EXACTLY as they are in every frame (do not make him fatter), the barbell never covers the face. Colours, fur and line weight exactly like the SECOND reference. The background everywhere, also in the edited area, MUST be solid flat pure chroma-key GREEN (#00FF00), no black, no shadow, no scenery, no text, no frame numbers.",
+  "size": "1536x1024",
+  "mask": "Docs/ArtDirection/Generated/raw_v15_ryzhy_bench_slim/masked_ryzhy_slim2_mask.png"
+ },
+ {
+  "name": "ryzhy_bench_slim_barbell_e",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v15_ryzhy_bench_slim/masked_ryzhy_slim2_base.png",
+   "Assets/_Project/Art/Characters/Ryzhy/HideIdle/ryzhy_hideidle_00.png",
+   "Docs/ArtDirection/Generated/raw_v15_ryzhy_bench_slim/ref_barbell.png"
+  ],
+  "prompt": "The FIRST image is a sprite sheet of 8 frames (2 rows x 4 columns, read left to right, top row first), all 8 frames are the same picture of the orange tabby tomcat Ryzhy lying on his back. Edit ONLY the masked area: redraw the arms so the 8 frames become ONE smooth bench-press push from the lowest point up: frame 1 stays as it is (the fists just above the chest), frames 2-8 push up in small, EVEN steps, frame 8 is the top: the fists above the head, the arms extended up but still a little bent at the elbows. Both front paws grip a BARBELL like the THIRD reference (a wooden stick with two bundles of tin cans tied with rope at its ends), always horizontal, the same size in every frame and fully visible, the fists hold the stick between the can bundles, about shoulder width apart, always at the same height as each other. The arms keep their natural length and thickness. VERY IMPORTANT: the body must NOT get longer or shorter and must not move: keep the head in exactly the same place, the face (same expression), the athletic body, the shoulders, the legs and the feet EXACTLY as they are in every frame (do not make him fatter), the barbell never covers the face. Colours, fur and line weight exactly like the SECOND reference. The background everywhere, also in the edited area, MUST be solid flat pure chroma-key GREEN (#00FF00), no black, no shadow, no scenery, no text, no frame numbers.",
+  "size": "1536x1024",
+  "mask": "Docs/ArtDirection/Generated/raw_v15_ryzhy_bench_slim/masked_ryzhy_slim2_mask.png"
+ },
+ {
+  "name": "ryzhy_bench_slim_barbell_f",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v15_ryzhy_bench_slim/masked_ryzhy_slim2_base.png",
+   "Assets/_Project/Art/Characters/Ryzhy/HideIdle/ryzhy_hideidle_00.png",
+   "Docs/ArtDirection/Generated/raw_v15_ryzhy_bench_slim/ref_barbell.png"
+  ],
+  "prompt": "The FIRST image is a sprite sheet of 8 frames (2 rows x 4 columns, read left to right, top row first), all 8 frames are the same picture of the orange tabby tomcat Ryzhy lying on his back. Edit ONLY the masked area: redraw the arms so the 8 frames become ONE smooth bench-press push from the lowest point up: frame 1 stays as it is (the fists just above the chest), frames 2-8 push up in small, EVEN steps, frame 8 is the top: the fists above the head, the arms extended up but still a little bent at the elbows. Both front paws grip a BARBELL like the THIRD reference (a wooden stick with two bundles of tin cans tied with rope at its ends), always horizontal, the same size in every frame and fully visible, the fists hold the stick between the can bundles, about shoulder width apart, always at the same height as each other. The arms keep their natural length and thickness. VERY IMPORTANT: the body must NOT get longer or shorter and must not move: keep the head in exactly the same place, the face (same expression), the athletic body, the shoulders, the legs and the feet EXACTLY as they are in every frame (do not make him fatter), the barbell never covers the face. Colours, fur and line weight exactly like the SECOND reference. The background everywhere, also in the edited area, MUST be solid flat pure chroma-key GREEN (#00FF00), no black, no shadow, no scenery, no text, no frame numbers.",
+  "size": "1536x1024",
+  "mask": "Docs/ArtDirection/Generated/raw_v15_ryzhy_bench_slim/masked_ryzhy_slim2_mask.png"
+ }
+]
