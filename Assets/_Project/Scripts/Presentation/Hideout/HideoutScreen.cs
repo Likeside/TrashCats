@@ -40,7 +40,7 @@ namespace TrashCats.Presentation.Hideout
 
             _sheet = new ActivitySheet(session, overlayRoot, overlays, showResult, details.Open, art);
             _hud = new HudView(session, hudRect, debugPanel != null ? debugPanel.Open : (Action)null, onSettings);
-            _scene = new HideoutSceneView(session, services.Bus, sceneRect, _sheet.Open, upgrades.Open, art);
+            _scene = new HideoutSceneView(session, services.Bus, sceneRect, upgrades.Open, art);
             _scene.Loot += _hud.Collect;
             _panel = new CatPanelView(session, panelRect, _sheet.Open, showResult, art);
             _toast = new ToastView(sceneRect);

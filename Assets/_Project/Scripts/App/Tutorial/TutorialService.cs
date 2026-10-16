@@ -248,8 +248,9 @@ namespace TrashCats.App
             if (!IsDone(Train))
                 return new TutorialStep(Train, first.Id);
 
-            // junk for the upgrades: once a training cycle has shown how training works
-            if (!IsDone(Rummage) && IsDone(Trained))
+            // junk for the upgrades: once a training cycle has shown how training works, and the cat has the energy to
+            // go (a tired one is put to sleep first, else the step points at a card whose sheet cannot send it)
+            if (!IsDone(Rummage) && IsDone(Trained) && first.Energy >= TiredEnergy)
                 return new TutorialStep(Rummage, first.Id, soft: true);
 
             if (!IsDone(Equip))

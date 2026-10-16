@@ -56,11 +56,12 @@ namespace TrashCats.Tests
         }
 
         [UnityTest]
-        public IEnumerator TappingCatAndActivity_StartsActivity()
+        public IEnumerator TappingCatCardAndActivity_StartsActivity()
         {
             yield return BootGame();
 
-            Click("Cat_cat_ryzhy");
+            // the cats in the yard are not tapped: the card opens the activity sheet
+            Click("CatCard0");
             yield return null;
             Click("Activity_act_scavenge");
             yield return null;

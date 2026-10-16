@@ -66,6 +66,7 @@ namespace TrashCats.Presentation.UI
         {
             "upg_boxes" => Loc.T("texts.24"),
             "upg_dumpster" => Loc.T("texts.25"),
+            "upg_street" => Loc.T("texts.88"),
             "upg_can" => Loc.T("texts.26"),
             "upg_mouse" => Loc.T("texts.27"),
             "upg_wheel" => Loc.T("texts.28"),

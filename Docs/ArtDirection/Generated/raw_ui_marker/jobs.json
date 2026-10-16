@@ -1,0 +1,29 @@
+[
+ {
+  "name": "marker_loop_a",
+  "refs": [
+   "Assets/_Project/Art/UI/pointer.png",
+   "Assets/_Project/Art/UI/burst.png"
+  ],
+  "prompt": "Game UI element for a mobile game in a gritty comic-book street style (cats living in a back-alley trash hideout). One single item centred on the image: an EMPTY rounded-rectangle loop drawn freehand with ONE thick stroke of a red-orange felt-tip MARKER, like someone quickly circled something on a poster to point it out. Wide landscape shape (about 3 times wider than tall), the stroke is uneven in thickness, slightly wobbly, with the two ends of the stroke OVERLAPPING a little at the top right corner and the end flicking out. The marker stroke has a thin black ink outline on both sides (comic style), small dry-brush streaks inside the stroke, otherwise flat colour. The four sides are fairly straight so the shape can be stretched (9-slice), the corners are rounded. The inside of the loop is EMPTY. No text, no arrow, no shadow, no other objects. IMPORTANT: the background, INCLUDING THE INSIDE of the loop, MUST be solid flat pure chroma-key GREEN (#00FF00). Do not use green on the stroke.",
+  "size": "1536x1024"
+ },
+ {
+  "name": "marker_loop_b",
+  "refs": [
+   "Assets/_Project/Art/UI/pointer.png",
+   "Assets/_Project/Art/UI/burst.png"
+  ],
+  "prompt": "Game UI element for a mobile game in a gritty comic-book street style (cats living in a back-alley trash hideout). One single item centred on the image: an EMPTY rounded-rectangle loop drawn freehand with ONE thick stroke of a red-orange felt-tip MARKER, like someone quickly circled something on a poster to point it out. Wide landscape shape (about 3 times wider than tall), the stroke is uneven in thickness, slightly wobbly, with the two ends of the stroke OVERLAPPING a little at the top right corner and the end flicking out. The marker stroke has a thin black ink outline on both sides (comic style), small dry-brush streaks inside the stroke, otherwise flat colour. The four sides are fairly straight so the shape can be stretched (9-slice), the corners are rounded. The inside of the loop is EMPTY. No text, no arrow, no shadow, no other objects. IMPORTANT: the background, INCLUDING THE INSIDE of the loop, MUST be solid flat pure chroma-key GREEN (#00FF00). Do not use green on the stroke.",
+  "size": "1536x1024"
+ },
+ {
+  "name": "marker_loop_c",
+  "refs": [
+   "Assets/_Project/Art/UI/pointer.png",
+   "Assets/_Project/Art/UI/burst.png"
+  ],
+  "prompt": "Game UI element for a mobile game in a gritty comic-book street style (cats living in a back-alley trash hideout). One single item centred on the image: an EMPTY rounded-rectangle loop drawn freehand with ONE thick stroke of a red-orange felt-tip MARKER, like someone quickly circled something on a poster to point it out. Wide landscape shape (about 3 times wider than tall), the stroke is uneven in thickness, slightly wobbly, with the two ends of the stroke OVERLAPPING a little at the top right corner and the end flicking out. The marker stroke has a thin black ink outline on both sides (comic style), small dry-brush streaks inside the stroke, otherwise flat colour. The four sides are fairly straight so the shape can be stretched (9-slice), the corners are rounded. The inside of the loop is EMPTY. No text, no arrow, no shadow, no other objects. IMPORTANT: the background, INCLUDING THE INSIDE of the loop, MUST be solid flat pure chroma-key GREEN (#00FF00). Do not use green on the stroke.",
+  "size": "1536x1024"
+ }
+]

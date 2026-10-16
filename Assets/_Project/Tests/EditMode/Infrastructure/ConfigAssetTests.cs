@@ -22,10 +22,11 @@ namespace TrashCats.Tests
         [Test]
         public void GameConfigAsset_MatchesTestConfig()
         {
-            // Unit tests use TestConfigs.Default(); this keeps it identical to what the game ships with.
+            // Unit tests use TestConfigs.Default() (the same but for the activity durations); this keeps it identical to
+            // what the game ships with.
             var asset = AssetDatabase.LoadAssetAtPath<GameConfigAsset>(AssetPath);
 
-            Assert.That(ConfigDescription.Of(ConfigLoader.Load(asset)), Is.EqualTo(ConfigDescription.Of(TestConfigs.Default())));
+            Assert.That(ConfigDescription.Of(ConfigLoader.Load(asset)), Is.EqualTo(ConfigDescription.Of(TestConfigs.Shipped())));
         }
 
         [Test]

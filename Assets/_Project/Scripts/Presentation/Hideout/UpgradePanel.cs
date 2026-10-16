@@ -175,7 +175,7 @@ namespace TrashCats.Presentation.Hideout
         private static string EffectName(UpgradeDefinition definition) => definition.Effect switch
         {
             SleepEnergyBonusEffect => Loc.T("upgrade_panel.16"),
-            ResourceOutputBonusEffect => Loc.T("upgrade_panel.17"),
+            ResourceOutputBonusEffect e => Loc.T(e.FoodPerLevel.Any(v => v > 0) ? "upgrade_panel.20" : "upgrade_panel.21"),
             TrainingXpBonusEffect e => Loc.T("upgrade_panel.18", Texts.AttributeGenitive(e.Attribute).ToLowerInvariant()),
             _ => "",
         };
@@ -184,11 +184,12 @@ namespace TrashCats.Presentation.Hideout
         private static (string Icon, int Value, string Suffix)[] Values(GameConfig config, UpgradeDefinition definition, int level) => definition.Effect switch
         {
             SleepEnergyBonusEffect e => new[] { ("energy", Base(config, ActivityKind.Sleep) + e.BonusPerLevel[level], "") },
+            // the street's upgrade brings food, the dumpster's junk: only what the upgrade changes
             ResourceOutputBonusEffect e => new[]
             {
                 ("food", Base(config, ActivityKind.Scavenge) + e.FoodPerLevel[level], ""),
                 ("junk", Base(config, ActivityKind.Rummage) + e.JunkPerLevel[level], ""),
-            },
+            }.Where(v => v.Item1 == "food" ? e.FoodPerLevel.Any(x => x > 0) : e.JunkPerLevel.Any(x => x > 0)).ToArray(),
             TrainingXpBonusEffect e => new[] { (Texts.AttributeIcon(e.Attribute), e.PctPerLevel[level], Loc.T("upgrade_panel.19")) },
             _ => Array.Empty<(string, int, string)>(),
         };

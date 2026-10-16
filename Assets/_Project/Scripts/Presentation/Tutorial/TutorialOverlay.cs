@@ -14,10 +14,10 @@ namespace TrashCats.Presentation.Tutorial
 {
     /// <summary>
     /// Guided-chain overlay (Docs/GDD/UI_UX.md §11): points at the widget the step asks for with the cat-paw pointer and
-    /// a ring, and the cat the step is about says one short phrase in its own voice (its portrait by the bubble);
+    /// a marker loop, and the cat the step is about says one short phrase in its own voice (its portrait by the bubble);
     /// "Пропустить обучение" ends the chain. The first steps also dim everything else and block taps outside the target;
     /// soft steps only point. Widgets are found by object name, deepest first (e.g. the activity button if the sheet is
-    /// open, else the cat in the yard, else its card). Of the waiting steps the first one whose target is on screen is
+    /// open, else the cat's card). Of the waiting steps the first one whose target is on screen is
     /// shown; the overlay hides while another modal covers the target or the target is missing / disabled.
     /// </summary>
     public sealed class TutorialOverlay : IDisposable
@@ -35,8 +35,10 @@ namespace TrashCats.Presentation.Tutorial
         private readonly RoundPicture _speaker;
         private readonly Func<CatId, Sprite> _portrait;
         private readonly RectTransform _frame;
-        private readonly RectTransform[] _ring = new RectTransform[4];
-        private const float RingWidth = 7f;
+        /// <summary>A loop drawn round the hole with a felt-tip marker (UiSkin.tutorialMarker, 9-slice).</summary>
+        private readonly Image _marker;
+        /// <summary>How far the loop stands out of the hole: its stroke runs over the hole's edge.</summary>
+        private const float MarkerOutset = 16f;
         private readonly RectTransform _pointer;
         private readonly RectTransform _bubble;
         private readonly TMP_Text _text;
@@ -67,10 +69,14 @@ namespace TrashCats.Presentation.Tutorial
                 _blockers[i] = _blockerImages[i].rectTransform;
             }
 
-            // a bright yellow ring around the hole; the target itself stays untouched and tappable
+            // a marker loop round the hole, as if circled on a poster; the target itself stays untouched and tappable
             _frame = Ui.Rect(_root, "Frame");
-            for (var i = 0; i < 4; i++)
-                _ring[i] = Ui.Panel(_frame, "Ring" + i, Palette.Primary).rectTransform;
+            _marker = Ui.Panel(_frame, "Marker", Color.white);
+            _marker.sprite = Ui.Skin?.tutorialMarker;
+            _marker.type = Image.Type.Sliced;
+            _marker.pixelsPerUnitMultiplier = 1.6f;
+            _marker.enabled = _marker.sprite != null;
+            _marker.rectTransform.Place(Vector2.zero, Vector2.one, new Vector2(-MarkerOutset, -MarkerOutset), new Vector2(MarkerOutset, MarkerOutset));
 
             var pointerSprite = Ui.Skin?.pointer;
             var pointer = Ui.Panel(_root, "Pointer", pointerSprite != null ? Color.white : Palette.Primary);
@@ -128,6 +134,7 @@ namespace TrashCats.Presentation.Tutorial
                 return;
             }
 
+            DrawMarker();
             _text.text = Phrase(step);
             _speaker.Backdrop.color = CatColors.Backdrop(step.Cat);
             _speaker.SetPicture(_portrait?.Invoke(step.Cat));
@@ -217,12 +224,6 @@ namespace TrashCats.Presentation.Tutorial
             Set(_blockers[2], new Vector2(0, min.y), new Vector2(min.x, max.y));        // left
             Set(_blockers[3], new Vector2(max.x, min.y), new Vector2(size.x, max.y));   // right
             Set(_frame, min, max);
-            var w = max.x - min.x;
-            var h = max.y - min.y;
-            Set(_ring[0], new Vector2(-RingWidth, h), new Vector2(w + RingWidth, h + RingWidth));
-            Set(_ring[1], new Vector2(-RingWidth, -RingWidth), new Vector2(w + RingWidth, 0));
-            Set(_ring[2], new Vector2(-RingWidth, 0), new Vector2(0, h));
-            Set(_ring[3], new Vector2(w, 0), new Vector2(w + RingWidth, h));
 
             // pointer above the hole pointing down, or below it pointing up when the hole is high on the screen
             var centre = (min + max) * 0.5f;
@@ -245,6 +246,25 @@ namespace TrashCats.Presentation.Tutorial
 
         private float _bob;
 
+        /// <summary>The loop slaps on round the new target, then breathes a little.</summary>
+        private void DrawMarker()
+        {
+            var rt = _marker.rectTransform;
+            rt.DOKill();
+            _marker.DOKill();
+            rt.localScale = Vector3.one * 1.12f;
+            _marker.color = new Color(1f, 1f, 1f, 0f);
+            DOTween.Sequence()
+                .Append(rt.DOScale(1f, 0.28f).SetEase(Ease.OutBack))
+                .Join(_marker.DOFade(1f, 0.18f))
+                .SetUpdate(true)
+                .SetTarget(rt)
+                .SetLink(rt.gameObject)
+                // a sequence cannot hold an endless tween: the breathing starts after the slap
+                .OnComplete(() => rt.DOScale(1.03f, 0.7f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo).SetUpdate(true)
+                    .SetTarget(rt).SetLink(rt.gameObject));
+        }
+
         private static void Set(RectTransform rt, Vector2 min, Vector2 max)
         {
             rt.anchorMin = rt.anchorMax = Vector2.zero;
@@ -258,21 +278,20 @@ namespace TrashCats.Presentation.Tutorial
             var config = _session.Config;
             var cats = _session.World.Cats;
             var index = Math.Max(0, cats.ToList().FindIndex(c => c.Id.Equals(step.Cat)));
+            // the cat's card (the cats in the yard are not tapped)
             var card = "CatCard" + index;
-            // the cat right in the yard first (tapping it opens the same sheet as its card)
-            var yard = "Cat_" + step.Cat;
             string Activity(ActivityKind kind, AttributeType? attribute = null) =>
                 "Activity_" + config.Activities.First(a => a.Kind == kind && (attribute == null || a.TrainedAttribute == attribute)).Id;
 
             switch (step.Id)
             {
-                case TutorialService.Scavenge: return new[] { Activity(ActivityKind.Scavenge), yard, card };
+                case TutorialService.Scavenge: return new[] { Activity(ActivityKind.Scavenge), card };
                 case TutorialService.Bar: return new[] { "Progress_" + step.Cat };
                 case TutorialService.Feed: return new[] { "Sheet_Feed", "Feed" + index };
-                case TutorialService.Train: return new[] { Activity(ActivityKind.Train, AttributeType.Strength), yard, card };
-                case TutorialService.Rummage: return new[] { Activity(ActivityKind.Rummage), yard, card };
+                case TutorialService.Train: return new[] { Activity(ActivityKind.Train, AttributeType.Strength), card };
+                case TutorialService.Rummage: return new[] { Activity(ActivityKind.Rummage), card };
                 case TutorialService.Equip: return new[] { "Skill_" + step.Skill, "Sheet_Details", card };
-                case TutorialService.Sleep: return new[] { Activity(ActivityKind.Sleep), yard, card };
+                case TutorialService.Sleep: return new[] { Activity(ActivityKind.Sleep), card };
                 case TutorialService.Fight: return new[] { "Prep_Fight", "Node_" + step.Territory, "Tab_Map" };
                 case TutorialService.Upgrade: return new[] { "Upgrade_Buy", "Station_" + step.Upgrade };
                 case TutorialService.Order: return new[] { "Prep_Queue" };

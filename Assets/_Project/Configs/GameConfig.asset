@@ -83,7 +83,7 @@ MonoBehaviour:
   - id: act_scavenge
     nameKey: act.scavenge
     kind: 0
-    durationMs: 20000
+    durationMs: 10000
     energyCost: 10
     satietyCost: 4
     baseOutput: 3
@@ -92,7 +92,7 @@ MonoBehaviour:
   - id: act_rummage
     nameKey: act.rummage
     kind: 1
-    durationMs: 25000
+    durationMs: 12500
     energyCost: 10
     satietyCost: 4
     baseOutput: 3
@@ -101,7 +101,7 @@ MonoBehaviour:
   - id: act_train_str
     nameKey: act.train_str
     kind: 2
-    durationMs: 30000
+    durationMs: 15000
     energyCost: 15
     satietyCost: 14
     baseOutput: 10
@@ -110,7 +110,7 @@ MonoBehaviour:
   - id: act_train_agi
     nameKey: act.train_agi
     kind: 2
-    durationMs: 30000
+    durationMs: 15000
     energyCost: 15
     satietyCost: 14
     baseOutput: 10
@@ -119,7 +119,7 @@ MonoBehaviour:
   - id: act_train_tou
     nameKey: act.train_tou
     kind: 2
-    durationMs: 30000
+    durationMs: 15000
     energyCost: 15
     satietyCost: 14
     baseOutput: 10
@@ -128,7 +128,7 @@ MonoBehaviour:
   - id: act_sleep
     nameKey: act.sleep
     kind: 3
-    durationMs: 15000
+    durationMs: 7500
     energyCost: 0
     satietyCost: 0
     baseOutput: 25
@@ -148,8 +148,16 @@ MonoBehaviour:
     costs: 140000003c000000
     effect: 1
     valuesPerLevel: 
-    foodPerLevel: 000000000100000002000000
+    foodPerLevel: 000000000000000000000000
     junkPerLevel: 000000000100000002000000
+    attribute: 0
+  - id: upg_street
+    nameKey: upg.street
+    costs: 140000003c000000
+    effect: 1
+    valuesPerLevel: 
+    foodPerLevel: 000000000100000002000000
+    junkPerLevel: 000000000000000000000000
     attribute: 0
   - id: upg_can
     nameKey: upg.can

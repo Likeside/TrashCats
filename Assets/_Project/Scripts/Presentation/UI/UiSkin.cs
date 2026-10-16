@@ -42,6 +42,7 @@ namespace TrashCats.Presentation.UI
         public Sprite bubble;
         public Sprite tape;
         public Sprite pointer;
+        [Tooltip("Marker loop round the tutorial target (9-slice)")] public Sprite tutorialMarker;
 
         [Header("Effects")]
         public Sprite fxStar;
