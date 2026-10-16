@@ -1,0 +1,29 @@
+[
+ {
+  "name": "ryzhy_press_a",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v18_ryzhy_bench_v2refs/ref_v2_sequence.png",
+   "Docs/ArtDirection/Generated/raw_v18_ryzhy_bench_v2refs/ref_v2_frame0.png"
+  ],
+  "prompt": "Game sprite sheet: 8 animation frames of ONE smooth bench-press push from the lowest point up to the top, in a grid of 2 rows x 4 columns, read left to right, top row first, generous empty space between frames, never mirror a frame. The FIRST reference is the existing animation of the orange tabby tomcat Ryzhy pressing a barbell (a wooden stick with two bundles of tin cans tied with rope): use EXACTLY this character, this barbell, this camera angle and this motion (lying on his back, legs bent and down to the floor, the barbell pushed from the chest straight up). The SECOND reference is frame 1 of the new sheet: copy it exactly. Frames 2-8 push the barbell up in small, EVEN steps, frame 8 is the top: the arms extended up above the chest with the elbows only a little bent. VERY IMPORTANT: everything except the arms and the barbell stays EXACTLY the same in all 8 frames as in the SECOND reference: the same position, size and angle of the head, body, belly, legs and feet (they never move, never get longer or shorter, the head always looks the same way). The arms keep their length and thickness (never stretched). The barbell is the same size in every frame, always horizontal, fully visible, the fists between the can bundles. The SAME facial expression in all 8 frames, exactly the face of the SECOND reference: the calm confident smirk, half-closed eyes, closed mouth; no grimace, no teeth, no strain, no change of expression. Comic book style exactly like the references. IMPORTANT: no bench, no floor line. IMPORTANT: the background of the whole sheet MUST be solid flat pure chroma-key GREEN (#00FF00) everywhere, no shadow, no scenery, no text, no frame numbers. Do not use green on the character.",
+  "size": "1536x1024"
+ },
+ {
+  "name": "ryzhy_press_b",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v18_ryzhy_bench_v2refs/ref_v2_sequence.png",
+   "Docs/ArtDirection/Generated/raw_v18_ryzhy_bench_v2refs/ref_v2_frame0.png"
+  ],
+  "prompt": "Game sprite sheet: 8 animation frames of ONE smooth bench-press push from the lowest point up to the top, in a grid of 2 rows x 4 columns, read left to right, top row first, generous empty space between frames, never mirror a frame. The FIRST reference is the existing animation of the orange tabby tomcat Ryzhy pressing a barbell (a wooden stick with two bundles of tin cans tied with rope): use EXACTLY this character, this barbell, this camera angle and this motion (lying on his back, legs bent and down to the floor, the barbell pushed from the chest straight up). The SECOND reference is frame 1 of the new sheet: copy it exactly. Frames 2-8 push the barbell up in small, EVEN steps, frame 8 is the top: the arms extended up above the chest with the elbows only a little bent. VERY IMPORTANT: everything except the arms and the barbell stays EXACTLY the same in all 8 frames as in the SECOND reference: the same position, size and angle of the head, body, belly, legs and feet (they never move, never get longer or shorter, the head always looks the same way). The arms keep their length and thickness (never stretched). The barbell is the same size in every frame, always horizontal, fully visible, the fists between the can bundles. The SAME facial expression in all 8 frames, exactly the face of the SECOND reference: the calm confident smirk, half-closed eyes, closed mouth; no grimace, no teeth, no strain, no change of expression. Comic book style exactly like the references. IMPORTANT: no bench, no floor line. IMPORTANT: the background of the whole sheet MUST be solid flat pure chroma-key GREEN (#00FF00) everywhere, no shadow, no scenery, no text, no frame numbers. Do not use green on the character.",
+  "size": "1536x1024"
+ },
+ {
+  "name": "ryzhy_press_c",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v18_ryzhy_bench_v2refs/ref_v2_sequence.png",
+   "Docs/ArtDirection/Generated/raw_v18_ryzhy_bench_v2refs/ref_v2_frame0.png"
+  ],
+  "prompt": "Game sprite sheet: 8 animation frames of ONE smooth bench-press push from the lowest point up to the top, in a grid of 2 rows x 4 columns, read left to right, top row first, generous empty space between frames, never mirror a frame. The FIRST reference is the existing animation of the orange tabby tomcat Ryzhy pressing a barbell (a wooden stick with two bundles of tin cans tied with rope): use EXACTLY this character, this barbell, this camera angle and this motion (lying on his back, legs bent and down to the floor, the barbell pushed from the chest straight up). The SECOND reference is frame 1 of the new sheet: copy it exactly. Frames 2-8 push the barbell up in small, EVEN steps, frame 8 is the top: the arms extended up above the chest with the elbows only a little bent. VERY IMPORTANT: everything except the arms and the barbell stays EXACTLY the same in all 8 frames as in the SECOND reference: the same position, size and angle of the head, body, belly, legs and feet (they never move, never get longer or shorter, the head always looks the same way). The arms keep their length and thickness (never stretched). The barbell is the same size in every frame, always horizontal, fully visible, the fists between the can bundles. The SAME facial expression in all 8 frames, exactly the face of the SECOND reference: the calm confident smirk, half-closed eyes, closed mouth; no grimace, no teeth, no strain, no change of expression. Comic book style exactly like the references. IMPORTANT: no bench, no floor line. IMPORTANT: the background of the whole sheet MUST be solid flat pure chroma-key GREEN (#00FF00) everywhere, no shadow, no scenery, no text, no frame numbers. Do not use green on the character.",
+  "size": "1536x1024"
+ }
+]

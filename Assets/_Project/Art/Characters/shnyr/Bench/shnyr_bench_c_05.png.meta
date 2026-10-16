@@ -129,10 +129,10 @@ TextureImporter:
       name: shnyr_bench_c_05_0
       rect:
         serializedVersion: 2
-        x: 75
+        x: 86
         y: 18
-        width: 374
-        height: 258
+        width: 359
+        height: 278
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
