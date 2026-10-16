@@ -1,0 +1,18 @@
+[
+ {
+  "name": "ryzhy_inbetween_green_a",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v21_ryzhy_bench_inbetween/ref_green_06.png",
+   "Docs/ArtDirection/Generated/raw_v21_ryzhy_bench_inbetween/ref_green_07.png"
+  ],
+  "prompt": "Game sprite sheet on a solid flat pure chroma-key GREEN (#00FF00) background: 4 animation frames in a 2x2 grid (read left to right, top row first) of ONE smooth part of a bench press of the orange tabby tomcat Ryzhy lying on his back. The FIRST reference is frame 1 (elbows still bent, the barbell just above his face), the SECOND reference is frame 4 (the top, the arms extended up): copy them exactly as frames 1 and 4. Frames 2 and 3 are the IN-BETWEENS: the barbell one third and two thirds of the way up, in EVEN steps. VERY IMPORTANT: everything except the arms and the barbell stays EXACTLY the same in all 4 frames: the same position, size and angle of the head, face, body, belly, legs and feet; the barbell is the same size and horizontal; the arms keep their length. Comic book style exactly like the references. IMPORTANT: the background of the WHOLE image MUST be the same solid flat pure chroma-key GREEN (#00FF00) as in the references, everywhere, NOT black, no dark areas, no shadow, no text, no frame numbers. Do not use green on the character."
+ },
+ {
+  "name": "ryzhy_inbetween_green_b",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v21_ryzhy_bench_inbetween/ref_green_06.png",
+   "Docs/ArtDirection/Generated/raw_v21_ryzhy_bench_inbetween/ref_green_07.png"
+  ],
+  "prompt": "Game sprite sheet on a solid flat pure chroma-key GREEN (#00FF00) background: 4 animation frames in a 2x2 grid (read left to right, top row first) of ONE smooth part of a bench press of the orange tabby tomcat Ryzhy lying on his back. The FIRST reference is frame 1 (elbows still bent, the barbell just above his face), the SECOND reference is frame 4 (the top, the arms extended up): copy them exactly as frames 1 and 4. Frames 2 and 3 are the IN-BETWEENS: the barbell one third and two thirds of the way up, in EVEN steps. VERY IMPORTANT: everything except the arms and the barbell stays EXACTLY the same in all 4 frames: the same position, size and angle of the head, face, body, belly, legs and feet; the barbell is the same size and horizontal; the arms keep their length. Comic book style exactly like the references. IMPORTANT: the background of the WHOLE image MUST be the same solid flat pure chroma-key GREEN (#00FF00) as in the references, everywhere, NOT black, no dark areas, no shadow, no text, no frame numbers. Do not use green on the character."
+ }
+]

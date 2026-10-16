@@ -4,6 +4,7 @@ lower body (rows from lock_y down, under the arms) of the first cell is fitted t
 every other cell keeps that scale and is shifted onto the first one by its lower body, so the cat lies still on the mat
 and keeps its size (HideoutLayout.BenchFit stays valid).
 Usage: fit_bench_cells.py <sheet> <old frame png> <out dir> <stem> <lock_y> [cells, e.g. 0,2,4,6,7] [--feet]
+--grid CxR: the sheet's columns x rows (default 4x2).
 --feet: the other cells are placed by their feet (lowest row, middle of the feet) instead of the lower-body overlap.
 """
 import os
@@ -14,6 +15,16 @@ from PIL import Image
 
 sys.path.insert(0, os.path.dirname(__file__))
 import compose_pose_frames as C  # noqa: E402
+
+
+def cells(sheet, cols, rows):
+    """Cells of a cols x rows sheet, keyed out (compose_pose_frames.cells cuts 4 x 2 only)."""
+    rgb = np.array(Image.open(sheet).convert("RGB"))
+    clean, alpha = C.key_green(rgb)
+    rgba = np.dstack([clean, alpha]).astype(np.uint8)
+    h, w = alpha.shape
+    return [C.despeckle(rgba[r * h // rows:(r + 1) * h // rows, c * w // cols:(c + 1) * w // cols].copy())
+            for r in range(rows) for c in range(cols)]
 
 
 def place(a, k, W, H, ox, oy):
@@ -59,13 +70,14 @@ def main():
     old = np.array(Image.open(old_png).convert("RGBA"))
     H, W = old.shape[:2]
     ref = C.mask(old)
-    cells = [a for _, a in C.cells(sheet)]
-    pick = [int(v) for v in sys.argv[6].split(",")] if len(sys.argv) > 6 and sys.argv[6][0].isdigit() else list(range(len(cells)))
-    first = cells[pick[0]]
+    grid = sys.argv[sys.argv.index("--grid") + 1] if "--grid" in sys.argv else "4x2"
+    cells_ = cells(sheet, *(int(v) for v in grid.split("x")))
+    pick = [int(v) for v in sys.argv[6].split(",")] if len(sys.argv) > 6 and sys.argv[6][0].isdigit() else list(range(len(cells_)))
+    first = cells_[pick[0]]
     # scale: the feet-to-knee part of the old frame and of the cell, by the width of everything under lock_y
     rx0, _, rx1, ry1 = C.bbox(ref[lock_y:])
     best = None
-    for k in np.arange(0.6, 1.6, 0.01):
+    for k in np.arange(0.3, 1.6, 0.01):
         m = C.mask(C.scaled(first, k))
         bx0, by0, bx1, by1 = C.bbox(m)
         # feet on the old feet line, centred like the old lower body
@@ -88,11 +100,11 @@ def main():
             shift = shift0
         elif "--feet" in sys.argv:
             # the feet stay planted: the lowest row and the middle of the feet as in the first cell
-            f = feet(C.mask(C.scaled(cells[i], k)))
+            f = feet(C.mask(C.scaled(cells_[i], k)))
             shift = (shift0[0] + round(feet0[0] - f[0]), shift0[1] + feet0[1] - f[1])
         else:
-            shift = fit_wide(base, cells[i], k, W, H, lock_y, shift0)[1]
-        Image.fromarray(place(cells[i], k, W, H, *shift)).save(f"{out}/{stem}_{n:02d}.png")
+            shift = fit_wide(base, cells_[i], k, W, H, lock_y, shift0)[1]
+        Image.fromarray(place(cells_[i], k, W, H, *shift)).save(f"{out}/{stem}_{n:02d}.png")
         print(i, "->", n, "shift", shift)
     print("scale", round(float(k), 3))
 
