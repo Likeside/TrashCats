@@ -138,7 +138,7 @@ namespace TrashCats.Editor
                 tail = Clip(dir, "Tail", 5f, true),
                 run = Clip(dir, "Run", 9f, true),
                 hideoutIdle = Clip(dir, "HideIdle", 6f, true),
-                rope = Clip(dir, "Rope", 9f, true),
+                rope = Clip(dir, "Rope", 9f * 1.15f, true), // 15% quicker than drawn (2026-10-16)
                 dig = Clip(dir, "Dig", 8f, true),
                 canPunch = Clip(dir, "CanPunch", 10f, true),
                 bench = Clip(dir, "Bench", 1f, true),
@@ -214,10 +214,9 @@ namespace TrashCats.Editor
         {
             var frames = Sprites($"{dir}/{folder}");
             // doubled clips play faster to keep the tempo: by keys.json (adaptive in-betweens) or 8 -> 15/16 frames
-            var keys = new int[0];
             var keysPath = $"{dir}/{folder}/keys.json";
-            if (File.Exists(keysPath))
-                keys = Regex.Matches(File.ReadAllText(keysPath), @"\d+").Cast<Match>().Select(m => int.Parse(m.Value)).ToArray();
+            var keysJson = File.Exists(keysPath) ? File.ReadAllText(keysPath) : "";
+            var keys = Ints(keysJson, "keys");
             if (keys.Length > 0) fps *= (float)frames.Length / keys.Length;
             else if (frames.Length >= 15) fps *= 2f;
             // the hands that hold a prop the game draws (rope, barbell), one per frame (Tools/pose_handles.py)
@@ -229,8 +228,17 @@ namespace TrashCats.Editor
                 handles = Enumerable.Range(0, v.Length / 4).Select(i => new Vector4(v[i * 4], v[i * 4 + 1], v[i * 4 + 2], v[i * 4 + 3])).ToArray();
             }
             // "pingPong": true in keys.json: the frames go one way (a push up) and play there and back
-            var pingPong = File.Exists(keysPath) && Regex.IsMatch(File.ReadAllText(keysPath), @"""pingPong""\s*:\s*true");
-            return frames.Length == 0 ? null : new FlipbookClip { name = folder.ToLowerInvariant(), frames = frames, fps = fps, loop = loop, keys = keys, handles = handles, pingPong = pingPong };
+            var pingPong = Regex.IsMatch(keysJson, @"""pingPong""\s*:\s*true");
+            // "contacts": frames where the feet hit the ground (the hideout kicks up dust there)
+            return frames.Length == 0 ? null : new FlipbookClip { name = folder.ToLowerInvariant(), frames = frames, fps = fps, loop = loop, keys = keys, handles = handles, pingPong = pingPong,
+                contacts = Ints(keysJson, "contacts") };
+        }
+
+        /// <summary>The integer array <paramref name="name"/> of a small JSON object, empty when there is none.</summary>
+        private static int[] Ints(string json, string name)
+        {
+            var m = Regex.Match(json, $@"""{name}""\s*:\s*\[([^\]]*)\]");
+            return m.Success ? Regex.Matches(m.Groups[1].Value, @"\d+").Cast<Match>().Select(x => int.Parse(x.Value)).ToArray() : new int[0];
         }
 
         private static Sprite[] Sprites(string folder)

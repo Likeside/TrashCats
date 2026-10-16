@@ -17,11 +17,12 @@ namespace TrashCats.Presentation.Dev
         private bool _battles;
         private bool _tutorial;
         private bool _punch;
+        private bool _gym;
 
         public static void AttachIfRequested(GameObject host)
         {
             var args = Environment.GetCommandLineArgs();
-            foreach (var flag in new[] { "-autoplayCapture", "-autoplayBattles", "-autoplayTutorial", "-autoplayPunch" })
+            foreach (var flag in new[] { "-autoplayCapture", "-autoplayBattles", "-autoplayTutorial", "-autoplayPunch", "-autoplayGym" })
             {
                 var index = Array.IndexOf(args, flag);
                 if (index < 0 || index + 1 >= args.Length) continue;
@@ -31,11 +32,12 @@ namespace TrashCats.Presentation.Dev
                 capture._battles = flag == "-autoplayBattles";
                 capture._tutorial = flag == "-autoplayTutorial";
                 capture._punch = flag == "-autoplayPunch";
+                capture._gym = flag == "-autoplayGym";
                 return;
             }
         }
 
-        private IEnumerator Start() => _punch ? PunchFrames() : _tutorial ? TutorialRun() : _battles ? Battles() : Tour();
+        private IEnumerator Start() => _gym ? Gym() : _punch ? PunchFrames() : _tutorial ? TutorialRun() : _battles ? Battles() : Tour();
 
         /// <summary>Starts a battle and freezes Ryzhy on each frame of his attack clip, one screenshot per frame (tail check).</summary>
         private IEnumerator PunchFrames()
@@ -253,6 +255,35 @@ namespace TrashCats.Presentation.Dev
             Click("Settings_Reset");
             yield return Shot("13_reset_confirm");
             yield return new WaitForSeconds(0.3f);
+            Application.Quit();
+        }
+
+        /// <summary>Ponchik on the bench, Ryzhy and Shnyr on the skipping rope: a burst of screenshots (the press, landing dust).</summary>
+        private IEnumerator Gym()
+        {
+            Directory.CreateDirectory(_dir);
+            yield return new WaitForSeconds(1f);
+            Dismiss();
+            GetComponent<GameSceneRoot>().DevSkipTutorial();
+            var services = GameBootstrap.Instance.Services;
+            services.Debug.RecruitAllAndRest();
+            yield return null;
+            Dismiss(); Dismiss();
+            var session = services.Session;
+            foreach (var cat in session.World.Cats)
+            {
+                var activity = cat.Id.Value == "cat_ponchik" ? "act_train_str" : "act_train_tou";
+                session.AssignActivity(cat.Id, new Domain.ActivityId(activity));
+            }
+            yield return new WaitForSeconds(1.5f);
+            Dismiss(); Dismiss();
+            for (var i = 0; i < 40; i++)
+            {
+                yield return new WaitForEndOfFrame();
+                ScreenCapture.CaptureScreenshot(Path.Combine(_dir, $"gym_{i:00}.png"));
+                yield return new WaitForSeconds(0.05f);
+            }
+            yield return new WaitForSeconds(0.5f);
             Application.Quit();
         }
 
