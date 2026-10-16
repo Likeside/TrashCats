@@ -511,7 +511,9 @@ namespace TrashCats.Presentation.Hideout
             return text;
         }
 
-        private const float PlateArrow = 44f;
+        private const float PlateArrow = 38f;
+        /// <summary>The plate's rim is thicker at the bottom (hud_a): the arrow sits a little up, clear of it.</summary>
+        private const float PlateArrowLift = 4f;
 
         /// <summary>
         /// Sizes a station plate to its icon and level (just the icon when there is no level); the green arrow of an
@@ -523,7 +525,7 @@ namespace TrashCats.Presentation.Hideout
             var width = string.IsNullOrEmpty(text.text) ? 0f : text.GetPreferredValues(text.text).x + 6f;
             var withArrow = arrow != null && arrow.gameObject.activeSelf;
             if (withArrow)
-                arrow.rectTransform.anchoredPosition = new Vector2(PlatePad + PlateIcon + 6f + width + PlateArrow * 0.5f, 0f);
+                arrow.rectTransform.anchoredPosition = new Vector2(PlatePad + PlateIcon + 6f + width + PlateArrow * 0.5f, PlateArrowLift);
             var extra = withArrow ? PlateArrow + 4f : 0f;
             ((RectTransform)text.transform.parent).sizeDelta = new Vector2(Mathf.Max(PlateHeight, PlatePad * 2f + PlateIcon + width + extra), PlateHeight);
         }
@@ -1124,7 +1126,8 @@ namespace TrashCats.Presentation.Hideout
             var x = Pad;
             label.rectTransform.Place(new Vector2(0f, 0f), new Vector2(0f, 1f), new Vector2(x, 0f), new Vector2(x + textWidth, 0f));
             x += textWidth + 6f;
-            foreach (var key in levelUp ? new[] { icon, "levelup" } : new[] { icon })
+            // a level-up: the same green arrow as an affordable upgrade on the station plates
+            foreach (var key in levelUp ? new[] { icon, "upgrade_ready" } : new[] { icon })
             {
                 var picture = Ui.Icon(rt, key);
                 if (picture == null) continue;
