@@ -270,6 +270,7 @@ namespace TrashCats.Presentation.Tutorial
                 case TutorialService.Bar: return new[] { "Progress_" + step.Cat };
                 case TutorialService.Feed: return new[] { "Sheet_Feed", "Feed" + index };
                 case TutorialService.Train: return new[] { Activity(ActivityKind.Train, AttributeType.Strength), yard, card };
+                case TutorialService.Rummage: return new[] { Activity(ActivityKind.Rummage), yard, card };
                 case TutorialService.Equip: return new[] { "Skill_" + step.Skill, "Sheet_Details", card };
                 case TutorialService.Sleep: return new[] { Activity(ActivityKind.Sleep), yard, card };
                 case TutorialService.Fight: return new[] { "Prep_Fight", "Node_" + step.Territory, "Tab_Map" };
@@ -288,6 +289,7 @@ namespace TrashCats.Presentation.Tutorial
                 case TutorialService.Bar: return Loc.T("tutorial_overlay.15");
                 case TutorialService.Feed: return Loc.T("tutorial_overlay.03");
                 case TutorialService.Train: return Loc.T("tutorial_overlay.04");
+                case TutorialService.Rummage: return Loc.T("tutorial_overlay.22");
                 case TutorialService.Equip: return Loc.T("tutorial_overlay.05");
                 case TutorialService.Sleep: return Loc.T("tutorial_overlay.06", name);
                 case TutorialService.Fight: return step.Territory is TerritoryId t ? Loc.T("tutorial_overlay.07", Texts.TerritoryName(t)) : Loc.T("tutorial_overlay.08");
