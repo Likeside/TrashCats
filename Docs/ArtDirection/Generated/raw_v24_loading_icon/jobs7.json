@@ -1,0 +1,38 @@
+[
+ {
+  "name": "logo_fc2_a",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v24_loading_icon/fc_base.png"
+  ],
+  "mask": "Docs/ArtDirection/Generated/raw_v24_loading_icon/fc_mask.png",
+  "prompt": "The FIRST image is a game logo: a riveted dark tin plate with the words TRASH CATS in chunky comic letters. Edit ONLY the masked area at the bottom: add a third line of text FIGHT CLUB below the plate, overlapping the plate's bottom edge a little, written on a wide strip of torn red-orange duct tape (or a torn cardboard label) stuck slightly tilted across the bottom of the plate. The letters FIGHT CLUB: chunky hand-drawn comic letters in the same style as TRASH CATS (thick black ink outline, dark 3D drop shadow, scratches, halftone), cream-white fill, about half as tall as the letters of CATS, the strip about as wide as the plate. Spelled exactly F-I-G-H-T C-L-U-B, nothing else written. Do not change the plate and TRASH CATS. Everything outside the plate and the strip stays solid flat pure chroma-key GREEN (#00FF00). Do not use green in the logo.",
+  "size": "1536x1024"
+ },
+ {
+  "name": "logo_fc2_b",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v24_loading_icon/fc_base.png"
+  ],
+  "mask": "Docs/ArtDirection/Generated/raw_v24_loading_icon/fc_mask.png",
+  "prompt": "The FIRST image is a game logo: a riveted dark tin plate with the words TRASH CATS in chunky comic letters. Edit ONLY the masked area at the bottom: add a third line of text FIGHT CLUB below the plate, overlapping the plate's bottom edge a little, written on a wide strip of torn red-orange duct tape (or a torn cardboard label) stuck slightly tilted across the bottom of the plate. The letters FIGHT CLUB: chunky hand-drawn comic letters in the same style as TRASH CATS (thick black ink outline, dark 3D drop shadow, scratches, halftone), cream-white fill, about half as tall as the letters of CATS, the strip about as wide as the plate. Spelled exactly F-I-G-H-T C-L-U-B, nothing else written. Do not change the plate and TRASH CATS. Everything outside the plate and the strip stays solid flat pure chroma-key GREEN (#00FF00). Do not use green in the logo.",
+  "size": "1536x1024"
+ },
+ {
+  "name": "logo_fc2_c",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v24_loading_icon/fc_base.png"
+  ],
+  "mask": "Docs/ArtDirection/Generated/raw_v24_loading_icon/fc_mask.png",
+  "prompt": "The FIRST image is a game logo: a riveted dark tin plate with the words TRASH CATS in chunky comic letters. Edit ONLY the masked area at the bottom: add a third line of text FIGHT CLUB below the plate, overlapping the plate's bottom edge a little, written on a wide strip of torn red-orange duct tape (or a torn cardboard label) stuck slightly tilted across the bottom of the plate. The letters FIGHT CLUB: chunky hand-drawn comic letters in the same style as TRASH CATS (thick black ink outline, dark 3D drop shadow, scratches, halftone), cream-white fill, about half as tall as the letters of CATS, the strip about as wide as the plate. Spelled exactly F-I-G-H-T C-L-U-B, nothing else written. Do not change the plate and TRASH CATS. Everything outside the plate and the strip stays solid flat pure chroma-key GREEN (#00FF00). Do not use green in the logo.",
+  "size": "1536x1024"
+ },
+ {
+  "name": "logo_fc2_d",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v24_loading_icon/fc_base.png"
+  ],
+  "mask": "Docs/ArtDirection/Generated/raw_v24_loading_icon/fc_mask.png",
+  "prompt": "The FIRST image is a game logo: a riveted dark tin plate with the words TRASH CATS in chunky comic letters. Edit ONLY the masked area at the bottom: add a third line of text FIGHT CLUB below the plate, overlapping the plate's bottom edge a little, written on a wide strip of torn red-orange duct tape (or a torn cardboard label) stuck slightly tilted across the bottom of the plate. The letters FIGHT CLUB: chunky hand-drawn comic letters in the same style as TRASH CATS (thick black ink outline, dark 3D drop shadow, scratches, halftone), cream-white fill, about half as tall as the letters of CATS, the strip about as wide as the plate. Spelled exactly F-I-G-H-T C-L-U-B, nothing else written. Do not change the plate and TRASH CATS. Everything outside the plate and the strip stays solid flat pure chroma-key GREEN (#00FF00). Do not use green in the logo.",
+  "size": "1536x1024"
+ }
+]
