@@ -19,6 +19,10 @@ namespace TrashCats.Presentation.Bootstrap
         public static string SaveDirectoryOverride { get; set; }
 
         [SerializeField] private GameConfigAsset gameConfig;
+        [Tooltip("Loading screen picture (Art/UI/loading_bg), the logo (Art/UI/logo) and the skin its bar is drawn with")]
+        [SerializeField] private Sprite loadingBackground;
+        [SerializeField] private Sprite logo;
+        [SerializeField] private UI.UiSkin uiSkin;
 
         private SaveService _saveService;
         private AppLifecycleListener _lifecycle;
@@ -50,7 +54,9 @@ namespace TrashCats.Presentation.Bootstrap
 
         private void Start()
         {
-            SceneManager.LoadScene(GameSceneName, LoadSceneMode.Single);
+            // the gang on the loading screen while the Game scene loads and builds its screens
+            LoadingScreen.Show(loadingBackground, logo, uiSkin)
+                .Load(GameSceneName, () => Object.FindAnyObjectByType<GameSceneRoot>() is { IsBooted: true });
         }
 
         private void Update()

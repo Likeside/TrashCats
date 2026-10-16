@@ -149,6 +149,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameConfig: {fileID: 11400000, guid: cb348000037fbfada881264d3cd59e45, type: 2}
+  loadingBackground: {fileID: 21300000, guid: a22a50f62008050278a73eb1aa5b8639, type: 3}
+  logo: {fileID: 21300000, guid: 843ecc1dd50f42588914a89dfcc7ab45, type: 3}
+  uiSkin: {fileID: 11400000, guid: 91151bcb605ec8eedb669bc7327629ec, type: 2}
 --- !u!4 &1969987995
 Transform:
   m_ObjectHideFlags: 0

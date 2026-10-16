@@ -13,7 +13,8 @@ namespace TrashCats.Editor
 
         private void OnPreprocessTexture()
         {
-            if (!assetPath.StartsWith(ArtRoot))
+            // the app icon is a plain texture (Player Settings), set up by LoadingAndIconSetup
+            if (!assetPath.StartsWith(ArtRoot) || assetPath.StartsWith(ArtRoot + "AppIcon/"))
                 return;
 
             var importer = (TextureImporter)assetImporter;
