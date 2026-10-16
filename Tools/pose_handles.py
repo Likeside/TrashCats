@@ -20,10 +20,10 @@ KEYS = {
     ("ponchik", "Rope"): [(55, 295, 345, 293), (62, 298, 338, 295), (64, 300, 340, 300), (60, 303, 338, 300),
                           (62, 268, 342, 268), (58, 305, 348, 300), (62, 290, 352, 290), (60, 298, 345, 298)],
     # bench: key order as played. Ryzhy's folded-arms keys and Shnyr's narrow-grip keys are dropped (2026-10-16);
-    # Shnyr's mid key is played twice (up and down); Ryzhy's lowest keys (elbows below the chest) from raw_v11_bench_deep
-    ("Ryzhy", "Bench"): [(206, 175, 272, 188), (174, 155, 256, 165), (175, 130, 262, 135), (182, 88, 288, 100),
-                         (225, 42, 305, 46), (220, 56, 307, 61), (180, 101, 268, 108), (178, 134, 258, 144),
-                         (206, 172, 275, 182)],
+    # Shnyr's mid key is played twice (up and down); Ryzhy's lowest keys (elbows below the chest) from raw_v11_bench_deep, the push-up keys from raw_v12_bench_up, every key's head moved to one place (v13_bench_keys_headlocked)
+    ("Ryzhy", "Bench"): [(206, 175, 275, 189), (174, 155, 256, 161), (175, 130, 257, 139), (177, 93, 261, 100),
+                         (179, 57, 265, 63), (180, 57, 265, 63), (177, 93, 261, 100), (175, 130, 257, 139),
+                         (206, 172, 278, 183)],
     ("shnyr", "Bench"): [(219, 152, 340, 175), (209, 128, 357, 155), (218, 42, 326, 50), (219, 38, 326, 43),
                          (209, 128, 357, 155), (204, 146, 344, 163)],
     ("ponchik", "Bench"): [(195, 162, 288, 172), (171, 128, 318, 140), (155, 90, 327, 118), (200, 17, 288, 22),

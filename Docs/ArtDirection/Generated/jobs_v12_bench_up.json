@@ -1,0 +1,20 @@
+[
+ {
+  "name": "ryzhy_bench_up_a",
+  "refs": [
+   "Assets/_Project/Art/Characters/Ryzhy/HideIdle/ryzhy_hideidle_00.png",
+   "Docs/ArtDirection/Generated/raw_v12_bench_up/ref_ryzhy_bench_shoulders.png"
+  ],
+  "prompt": "Game sprite sheet: 4 animation frames of the PUSH-UP part of a bench press, in a grid of 2 rows x 2 columns, read left to right, top row first, generous empty space between frames, never mirror a frame. Character: the orange tabby tomcat Ryzhy, colours and line weight EXACTLY as in the FIRST reference, drawn EXACTLY as in the SECOND reference: same size, same camera angle, lying on his back on an invisible bench, legs down to the floor. Frame 1 is an exact copy of the SECOND reference (fists at shoulder height). Frames 2-4 push the invisible bar up: 2) the arms half extended, the fists above the head height, 3) the arms fully extended straight up, the fists high above the chest, 4) the same as frame 3. The two fists always at the same height and the same distance apart as in the reference. VERY IMPORTANT: the head is a fixed part of the body, it stays EXACTLY where it is in the SECOND reference in all 4 frames: the same position, the same size, the same angle (three-quarter view looking up to the right), the same face (eyes, brows, grin), it does not move, tilt, turn or grow, and the arms never cover the face. Body, belly, legs and feet stay exactly in place in every frame, only the arms move. Comic book style exactly like the references. IMPORTANT: no bench, no barbell, no floor line. IMPORTANT: the background of the whole sheet MUST be solid flat pure chroma-key GREEN (#00FF00) everywhere, no shadow, no scenery, no text, no frame numbers. Do not use green on the character.",
+  "size": "1536x1024"
+ },
+ {
+  "name": "ryzhy_bench_up_b",
+  "refs": [
+   "Assets/_Project/Art/Characters/Ryzhy/HideIdle/ryzhy_hideidle_00.png",
+   "Docs/ArtDirection/Generated/raw_v12_bench_up/ref_ryzhy_bench_shoulders.png"
+  ],
+  "prompt": "Game sprite sheet: 4 animation frames of the PUSH-UP part of a bench press, in a grid of 2 rows x 2 columns, read left to right, top row first, generous empty space between frames, never mirror a frame. Character: the orange tabby tomcat Ryzhy, colours and line weight EXACTLY as in the FIRST reference, drawn EXACTLY as in the SECOND reference: same size, same camera angle, lying on his back on an invisible bench, legs down to the floor. Frame 1 is an exact copy of the SECOND reference (fists at shoulder height). Frames 2-4 push the invisible bar up: 2) the arms half extended, the fists above the head height, 3) the arms fully extended straight up, the fists high above the chest, 4) the same as frame 3. The two fists always at the same height and the same distance apart as in the reference. VERY IMPORTANT: the head is a fixed part of the body, it stays EXACTLY where it is in the SECOND reference in all 4 frames: the same position, the same size, the same angle (three-quarter view looking up to the right), the same face (eyes, brows, grin), it does not move, tilt, turn or grow, and the arms never cover the face. Body, belly, legs and feet stay exactly in place in every frame, only the arms move. Comic book style exactly like the references. IMPORTANT: no bench, no barbell, no floor line. IMPORTANT: the background of the whole sheet MUST be solid flat pure chroma-key GREEN (#00FF00) everywhere, no shadow, no scenery, no text, no frame numbers. Do not use green on the character.",
+  "size": "1536x1024"
+ }
+]
