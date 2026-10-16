@@ -95,6 +95,22 @@ namespace TrashCats.Tests
         }
 
         [Test]
+        public void RummageStep_AfterATrainingCycle_DoneWhenSentToTheDumpster()
+        {
+            _session.AssignActivity(TestIds.Ryzhy, TestIds.Scavenge);
+            Pass(20_000);
+            _session.FeedCat(TestIds.Ryzhy);
+            _session.AssignActivity(TestIds.Ryzhy, TestIds.TrainStr);
+            Assert.That(Step, Is.Not.EqualTo(TutorialService.Rummage), "training is shown first");
+
+            Pass(30_000);
+            Assert.That(Step, Is.EqualTo(TutorialService.Rummage));
+            _session.AssignActivity(TestIds.Ryzhy, TestIds.Rummage);
+            Assert.That(_session.World.Tutorial.IsDone(TutorialService.Rummage), Is.True);
+            Assert.That(Step, Is.Not.EqualTo(TutorialService.Rummage));
+        }
+
+        [Test]
         public void UnlockedSkill_AsksToEquip_UntilEquipped()
         {
             var cat = TestCats.Make(TestIds.Ryzhy, str: 4);

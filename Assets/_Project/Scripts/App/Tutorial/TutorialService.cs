@@ -64,11 +64,15 @@ namespace TrashCats.App
         public const string Bar = "t_bar";
         public const string Feed = "t_feed";
         public const string Train = "t_train";
+        public const string Rummage = "t_rummage";
         public const string Equip = "t_skill";
         public const string Sleep = "t_sleep";
         public const string Fight = "t_fight";
         public const string Upgrade = "t_upgrade";
         public const string Order = "t_order";
+
+        /// <summary>Marker: a training cycle finished (the player saw it work; time to show the dumpster).</summary>
+        public const string Trained = "m_trained";
 
         /// <summary>Marker: some attribute levelled up (the gang got stronger, time for the first fight).</summary>
         public const string LevelledUp = "m_levelup";
@@ -108,7 +112,12 @@ namespace TrashCats.App
             _session = session;
             _bus = bus;
             _subscriptions.Add(bus.Subscribe<ActivityStarted>(OnActivityStarted));
-            _subscriptions.Add(bus.Subscribe<ActivityCycleCompleted>(_ => { Done(Bar); Evaluate(); }));
+            _subscriptions.Add(bus.Subscribe<ActivityCycleCompleted>(e =>
+            {
+                Done(Bar);
+                if (e.Kind == ActivityKind.Train) Done(Trained);
+                Evaluate();
+            }));
             _subscriptions.Add(bus.Subscribe<ResourcesChanged>(e =>
             {
                 if (e.FoodDelta < 0) Done(Feed); // only feeding spends food
@@ -239,6 +248,10 @@ namespace TrashCats.App
             if (!IsDone(Train))
                 return new TutorialStep(Train, first.Id);
 
+            // junk for the upgrades: once a training cycle has shown how training works
+            if (!IsDone(Rummage) && IsDone(Trained))
+                return new TutorialStep(Rummage, first.Id, soft: true);
+
             if (!IsDone(Equip))
             {
                 foreach (var cat in cats)
@@ -304,6 +317,7 @@ namespace TrashCats.App
                 if (activity.Kind == ActivityKind.Scavenge) Done(Scavenge);
                 if (activity.Kind == ActivityKind.Train && activity.TrainedAttribute == AttributeType.Strength) Done(Train);
                 if (activity.Kind == ActivityKind.Sleep) Done(Sleep);
+                if (activity.Kind == ActivityKind.Rummage) Done(Rummage);
             }
 
             Evaluate();
