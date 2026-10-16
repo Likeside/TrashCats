@@ -1,0 +1,65 @@
+[
+ {
+  "name": "loading2_a",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v24_loading_icon/ref_idle_gang.png",
+   "Docs/ArtDirection/Generated/raw_v24_loading_icon/ref_idle_shnyr.png",
+   "Docs/ArtDirection/Generated/raw_v24_loading_icon/ref_idle_ryzhy.png",
+   "Docs/ArtDirection/Generated/raw_v24_loading_icon/ref_idle_ponchik.png",
+   "Assets/_Project/Art/Environment/bg_hideout.png"
+  ],
+  "prompt": "Loading screen illustration for a mobile game about a gang of street cats living in a back-alley hideout. Portrait 2:3. Gritty comic-book style (thick ink outlines, warm dusk light, halftone texture). The FIRST reference shows the three cats of the gang side by side at their TRUE relative sizes and EXACT proportions: Shnyr (thin grey striped cat with big ears), Ryzhy (orange tabby with arms folded, confident smirk), Ponchik (very fat round black-and-white cat, small head on a huge round body, grumpy). The SECOND, THIRD and FOURTH references are each cat alone. Draw EXACTLY these three cats with EXACTLY these body proportions, head sizes, poses and faces (do not make the heads bigger, do not make them cuter, do not change Ponchik's round body), standing side by side as a tough gang on top of a pile of trash bags and crates in the alley of the FIFTH reference, a dumpster and city rooftops at sunset behind. Leave the TOP fifth of the picture as calm sky (a logo goes there) and the BOTTOM fifth as darker ground (a loading bar goes there), the cats in the middle. No text, no letters, no logo.",
+  "size": "1024x1536"
+ },
+ {
+  "name": "loading2_b",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v24_loading_icon/ref_idle_gang.png",
+   "Docs/ArtDirection/Generated/raw_v24_loading_icon/ref_idle_shnyr.png",
+   "Docs/ArtDirection/Generated/raw_v24_loading_icon/ref_idle_ryzhy.png",
+   "Docs/ArtDirection/Generated/raw_v24_loading_icon/ref_idle_ponchik.png",
+   "Assets/_Project/Art/Environment/bg_hideout.png"
+  ],
+  "prompt": "Loading screen illustration for a mobile game about a gang of street cats living in a back-alley hideout. Portrait 2:3. Gritty comic-book style (thick ink outlines, warm dusk light, halftone texture). The FIRST reference shows the three cats of the gang side by side at their TRUE relative sizes and EXACT proportions: Shnyr (thin grey striped cat with big ears), Ryzhy (orange tabby with arms folded, confident smirk), Ponchik (very fat round black-and-white cat, small head on a huge round body, grumpy). The SECOND, THIRD and FOURTH references are each cat alone. Draw EXACTLY these three cats with EXACTLY these body proportions, head sizes, poses and faces (do not make the heads bigger, do not make them cuter, do not change Ponchik's round body), standing side by side as a tough gang on top of a pile of trash bags and crates in the alley of the FIFTH reference, a dumpster and city rooftops at sunset behind. Leave the TOP fifth of the picture as calm sky (a logo goes there) and the BOTTOM fifth as darker ground (a loading bar goes there), the cats in the middle. No text, no letters, no logo.",
+  "size": "1024x1536"
+ },
+ {
+  "name": "loading2_c",
+  "refs": [
+   "Docs/ArtDirection/Generated/raw_v24_loading_icon/ref_idle_gang.png",
+   "Docs/ArtDirection/Generated/raw_v24_loading_icon/ref_idle_shnyr.png",
+   "Docs/ArtDirection/Generated/raw_v24_loading_icon/ref_idle_ryzhy.png",
+   "Docs/ArtDirection/Generated/raw_v24_loading_icon/ref_idle_ponchik.png",
+   "Assets/_Project/Art/Environment/bg_hideout.png"
+  ],
+  "prompt": "Loading screen illustration for a mobile game about a gang of street cats living in a back-alley hideout. Portrait 2:3. Gritty comic-book style (thick ink outlines, warm dusk light, halftone texture). The FIRST reference shows the three cats of the gang side by side at their TRUE relative sizes and EXACT proportions: Shnyr (thin grey striped cat with big ears), Ryzhy (orange tabby with arms folded, confident smirk), Ponchik (very fat round black-and-white cat, small head on a huge round body, grumpy). The SECOND, THIRD and FOURTH references are each cat alone. Draw EXACTLY these three cats with EXACTLY these body proportions, head sizes, poses and faces (do not make the heads bigger, do not make them cuter, do not change Ponchik's round body), standing side by side as a tough gang on top of a pile of trash bags and crates in the alley of the FIFTH reference, a dumpster and city rooftops at sunset behind. Leave the TOP fifth of the picture as calm sky (a logo goes there) and the BOTTOM fifth as darker ground (a loading bar goes there), the cats in the middle. No text, no letters, no logo.",
+  "size": "1024x1536"
+ },
+ {
+  "name": "logo_a",
+  "refs": [
+   "Assets/_Project/Art/UI/button_yellow.png",
+   "Assets/_Project/Art/UI/panel_tin.png"
+  ],
+  "prompt": "Game logo for a mobile game 'TRASH CATS' about a gang of street cats. The words TRASH CATS in two lines (TRASH on top, CATS below, bigger), chunky hand-drawn comic-book letters, slightly tilted and uneven like cut from rusty tin and cardboard, warm orange-yellow fill with a thick black ink outline and a dark brown 3D drop shadow, scratches and halftone texture inside the letters; cat ears sticking up from the letter C of CATS, a cat tail curling from the S, a dented tin can lid as the dot/accent and a fish bone tucked behind the letters. Spelled exactly T-R-A-S-H C-A-T-S, nothing else written. Centered, the logo fills the width. Solid flat pure chroma-key GREEN (#00FF00) background everywhere, no shadow on the background. Do not use green in the logo.",
+  "size": "1536x1024"
+ },
+ {
+  "name": "logo_b",
+  "refs": [
+   "Assets/_Project/Art/UI/button_yellow.png",
+   "Assets/_Project/Art/UI/panel_tin.png"
+  ],
+  "prompt": "Game logo for a mobile game 'TRASH CATS' about a gang of street cats. The words TRASH CATS in two lines (TRASH on top, CATS below, bigger), chunky hand-drawn comic-book letters, slightly tilted and uneven like cut from rusty tin and cardboard, warm orange-yellow fill with a thick black ink outline and a dark brown 3D drop shadow, scratches and halftone texture inside the letters; cat ears sticking up from the letter C of CATS, a cat tail curling from the S, a dented tin can lid as the dot/accent and a fish bone tucked behind the letters. Spelled exactly T-R-A-S-H C-A-T-S, nothing else written. Centered, the logo fills the width. Solid flat pure chroma-key GREEN (#00FF00) background everywhere, no shadow on the background. Do not use green in the logo.",
+  "size": "1536x1024"
+ },
+ {
+  "name": "logo_c",
+  "refs": [
+   "Assets/_Project/Art/UI/button_yellow.png",
+   "Assets/_Project/Art/UI/panel_tin.png"
+  ],
+  "prompt": "Game logo for a mobile game 'TRASH CATS' about a gang of street cats. The words TRASH CATS in two lines (TRASH on top, CATS below, bigger), chunky hand-drawn comic-book letters, slightly tilted and uneven like cut from rusty tin and cardboard, warm orange-yellow fill with a thick black ink outline and a dark brown 3D drop shadow, scratches and halftone texture inside the letters; cat ears sticking up from the letter C of CATS, a cat tail curling from the S, a dented tin can lid as the dot/accent and a fish bone tucked behind the letters. Spelled exactly T-R-A-S-H C-A-T-S, nothing else written. Centered, the logo fills the width. Solid flat pure chroma-key GREEN (#00FF00) background everywhere, no shadow on the background. Do not use green in the logo.",
+  "size": "1536x1024"
+ }
+]

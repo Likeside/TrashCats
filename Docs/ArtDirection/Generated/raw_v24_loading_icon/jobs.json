@@ -1,0 +1,62 @@
+[
+ {
+  "name": "loading_a",
+  "refs": [
+   "Assets/_Project/Art/Characters/Ryzhy/Card/ryzhy_card.png",
+   "Assets/_Project/Art/Characters/shnyr/Card/shnyr_card.png",
+   "Assets/_Project/Art/Characters/ponchik/Card/ponchik_card.png",
+   "Assets/_Project/Art/Environment/bg_hideout.png"
+  ],
+  "prompt": "Loading screen illustration for a mobile game 'Trash Cats' about a gang of street cats living in a back-alley hideout and fighting rival gangs for territory. Portrait 2:3. Gritty comic-book style exactly like the references (thick ink outlines, warm dusk light, halftone texture). The three cats of the gang from the references, EXACTLY their looks: Ryzhy (orange tabby, confident smirk) in the middle front, Shnyr (thin grey striped cat with big ears, sly) on the left, Ponchik (fat black-and-white cat, grumpy) on the right, standing together as a tough gang pose on top of a pile of trash bags and crates in the alley of the FOURTH reference, a dumpster and city rooftops at sunset behind. Leave the TOP fifth of the picture as calm sky (a title will be placed there) and the BOTTOM fifth as darker ground (a loading bar will be placed there), the cats in the middle. No text, no letters, no logo.",
+  "size": "1024x1536"
+ },
+ {
+  "name": "loading_b",
+  "refs": [
+   "Assets/_Project/Art/Characters/Ryzhy/Card/ryzhy_card.png",
+   "Assets/_Project/Art/Characters/shnyr/Card/shnyr_card.png",
+   "Assets/_Project/Art/Characters/ponchik/Card/ponchik_card.png",
+   "Assets/_Project/Art/Environment/bg_hideout.png"
+  ],
+  "prompt": "Loading screen illustration for a mobile game 'Trash Cats' about a gang of street cats living in a back-alley hideout and fighting rival gangs for territory. Portrait 2:3. Gritty comic-book style exactly like the references (thick ink outlines, warm dusk light, halftone texture). The three cats of the gang from the references, EXACTLY their looks: Ryzhy (orange tabby, confident smirk) in the middle front, Shnyr (thin grey striped cat with big ears, sly) on the left, Ponchik (fat black-and-white cat, grumpy) on the right, standing together as a tough gang pose on top of a pile of trash bags and crates in the alley of the FOURTH reference, a dumpster and city rooftops at sunset behind. Leave the TOP fifth of the picture as calm sky (a title will be placed there) and the BOTTOM fifth as darker ground (a loading bar will be placed there), the cats in the middle. No text, no letters, no logo.",
+  "size": "1024x1536"
+ },
+ {
+  "name": "loading_c",
+  "refs": [
+   "Assets/_Project/Art/Characters/Ryzhy/Card/ryzhy_card.png",
+   "Assets/_Project/Art/Characters/shnyr/Card/shnyr_card.png",
+   "Assets/_Project/Art/Characters/ponchik/Card/ponchik_card.png",
+   "Assets/_Project/Art/Environment/bg_hideout.png"
+  ],
+  "prompt": "Loading screen illustration for a mobile game 'Trash Cats' about a gang of street cats living in a back-alley hideout and fighting rival gangs for territory. Portrait 2:3. Gritty comic-book style exactly like the references (thick ink outlines, warm dusk light, halftone texture). The three cats of the gang from the references, EXACTLY their looks: Ryzhy (orange tabby, confident smirk) in the middle front, Shnyr (thin grey striped cat with big ears, sly) on the left, Ponchik (fat black-and-white cat, grumpy) on the right, standing together as a tough gang pose on top of a pile of trash bags and crates in the alley of the FOURTH reference, a dumpster and city rooftops at sunset behind. Leave the TOP fifth of the picture as calm sky (a title will be placed there) and the BOTTOM fifth as darker ground (a loading bar will be placed there), the cats in the middle. No text, no letters, no logo.",
+  "size": "1024x1536"
+ },
+ {
+  "name": "icon_a",
+  "refs": [
+   "Assets/_Project/Art/Characters/Ryzhy/Card/ryzhy_card.png",
+   "Assets/_Project/Art/Environment/prop_upg_dumpster.png"
+  ],
+  "prompt": "App icon for a mobile game 'Trash Cats' about street cats. Square, the subject fills the square edge to edge (no rounded corners, no border, no margin, the background is part of the art). Close-up head and shoulders of the orange tabby tomcat Ryzhy from the FIRST reference, EXACTLY his look and his confident smirk, one eyebrow raised, peeking over the rim of a dented metal trash can, a crumpled tin can lid on his head like a crown. Bold, simple, readable at small size, strong contrast, warm orange and teal dusk background with halftone dots. Gritty comic-book style with thick ink outlines like the reference. No text, no letters.",
+  "size": "1024x1024"
+ },
+ {
+  "name": "icon_b",
+  "refs": [
+   "Assets/_Project/Art/Characters/Ryzhy/Card/ryzhy_card.png",
+   "Assets/_Project/Art/Environment/prop_upg_dumpster.png"
+  ],
+  "prompt": "App icon for a mobile game 'Trash Cats' about street cats. Square, the subject fills the square edge to edge (no rounded corners, no border, no margin, the background is part of the art). Close-up head and shoulders of the orange tabby tomcat Ryzhy from the FIRST reference, EXACTLY his look and his confident smirk, one eyebrow raised, peeking over the rim of a dented metal trash can, a crumpled tin can lid on his head like a crown. Bold, simple, readable at small size, strong contrast, warm orange and teal dusk background with halftone dots. Gritty comic-book style with thick ink outlines like the reference. No text, no letters.",
+  "size": "1024x1024"
+ },
+ {
+  "name": "icon_c",
+  "refs": [
+   "Assets/_Project/Art/Characters/Ryzhy/Card/ryzhy_card.png",
+   "Assets/_Project/Art/Environment/prop_upg_dumpster.png"
+  ],
+  "prompt": "App icon for a mobile game 'Trash Cats' about street cats. Square, the subject fills the square edge to edge (no rounded corners, no border, no margin, the background is part of the art). Close-up head and shoulders of the orange tabby tomcat Ryzhy from the FIRST reference, EXACTLY his look and his confident smirk, one eyebrow raised, peeking over the rim of a dented metal trash can, a crumpled tin can lid on his head like a crown. Bold, simple, readable at small size, strong contrast, warm orange and teal dusk background with halftone dots. Gritty comic-book style with thick ink outlines like the reference. No text, no letters.",
+  "size": "1024x1024"
+ }
+]

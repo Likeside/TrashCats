@@ -85,3 +85,7 @@
 ## Скакалка Пончика: верёвка от верхних концов ручек (2026-10-16)
 - В `handles.json` точки стояли у нижних концов ручек; теперь у верхних (найдены по коричневому цвету ручки над кулаком в каждом кадре). Прежний файл: `Characters/ponchik/v24_rope_handles_before`.
 - Откат (2026-10-16, 2): по просьбе пользователя жим Рыжего возвращён к 8-кадровому клипу из коммита 19a4294 (06:47, до промежуточных кадров v21–v23; те сохранены в ArtSource).
+
+## Загрузочный экран, лого, иконка (2026-10-16)
+- `Docs/ArtDirection/Generated/raw_v24_loading_icon`: фон `loading2_a` (референсы — айдл-спрайты котов в их настоящем соотношении, `ref_idle_gang.png`; первая серия `loading_*` без них исказила пропорции), лого `logo_c` (табличка вырезана из чёрного фона), иконка `icon_c`. Копии: `ArtSource/UI/loading_bg_v1|v2.png`, `logo_v1.png`, `app_icon_v1.png`.
+- В игру: `Art/UI/loading_bg.png`, `Art/UI/logo.png`, `Art/AppIcon/app_icon.png`; меню TrashCats/Art/Apply Loading Screen And App Icon прописывает их в Boot-сцену и Player Settings.
