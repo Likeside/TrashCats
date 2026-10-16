@@ -386,7 +386,7 @@ namespace TrashCats.Presentation.Hideout
                 // the mat's plate hangs on the wall over the barbell (the EXIT sign stands in front of the mat)
                 var bench = activity.Kind == ActivityKind.Train && activity.TrainedAttribute == AttributeType.Strength;
                 var text = Plate(box.rectTransform, Texts.OutcomeIcon(activity), bench ? HideoutLayout.Bench.Depth + 0.2f : place.Depth,
-                    bench ? HideoutLayout.BenchPlate : (Vector2?)null);
+                    HideoutLayout.PlateAt(activity));
                 _plates[activity.Id.Value] = (RectTransform)text.transform.parent;
                 if (upgrade != null)
                 {
@@ -410,7 +410,7 @@ namespace TrashCats.Presentation.Hideout
         /// and its upgrade level (no words). It is drawn in the depth order right in front of its prop and follows the
         /// prop (see Tick).
         /// </summary>
-        private TMP_Text Plate(RectTransform box, string icon, float depth, Vector2? at = null)
+        private TMP_Text Plate(RectTransform box, string icon, float depth, Vector2 at)
         {
             var plate = Ui.Panel(_frame, "Caption_" + box.name, Ui.Skin?.barFrame != null ? Color.white : new Color(0, 0, 0, 0.55f));
             plate.sprite = Ui.Skin?.barFrame;
@@ -419,7 +419,7 @@ namespace TrashCats.Presentation.Hideout
             var rt = plate.rectTransform;
             rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 0.5f);
             rt.pivot = new Vector2(0.5f, 1f);
-            _captions.Add((rt, box, at ?? new Vector2(0.5f, 0f)));
+            _captions.Add((rt, box, at));
             // just in front of its prop: a cat nearer to the camera than the prop draws over the caption
             _depthItems.Add((rt, depth - 0.0005f));
             var picture = Ui.Icon(plate.transform, icon);

@@ -97,8 +97,8 @@ namespace TrashCats.Presentation.Hideout
         /// <summary>The dumpster at the back on the right; a cat rummaging in it is not shown, only its badge above.</summary>
         public static readonly PropPlace Dumpster = new PropPlace("prop_upg_dumpster_v1_angled", new Vector2(0.9538f, 0.4165f), new Vector2(0.2774f, 0.1742f), -1.41f, true, 0.425f);
 
-        /// <summary>The dumpster's nudge in canvas units, right and up (set by hand in the editor, 2026-10-15).</summary>
-        public static readonly Vector2 DumpsterShift = new Vector2(75.1f, 15.5f);
+        /// <summary>The dumpster's nudge in canvas units, right and up (set by hand in the UI layout scene, 2026-10-16).</summary>
+        public static readonly Vector2 DumpsterShift = new Vector2(22.76f, 6.04f);
 
         /// <summary>The box bed, sized for Ponchik (the biggest sleeper).</summary>
         public static readonly PropPlace Bed = new PropPlace("prop_upg_boxes", new Vector2(0.915f, 0.0117f), new Vector2(0.52f, 0.3055f), 0f, true, -0.02f);
@@ -119,10 +119,20 @@ namespace TrashCats.Presentation.Hideout
         /// bottom (the pivot). Hidden while a cat presses it.
         /// </summary>
         public static readonly (string Sprite, Vector2 Seat, Vector2 Size, float Rotation, float BarUnderside) Barbell =
-            ("prop_barbell", new Vector2(0.667f, 0.905f), new Vector2(0.98f, 0.291f), -7.3f, 0.49f);
+            ("prop_barbell", new Vector2(0.6668f, 0.9283f), new Vector2(1.274f, 0.291f), -7.85f, 0.49f);
 
-        /// <summary>Where the barbell's plate hangs: on the wall over the barbell, in 0..1 of the mat's box (top of the plate).</summary>
-        public static readonly Vector2 BenchPlate = new Vector2(0.27f, 1.38f);
+        /// <summary>
+        /// Where a station's plate hangs, in 0..1 of the prop's box (top of the plate): under the prop by default; the
+        /// barbell's on the wall over it, the skipping rope's over the nail, the dumpster's over its lid (placed by hand in
+        /// the UI layout scene, 2026-10-16).
+        /// </summary>
+        public static Vector2 PlateAt(ActivityDefinition activity) => activity.Kind switch
+        {
+            ActivityKind.Rummage => new Vector2(0.5f, 1.234f),
+            ActivityKind.Train when activity.TrainedAttribute == AttributeType.Strength => new Vector2(0.27f, 1.349f),
+            ActivityKind.Train when activity.TrainedAttribute == AttributeType.Endurance => new Vector2(0.5f, 1.525f),
+            _ => new Vector2(0.5f, 0f),
+        };
 
         /// <summary>The way out to the street: an EXIT signpost in the empty front left corner.</summary>
         /// Nearer to the camera than the cat on the skipping rope: a bit bigger, lower, and drawn over it.
