@@ -54,6 +54,7 @@ namespace TrashCats.Presentation.Characters
         [Tooltip("Hideout: head first in the dumpster, rump and tail out (loop)")] public FlipbookClip dig = new FlipbookClip();
         [Tooltip("Hideout: running in the wheel (loop; the wheel was replaced by the bench press)")] public FlipbookClip run = new FlipbookClip();
         [Tooltip("Hideout: bench press on the mat, a whole up-and-down rep in frame order (loop)")] public FlipbookClip bench = new FlipbookClip();
+        [Tooltip("Hideout: bench press variants (bench first), each a push-up played ping-pong; the hideout switches to another one after every rep")] public FlipbookClip[] benchVariants = new FlipbookClip[0];
         [Tooltip("Hideout: punching the tin can (loop)")] public FlipbookClip canPunch = new FlipbookClip();
         [Tooltip("Optional separately animated tail; attach points come from the body clips")] public FlipbookClip tail = new FlipbookClip();
         [Tooltip("Static picture for UI (hideout tokens, cards)")] public Sprite portrait;

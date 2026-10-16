@@ -2,7 +2,7 @@
 """Batch art generation via the OpenAI Images edit endpoint (gpt-image-2), with reference images and stages.
 
 Usage: Tools/art_batch.py <jobs.json> <out_dir> [--only name1,name2] [--dry-run]
-jobs.json: [{"name": "...", "refs": ["path.png", ...], "prompt": "...", "size": "1536x1024"}, ...]
+jobs.json: [{"name": "...", "refs": ["path.png", ...], "prompt": "...", "size": "1536x1024", "mask": "optional.png"}, ...]
 A job is skipped if <out_dir>/<name>.png already exists (re-runs only generate what is missing).
 Reads OPENAI_API_KEY from the environment. Appends every prompt to <out_dir>/prompts.md.
 """
@@ -28,6 +28,8 @@ def run(job, out_dir, key):
            "-F", "quality=high", "-F", "background=opaque", "-o", resp]
     for ref in job["refs"]:
         cmd += ["-F", f"image[]=@{ref}"]
+    if job.get("mask"):  # PNG the size of the first image, transparent where the model may draw
+        cmd += ["-F", f"mask=@{job['mask']}"]
     try:
         code = subprocess.run(cmd, capture_output=True, text=True).returncode
     finally:

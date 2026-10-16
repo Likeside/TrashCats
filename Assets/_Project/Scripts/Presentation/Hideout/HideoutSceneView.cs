@@ -122,6 +122,7 @@ namespace TrashCats.Presentation.Hideout
                 var working = cat.Activity.IsWorking;
                 var visible = token.Root.gameObject.activeInHierarchy;
                 HeldProps(token, visible);
+                NextBenchVariant(token);
                 var bar = working && visible;
                 if (token.Progress.Rect.gameObject.activeSelf != bar)
                     token.Progress.Rect.gameObject.SetActive(bar);
@@ -262,6 +263,28 @@ namespace TrashCats.Presentation.Hideout
                     rt.localEulerAngles = new Vector3(0, 0, Mathf.Atan2(d.y, d.x) * Mathf.Rad2Deg);
                 }
             }
+        }
+
+        /// <summary>
+        /// The bench press switches to another of the cat's push-up variants after every rep (the ping-pong clip is back
+        /// at the bottom, where all variants start), so the reps do not repeat one drawing.
+        /// </summary>
+        private void NextBenchVariant(CatToken token)
+        {
+            var variants = token.Art?.benchVariants;
+            if (token.Spot.Clip != HideoutLayout.CatClip.Bench || variants == null || variants.Length < 2 || token.Flipbook.Clip is not { pingPong: true })
+            {
+                token.BenchPhase = 0f;
+                return;
+            }
+            var phase = token.Flipbook.Phase;
+            if (phase < token.BenchPhase - 0.5f)
+            {
+                token.BenchVariant = (token.BenchVariant + UnityEngine.Random.Range(1, variants.Length)) % variants.Length;
+                Show(token);
+                phase = 0f;
+            }
+            token.BenchPhase = phase;
         }
 
         /// <summary>
@@ -631,6 +654,9 @@ namespace TrashCats.Presentation.Hideout
             }
 
             var h = spot.Height > 0f ? spot.Height : size.y * HideoutLayout.HeightPerPixel * HideoutLayout.DepthScale(spot.Foot.y) * spot.Scale;
+            // a bench variant on a bigger canvas (a drawn barbell sticks out) keeps the cat's size: BenchFit is for the first clip
+            if (spot.Clip == HideoutLayout.CatClip.Bench && spot.Height > 0f && clip != null && token.Art?.bench?.frames.Length > 0)
+                h *= size.y / token.Art.bench.frames[0].rect.height;
             var w = h * size.x / size.y / HideoutLayout.PictureAspect;
             token.Root.Place(new Vector2(spot.Foot.x - w * 0.5f, spot.Foot.y), new Vector2(spot.Foot.x + w * 0.5f, spot.Foot.y + h));
             token.Image.rectTransform.localScale = new Vector3(spot.FaceLeft != sourceFacesLeft ? -1f : 1f, 1f, 1f);
@@ -654,6 +680,7 @@ namespace TrashCats.Presentation.Hideout
             FlipbookClip Pose(int index) => art.HideoutPose(index) is Sprite sprite ? new FlipbookClip { frames = new[] { sprite } } : null;
             return clip switch
             {
+                HideoutLayout.CatClip.Bench when art.benchVariants?.Length > 0 => (art.benchVariants[token.BenchVariant % art.benchVariants.Length], false),
                 HideoutLayout.CatClip.Bench when art.bench?.frames.Length > 0 => (art.bench, false),
                 HideoutLayout.CatClip.Punch when art.canPunch?.frames.Length > 0 => (art.canPunch, false),
                 HideoutLayout.CatClip.Rope when art.rope?.frames.Length > 0 => (art.rope, false),
@@ -848,6 +875,9 @@ namespace TrashCats.Presentation.Hideout
             /// <summary>Props the game draws in the cat's hands (the frames have only the hands).</summary>
             public RopeGraphic Rope;
             public Image HeldBarbell;
+            /// <summary>Bench press: the push-up variant played and the clip phase last tick (a drop = a rep ended).</summary>
+            public int BenchVariant;
+            public float BenchPhase;
             public (RectTransform Root, UiBar Bar, TMP_Text Caption) Away;
             public Color BaseColor;
             public HideoutLayout.CatSpot Spot;
