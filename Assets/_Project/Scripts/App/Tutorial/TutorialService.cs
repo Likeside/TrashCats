@@ -259,7 +259,7 @@ namespace TrashCats.App
             if (!IsDone(Fight))
             {
                 var target = Config.Territories.FirstOrDefault(t => World.Territories.Get(t.Id).Status == TerritoryStatus.Available);
-                var ready = cats.Any(c => c.Energy >= Config.Needs.MinEnergyForBattle);
+                var ready = cats.Any(Rested);
                 var trained = IsDone(Sleep) || IsDone(LevelledUp);
                 if (target != null && ready && trained)
                     return new TutorialStep(Fight, first.Id, territory: target.Id, soft: true);
@@ -278,6 +278,16 @@ namespace TrashCats.App
             }).ToList();
             var strength = affordable.FirstOrDefault(u => u.Effect is TrainingXpBonusEffect t && t.Attribute == AttributeType.Strength);
             return (strength ?? affordable.FirstOrDefault())?.Id;
+        }
+
+        /// <summary>
+        /// Rested enough to be led to the first fight: with energy to spare (a cat that keeps working would tire on the
+        /// way to the battle preparation), or idle with just enough.
+        /// </summary>
+        private bool Rested(IReadOnlyCat cat)
+        {
+            var min = Config.Needs.MinEnergyForBattle;
+            return cat.Energy >= min * 2 || (cat.Energy >= min && !cat.Activity.IsWorking);
         }
 
         private IEnumerable<SkillDefinition> UnlockedSkills(IReadOnlyCat cat) =>
