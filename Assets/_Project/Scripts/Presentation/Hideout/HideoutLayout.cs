@@ -199,7 +199,7 @@ namespace TrashCats.Presentation.Hideout
         {
             "ryzhy" => (new Vector2(0.56f, 0.06f), 1.506f, 364f / 0.78f), // drawn barbell frames (2026-10-16): a longer body, smaller
             "shnyr" => (new Vector2(0.6257f, 0.0886f), 1.31f, 372f),
-            "ponchik" => (new Vector2(0.62f, 0.07f), 1.494f, 361f / 0.8f),
+            "ponchik" => (new Vector2(0.6407f, 0.0856f), 1.494f, 361f), // the barbell frames keep his pixel size, 80 px taller
             _ => null,
         };
 
