@@ -135,9 +135,9 @@ namespace TrashCats.Presentation.Dev
                 var holder = _barbell.transform.parent;
                 holder.localPosition = (a + b) * 0.5f;
                 holder.localEulerAngles = new Vector3(0, 0, Mathf.Atan2(d.y, d.x) * Mathf.Rad2Deg);
-                // 0.62 of the frame's width, as in the hideout
+                // the same share of the frame's width as in the hideout
                 var size = _barbell.sprite.rect.size / _barbell.sprite.pixelsPerUnit;
-                holder.localScale = Vector3.one * (0.62f * frame.x / size.x);
+                holder.localScale = Vector3.one * (Hideout.HideoutSceneView.HeldBarbellWidth * frame.x / size.x);
             }
         }
 
