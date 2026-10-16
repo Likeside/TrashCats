@@ -140,15 +140,16 @@ namespace TrashCats.Presentation.Hideout
                     var top = new Vector3((_corners[1].x + _corners[2].x) * 0.5f, Mathf.Max(_corners[1].y, _corners[2].y), 0f);
                     token.Progress.Rect.position = top + new Vector3(token.PlateSlot * (ProgressWidth + 12f), BarGap) * Scale;
                     KeepInScene(token.Progress.Rect, true);
-                    // the portrait of a cat out of sight sits a little over its bar
+                    // the portrait of a cat out of sight sits a little over its bar, both right over the plate
                     if (token.Away.Root.gameObject.activeSelf)
                     {
                         token.Progress.Rect.GetWorldCorners(_corners);
                         token.Away.Root.position = new Vector3((_corners[1].x + _corners[2].x) * 0.5f, _corners[1].y + BarGap * Scale, 0f);
-                        // its caption is wider than the portrait: both step in from the screen edge together
                         var x = token.Away.Root.position.x;
-                        KeepInScene(token.Away.Root, true, token.Away.Root.rect.width * 0.45f);
+                        KeepInScene(token.Away.Root, true);
                         token.Progress.Rect.position += Vector3.right * (token.Away.Root.position.x - x);
+                        // its caption is wider than the portrait: only the words step in from the screen edge
+                        KeepCaptionInScene(token.Away.Caption);
                     }
                 }
             }
@@ -197,6 +198,18 @@ namespace TrashCats.Presentation.Hideout
             if (_corners[0].y < _sceneCorners[0].y + margin) dy = _sceneCorners[0].y + margin - _corners[0].y;
             else if (_corners[1].y > top - margin) dy = top - margin - _corners[1].y;
             item.position += new Vector3(dx, dy, 0f);
+        }
+
+        /// <summary>Shifts a badge's caption sideways so its words (not its wide box) stay inside the visible scene.</summary>
+        private void KeepCaptionInScene(TMP_Text caption)
+        {
+            var rt = caption.rectTransform;
+            rt.anchoredPosition = Vector2.zero;
+            var half = caption.GetPreferredValues(caption.text).x * 0.5f * Scale;
+            var center = rt.position.x;
+            var margin = 10f * Scale;
+            var dx = Mathf.Max(0f, _sceneCorners[0].x + margin - (center - half)) + Mathf.Min(0f, _sceneCorners[2].x - margin - (center + half));
+            rt.position += Vector3.right * dx;
         }
 
         /// <summary>Barbell length, share of the bench frame's width.</summary>
