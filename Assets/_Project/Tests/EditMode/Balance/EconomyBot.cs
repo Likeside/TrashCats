@@ -30,7 +30,7 @@ namespace TrashCats.Tests
             public Dictionary<CatId, (int Str, int Agi, int Tou)> Levels = new Dictionary<CatId, (int, int, int)>();
         }
 
-        private static readonly UpgradeId[] UpgradePriority = { new UpgradeId("upg_can"), new UpgradeId("upg_boxes"), new UpgradeId("upg_dumpster"), new UpgradeId("upg_mouse"), new UpgradeId("upg_wheel") };
+        private static readonly UpgradeId[] UpgradePriority = { new UpgradeId("upg_can"), new UpgradeId("upg_boxes"), new UpgradeId("upg_dumpster"), new UpgradeId("upg_street"), new UpgradeId("upg_mouse"), new UpgradeId("upg_wheel") };
 
         private readonly GameConfig _config;
         private readonly GameWorld _world;

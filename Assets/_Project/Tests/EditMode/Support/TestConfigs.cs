@@ -17,6 +17,7 @@ namespace TrashCats.Tests
 
         public static readonly UpgradeId Boxes = new UpgradeId("upg_boxes");
         public static readonly UpgradeId Dumpster = new UpgradeId("upg_dumpster");
+        public static readonly UpgradeId Street = new UpgradeId("upg_street");
         public static readonly UpgradeId Can = new UpgradeId("upg_can");
         public static readonly UpgradeId Mouse = new UpgradeId("upg_mouse");
         public static readonly UpgradeId Wheel = new UpgradeId("upg_wheel");
@@ -51,7 +52,13 @@ namespace TrashCats.Tests
     /// </summary>
     public static class TestConfigs
     {
-        public static GameConfig Default(long firstCycleMs = 0) => new GameConfig
+        /// <summary>
+        /// The game's config: activity durations halved on 2026-10-16. Unit tests run on <see cref="Default"/>, whose
+        /// durations keep the values their timings were written for; everything else is the same.
+        /// </summary>
+        public static GameConfig Shipped() => Default(durationScale: 0.5f);
+
+        public static GameConfig Default(long firstCycleMs = 0, float durationScale = 1f) => new GameConfig
         {
             Needs = new NeedsConfig(),
             Time = new TimeConfig { FirstCycleMs = firstCycleMs },
@@ -83,20 +90,20 @@ namespace TrashCats.Tests
                 new ActivityDefinition
                 {
                     Id = TestIds.Scavenge, NameKey = "act.scavenge", Kind = ActivityKind.Scavenge,
-                    DurationMs = 20_000, EnergyCost = 10, SatietyCost = 4, BaseOutput = 3, Capacity = 1,
+                    DurationMs = Ms(20_000, durationScale), EnergyCost = 10, SatietyCost = 4, BaseOutput = 3, Capacity = 1,
                 },
                 new ActivityDefinition
                 {
                     Id = TestIds.Rummage, NameKey = "act.rummage", Kind = ActivityKind.Rummage,
-                    DurationMs = 25_000, EnergyCost = 10, SatietyCost = 4, BaseOutput = 3, Capacity = 1,
+                    DurationMs = Ms(25_000, durationScale), EnergyCost = 10, SatietyCost = 4, BaseOutput = 3, Capacity = 1,
                 },
-                Training(TestIds.TrainStr, "act.train_str", AttributeType.Strength),
-                Training(TestIds.TrainAgi, "act.train_agi", AttributeType.Technique),
-                Training(TestIds.TrainTou, "act.train_tou", AttributeType.Endurance),
+                Training(TestIds.TrainStr, "act.train_str", AttributeType.Strength, durationScale),
+                Training(TestIds.TrainAgi, "act.train_agi", AttributeType.Technique, durationScale),
+                Training(TestIds.TrainTou, "act.train_tou", AttributeType.Endurance, durationScale),
                 new ActivityDefinition
                 {
                     Id = TestIds.Sleep, NameKey = "act.sleep", Kind = ActivityKind.Sleep,
-                    DurationMs = 15_000, EnergyCost = 0, SatietyCost = 0, BaseOutput = 25, Capacity = 1,
+                    DurationMs = Ms(15_000, durationScale), EnergyCost = 0, SatietyCost = 0, BaseOutput = 25, Capacity = 1,
                 },
             },
             Upgrades = new[]
@@ -109,7 +116,12 @@ namespace TrashCats.Tests
                 new UpgradeDefinition
                 {
                     Id = TestIds.Dumpster, NameKey = "upg.dumpster", Costs = new[] { 20, 60 },
-                    Effect = new ResourceOutputBonusEffect { FoodPerLevel = new[] { 0, 1, 2 }, JunkPerLevel = new[] { 0, 1, 2 } },
+                    Effect = new ResourceOutputBonusEffect { FoodPerLevel = new[] { 0, 0, 0 }, JunkPerLevel = new[] { 0, 1, 2 } },
+                },
+                new UpgradeDefinition
+                {
+                    Id = TestIds.Street, NameKey = "upg.street", Costs = new[] { 20, 60 },
+                    Effect = new ResourceOutputBonusEffect { FoodPerLevel = new[] { 0, 1, 2 }, JunkPerLevel = new[] { 0, 0, 0 } },
                 },
                 Station(TestIds.Can, "upg.can", AttributeType.Technique),
                 Station(TestIds.Mouse, "upg.mouse", AttributeType.Endurance),
@@ -196,10 +208,12 @@ namespace TrashCats.Tests
             },
         };
 
-        private static ActivityDefinition Training(ActivityId id, string nameKey, AttributeType attribute) => new ActivityDefinition
+        private static long Ms(long ms, float scale) => (long)(ms * scale);
+
+        private static ActivityDefinition Training(ActivityId id, string nameKey, AttributeType attribute, float durationScale) => new ActivityDefinition
         {
             Id = id, NameKey = nameKey, Kind = ActivityKind.Train, TrainedAttribute = attribute,
-            DurationMs = 30_000, EnergyCost = 15, SatietyCost = 14, BaseOutput = 10, Capacity = 1,
+            DurationMs = Ms(30_000, durationScale), EnergyCost = 15, SatietyCost = 14, BaseOutput = 10, Capacity = 1,
         };
 
         private static UpgradeDefinition Station(UpgradeId id, string nameKey, AttributeType attribute) => new UpgradeDefinition

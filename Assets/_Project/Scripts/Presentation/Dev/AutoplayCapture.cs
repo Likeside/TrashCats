@@ -144,7 +144,7 @@ namespace TrashCats.Presentation.Dev
             Dismiss();
             yield return null;
             yield return Shot("01_hideout");
-            Click("Cat_cat_ryzhy");
+            Click("CatCard0");
             yield return Shot("02_activity_sheet");
             Click("Activity_act_train_str");
             yield return new WaitForSeconds(0.5f);
@@ -153,13 +153,13 @@ namespace TrashCats.Presentation.Dev
             yield return Shot("03b_punch_frame");
             // the activity sheet of a working cat (cycle bars, Stop), then of a tired and hungry one (Sleep and Feed advised)
             var services = GameBootstrap.Instance.Services;
-            Click("Cat_cat_ryzhy");
+            Click("CatCard0");
             yield return Shot("02b_sheet_working");
             Click("ActivitySheet");
             services.Debug.SkipGameTime(10 * 60 * 1000);
             yield return null;
             Dismiss(); Dismiss();
-            Click("Cat_cat_ryzhy");
+            Click("CatCard0");
             yield return Shot("02c_sheet_tired");
             Click("ActivitySheet");
             // the whole gang at the stations: bench mat, bed, dumpster
@@ -171,7 +171,7 @@ namespace TrashCats.Presentation.Dev
             Dismiss(); Dismiss();
             yield return Shot("03a_idle_three");
             // the cat details and the battle prep with the whole gang rested (win chance bar)
-            Click("Cat_cat_ryzhy");
+            Click("CatCard0");
             Click("Sheet_Details");
             yield return Shot("03h_cat_details");
             Click("Details_Close", required: false);
@@ -244,7 +244,7 @@ namespace TrashCats.Presentation.Dev
             yield return new WaitForSeconds(0.5f);
             yield return Shot("10_after_battle");
             Dismiss();
-            Click("Cat_cat_ryzhy");
+            Click("CatCard0");
             Click("Sheet_Details");
             yield return Shot("11_cat_details");
             Click("Details_Close", required: false);
@@ -283,7 +283,11 @@ namespace TrashCats.Presentation.Dev
                 ScreenCapture.CaptureScreenshot(Path.Combine(_dir, $"gym_{i:00}.png"));
                 yield return new WaitForSeconds(0.05f);
             }
-            yield return new WaitForSeconds(0.5f);
+            // the street's own upgrade (the EXIT sign), apart from the dumpster's
+            services.Debug.AddResources(0, 100);
+            yield return null;
+            Click("Station_upg_street");
+            yield return Shot("gym_street_upgrade");
             Application.Quit();
         }
 

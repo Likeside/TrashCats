@@ -74,6 +74,7 @@ namespace TrashCats.Editor
             skin.bubble = Sprite("bubble");
             skin.tape = Sprite("tape");
             skin.pointer = Sprite("pointer");
+            skin.tutorialMarker = Sprite("tutorial_marker");
             skin.circle = Sprite("circle_mask");
             skin.fxStar = Sprite("fx_star");
             skin.fxDust = Sprite("fx_dust");

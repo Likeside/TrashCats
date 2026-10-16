@@ -169,6 +169,7 @@ namespace TrashCats.Presentation.Hideout
         {
             "upg_boxes" => Bed.Sprite,
             "upg_dumpster" => Dumpster.Sprite,
+            "upg_street" => ExitSign.Sprite,
             "upg_can" => Can.Sprite,
             "upg_mouse" => RopeProp.Sprite,
             "upg_wheel" => Bench.Sprite,

@@ -31,7 +31,6 @@ namespace TrashCats.Presentation.Hideout
         private readonly RectTransform _root;
         private readonly RectTransform _frame;
         private readonly List<(Transform Item, float BaseY)> _depthItems = new List<(Transform, float)>();
-        private readonly Action<CatId> _onCatTapped;
         private readonly Action<UpgradeId> _onStationTapped;
         private readonly CharacterViewFactory _art;
         private readonly Dictionary<CatId, CatToken> _tokens = new Dictionary<CatId, CatToken>();
@@ -54,13 +53,12 @@ namespace TrashCats.Presentation.Hideout
         private static readonly string[] FoodBits = { "fx_food_bone", "fx_food_stew", "fx_food_head" };
         private readonly List<IDisposable> _subscriptions = new List<IDisposable>();
 
-        public HideoutSceneView(GameSession session, EventBus bus, RectTransform root, Action<CatId> onCatTapped, Action<UpgradeId> onStationTapped,
+        public HideoutSceneView(GameSession session, EventBus bus, RectTransform root, Action<UpgradeId> onStationTapped,
             CharacterViewFactory art)
         {
             _art = art;
             _session = session;
             _root = root;
-            _onCatTapped = onCatTapped;
             _onStationTapped = onStationTapped;
 
             Ui.Panel(root, "Floor", Palette.Scene).rectTransform.Fill();
@@ -464,11 +462,13 @@ namespace TrashCats.Presentation.Hideout
             UpgradeId? upgrade = activity.Kind switch
             {
                 ActivityKind.Sleep => config.Upgrades.FirstOrDefault(u => u.Effect is SleepEnergyBonusEffect)?.Id,
-                ActivityKind.Rummage => config.Upgrades.FirstOrDefault(u => u.Effect is ResourceOutputBonusEffect)?.Id,
+                // the street brings food, the dumpster junk: each has its own upgrade
+                ActivityKind.Scavenge => config.Upgrades.FirstOrDefault(u => u.Effect is ResourceOutputBonusEffect r && r.FoodPerLevel.Any(v => v > 0))?.Id,
+                ActivityKind.Rummage => config.Upgrades.FirstOrDefault(u => u.Effect is ResourceOutputBonusEffect r && r.JunkPerLevel.Any(v => v > 0))?.Id,
                 ActivityKind.Train => config.Upgrades.FirstOrDefault(u => u.Effect is TrainingXpBonusEffect t && t.Attribute == activity.TrainedAttribute)?.Id,
                 _ => null,
             };
-            var label = activity.Kind == ActivityKind.Scavenge ? Loc.T("hideout_scene_view.01") : upgrade != null ? Texts.UpgradeName(upgrade.Value) : Texts.ActivityShort(activity);
+            var label = activity.Kind == ActivityKind.Scavenge && upgrade == null ? Loc.T("hideout_scene_view.01") : upgrade != null ? Texts.UpgradeName(upgrade.Value) : Texts.ActivityShort(activity);
             return (label, upgrade);
         }
 
@@ -525,17 +525,15 @@ namespace TrashCats.Presentation.Hideout
             var color = CatColors.For(cat.Id);
             var catArt = _art?.Find(_session.Config.GetCat(cat.Id).ViewKey);
             var hasArt = catArt?.HideoutPose(0) != null;
-            // a transparent tap area (the box) with the picture as a child, so only the picture is mirrored
-            var hit = Ui.Panel(_frame, "Cat_" + cat.Id, new Color(0, 0, 0, 0), raycast: true);
+            // a transparent box with the picture as a child, so only the picture is mirrored; cats in the yard are not
+            // tapped (they hid the stations behind them), the cards below do that
+            var hit = Ui.Panel(_frame, "Cat_" + cat.Id, new Color(0, 0, 0, 0));
             var rt = hit.rectTransform;
             var image = Ui.Panel(rt, "Body", hasArt ? Color.white : color);
             image.rectTransform.Fill();
             var flipbook = image.gameObject.AddComponent<UiFlipbook>();
             if (hasArt)
                 image.sprite = catArt.HideoutPose(0);
-            var button = hit.gameObject.AddComponent<Button>();
-            var id = cat.Id;
-            button.onClick.AddListener(() => _onCatTapped(id));
 
             // a small cycle bar over the busy cat's head
             var progress = Ui.Bar(_barLayer, "Progress_" + cat.Id, Palette.Progress);
@@ -834,9 +832,6 @@ namespace TrashCats.Presentation.Hideout
             var caption = Ui.Label(root, Loc.T("hideout.away"), 22, TextAnchor.MiddleCenter, Palette.Paper);
             caption.rectTransform.Place(new Vector2(-0.4f, 0.8f), new Vector2(1.4f, 1f));
             root.gameObject.SetActive(false);
-            var button = Ui.Panel(root, "Tap", new Color(0, 0, 0, 0), raycast: true);
-            button.rectTransform.Fill();
-            button.gameObject.AddComponent<Button>().onClick.AddListener(() => _onCatTapped(id));
             return (root, caption);
         }
 

@@ -70,6 +70,8 @@ SLICES = {
     "bar_hp": (178, 52, 48, 52),
     "bar_grit": (178, 52, 48, 52),
     "tape": (34, 26, 34, 26),
+    # cut by hand from raw_ui_marker/marker_loop_c.png (2026-10-16): the flick at the top right stays in its corner
+    "tutorial_marker": (60, 60, 200, 70),
     "button_a_yellow": (50, 50, 50, 50),
     "button_a_blue": (50, 50, 50, 50),
     "button_a_grey": (50, 50, 50, 50),

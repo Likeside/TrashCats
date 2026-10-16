@@ -25,7 +25,7 @@ namespace TrashCats.Tests
         [Test]
         public void FortyMinuteRun_ProducesReport_AndKeepsInvariants()
         {
-            var config = TestConfigs.Default();
+            var config = TestConfigs.Shipped();
             var bot = new EconomyBot(config);
             var fights = EconomyBot.ExpectedFights(config);
 

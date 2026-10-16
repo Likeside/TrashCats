@@ -111,6 +111,15 @@ namespace TrashCats.Tests
         }
 
         [Test]
+        public void RummageStep_WaitsWhileTheCatIsTired_SleepComesFirst()
+        {
+            var cat = TestCats.Make(TestIds.Ryzhy, energy: 10);
+            Start(WorldWith(cat, done: new[] { TutorialService.Scavenge, TutorialService.Bar, TutorialService.Feed, TutorialService.Train, TutorialService.Trained }));
+
+            Assert.That(Step, Is.EqualTo(TutorialService.Sleep));
+        }
+
+        [Test]
         public void UnlockedSkill_AsksToEquip_UntilEquipped()
         {
             var cat = TestCats.Make(TestIds.Ryzhy, str: 4);

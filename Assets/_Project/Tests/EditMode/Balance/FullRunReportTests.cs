@@ -17,7 +17,7 @@ namespace TrashCats.Tests
         [Test]
         public void TenPlaythroughs_ReachTheBoss_AndReportTime()
         {
-            var config = TestConfigs.Default();
+            var config = TestConfigs.Shipped();
             var runs = new List<(int Seed, long? FinalMs, EconomyBot Bot)>();
             for (var seed = 1; seed <= 10; seed++)
             {
