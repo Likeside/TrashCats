@@ -124,7 +124,7 @@ namespace TrashCats.Presentation.Hideout
         /// <summary>
         /// Where a station's plate hangs, in 0..1 of the prop's box (top of the plate): under the prop by default; the
         /// barbell's on the wall over it, the skipping rope's over the nail, the dumpster's on its front, left of the middle,
-        /// the bed's on the blanket (placed by hand in the UI layout scene, 2026-10-16).
+        /// the bed's on the blanket, the can's over it (placed by hand in the UI layout scene, 2026-10-16).
         /// </summary>
         public static Vector2 PlateAt(ActivityDefinition activity) => activity.Kind switch
         {
@@ -132,6 +132,8 @@ namespace TrashCats.Presentation.Hideout
             ActivityKind.Sleep => new Vector2(0.3946f, 0.5275f),
             ActivityKind.Train when activity.TrainedAttribute == AttributeType.Strength => new Vector2(0.27f, 1.349f),
             ActivityKind.Train when activity.TrainedAttribute == AttributeType.Endurance => new Vector2(0.5f, 1.525f),
+            // the punching can's over the can (UiLayout_user_v3, 2026-10-16)
+            ActivityKind.Train when activity.TrainedAttribute == AttributeType.Technique => new Vector2(0.5f, 1.1773f),
             _ => new Vector2(0.5f, 0f),
         };
 
