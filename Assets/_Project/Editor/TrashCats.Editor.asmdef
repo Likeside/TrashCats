@@ -5,6 +5,7 @@
         "TrashCats.Presentation",
         "TrashCats.App",
         "TrashCats.Domain",
+        "TrashCats.Infrastructure",
         "Unity.TextMeshPro",
         "UnityEngine.UI"
     ],
